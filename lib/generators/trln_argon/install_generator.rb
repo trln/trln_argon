@@ -21,6 +21,10 @@ module TrlnArgon
       copy_file "trln_search_builder.rb", "app/models/trln_search_builder.rb"
     end
 
+    def install_stylesheet
+      copy_file "trln_argon.scss", "app/assets/stylesheets/trln_argon.scss"
+    end
+
     def inject_catalog_controller_overrides
       unless IO.read("app/controllers/catalog_controller.rb").include?('TrlnArgon')
 

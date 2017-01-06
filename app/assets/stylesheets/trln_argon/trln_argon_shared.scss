@@ -1,0 +1,63 @@
+a {
+    color: $green;
+}
+
+a:hover, a:focus {
+    color: $green;
+}
+
+#sort-dropdown, #per_page-dropdown {
+    .dropdown-toggle {
+        color: $purple-light;
+    }
+}
+
+.form-control:focus {
+    border-color: $purple-light;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: $purple-light;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
+    background-color: $purple-dark;;
+    border-color: $purple-dark;;
+}
+
+.btn-primary {
+    background-color: $purple-dark;
+    border-color: $purple-dark;
+}
+
+.btn-primary:hover {
+    background-color: $purple-light;
+    border-color: $purple-light;
+}
+
+.navbar-inverse {
+    background-color: #fff;
+    border-color: $green;
+
+    .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a {
+       color: $purple-dark;
+       text-transform: uppercase;
+    }
+
+    .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+        color: $purple-light;
+    }
+}
+
+.navbar-static-top {
+    border-width: 5px 0 0;
+}
+
+#header-navbar {
+
+    .navbar-brand {
+        margin-top: 2px;
+        background: transparent image_url($header-logo) no-repeat top left;
+        background-size: 103px;
+    }
+}

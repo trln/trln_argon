@@ -1,0 +1,12 @@
+/* Master stylesheet file for the engine.
+ * local app can require this one file and get all the required files.
+*/
+
+/* trln_argon dependences: blacklight_advanced_search, blacklight_range_limit, etc. */
+@import 'trln_argon_dependencies';
+
+/* variables and settings */
+@import 'trln_argon_defaults';
+
+/* additional stylesheets */
+@import 'trln_argon_shared';
