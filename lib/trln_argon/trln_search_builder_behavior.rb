@@ -9,10 +9,10 @@ module TrlnArgon
     private
 
     def record_rollup_query
-      "{!collapse field=#{Trln::Catalog::Engine.configuration.rollup_field} "\
+      "{!collapse field=#{TrlnArgon::Engine.configuration.rollup_field} "\
       "nullPolicy=expand "\
-      "max=termfreq(#{Trln::Catalog::Engine.configuration.preferred_record_field},"\
-      "\"#{Trln::Catalog::Engine.configuration.preferred_record_value}\")}"
+      "max=termfreq(#{TrlnArgon::Engine.configuration.preferred_record_field},"\
+      "\"#{TrlnArgon::Engine.configuration.preferred_record_value}\")}"
     end
 
   end
