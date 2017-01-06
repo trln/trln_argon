@@ -1,3 +1,5 @@
+require 'blacklight'
+
 module TrlnArgon
   class Engine < ::Rails::Engine
     isolate_namespace TrlnArgon
