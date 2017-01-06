@@ -1,0 +1,16 @@
+defaults: &defaults
+    rollup_field: "rollup_key"
+    preferred_record_field: "institution"
+    preferred_record_value: "duke"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
