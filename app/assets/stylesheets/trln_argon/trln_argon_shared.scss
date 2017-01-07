@@ -55,7 +55,7 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
 }
 
 .navbar-static-top {
-    border-width: 5px 0 0;
+    border-width: 10px 0 0;
 }
 
 #header-navbar {
@@ -69,5 +69,5 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
 
 .turbolinks-progress-bar {
   height: 5px;
-  background-color: $purple-light;
+  background-color: $orange;
 }
