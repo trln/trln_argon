@@ -8,31 +8,36 @@ a:hover, a:focus {
 
 #sort-dropdown, #per_page-dropdown {
     .dropdown-toggle {
-        color: $purple-light;
+        color: $green;
     }
 }
 
-.form-control:focus {
-    border-color: $purple-light;
-}
-
 .pagination > li > a, .pagination > li > span {
-    color: $purple-light;
+    color: $green;
 }
 
 .pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus, .pagination > .active > span, .pagination > .active > span:hover, .pagination > .active > span:focus {
-    background-color: $purple-dark;;
-    border-color: $purple-dark;;
+    background-color: $green;
+    border-color: $green;
 }
 
 .btn-primary {
-    background-color: $purple-dark;
-    border-color: $purple-dark;
+    background-color: $green;
+    border-color: $green;
 }
 
-.btn-primary:hover {
-    background-color: $purple-light;
-    border-color: $purple-light;
+panel-success > .panel-heading, .facet_limit-active > .panel-heading {
+    color: #fff;
+    background-color: $green;
+    border-color: $green;
+}
+
+.facet_limit-active .panel-heading.collapse-toggle .panel-title:after {
+    color: #fff;
+}
+
+.panel-success, .facet_limit-active {
+    border-color: $green;
 }
 
 .navbar-inverse {
@@ -60,4 +65,9 @@ a:hover, a:focus {
         background: transparent image_url($header-logo) no-repeat top left;
         background-size: 103px;
     }
+}
+
+.turbolinks-progress-bar {
+  height: 5px;
+  background-color: $purple-light;
 }
