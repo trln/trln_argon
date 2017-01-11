@@ -5,7 +5,7 @@ module TrlnArgon
 
     source_root File.expand_path('../templates', __FILE__)
 
-    desc "Install TRLN Catalog"
+    desc "Install TRLN Argon Engine"
 
     def verify_blacklight_installed
       if !IO.read('app/controllers/application_controller.rb').include?('include Blacklight::Controller')
@@ -13,7 +13,7 @@ module TrlnArgon
       end
     end
 
-    def install_configuration_field
+    def install_configuration_file
       copy_file "trln_argon_config.yml", "config/trln_argon_config.yml"
     end
 
