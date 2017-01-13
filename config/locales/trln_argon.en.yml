@@ -1,8 +1,40 @@
 en:
 
-  blacklight:
+    blacklight:
 
-    home:
+        local_institution:
+            duke:
+                short_name: "Duke"
+                long_name: "Duke Libraries"
+            unc:
+                short_name: "UNC"
+                long_name: "UNC Libraries"
+            ncsu:
+                short_name: "NCSU"
+                long_name: "NCSU Libraries"
 
-        welcome: "Welcome to Search TRLN"
-        blurb: "Search TRLN provides a single search interface to the TRLN Libraries' Collections."
+
+        consortium:
+            short_name: "TRLN"
+            long_name: "TRLN Libraries"
+
+        home:
+
+            welcome: "Welcome to Search TRLN"
+            blurb: "Search TRLN provides a single search interface to the TRLN Libraries' Collections."
+
+        search:
+            pagination_info:
+                no_items_found: 'No %{filter_scope_name} %{entry_name} found'
+                single_item_found: '<strong>1</strong> %{filter_scope_name} %{entry_name} found'
+                pages:
+                    one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
+                    other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
+
+
+        entry_name:
+            default: 'result'
+
+        local_filter:
+            applied: "Show %{filtered_results_total} %{entry_name} at all %{consortium_name}"
+            not_applied: "Show %{filtered_results_total} %{entry_name} at %{local_institution_name}"

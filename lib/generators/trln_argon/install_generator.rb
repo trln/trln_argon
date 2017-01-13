@@ -17,8 +17,14 @@ module TrlnArgon
       copy_file "trln_argon_config.yml", "config/trln_argon_config.yml"
     end
 
-    def install_search_builder
-      copy_file "trln_search_builder.rb", "app/models/trln_search_builder.rb"
+    def install_search_builders
+      copy_file "search_builders/trln_search_builder.rb", "app/models/trln_search_builder.rb"
+      copy_file "search_builders/consortium_search_builder.rb", "app/models/consortium_search_builder.rb"
+    end
+
+    def install_helpers
+      copy_file "helpers/catalog_helper.rb", "app/helpers/catalog_helper.rb"
+      copy_file "helpers/trln_argon_helper.rb", "app/helpers/trln_argon_helper.rb"
     end
 
     def install_stylesheet
@@ -27,14 +33,9 @@ module TrlnArgon
 
     def inject_catalog_controller_overrides
       unless IO.read("app/controllers/catalog_controller.rb").include?('TrlnArgon')
-
         insert_into_file "app/controllers/catalog_controller.rb", :after => "include Blacklight::Marc::Catalog" do
           "\n\n  # CatalogController behavior and configuration for TrlnArgon"\
           "\n  include TrlnArgon::ControllerOverride\n"
-        end
-
-        insert_into_file "app/controllers/catalog_controller.rb", :after => "configure_blacklight do |config|" do
-          "\n\n    config.search_builder_class = TrlnSearchBuilder\n"
         end
       end
     end
