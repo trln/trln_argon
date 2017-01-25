@@ -23,6 +23,7 @@ module TrlnArgon
                     :preferred_record_value,
                     :local_institution,
                     :apply_local_filter_by_default,
+                    :application_name
 
       def initialize
         @rollup_field                  = "rollup_key"
@@ -30,6 +31,7 @@ module TrlnArgon
         @preferred_record_value        = "duke"
         @local_institution             = "duke"
         @apply_local_filter_by_default = "true"
+        @application_name              = "TRLN Argon"
       end
 
     end

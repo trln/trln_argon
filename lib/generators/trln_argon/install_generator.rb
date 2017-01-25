@@ -18,12 +18,13 @@ module TrlnArgon
     end
 
     def install_search_builders
-      copy_file "search_builders/trln_search_builder.rb", "app/models/trln_search_builder.rb"
+      copy_file "search_builders/local_search_builder.rb", "app/models/local_search_builder.rb"
       copy_file "search_builders/consortium_search_builder.rb", "app/models/consortium_search_builder.rb"
     end
 
     def install_helpers
       copy_file "helpers/catalog_helper.rb", "app/helpers/catalog_helper.rb"
+      copy_file "helpers/blacklight_helper.rb", "app/helpers/blacklight_helper.rb"
       copy_file "helpers/trln_argon_helper.rb", "app/helpers/trln_argon_helper.rb"
     end
 
