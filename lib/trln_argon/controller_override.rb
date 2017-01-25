@@ -4,6 +4,9 @@ module TrlnArgon
 
     included do
 
+      self.send(:include, BlacklightAdvancedSearch::Controller)
+
+
       before_action :local_filter_session
       before_action :search_builder_class
       before_action :filtered_results_total, only: :index
@@ -15,6 +18,14 @@ module TrlnArgon
 
         # TODO: Consider making some of this configurabl in trln_argon_config.yml
         config.default_per_page = 20
+
+        # default advanced config values
+        config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+        # config.advanced_search[:qt] ||= 'advanced'
+        config.advanced_search[:url_key] ||= 'advanced'
+        config.advanced_search[:query_parser] ||= 'dismax'
+        config.advanced_search[:form_solr_parameters] ||= {}
+
       end
 
 
