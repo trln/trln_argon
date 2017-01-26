@@ -1,4 +1,5 @@
 require 'blacklight'
+require 'blacklight_advanced_search'
 
 module TrlnArgon
   class Engine < ::Rails::Engine

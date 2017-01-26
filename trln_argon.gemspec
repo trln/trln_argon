@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 5.0.1"
   s.add_dependency "blacklight", "~> 6.7"
+  s.add_dependency "blacklight_advanced_search", "~> 6.2"
 
   s.add_development_dependency "sqlite3"
 end
