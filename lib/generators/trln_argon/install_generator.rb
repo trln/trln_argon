@@ -18,6 +18,7 @@ module TrlnArgon
     end
 
     def install_search_builders
+      copy_file "search_builders/trln_argon_search_builder.rb", "app/models/trln_argon_search_builder.rb"
       copy_file "search_builders/local_search_builder.rb", "app/models/local_search_builder.rb"
       copy_file "search_builders/consortium_search_builder.rb", "app/models/consortium_search_builder.rb"
     end
@@ -37,6 +38,16 @@ module TrlnArgon
         insert_into_file "app/controllers/catalog_controller.rb", :after => "include Blacklight::Marc::Catalog" do
           "\n\n  # CatalogController behavior and configuration for TrlnArgon"\
           "\n  include TrlnArgon::ControllerOverride\n"
+        end
+      end
+    end
+
+    def inject_search_builder_behavior
+      unless IO.read("app/models/search_builder.rb").include?('TrlnSearchBuilderBehavior')
+        insert_into_file "app/models/search_builder.rb", :after => "include Blacklight::Solr::SearchBuilderBehavior" do
+          "\n  include BlacklightAdvancedSearch::AdvancedSearchBuilder"\
+          "\n  include TrlnArgon::TrlnSearchBuilderBehavior"\
+          "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
         end
       end
     end

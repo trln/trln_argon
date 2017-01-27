@@ -6,9 +6,7 @@ module TrlnArgon
 
       self.send(:include, BlacklightAdvancedSearch::Controller)
 
-
       before_action :local_filter_session
-      before_action :search_builder_class
       before_action :filtered_results_total, only: :index
 
       helper_method :local_filter_applied?
@@ -17,11 +15,11 @@ module TrlnArgon
       configure_blacklight do |config|
 
         # TODO: Consider making some of this configurabl in trln_argon_config.yml
+        config.search_builder_class = TrlnArgonSearchBuilder
         config.default_per_page = 20
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
-        # config.advanced_search[:qt] ||= 'advanced'
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
@@ -36,22 +34,25 @@ module TrlnArgon
       end
 
       def filtered_results_query_response
-        filtered_response = repository.search(filtered_results_search_builder.with(search_state.to_h))
+        filtered_response = repository.search(local_filter_search_builder.append(*additional_processor_chain_methods).with(search_state.to_h))
       end
 
-      def filtered_results_search_builder
-        if local_filter_applied?
-          ConsortiumSearchBuilder.new(CatalogController)
-        else
-          LocalSearchBuilder.new(CatalogController)
-        end
+      # This is needed so that controllers that inherit from CatalogController
+      # Will have any additional processor chain methods applied to the 
+      # query that fetches the local filter count
+      def additional_processor_chain_methods
+        search_builder.processor_chain - local_filter_search_builder.processor_chain - excluded_processor_chain_methods
       end
 
-      def search_builder_class
+      def excluded_processor_chain_methods
+        [:apply_local_filter]
+      end
+
+      def local_filter_search_builder
         if local_filter_applied?
-          blacklight_config.search_builder_class = LocalSearchBuilder
+          @local_filter_search_builder ||= ConsortiumSearchBuilder.new(CatalogController)
         else
-          blacklight_config.search_builder_class = ConsortiumSearchBuilder
+          @local_filter_search_builder ||= LocalSearchBuilder.new(CatalogController)
         end
       end
 
