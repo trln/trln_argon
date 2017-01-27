@@ -33,10 +33,14 @@ en:
 
         entry_name:
             default: 'result'
+            bookmarks: 'item'
 
         local_filter:
             applied: "Show %{filtered_results_total} %{entry_name} at all %{consortium_name}"
             not_applied: "Show %{filtered_results_total} %{entry_name} at %{local_institution_name}"
+
+        scope_name:
+            bookmarks: 'bookmarked'
 
     blacklight_advanced_search:
         form:
