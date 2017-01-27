@@ -19,6 +19,8 @@ module TrlnArgon
         collection.model.model_name.human.downcase
       elsif collection.respond_to?(:model_name) && !collection.model_name.nil? # AR, Blacklight::PaginationMethods
         collection.model_name.human.downcase
+      elsif controller_name == 'bookmarks'
+        t('blacklight.entry_name.bookmarks')
       else
         t('blacklight.entry_name.default')
       end

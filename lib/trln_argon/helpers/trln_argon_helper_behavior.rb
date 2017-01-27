@@ -23,7 +23,11 @@ module TrlnArgon
     end
 
     def filter_scope_name
-      local_filter_applied? ? institution_short_name : consortium_short_name
+      if controller_name == 'bookmarks'
+        t('blacklight.scope_name.bookmarks')
+      else
+        local_filter_applied? ? institution_short_name : consortium_short_name
+      end
     end
 
   end
