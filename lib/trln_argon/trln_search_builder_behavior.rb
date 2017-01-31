@@ -36,7 +36,8 @@ module TrlnArgon
 
       # TODO: Placeholder for query that will limit results to local holdings:
       #
-      # "institution_field:#{TrlnArgon::Engine.configuration.local_institution}"
+      # "#{TrlnArgon::Engine.configuration.local_records_field}:"\
+      # "#{TrlnArgon::Engine.configuration.local_records_values.join(" OR ")}"
     end
 
   end
