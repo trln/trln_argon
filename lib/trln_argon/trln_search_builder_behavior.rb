@@ -32,12 +32,8 @@ module TrlnArgon
     end
 
     def local_holdings_query
-      "language_facet:English" # Arbitrary filter query to test local filter
-
-      # TODO: Placeholder for query that will limit results to local holdings:
-      #
-      # "#{TrlnArgon::Engine.configuration.local_records_field}:"\
-      # "#{TrlnArgon::Engine.configuration.local_records_values.join(" OR ")}"
+      "#{TrlnArgon::Engine.configuration.local_records_field}:"\
+      "#{TrlnArgon::Engine.configuration.local_records_values.join(" OR ")}"
     end
 
   end

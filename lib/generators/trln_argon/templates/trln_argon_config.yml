@@ -1,9 +1,9 @@
 defaults: &defaults
     rollup_field: "rollup_id"
-    preferred_record_field: "owner"
+    preferred_record_field: "institution_a"
     preferred_record_value: "duke"
     local_institution: "duke"
-    local_records_field: "owner"
+    local_records_field: "institution_a"
     local_records_values:
       - duke
       - trln
