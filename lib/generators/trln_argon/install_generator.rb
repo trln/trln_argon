@@ -42,6 +42,31 @@ module TrlnArgon
       end
     end
 
+    def remove_default_blacklight_configs
+      #For multi line fields
+      fields_to_remove = [/ +config.add_facet_field 'example_query_facet_field'[\s\S]+?}\n[ ]+}/,
+                               / +config.add_search_field\([\s\S]+?end/
+      ]
+
+      fields_to_remove.each do |remove_marker|
+        gsub_file("app/controllers/catalog_controller.rb", /#{remove_marker}/, "")
+      end
+
+      #For single line fields
+      fields_to_remove = [/ +config.index.title_field +=.+?$\n*/,
+                               / +config.index.display_type_field +=.+?$\n*/,
+                               / +config.add_facet_field +'.+?$\n*/,
+                               / +config.add_index_field +'.+?$\n*/,
+                               / +config.add_show_field +'.+?$\n*/,
+                               / +config.add_search_field +'.+?$\n*/,
+                               / +config.add_sort_field +'.+?$\n*/
+      ]
+
+      fields_to_remove.each do |remove_marker|
+        gsub_file("app/controllers/catalog_controller.rb", /#{remove_marker}/, "")
+      end
+    end
+
     def inject_search_builder_behavior
       unless IO.read("app/models/search_builder.rb").include?('TrlnSearchBuilderBehavior')
         insert_into_file "app/models/search_builder.rb", :after => "include Blacklight::Solr::SearchBuilderBehavior" do

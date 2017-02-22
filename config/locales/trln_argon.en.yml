@@ -42,6 +42,36 @@ en:
         scope_name:
             bookmarks: 'bookmarked'
 
+        field_label:
+            authors_main_a: "Author"
+            format_a: "Format"
+            isbn_primary_number_a: "ISBN"
+            language_a: "Language"
+            publication_year_isort_stored_single: "Date"
+            publisher_etc_name_a: "Publisher"
+            title_main: "Title"
+            url_href_a: "URL"
+
+        facet_label:
+            format_f: "Format"
+            items_call_number_tag_f: "Call Number"
+            language_f: "Language"
+            publication_year: "Year"
+            subjects_pp: "Subject"
+
+        search_field:
+            all_fields: "All Fields"
+            author: "Author"
+            title: "Title"
+
+        sort_option:
+            relevance: "Relevance"
+            title_asc: "Title (A-Z)"
+            title_desc: "Title (Z-A)"
+            year_asc: "Year (old to new)"
+            year_desc: "Year (new to old)"
+
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
+
