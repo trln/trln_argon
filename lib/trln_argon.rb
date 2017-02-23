@@ -5,6 +5,8 @@ module TrlnArgon
   require 'trln_argon/helpers/catalog_helper_behavior'
   require 'trln_argon/helpers/blacklight_helper_behavior'
   require 'trln_argon/helpers/trln_argon_helper_behavior'
+  require 'trln_argon/field'
+  require 'trln_argon/fields'
   require 'trln_argon/controller_override'
   require 'trln_argon/trln_search_builder_behavior'
 end

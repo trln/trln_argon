@@ -1,11 +1,11 @@
 <% if @filtered_results_total > 0 %>
   <% if local_filter_applied? %>
-    <%= link_to t("blacklight.local_filter.applied", consortium_name: consortium_long_name,
+    <%= link_to t("trln_argon.local_filter.applied", consortium_name: consortium_long_name,
                                                      filtered_results_total: number_with_delimiter(@filtered_results_total),
                                                      entry_name: entry_name(@filtered_results_total)),
           url_for(search_state.to_h.merge(local_filter: 'false', page: '1')) %>
   <% else %>
-    <%= link_to t("blacklight.local_filter.not_applied", local_institution_name: institution_long_name,
+    <%= link_to t("trln_argon.local_filter.not_applied", local_institution_name: institution_long_name,
                                                          filtered_results_total: number_with_delimiter(@filtered_results_total),
                                                          entry_name: entry_name(@filtered_results_total)),
           url_for(search_state.to_h.merge(local_filter: 'true', page: '1')) %>

@@ -3,7 +3,7 @@ module TrlnArgon
 
     def apply_local_filter(solr_parameters)
       solr_parameters[:fq] ||= []
-      if blacklight_params["local_filter"] == 'true'
+      if blacklight_params["local_filter"] == "true"
         solr_parameters[:fq] << local_holdings_query
       else
         solr_parameters[:fq] << record_rollup_query
@@ -23,17 +23,15 @@ module TrlnArgon
     private
 
     def record_rollup_query
-      # TODO: Placeholder for query that will rollup duplicate records:
-      #
-      # "{!collapse field=#{TrlnArgon::Engine.configuration.rollup_field} "\
+      # "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
       # "nullPolicy=expand "\
-      # "max=termfreq(#{TrlnArgon::Engine.configuration.preferred_record_field},"\
-      # "\"#{TrlnArgon::Engine.configuration.preferred_record_value}\")}"
+      # "max=termfreq(#{TrlnArgon::Fields::INSTITUTION},"\
+      # "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
     end
 
     def local_holdings_query
-      "#{TrlnArgon::Engine.configuration.local_records_field}:"\
-      "#{TrlnArgon::Engine.configuration.local_records_values.join(" OR ")}"
+      "#{TrlnArgon::Fields::INSTITUTION}:"\
+      "#{TrlnArgon::Engine.configuration.local_records.split(',').map { |val| val.strip }.join(" OR ")}"
     end
 
   end

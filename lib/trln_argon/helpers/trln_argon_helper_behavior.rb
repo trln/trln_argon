@@ -7,24 +7,24 @@ module TrlnArgon
     end
 
     def institution_short_name
-      t("blacklight.local_institution.#{TrlnArgon::Engine.configuration.local_institution}.short_name")
+      t("trln_argon.local_institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
     end
 
     def institution_long_name
-      t("blacklight.local_institution.#{TrlnArgon::Engine.configuration.local_institution}.long_name")
+      t("trln_argon.local_institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name")
     end
 
     def consortium_short_name
-      t("blacklight.consortium.short_name")
+      t("trln_argon.consortium.short_name")
     end
 
     def consortium_long_name
-      t("blacklight.consortium.long_name")
+      t("trln_argon.consortium.long_name")
     end
 
     def filter_scope_name
       if controller_name == 'bookmarks'
-        t('blacklight.scope_name.bookmarks')
+        t('trln_argon.scope_name.bookmarks')
       else
         local_filter_applied? ? institution_short_name : consortium_short_name
       end

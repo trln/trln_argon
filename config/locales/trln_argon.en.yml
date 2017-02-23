@@ -2,22 +2,6 @@ en:
 
     blacklight:
 
-        local_institution:
-            duke:
-                short_name: "Duke"
-                long_name: "Duke Libraries"
-            unc:
-                short_name: "UNC"
-                long_name: "UNC Libraries"
-            ncsu:
-                short_name: "NCSU"
-                long_name: "NCSU Libraries"
-
-
-        consortium:
-            short_name: "TRLN"
-            long_name: "TRLN Libraries"
-
         home:
 
             welcome: "Welcome to Search TRLN"
@@ -35,6 +19,19 @@ en:
             default: 'result'
             bookmarks: 'item'
 
+    trln_argon:
+
+        local_institution:
+            duke:
+                short_name: "Duke"
+                long_name: "Duke Libraries"
+            unc:
+                short_name: "UNC"
+                long_name: "UNC Libraries"
+            ncsu:
+                short_name: "NCSU"
+                long_name: "NCSU Libraries"
+
         local_filter:
             applied: "Show %{filtered_results_total} %{entry_name} at all %{consortium_name}"
             not_applied: "Show %{filtered_results_total} %{entry_name} at %{local_institution_name}"
@@ -42,29 +39,44 @@ en:
         scope_name:
             bookmarks: 'bookmarked'
 
-        field_label:
-            authors_main_a: "Author"
-            format_a: "Format"
-            isbn_primary_number_a: "ISBN"
-            language_a: "Language"
-            publication_year_isort_stored_single: "Date"
-            publisher_etc_name_a: "Publisher"
-            title_main: "Title"
-            url_href_a: "URL"
+        consortium:
+            short_name: "TRLN"
+            long_name: "TRLN Libraries"
 
-        facet_label:
-            format_f: "Format"
-            items_call_number_tag_f: "Call Number"
-            language_f: "Language"
-            publication_year: "Year"
-            subjects_pp: "Subject"
+        fields:
+            authors_main_a:
+                label: "Author"
+            format_a:
+                label: "Format"
+            isbn_primary_number_a:
+                label: "ISBN"
+            language_a:
+                label: "Language"
+            publication_year_isort_stored_single:
+                label: "Date"
+            publisher_etc_name_a:
+                label: "Publisher"
+            title_main:
+                label: "Title"
+            url_href_a:
+                label: "URL"
+            format_f:
+                label: "Format"
+            items_call_number_tag_f:
+                label: "Call Number"
+            language_f:
+                label: "Language"
+            publication_year:
+                label: "Year"
+            subjects_pp:
+                label: "Subject"
 
-        search_field:
+        search_fields:
             all_fields: "All Fields"
             author: "Author"
             title: "Title"
 
-        sort_option:
+        sort_options:
             relevance: "Relevance"
             title_asc: "Title (A-Z)"
             title_desc: "Title (Z-A)"

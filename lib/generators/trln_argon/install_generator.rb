@@ -13,8 +13,9 @@ module TrlnArgon
       end
     end
 
-    def install_configuration_file
-      copy_file "trln_argon_config.yml", "config/trln_argon_config.yml"
+    def install_configuration_files
+      copy_file "local_env.yml.sample", "config/local_env.yml.sample"
+      copy_file "trln_argon.yml", "config/trln_argon.yml"
     end
 
     def install_search_builders
@@ -33,11 +34,24 @@ module TrlnArgon
       copy_file "trln_argon.scss", "app/assets/stylesheets/trln_argon.scss"
     end
 
-    def inject_catalog_controller_overrides
+    def inject_local_env_loader
       unless IO.read("app/controllers/catalog_controller.rb").include?('TrlnArgon')
         insert_into_file "app/controllers/catalog_controller.rb", :after => "include Blacklight::Marc::Catalog" do
           "\n\n  # CatalogController behavior and configuration for TrlnArgon"\
           "\n  include TrlnArgon::ControllerOverride\n"
+        end
+      end
+    end
+
+    def inject_catalog_controller_overrides
+      unless IO.read("config/application.rb").include?('local_env.yml')
+        insert_into_file "config/application.rb", :after => "class Application < Rails::Application" do
+          "\n\n  config.before_configuration do"\
+          "\n      env_file = File.join(Rails .root, 'config', 'local_env.yml')"\
+          "\n      if File.exists?(env_file)"\
+          "\n        YAML.load_file(env_file).each { |key, value| ENV[key.to_s] = value }"\
+          "\n      end"\
+          "\n    end\n"
         end
       end
     end
