@@ -23,10 +23,10 @@ module TrlnArgon
     private
 
     def record_rollup_query
-      "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
-      "nullPolicy=expand "\
-      "max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
-      "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
+      #"{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
+      #"nullPolicy=expand "\
+      #"max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
+      #"\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
     end
 
     def local_holdings_query
