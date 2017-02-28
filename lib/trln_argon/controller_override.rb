@@ -53,14 +53,14 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
-        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
+        config.add_index_field TrlnArgon::Fields::INSTITUTION_DISPLAY.to_s, label: TrlnArgon::Fields::INSTITUTION_DISPLAY.label, helper_method: :institution_code_to_short_name
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
         config.add_show_field TrlnArgon::Fields::TITLE_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::TITLE_MAIN_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::FORMAT_DISPLAY.to_s, label: TrlnArgon::Fields::FORMAT_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::URL_HREF_DISPLAY.to_s, label: TrlnArgon::Fields::URL_HREF_DISPLAY.label
+        config.add_show_field TrlnArgon::Fields::URL_HREF_DISPLAY.to_s, label: TrlnArgon::Fields::URL_HREF_DISPLAY.label, helper_method: :auto_link_values
         config.add_show_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.to_s, label: TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.label

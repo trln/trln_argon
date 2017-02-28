@@ -23,15 +23,20 @@ module TrlnArgon
     private
 
     def record_rollup_query
-      # "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
-      # "nullPolicy=expand "\
-      # "max=termfreq(#{TrlnArgon::Fields::INSTITUTION},"\
-      # "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
+      "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
+      "nullPolicy=expand "\
+      "max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
+      "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
     end
 
     def local_holdings_query
-      "#{TrlnArgon::Fields::INSTITUTION}:"\
-      "#{TrlnArgon::Engine.configuration.local_records.split(',').map { |val| val.strip }.join(" OR ")}"
+      local_values.map do |value|
+        "#{TrlnArgon::Fields::INSTITUTION_FACET}:#{value}"
+      end.join(" OR ")
+    end
+
+    def local_values
+      TrlnArgon::Engine.configuration.local_records.split(',').map { |val| val.strip }
     end
 
   end

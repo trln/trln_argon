@@ -25,7 +25,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       let(:builder_with_params) { search_builder.with({local_filter: 'true'}) }
 
       it 'should apply the local holdings query' do
-        expect(builder_with_params.show_only_local_holdings(solr_parameters).to_s).to include('language_facet:English')
+        expect(builder_with_params.show_only_local_holdings(solr_parameters).to_s).to include("institution_f:duke OR institution_f:trln")
       end
 
     end
@@ -44,7 +44,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
   describe 'show_only_local_holdings' do
 
     it 'should add paramters to restrict results to local holdings' do
-      expect(search_builder.show_only_local_holdings(solr_parameters).to_s).to include('language_facet:English')
+      expect(search_builder.show_only_local_holdings(solr_parameters).to_s).to include("institution_f:duke OR institution_f:trln")
     end
 
   end
