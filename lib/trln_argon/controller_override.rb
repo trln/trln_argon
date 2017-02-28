@@ -25,15 +25,15 @@ module TrlnArgon
         config.advanced_search[:form_solr_parameters] ||= {}
 
 
-        config.index.title_field = 'title_main'
+        config.index.title_field = TrlnArgon::Fields::TITLE_MAIN_DISPLAY.to_s
 
-        config.index.display_type_field = 'format_a'
+        config.index.display_type_field = TrlnArgon::Fields::FORMAT_DISPLAY.to_s
 
         config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s, label: TrlnArgon::Fields::FORMAT_FACET.label
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_FACET.to_s, label: TrlnArgon::Fields::PUBLICATION_YEAR_FACET.label, single: true
-        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s, label: TrlnArgon::Fields::SUBJECTS_FACET.label, limit: 20
+        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s, label: TrlnArgon::Fields::SUBJECTS_FACET.label, limit: 20, index_range: 'A'..'Z'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s, label: TrlnArgon::Fields::LANGUAGE_FACET.label, limit: true
-        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_TAG_FACET.to_s, label: TrlnArgon::Fields::LANGUAGE_FACET.label
+        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s, label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
 
         # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_facet']
 
@@ -46,13 +46,14 @@ module TrlnArgon
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
-        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::TITLE_MAIN_DISPLAY.label
+        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN_DISPLAY.to_s, label: TrlnArgon::Fields::TITLE_MAIN_VERN_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.label
+        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_VERN_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::FORMAT_DISPLAY.to_s, label: TrlnArgon::Fields::FORMAT_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
         config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label
-
+        config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -63,7 +64,7 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
         config.add_show_field TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.to_s, label: TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.label
-        
+
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields
         #
@@ -116,39 +117,45 @@ module TrlnArgon
         # Specifying a :qt only to show it's possible, and so our internal automated
         # tests can test it. In this case it's the same as
         # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-        # config.add_search_field('subject') do |field|
-        #   field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
-        #   field.qt = 'search'
-        #   field.solr_local_parameters = {
-        #     qf: '$subject_qf',
-        #     pf: '$subject_pf'
-        #   }
-        # end
+        config.add_search_field('subject') do |field|
+          field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
+          field.qt = 'search'
+          field.solr_local_parameters = {
+            qf: '$subject_qf',
+            pf: '$subject_pf'
+          }
+        end
 
         # "sort results by" select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
         # except in the relevancy case).
         config.add_sort_field "score desc, "\
-                              "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} desc, "\
+                              "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} desc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.relevance')
 
-        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} desc, "\
+        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} desc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.year_desc')
 
-        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
-                              "#{TrlnArgon::Fields::TITLE_SORT} asc",
-                              label: I18n.t('trln_argon.sort_options.year_asc')
+        # config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc, "\
+        #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
+        #                       label: I18n.t('trln_argon.sort_options.year_asc')
+
+        # config.add_sort_field "#{TrlnArgon::Fields::AUTHOR_SORT} asc, "\
+        #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
+        #                       label: I18n.t('trln_argon.sort_options.author_asc')
 
         config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} asc, "\
-                              "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
+                              "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.title_asc')
 
-        config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
-                              "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
-                              label: I18n.t('trln_argon.sort_options.title_desc')
+        # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
+        #                       "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc",
+        #                       label: I18n.t('trln_argon.sort_options.title_desc')
+
+
 
       end
 
