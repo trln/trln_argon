@@ -6,6 +6,12 @@ module TrlnArgon
       count.to_int == 1 ? entry : entry.pluralize
     end
 
+    def institution_code_to_short_name options={}
+      options[:value].map do |value|
+        t("trln_argon.local_institution.#{value}.short_name")
+      end.join("; ")
+    end
+
     def institution_short_name
       t("trln_argon.local_institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
     end
