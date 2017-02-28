@@ -19,18 +19,26 @@ en:
             default: 'result'
             bookmarks: 'item'
 
+    blacklight_advanced_search:
+        form:
+            title: "Advanced Search"
+
     trln_argon:
 
         local_institution:
             duke:
                 short_name: "Duke"
                 long_name: "Duke Libraries"
-            unc:
-                short_name: "UNC"
-                long_name: "UNC Libraries"
+            nccu:
+                short_name: "NCCU"
+                long_name: "Shepard Library"
             ncsu:
                 short_name: "NCSU"
                 long_name: "NCSU Libraries"
+            unc:
+                short_name: "UNC"
+                long_name: "UNC Libraries"
+
 
         local_filter:
             applied: "Show %{filtered_results_total} %{entry_name} at all %{consortium_name}"
@@ -87,8 +95,3 @@ en:
             year_asc: "Year (old to new)"
             year_desc: "Year (new to old)"
             author_asc: "Author (A-Z)"
-
-    blacklight_advanced_search:
-        form:
-            title: "Advanced Search"
-

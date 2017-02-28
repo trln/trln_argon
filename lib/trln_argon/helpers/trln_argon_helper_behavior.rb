@@ -1,15 +1,19 @@
 module TrlnArgon
   module TrlnArgonHelperBehavior
 
+    def institution_code_to_short_name options={}
+      options[:value].map do |val|
+        t("trln_argon.local_institution.#{val}.short_name", default: val)
+      end.to_sentence
+    end
+
+    def auto_link_values options={}
+      options[:value].map { |value| auto_link(value) }.to_sentence.html_safe
+    end
+
     def entry_name(count)
       entry = t("blacklight.entry_name.default")
       count.to_int == 1 ? entry : entry.pluralize
-    end
-
-    def institution_code_to_short_name options={}
-      options[:value].map do |value|
-        t("trln_argon.local_institution.#{value}.short_name")
-      end.join("; ")
     end
 
     def institution_short_name
