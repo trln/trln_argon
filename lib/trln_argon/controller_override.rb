@@ -25,15 +25,15 @@ module TrlnArgon
         config.advanced_search[:form_solr_parameters] ||= {}
 
 
-        config.index.title_field = TrlnArgon::Fields::TITLE_MAIN_DISPLAY.to_s
+        config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
 
-        config.index.display_type_field = TrlnArgon::Fields::FORMAT_DISPLAY.to_s
+        config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
         config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s, label: TrlnArgon::Fields::FORMAT_FACET.label
-        config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_FACET.to_s, label: TrlnArgon::Fields::PUBLICATION_YEAR_FACET.label, single: true
         config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s, label: TrlnArgon::Fields::SUBJECTS_FACET.label, limit: 20, index_range: 'A'..'Z'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s, label: TrlnArgon::Fields::LANGUAGE_FACET.label, limit: true
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s, label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
+        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s, label: TrlnArgon::Fields::INSTITUTION_FACET.label
 
         # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_facet']
 
@@ -46,24 +46,24 @@ module TrlnArgon
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
-        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN_DISPLAY.to_s, label: TrlnArgon::Fields::TITLE_MAIN_VERN_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_VERN_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::FORMAT_DISPLAY.to_s, label: TrlnArgon::Fields::FORMAT_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
-        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
+        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN.to_s, label: TrlnArgon::Fields::TITLE_MAIN_VERN.label
+        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN.label
+        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_VERN.label
+        config.add_index_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
+        config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
+        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC_NAME.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME.label
         config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
-        config.add_index_field TrlnArgon::Fields::INSTITUTION_DISPLAY.to_s, label: TrlnArgon::Fields::INSTITUTION_DISPLAY.label, helper_method: :institution_code_to_short_name
+        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
-        config.add_show_field TrlnArgon::Fields::TITLE_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::TITLE_MAIN_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::FORMAT_DISPLAY.to_s, label: TrlnArgon::Fields::FORMAT_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::URL_HREF_DISPLAY.to_s, label: TrlnArgon::Fields::URL_HREF_DISPLAY.label, helper_method: :auto_link_values
-        config.add_show_field TrlnArgon::Fields::LANGUAGE_DISPLAY.to_s, label: TrlnArgon::Fields::LANGUAGE_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME_DISPLAY.label
-        config.add_show_field TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.to_s, label: TrlnArgon::Fields::ISBN_PRIMARY_NUMBER_DISPLAY.label
+        config.add_show_field TrlnArgon::Fields::TITLE_MAIN.to_s, label: TrlnArgon::Fields::TITLE_MAIN.label
+        config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN.label
+        config.add_show_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
+        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s, label: TrlnArgon::Fields::URL_HREF.label, helper_method: :auto_link_values
+        config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
+        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC_NAME.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME.label
+        config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s, label: TrlnArgon::Fields::ISBN_NUMBER.label
 
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields

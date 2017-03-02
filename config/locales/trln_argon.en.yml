@@ -25,7 +25,7 @@ en:
 
     trln_argon:
 
-        local_institution:
+        institution:
             duke:
                 short_name: "Duke"
                 long_name: "Duke Libraries"
@@ -52,36 +52,20 @@ en:
             long_name: "TRLN Libraries"
 
         fields:
-            authors_main_a:
+            authors_main:
                 label: "Author"
-            format_a:
-                label: "Format"
-            institution_a:
-                label: "Institution"
-            isbn_primary_number_a:
-                label: "ISBN"
-            items_lcc_top_f:
-                label: "Call Number"
-            language_a:
-                label: "Language"
+            isbn_number:
+                label: "ISBN Number"
             publication_year_isort_stored_single:
                 label: "Date"
-            publisher_etc_name_a:
+            publisher_etc_name:
                 label: "Publisher"
             title_main:
                 label: "Title"
-            url_href_a:
+            url_href:
                 label: "URL"
-            format_f:
-                label: "Format"
-            items_call_number_tag_f:
+            items_lcc_top_facet:
                 label: "Call Number"
-            language_f:
-                label: "Language"
-            publication_year:
-                label: "Year"
-            subjects_f:
-                label: "Subject"
 
         search_fields:
             all_fields: "All Fields"

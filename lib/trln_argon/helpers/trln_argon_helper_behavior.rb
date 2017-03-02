@@ -3,7 +3,7 @@ module TrlnArgon
 
     def institution_code_to_short_name options={}
       options[:value].map do |val|
-        t("trln_argon.local_institution.#{val}.short_name", default: val)
+        t("trln_argon.institution.#{val}.short_name", default: val)
       end.to_sentence
     end
 
@@ -17,11 +17,11 @@ module TrlnArgon
     end
 
     def institution_short_name
-      t("trln_argon.local_institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
+      t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
     end
 
     def institution_long_name
-      t("trln_argon.local_institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name")
+      t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name")
     end
 
     def consortium_short_name
