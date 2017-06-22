@@ -1,42 +1,19 @@
-begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
+
+RSpec::Core::RakeTask.new(:spec)
+
+Dir.glob('./tasks/*.rake').each { |f| load f }
+Dir.glob('./lib/tasks/*.rake').each { |f| load f }
+
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new(:spec)
+
+require 'engine_cart/rake_task'
+EngineCart.fingerprint_proc = EngineCart.rails_fingerprint_proc
+
+task :ci do
+  ENV['environment'] = 'test'
+  Rake::Task['engine_cart:generate'].invoke
+  Rake::Task['spec'].invoke
 end
-
-require 'rdoc/task'
-
-RDoc::Task.new(:rdoc) do |rdoc|
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'TrlnArgon'
-  rdoc.options << '--line-numbers'
-  rdoc.rdoc_files.include('README.md')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
-
-APP_RAKEFILE = File.expand_path("../spec/dummy/Rakefile", __FILE__)
-
-load 'rails/tasks/engine.rake'
-load 'rails/tasks/statistics.rake'
-
-Bundler::GemHelper.install_tasks
-
-# require 'bundler/gem_tasks'
-
-begin
-  require 'bundler/setup'
-rescue LoadError
-  puts 'You must `gem install bundler` and `bundle install` to run rake tasks`'
-end
-
-require 'rake/testtask'
-
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
-end
-
-
-task default: :test

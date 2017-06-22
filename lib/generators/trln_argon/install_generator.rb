@@ -14,7 +14,7 @@ module TrlnArgon
     end
 
     def install_configuration_files
-      copy_file "local_env.yml.sample", "config/local_env.yml.sample"
+      copy_file "local_env.yml", "config/local_env.yml"
       copy_file "trln_argon.yml", "config/trln_argon.yml"
     end
 
@@ -39,6 +39,14 @@ module TrlnArgon
         insert_into_file "app/controllers/catalog_controller.rb", :after => "include Blacklight::Marc::Catalog" do
           "\n\n  # CatalogController behavior and configuration for TrlnArgon"\
           "\n  include TrlnArgon::ControllerOverride\n"
+        end
+      end
+    end
+
+    def inject_into_dev_env
+      unless IO.read("config/environments/development.rb").include?("BetterErrors")
+        insert_into_file "config/environments/development.rb", :after => "Rails.application.configure do" do
+          "\n\n  BetterErrors::Middleware.allow_ip! \"10.0.2.2\" if defined? BetterErrors && Rails.env == :development\n"
         end
       end
     end
