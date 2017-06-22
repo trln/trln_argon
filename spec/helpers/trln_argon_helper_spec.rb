@@ -76,7 +76,7 @@ describe TrlnArgonHelper do
   describe "#institution_short_name" do
 
     it "should use the configured and translated name" do
-      expect(helper.institution_short_name).to eq("Duke")
+      expect(helper.institution_short_name).to eq("UNC")
     end
 
   end
@@ -84,7 +84,7 @@ describe TrlnArgonHelper do
   describe "#institution_long_name" do
 
     it "should use the configured and translated name" do
-      expect(helper.institution_long_name).to eq("Duke Libraries")
+      expect(helper.institution_long_name).to eq("UNC Libraries")
     end
 
   end
@@ -125,7 +125,7 @@ describe TrlnArgonHelper do
       end
 
       it "should use the translated scope name for bookmarks" do
-        expect(helper.filter_scope_name).to eq("Duke")
+        expect(helper.filter_scope_name).to eq("UNC")
       end
 
     end
