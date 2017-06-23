@@ -9,7 +9,8 @@ module TrlnArgon
     INSTITUTION            = TrlnArgon::Field.new :institution_a
     ISBN_NUMBER            = TrlnArgon::Field.new :isbn_number_a
     LANGUAGE               = TrlnArgon::Field.new :language_a
-    PUBLISHER_ETC_NAME     = TrlnArgon::Field.new :publisher_etc_name_a
+    PUBLISHER_ETC          = TrlnArgon::Field.new :publisher_etc_a
+    SUBJECTS               = TrlnArgon::Field.new :subjects_a
     TITLE_MAIN             = TrlnArgon::Field.new :title_main
     TITLE_MAIN_VERN        = TrlnArgon::Field.new :title_main_vern
     URL_HREF               = TrlnArgon::Field.new :url_href_a

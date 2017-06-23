@@ -51,7 +51,7 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_VERN.label
         config.add_index_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
         config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC_NAME.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME.label
+        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC.label
         config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
         config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
 
@@ -62,8 +62,12 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
         config.add_show_field TrlnArgon::Fields::URL_HREF.to_s, label: TrlnArgon::Fields::URL_HREF.label, helper_method: :auto_link_values
         config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC_NAME.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC_NAME.label
+        config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s, label: TrlnArgon::Fields::SUBJECTS.label
+        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC.label
         config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s, label: TrlnArgon::Fields::ISBN_NUMBER.label
+        config.add_show_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
+
 
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields

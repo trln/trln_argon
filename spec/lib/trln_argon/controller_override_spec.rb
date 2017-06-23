@@ -103,7 +103,7 @@ describe TrlnArgon::ControllerOverride do
       end
 
       it "should set the publisher name field" do
-        expect(override_config.index_fields).to have_key("publisher_etc_name_a")
+        expect(override_config.index_fields).to have_key("publisher_etc_a")
       end
 
       it "should set the publication year field" do
@@ -138,12 +138,24 @@ describe TrlnArgon::ControllerOverride do
         expect(override_config.show_fields).to have_key("language_a")
       end
 
-      it "should set the publisher name field" do
-        expect(override_config.show_fields).to have_key("publisher_etc_name_a")
+      it "should set the subjects field" do
+        expect(override_config.show_fields).to have_key("subjects_a")
+      end
+
+      it "should set the publisher field" do
+        expect(override_config.show_fields).to have_key("publisher_etc_a")
       end
 
       it "should set the ISBN field" do
         expect(override_config.show_fields).to have_key("isbn_number_a")
+      end
+
+      it "should set the publication year field" do
+        expect(override_config.show_fields).to have_key("publication_year_isort_stored_single")
+      end
+
+      it "should set the institution field" do
+        expect(override_config.show_fields).to have_key("institution_a")
       end
 
     end
