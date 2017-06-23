@@ -38,9 +38,14 @@ module TrlnArgon
         expect(Fields::LANGUAGE.solr_name).to eq('language_a')
       end
 
-      it "should have a PUBLISHER_ETC_NAME" do
-        expect(Fields::PUBLISHER_ETC_NAME.label).to eq("Publisher")
-        expect(Fields::PUBLISHER_ETC_NAME.solr_name).to eq('publisher_etc_name_a')
+      it "should have a PUBLISHER_ETC" do
+        expect(Fields::PUBLISHER_ETC.label).to eq("Publisher")
+        expect(Fields::PUBLISHER_ETC.solr_name).to eq('publisher_etc_a')
+      end
+
+      it "should have a SUBJECTS" do
+        expect(Fields::SUBJECTS.label).to eq("Subjects")
+        expect(Fields::SUBJECTS.solr_name).to eq('subjects_a')
       end
 
       it "should have a TITLE_MAIN" do

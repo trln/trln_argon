@@ -58,7 +58,7 @@ en:
                 label: "ISBN Number"
             publication_year_isort_stored_single:
                 label: "Date"
-            publisher_etc_name:
+            publisher_etc:
                 label: "Publisher"
             title_main:
                 label: "Title"
