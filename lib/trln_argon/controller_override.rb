@@ -14,16 +14,14 @@ module TrlnArgon
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
 
-        # TODO: Consider making some of this configurabl in trln_argon_config.yml
         config.search_builder_class = TrlnArgonSearchBuilder
         config.default_per_page = 20
 
-        # Single document search parameters
-        config.default_document_solr_params = {
-          fl: '*',
-          rows: 1,
-          q: '{!term f=id v=$id}'
-        }
+        # Use Solr search requestHandler for search requests
+        config.solr_path = :select
+
+        # Use Solr document requestHandler for document requests
+        config.document_solr_path = :document
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
