@@ -1,4 +1,5 @@
-# desc "Explaining what the task does"
-# task :trln_argon do
-#   # Task goes here
-# end
+task :ci do
+  ENV['environment'] = 'test'
+  Rake::Task['engine_cart:generate'].invoke
+  Rake::Task['spec'].invoke
+end

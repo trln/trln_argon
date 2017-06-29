@@ -1,4 +1,4 @@
-require "trln_argon/engine"
+require 'trln_argon/engine'
 require 'trln_argon/version'
 
 module TrlnArgon

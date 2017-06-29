@@ -2,7 +2,7 @@ describe "full records" do
 
   context "displays multiple fields from the record" do
 
-    before { visit solr_document_path(id: "NCSU3724376") }
+    before { visit solr_document_path(id: "DUKE000152671") }
 
     it "displays the title field" do
       expect(page).to have_css("dt.blacklight-title_main", text: "Title:")
@@ -19,7 +19,7 @@ describe "full records" do
       expect(page).to have_css("dd.blacklight-format_a", text: /.+/)
     end
 
-    it "displays the URL field" do
+    xit "displays the URL field" do
       expect(page).to have_css("dt.blacklight-url_href_a", text: "URL:")
       expect(page).to have_css("dd.blacklight-url_href_a", text: /.+/)
     end
@@ -34,12 +34,12 @@ describe "full records" do
       expect(page).to have_css("dd.blacklight-subjects_a", text: /.+/)
     end
 
-    it "displays the publisher field" do
+    xit "displays the publisher field" do
       expect(page).to have_css("dt.blacklight-publisher_etc_a", text: "Publisher:")
       expect(page).to have_css("dd.blacklight-publisher_etc_a", text: /.+/)
     end
 
-    it "displays the ISBN field" do
+    xit "displays the ISBN field" do
       expect(page).to have_css("dt.blacklight-isbn_number_a", text: "ISBN Number:")
       expect(page).to have_css("dd.blacklight-isbn_number_a", text: /.+/)
     end

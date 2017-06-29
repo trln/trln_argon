@@ -1,10 +1,13 @@
 module TrlnArgon
+  # Sets the default Blacklight configuration and
+  # CatalogController behaviors for TRLN Argon based
+  # applications. Override in the local application in
+  # app/controllers/catalog_controller.rb
   module ControllerOverride
     extend ActiveSupport::Concern
 
     included do
-
-      self.send(:include, BlacklightAdvancedSearch::Controller)
+      send(:include, BlacklightAdvancedSearch::Controller)
 
       before_action :local_filter_session
       before_action :filtered_results_total, only: :index
@@ -13,7 +16,6 @@ module TrlnArgon
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
-
         config.search_builder_class = TrlnArgonSearchBuilder
         config.default_per_page = 20
 
@@ -29,50 +31,68 @@ module TrlnArgon
         config.advanced_search[:query_parser] ||= 'dismax'
         config.advanced_search[:form_solr_parameters] ||= {}
 
-
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
 
         config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
-        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s, label: TrlnArgon::Fields::FORMAT_FACET.label
-        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s, label: TrlnArgon::Fields::SUBJECTS_FACET.label, limit: 20, index_range: 'A'..'Z'
-        config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s, label: TrlnArgon::Fields::LANGUAGE_FACET.label, limit: true
-        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s, label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
-        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s, label: TrlnArgon::Fields::INSTITUTION_FACET.label
-
-        # config.add_facet_field 'example_pivot_field', label: 'Pivot Field', :pivot => ['format', 'language_facet']
-
-        # config.add_facet_field 'example_query_facet_field', label: 'Publish Date', :query => {
-        #    :years_5 => { label: 'within 5 Years', fq: "pub_date:[#{Time.zone.now.year - 5 } TO *]" },
-        #    :years_10 => { label: 'within 10 Years', fq: "pub_date:[#{Time.zone.now.year - 10 } TO *]" },
-        #    :years_25 => { label: 'within 25 Years', fq: "pub_date:[#{Time.zone.now.year - 25 } TO *]" }
-        # }
-
+        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
+                               label: TrlnArgon::Fields::FORMAT_FACET.label
+        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECTS_FACET.label,
+                               limit: 20,
+                               index_range: 'A'..'Z'
+        config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
+                               label: TrlnArgon::Fields::LANGUAGE_FACET.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
+        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
+                               label: TrlnArgon::Fields::INSTITUTION_FACET.label
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
-        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN.to_s, label: TrlnArgon::Fields::TITLE_MAIN_VERN.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN_VERN.label
-        config.add_index_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
-        config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC.label
-        config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
-        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
+        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN.to_s,
+                               label: TrlnArgon::Fields::TITLE_MAIN_VERN.label
+        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
+                               label: TrlnArgon::Fields::AUTHORS_MAIN.label
+        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN.to_s,
+                               label: TrlnArgon::Fields::AUTHORS_MAIN_VERN.label
+        config.add_index_field TrlnArgon::Fields::FORMAT.to_s,
+                               label: TrlnArgon::Fields::FORMAT.label
+        config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s,
+                               label: TrlnArgon::Fields::LANGUAGE.label
+        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
+                               label: TrlnArgon::Fields::PUBLISHER_ETC.label
+        config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
+                               label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
+                               label: TrlnArgon::Fields::INSTITUTION.label,
+                               helper_method: :institution_code_to_short_name
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
-        config.add_show_field TrlnArgon::Fields::TITLE_MAIN.to_s, label: TrlnArgon::Fields::TITLE_MAIN.label
-        config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN.to_s, label: TrlnArgon::Fields::AUTHORS_MAIN.label
-        config.add_show_field TrlnArgon::Fields::FORMAT.to_s, label: TrlnArgon::Fields::FORMAT.label
-        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s, label: TrlnArgon::Fields::URL_HREF.label, helper_method: :auto_link_values
-        config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s, label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s, label: TrlnArgon::Fields::SUBJECTS.label
-        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC.to_s, label: TrlnArgon::Fields::PUBLISHER_ETC.label
-        config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s, label: TrlnArgon::Fields::ISBN_NUMBER.label
-        config.add_show_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s, label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
-        config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s, label: TrlnArgon::Fields::INSTITUTION.label, helper_method: :institution_code_to_short_name
-
+        config.add_show_field TrlnArgon::Fields::TITLE_MAIN.to_s,
+                              label: TrlnArgon::Fields::TITLE_MAIN.label
+        config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
+                              label: TrlnArgon::Fields::AUTHORS_MAIN.label
+        config.add_show_field TrlnArgon::Fields::FORMAT.to_s,
+                              label: TrlnArgon::Fields::FORMAT.label
+        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s,
+                              label: TrlnArgon::Fields::URL_HREF.label,
+                              helper_method: :auto_link_values
+        config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
+                              label: TrlnArgon::Fields::LANGUAGE.label
+        config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s,
+                              label: TrlnArgon::Fields::SUBJECTS.label
+        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
+                              label: TrlnArgon::Fields::PUBLISHER_ETC.label
+        config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
+                              label: TrlnArgon::Fields::ISBN_NUMBER.label
+        config.add_show_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
+                              label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s,
+                              label: TrlnArgon::Fields::INSTITUTION.label,
+                              helper_method: :institution_code_to_short_name
 
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields
@@ -92,8 +112,8 @@ module TrlnArgon
         # solr request handler? The one set in config[:default_solr_parameters][:qt],
         # since we aren't specifying it otherwise.
 
-        config.add_search_field 'all_fields', label: I18n.t('trln_argon.search_fields.all_fields')
-
+        config.add_search_field 'all_fields',
+                                label: I18n.t('trln_argon.search_fields.all_fields')
 
         # Now we see how to over-ride Solr request handler defaults, in this
         # case for a BL "search field", which is really a dismax aggregate
@@ -139,7 +159,7 @@ module TrlnArgon
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
         # except in the relevancy case).
-        config.add_sort_field "score desc, "\
+        config.add_sort_field 'score desc, '\
                               "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} desc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.relevance')
@@ -163,27 +183,28 @@ module TrlnArgon
         # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
         #                       "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
-
-
-
       end
-
 
       private
 
       def filtered_results_total
-        @filtered_results_total = filtered_results_query_response['response']['numFound']
+        @filtered_results_total =
+          filtered_results_query_response['response']['numFound']
       end
 
       def filtered_results_query_response
-        filtered_response = repository.search(local_filter_search_builder.append(*additional_processor_chain_methods).with(search_state.to_h))
+        repository.search(local_filter_search_builder
+          .append(*additional_processor_chain_methods)
+          .with(search_state.to_h))
       end
 
       # This is needed so that controllers that inherit from CatalogController
-      # Will have any additional processor chain methods applied to the 
+      # Will have any additional processor chain methods applied to the
       # query that fetches the local filter count
       def additional_processor_chain_methods
-        search_builder.processor_chain - local_filter_search_builder.processor_chain - excluded_processor_chain_methods
+        search_builder.processor_chain -
+          local_filter_search_builder.processor_chain -
+          excluded_processor_chain_methods
       end
 
       def excluded_processor_chain_methods
@@ -191,11 +212,12 @@ module TrlnArgon
       end
 
       def local_filter_search_builder
-        if local_filter_applied?
-          @local_filter_search_builder ||= ConsortiumSearchBuilder.new(CatalogController)
-        else
-          @local_filter_search_builder ||= LocalSearchBuilder.new(CatalogController)
-        end
+        @local_filter_search_builder ||=
+          if local_filter_applied?
+            ConsortiumSearchBuilder.new(CatalogController)
+          else
+            LocalSearchBuilder.new(CatalogController)
+          end
       end
 
       def local_filter_session
@@ -230,7 +252,7 @@ module TrlnArgon
       end
 
       def local_filter_whitelist
-        ['true', 'false']
+        %w[true false]
       end
 
       def local_filter_applied?
@@ -240,8 +262,6 @@ module TrlnArgon
       def local_filter_default
         TrlnArgon::Engine.configuration.apply_local_filter_by_default
       end
-
     end
-
   end
 end
