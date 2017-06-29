@@ -1,0 +1,38 @@
+AllCops:
+  Exclude:
+    - '.internal_test_app/**/*'
+    - 'Gemfile'
+    - 'spec/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'lib/trln_argon/version.rb'
+
+Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'lib/trln_argon/controller_override.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'lib/trln_argon/controller_override.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'

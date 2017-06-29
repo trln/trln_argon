@@ -1,6 +1,6 @@
-config_file = File.join(Rails.root, "/config/trln_argon.yml")
+config_file = File.join(Rails.root, '/config/trln_argon.yml')
 
-def apply_local_config (config, field)
+def apply_local_config(config, field)
   config[field] if config[field]
 end
 

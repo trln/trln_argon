@@ -1,18 +1,20 @@
 module TrlnArgon
+  # Shared helpers for TRLN Argon based applicatilns
+  # Methods can be overridden in the local application
+  # in app/helpers/trln_argon_helper.rb
   module TrlnArgonHelperBehavior
-
-    def institution_code_to_short_name options={}
+    def institution_code_to_short_name(options = {})
       options[:value].map do |val|
         t("trln_argon.institution.#{val}.short_name", default: val)
       end.to_sentence
     end
 
-    def auto_link_values options={}
+    def auto_link_values(options = {})
       options[:value].map { |value| auto_link(value) }.to_sentence.html_safe
     end
 
     def entry_name(count)
-      entry = t("blacklight.entry_name.default")
+      entry = t('blacklight.entry_name.default')
       count.to_int == 1 ? entry : entry.pluralize
     end
 
@@ -25,11 +27,11 @@ module TrlnArgon
     end
 
     def consortium_short_name
-      t("trln_argon.consortium.short_name")
+      t('trln_argon.consortium.short_name')
     end
 
     def consortium_long_name
-      t("trln_argon.consortium.long_name")
+      t('trln_argon.consortium.long_name')
     end
 
     def filter_scope_name
@@ -39,6 +41,5 @@ module TrlnArgon
         local_filter_applied? ? institution_short_name : consortium_short_name
       end
     end
-
   end
 end

@@ -1,10 +1,8 @@
 module TrlnArgon
-
   class Field < SimpleDelegator
-
     attr_reader :solr_name
 
-    def initialize(solr_name, *args)
+    def initialize(solr_name)
       @solr_name = solr_name.to_s
       super(@solr_name)
     end
@@ -29,7 +27,5 @@ module TrlnArgon
         solr_name
       end
     end
-
   end
-
 end
