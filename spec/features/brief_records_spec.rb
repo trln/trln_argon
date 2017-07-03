@@ -27,7 +27,7 @@ describe "brief records" do
 
     it "displays the publisher field" do
       brief_records = page.find(:css, "#documents:first-of-type")
-      expect(brief_records).to have_css("dt.blacklight-publisher_etc_a", text: "Publisher:")
+      expect(brief_records).to have_css("dt.blacklight-publisher_etc_a", text: "Publisher Etc:")
       expect(brief_records).to have_css("dd.blacklight-publisher_etc_a", text: /.+/)
     end
 

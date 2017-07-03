@@ -21,6 +21,8 @@ module TrlnArgon
       case solr_name
       when /.*_a$/
         solr_name.gsub(/_a$/, '')
+      when /.*_v$/
+        solr_name.gsub(/_v$/, '')
       when /.*_f$/
         solr_name.gsub(/_f$/, '_facet')
       else

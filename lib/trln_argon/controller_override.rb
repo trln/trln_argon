@@ -46,6 +46,8 @@ module TrlnArgon
                                limit: true
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
+        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
+                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label
 
