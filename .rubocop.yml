@@ -32,6 +32,7 @@ Metrics/MethodLength:
 Metrics/ModuleLength:
   Exclude:
     - 'lib/trln_argon/controller_override.rb'
+    - 'lib/trln_argon/fields.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:

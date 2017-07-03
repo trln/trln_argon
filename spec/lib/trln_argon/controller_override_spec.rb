@@ -74,6 +74,10 @@ describe TrlnArgon::ControllerOverride do
         expect(override_config.facet_fields).to have_key("items_lcc_top_f")
       end
 
+      it "should set the items location facet" do
+        expect(override_config.facet_fields).to have_key("items_location_f")
+      end
+
       it "should set the institution facet" do
         expect(override_config.facet_fields).to have_key("institution_f")
       end

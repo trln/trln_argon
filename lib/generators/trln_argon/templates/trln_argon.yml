@@ -18,4 +18,3 @@ production:
   local_records: <%= ENV['LOCAL_RECORDS'] || 'unc,trln' %>
   apply_local_filter_by_default: <%= ENV['APPLY_LOCAL_FILTER_BY_DEFAULT'] || 'true' %>
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
-  
