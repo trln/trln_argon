@@ -176,7 +176,5 @@ module TrlnArgon
     def self.solr_field_names
       constants.map { |symbol| symbol.to_s.constantize }
     end
-
-
   end
 end

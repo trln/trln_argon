@@ -17,6 +17,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - 'lib/trln_argon/controller_override.rb'
+    - 'lib/tasks/trln_argon_tasks.rake'
 
 Metrics/CyclomaticComplexity:
   Exclude:
