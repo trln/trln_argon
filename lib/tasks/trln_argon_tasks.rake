@@ -58,6 +58,9 @@ namespace :trln_argon do
 
       response, = controller.search_results(numTerms: 0)
 
+      puts 'all_fields source repository:'
+      puts blacklight_config.connection_config[:url]
+
       @all_fields = response['fields'].map { |field_name, _| field_name }
     end
   end
