@@ -10,3 +10,4 @@ spec/dummy/.sass-cache
 Gemfile.lock
 
 .internal_test_app
+.idea/
