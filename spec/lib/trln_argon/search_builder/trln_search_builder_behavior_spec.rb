@@ -34,7 +34,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
 
       let(:builder_with_params) { search_builder.with({local_filter: 'false'}) }
 
-      it 'should apply the local holdings query' do
+      it 'should not apply the local holdings query' do
         expect(builder_with_params.show_only_local_holdings(solr_parameters).to_s).to include('')
       end
 
@@ -43,7 +43,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
 
   describe 'show_only_local_holdings' do
 
-    it 'should add paramters to restrict results to local holdings' do
+    it 'should add parameters to restrict results to local holdings' do
       expect(search_builder.show_only_local_holdings(solr_parameters).to_s).to include("institution_f:unc OR institution_f:trln")
     end
 
@@ -51,7 +51,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
 
   describe 'rollup_duplicate_records' do
 
-    it 'should add paramters to rollup duplicate records' do
+    it 'should add parameters to rollup duplicate records' do
       expect(search_builder.rollup_duplicate_records(solr_parameters).to_s).to include('')
     end
 
