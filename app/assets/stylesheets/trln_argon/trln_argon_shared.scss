@@ -36,6 +36,15 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     color: #fff;
 }
 
+.facet_limit-active .panel-heading { 
+    a:hover {
+        color: #fff;
+    }
+    a:focus {
+        color: #fff;
+    }
+}
+
 .panel-success, .facet_limit-active {
     border-color: $green;
 }
