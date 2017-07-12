@@ -2,7 +2,6 @@ module TrlnArgon
   RSpec.describe Fields do
 
     describe "identifier field constants" do
-
       it "should have a ID" do
         expect(Fields::ID.label).to eq("Id")
         expect(Fields::ID.solr_name).to eq("id")
@@ -12,11 +11,9 @@ module TrlnArgon
         expect(Fields::ROLLUP_ID.label).to eq("Rollup")
         expect(Fields::ROLLUP_ID.solr_name).to eq('rollup_id')
       end
-
     end
 
     describe "display field constants" do
-
       it "should have a AUTHORS_DIRECTOR" do
         expect(Fields::AUTHORS_DIRECTOR.label).to eq("Authors Director")
         expect(Fields::AUTHORS_DIRECTOR.solr_name).to eq("authors_director_a")
@@ -815,11 +812,9 @@ module TrlnArgon
         expect(Fields::SUBJECTS_FACET.label).to eq("Subjects")
         expect(Fields::SUBJECTS_FACET.solr_name).to eq('subjects_f')
       end
-
     end
 
     describe "sort field constants" do
-
       it "should have a AUTHORS_SORT" do
         expect(Fields::AUTHORS_SORT.label).to eq("Authors Sort")
         expect(Fields::AUTHORS_SORT.solr_name).to eq('authors_sort_a')
@@ -834,7 +829,6 @@ module TrlnArgon
         expect(Fields::TITLE_SORT.label).to eq("Title Sort Ssort Single")
         expect(Fields::TITLE_SORT.solr_name).to eq('title_sort_ssort_single')
       end
-
     end
 
   end

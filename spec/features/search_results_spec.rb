@@ -70,4 +70,19 @@ describe "search results" do
     end
   end
 
+  describe "paging controls" do
+    before do
+      visit search_catalog_path(local_filter: "false")
+      click_button "search"
+    end
+
+    it "provides paging options above the results" do
+      expect(page).to have_css("#sortAndPerPage .page_links")
+    end
+
+    it "provides paging options below the search results" do
+      expect(page).to have_css(".pagination")
+    end
+  end
+
 end
