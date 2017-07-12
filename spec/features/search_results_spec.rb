@@ -50,4 +50,24 @@ describe "search results" do
       search_field: "all_fields"))
   end
 
+  context "facets applied to search" do
+    before do
+      visit search_catalog_path(local_filter: "false")
+      click_button "search"
+      click_link "Format"
+      click_link "Print"
+      click_link "Book"
+    end
+
+    it "displays the Format > Print facet breadcrumb" do
+      expect(page).to have_css(".filterName", text: "Format")
+      expect(page).to have_css(".filterValue", text: "Print")
+    end
+
+    it "displays the Format > Book facet breadcrumb" do
+      expect(page).to have_css(".filterName", text: "Format")
+      expect(page).to have_css(".filterValue", text: "Book")
+    end
+  end
+
 end
