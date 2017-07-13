@@ -18,6 +18,23 @@ describe "search results" do
     end
   end
 
+  context 'all results' do
+    it 'returns entire catalog when no query string provided' do
+      visit search_catalog_path(local_filer: 'false')
+      click_button 'search'
+      page_entries_text = page.find(:css, '.page_entries').text
+      result_count = 0
+      page_entries_text.scan(/\b(\d+,?(\d+)?)\b/).each do |match|
+        integer = match[0].gsub!(/\D/,'').to_i
+        result_count = integer if integer > result_count
+      end
+      uri = URI("#{CatalogController.blacklight_config.connection_config[:url]}/select?&q=*:*&wt=json")
+      solr_count = JSON.parse(Net::HTTP.get(uri))['response']['numFound']
+
+      expect(result_count).to eq(solr_count)
+    end
+  end
+
   it "produces expected search from GET parameters (bookmarkable)" do
     visit search_catalog_path({ :q => "food",
           "f[format_f][]" => "Book",
