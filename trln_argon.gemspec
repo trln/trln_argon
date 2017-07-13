@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails', '~> 3.5'
   s.add_development_dependency 'capybara'
   s.add_development_dependency 'rubocop', '~> 0.49.1'
+  s.add_development_dependency 'rubocop-rspec'
   s.add_development_dependency 'engine_cart'
   s.add_development_dependency 'better_errors'
   s.add_development_dependency 'binding_of_caller'

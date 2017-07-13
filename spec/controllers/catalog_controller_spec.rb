@@ -1,15 +1,11 @@
 describe CatalogController do
-
   render_views
 
   describe 'search builder class' do
-
-    it 'should use TrlnArgonSearchBuilder' do
-      expect(CatalogController.blacklight_config.search_builder_class).to eq(TrlnArgonSearchBuilder)
+    it 'uses TrlnArgonSearchBuilder' do
+      expect(described_class.blacklight_config.search_builder_class).to eq(TrlnArgonSearchBuilder)
     end
-
   end
-
 
   # TODO: I get a `uninitialized constant Blacklight::Solr::Repository::RSolr` error
   # with this test. Might be some Solr testing setup needed. Further investigation required.
@@ -22,5 +18,4 @@ describe CatalogController do
   #   end
 
   # end
-
 end
