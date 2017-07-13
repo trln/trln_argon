@@ -1,6 +1,3 @@
-require 'json'
-require 'net/http'
-
 describe "search results" do
 
   context "no results found" do
@@ -21,20 +18,18 @@ describe "search results" do
     end
   end
 
-  context "all results" do
-    it "returns entire catalog when no querys tring provided" do
-      visit search_catalog_path
-      click_button "search"
-      page_entries_text = page.find(:css, ".page_entries").text
+  context 'all results' do
+    it 'returns entire catalog when no query string provided' do
+      visit search_catalog_path(local_filer: 'false')
+      click_button 'search'
+      page_entries_text = page.find(:css, '.page_entries').text
       result_count = 0
-      page_entries_text.scan(%r{\b(\d+,?(\d+)?)\b}).each do |match|
+      page_entries_text.scan(/\b(\d+,?(\d+)?)\b/).each do |match|
         integer = match[0].gsub!(/\D/,'').to_i
         result_count = integer if integer > result_count
       end
-      solr_url = ENV['SOLR_URL'].to_s.empty? ? 'http://127.0.0.1/solr/trln' : ENV['SOLR_URL']
-      uri = URI("#{solr_url}/select?&q=*:*&wt=json")
-      solr_results = JSON.parse(Net::HTTP.get(uri))
-      solr_count = solr_results['response']['numFound']
+      uri = URI("#{CatalogController.blacklight_config.connection_config[:url]}/select?&q=*:*&wt=json")
+      solr_count = JSON.parse(Net::HTTP.get(uri))['response']['numFound']
 
       expect(result_count).to eq(solr_count)
     end
