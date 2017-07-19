@@ -101,6 +101,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the institution field' do
       expect(override_config.index_fields).to have_key('institution_a')
     end
+
+    it 'sets the URL field' do
+      expect(override_config.index_fields).to have_key('url_href_a')
+    end
   end
 
   describe 'show fields' do
@@ -114,10 +118,6 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the format field' do
       expect(override_config.show_fields).to have_key('format_a')
-    end
-
-    it 'sets the URL field' do
-      expect(override_config.show_fields).to have_key('url_href_a')
     end
 
     it 'sets the title language field' do
@@ -142,6 +142,10 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the institution field' do
       expect(override_config.show_fields).to have_key('institution_a')
+    end
+
+    it 'sets the URL field' do
+      expect(override_config.show_fields).to have_key('url_href_a')
     end
   end
 
