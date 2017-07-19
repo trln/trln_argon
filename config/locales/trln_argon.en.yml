@@ -61,7 +61,7 @@ en:
             title_main:
                 label: "Title"
             url_href:
-                label: "URL"
+                label: "Link"
             items_lcc_top_facet:
                 label: "Call Number"
 
@@ -77,3 +77,5 @@ en:
             year_asc: "Year (old to new)"
             year_desc: "Year (new to old)"
             author_asc: "Author (A-Z)"
+
+        online_access: "Online Access"

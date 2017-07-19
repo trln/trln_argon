@@ -1224,7 +1224,7 @@ module TrlnArgon
       end
 
       it 'has a URL_HREF label' do
-        expect(Fields::URL_HREF.label).to eq('URL')
+        expect(Fields::URL_HREF.label).to eq('Link')
       end
 
       it 'has a URL_HREF solr name' do

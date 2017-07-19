@@ -41,5 +41,23 @@ module TrlnArgon
         local_filter_applied? ? institution_short_name : consortium_short_name
       end
     end
+
+    def url_href_with_url_text_link(options = {})
+      text = online_access_link_text(options[:value], options[:document][TrlnArgon::Fields::URL_TEXT])
+      hrefs_and_text = options[:value].zip(text)
+      hrefs_and_text.map do |href_text_pair|
+        link_to href_text_pair.last, href_text_pair.first
+      end.join('; ').html_safe
+    end
+
+    private
+
+    def online_access_link_text(url_hrefs, url_text)
+      if url_text && url_text.count == url_hrefs.count
+        url_text
+      else
+        [t('trln_argon.online_access')] * url_hrefs.count
+      end
+    end
   end
 end
