@@ -117,4 +117,114 @@ describe TrlnArgonHelper do
       end
     end
   end
+
+  describe '#url_href_with_url_text_link' do
+    context 'single link without text' do
+      let(:document) do
+        SolrDocument.new(
+          id: 'DUKE12345'
+        )
+      end
+      let(:options) do
+        { value:    ['http://www.firstlink.edu'],
+          document: document }
+      end
+
+      it 'generates a link using the default text' do
+        expect(helper.url_href_with_url_text_link(options)).to(
+          eq('<a href="http://www.firstlink.edu">Online Access</a>')
+        )
+      end
+    end
+
+    context 'single link with text' do
+      let(:document) do
+        SolrDocument.new(
+          id:         'DUKE12345',
+          url_text_a: ['First Link']
+        )
+      end
+      let(:options) do
+        { value:    ['http://www.firstlink.edu'],
+          document: document }
+      end
+
+      it 'generates a link using the supplied text value' do
+        expect(helper.url_href_with_url_text_link(options)).to(
+          eq('<a href="http://www.firstlink.edu">First Link</a>')
+        )
+      end
+    end
+
+    context 'multiple links each without a text value' do
+      let(:document) do
+        SolrDocument.new(
+          id: 'DUKE12345'
+        )
+      end
+      let(:options) do
+        { value:    ['http://www.firstlink.edu',
+                     'http://www.secondlink.edu',
+                     'http://www.thirdlink.edu'],
+          document: document }
+      end
+
+      it 'generates all the links using the default text value' do
+        expect(helper.url_href_with_url_text_link(options)).to(
+          eq('<a href="http://www.firstlink.edu">Online Access</a>; '\
+             '<a href="http://www.secondlink.edu">Online Access</a>; '\
+             '<a href="http://www.thirdlink.edu">Online Access</a>')
+        )
+      end
+    end
+
+    context 'multiple links each with a text value' do
+      let(:document) do
+        SolrDocument.new(
+          id: 'DUKE12345',
+          url_text_a: ['First Link',
+                       'Second Link',
+                       'Third Link']
+        )
+      end
+      let(:options) do
+        { value:    ['http://www.firstlink.edu',
+                     'http://www.secondlink.edu',
+                     'http://www.thirdlink.edu'],
+          document: document }
+      end
+
+      it 'generates each link with its own text value' do
+        expect(helper.url_href_with_url_text_link(options)).to(
+          eq('<a href="http://www.firstlink.edu">First Link</a>; '\
+             '<a href="http://www.secondlink.edu">Second Link</a>; '\
+             '<a href="http://www.thirdlink.edu">Third Link</a>')
+        )
+      end
+    end
+
+    context 'multiple links with a different number of text values' do
+      let(:document) do
+        SolrDocument.new(
+          id: 'DUKE12345',
+          url_text_a: ['A Link',
+                       'Another Link']
+        )
+      end
+      let(:options) do
+        { value:    ['http://www.firstlink.edu',
+                     'http://www.secondlink.edu',
+                     'http://www.thirdlink.edu'],
+          document: document }
+      end
+
+      it 'generates all the links using the default text value' do
+        expect(helper.url_href_with_url_text_link(options)).to(
+          eq('<a href="http://www.firstlink.edu">Online Access</a>; '\
+             '<a href="http://www.secondlink.edu">Online Access</a>; '\
+             '<a href="http://www.thirdlink.edu">Online Access</a>')
+        )
+      end
+    end
+  end
 end

@@ -81,7 +81,7 @@ module TrlnArgon
                               label: TrlnArgon::Fields::FORMAT.label
         config.add_show_field TrlnArgon::Fields::URL_HREF.to_s,
                               label: TrlnArgon::Fields::URL_HREF.label,
-                              helper_method: :auto_link_values
+                              helper_method: :url_href_with_url_text_link
         config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
                               label: TrlnArgon::Fields::LANGUAGE.label
         config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s,
