@@ -70,6 +70,9 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
                                label: TrlnArgon::Fields::INSTITUTION.label,
                                helper_method: :institution_code_to_short_name
+        config.add_index_field TrlnArgon::Fields::URL_HREF.to_s,
+                               label: TrlnArgon::Fields::URL_HREF.label,
+                               helper_method: :url_href_with_url_text_link
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -79,9 +82,6 @@ module TrlnArgon
                               label: TrlnArgon::Fields::AUTHORS_MAIN.label
         config.add_show_field TrlnArgon::Fields::FORMAT.to_s,
                               label: TrlnArgon::Fields::FORMAT.label
-        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s,
-                              label: TrlnArgon::Fields::URL_HREF.label,
-                              helper_method: :url_href_with_url_text_link
         config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
                               label: TrlnArgon::Fields::LANGUAGE.label
         config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s,
@@ -95,6 +95,9 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s,
                               label: TrlnArgon::Fields::INSTITUTION.label,
                               helper_method: :institution_code_to_short_name
+        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s,
+                              label: TrlnArgon::Fields::URL_HREF.label,
+                              helper_method: :url_href_with_url_text_link
 
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields
