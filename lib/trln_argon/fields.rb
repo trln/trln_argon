@@ -62,7 +62,7 @@ module TrlnArgon
     ISSN_PRIMARY_ISBN                = TrlnArgon::Field.new :issn_primary_isbn
     ISSN_SERIES                      = TrlnArgon::Field.new :issn_series_a
     ISSN_SERIES_ISBN                 = TrlnArgon::Field.new :issn_series_isbn
-    ITEMS			     = TrlnArgon::Field.new :items_a
+    ITEMS                            = TrlnArgon::Field.new :items_a
     ITEMS_BARCODE                    = TrlnArgon::Field.new :items_barcode_a
     ITEMS_CALL_NUMBER                = TrlnArgon::Field.new :items_call_number_a
     ITEMS_CALL_NUMBER_LCCN           = TrlnArgon::Field.new :items_call_number_lccn

@@ -15,7 +15,7 @@ module TrlnArgon
       return if IO.read('Gemfile').include?('better_errors')
       gem 'better_errors', '2.1.1'
     end
-      
+
     def install_configuration_files
       copy_file 'local_env.yml', 'config/local_env.yml'
       copy_file 'trln_argon.yml', 'config/trln_argon.yml'
@@ -45,14 +45,14 @@ module TrlnArgon
       end
     end
 
-    def inject_item_deserializer 
+    def inject_item_deserializer
       solrdoc = 'app/models/solr_document.rb'
       return if IO.read(solrdoc).include?('TrlnArgon')
       insert_into_file solrdoc, before: 'class SolrDocument' do
         "\nrequire 'trln_argon'\n\n"
       end
       insert_into_file solrdoc, after: 'include Blacklight::Solr::Document' do
-    "\n  include TrlnArgon::ItemDeserializer\n\n"
+        "\n  include TrlnArgon::ItemDeserializer\n\n"
       end
     end
 
@@ -110,14 +110,13 @@ module TrlnArgon
       end
     end
 
-    def inject_item_show_config 
-      controller = 'app/controller/catalog_controller.rb'
+    def inject_item_show_config
+      controller = 'app/controllers/catalog_controller.rb'
       return if IO.read(controller).include?(':show_items')
-      inject_into_file controller, after: 'config.add_facet_fields_to_solr_request!'  do
+      inject_into_file controller, after: 'config.add_facet_fields_to_solr_request!' do
         "\n\n    config.show.partials = [ :show_header, :show, :show_items ]\n\n"
       end
-  end
-
+    end
 
     def inject_search_builder_behavior
       return if IO.read('app/models/search_builder.rb').include?('TrlnSearchBuilderBehavior')

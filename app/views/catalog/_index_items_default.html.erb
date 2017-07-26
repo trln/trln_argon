@@ -1,0 +1,6 @@
+<!-- TODO: Use a different partial for serials? -->
+<!--       For now just skip it if it's a Journal/Newspaper -->
+<% unless document[TrlnArgon::Fields::FORMAT].blank? ||
+          document[TrlnArgon::Fields::FORMAT].include?("Journal/Newspaper") %>
+  <%= render partial: "items_table", locals: { document: document } %>
+<% end %>
