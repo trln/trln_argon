@@ -24,6 +24,7 @@ module TrlnArgon
 
         # Use Solr document requestHandler for document requests
         config.document_solr_path = :document
+        config.document_solr_request_handler = nil
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new

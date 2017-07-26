@@ -47,6 +47,18 @@ module TrlnArgon
       end
     end
 
+    def inject_into_solr_document
+      line_to_check = 'SolrDocument.repository.blacklight_config.document_solr_path'
+      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
+      insert_into_file 'app/models/solr_document.rb', after: 'include Blacklight::Solr::Document' do
+        "\n\n  # This is needed so that SolrDocument.find will work correctly"\
+        "\n  # from the Rails console with our Solr configuration."\
+        "\n  # Otherwise, it tries to use the non-existent document request handler."\
+        "\n  SolrDocument.repository.blacklight_config.document_solr_path = :document"\
+        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil\n"
+      end
+    end
+
     def inject_catalog_controller_overrides
       return if IO.read('config/application.rb').include?('local_env.yml')
       insert_into_file 'config/application.rb', after: 'class Application < Rails::Application' do

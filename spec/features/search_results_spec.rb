@@ -121,12 +121,12 @@ describe 'search results' do
 
     it 'adds the facet(s) as a GET parameter to the URL' do
       click_link 'Institution'
-      click_link 'unc'
+      click_link 'ncsu'
       expect(page).to have_current_path(
         root_path(
           :q                  => '',
           'f[format_f]'       => %w[Print Book],
-          'f[institution_f]'  => %w[unc],
+          'f[institution_f]'  => %w[ncsu],
           :local_filter       => 'false',
           :search_field       => 'all_fields'
         )
