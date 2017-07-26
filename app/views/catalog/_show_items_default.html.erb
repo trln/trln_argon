@@ -1,0 +1,29 @@
+<% if !@document.read_items.key?(nil) %><div class="items">
+  <!-- TODO: proper CSS, inline styles MUST NOT STAND -->
+  <table width='100%'>
+	<caption>Holdings</caption>
+   <thead>
+    <tr>
+     <th>Location</th>
+     <th>Call Number</th>
+     <th>Status</th>
+    </tr>
+  <tbody>
+ <% @document.read_items.each do |library, items| %>
+   <tr>
+    <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '>Library: <%= library %>
+   </tr>
+   <% items.each do |item| %>
+ 	<tr>
+          <td style='width: 20%;'><%= item['shelving_location'] %></td>
+          <td style='width: 40%;'><%= item['call_number'] %></td>
+	  <td style='width: 20%;'><%= item['status'] %></td>
+        </tr>
+   <% end %>
+  	<% end %>
+	</tbody>
+   </table>
+</div>	
+<% end %>
+     
+
