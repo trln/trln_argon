@@ -27,7 +27,7 @@ module TrlnArgon
         config.document_solr_request_handler = nil
 
         # Set partials to render
-        config.index.partials = [:index_header, :thumbnail, :index, :index_items]
+        config.index.partials = %i[index_header thumbnail index index_items]
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
