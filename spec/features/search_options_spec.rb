@@ -13,5 +13,13 @@ describe 'search options' do
     it 'provides a Title search option' do
       expect(page).to have_select('search_field', with_options: ['Title'])
     end
+
+    it 'provides an Author search option' do
+      expect(page).to have_select('search_field', with_options: ['Author'])
+    end
+
+    it 'provides a Subject search option' do
+      expect(page).to have_select('search_field', with_options: ['Subject'])
+    end
   end
 end

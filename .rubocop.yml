@@ -23,6 +23,10 @@ Metrics/BlockLength:
     - 'spec/lib/trln_argon/fields_spec.rb'
     - 'spec/**/*'
 
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/generators/trln_argon/install_generator.rb'
+
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
