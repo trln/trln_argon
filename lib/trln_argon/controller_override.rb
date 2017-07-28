@@ -6,6 +6,8 @@ module TrlnArgon
   module ControllerOverride
     extend ActiveSupport::Concern
 
+    include TrlnArgon::IsbnIssnSearch
+
     included do
       send(:include, BlacklightAdvancedSearch::Controller)
 
@@ -157,10 +159,20 @@ module TrlnArgon
         # config[:default_solr_parameters][:qt], so isn't actually neccesary.
         config.add_search_field('subject') do |field|
           field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
+          field.label = I18n.t('trln_argon.search_fields.subject')
           field.qt = 'search'
           field.solr_local_parameters = {
             qf: '$subject_qf',
             pf: '$subject_pf'
+          }
+        end
+
+        config.add_search_field('isbn_issn') do |field|
+          field.label = I18n.t('trln_argon.search_fields.isbn_issn')
+          field.solr_local_parameters = {
+            # TODO: Set this up in Solr select_edismax.xml
+            qf: 'isbn_number_isbn issn_linking_num issn_primary_num issn_series_num',
+            pf: 'isbn_number_isbn issn_linking_num issn_primary_num issn_series_num'
           }
         end
 
