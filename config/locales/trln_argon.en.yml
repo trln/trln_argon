@@ -69,6 +69,8 @@ en:
             all_fields: "All Fields"
             author: "Author"
             title: "Title"
+            subject: "Subject"
+            isbn_issn: "ISBN/ISSN"
 
         sort_options:
             relevance: "Relevance"
