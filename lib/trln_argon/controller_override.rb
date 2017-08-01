@@ -6,8 +6,6 @@ module TrlnArgon
   module ControllerOverride
     extend ActiveSupport::Concern
 
-    include TrlnArgon::IsbnIssnSearch
-
     included do
       send(:include, BlacklightAdvancedSearch::Controller)
 
@@ -20,6 +18,10 @@ module TrlnArgon
       configure_blacklight do |config|
         config.search_builder_class = TrlnArgonSearchBuilder
         config.default_per_page = 20
+
+        config.default_solr_params = {
+          defType: 'edismax'
+        }
 
         # Use Solr search requestHandler for search requests
         config.solr_path = :select
@@ -34,7 +36,7 @@ module TrlnArgon
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
         config.advanced_search[:url_key] ||= 'advanced'
-        config.advanced_search[:query_parser] ||= 'dismax'
+        config.advanced_search[:query_parser] ||= 'edismax'
         config.advanced_search[:form_solr_parameters] ||= {}
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
@@ -132,7 +134,7 @@ module TrlnArgon
 
         config.add_search_field('title') do |field|
           # solr_parameters hash are sent to Solr as ordinary url query params.
-          field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
+          # field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
           field.label = I18n.t('trln_argon.search_fields.title')
 
           # :solr_local_parameters will be sent using Solr LocalParams
@@ -146,7 +148,6 @@ module TrlnArgon
         end
 
         config.add_search_field('author') do |field|
-          field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
           field.label = I18n.t('trln_argon.search_fields.author')
           field.solr_local_parameters = {
             qf: '$author_qf',
@@ -158,7 +159,6 @@ module TrlnArgon
         # tests can test it. In this case it's the same as
         # config[:default_solr_parameters][:qt], so isn't actually neccesary.
         config.add_search_field('subject') do |field|
-          field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
           field.label = I18n.t('trln_argon.search_fields.subject')
           field.qt = 'search'
           field.solr_local_parameters = {
@@ -170,9 +170,7 @@ module TrlnArgon
         config.add_search_field('isbn_issn') do |field|
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
           field.solr_local_parameters = {
-            # TODO: Set this up in Solr select_edismax.xml
-            qf: 'isbn_number_isbn issn_linking_num issn_primary_num issn_series_num',
-            pf: 'isbn_number_isbn issn_linking_num issn_primary_num issn_series_num'
+            qf: '$isbn_issn_qf'
           }
         end
 
