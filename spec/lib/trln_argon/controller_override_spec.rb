@@ -5,10 +5,6 @@ describe TrlnArgon::ControllerOverride do
   let(:mock_controller) { ControllerOverrideTestClass.new }
   let(:override_config) { mock_controller.blacklight_config }
 
-  it 'includes the IsbnIssnSearch module' do
-    expect(mock_controller).to be_kind_of(TrlnArgon::IsbnIssnSearch)
-  end
-
   describe 'search builder' do
     it 'uses the expected search builder' do
       expect(override_config.search_builder_class).to eq(TrlnArgonSearchBuilder)
@@ -27,7 +23,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the query_parser' do
-      expect(override_config.advanced_search[:query_parser]).to eq('dismax')
+      expect(override_config.advanced_search[:query_parser]).to eq('edismax')
     end
 
     it 'sets the form_solr_parameters' do

@@ -46,4 +46,63 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       expect(search_builder.rollup_duplicate_records(solr_parameters).to_s).to include('')
     end
   end
+
+  describe 'boost_isxn_matches' do
+    before { builder_with_params.boost_isxn_matches(solr_parameters) }
+
+    context 'all fields search contains an issn search' do
+      let(:builder_with_params) { search_builder.with(q: '03431258') }
+
+      it 'sets the isxn_ns_v parameter' do
+        expect(solr_parameters[:isxn_ns_v]).to eq('03431258')
+      end
+
+      it 'sets the isxn_v parameter' do
+        expect(solr_parameters[:isxn_v]).to eq('03431258')
+      end
+
+      it 'sets the q parameter' do
+        expect(solr_parameters[:q]).to(
+          eq([' _query_:"{!edismax qf=$isbn_issn_qf v=$isxn_v}"^2',
+              ' _query_:"{!edismax qf=$isbn_issn_qf v=$isxn_ns_v}"^2'])
+        )
+      end
+    end
+
+    context 'all fields search contains a messy isbn search' do
+      let(:builder_with_params) { search_builder.with(q: '98---121     00822') }
+
+      it 'sets the isxn_ns_v parameter' do
+        expect(solr_parameters[:isxn_ns_v]).to eq('9789812100825')
+      end
+
+      it 'sets the isxn_v parameter' do
+        expect(solr_parameters[:isxn_v]).to be_nil
+      end
+
+      it 'sets the q parameter' do
+        expect(solr_parameters[:q]).to(
+          eq([' _query_:"{!edismax qf=$isbn_issn_qf v=$isxn_ns_v}"^2'])
+        )
+      end
+    end
+
+    context 'all fields search with multiple isxn values and random text' do
+      let(:builder_with_params) { search_builder.with(q: 'alexander and the terrible 9812100822 03431258') }
+
+      it 'sets the isxn_ns_v parameter' do
+        expect(solr_parameters[:isxn_ns_v]).to be_nil
+      end
+
+      it 'sets the isxn_v parameter' do
+        expect(solr_parameters[:isxn_v]).to eq('9789812100825 03431258')
+      end
+
+      it 'sets the q parameter' do
+        expect(solr_parameters[:q]).to(
+          eq([' _query_:"{!edismax qf=$isbn_issn_qf v=$isxn_v}"^2'])
+        )
+      end
+    end
+  end
 end
