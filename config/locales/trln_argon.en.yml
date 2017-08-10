@@ -54,16 +54,36 @@ en:
         fields:
             authors_main:
                 label: "Author"
+            authors_main_facet:
+                label: "Author"
             isbn_number:
                 label: "ISBN Number"
             publication_year_isort_stored_single:
-                label: "Date"
+                label: "Publication Year"
             title_main:
                 label: "Title"
             url_href:
                 label: "Link"
             items_lcc_top_facet:
                 label: "Call Number"
+            items_location_facet:
+                label: "Location"
+            subjects_facet:
+                label: "Subject"
+            subject_genre_facet:
+                label: "Genre"
+            subject_medical_facet:
+                label: "Medical Subject"
+            subject_region_facet:
+                label: "Region"
+            subject_time_period_facet:
+                label: "Time Period"
+
+        publication_year_ranges:
+            '2000_to_present': '2000 to present'
+            '1900_to_1999': '1900 to 1999'
+            '1800_to_1899': '1800 to 1899'
+            'before_1800': 'Before 1800'
 
         search_fields:
             all_fields: "All Fields"

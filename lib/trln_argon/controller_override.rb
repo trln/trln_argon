@@ -43,21 +43,53 @@ module TrlnArgon
 
         config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
-        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
-                               label: TrlnArgon::Fields::FORMAT_FACET.label
         config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECTS_FACET.label,
-                               limit: 20,
-                               index_range: 'A'..'Z'
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
+                               label: TrlnArgon::Fields::FORMAT_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
+                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+                               limit: true
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
-        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
-                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label
+        config.add_facet_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
+                               query: { '2000_to_present' => { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
+                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[2000 TO *]" },
+                                        '1900_to_1999'    => { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
+                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[1900 TO 1999]" },
+                                        '1800_to_1899'    => { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
+                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[1800 TO 1899]" },
+                                        'before_1800'     => { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
+                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[* TO 1799]" } },
+                               label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s,
+                               label: TrlnArgon::Fields::AUTHORS_MAIN_FACET.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_GENRE_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_GENRE_FACET.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_REGION_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_REGION_FACET.label,
+                               limit: true
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_TIME_PERIOD_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_TIME_PERIOD_FACET.label,
+                               limit: true
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
-                               label: TrlnArgon::Fields::INSTITUTION_FACET.label
+                               label: TrlnArgon::Fields::INSTITUTION_FACET.label,
+                               limit: true
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display

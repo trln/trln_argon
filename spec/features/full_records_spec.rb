@@ -67,7 +67,7 @@ describe 'full records' do
     end
 
     it 'displays the publication date field label' do
-      expect(page).to have_css('dt.blacklight-publication_year_isort_stored_single', text: 'Date:')
+      expect(page).to have_css('dt.blacklight-publication_year_isort_stored_single', text: 'Publication Year:')
     end
 
     it 'displays the publication date field value' do

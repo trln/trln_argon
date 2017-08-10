@@ -52,6 +52,30 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('subjects_f')
     end
 
+    it 'sets the subject genre facet' do
+      expect(override_config.facet_fields).to have_key('subject_genre_f')
+    end
+
+    it 'sets the subject medical facet' do
+      expect(override_config.facet_fields).to have_key('subject_medical_f')
+    end
+
+    it 'sets the subject region facet' do
+      expect(override_config.facet_fields).to have_key('subject_region_f')
+    end
+
+    it 'sets the subject time period facet' do
+      expect(override_config.facet_fields).to have_key('subject_time_period_f')
+    end
+
+    it 'sets the authors main facet' do
+      expect(override_config.facet_fields).to have_key('authors_main_f')
+    end
+
+    it 'sets the publication year facet' do
+      expect(override_config.facet_fields).to have_key('publication_year_isort_stored_single')
+    end
+
     it 'sets the language facet' do
       expect(override_config.facet_fields).to have_key('language_f')
     end
