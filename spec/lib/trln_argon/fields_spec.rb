@@ -1266,7 +1266,7 @@ module TrlnArgon
       end
 
       it 'has a PUBLICATION_DATE_SORT label' do
-        expect(Fields::PUBLICATION_DATE_SORT.label).to eq('Date')
+        expect(Fields::PUBLICATION_DATE_SORT.label).to eq('Publication Year')
       end
 
       it 'has a PUBLICATION_DATE_SORT solr name' do

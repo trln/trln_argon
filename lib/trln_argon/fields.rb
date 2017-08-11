@@ -163,12 +163,17 @@ module TrlnArgon
     VOLUME_DATE_RANGE                = TrlnArgon::Field.new :volume_date_range_a
 
     # Facet field constants
-    CALL_NUMBER_FACET    = TrlnArgon::Field.new :items_lcc_top_f
-    FORMAT_FACET         = TrlnArgon::Field.new :format_f
-    INSTITUTION_FACET    = TrlnArgon::Field.new :institution_f
-    ITEMS_LOCATION_FACET = TrlnArgon::Field.new :items_location_f
-    LANGUAGE_FACET       = TrlnArgon::Field.new :language_f
-    SUBJECTS_FACET       = TrlnArgon::Field.new :subjects_f
+    AUTHORS_MAIN_FACET        = TrlnArgon::Field.new :authors_main_f
+    CALL_NUMBER_FACET         = TrlnArgon::Field.new :items_lcc_top_f
+    FORMAT_FACET              = TrlnArgon::Field.new :format_f
+    INSTITUTION_FACET         = TrlnArgon::Field.new :institution_f
+    ITEMS_LOCATION_FACET      = TrlnArgon::Field.new :items_location_f
+    LANGUAGE_FACET            = TrlnArgon::Field.new :language_f
+    SUBJECTS_FACET            = TrlnArgon::Field.new :subjects_f
+    SUBJECT_GENRE_FACET       = TrlnArgon::Field.new :subject_genre_f
+    SUBJECT_MEDICAL_FACET     = TrlnArgon::Field.new :subject_medical_f
+    SUBJECT_REGION_FACET      = TrlnArgon::Field.new :subject_region_f
+    SUBJECT_TIME_PERIOD_FACET = TrlnArgon::Field.new :subject_time_period_f
 
     # Sort field constants
     PUBLICATION_DATE_SORT = TrlnArgon::Field.new :publication_year_isort_stored_single
