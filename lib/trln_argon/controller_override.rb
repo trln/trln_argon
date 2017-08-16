@@ -50,12 +50,24 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label
+	config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+			label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+			partial: 'blacklight/hierarchy/facet_hierarchy'
+
         config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
                                label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label
+
+
+	# hierarchical facet configuration
+    	config.facet_display ||= {}
+	components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
+    	config.facet_display[:hierarchy] = {
+		# blacklight-hiearchy requires this mapping;
+		# prefix + final component (separated by _)
+		components[0..-2].join('_') => [[components[-1]], ':']
+    	}
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display

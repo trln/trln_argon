@@ -163,7 +163,7 @@ module TrlnArgon
     VOLUME_DATE_RANGE                = TrlnArgon::Field.new :volume_date_range_a
 
     # Facet field constants
-    CALL_NUMBER_FACET    = TrlnArgon::Field.new :items_lcc_top_f
+    CALL_NUMBER_FACET    = TrlnArgon::Field.new :lcc_callnum_classification_f
     FORMAT_FACET         = TrlnArgon::Field.new :format_f
     INSTITUTION_FACET    = TrlnArgon::Field.new :institution_f
     ITEMS_LOCATION_FACET = TrlnArgon::Field.new :items_location_f

@@ -62,6 +62,8 @@ en:
                 label: "Title"
             url_href:
                 label: "Link"
+            lcc_callnum_classification_facet:
+                label: 'Call Number Location'
             items_lcc_top_facet:
                 label: "Call Number"
 
