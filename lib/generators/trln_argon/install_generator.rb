@@ -11,6 +11,11 @@ module TrlnArgon
       raise 'Install Blacklight before installing TRLN Argon.'
     end
 
+    def run_dependency_generators
+	generate 'blacklight_hierarchy:install'
+    end
+	
+
     def install_gems
       return if IO.read('Gemfile').include?('better_errors')
       gem 'better_errors', '2.1.1'
@@ -20,6 +25,10 @@ module TrlnArgon
       copy_file 'local_env.yml', 'config/local_env.yml'
       copy_file 'trln_argon.yml', 'config/trln_argon.yml'
     end
+
+    #def copy_asset_files
+    #	copy_file 'trln_argon.js', 'app/assets/trln_argon_application.js'
+    #end
 
     def install_search_builders
       copy_file 'search_builders/trln_argon_search_builder.rb', 'app/models/trln_argon_search_builder.rb'
