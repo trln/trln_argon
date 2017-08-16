@@ -5,10 +5,6 @@ describe TrlnArgon::ControllerOverride do
   let(:mock_controller) { ControllerOverrideTestClass.new }
   let(:override_config) { mock_controller.blacklight_config }
 
-  it 'includes the IsbnIssnSearch module' do
-    expect(mock_controller).to be_kind_of(TrlnArgon::IsbnIssnSearch)
-  end
-
   describe 'search builder' do
     it 'uses the expected search builder' do
       expect(override_config.search_builder_class).to eq(TrlnArgonSearchBuilder)
@@ -27,7 +23,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the query_parser' do
-      expect(override_config.advanced_search[:query_parser]).to eq('dismax')
+      expect(override_config.advanced_search[:query_parser]).to eq('edismax')
     end
 
     it 'sets the form_solr_parameters' do
@@ -54,6 +50,30 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the subject facet' do
       expect(override_config.facet_fields).to have_key('subjects_f')
+    end
+
+    it 'sets the subject genre facet' do
+      expect(override_config.facet_fields).to have_key('subject_genre_f')
+    end
+
+    it 'sets the subject medical facet' do
+      expect(override_config.facet_fields).to have_key('subject_medical_f')
+    end
+
+    it 'sets the subject region facet' do
+      expect(override_config.facet_fields).to have_key('subject_region_f')
+    end
+
+    it 'sets the subject time period facet' do
+      expect(override_config.facet_fields).to have_key('subject_time_period_f')
+    end
+
+    it 'sets the authors main facet' do
+      expect(override_config.facet_fields).to have_key('authors_main_f')
+    end
+
+    it 'sets the publication year facet' do
+      expect(override_config.facet_fields).to have_key('publication_year_isort_stored_single')
     end
 
     it 'sets the language facet' do

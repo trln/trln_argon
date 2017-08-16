@@ -2,7 +2,6 @@ require 'trln_argon/engine'
 require 'trln_argon/version'
 
 module TrlnArgon
-  autoload :IsbnIssnSearch, 'trln_argon/isbn_issn_search.rb'
   require 'trln_argon/controller_override'
   require 'trln_argon/field'
   require 'trln_argon/fields'

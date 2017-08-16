@@ -44,7 +44,7 @@ describe 'brief records' do
     end
 
     it 'displays the publication year field label' do
-      expect(brief_records).to have_css('dt.blacklight-publication_year_isort_stored_single', text: 'Date:')
+      expect(brief_records).to have_css('dt.blacklight-publication_year_isort_stored_single', text: 'Publication Year:')
     end
 
     it 'displays the publication year field value' do
