@@ -48,6 +48,7 @@ module TrlnArgon
     FORMAT                           = TrlnArgon::Field.new :format_a
     FREQUENCY_CURRENT                = TrlnArgon::Field.new :frequency_current_a
     FREQUENCY_FORMER                 = TrlnArgon::Field.new :frequency_former_a
+    HOLDINGS			     = TrlnArgon::Field.new :holdings_a
     IMPRINT                          = TrlnArgon::Field.new :imprint_a
     IMPRINT_TYPE                     = TrlnArgon::Field.new :imprint_type_a
     INSTITUTION                      = TrlnArgon::Field.new :institution_a

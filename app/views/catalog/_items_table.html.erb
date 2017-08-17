@@ -1,27 +1,50 @@
 <% unless document.read_items.key?(nil) %>
   <div class="items">
     <!-- TODO: proper CSS, inline styles MUST NOT STAND -->
-    <table width='100%'>
+    <table width='100%' class='table table-condensed table-striped table-hover'>
       <caption>Holdings</caption>
       <thead>
-        <tr>
-          <th>Location</th>
-          <th>Call Number</th>
-          <th>Status</th>
+        <tr class="holdings-header">
+          <th class="location-header">Location</th>
+          <th class="callnum-header">Call Number</th>
+          <th class="status-header">Status</th>
         </tr>
-      <tbody>
-      <% document.read_items.each do |library, items| %>
-        <tr>
+      <% document.holdings.each do |library, location_map| %>
+  <% next if library == 'ONLINE' %>
+  <tbody class="library-group <% library %>">  
+        <tr class='library-banner'>
           <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '>Library: <%= library %>
         </tr>
-        <% items.each do |item| %>
-        <tr>
-          <td style='width: 20%;'><%= item['shelving_location'] %></td>
-          <td style='width: 40%;'><%= item['call_number'] %></td>
-          <td style='width: 20%;'><%= item['status'] %></td>
+  <% location_map.each do |loc, item_data|  %>
+    <tr class="location-banner" data-library="<%= library %>"
+    data-location="<%= loc %>">
+       <% if item_data['summary'] %>
+           <th style="width: 20%; padding-left: .5em;">
+             <%= loc %>
+           </th>
+           <th style="width: 30%;">
+    <%= item_data['call_number'] %>
+     <th style="width: 50%;">
+              <%= item_data['summary'] %>
+      <span class="expander">(+ show items)</span>
+     </th>
+    <% else %>
+           <th colspan="3">
+     <% loc %>
+     </th>
+     <% end %>
+    </tr>
+  
+        <% item_data['items'].each do |item| %>
+        <tr class="item <%= loc %> <%= library %>">
+          <td style='width: 20%;'>&nbsp;</td>
+          <td style='width: 30%;'><%= item['call_number'] %></td>
+          <td style='width: 50%;'><%= item['status'] %></td>
         </tr>
         <% end %>
       <% end %>
+  </tbody>
+        <% end %>
       </tbody>
     </table>
   </div>
