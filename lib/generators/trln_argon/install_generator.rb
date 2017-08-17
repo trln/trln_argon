@@ -27,7 +27,7 @@ module TrlnArgon
     end
 
     def copy_asset_files
-    	copy_file 'trln_argon.js', 'app/assets/trln_argon_application.js'
+    	copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
     end
 
     def install_search_builders
