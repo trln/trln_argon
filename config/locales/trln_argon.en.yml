@@ -70,15 +70,15 @@ en:
                 label: "Call Number"
             items_location_facet:
                 label: "Location"
-            subjects_facet:
+            subject_topic_lcsh_facet:
                 label: "Subject"
             subject_genre_facet:
                 label: "Genre"
             subject_medical_facet:
                 label: "Medical Subject"
-            subject_region_facet:
+            subject_geographic_facet:
                 label: "Region"
-            subject_time_period_facet:
+            subject_chronological_facet:
                 label: "Time Period"
 
         publication_year_ranges:

@@ -43,8 +43,8 @@ module TrlnArgon
 
         config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
-        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECTS_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.label,
                                limit: true,
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.to_s,
@@ -85,11 +85,11 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GENRE_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GENRE_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::SUBJECT_REGION_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECT_REGION_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::SUBJECT_TIME_PERIOD_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECT_TIME_PERIOD_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label,
