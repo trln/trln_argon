@@ -26,9 +26,9 @@ module TrlnArgon
       copy_file 'trln_argon.yml', 'config/trln_argon.yml'
     end
 
-    #def copy_asset_files
-    #	copy_file 'trln_argon.js', 'app/assets/trln_argon_application.js'
-    #end
+    def copy_asset_files
+    	copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
+    end
 
     def install_search_builders
       copy_file 'search_builders/trln_argon_search_builder.rb', 'app/models/trln_argon_search_builder.rb'
