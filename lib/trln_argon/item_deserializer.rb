@@ -50,7 +50,7 @@ module TrlnArgon
         loc_map = h_final[lib] ||= {}
         loc_map[loc] ||= h.update('items' => [])
       end
-      h_final
+      h_final.reject { |k, v| k.nil? }
     end
 
     def holdings
