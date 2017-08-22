@@ -26,14 +26,6 @@ describe 'full records' do
       expect(page).to have_css('dd.blacklight-format_a', text: /.+/)
     end
 
-    xit 'displays the URL field label' do
-      expect(page).to have_css('dt.blacklight-url_href_a', text: 'URL:')
-    end
-
-    xit 'displays the URL field value' do
-      expect(page).to have_css('dd.blacklight-url_href_a', text: /.+/)
-    end
-
     it 'displays the language field label' do
       expect(page).to have_css('dt.blacklight-language_a', text: 'Language:')
     end
@@ -48,22 +40,6 @@ describe 'full records' do
 
     it 'displays the subjects field value' do
       expect(page).to have_css('dd.blacklight-subjects_a', text: /.+/)
-    end
-
-    xit 'displays the publisher field label' do
-      expect(page).to have_css('dt.blacklight-publisher_etc_a', text: 'Publisher:')
-    end
-
-    xit 'displays the publisher field value' do
-      expect(page).to have_css('dd.blacklight-publisher_etc_a', text: /.+/)
-    end
-
-    xit 'displays the ISBN field label' do
-      expect(page).to have_css('dt.blacklight-isbn_number_a', text: 'ISBN Number:')
-    end
-
-    xit 'displays the ISBN field value' do
-      expect(page).to have_css('dd.blacklight-isbn_number_a', text: /.+/)
     end
 
     it 'displays the publication date field label' do

@@ -48,8 +48,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('format_f')
     end
 
-    it 'sets the subject facet' do
-      expect(override_config.facet_fields).to have_key('subjects_f')
+    it 'sets the subject topic lcsh facet' do
+      expect(override_config.facet_fields).to have_key('subject_topic_lcsh_f')
     end
 
     it 'sets the subject genre facet' do
@@ -60,12 +60,12 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('subject_medical_f')
     end
 
-    it 'sets the subject region facet' do
-      expect(override_config.facet_fields).to have_key('subject_region_f')
+    it 'sets the subject geographic facet' do
+      expect(override_config.facet_fields).to have_key('subject_geographic_f')
     end
 
-    it 'sets the subject time period facet' do
-      expect(override_config.facet_fields).to have_key('subject_time_period_f')
+    it 'sets the subject chronological facet' do
+      expect(override_config.facet_fields).to have_key('subject_chronological_f')
     end
 
     it 'sets the authors main facet' do
@@ -81,7 +81,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the call number facet' do
-      expect(override_config.facet_fields).to have_key('items_lcc_top_f')
+      expect(override_config.facet_fields).to have_key('lcc_callnum_classification_f')
     end
 
     it 'sets the items location facet' do
