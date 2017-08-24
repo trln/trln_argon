@@ -32,6 +32,7 @@ module TrlnArgon
     COPYRIGHT_STATEMENT              = TrlnArgon::Field.new :copyright_statement_a
     COPYRIGHT_YEAR                   = TrlnArgon::Field.new :copyright_year_a
     COPYRIGHT_YEAR_I                 = TrlnArgon::Field.new :copyright_year_i
+    DATE_CATALOGED                   = TrlnArgon::Field.new :date_cataloged
     DESCRIPTION_DIGITAL_FILE         = TrlnArgon::Field.new :description_digital_file_a
     DESCRIPTION_GENERAL              = TrlnArgon::Field.new :description_general_a
     DESCRIPTION_ORGANIZATION         = TrlnArgon::Field.new :description_organization_a
@@ -48,7 +49,7 @@ module TrlnArgon
     FORMAT                           = TrlnArgon::Field.new :format_a
     FREQUENCY_CURRENT                = TrlnArgon::Field.new :frequency_current_a
     FREQUENCY_FORMER                 = TrlnArgon::Field.new :frequency_former_a
-    HOLDINGS			     = TrlnArgon::Field.new :holdings_a
+    HOLDINGS			                   = TrlnArgon::Field.new :holdings_a
     IMPRINT                          = TrlnArgon::Field.new :imprint_a
     IMPRINT_TYPE                     = TrlnArgon::Field.new :imprint_type_a
     INSTITUTION                      = TrlnArgon::Field.new :institution_a
@@ -166,6 +167,7 @@ module TrlnArgon
     # Facet field constants
     AUTHORS_MAIN_FACET          = TrlnArgon::Field.new :authors_main_f
     CALL_NUMBER_FACET           = TrlnArgon::Field.new :lcc_callnum_classification_f
+    DATE_CATALOGED_FACET        = TrlnArgon::Field.new :date_cataloged_dt
     FORMAT_FACET                = TrlnArgon::Field.new :format_f
     INSTITUTION_FACET           = TrlnArgon::Field.new :institution_f
     ITEMS_LOCATION_FACET        = TrlnArgon::Field.new :items_location_f
