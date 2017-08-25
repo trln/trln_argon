@@ -78,7 +78,7 @@ en:
                 label: "Medical Subject"
             subject_geographic_facet:
                 label: "Region"
-            date_cataloged_facet:
+            :date_cataloged_dt:
                 label: 'New Titles'
             subject_chronological_facet:
                 label: "Time Period"
@@ -92,7 +92,7 @@ en:
         new_title_ranges:
             'now_minus_week': 'New in this week'
             'now_minus_month': 'New in this month'
-            'now_minus_three_months': 'New is past 3 months'
+            'now_minus_three_months': 'New in past 3 months'
 
         search_fields:
             all_fields: "All Fields"

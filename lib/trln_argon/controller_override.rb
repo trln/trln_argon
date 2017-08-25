@@ -100,7 +100,7 @@ module TrlnArgon
                                         'last_month'        => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-1MONTH/DAY TO NOW]" },
                                         'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
-                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-10YEAR/DAY TO NOW]" } },
+                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
 
