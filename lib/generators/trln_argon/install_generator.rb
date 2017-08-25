@@ -12,9 +12,8 @@ module TrlnArgon
     end
 
     def run_dependency_generators
-	generate 'blacklight_hierarchy:install'
+      generate 'blacklight_hierarchy:install'
     end
-	
 
     def install_gems
       return if IO.read('Gemfile').include?('better_errors')
@@ -24,10 +23,11 @@ module TrlnArgon
     def install_configuration_files
       copy_file 'local_env.yml', 'config/local_env.yml'
       copy_file 'trln_argon.yml', 'config/trln_argon.yml'
+      copy_file 'solr_field_overrides.yml', 'config/solr_field_overrides.yml'
     end
 
     def copy_asset_files
-    	copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
+      copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
     end
 
     def install_search_builders
