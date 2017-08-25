@@ -94,9 +94,19 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label,
                                limit: true
+        config.add_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
+                               query: { 'last_week'         => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
+                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-7DAY/DAY TO NOW]" },
+                                        'last_month'        => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
+                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-1MONTH/DAY TO NOW]" },
+                                        'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
+                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-3MONTH/DAY TO NOW]" } },
+                               label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
+                               limit: true
 
 
-	# hierarchical facet configuration
+
+        # hierarchical facet configuration
     	config.facet_display ||= {}
 	components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
     	config.facet_display[:hierarchy] = {

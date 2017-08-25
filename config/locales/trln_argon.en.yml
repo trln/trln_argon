@@ -78,6 +78,8 @@ en:
                 label: "Medical Subject"
             subject_geographic_facet:
                 label: "Region"
+            :date_cataloged_dt:
+                label: 'New Titles'
             subject_chronological_facet:
                 label: "Time Period"
 
@@ -86,6 +88,11 @@ en:
             '1900_to_1999': '1900 to 1999'
             '1800_to_1899': '1800 to 1899'
             'before_1800': 'Before 1800'
+
+        new_title_ranges:
+            'now_minus_week': 'New in this week'
+            'now_minus_month': 'New in this month'
+            'now_minus_three_months': 'New in past 3 months'
 
         search_fields:
             all_fields: "All Fields"
