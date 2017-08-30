@@ -58,8 +58,8 @@ module TrlnArgon
     end
 
     def cn_prefix(items)
-	cns = items.reject(&:nil?).collect { |i| i['call_number'].gsub(/\d{4}$/, '') }
-	cns[0]
+      cns = items.reject(&:nil?).collect { |i| i['call_number'].to_s.gsub(/\d{4}$/, '') }
+      cns[0]
     end
 
 
