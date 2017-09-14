@@ -1,3 +1,7 @@
+AUTHOR_FACET:
+  solr_field: :author_facet_f
+  label:
+    en: Author
 AUTHORS_DIRECTOR:
   solr_field: :authors_director_a
   label:
@@ -84,6 +88,10 @@ AUTHORS_UNCONTROLLED_T:
     en: Authors Uncontrolled T
 AVAILABILITY:
   solr_field: :availability_a
+  label:
+    en: Availability
+AVAILABLE_FACET:
+  solr_field: :available_f
   label:
     en: Availability
 CALL_NUMBER_SCHEMES:

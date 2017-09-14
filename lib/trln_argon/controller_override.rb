@@ -82,8 +82,8 @@ module TrlnArgon
                                           fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[* TO 1799]" } },
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s,
-                               label: TrlnArgon::Fields::AUTHORS_MAIN_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
+                               label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GENRE_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GENRE_FACET.label,
@@ -97,13 +97,18 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label,
                                limit: true
+        config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                               label: TrlnArgon::Fields::AVAILABLE_FACET.label,
+                               limit: true
         config.add_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
-                               query: { 'last_week'         => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
-                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-7DAY/DAY TO NOW]" },
-                                        'last_month'        => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
-                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-1MONTH/DAY TO NOW]" },
-                                        'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
-                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s}:[NOW-3MONTH/DAY TO NOW]" } },
+                               query: {
+                                 'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
+                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-7DAY/DAY TO NOW]" },
+                                 'last_month' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
+                                                   fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-1MONTH/DAY TO NOW]" },
+                                 'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
+                                                          fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" }
+                               },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
 

@@ -69,7 +69,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the authors main facet' do
-      expect(override_config.facet_fields).to have_key('authors_main_f')
+      expect(override_config.facet_fields).to have_key('author_facet_f')
     end
 
     it 'sets the publication year facet' do
@@ -86,6 +86,10 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the items location facet' do
       expect(override_config.facet_fields).to have_key('items_location_f')
+    end
+
+    it 'sets the availability facet' do
+      expect(override_config.facet_fields).to have_key('available_f')
     end
 
     it 'sets the institution facet' do

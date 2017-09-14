@@ -4,7 +4,7 @@ module TrlnArgon
   module ItemDeserializer
     include ActionView::Helpers::TextHelper
     def deserialize
-      (self[TrlnArgon::Fields::ITEMS] || ['{}']).map { |d| JSON.parse(d) }
+      (self[TrlnArgon::Fields::ITEMS] || ['{}']).map { |d| stringified_hash_to_json(d) }
                                                 .group_by { |rec| rec['library'] }
     end
 
@@ -13,8 +13,8 @@ module TrlnArgon
     end
 
     def deserialize_holdings
-      items = (self[TrlnArgon::Fields::ITEMS] || {}).map { |x| JSON.parse(x) }
-      holdings = (self[TrlnArgon::Fields::HOLDINGS] || {}).map { |x| JSON.parse(x) }
+      items = (self[TrlnArgon::Fields::ITEMS] || {}).map { |x| stringified_hash_to_json(x) }
+      holdings = (self[TrlnArgon::Fields::HOLDINGS] || {}).map { |x| stringified_hash_to_json(x) }
       # { LIBRARY => { LOCATION => [ items ] } }
       items_intermediate = Hash[items.group_by { |i| i['library'] }.map do |lib, locations|
         [lib, locations.group_by { |i| i['shelving_location'] }]
@@ -28,7 +28,7 @@ module TrlnArgon
             i.reject { |k, _v| %w[library shelving_location].include?(k) }
           end
 	  h['call_number'] = cn_prefix(h['items'])
-	  if h['summary'].empty?
+	  if h['summary'].blank?
 		items = h['items'] || []
 		avail = items.count { |i| 'available' == i['status'].downcase rescue false }
 		sum = "(#{pluralize(items.count, 'copy')}"
@@ -54,7 +54,7 @@ module TrlnArgon
     end
 
     def holdings
-      @holdings || deserialize_holdings
+      @holdings ||= deserialize_holdings
     end
 
     def cn_prefix(items)
@@ -62,6 +62,8 @@ module TrlnArgon
       cns[0]
     end
 
-
+    def stringified_hash_to_json(x)
+      JSON.parse(x.gsub('=>', ':'))
+    end
   end
 end
