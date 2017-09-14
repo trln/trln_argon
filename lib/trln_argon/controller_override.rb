@@ -59,25 +59,28 @@ module TrlnArgon
                                limit: true,
                                collapse: false
 
-	config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-			label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
-			partial: 'blacklight/hierarchy/facet_hierarchy'
-
+        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+                               partial: 'blacklight/hierarchy/facet_hierarchy'
 
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
 
-        config.add_facet_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
-                               query: { '2000_to_present' => { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
-                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[2000 TO *]" },
-                                        '1900_to_1999'    => { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
-                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[1900 TO 1999]" },
-                                        '1800_to_1899'    => { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
-                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[1800 TO 1899]" },
-                                        'before_1800'     => { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
-                                                                  fq: "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s}:[* TO 1799]" } },
-                               label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label,
+        config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
+                               query: { '2000_to_present' =>
+                                        { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
+                                          q: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[2000 TO *]" },
+                                        '1900_to_1999' =>
+                                        { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
+                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1900 TO 1999]" },
+                                        '1800_to_1899' =>
+                                        { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
+                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1800 TO 1899]" },
+                                        'before_1800' =>
+                                        { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
+                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[* TO 1799]" } },
+                               label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHORS_MAIN_FACET.label,
@@ -104,16 +107,14 @@ module TrlnArgon
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
 
-
-
         # hierarchical facet configuration
-    	config.facet_display ||= {}
-	components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
-    	config.facet_display[:hierarchy] = {
-		# blacklight-hiearchy requires this mapping;
-		# prefix + final component (separated by _)
-		components[0..-2].join('_') => [[components[-1]], ':']
-    	}
+        config.facet_display ||= {}
+        components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
+        config.facet_display[:hierarchy] = {
+          # blacklight-hiearchy requires this mapping;
+          # prefix + final component (separated by _)
+          components[0..-2].join('_') => [[components[-1]], ':']
+        }
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
@@ -129,8 +130,8 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LANGUAGE.label
         config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
                                label: TrlnArgon::Fields::PUBLISHER_ETC.label
-        config.add_index_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
-                               label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_index_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
+                               label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label
         config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
                                label: TrlnArgon::Fields::INSTITUTION.label,
                                helper_method: :institution_code_to_short_name
@@ -154,8 +155,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::PUBLISHER_ETC.label
         config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
                               label: TrlnArgon::Fields::ISBN_NUMBER.label
-        config.add_show_field TrlnArgon::Fields::PUBLICATION_DATE_SORT.to_s,
-                              label: TrlnArgon::Fields::PUBLICATION_DATE_SORT.label
+        config.add_show_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
+                              label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label
         config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s,
                               label: TrlnArgon::Fields::INSTITUTION.label,
                               helper_method: :institution_code_to_short_name
@@ -235,15 +236,15 @@ module TrlnArgon
         # whether the sort is ascending or descending (it must be asc or desc
         # except in the relevancy case).
         config.add_sort_field 'score desc, '\
-                              "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} desc, "\
+                              "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} desc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.relevance')
 
-        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} desc, "\
+        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} desc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.year_desc')
 
-        # config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc, "\
+        # config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
         #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.year_asc')
 
@@ -252,11 +253,11 @@ module TrlnArgon
         #                       label: I18n.t('trln_argon.sort_options.author_asc')
 
         config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} asc, "\
-                              "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc",
+                              "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.title_asc')
 
         # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
-        #                       "#{TrlnArgon::Fields::PUBLICATION_DATE_SORT} asc",
+        #                       "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
       end
 
