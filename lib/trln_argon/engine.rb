@@ -55,7 +55,7 @@ module TrlnArgon
       end
 
       def load_yaml_file(file_path)
-        YAML.load_file(file_path)
+        YAML.load_file(file_path) if File.exist?(file_path)
       end
 
       def solr_field_defaults_file_path

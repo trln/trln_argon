@@ -33,6 +33,8 @@ Metrics/CyclomaticComplexity:
 
 Metrics/LineLength:
   Max: 120
+  Exclude:
+    - 'lib/trln_argon/controller_override.rb'
 
 Metrics/MethodLength:
   Exclude:
