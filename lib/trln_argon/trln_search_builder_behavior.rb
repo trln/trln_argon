@@ -4,7 +4,7 @@ module TrlnArgon
   module TrlnSearchBuilderBehavior
     def apply_local_filter(solr_parameters)
       solr_parameters[:fq] ||= []
-      solr_parameters[:fq] << if blacklight_params['local_filter'] == 'true'
+      solr_parameters[:fq] << if blacklight_params[:local_filter].to_s == 'true'
                                 local_holdings_query
                               else
                                 record_rollup_query
