@@ -445,7 +445,7 @@ LCC_CALLNUM_CLASSIFICATION:
 CALL_NUMBER_FACET:
   solr_field: :lcc_callnum_classification_f
   label:
-    en: Call Number Location
+    en: Call Number
 LCC_CALLNUM_CLASSIFICATION_T:
   solr_field: :lcc_callnum_classification_t
   label:
@@ -797,11 +797,11 @@ SUBJECT_GENRE_T:
 SUBJECT_GEOGRAPHIC:
   solr_field: :subject_geographic_a
   label:
-    en: Location
+    en: Region
 SUBJECT_GEOGRAPHIC_FACET:
   solr_field: :subject_geographic_f
   label:
-    en: Location
+    en: Region
 SUBJECT_MEDICAL_FACET:
   solr_field: :subject_medical_f
   label:
