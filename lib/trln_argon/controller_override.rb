@@ -9,7 +9,8 @@ module TrlnArgon
     included do
       send(:include, BlacklightAdvancedSearch::Controller)
 
-      before_action :local_filter_session
+      before_action :set_local_filter_param_to_default
+
       before_action :filtered_results_total, only: :index
 
       helper_method :local_filter_applied?
@@ -301,43 +302,21 @@ module TrlnArgon
           end
       end
 
-      def local_filter_session
-        if local_filter_param_present?
-          set_local_filter_session_from_param
-        elsif local_filter_session_set?
-          set_local_filter_param_from_session
-        else
-          set_local_filter_param_and_session_to_default
-        end
+      def set_local_filter_param_to_default
+        return if local_filter_param_present?
+        params[:local_filter] = local_filter_default
+      end
+
+      def local_filter_applied?
+        params[:local_filter].to_s == 'true'
       end
 
       def local_filter_param_present?
         local_filter_whitelist.include?(params[:local_filter])
       end
 
-      def local_filter_session_set?
-        local_filter_whitelist.include?(session[:local_filter])
-      end
-
-      def set_local_filter_session_from_param
-        session[:local_filter] = params[:local_filter]
-      end
-
-      def set_local_filter_param_from_session
-        params[:local_filter] = session[:local_filter]
-      end
-
-      def set_local_filter_param_and_session_to_default
-        session[:local_filter] = local_filter_default
-        params[:local_filter] = local_filter_default
-      end
-
       def local_filter_whitelist
         %w[true false]
-      end
-
-      def local_filter_applied?
-        session[:local_filter] == 'true'
       end
 
       def local_filter_default

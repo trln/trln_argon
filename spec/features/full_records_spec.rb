@@ -1,6 +1,6 @@
 describe 'full records' do
   context 'displays multiple fields from the record' do
-    before { visit solr_document_path(id: 'DUKE000152671') }
+    before { visit solr_document_path(id: 'DUKE002960043') }
 
     it 'displays the title field label' do
       expect(page).to have_css('dt.blacklight-title_main', text: 'Title:')

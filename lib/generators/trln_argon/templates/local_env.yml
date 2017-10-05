@@ -1,4 +1,4 @@
-SOLR_URL: http://127.0.0.1:8983/solr/trln
+SOLR_URL: https://query.discovery.trln.org/trln-dev
 LOCAL_INSTITUTION_CODE: unc
 PREFERRED_RECORDS: unc
 LOCAL_RECORDS: 'unc, trln'

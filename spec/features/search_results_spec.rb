@@ -13,13 +13,13 @@ describe 'search results' do
       visit search_catalog_path
       fill_in 'q', with: 'food'
       click_button 'search'
-      expect(page).to have_content(/\d+ TRLN results/)
+      expect(page).to have_content(/\d+ UNC results/)
     end
   end
 
   context 'all results' do
     def result_count
-      visit search_catalog_path(local_filer: 'false')
+      visit search_catalog_path(local_filter: 'false')
       click_button 'search'
       page_entries_text = page.find(:css, '.page_entries').text
       result_count = 0
