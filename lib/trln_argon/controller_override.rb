@@ -44,6 +44,22 @@ module TrlnArgon
 
         config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
+        config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                               label: TrlnArgon::Fields::AVAILABLE_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
+                               label: TrlnArgon::Fields::INSTITUTION_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
+                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
+                               label: TrlnArgon::Fields::FORMAT_FACET.label,
+                               limit: true,
+                               collapse: false
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.label,
                                limit: true,
@@ -51,23 +67,12 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
-                               label: TrlnArgon::Fields::FORMAT_FACET.label,
-                               limit: true,
-                               collapse: false
-        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
-                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label,
-                               limit: true,
-                               collapse: false
-
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                partial: 'blacklight/hierarchy/facet_hierarchy'
-
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
-
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
                                query: { '2000_to_present' =>
                                         { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
@@ -94,12 +99,6 @@ module TrlnArgon
                                limit: true
         config.add_facet_field TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.label,
-                               limit: true
-        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
-                               label: TrlnArgon::Fields::INSTITUTION_FACET.label,
-                               limit: true
-        config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
-                               label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
                                query: {
