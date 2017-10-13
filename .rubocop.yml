@@ -7,6 +7,7 @@ AllCops:
     - 'bin/**/*'
     - 'db/**/*'
     - 'lib/trln_argon/version.rb'
+    - 'lib/trln_argon/item_deserializer.rb'
 
 Documentation:
   Enabled: false

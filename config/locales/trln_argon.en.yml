@@ -51,37 +51,9 @@ en:
             short_name: "TRLN"
             long_name: "TRLN Libraries"
 
-        fields:
-            authors_main:
-                label: "Author"
-            authors_main_facet:
-                label: "Author"
-            isbn_number:
-                label: "ISBN Number"
-            publication_year_isort_stored_single:
-                label: "Publication Year"
-            title_main:
-                label: "Title"
-            url_href:
-                label: "Link"
-            lcc_callnum_classification_facet:
-                label: 'Call Number Location'
-            items_lcc_top_facet:
-                label: "Call Number"
-            items_location_facet:
-                label: "Location"
-            subject_topic_lcsh_facet:
-                label: "Subject"
-            subject_genre_facet:
-                label: "Genre"
-            subject_medical_facet:
-                label: "Medical Subject"
-            subject_geographic_facet:
-                label: "Region"
-            :date_cataloged_dt:
-                label: 'New Titles'
-            subject_chronological_facet:
-                label: "Time Period"
+        availability:
+            available: "Available"
+            not_available: "Not Available"
 
         publication_year_ranges:
             '2000_to_present': '2000 to present'

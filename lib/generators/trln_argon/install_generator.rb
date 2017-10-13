@@ -61,7 +61,15 @@ module TrlnArgon
         "\nrequire 'trln_argon'\n\n"
       end
       insert_into_file solrdoc, after: 'include Blacklight::Solr::Document' do
-        "\n  include TrlnArgon::ItemDeserializer\n\n"
+        "\n  include TrlnArgon::ItemDeserializer\n"
+      end
+    end
+
+    def inject_solr_document_behaviors
+      solrdoc = 'app/models/solr_document.rb'
+      return if IO.read(solrdoc).include?('TrlnArgon::SolrDocument')
+      insert_into_file solrdoc, after: 'include Blacklight::Solr::Document' do
+        "\n  include TrlnArgon::SolrDocument\n"
       end
     end
 
