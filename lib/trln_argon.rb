@@ -2,6 +2,9 @@ require 'trln_argon/engine'
 require 'trln_argon/version'
 
 module TrlnArgon
+  autoload :Lookups, 'trln_argon/mappings'
+  autoload :LookupManager, 'trln_argon/mappings'
+  autoload :MappingsGitFetcher, 'trln_argon/mappings'
   require 'trln_argon/controller_override'
   require 'trln_argon/field'
   require 'trln_argon/fields'

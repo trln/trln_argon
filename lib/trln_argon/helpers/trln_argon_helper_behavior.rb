@@ -50,6 +50,10 @@ module TrlnArgon
       end.join('; ').html_safe
     end
 
+    def map_argon_code(inst, context, value)
+      TrlnArgon::LookupManager.instance.map([inst, context, value].join('.'))
+    end
+
     private
 
     def online_access_link_text(url_hrefs, url_text)

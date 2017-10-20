@@ -27,21 +27,19 @@ module TrlnArgon
           h['items'] = loc_items.collect do |i|
             i.reject { |k, _v| %w[library shelving_location].include?(k) }
           end
-	  h['call_number'] = cn_prefix(h['items'])
-	  if h['summary'].blank?
-		items = h['items'] || []
-		avail = items.count { |i| 'available' == i['status'].downcase rescue false }
-		sum = "(#{pluralize(items.count, 'copy')}"
-		   if avail != items.count
-			sum << ", #{avail} available"
-		  end
-		sum << ")"
-		h['summary'] = sum
-	  end
-		
+          h['call_number'] = cn_prefix(h['items'])
+          if h['summary'].blank?
+            items = h['items'] || []
+            avail = items.count { |i| 'available' == i['status'].downcase rescue false }
+            sum = "(#{pluralize(items.count, 'copy')}"
+            sum << ", #{avail} available" unless avail == items.count		
+            sum << ")"
+            h['summary'] = sum
+          end
           [loc, h]
         end]]
       end]
+
       # finally, create holdings where we have summaries but no
       # items ... potentially controversial
       holdings.each do |h|
@@ -64,6 +62,13 @@ module TrlnArgon
 
     def stringified_hash_to_json(x)
       JSON.parse(x.gsub('=>', ':'))
+    end
+
+     # quick hack, for the moment: we need to guess the context for looking up
+    # location and status codes when displaying items, and the items themselves
+    # don't contain this data.
+    def record_owner
+      self[TrlnArgon::Fields::INSTITUTION].first
     end
   end
 end
