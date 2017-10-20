@@ -86,8 +86,8 @@ AUTHORS_UNCONTROLLED_T:
   solr_field: :authors_uncontrolled_t
   label:
     en: Authors Uncontrolled T
-AVAILABILITY:
-  solr_field: :availability_a
+AVAILABLE:
+  solr_field: :available_a
   label:
     en: Availability
 AVAILABLE_FACET:

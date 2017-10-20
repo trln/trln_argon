@@ -17,9 +17,11 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
     context 'local filter is applied' do
       let(:builder_with_params) { search_builder.with(local_filter: 'true') }
 
+      before { builder_with_params.apply_local_filter(solr_parameters) }
+
       it 'applies the local holdings query' do
-        expect(builder_with_params.show_only_local_holdings(solr_parameters).to_s).to(
-          include('institution_f:unc OR institution_f:trln')
+        expect(solr_parameters[:fq]).to(
+          eq(['institution_f:unc OR institution_f:trln'])
         )
       end
     end
@@ -27,23 +29,31 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
     context 'local filter is not applied' do
       let(:builder_with_params) { search_builder.with(local_filter: 'false') }
 
-      it 'does not apply the local holdings query' do
-        expect(builder_with_params.show_only_local_holdings(solr_parameters).to_s).to include('')
+      before { builder_with_params.apply_local_filter(solr_parameters) }
+
+      it 'applies the local holdings query' do
+        expect(solr_parameters[:fq]).to(
+          eq(['{!collapse field=rollup_id nullPolicy=expand max=termfreq(institution_f,"unc")}'])
+        )
       end
     end
   end
 
   describe 'show_only_local_holdings' do
+    before { search_builder.show_only_local_holdings(solr_parameters) }
     it 'adds parameters to restrict results to local holdings' do
-      expect(search_builder.show_only_local_holdings(solr_parameters).to_s).to(
-        include('institution_f:unc OR institution_f:trln')
+      expect(solr_parameters[:fq]).to(
+        eq(['institution_f:unc OR institution_f:trln'])
       )
     end
   end
 
   describe 'rollup_duplicate_records' do
+    before { search_builder.rollup_duplicate_records(solr_parameters) }
     it 'adds parameters to rollup duplicate records' do
-      expect(search_builder.rollup_duplicate_records(solr_parameters).to_s).to include('')
+      expect(solr_parameters[:fq]).to(
+        eq(['{!collapse field=rollup_id nullPolicy=expand max=termfreq(institution_f,"unc")}'])
+      )
     end
   end
 

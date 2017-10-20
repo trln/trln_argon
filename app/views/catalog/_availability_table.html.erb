@@ -1,0 +1,19 @@
+<div class="availability">
+  <table  width='100%' class='table table-condensed'>
+    <caption>Location</caption>
+    <tbody>
+      <% expanded_availability.each do |institution, values| %>
+        <tr>
+          <td><%= t("trln_argon.institution.#{institution}.long_name") %></td>
+          <td><%= values[:availability] %></td>
+          <% if values[:url].present? %>
+            <% short_name = t("trln_argon.institution.#{institution}.short_name") %>
+            <td><%= link_to "Online Access (#{short_name} Only)", values[:url].first %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

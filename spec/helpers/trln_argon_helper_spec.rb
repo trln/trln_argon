@@ -88,7 +88,7 @@ describe TrlnArgonHelper do
 
   describe '#filter_scope_name' do
     context 'scope is BookmarksController' do
-      before { allow(helper).to receive(:controller_name) { 'bookmarks' } }
+      before { allow(helper).to receive(:controller_name).and_return('bookmarks') }
 
       it 'uses the translated scope name for bookmarks' do
         expect(helper.filter_scope_name).to eq('bookmarked')
@@ -97,8 +97,8 @@ describe TrlnArgonHelper do
 
     context 'local filter is applied', verify_stubs: false do
       before do
-        allow(helper).to receive(:controller_name) { 'catalog' }
-        allow(helper).to receive(:local_filter_applied?) { true }
+        allow(helper).to receive(:controller_name).and_return('catalog')
+        allow(helper).to receive(:local_filter_applied?).and_return(true)
       end
 
       it 'uses the translated scope name for bookmarks' do
@@ -108,8 +108,8 @@ describe TrlnArgonHelper do
 
     context 'local filter is not applied', verify_stubs: false do
       before do
-        allow(helper).to receive(:controller_name) { 'catalog' }
-        allow(helper).to receive(:local_filter_applied?) { false }
+        allow(helper).to receive(:controller_name).and_return('catalog')
+        allow(helper).to receive(:local_filter_applied?).and_return(false)
       end
 
       it 'uses the translated scope name for bookmarks' do

@@ -10,4 +10,5 @@ module TrlnArgon
   require 'trln_argon/helpers/trln_argon_helper_behavior'
   require 'trln_argon/trln_search_builder_behavior'
   autoload :ItemDeserializer, 'trln_argon/item_deserializer.rb'
+  autoload :SolrDocument, 'trln_argon/solr_document.rb'
 end
