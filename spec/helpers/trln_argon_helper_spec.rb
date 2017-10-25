@@ -298,4 +298,26 @@ describe TrlnArgonHelper do
       end
     end
   end
+
+  describe '#location_filter_display' do
+    context 'all codes are mappable' do
+      let(:hierarchy_value) { 'duke:dukedivy:dukedivyrees' }
+
+      it 'translates the coded hierarchy to a human readable string' do
+        expect(helper.location_filter_display(hierarchy_value)).to(
+          eq('Duke, Divinity, Reserves')
+        )
+      end
+    end
+
+    context 'some codes are not mappable' do
+      let(:hierarchy_value) { 'duke:blah:foo' }
+
+      it 'has codes in place of unmappable values' do
+        expect(helper.location_filter_display(hierarchy_value)).to(
+          eq('Duke, duke.facet.blah, duke.facet.foo')
+        )
+      end
+    end
+  end
 end
