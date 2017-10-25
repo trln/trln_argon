@@ -45,14 +45,14 @@ module TrlnArgon
     KEYS = {
       library: 'library location',
       location: 'shelving location'
-    }
+    }.freeze
 
     PATH_COMPONENTS = %i[library location].freeze
 
     FILENAMES = {
       location_holdings: 'location_item_holdings.json',
       location_facet: 'location_facet.json'
-    }
+    }.freeze
 
     def initialize(base = '.')
       @directory = base
@@ -114,7 +114,7 @@ module TrlnArgon
     end
 
     def read_json(filename)
-      File.exist?(filename) ? File.open(filename) { |f| JSON.load(f) } : {}
+      File.exist?(filename) ? File.open(filename) { |f| JSON.parse(f.read) } : {}
     end
   end
 

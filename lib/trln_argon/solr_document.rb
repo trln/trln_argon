@@ -6,7 +6,7 @@ module TrlnArgon
     end
 
     def expanded_holdings
-      @expanded_holdings ||= Hash[expanded_documents.collect do |doc|
+      @expanded_holdings ||= Hash[expanded_documents.map do |doc|
         [doc[TrlnArgon::Fields::INSTITUTION].first,
          doc.deserialize_holdings]
       end]

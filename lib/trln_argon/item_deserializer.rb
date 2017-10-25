@@ -24,7 +24,7 @@ module TrlnArgon
         [lib, Hash[loc_map.map do |loc, loc_items|
           h = holdings.find { |i| i['library'] == lib && i['location'] == loc } ||
               { 'summary' => '', 'call_number' => '', 'notes' => [] }
-          h['items'] = loc_items.collect do |i|
+          h['items'] = loc_items.map do |i|
             i.reject { |k, _v| %w[library shelving_location].include?(k) }
           end
           h['call_number'] = cn_prefix(h['items'])
@@ -56,7 +56,7 @@ module TrlnArgon
     end
 
     def cn_prefix(items)
-      cns = items.reject(&:nil?).collect { |i| i['call_number'].to_s.gsub(/\d{4}$/, '') }
+      cns = items.reject(&:nil?).map { |i| i['call_number'].to_s.gsub(/\d{4}$/, '') }
       cns[0]
     end
 
