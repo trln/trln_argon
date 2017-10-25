@@ -1,0 +1,11 @@
+{
+    "library location" : {
+        "lib1" : "Library One, Full Name",
+        "lib2" : "Library Two, Full Name"
+    },
+    "shelving location" : {
+        "loc1" : "Location One",
+        "loc2" : "Location Two"
+    }
+}
+

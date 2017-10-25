@@ -12,14 +12,14 @@
   <% next if library == 'ONLINE' %>
   <tbody class="library-group <% library %>">  
         <tr class='library-banner'>
-          <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '>Library: <%= library %>
+          <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '><%= map_argon_code(document.record_owner, 'library', library) %>
         </tr>
   <% location_map.each do |loc, item_data|  %>
     <tr class="location-banner" data-library="<%= library %>"
     data-location="<%= loc %>">
        <% if item_data['summary'] %>
            <th style="width: 20%; padding-left: .5em;">
-             <%= loc %>
+             <%= map_argon_code(document.record_owner, 'location', loc) if loc %>
            </th>
            <th style="width: 30%;">
     <%= item_data['call_number'] %>
@@ -29,7 +29,7 @@
      </th>
     <% else %>
            <th colspan="3">
-     <% loc %>
+     <%= map_argon_code(document.record_owner, 'location', loc) if loc %>
      </th>
      <% end %>
     </tr>

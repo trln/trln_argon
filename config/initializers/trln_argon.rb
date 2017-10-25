@@ -14,6 +14,14 @@ if File.exist?(config_file)
     config.local_records                 = apply_local_config(local_config, 'local_records')
     config.apply_local_filter_by_default = apply_local_config(local_config, 'apply_local_filter_by_default')
     config.application_name              = apply_local_config(local_config, 'application_name')
-  end
 
+    config.code_mappings = {
+      git_url: 'https://github.com/trln/argon_code_mappings',
+      git_branch: 'master'
+    }
+    git_fetcher = TrlnArgon::MappingsGitFetcher.new(git_url: config.code_mappings[:git_url])
+    TrlnArgon::LookupManager.fetcher = git_fetcher
+
+    TrlnArgon::LookupManager.instance.map('ncsu.library.DHHILL')
+  end
 end

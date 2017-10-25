@@ -275,7 +275,7 @@ module TrlnArgon
       private
 
       def expanded_documents_hash
-        @expanded_documents_hash ||= Hash[@response.documents.collect { |doc| [doc.id, expanded_documents(doc)] }]
+        @expanded_documents_hash ||= Hash[@response.documents.map { |doc| [doc.id, expanded_documents(doc)] }]
       end
 
       def expanded_documents(doc)
@@ -283,7 +283,7 @@ module TrlnArgon
           group.key == doc[TrlnArgon::Fields::ROLLUP_ID]
         end.first
         group_docs = group_docs.respond_to?(:docs) ? group_docs.docs : [doc]
-        Hash[group_docs.collect do |gr_doc|
+        Hash[group_docs.map do |gr_doc|
           [gr_doc[TrlnArgon::Fields::INSTITUTION].first,
            { availability: gr_doc.availability,
              url: gr_doc[TrlnArgon::Fields::URL_HREF] }]

@@ -24,7 +24,8 @@ module TrlnArgon
                     :local_records,
                     :apply_local_filter_by_default,
                     :application_name,
-                    :solr_fields
+                    :solr_fields,
+                    :code_mappings
 
       def initialize
         @preferred_records             = 'unc'
