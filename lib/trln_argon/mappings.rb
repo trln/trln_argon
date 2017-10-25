@@ -1,5 +1,6 @@
 require 'git'
 require 'singleton'
+require 'fileutils'
 
 module TrlnArgon
   class MappingsGitFetcher
@@ -89,10 +90,10 @@ module TrlnArgon
         lhf = File.join(path, FILENAMES[:location_holdings])
         parse_holdings!(lhf, inst_mappings)
         lff = File.join(path, FILENAMES[:location_facet])
-        facets = Hash.new do |hash, key|
-          hash[key] = inst_mappings['library'][key]
+        facets = read_json(lff)
+        inst_mappings['library'].each do |k, v|
+          facets[k] ||= v
         end
-        facets.update(read_json(lff))
         inst_mappings['facet'] = facets
       end
       mappings
