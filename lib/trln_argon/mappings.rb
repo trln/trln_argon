@@ -1,6 +1,5 @@
 require 'git'
 require 'singleton'
-require 'fileutils'
 
 module TrlnArgon
   class MappingsGitFetcher
