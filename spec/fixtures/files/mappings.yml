@@ -1,8 +1,8 @@
 ncsu:
-  library:
+  loc_b:
     DHHILL: D.H. Hill Library
     HUNT: Hunt Library
-  location:
+  loc_n:
     STACKS: Stacks
   facet:
     DHHILL: D.H. Hill

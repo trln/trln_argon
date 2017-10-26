@@ -42,11 +42,11 @@ module TrlnArgon
     attr_reader :directory
 
     KEYS = {
-      library: 'library location',
-      location: 'shelving location'
+      loc_b: 'loc_b',
+      loc_n: 'loc_n'
     }.freeze
 
-    PATH_COMPONENTS = %i[library location].freeze
+    PATH_COMPONENTS = %i[loc_b loc_n].freeze
 
     FILENAMES = {
       location_holdings: 'location_item_holdings.json',
@@ -90,7 +90,7 @@ module TrlnArgon
         parse_holdings!(lhf, inst_mappings)
         lff = File.join(path, FILENAMES[:location_facet])
         facets = read_json(lff)
-        inst_mappings['library'].each do |k, v|
+        inst_mappings['loc_b'].each do |k, v|
           facets[k] ||= v
         end
         inst_mappings['facet'] = facets
@@ -103,13 +103,13 @@ module TrlnArgon
     def parse_holdings!(filename, inst_mappings)
       lookups = read_json(filename)
 
-      library_mappings = (inst_mappings['library'] ||= {})
-      libraries = lookups.fetch(KEYS[:library], {})
-      library_mappings.update(libraries)
+      loc_b_mappings = (inst_mappings['loc_b'] ||= {})
+      locations_broad = lookups.fetch(KEYS[:loc_b], {})
+      loc_b_mappings.update(locations_broad)
 
-      locations = lookups.fetch(KEYS[:location], {})
-      location_mappings = (inst_mappings['location'] ||= {})
-      location_mappings.update(locations)
+      locations_narrow = lookups.fetch(KEYS[:loc_n], {})
+      loc_n_mappings = (inst_mappings['loc_n'] ||= {})
+      loc_n_mappings.update(locations_narrow)
     end
 
     def read_json(filename)
@@ -117,7 +117,7 @@ module TrlnArgon
     end
   end
 
-  # Mappings for library/location names, statuses, etc.
+  # Mappings for loc_b/loc_n names, statuses, etc.
   class LookupManager
     include Singleton
 
