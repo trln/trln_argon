@@ -8,36 +8,35 @@
           <th class="callnum-header">Call Number</th>
           <th class="status-header">Status</th>
         </tr>
-      <% document.holdings.each do |library, location_map| %>
-  <% next if library == 'ONLINE' %>
-  <tbody class="library-group <% library %>">  
-        <tr class='library-banner'>
-          <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '><%= map_argon_code(document.record_owner, 'library', library) %>
+      <% document.holdings.each do |loc_b, loc_narrow_map| %>
+  <% next if loc_b == 'ONLINE' %>
+  <tbody class="loc-broad-group <% loc_b %>">  
+        <tr class='loc-broad-banner'>
+          <th colspan="3" style='background-color: #ececec; padding: .2em 2em; '><%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
         </tr>
-  <% location_map.each do |loc, item_data|  %>
-    <tr class="location-banner" data-library="<%= library %>"
-    data-location="<%= loc %>">
+  <% loc_narrow_map.each do |loc_n, item_data|  %>
+    <tr class="loc-narrow-banner" data-locbroad="<%= loc_b %>"
+    data-locnarrow="<%= loc_n %>">
        <% if item_data['summary'] %>
            <th style="width: 20%; padding-left: .5em;">
-             <%= map_argon_code(document.record_owner, 'location', loc) if loc %>
+             <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
            </th>
            <th style="width: 30%;">
-    <%= item_data['call_number'] %>
+    <%= item_data['call_no'] %>
      <th style="width: 50%;">
               <%= item_data['summary'] %>
       <span class="expander">(+ show items)</span>
      </th>
     <% else %>
            <th colspan="3">
-     <%= map_argon_code(document.record_owner, 'location', loc) if loc %>
+     <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
      </th>
      <% end %>
     </tr>
-  
         <% item_data['items'].each do |item| %>
-        <tr class="item <%= loc %> <%= library %>">
+        <tr class="item <%= loc_n %> <%= loc_b %>">
           <td style='width: 20%;'>&nbsp;</td>
-          <td style='width: 30%;'><%= item['call_number'] %></td>
+          <td style='width: 30%;'><%= item['call_no'] %></td>
           <td style='width: 50%;'><%= item['status'] %></td>
         </tr>
         <% end %>

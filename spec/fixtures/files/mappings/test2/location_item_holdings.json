@@ -1,9 +1,9 @@
 {
-    "library location" : {
+    "loc_b" : {
         "lib1" : "Test2 One, Full Name",
         "lib2" : "Test2 Two, Full Name"
     },
-    "shelving location" : {
+    "loc_n" : {
         "loc1" : "Test 2 Location One",
         "loc2" : "Test2 Location Two"
     }

@@ -6,7 +6,7 @@ describe TrlnArgon::Lookups do
   end
 
   it 'returns path spec as default when not found' do
-    pathspec = 'loopy.library.notfound'
+    pathspec = 'loopy.loc_b.notfound'
     expect(lookups.lookup(pathspec)).to eq(pathspec)
   end
 
@@ -21,6 +21,6 @@ describe TrlnArgon::Lookups do
 
   it 'correctly falls back when no facet value mapped' do
     lib2_facet = lookups.lookup('test2.facet.lib2')
-    expect(lib2_facet).to eq(lookups.lookup('test2.library.lib2'))
+    expect(lib2_facet).to eq(lookups.lookup('test2.loc_b.lib2'))
   end
 end
