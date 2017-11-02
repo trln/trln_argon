@@ -11,32 +11,9 @@ describe 'search results' do
   context 'some results found' do
     it 'displays the number of results found' do
       visit search_catalog_path
-      fill_in 'q', with: 'food'
+      fill_in 'q', with: ''
       click_button 'search'
       expect(page).to have_content(/\d+ UNC results/)
-    end
-  end
-
-  context 'all results' do
-    def result_count
-      visit search_catalog_path(local_filter: 'false')
-      click_button 'search'
-      page_entries_text = page.find(:css, '.page_entries').text
-      result_count = 0
-      page_entries_text.scan(/\b(\d+,?(\d+)?)\b/).each do |match|
-        integer = match[0].gsub!(/\D/, '').to_i
-        result_count = integer if integer > result_count
-      end
-      result_count
-    end
-
-    def solr_count
-      uri = URI("#{CatalogController.blacklight_config.connection_config[:url]}/select?&q=*:*&wt=json")
-      JSON.parse(Net::HTTP.get(uri))['response']['numFound']
-    end
-
-    it 'returns entire catalog when no query string provided' do
-      expect(result_count).to eq(solr_count)
     end
   end
 

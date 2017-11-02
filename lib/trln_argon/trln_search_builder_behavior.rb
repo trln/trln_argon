@@ -31,6 +31,12 @@ module TrlnArgon
       end
     end
 
+    def begins_with_filter(solr_parameters)
+      return unless blacklight_params[:begins_with].present?
+      solr_parameters[:fq] ||= []
+      solr_parameters[:fq].concat begins_with_queries(blacklight_params[:begins_with])
+    end
+
     private
 
     def record_rollup_query
@@ -38,6 +44,24 @@ module TrlnArgon
       'nullPolicy=expand '\
       "max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
       "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
+    end
+
+    def begins_with_queries(begins_with)
+      queries = []
+      begins_with.each do |field, segments|
+        segments.reject!(&:empty?)
+        next if segments.empty?
+        queries << begins_with_query(field, segments)
+      end
+      queries
+    end
+
+    def begins_with_query(field, segments)
+      "_query_:\"{!q.op=AND df=#{field}}#{join_begins_with_segments(segments)}\""
+    end
+
+    def join_begins_with_segments(segments)
+      segments.map { |segment| "/#{segment}.*/" }.join(' ')
     end
 
     def local_holdings_query

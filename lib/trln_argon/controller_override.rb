@@ -14,6 +14,7 @@ module TrlnArgon
       before_action :filtered_results_total, only: :index
 
       helper_method :local_filter_applied?
+      helper_method :query_has_constraints?
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -112,6 +113,13 @@ module TrlnArgon
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
 
+        # Subject is configured as a facet and set not to display so that the field
+        # label will be accessible for the begins_with filter. Set other fields that will
+        # be used for begins with searches in the same way.
+        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECTS_FACET.label,
+                               show: false
+
         # hierarchical facet configuration
         config.facet_display ||= {}
         components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
@@ -155,7 +163,8 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
                               label: TrlnArgon::Fields::LANGUAGE.label
         config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s,
-                              label: TrlnArgon::Fields::SUBJECTS.label
+                              label: TrlnArgon::Fields::SUBJECTS.label,
+                              helper_method: :link_to_subject_segments
         config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
                               label: TrlnArgon::Fields::PUBLISHER_ETC.label
         config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
@@ -270,6 +279,19 @@ module TrlnArgon
         super
         return if local_filter_applied?
         expanded_documents_hash
+      end
+
+      def has_search_parameters? # rubocop:disable Style/PredicateName
+        !params[:q].blank? ||
+          !params[:f].blank? ||
+          !params[:search_field].blank? ||
+          !params[:begins_with].blank?
+      end
+
+      def query_has_constraints?(localized_params = params)
+        !(localized_params[:q].blank? &&
+          localized_params[:f].blank? &&
+          localized_params[:begins_with].blank?)
       end
 
       private
