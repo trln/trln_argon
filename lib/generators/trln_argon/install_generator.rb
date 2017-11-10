@@ -131,7 +131,7 @@ module TrlnArgon
       controller = 'app/controllers/catalog_controller.rb'
       return if IO.read(controller).include?(':show_items')
       inject_into_file controller, after: 'config.add_facet_fields_to_solr_request!' do
-        "\n\n    config.show.partials = [ :show_header, :show, :show_items ]\n\n"
+        "\n\n    config.show.partials = %i[show_header show_thumbnail show show_items]\n\n"
       end
     end
 

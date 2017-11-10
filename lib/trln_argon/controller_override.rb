@@ -31,6 +31,8 @@ module TrlnArgon
         config.document_solr_path = :document
         config.document_solr_request_handler = nil
 
+        # config.show.partials is set by the install generator
+
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
 

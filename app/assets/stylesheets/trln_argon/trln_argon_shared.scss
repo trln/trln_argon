@@ -80,3 +80,23 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
   height: 5px;
   background-color: $orange;
 }
+
+.thumbnail {
+    border: none;
+    float: right;
+}
+
+
+#document {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+#document .thumbnail {
+    flex-basis: auto;
+}
+
+#document dl {
+    flex-basis: auto;
+}
