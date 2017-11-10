@@ -24,7 +24,7 @@ module TrlnArgon
       q = { isbn: "#{isbn}/#{SIZES[options[:size].to_sym]}",
             oclc: oclc,
             client: options[:client] }.to_query
-      URI::HTTP.build(host: 'syndetics.com',
+      URI::HTTPS.build(host: 'syndetics.com',
                       path: '/index.php',
                       query: q).to_s
     end
