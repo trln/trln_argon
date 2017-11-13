@@ -25,8 +25,8 @@ module TrlnArgon
             oclc: oclc,
             client: options[:client] }.to_query
       URI::HTTPS.build(host: 'syndetics.com',
-                      path: '/index.php',
-                      query: q).to_s
+                       path: '/index.php',
+                       query: q).to_s
     end
 
     def institution_code_to_short_name(options = {})
