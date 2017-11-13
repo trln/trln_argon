@@ -18,7 +18,6 @@ module TrlnArgon
     # @option options :size [String, Symbol] image size (:small, :medium, :large)
     def cover_image(doc, options = { client: 'trlnet', size: :small })
       options = {}.update(IMG_OPTIONS).update(options)
-      $stderr.puts("\t\t#{options}")
       isbn = doc.fetch('isbn_number_a', ['']).first
       oclc = doc.fetch('oclc_number', '')
       q = { isbn: "#{isbn}/#{SIZES[options[:size].to_sym]}",
