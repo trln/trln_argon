@@ -54,6 +54,10 @@ module TrlnArgon
       TrlnArgon::LookupManager.instance.map([inst, context, value].join('.'))
     end
 
+    def link_to_subject_segments(options = {})
+      options[:value].map { |subject| build_segment_links(subject) }.join('<br />').html_safe
+    end
+
     private
 
     def online_access_link_text(url_hrefs, url_text)
@@ -62,6 +66,29 @@ module TrlnArgon
       else
         [t('trln_argon.online_access')] * url_hrefs.count
       end
+    end
+
+    def build_segment_links(segments_string, delimiter = ' -- ')
+      segments = segments_string.split(delimiter)
+      subject_hierarchy = array_to_hierarchy(segments, delimiter)
+      zipped_segments = segments.zip(subject_hierarchy)
+      linked_segments = zipped_segments.map { |segment| segment_begins_with_link(segment) }.join(delimiter)
+      linked_segments
+    end
+
+    def segment_begins_with_link(segment_hierarchy_pair)
+      params = { begins_with: { TrlnArgon::Fields::SUBJECTS_FACET => Array(segment_hierarchy_pair.last) } }
+      params[:local_filter] = local_filter_applied?.to_s
+      link_to segment_hierarchy_pair.first, search_action_url(params)
+    end
+
+    def array_to_hierarchy(args, delimiter = ' -- ')
+      result = []
+      args.each_with_object([]) do |part, acc|
+        acc << part
+        result << acc.join(delimiter)
+      end
+      result
     end
   end
 end

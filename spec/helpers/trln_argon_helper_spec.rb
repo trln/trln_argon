@@ -226,5 +226,24 @@ describe TrlnArgonHelper do
         )
       end
     end
+
+    describe '#link_to_subject_segments' do
+      let(:options) do
+        { value:    ['Technology -- History -- Science',
+                     'Galilei, Galileo, 1564-1642'] }
+      end
+      let(:context) { CatalogController.new }
+
+      it 'generates links to a search for each segment' do
+        allow(context).to receive(:local_filter_applied?).and_return(false)
+        allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
+        expect(context.helpers.link_to_subject_segments(options)).to(
+          eq('<a href="/catalog?begins_with=something">Technology</a> -- '\
+             '<a href="/catalog?begins_with=something">History</a> -- '\
+             '<a href="/catalog?begins_with=something">Science</a><br />'\
+             '<a href="/catalog?begins_with=something">Galilei, Galileo, 1564-1642</a>')
+        )
+      end
+    end
   end
 end
