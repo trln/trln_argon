@@ -128,14 +128,6 @@ module TrlnArgon
       end
     end
 
-    def inject_item_show_config
-      controller = 'app/controllers/catalog_controller.rb'
-      return if IO.read(controller).include?(':show_items')
-      inject_into_file controller, after: 'config.add_facet_fields_to_solr_request!' do
-        "\n\n    config.show.partials = [ :show_header, :show, :show_items ]\n\n"
-      end
-    end
-
     def inject_search_builder_behavior
       return if IO.read('app/models/search_builder.rb').include?('TrlnSearchBuilderBehavior')
       insert_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
