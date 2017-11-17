@@ -9,5 +9,9 @@ describe TrlnArgonSearchBuilder do
     it 'adds the isxn boost method to the processor chain' do
       expect(obj.processor_chain).to include(:boost_isxn_matches)
     end
+
+    it 'adds the before filter method to the processor chain' do
+      expect(obj.processor_chain).to include(:begins_with_filter)
+    end
   end
 end

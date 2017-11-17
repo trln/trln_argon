@@ -82,3 +82,6 @@ en:
             author_asc: "Author (A-Z)"
 
         online_access: "Online Access"
+
+        search_constraints:
+            begins_with: "begins with"

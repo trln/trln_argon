@@ -40,6 +40,7 @@ module TrlnArgon
       copy_file 'helpers/catalog_helper.rb', 'app/helpers/catalog_helper.rb'
       copy_file 'helpers/blacklight_helper.rb', 'app/helpers/blacklight_helper.rb'
       copy_file 'helpers/trln_argon_helper.rb', 'app/helpers/trln_argon_helper.rb'
+      copy_file 'helpers/render_constraints_helper.rb', 'app/helpers/render_constraints_helper.rb'
     end
 
     def install_stylesheet

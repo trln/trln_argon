@@ -8,6 +8,7 @@ spec/dummy/tmp/
 spec/dummy/log/*.log
 spec/dummy/.sass-cache
 Gemfile.lock
+config/mappings/
 
 .internal_test_app
 .idea/
