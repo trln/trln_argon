@@ -144,7 +144,7 @@ module TrlnArgon
       @covers = Hash[COVERS.map do |elname, size|
         txt = doc.xpath("#{elname}/text()").first
         [size, txt.text] if txt
-      end]
+      end.select(&:itself)]
       @present = doc.root.children.map(&:name)
     end
   end
