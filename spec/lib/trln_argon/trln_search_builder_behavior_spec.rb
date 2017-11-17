@@ -14,7 +14,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
   before { allow(context).to receive(:blacklight_config).and_return(blacklight_config) }
 
   describe 'apply_local_filter' do
-    context 'local filter is applied' do
+    context 'when local filter is applied' do
       let(:builder_with_params) { search_builder.with(local_filter: 'true') }
 
       before { builder_with_params.apply_local_filter(solr_parameters) }
@@ -26,7 +26,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       end
     end
 
-    context 'local filter is not applied' do
+    context 'when local filter is not applied' do
       let(:builder_with_params) { search_builder.with(local_filter: 'false') }
 
       before { builder_with_params.apply_local_filter(solr_parameters) }
@@ -60,7 +60,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
   describe 'boost_isxn_matches' do
     before { builder_with_params.boost_isxn_matches(solr_parameters) }
 
-    context 'all fields search contains an issn search' do
+    context 'when all fields search contains an issn search' do
       let(:builder_with_params) { search_builder.with(q: '03431258') }
 
       it 'sets the isxn_ns_v parameter' do
@@ -79,7 +79,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       end
     end
 
-    context 'all fields search contains a messy isbn search' do
+    context 'when all fields search contains a messy isbn search' do
       let(:builder_with_params) { search_builder.with(q: '98---121     00822') }
 
       it 'sets the isxn_ns_v parameter' do
@@ -97,7 +97,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       end
     end
 
-    context 'all fields search with multiple isxn values and random text' do
+    context 'when all fields search with multiple isxn values and random text' do
       let(:builder_with_params) { search_builder.with(q: 'alexander and the terrible 9812100822 03431258') }
 
       it 'sets the isxn_ns_v parameter' do

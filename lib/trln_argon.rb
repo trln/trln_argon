@@ -5,6 +5,7 @@ module TrlnArgon
   autoload :Lookups, 'trln_argon/mappings'
   autoload :LookupManager, 'trln_argon/mappings'
   autoload :MappingsGitFetcher, 'trln_argon/mappings'
+  autoload :SyndeticsData, 'trln_argon/syndetics_data'
   require 'trln_argon/controller_override'
   require 'trln_argon/field'
   require 'trln_argon/fields'

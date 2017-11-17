@@ -3,7 +3,7 @@ require 'uri'
 
 describe TrlnArgonHelper do
   describe '#institution_code_to_short_name' do
-    context 'code has a translation' do
+    context 'when code has a translation' do
       let(:options) { { value: %w[unc duke ncsu] } }
 
       it 'uses the translated value' do
@@ -11,7 +11,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'code does not have a translation' do
+    context 'when code does not have a translation' do
       let(:options) { { value: ['pie'] } }
 
       it 'uses the default value' do
@@ -21,7 +21,7 @@ describe TrlnArgonHelper do
   end
 
   describe '#auto_link_values' do
-    context 'has a single link' do
+    context 'when it has a single link' do
       let(:options) { { value: ['https://library.duke.edu'] } }
 
       it 'returns a single linked value' do
@@ -30,7 +30,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'has more than one link' do
+    context 'when it has more than one link' do
       let(:options) { { value: ['https://library.duke.edu', 'https://www.lib.ncsu.edu'] } }
 
       it 'returns a single linked value' do
@@ -41,7 +41,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'has a link and then something that is not a link' do
+    context 'when it has a link and then something that is not a link' do
       let(:options) { { value: ['https://library.duke.edu', 'Soup'] } }
 
       it 'returns a linked value and a non-linked value' do
@@ -52,13 +52,13 @@ describe TrlnArgonHelper do
   end
 
   describe '#entry_name' do
-    context 'count is 1' do
+    context 'when count is 1' do
       it 'does not pluralize the entry name' do
         expect(helper.entry_name(1)).to eq('result')
       end
     end
 
-    context 'count is more than 1' do
+    context 'when count is more than 1' do
       it 'pluralizes the entry name' do
         expect(helper.entry_name(2)).to eq('results')
       end
@@ -90,7 +90,7 @@ describe TrlnArgonHelper do
   end
 
   describe '#filter_scope_name' do
-    context 'scope is BookmarksController' do
+    context 'when the scope is BookmarksController' do
       before { allow(helper).to receive(:controller_name).and_return('bookmarks') }
 
       it 'uses the translated scope name for bookmarks' do
@@ -98,7 +98,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'local filter is applied', verify_stubs: false do
+    context 'when local filter is applied', verify_stubs: false do
       before do
         allow(helper).to receive(:controller_name).and_return('catalog')
         allow(helper).to receive(:local_filter_applied?).and_return(true)
@@ -109,7 +109,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'local filter is not applied', verify_stubs: false do
+    context 'when local filter is not applied', verify_stubs: false do
       before do
         allow(helper).to receive(:controller_name).and_return('catalog')
         allow(helper).to receive(:local_filter_applied?).and_return(false)
@@ -122,7 +122,7 @@ describe TrlnArgonHelper do
   end
 
   describe '#url_href_with_url_text_link' do
-    context 'single link without text' do
+    context 'when we show single link without text' do
       let(:document) do
         SolrDocument.new(
           id: 'DUKE12345'
@@ -140,7 +140,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'single link with text' do
+    context 'when we show a single link with text' do
       let(:document) do
         SolrDocument.new(
           id:         'DUKE12345',
@@ -159,7 +159,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'multiple links each without a text value' do
+    context 'when we render multiple links each without a text value' do
       let(:document) do
         SolrDocument.new(
           id: 'DUKE12345'
@@ -181,7 +181,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'multiple links each with a text value' do
+    context 'when there are multiple links each with a text value' do
       let(:document) do
         SolrDocument.new(
           id: 'DUKE12345',
@@ -206,7 +206,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'multiple links with a different number of text values' do
+    context 'when there are multiple links with a different number of text values' do
       let(:document) do
         SolrDocument.new(
           id: 'DUKE12345',
@@ -251,7 +251,7 @@ describe TrlnArgonHelper do
   end
 
   describe '#cover_image' do
-    context 'link to a Syndetics cover image with various options' do
+    context 'when we link to a Syndetics cover image with various options' do
       let(:oclc) do
         '123098080985'
       end

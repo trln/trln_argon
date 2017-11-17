@@ -28,6 +28,32 @@ module TrlnArgon
                        query: q).to_s
     end
 
+    def enhanced_data_url(query)
+      URI::HTTPS.build(host: 'syndetics.com',
+                       path: '/index.php',
+                       query: query).to_s
+    end
+
+    # rubocop:disable MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def enhanced_data(doc, options = { client: 'trlnet' })
+      isbns = doc.fetch('isbn_number_a', [])
+      isbns[0] = "#{isbns[0]}/XML.XML"
+      oclc = doc.fetch('oclc_number', '')
+      data = nil
+      unless isbns.empty? && oclc == ''
+        q = { isbn: isbns, oclc: oclc, client: options[:client] }.to_query.gsub(/%5B%5D/, '')
+        begin
+          doc_xml = Faraday.get(enhanced_data_url(q)).body
+          data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
+        rescue StandardError => e
+          logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{q}: #{e}")
+        end
+        yield data if block_given? && !data.nil?
+      end
+      data
+    end
+
     def institution_code_to_short_name(options = {})
       options[:value].map do |val|
         t("trln_argon.institution.#{val}.short_name", default: val)
