@@ -1,5 +1,5 @@
 describe 'search options' do
-  context 'search dropdown' do
+  context 'when displaying search dropdown' do
     before { visit search_catalog_path }
 
     it 'provides a dropdown with fielded search options' do

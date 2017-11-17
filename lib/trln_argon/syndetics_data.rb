@@ -9,7 +9,22 @@ module TrlnArgon
   # the end to determine whether the data is present, and
   # another to fetch the data (usually HTML, but sometimes plain text or a URL)
   #
-  # See the names of the ELEMENTS constant for furhter details.
+  # See the names of the ELEMENTS constant for furter details.
+  #
+  # ELEMENTS is hash that describes the attributes and common operation
+  # of this class.  Each key corresponds to an attribute that might be found
+  # in the Syndetics data, and translates to a query method (ending in ?)
+  # and an access method (using hte key).  Each name is associated with a data
+  # hash that defines how to extract the attribute from the XML document.
+  # :path indicates the element to be extracted for a simple text extraction,
+  # :path_required indicates that :path must be present for the query method
+  # IN ADDITION TO :element, if the query method matches the input document.
+  # :bigtext indicates that the field is often simple text, but might be long
+  # and not have line breaks, in which case we will try to output it as a
+  # set of paragraphs.
+  # :transformer if present, a proc/block/method that should be invoked on a
+  # document rooted at :element to extract the content.
+  # rubocop:disable Metrics/ClassLength
   class SyndeticsData
     include XMLHandler
     COVERS = { SC: 'small', MC: 'medium', LC: 'large' }.freeze
@@ -29,17 +44,17 @@ module TrlnArgon
     end
 
     def self.transform_toc(tocelement)
-      @@toc_xslt ||= compile_stylesheet(read_stylesheet('toc'))
+      @toc_xslt ||= compile_stylesheet(read_stylesheet('toc'))
       transform_element(@@toc_xslt, tocelement)
     end
 
     def self.transform_avreview(avelement)
-      @@avreview_xslt ||= compile_stylesheet(read_stylesheet('av-review'))
+      @avreview_xslt ||= compile_stylesheet(read_stylesheet('av-review'))
       transform_element(@@avreview_xslt, avelement)
     end
 
     def self.transform_avtracklist(avelement)
-      @@avtracklist_xslt ||= compile_stylesheet(read_stylesheet('av-tracks'))
+      @avtracklist_xslt ||= compile_stylesheet(read_stylesheet('av-tracks'))
       transform_element(@@avtracklist_xslt, avelement)
     end
 
@@ -53,18 +68,6 @@ module TrlnArgon
       result.gsub(%r{(<\/?p>){2,}}, '\1')
     end
 
-    # indication of which elements we can query and extract.  This is a sort
-    # of DSL; the hash corresponding to each element name will contain
-    # at least :element, which is the top level element that must be required
-    # for the query method to match the input document.
-    # :path indicates the element to be extracted for a simple text extraction,
-    # :path_required indicates that :path must be present for the query method
-    # IN ADDITION TO :element, if the query method matches the input document.
-    # :bigtext indicates that the field is often simple text, but might be long
-    # and not have line breaks, in which case we will try to output it as a
-    # set of paragraphs.
-    # :transformer if present, a proc/block/method that should be invoked on a 
-    # document rooted at :element to extract the content.
     ELEMENTS = {
       summary: {
         element: 'SUMMARY',
@@ -144,29 +147,5 @@ module TrlnArgon
       end]
       @present = doc.root.children.map(&:name)
     end
-
-    # custom methods that have to dig a bit deeper than looking for a top level element
-    #def avreview?
-      # summary contains a review if we have a 500 or 520 field under VarDFlds
-      # XSLT handles both cases
-    #  avsummary? && @doc.root.xpath('AVSUMMARY[//Fld520|//Fld500]|AVSUMMARY[//Fld500]').first
-    #end
-
-    #def avtracklist?
-      # summary contains a track list if we have a 970 under SSIFlds
-    #  avsummary? && @doc.root.xpath('AVSUMMARY[//Fld970]').first
-    #end
-
-    #def avreview
-    #  el = avreview?
-    #  return '' unless el
-    #  SyndeticsData.transform_avreview(el)
-    #end
-
-    #def avtracklist
-    #  el = avtracklist?
-    #  return '' unless el
-    #  SyndeticsData.transform_avtracklist(el)
-    #end
   end
 end

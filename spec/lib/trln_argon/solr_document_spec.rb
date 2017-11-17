@@ -5,7 +5,7 @@ describe TrlnArgon::SolrDocument do
   end
 
   describe 'availability' do
-    context 'availability is set on the document' do
+    context 'when availability is set on the document' do
       let(:solr_document) do
         SolrDocumentTestClass.new(
           id: 'NCSU12345',
@@ -18,7 +18,7 @@ describe TrlnArgon::SolrDocument do
       end
     end
 
-    context 'availability is not set on the document' do
+    context 'when availability is not set on the document' do
       let(:solr_document) do
         SolrDocumentTestClass.new(
           id: 'NCSU12345'

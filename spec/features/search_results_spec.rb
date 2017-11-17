@@ -1,5 +1,5 @@
 describe 'search results' do
-  context 'no results found' do
+  context 'when no results found' do
     it 'displays a message for no results found' do
       visit search_catalog_path
       fill_in 'q', with: 'qwertyuiopasdfdghjklzxcvbnm'
@@ -8,7 +8,7 @@ describe 'search results' do
     end
   end
 
-  context 'some results found' do
+  context 'when some results found' do
     it 'displays the number of results found' do
       visit search_catalog_path
       fill_in 'q', with: 'food'
@@ -17,7 +17,7 @@ describe 'search results' do
     end
   end
 
-  context 'all results' do
+  context 'when showing all results' do
     def result_count
       visit search_catalog_path(local_filter: 'false')
       click_button 'search'
@@ -40,7 +40,7 @@ describe 'search results' do
     end
   end
 
-  context 'facets applied to search' do
+  context 'when facets applied to search' do
     before do
       visit search_catalog_path(local_filter: 'false')
       click_button 'search'

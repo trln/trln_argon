@@ -1,5 +1,5 @@
 describe 'full records' do
-  context 'displays multiple fields from the record' do
+  context 'when it displays multiple fields from the record' do
     before { visit solr_document_path(id: 'DUKE002960043') }
 
     it 'displays the title field label' do
