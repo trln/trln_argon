@@ -1,0 +1,10 @@
+ <div class="syndetics_junk">
+  	<% enhanced_data(@document) do |s| %>
+  	  <% if s.summary? %>
+       <section class="summary">
+        <header>Summary</header>
+  	    <%= s.summary.html_safe %>
+      </section>
+  	  <% end %>
+  	<% end %>
+  </div>
