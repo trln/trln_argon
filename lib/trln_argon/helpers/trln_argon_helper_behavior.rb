@@ -109,6 +109,14 @@ module TrlnArgon
       options[:value].map { |subject| build_segment_links(subject) }.join('<br />').html_safe
     end
 
+    def location_filter_display(value = '')
+      values = value.split(':')
+
+      values.map do |code|
+        map_argon_code(values.first, 'facet', code)
+      end.join(I18n.t('trln_argon.search_constraints.location_separator'))
+    end
+
     private
 
     def online_access_link_text(url_hrefs, url_text)
