@@ -1,3 +1,5 @@
 <div class='blacklight thumbnail'>
- <img src="<%= cover_image(document) %>" class="coverImage">
+	<% cover_image(document) do |url| %>
+ 		<img src="<%= url %>" class="coverImage" onerror="this.style.display = 'none';">
+ 	<% end %>
 </div>

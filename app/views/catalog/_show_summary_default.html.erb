@@ -1,4 +1,4 @@
- <div class="syndetics_junk">
+ <div class="enhanced-data">
   	<% enhanced_data(@document) do |s| %>
   	  <% if s.summary? %>
        <section class="summary">
@@ -6,5 +6,11 @@
   	    <%= s.summary.html_safe %>
       </section>
   	  <% end %>
+  	  <% if s.toc? %>
+  	  <section class="table-of-contents">
+  	  	<header>Contents</header>
+  	    <%= s.toc %>
+  	  </section>
+  	 <% end %>
   	<% end %>
   </div>

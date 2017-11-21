@@ -7,46 +7,53 @@ module TrlnArgon
                                       medium: 'MC.GIF',
                                       large: 'LC.JPG').freeze
 
-    # Generate a link to a cover image
     # @param doc [SolrDocument] the current document being rendered
     # @param options [Hash<Symbol, Object>] customization options
     # @option options :client [String] client parameter for syndetics request
     # @option options :size [String, Symbol] image size (:small, :medium, :large)
+    # @yield [String] a prospective URL for the specified cover image
     def cover_image(doc, options = { client: 'trlnet', size: :small })
       options = {}.update(IMG_OPTIONS).update(options)
-      isbn = doc.fetch('isbn_number_a', ['']).first
-      oclc = doc.fetch('oclc_number', '')
-      q = { isbn: "#{isbn}/#{SIZES[options[:size].to_sym]}",
-            oclc: oclc,
-            client: options[:client] }.to_query
-      URI::HTTPS.build(host: 'syndetics.com',
-                       path: '/index.php',
-                       query: q).to_s
+      params = get_params(doc, options[:client], SIZES[options[:size].to_sym])
+      yield build_syndetics_query(params) if params
     end
 
-    def enhanced_data_url(query)
+    def build_syndetics_query(params)
       URI::HTTPS.build(host: 'syndetics.com',
                        path: '/index.php',
-                       query: query).to_s
+                       query: params.to_query.gsub(/%5B%5D/, ''))
     end
 
     # rubocop:disable MethodLength
-    # rubocop:disable Metrics/AbcSize
-    def enhanced_data(doc, options = { client: 'trlnet' })
-      isbns = doc.fetch('isbn_number_a', [])
-      isbns[0] = "#{isbns[0]}/XML.XML"
-      oclc = doc.fetch('oclc_number', '')
-      data = nil
-      unless isbns.empty? && oclc == ''
-        q = { isbn: isbns, oclc: oclc, client: options[:client] }.to_query.gsub(/%5B%5D/, '')
-        begin
-          doc_xml = Faraday.get(enhanced_data_url(q)).body
-          data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
-        rescue StandardError => e
-          logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{q}: #{e}")
+    def get_params(doc, client = 'trlnet', format_spec = 'XML.XML')
+      params = {
+        isbn: doc.fetch('isbn_number_a', []).dup,
+        oclc: doc.fetch('oclc_number', []).dup
+        # placeholder for UPC and EAN when they are added
+      }
+      %i[isbn oclc upc ean].each do |k|
+        if params.fetch(k, []).empty?
+          params.delete(k)
+        else
+          params[k][0] = "#{params[k][0]}/#{format_spec}"
+          break
         end
-        yield data if block_given? && !data.nil?
       end
+      params.empty? ? false : params.update(client: client)
+    end
+
+    # fetches enhanced data (SyndeticsData object) and yields it to a block,
+    # if it's available.
+    def enhanced_data(doc, client = 'trlnet')
+      params = get_params(doc, client, 'XML.XML')
+      return nil unless params
+      begin
+        doc_xml = Faraday.get(build_syndetics_query(params)).body
+        data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
+      rescue StandardError => e
+        logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{params}: #{e}")
+      end
+      yield data if block_given? && !data.nil?
       data
     end
   end
