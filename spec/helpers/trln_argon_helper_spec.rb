@@ -276,24 +276,26 @@ describe TrlnArgonHelper do
       end
 
       let(:url_template) do
-        'http://www.syndetics.com/index.aspc?isbn=%s/%s&oclc=&client=trlnet'
+        'http://www.syndetics.com/index.aspc?isbn=%s/%s&client=trlnet'
       end
 
       it 'generates a link to a small cover image with defaults' do
         expected = URI(format(url_template, isbn, 'SC.GIF'))
-        actual = URI(cover_image(document))
+        actual = cover_image(document) { |x| URI(x) }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
 
       it 'generates a link to a small cover image with custom options' do
         expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), isbn, 'SC.GIF'))
-        actual = URI(cover_image(document, size: 'small', client: 'ncstateu'))
+        actual = cover_image(document, size: 'small', client: 'ncstateu') {
+          |x| URI(x) 
+        }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
 
       it 'generates a link to a medium cover image with an OCLC number' do
-        expected = URI(format(url_template.gsub(/(oclc=)/, '\\1' + oclc), isbn, 'MC.GIF'))
-        actual = URI(cover_image(oclc_document, size: :medium))
+        expected = URI(format(url_template + '&oclc=' + oclc, isbn, 'MC.GIF'))
+        actual = cover_image(oclc_document, size: :medium) { |x| URI(x) }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
     end
