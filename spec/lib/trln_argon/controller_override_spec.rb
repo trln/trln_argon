@@ -84,8 +84,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('lcc_callnum_classification_f')
     end
 
-    it 'sets the items location facet' do
-      expect(override_config.facet_fields).to have_key('items_location_f')
+    it 'sets the location hierarchy facet' do
+      expect(override_config.facet_fields).to have_key('location_hierarchy_f')
     end
 
     it 'sets the availability facet' do

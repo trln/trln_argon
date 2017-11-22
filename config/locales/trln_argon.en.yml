@@ -85,3 +85,4 @@ en:
 
         search_constraints:
             begins_with: "begins with"
+            location_separator: ", "

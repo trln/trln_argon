@@ -55,9 +55,10 @@ module TrlnArgon
                                label: TrlnArgon::Fields::INSTITUTION_FACET.label,
                                limit: true,
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::ITEMS_LOCATION_FACET.to_s,
-                               label: TrlnArgon::Fields::ITEMS_LOCATION_FACET.label,
-                               limit: true,
+        config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
+                               label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
+                               filter_element_helper: :location_filter_display,
+                               partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
                                label: TrlnArgon::Fields::FORMAT_FACET.label,
@@ -124,11 +125,13 @@ module TrlnArgon
 
         # hierarchical facet configuration
         config.facet_display ||= {}
-        components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
+        cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
+        lf_components = TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s.split('_')
         config.facet_display[:hierarchy] = {
           # blacklight-hiearchy requires this mapping;
           # prefix + final component (separated by _)
-          components[0..-2].join('_') => [[components[-1]], ':']
+          cnf_components[0..-2].join('_') => [[cnf_components[-1]], ':'],
+          lf_components[0..-2].join('_') => [[lf_components[-1]], ':']
         }
 
         # solr fields to be displayed in the index (search results) view

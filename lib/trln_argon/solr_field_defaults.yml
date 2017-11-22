@@ -578,6 +578,10 @@ LOCAL_ID_STR:
   solr_field: :local_id_str
   label:
     en: Local Id Str
+LOCATION_HIERARCHY_FACET:
+  solr_field: location_hierarchy_f
+  label:
+    en: Location
 MANUFACTURER:
   solr_field: :manufacturer_a
   label:
