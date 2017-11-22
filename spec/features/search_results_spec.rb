@@ -40,7 +40,9 @@ describe 'search results' do
 
     it 'adds the facet(s) as a GET parameter to the URL' do
       click_link 'Institution'
-      click_link 'ncsu'
+      within('#facet-institution_f') do
+        click_link 'ncsu'
+      end
       expect(page).to have_current_path(
         root_path(
           :q                  => '',

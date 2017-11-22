@@ -1,4 +1,4 @@
-describe HierarchyHelper do
+describe TrlnArgon::HierarchyHelperBehavior do
   describe '#map_argon_facet_codes' do
     context 'a mapping exists' do
       let(:item) { instance_double('item', qvalue: 'duke:dukedivy', value: 'dukedivy') }
