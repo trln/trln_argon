@@ -1,6 +1,6 @@
 describe TrlnArgon::HierarchyHelperBehavior do
   describe '#map_argon_facet_codes' do
-    context 'a mapping exists' do
+    context 'when a mapping exists' do
       let(:item) { instance_double('item', qvalue: 'duke:dukedivy', value: 'dukedivy') }
 
       it 'returns a mapped value' do
@@ -8,7 +8,7 @@ describe TrlnArgon::HierarchyHelperBehavior do
       end
     end
 
-    context 'a mapping does not exist' do
+    context 'when a mapping does not exist' do
       let(:item2) { instance_double('item', qvalue: 'foo', value: 'bar') }
 
       it 'returns the unmapped path' do
