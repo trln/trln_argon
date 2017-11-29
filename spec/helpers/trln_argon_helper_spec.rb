@@ -300,7 +300,7 @@ describe TrlnArgonHelper do
   end
 
   describe '#location_filter_display' do
-    context 'all codes are mappable' do
+    context 'when all codes are mappable' do
       let(:hierarchy_value) { 'duke:dukedivy:dukedivyrees' }
 
       it 'translates the coded hierarchy to a human readable string' do
@@ -310,7 +310,7 @@ describe TrlnArgonHelper do
       end
     end
 
-    context 'some codes are not mappable' do
+    context 'when some codes are not mappable' do
       let(:hierarchy_value) { 'duke:blah:foo' }
 
       it 'has codes in place of unmappable values' do
