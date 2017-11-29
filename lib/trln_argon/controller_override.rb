@@ -47,6 +47,10 @@ module TrlnArgon
 
         config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
 
+        config.add_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                               label: TrlnArgon::Fields::AVAILABLE_FACET.label,
+                               collapse: false
+
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,
