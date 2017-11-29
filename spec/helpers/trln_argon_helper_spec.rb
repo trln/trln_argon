@@ -247,55 +247,6 @@ describe TrlnArgonHelper do
     end
   end
 
-  describe '#cover_image' do
-    context 'when we link to a Syndetics cover image with various options' do
-      let(:oclc) do
-        '123098080985'
-      end
-
-      let(:isbn) do
-        '123456789012X'
-      end
-
-      let(:document) do
-        SolrDocument.new(
-          id: 'TRLN12345',
-          isbn_number_a: ['123456789012X']
-        )
-      end
-
-      let(:oclc_document) do
-        SolrDocument.new(
-          id: 'TRLN12345',
-          isbn_number_a: ['123456789012X'],
-          oclc_number: '123098080985'
-        )
-      end
-
-      let(:url_template) do
-        'http://www.syndetics.com/index.aspc?isbn=%s/%s&oclc=&client=trlnet'
-      end
-
-      it 'generates a link to a small cover image with defaults' do
-        expected = URI(format(url_template, isbn, 'SC.GIF'))
-        actual = URI(cover_image(document))
-        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
-      end
-
-      it 'generates a link to a small cover image with custom options' do
-        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), isbn, 'SC.GIF'))
-        actual = URI(cover_image(document, size: 'small', client: 'ncstateu'))
-        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
-      end
-
-      it 'generates a link to a medium cover image with an OCLC number' do
-        expected = URI(format(url_template.gsub(/(oclc=)/, '\\1' + oclc), isbn, 'MC.GIF'))
-        actual = URI(cover_image(oclc_document, size: :medium))
-        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
-      end
-    end
-  end
-
   describe '#location_filter_display' do
     context 'when all codes are mappable' do
       let(:hierarchy_value) { 'duke:dukedivy:dukedivyrees' }
