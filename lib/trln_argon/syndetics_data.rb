@@ -40,22 +40,22 @@ module TrlnArgon
     def self.transform_element(xslt, element)
       doc = Nokogiri::XML::Document.new
       doc.root = element
-      xslt.transform(doc).serialize.strip
+      xslt.transform(doc).serialize.strip.html_safe
     end
 
     def self.transform_toc(tocelement)
       @toc_xslt ||= compile_stylesheet(read_stylesheet('toc'))
-      transform_element(@@toc_xslt, tocelement)
+      transform_element(@toc_xslt, tocelement)
     end
 
     def self.transform_avreview(avelement)
       @avreview_xslt ||= compile_stylesheet(read_stylesheet('av-review'))
-      transform_element(@@avreview_xslt, avelement)
+      transform_element(@avreview_xslt, avelement)
     end
 
     def self.transform_avtracklist(avelement)
       @avtracklist_xslt ||= compile_stylesheet(read_stylesheet('av-tracks'))
-      transform_element(@@avtracklist_xslt, avelement)
+      transform_element(@avtracklist_xslt, avelement)
     end
 
     # some fields have a wall of text; this tries to find places
@@ -133,7 +133,7 @@ module TrlnArgon
         element_data = data_element.xpath(data[:path])
         unless element_data.nil?
           result = element_data.first.text
-          return data[:bigtext] ? post_process_bigtext(result) : result
+          return (data[:bigtext] ? post_process_bigtext(result) : result).html_safe
         end
         ''
       end
