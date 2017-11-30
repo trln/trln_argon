@@ -1,8 +1,8 @@
 # Mixin for SolrDocument with TRLN Argon Specific Behavior
 module TrlnArgon
   module SolrDocument
-    TOC_ATTR = 'note_toc_str_stored'.freeze
-    SUMMARY_ATTR = 'note_summary_str_stored'.freeze
+    TOC_ATTR = 'note_toc_str'.freeze
+    SUMMARY_ATTR = 'note_summary_str'.freeze
 
     def expanded_documents
       @expanded_documents ||= expand_docs_search.documents.present? ? expand_docs_search.documents : [self]
