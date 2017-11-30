@@ -1,6 +1,9 @@
 # Mixin for SolrDocument with TRLN Argon Specific Behavior
 module TrlnArgon
   module SolrDocument
+    TOC_ATTR = 'note_toc_str_stored'.freeze
+    SUMMARY_ATTR = 'note_summary_str_stored'.freeze
+
     def expanded_documents
       @expanded_documents ||= expand_docs_search.documents.present? ? expand_docs_search.documents : [self]
     end
@@ -20,7 +23,22 @@ module TrlnArgon
       end
     end
 
+    def marc_summary
+      format_for_display(self[SUMMARY_ATTR])
+    end
+
+    def marc_toc
+      format_for_display(self[TOC_ATTR])
+    end
+
     private
+
+    # utility for formatting multi-valued fields
+    # when you're not really sure what else to do 
+    # with them
+    def format_for_display(strings)
+      strings.map {|x| "<p>#{x}</p>" } unless strings.nil?
+    end
 
     def expand_docs_search
       controller = CatalogController.new
