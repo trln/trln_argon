@@ -37,7 +37,7 @@ module TrlnArgon
     # when you're not really sure what else to do
     # with them
     def format_for_display(strings)
-      strings.map {|x| "<p>#{x}</p>" }.join("\n") unless strings.nil?
+      strings.map { |x| "<p>#{x}</p>" }.join("\n") unless strings.nil?
     end
 
     def expand_docs_search
