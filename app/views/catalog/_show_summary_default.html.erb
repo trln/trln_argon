@@ -1,16 +1,17 @@
- <div class="enhanced-data">
-  	<% enhanced_data(@document) do |s| %>
-  	  <% if s.summary? %>
-       <section class="summary">
-        <header>Summary</header>
-  	    <%= s.summary.html_safe %>
-      </section>
-  	  <% end %>
-  	  <% if s.toc? %>
-  	  <section class="table-of-contents">
-  	  	<header>Contents</header>
-  	    <%= s.toc %>
-  	  </section>
-  	 <% end %>
-  	<% end %>
-  </div>
+<div class="enhanced-data">
+  <% s = enhanced_data(@document) %>
+  <% summary = ( (s && s.summary) || @document['note_summary'] ) %>
+  <% toc = ( (s && s.toc) || @document['note_toc'] ) %>
+  <% unless summary.nil? || summary.empty? %>
+    <section class="summary">
+      <header>Summary</header>
+      <%= summary.html_safe %>
+    </section>
+  <% end %>
+  <% unless toc.nil? || toc.empty? %>
+    <section class="table-of-contents">
+  	  <header>Contents : <pre>'<%= toc %>'</pre></header>
+  	   <%= toc %>
+  	</section>
+  <% end %>
+</div>
