@@ -34,7 +34,7 @@ module TrlnArgon
     private
 
     # utility for formatting multi-valued fields
-    # when you're not really sure what else to do 
+    # when you're not really sure what else to do
     # with them
     def format_for_display(strings)
       strings.map {|x| "<p>#{x}</p>" }.join("\n") unless strings.nil?
