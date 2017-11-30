@@ -1,7 +1,7 @@
 <div class="enhanced-data">
   <% s = enhanced_data(@document) %>
-  <% summary = ( (s && s.summary) || @document['note_summary'] ) %>
-  <% toc = ( (s && s.toc) || @document['note_toc'] ) %>
+  <% summary = ( (s && s.summary? && s.summary) || @document.marc_summary ) %>
+  <% toc = ( (s && s.toc? && s.toc ) || @document.marc_toc ) %>
   <% unless summary.nil? || summary.empty? %>
     <section class="summary">
       <header>Summary</header>
@@ -11,7 +11,7 @@
   <% unless toc.nil? || toc.empty? %>
     <section class="table-of-contents">
   	  <header>Contents</header>
-  	   <%= toc %>
+  	   <%= toc.html_safe %>
   	</section>
   <% end %>
 </div>
