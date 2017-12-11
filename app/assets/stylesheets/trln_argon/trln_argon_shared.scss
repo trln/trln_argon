@@ -150,7 +150,6 @@ div.items h3 {
     width: 100%;
 }
 
-
 .fulltext-url {
     border: 2px solid #ddd;
     border-radius: 2px;
@@ -176,4 +175,24 @@ div.items h3 {
 
 .item-group {
     display: none;
+}
+
+/**
+ * Hide/Show large blocks of content, .e.g. Syndetics chapters
+ */
+.enhanced-data .content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.enhanced-data section .show-control {
+    display: none;
+}
+
+.enhanced-data section[aria-expanded=false] .show-control.more {
+    display: inline;    
+}
+
+.enhanced-data section[aria-expanded=true] .show-control.less {
+    display: inline;
 }
