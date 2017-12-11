@@ -156,9 +156,6 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
                                label: TrlnArgon::Fields::INSTITUTION.label,
                                helper_method: :institution_code_to_short_name
-        config.add_index_field TrlnArgon::Fields::URL_HREF.to_s,
-                               label: TrlnArgon::Fields::URL_HREF.label,
-                               helper_method: :url_href_with_url_text_link
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display

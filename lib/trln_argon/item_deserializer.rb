@@ -28,14 +28,6 @@ module TrlnArgon
             i.reject { |k, _v| %w[loc_b loc_n].include?(k) }
           end
           h['call_no'] = cn_prefix(h['items'])
-          if h['summary'].blank?
-            items = h['items'] || []
-            avail = items.count { |i| 'available' == i['status'].downcase rescue false }
-            sum = "(#{pluralize(items.count, 'copy')}"
-            sum << ", #{avail} available" unless avail == items.count
-            sum << ")"
-            h['summary'] = sum
-          end
           [loc_n, h]
         end]]
       end]

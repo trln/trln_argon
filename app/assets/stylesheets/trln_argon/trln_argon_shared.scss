@@ -105,3 +105,75 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     font-size: 125%;
     font-weight: bold;
 }
+
+div.items table {
+    width: 100%;
+}
+
+div.items h3 {
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.input-group {
+    display: table-row;
+}
+
+.input-group-element {
+  display: table-cell;
+  padding: 0 1em;
+  border: none;
+}
+
+.input-group-addon.for-search-field {
+    border-bottom: 0;
+    border-top: 0;   
+}
+
+#search_field {
+    position: relative;
+    top: -.6em;
+}
+
+.input-group-element h3 {
+    padding-top: -5px;
+    margin-top: -5px;
+    vertical-align: top;
+    line-height: 16px;
+  }
+
+.search-extra-controls {
+    clear: left;
+}
+
+#search-navbar .search-query-form {
+    width: 100%;
+}
+
+
+.fulltext-url {
+    border: 2px solid #ddd;
+    border-radius: 2px;
+    padding: 4px;
+    width: 50%;
+}
+
+.expander[aria-expanded=false] .hider {
+    display: none;
+}
+
+.expander[aria-expanded=false] .shower {
+    display: inline;
+}
+
+.expander[aria-expanded=true] .hider {
+    display: inline;
+}
+
+.expander[aria-expanded=true] .shower {
+    display: none;
+}
+
+.item-group {
+    display: none;
+}
