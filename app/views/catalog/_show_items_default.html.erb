@@ -1,9 +1,9 @@
 <h2>Holdings</h2>
 <% if local_filter_applied? %>
-  <%= render partial: "items_table", locals: { document: document } %>
+  <%= render partial: "items_table", locals: { document: document, show_items: true } %>
 <% else %>
   <% document.expanded_documents.each do |doc| %>
   <h3><%= t("trln_argon.institution.#{doc[TrlnArgon::Fields::INSTITUTION].first}.long_name") %></h3>
-    <%= render partial: "items_table", locals: { document: doc } %>
+    <%= render partial: "items_table", locals: { document: doc, show_items: true } %>
   <% end %>
 <% end %>

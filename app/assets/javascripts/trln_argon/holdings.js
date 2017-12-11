@@ -1,18 +1,17 @@
 Blacklight.onLoad(function() {
-  Blacklight.do_holdings_display_behavior();
+  // iife to expand the items for a given location if we have been
+  // linked directly to it.
+  (function() {
+    var pageTarget = window.location.hash;
+    if ( pageTarget ) {
+      var locationRe = /^#item-container-/;
+      if ( locationRe.test(pageTarget) ) {
+        $("a[href*='" + pageTarget+ "']").click();
+        $(pageTarget).animate({
+            scrollTop: $(pageTarget).offset().top
+          }, 500);
+      }
+    }
+  })();
 });
 
-(function($) {
-  Blacklight.do_holdings_display_behavior = function() {
-    $("tr.item").hide();
-      // activate  item hide/show click handler
-      $(".loc-narrow-banner").on('click', function() {
-        var container = $(this).closest("tbody");
-        var data = $(this).closest("tr").data();
-        // hides/shows and returns visibility
-        var visible = container.find("tr.item." + data.locbroad + "." + data.locnarrow).toggle().is(":visible");
-        var spander =  visible ? "(- hide items)" : "(+ show items)";
-        $(this).find(".expander").text(spander);
-        });
-  };
-})(jQuery);

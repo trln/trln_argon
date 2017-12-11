@@ -129,10 +129,6 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the institution field' do
       expect(override_config.index_fields).to have_key('institution_a')
     end
-
-    it 'sets the URL field' do
-      expect(override_config.index_fields).to have_key('url_href_a')
-    end
   end
 
   describe 'show fields' do

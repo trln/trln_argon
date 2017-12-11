@@ -2,9 +2,7 @@
 <!--       Skip display if holdings are only ONLINE; this is an NCSU-specific hack atm; we might also skip showing print summaries for journals -->
 <% if local_filter_applied? %>
   <% unless ['ONLINE'] == document.holdings.keys %>
-  <%# ||
-            document[TrlnArgon::Fields::FORMAT].include?("Journal/Newspaper")> %>
-    <%= render partial: "items_table", locals: { document: document } %>
+    <%= render partial: "items_table", locals: { document: document, show_items: false } %>
   <% end %>
 <% else %>
   <%= render partial: "availability_table", locals: { expanded_availability: @expanded_documents_hash[document.id] } %>
