@@ -1,72 +1,16 @@
-  <div class="items">
-    <% if document[TrlnArgon::Fields::URL_HREF.to_s] %>
-     <h3>Online</h3>
-      <div class="fulltext-url">
-        <%= url_href_with_url_text_link(value: document[TrlnArgon::Fields::URL_HREF.to_s], document: document) %>
-      </div>
-    <% end %>
-<% unless document.read_items.key?(nil) %>
+<div class="items">
+  <% if document[TrlnArgon::Fields::URL_HREF.to_s] %>
+    <h3>Online</h3>
+    <div class="fulltext-url">
+      <%= url_href_with_url_text_link(value: document[TrlnArgon::Fields::URL_HREF.to_s], document: document) %>
+    </div>
+  <% end %>
+  <% unless document.read_items.key?(nil) %>
     <h3>At the Library</h3>
-    <!-- TODO: proper CSS, inline styles MUST NOT STAND -->
-    <table class='table table-condensed table-striped table-hover'>
-      <thead>
-        <tr class="holdings-header">
-          <th class="location-header">Location</th>
-          <th class="callnum-header">Call Number</th>
-          <th class="status-header">Status</th>
-        </tr>
-      </thead>
-      <% document.holdings.each do |loc_b, loc_narrow_map| %>
-  <% next if loc_b == 'ONLINE' %>
-    <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
-      <th colspan="3" style='background-color: #ddd; padding: .2em 2em; '><%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
-    </tr>
-  <% loc_narrow_map.each do |loc_n, item_data|  %>
-    <tr class="loc-narrow-banner" data-locbroad="<%= loc_b %>"
-    data-locnarrow="<%= loc_n %>" id="<%= "item-details-#{loc_b}-#{loc_n}" %>">
-       <% if item_data['summary'] %>
-           <th style="width: 20%; padding-left: .5em;">
-             <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
-           </th>
-           <th style="width: 30%;">
-    <%= item_data['call_no'] %>
-     <th style="width: 50%;">
-      <%= item_data['summary'] %>
-      <% if show_items %>
-        <a class="expander" data-toggle='collapse' href='<%= "#item-container-#{loc_b}-#{loc_n}" %>' aria-expanded='false' aria-controls='this'>
-          <span class='shower'>
-            (+ show <%= item_data['items'].length %> items)
-          </span>
-          <span class='hider'>
-            ( - hide all items )
-          </span>
-        </span>
-      <% else %>
-        <span class="item-details-link">
-          <%= link_to "Details", controller: "catalog", action: 'show', id: document.id, anchor: "item-container-#{loc_b}-#{loc_n}" %>
-        </span>
-       <% end %> 
-      </th>
+    <% if context == 'index' %>
+      <%= render partial: "items_table_index", locals: { document: document} %>
     <% else %>
-     <th colspan="3">
-        <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
-     </th>
-     <% end %>
-    </tr>
-    <% if show_items %>
-     <tbody class='item-group' id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
-      <% item_data['items'].each do |item| %>
-        <tr class="item <%= loc_n %> <%= loc_b %>">
-          <td style='width: 20%;'>&nbsp;</td>
-          <td style='width: 30%;'><%= item['call_no'] %></td>
-          <td style='width: 50%;'><%= item['status'] %></td>
-        </tr>
-      <% end %>
-    </tbody>
+      <%= render partial: "items_table_show", locals: { document: document } %>
     <% end %>
   <% end %>
-        <% end %>
-      </tbody>
-    </table>
-<% end %>
 </div>
