@@ -1,0 +1,54 @@
+<table class='table table-condensed table-striped table-hover'>
+  <thead>
+    <tr class="holdings-header">
+      <th class="location-header">Location</th>
+      <th class="callnum-header">Call Number</th>
+      <th class="status-header">Status</th>
+    </tr>
+  </thead>
+  <% document.holdings.each do |loc_b, loc_narrow_map| %>
+    <% next if loc_b == 'ONLINE' %>
+    <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
+      <th colspan="3" style='background-color: #ddd;'>
+        <%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
+      </th>
+    </tr>
+    <% loc_narrow_map.each do |loc_n, item_data|  %>
+      <% has_summary = !item_data.fetch('summary', 'LOOK MA').blank? %>
+      <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
+      <% if has_summary %>
+      <tr class="loc-narrow-banner" data-locbroad="<%= loc_b %>"
+        data-locnarrow="<%= loc_n %>" id="<%= "item-details-#{loc_b}-#{loc_n}" %>">
+        <th style="width: 20%;"">
+          <%= narrow_loc %>
+        </th>
+        <th style="width: 30%;">
+          <%= item_data['call_no'] %>
+        </th>
+        <th style="width: 50%;">
+          <%= item_data['summary'] %>
+          <a class="expander" data-toggle='collapse' href='<%= "#item-container-#{loc_b}-#{loc_n}" %>' aria-expanded='false' aria-controls='this'>
+            <span class='shower'>
+              (+ show <%= item_data['items'].length %> items)
+            </span>
+            <span class='hider'>
+              (- hide all items)
+            </span>
+          </a>
+        </th>
+      </tr>
+      <% end %>
+      
+      <tbody class="item-group<%= has_summary ? '' : '-display' %>" id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
+        <% item_data['items'].each_with_index do |item, index| %>
+          <tr class="item <%= loc_n %> <%= loc_b %>">
+            <td style='width: 30%;'><%= index == 0 ? "\u2937" : "\u00a0\u00a0\u00a0" %><%= narrow_loc %></td>
+            <td style='width: 30%;'><%= item['call_no'] %></td>
+            <td style='width: 40%;'><%= item['status'] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      <% end %>
+    <% end %>
+</table>
+    

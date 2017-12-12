@@ -27,6 +27,7 @@ module TrlnArgon
           h['items'] = loc_items.map do |i|
             i.reject { |k, _v| %w[loc_b loc_n].include?(k) }
           end
+          h['summary'] ||= ''
           h['call_no'] = cn_prefix(h['items'])
           [loc_n, h]
         end]]
