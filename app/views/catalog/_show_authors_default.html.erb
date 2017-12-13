@@ -1,0 +1,12 @@
+<% display_values = show_configured_fields_and_values(blacklight_config.show_authors_fields, document) %>
+<div class="show-authors">
+  <% if display_values.any? %>
+    <h2><%= t('trln_argon.show.heading.authors') %></h2>
+    <dl class="dl-horizontal  dl-invert">
+      <% display_values.each do |value| %>
+          <dt class="blacklight-<%= value[:field].parameterize %>"><%= "#{value[:label]}:" %></dt>
+          <dd class="blacklight-<%= value[:field].parameterize %>"><%= value[:value] %></dd>
+      <% end -%>
+    </dl>
+  <% end %>
+</div>

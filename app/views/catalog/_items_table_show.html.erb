@@ -19,8 +19,8 @@
       <% if has_summary %>
       <tr class="loc-narrow-banner" data-locbroad="<%= loc_b %>"
         data-locnarrow="<%= loc_n %>" id="<%= "item-details-#{loc_b}-#{loc_n}" %>">
-        <th style="width: 20%;"">
-          <%= narrow_loc %>
+        <th style="width: 20%;">
+          <%= narrow_loc if loc_n %>
         </th>
         <th style="width: 30%;">
           <%= item_data['call_no'] %>
@@ -42,7 +42,7 @@
       <tbody class="item-group<%= has_summary ? '' : '-display' %>" id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
         <% item_data['items'].each_with_index do |item, index| %>
           <tr class="item <%= loc_n %> <%= loc_b %>">
-            <td style='width: 30%;'><%= index == 0 ? "\u2937" : "\u00a0\u00a0\u00a0" %><%= narrow_loc %></td>
+            <td style='width: 30%;'><%= index == 0 ? "\u2937" : "\u00a0\u00a0\u00a0" %><%= narrow_loc if loc_n %></td>
             <td style='width: 30%;'><%= item['call_no'] %></td>
             <td style='width: 40%;'><%= item['status'] %></td>
           </tr>

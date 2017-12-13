@@ -86,3 +86,12 @@ en:
         search_constraints:
             begins_with: "begins with"
             location_separator: ", "
+
+        show:
+            heading:
+                holdings: "Where to find it"
+                authors: "Authors, etc."
+                summary: "Summary"
+                contents: "Contents"
+                subjects: "This item is about"
+                metadata: "Other details"

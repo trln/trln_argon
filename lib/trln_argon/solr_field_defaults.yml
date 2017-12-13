@@ -9,7 +9,7 @@ AUTHOR_FACET:
 AUTHORS_DIRECTOR:
   solr_field: :authors_director_a
   label:
-    en: Authors Director
+    en: Director
 AUTHORS_DIRECTOR_MARC_SOURCE:
   solr_field: :authors_director_marc_source_a
   label:
@@ -25,7 +25,7 @@ AUTHORS_MAIN_CJK_V:
 AUTHORS_MAIN_FACET:
   solr_field: :authors_main_f
   label:
-    en: Author
+    en: Main Author
 AUTHORS_MAIN_MARC_SOURCE:
   solr_field: :authors_main_marc_source_a
   label:
@@ -49,7 +49,7 @@ AUTHORS_MAIN_VERNACULAR_LANG:
 AUTHORS_OTHER:
   solr_field: :authors_other_a
   label:
-    en: Authors Other
+    en: Other Authors
 AUTHORS_OTHER_CJK_V:
   solr_field: :authors_other_cjk_v
   label:
@@ -165,7 +165,7 @@ DESCRIPTION_DIGITAL_FILE_T:
 DESCRIPTION_GENERAL:
   solr_field: :description_general_a
   label:
-    en: Description General
+    en: Physical Description
 DESCRIPTION_GENERAL_T:
   solr_field: :description_general_t
   label:
@@ -201,7 +201,7 @@ DESCRIPTION_VIDEO_T:
 DESCRIPTION_VOLUMES:
   solr_field: :description_volumes_a
   label:
-    en: Description Volumes
+    en: Volume/Date Range
 DISTRIBUTION_STATEMENT:
   solr_field: :distribution_statement_a
   label:
@@ -241,7 +241,7 @@ FORMAT_FACET:
 FREQUENCY_CURRENT:
   solr_field: :frequency_current_a
   label:
-    en: Frequency Current
+    en: Frequency
 FREQUENCY_FORMER:
   solr_field: :frequency_former_a
   label:
@@ -289,11 +289,11 @@ ISBN:
 ISBN_NUMBER:
   solr_field: :isbn_number_a
   label:
-    en: ISBN Number
+    en: ISBN
 ISBN_NUMBER_ISBN:
   solr_field: :isbn_number_isbn
   label:
-    en: ISBN Number
+    en: ISBN
 ISBN_QUALIFYING_INFO:
   solr_field: :isbn_qualifying_info_a
   label:
@@ -309,7 +309,7 @@ ISSN:
 ISSN_LINKING:
   solr_field: :issn_linking_a
   label:
-    en: ISSN Linking
+    en: ISSN
 ISSN_LINKING_ISBN:
   solr_field: :issn_linking_isbn
   label:
@@ -469,7 +469,7 @@ LINKING_ADDED_ENTRY_T:
 LINKING_HAS_SUPPLEMENT:
   solr_field: :linking_has_supplement_a
   label:
-    en: Linking Has Supplement
+    en: Has Supplement
 LINKING_HAS_SUPPLEMENT_ISN:
   solr_field: :linking_has_supplement_isn_a
   label:
@@ -609,7 +609,7 @@ NOTES_ADDITIONAL_VERNACULAR_LANG:
 NOTES_INDEXED:
   solr_field: :notes_indexed_a
   label:
-    en: Notes Indexed
+    en: Notes
 NOTES_INDEXED_CJK_V:
   solr_field: :notes_indexed_cjk_v
   label:
@@ -641,7 +641,7 @@ NOTES_SERIALS_SUMMARY_T:
 OCLC_NUMBER:
   solr_field: :oclc_number
   label:
-    en: Oclc Number
+    en: OCLC Number
 OCLC_NUMBER_OLD:
   solr_field: :oclc_number_old_a
   label:
@@ -953,7 +953,7 @@ TITLE_TRANSLATION_T:
 TITLE_UNIFORM:
   solr_field: :title_uniform_a
   label:
-    en: Title Uniform
+    en: Uniform Title
 TITLE_UNIFORM_T:
   solr_field: :title_uniform_t
   label:

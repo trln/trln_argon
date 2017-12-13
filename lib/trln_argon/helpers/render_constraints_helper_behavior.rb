@@ -17,7 +17,7 @@ module TrlnArgon
     # @param [Array<String>] selected facet values
     # @param [Hash] query parameters
     # @return [String]
-    def render_filter_element(facet, values, localized_params)
+    def render_filter_element(facet, values, _localized_params)
       facet_config = facet_configuration_for_field(facet)
 
       safe_join(values.map do |val|
@@ -25,7 +25,7 @@ module TrlnArgon
         display_value = filter_element_display_value(facet_config, facet, val)
         render_constraint_element(
           facet_field_label(facet_config.key), display_value,
-          remove: search_action_path(remove_facet_params(facet, val, localized_params)),
+          remove: search_action_path(search_state.remove_facet_params(facet, val)),
           classes: ['filter', 'filter-' + facet.parameterize]
         )
       end, "\n")

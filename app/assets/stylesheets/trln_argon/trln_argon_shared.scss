@@ -101,11 +101,6 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     flex-basis: auto;
 }
 
-.enhanced-data section  header {
-    font-size: 125%;
-    font-weight: bold;
-}
-
 div.items table {
     width: 100%;
 }
@@ -187,12 +182,26 @@ div.items h3 {
 
 .enhanced-data section .show-control {
     display: none;
+    font-size: 14px;
 }
 
 .enhanced-data section[aria-expanded=false] .show-control.more {
-    display: inline;    
+    display: inline;
 }
 
 .enhanced-data section[aria-expanded=true] .show-control.less {
     display: inline;
+}
+
+.show-document {
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+}
+
+#show-sub-header {
+    li {
+        font-size: 18px;
+    }
 }

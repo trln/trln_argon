@@ -58,8 +58,14 @@ module TrlnArgon
       TrlnArgon::LookupManager.instance.map([inst, context, value].join('.'))
     end
 
+    def list_of_linked_subjects_segments(options = {})
+      link_to_subject_segments(options).map do |subject|
+        content_tag(:li, subject, class: options[:field])
+      end.join('').html_safe
+    end
+
     def link_to_subject_segments(options = {})
-      options[:value].map { |subject| build_segment_links(subject) }.join('<br />').html_safe
+      options[:value].map { |subject| build_segment_links(subject).html_safe }
     end
 
     def location_filter_display(value = '')
@@ -68,6 +74,15 @@ module TrlnArgon
       values.map do |code|
         map_argon_code(values.first, 'facet', code)
       end.join(I18n.t('trln_argon.search_constraints.location_separator'))
+    end
+
+    def show_configured_fields_and_values(config, document)
+      config.map do |field_name, field|
+        next unless document_has_value?(document, field)
+        { field: field_name,
+          label: field.label,
+          value: presenter(document).field_value(field) }
+      end.compact
     end
 
     private
