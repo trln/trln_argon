@@ -2,16 +2,37 @@
   <% s = enhanced_data(@document) %>
   <% summary = ( (s && s.summary? && s.summary) || @document.marc_summary ) %>
   <% toc = ( (s && s.toc? && s.toc ) || @document.marc_toc ) %>
+  <% samplechapter = ( s && s.samplechapter? && s.samplechapter ) || nil %>
   <% unless summary.nil? || summary.empty? %>
     <section class="summary">
-      <header>Summary</header>
-      <%= summary.html_safe %>
+      <h4>Summary <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
+      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h4>
+      
+      <div class="content">
+        <%= summary.html_safe %>
+      </div>
+     
     </section>
   <% end %>
   <% unless toc.nil? || toc.empty? %>
     <section class="table-of-contents">
-  	  <header>Contents</header>
+  	  <h4>Contents <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
+      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h4>
+      
+      <div class="content">
   	   <%= toc.html_safe %>
+     </div>
   	</section>
+  <% end %>
+  <% unless samplechapter.nil? || samplechapter.empty? %>
+  <section class="sample-chapter">
+    <h4>Sample Chapter <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
+    <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h4>
+    
+    <div class='content'>
+      <%= samplechapter.html_safe %>
+    </div>
+    
+  </section>
   <% end %>
 </div>
