@@ -32,7 +32,12 @@ module TrlnArgon
         config.document_solr_path = :document
         config.document_solr_request_handler = nil
 
-        config.show.partials = %i[show_header show_thumbnail show show_summary show_items]
+        config.show.heading_partials = %i[show_thumbnail show_header show_sub_header]
+        config.show.partials = %i[show_items
+                                  show_authors
+                                  show_summary
+                                  show_subjects
+                                  show]
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
@@ -118,6 +123,9 @@ module TrlnArgon
                                },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
+        config.add_facet_field TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s,
+                               label: TrlnArgon::Fields::AUTHORS_MAIN_FACET.label,
+                               show: false
 
         # Subject is configured as a facet and set not to display so that the field
         # label will be accessible for the begins_with filter. Set other fields that will
@@ -159,29 +167,43 @@ module TrlnArgon
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
-        config.add_show_field TrlnArgon::Fields::TITLE_MAIN.to_s,
-                              label: TrlnArgon::Fields::TITLE_MAIN.label
-        config.add_show_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
-                              label: TrlnArgon::Fields::AUTHORS_MAIN.label
-        config.add_show_field TrlnArgon::Fields::FORMAT.to_s,
-                              label: TrlnArgon::Fields::FORMAT.label
-        config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
-                              label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_show_field TrlnArgon::Fields::SUBJECTS.to_s,
-                              label: TrlnArgon::Fields::SUBJECTS.label,
-                              helper_method: :link_to_subject_segments
-        config.add_show_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
-                              label: TrlnArgon::Fields::PUBLISHER_ETC.label
+        config.add_show_field TrlnArgon::Fields::TITLE_UNIFORM.to_s,
+                              label: TrlnArgon::Fields::TITLE_UNIFORM.label
+        config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
+                              label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
+        config.add_show_field TrlnArgon::Fields::DESCRIPTION_GENERAL.to_s,
+                              label: TrlnArgon::Fields::DESCRIPTION_GENERAL.label
+        config.add_show_field TrlnArgon::Fields::DESCRIPTION_VOLUMES.to_s,
+                              label: TrlnArgon::Fields::DESCRIPTION_VOLUMES.label
+        config.add_show_field TrlnArgon::Fields::NOTES_INDEXED.to_s,
+                              label: TrlnArgon::Fields::NOTES_INDEXED.label
+        config.add_show_field TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.to_s,
+                              label: TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.label
         config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
                               label: TrlnArgon::Fields::ISBN_NUMBER.label
-        config.add_show_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
-                              label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label
-        config.add_show_field TrlnArgon::Fields::INSTITUTION.to_s,
-                              label: TrlnArgon::Fields::INSTITUTION.label,
-                              helper_method: :institution_code_to_short_name
-        config.add_show_field TrlnArgon::Fields::URL_HREF.to_s,
-                              label: TrlnArgon::Fields::URL_HREF.label,
-                              helper_method: :url_href_with_url_text_link
+        config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
+                              label: TrlnArgon::Fields::ISSN_LINKING.label
+        config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
+                              label: TrlnArgon::Fields::OCLC_NUMBER.label
+
+        config.add_show_sub_header_field TrlnArgon::Fields::AUTHORS_MAIN.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::FORMAT.to_s
+
+        # NOTE: What field should be searched when linking to a search for various
+        #       author/contributer fields from the record show page? The "Author" facet
+        #       combines these into a single field and may exclude values that are displayed.
+        #       For now, linking to the same field that is displayed.
+        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
+                                      label: TrlnArgon::Fields::AUTHORS_MAIN.label,
+                                      link_to_search: TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s
+        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_DIRECTOR.to_s,
+                                      label: TrlnArgon::Fields::AUTHORS_DIRECTOR.label
+        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_OTHER.to_s,
+                                      label: TrlnArgon::Fields::AUTHORS_OTHER.label
+
+        config.add_show_subjects_field TrlnArgon::Fields::SUBJECTS.to_s,
+                                       helper_method: :list_of_linked_subjects_segments
 
         # "fielded" search configuration. Used by pulldown among other places.
         # For supported keys in hash, see rdoc for Blacklight::SearchFields

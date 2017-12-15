@@ -1,4 +1,4 @@
-<h2>Holdings</h2>
+<h2><%= t('trln_argon.show.heading.holdings') %></h2>
 <% if local_filter_applied? %>
   <%= render partial: "items_table", locals: { document: document, context: 'show' } %>
 <% else %>

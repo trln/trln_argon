@@ -5,8 +5,9 @@
   <% samplechapter = ( s && s.samplechapter? && s.samplechapter ) || nil %>
   <% unless summary.nil? || summary.empty? %>
     <section class="summary">
-      <h4>Summary <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
-      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h4>
+
+      <h2>Summary <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
+      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h2>
       
       <div class="content">
         <%= summary.html_safe %>
@@ -16,8 +17,8 @@
   <% end %>
   <% unless toc.nil? || toc.empty? %>
     <section class="table-of-contents">
-  	  <h4>Contents <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
-      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h4>
+  	  <h2>Contents <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
+      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h2>
       
       <div class="content">
   	   <%= toc.html_safe %>

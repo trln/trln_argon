@@ -132,44 +132,36 @@ describe TrlnArgon::ControllerOverride do
   end
 
   describe 'show fields' do
-    it 'sets the title main field' do
-      expect(override_config.show_fields).to have_key('title_main')
+    it 'sets the Uniform Title field' do
+      expect(override_config.show_fields).to have_key('title_uniform_a')
     end
 
-    it 'sets the authors main field' do
-      expect(override_config.show_fields).to have_key('authors_main_a')
+    it 'sets the Current Frequency field' do
+      expect(override_config.show_fields).to have_key('frequency_current_a')
     end
 
-    it 'sets the format field' do
-      expect(override_config.show_fields).to have_key('format_a')
+    it 'sets the General Description field' do
+      expect(override_config.show_fields).to have_key('description_general_a')
     end
 
-    it 'sets the title language field' do
-      expect(override_config.show_fields).to have_key('language_a')
+    it 'sets the Volume Description field' do
+      expect(override_config.show_fields).to have_key('description_volumes_a')
     end
 
-    it 'sets the subjects field' do
-      expect(override_config.show_fields).to have_key('subjects_a')
-    end
-
-    it 'sets the publisher field' do
-      expect(override_config.show_fields).to have_key('publisher_etc_a')
+    it 'sets the Notes field' do
+      expect(override_config.show_fields).to have_key('notes_indexed_a')
     end
 
     it 'sets the ISBN field' do
       expect(override_config.show_fields).to have_key('isbn_number_a')
     end
 
-    it 'sets the publication year field' do
-      expect(override_config.show_fields).to have_key('publication_year_isort_stored_single')
+    it 'sets the ISSN field' do
+      expect(override_config.show_fields).to have_key('issn_linking_a')
     end
 
-    it 'sets the institution field' do
-      expect(override_config.show_fields).to have_key('institution_a')
-    end
-
-    it 'sets the URL field' do
-      expect(override_config.show_fields).to have_key('url_href_a')
+    it 'sets the OCLC Number field' do
+      expect(override_config.show_fields).to have_key('oclc_number')
     end
   end
 
