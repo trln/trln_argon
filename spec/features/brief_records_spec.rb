@@ -10,12 +10,12 @@ describe 'brief records' do
     end
 
     describe 'author field' do
-      it 'displays the author field label' do
-        expect(brief_records).to have_css('dt.blacklight-authors_main_a', text: 'Author:')
+      it 'displays the statement of responsibility field label' do
+        expect(brief_records).to have_css('dt.blacklight-statement_of_responsibility_a', text: 'Author:')
       end
 
-      it 'displays the author field value' do
-        expect(brief_records).to have_css('dd.blacklight-authors_main_a', text: /.+/)
+      it 'displays the statement of responsibility field value' do
+        expect(brief_records).to have_css('dd.blacklight-statement_of_responsibility_a', text: /.+/)
       end
     end
 
@@ -35,20 +35,12 @@ describe 'brief records' do
       expect(brief_records).to have_css('dd.blacklight-language_a', text: /.+/)
     end
 
-    it 'displays the publisher field label' do
-      expect(brief_records).to have_css('dt.blacklight-publisher_etc_a', text: 'Publisher Etc:')
+    it 'displays the imprint field label' do
+      expect(brief_records).to have_css('dt.blacklight-imprint_a', text: 'Imprint:')
     end
 
     it 'displays the publisher field value' do
-      expect(brief_records).to have_css('dd.blacklight-publisher_etc_a', text: /.+/)
-    end
-
-    it 'displays the publication year field label' do
-      expect(brief_records).to have_css('dt.blacklight-publication_year_isort_stored_single', text: 'Publication Year:')
-    end
-
-    it 'displays the publication year field value' do
-      expect(brief_records).to have_css('dd.blacklight-publication_year_isort_stored_single', text: /.+/)
+      expect(brief_records).to have_css('dd.blacklight-imprint_a', text: /.+/)
     end
 
     it 'displays the institution field label' do

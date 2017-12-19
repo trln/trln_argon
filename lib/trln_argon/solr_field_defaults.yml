@@ -49,7 +49,7 @@ AUTHORS_MAIN_VERNACULAR_LANG:
 AUTHORS_OTHER:
   solr_field: :authors_other_a
   label:
-    en: Other Authors
+    en: Author
 AUTHORS_OTHER_CJK_V:
   solr_field: :authors_other_cjk_v
   label:
@@ -761,7 +761,7 @@ SOURCE:
 STATEMENT_OF_RESPONSIBILITY:
   solr_field: :statement_of_responsibility_a
   label:
-    en: Statement Of Responsibility
+    en: Author
 STATEMENT_OF_RESPONSIBILITY_CJK_V:
   solr_field: :statement_of_responsibility_cjk_v
   label:

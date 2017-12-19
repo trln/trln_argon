@@ -102,12 +102,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.index_fields).to have_key('title_main_vern')
     end
 
-    it 'sets the authors main field' do
-      expect(override_config.index_fields).to have_key('authors_main_a')
-    end
-
-    it 'sets the authors main vernacular field' do
-      expect(override_config.index_fields).to have_key('authors_main_vern')
+    it 'sets the statement of responsibility field' do
+      expect(override_config.index_fields).to have_key('statement_of_responsibility_a')
     end
 
     it 'sets the format field' do
@@ -118,12 +114,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.index_fields).to have_key('language_a')
     end
 
-    it 'sets the publisher name field' do
-      expect(override_config.index_fields).to have_key('publisher_etc_a')
-    end
-
-    it 'sets the publication year field' do
-      expect(override_config.index_fields).to have_key('publication_year_isort_stored_single')
+    it 'sets the imprint field' do
+      expect(override_config.index_fields).to have_key('imprint_a')
     end
 
     it 'sets the institution field' do

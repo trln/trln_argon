@@ -149,18 +149,14 @@ module TrlnArgon
         #   The ordering of the field names is the order of the display
         config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN.to_s,
                                label: TrlnArgon::Fields::TITLE_MAIN_VERN.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
-                               label: TrlnArgon::Fields::AUTHORS_MAIN.label
-        config.add_index_field TrlnArgon::Fields::AUTHORS_MAIN_VERN.to_s,
-                               label: TrlnArgon::Fields::AUTHORS_MAIN_VERN.label
+        config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
+                               label: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.label
+        config.add_index_field TrlnArgon::Fields::IMPRINT.to_s,
+                               label: TrlnArgon::Fields::IMPRINT.label
         config.add_index_field TrlnArgon::Fields::FORMAT.to_s,
                                label: TrlnArgon::Fields::FORMAT.label
         config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s,
                                label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_index_field TrlnArgon::Fields::PUBLISHER_ETC.to_s,
-                               label: TrlnArgon::Fields::PUBLISHER_ETC.label
-        config.add_index_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
-                               label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label
         config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
                                label: TrlnArgon::Fields::INSTITUTION.label,
                                helper_method: :institution_code_to_short_name
@@ -186,21 +182,18 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
                               label: TrlnArgon::Fields::OCLC_NUMBER.label
 
-        config.add_show_sub_header_field TrlnArgon::Fields::AUTHORS_MAIN.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::FORMAT.to_s
 
-        # NOTE: What field should be searched when linking to a search for various
-        #       author/contributer fields from the record show page? The "Author" facet
-        #       combines these into a single field and may exclude values that are displayed.
-        #       For now, linking to the same field that is displayed.
+        # TODO: What field should be searched when linking to a search for various
+        #       author/contributer fields from the record show page?
         config.add_show_authors_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
-                                      label: TrlnArgon::Fields::AUTHORS_MAIN.label,
-                                      link_to_search: TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s
-        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_DIRECTOR.to_s,
-                                      label: TrlnArgon::Fields::AUTHORS_DIRECTOR.label
+                                      label: TrlnArgon::Fields::AUTHORS_MAIN.label
         config.add_show_authors_field TrlnArgon::Fields::AUTHORS_OTHER.to_s,
                                       label: TrlnArgon::Fields::AUTHORS_OTHER.label
+        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_DIRECTOR.to_s,
+                                      label: TrlnArgon::Fields::AUTHORS_DIRECTOR.label
 
         config.add_show_subjects_field TrlnArgon::Fields::SUBJECTS.to_s,
                                        helper_method: :list_of_linked_subjects_segments
