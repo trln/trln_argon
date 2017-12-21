@@ -46,14 +46,6 @@ module TrlnArgon
       end
     end
 
-    def url_href_with_url_text_link(options = {})
-      text = online_access_link_text(options[:value], options[:document][TrlnArgon::Fields::URL_TEXT])
-      hrefs_and_text = options[:value].zip(text)
-      hrefs_and_text.map do |href_text_pair|
-        link_to href_text_pair.last, href_text_pair.first
-      end.join('; ').html_safe
-    end
-
     def map_argon_code(inst, context, value)
       TrlnArgon::LookupManager.instance.map([inst, context, value].join('.'))
     end
@@ -85,7 +77,27 @@ module TrlnArgon
       end.compact
     end
 
+    def link_to_secondary_urls(options = {})
+      options[:value].map do |url|
+        link_text = if url[:text].present?
+                      url[:text]
+                    else
+                      url[:href]
+                    end
+        link_to link_text, url[:href]
+      end.join('<br />').html_safe
+    end
+
+    def link_to_primary_url(url_hash)
+      link_to(primary_url_text(url_hash), url_hash[:href], class: "link-type-#{url_hash[:type]}")
+    end
+
     private
+
+    def primary_url_text(url_hash)
+      return url_hash[:text] if url_hash[:text].present?
+      I18n.t('trln_argon.online_access')
+    end
 
     def online_access_link_text(url_hrefs, url_text)
       if url_text && url_text.count == url_hrefs.count

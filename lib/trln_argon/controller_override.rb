@@ -175,6 +175,10 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTES_INDEXED.label
         config.add_show_field TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.to_s,
                               label: TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.label
+        config.add_show_field TrlnArgon::Fields::SECONDARY_URLS.to_s,
+                              label: TrlnArgon::Fields::SECONDARY_URLS.label,
+                              accessor: :secondary_urls,
+                              helper_method: :link_to_secondary_urls
         config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
                               label: TrlnArgon::Fields::ISBN_NUMBER.label
         config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
@@ -326,9 +330,7 @@ module TrlnArgon
         end.first
         group_docs = group_docs.respond_to?(:docs) ? group_docs.docs : [doc]
         Hash[group_docs.map do |gr_doc|
-          [gr_doc[TrlnArgon::Fields::INSTITUTION].first,
-           { availability: gr_doc.availability,
-             url: gr_doc[TrlnArgon::Fields::URL_HREF] }]
+          [gr_doc[TrlnArgon::Fields::INSTITUTION].first, gr_doc]
         end]
       end
 
@@ -351,7 +353,7 @@ module TrlnArgon
                                              'group.limit' => '4',
                                              fl: "#{TrlnArgon::Fields::ID}, #{TrlnArgon::Fields::ROLLUP_ID}, "\
                                                  "#{TrlnArgon::Fields::INSTITUTION}, #{TrlnArgon::Fields::AVAILABLE}, "\
-                                                 "#{TrlnArgon::Fields::URL_HREF}")
+                                                 "#{TrlnArgon::Fields::URLS}")
       end
 
       def expanded_documents_response

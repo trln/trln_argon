@@ -118,135 +118,25 @@ describe TrlnArgonHelper do
     end
   end
 
-  describe '#url_href_with_url_text_link' do
-    context 'when we show single link without text' do
-      let(:document) do
-        SolrDocument.new(
-          id: 'DUKE12345'
-        )
-      end
-      let(:options) do
-        { value:    ['http://www.firstlink.edu'],
-          document: document }
-      end
-
-      it 'generates a link using the default text' do
-        expect(helper.url_href_with_url_text_link(options)).to(
-          eq('<a href="http://www.firstlink.edu">Online Access</a>')
-        )
-      end
+  describe '#link_to_subject_segments' do
+    let(:options) do
+      { value:    ['Technology -- History -- Science',
+                   'Galilei, Galileo, 1564-1642'] }
     end
+    let(:context) { CatalogController.new }
 
-    context 'when we show a single link with text' do
-      let(:document) do
-        SolrDocument.new(
-          id:         'DUKE12345',
-          url_text_a: ['First Link']
-        )
-      end
-      let(:options) do
-        { value:    ['http://www.firstlink.edu'],
-          document: document }
-      end
-
-      it 'generates a link using the supplied text value' do
-        expect(helper.url_href_with_url_text_link(options)).to(
-          eq('<a href="http://www.firstlink.edu">First Link</a>')
-        )
-      end
-    end
-
-    context 'when we render multiple links each without a text value' do
-      let(:document) do
-        SolrDocument.new(
-          id: 'DUKE12345'
-        )
-      end
-      let(:options) do
-        { value:    ['http://www.firstlink.edu',
-                     'http://www.secondlink.edu',
-                     'http://www.thirdlink.edu'],
-          document: document }
-      end
-
-      it 'generates all the links using the default text value' do
-        expect(helper.url_href_with_url_text_link(options)).to(
-          eq('<a href="http://www.firstlink.edu">Online Access</a>; '\
-             '<a href="http://www.secondlink.edu">Online Access</a>; '\
-             '<a href="http://www.thirdlink.edu">Online Access</a>')
-        )
-      end
-    end
-
-    context 'when there are multiple links each with a text value' do
-      let(:document) do
-        SolrDocument.new(
-          id: 'DUKE12345',
-          url_text_a: ['First Link',
-                       'Second Link',
-                       'Third Link']
-        )
-      end
-      let(:options) do
-        { value:    ['http://www.firstlink.edu',
-                     'http://www.secondlink.edu',
-                     'http://www.thirdlink.edu'],
-          document: document }
-      end
-
-      it 'generates each link with its own text value' do
-        expect(helper.url_href_with_url_text_link(options)).to(
-          eq('<a href="http://www.firstlink.edu">First Link</a>; '\
-             '<a href="http://www.secondlink.edu">Second Link</a>; '\
-             '<a href="http://www.thirdlink.edu">Third Link</a>')
-        )
-      end
-    end
-
-    context 'when there are multiple links with a different number of text values' do
-      let(:document) do
-        SolrDocument.new(
-          id: 'DUKE12345',
-          url_text_a: ['A Link',
-                       'Another Link']
-        )
-      end
-      let(:options) do
-        { value:    ['http://www.firstlink.edu',
-                     'http://www.secondlink.edu',
-                     'http://www.thirdlink.edu'],
-          document: document }
-      end
-
-      it 'generates all the links using the default text value' do
-        expect(helper.url_href_with_url_text_link(options)).to(
-          eq('<a href="http://www.firstlink.edu">Online Access</a>; '\
-             '<a href="http://www.secondlink.edu">Online Access</a>; '\
-             '<a href="http://www.thirdlink.edu">Online Access</a>')
-        )
-      end
-    end
-
-    describe '#link_to_subject_segments' do
-      let(:options) do
-        { value:    ['Technology -- History -- Science',
-                     'Galilei, Galileo, 1564-1642'] }
-      end
-      let(:context) { CatalogController.new }
-
-      it 'generates links to a search for each segment' do
-        allow(context).to receive(:local_filter_applied?).and_return(false)
-        allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
-        expect(context.helpers.link_to_subject_segments(options)).to(
-          eq(['<a title="Technology" href="/catalog?begins_with=something">Technology</a> -- '\
-              '<a title="Technology -- History" href="/catalog?begins_with=something">'\
-              '<span class="sr-only">Technology -- </span>History</a> -- '\
-              '<a title="Technology -- History -- Science" href="/catalog?begins_with=something">'\
-              '<span class="sr-only">Technology -- History -- </span>Science</a>',
-              '<a title="Galilei, Galileo, 1564-1642" href="/catalog?begins_with=something">'\
-              'Galilei, Galileo, 1564-1642</a>'])
-        )
-      end
+    it 'generates links to a search for each segment' do
+      allow(context).to receive(:local_filter_applied?).and_return(false)
+      allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
+      expect(context.helpers.link_to_subject_segments(options)).to(
+        eq(['<a title="Technology" href="/catalog?begins_with=something">Technology</a> -- '\
+            '<a title="Technology -- History" href="/catalog?begins_with=something">'\
+            '<span class="sr-only">Technology -- </span>History</a> -- '\
+            '<a title="Technology -- History -- Science" href="/catalog?begins_with=something">'\
+            '<span class="sr-only">Technology -- History -- </span>Science</a>',
+            '<a title="Galilei, Galileo, 1564-1642" href="/catalog?begins_with=something">'\
+            'Galilei, Galileo, 1564-1642</a>'])
+      )
     end
   end
 
@@ -269,6 +159,60 @@ describe TrlnArgonHelper do
           eq('Duke, duke.facet.blah, duke.facet.foo')
         )
       end
+    end
+  end
+
+  describe '#link_to_primary_url' do
+    context 'url data includes text' do
+      let(:url_hash) do
+        { href: 'http://www.law.duke.edu/journals/lcp/',
+          type: 'fulltext',
+          text: 'Law and contemporary problems, v. 63, no. 1-2' }
+      end
+
+      it 'creates a link using the supplied text' do
+        expect(helper.link_to_primary_url(url_hash)).to(
+          eq('<a class="link-type-fulltext" '\
+             'href="http://www.law.duke.edu/journals/lcp/">'\
+             'Law and contemporary problems, v. 63, no. 1-2</a>')
+        )
+      end
+    end
+
+    context 'url data does not include text' do
+      let(:url_hash) do
+        { href: 'http://www.law.duke.edu/journals/lcp/',
+          type: 'fulltext',
+          text: '' }
+      end
+
+      it 'creates a link using the default translation' do
+        expect(helper.link_to_primary_url(url_hash)).to(
+          eq('<a class="link-type-fulltext" '\
+             'href="http://www.law.duke.edu/journals/lcp/">'\
+             'Online Access</a>')
+        )
+      end
+    end
+  end
+
+  describe '#link_to_secondary_urls' do
+    let(:options) do
+      { value: [{ href: 'http://www.law.duke.edu/journals/lcp/',
+                  type: 'other',
+                  text: 'Law and contemporary problems, v. 63, no. 1-2' },
+                { href: 'http://www.law.duke.edu/journals/lcp/',
+                  type: 'other',
+                  text: '' }] }
+    end
+
+    it 'creates links to secondary urls' do
+      expect(helper.link_to_secondary_urls(options)).to(
+        eq('<a href="http://www.law.duke.edu/journals/lcp/">'\
+           'Law and contemporary problems, v. 63, no. 1-2</a><br />'\
+           '<a href="http://www.law.duke.edu/journals/lcp/">'\
+           'http://www.law.duke.edu/journals/lcp/</a>')
+      )
     end
   end
 end

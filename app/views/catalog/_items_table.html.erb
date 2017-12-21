@@ -1,8 +1,15 @@
 <div class="items">
-  <% if document[TrlnArgon::Fields::URL_HREF.to_s] %>
+  <% if document.fulltext_urls.any? || document.findingaid_urls.any? %>
     <h3>Online</h3>
     <div class="fulltext-url">
-      <%= url_href_with_url_text_link(value: document[TrlnArgon::Fields::URL_HREF.to_s], document: document) %>
+      <ul>
+      <% document.fulltext_urls.each do |url| %>
+        <li><%= link_to_primary_url(url) %></li>
+      <% end %>
+      <% document.findingaid_urls.each do |url| %>
+        <li><%= link_to_primary_url(url) %></li>
+      <% end %>
+      </ul>
     </div>
   <% end %>
   <% unless document.read_items.key?(nil) %>

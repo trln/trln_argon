@@ -2,13 +2,21 @@
   <table  width='100%' class='table table-condensed'>
     <caption>Location</caption>
     <tbody>
-      <% expanded_availability.each do |institution, values| %>
+      <% expanded_availability.each do |institution, doc| %>
         <tr>
           <td><%= t("trln_argon.institution.#{institution}.long_name") %></td>
-          <td><%= values[:availability] %></td>
-          <% if values[:url].present? %>
-            <% short_name = t("trln_argon.institution.#{institution}.short_name") %>
-            <td><%= link_to "Online Access (#{short_name} Only)", values[:url].first %></td>
+          <td><%= doc.availability %></td>
+          <% if doc.fulltext_urls.any? || doc.findingaid_urls.any? %>
+            <td>
+              <ul>
+              <% doc.fulltext_urls.each do |url| %>
+                <li><%= link_to_primary_url(url) %></li>
+              <% end %>
+              <% doc.findingaid_urls.each do |url| %>
+                <li><%= link_to_primary_url(url) %></li>
+              <% end %>
+              </ul>
+            </td>
           <% else %>
             <td></td>
           <% end %>
