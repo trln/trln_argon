@@ -95,3 +95,11 @@ en:
                 contents: "Contents"
                 subjects: "This item is about"
                 metadata: "Other details"
+
+        imprint_type:
+            imprint: ""
+            production: "Produced"
+            publication: ""
+            distribution: "Distributed"
+            manufacture: "Manufactured"
+            copyright: ""

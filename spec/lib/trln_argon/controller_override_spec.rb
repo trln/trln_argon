@@ -98,8 +98,8 @@ describe TrlnArgon::ControllerOverride do
   end
 
   describe 'index fields' do
-    it 'sets the title main vernacular field' do
-      expect(override_config.index_fields).to have_key('title_main_vern')
+    it 'sets the imprint field' do
+      expect(override_config.index_fields).to have_key('imprint_a')
     end
 
     it 'sets the statement of responsibility field' do
@@ -108,18 +108,6 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the format field' do
       expect(override_config.index_fields).to have_key('format_a')
-    end
-
-    it 'sets the language field' do
-      expect(override_config.index_fields).to have_key('language_a')
-    end
-
-    it 'sets the imprint field' do
-      expect(override_config.index_fields).to have_key('imprint_a')
-    end
-
-    it 'sets the institution field' do
-      expect(override_config.index_fields).to have_key('institution_a')
     end
   end
 

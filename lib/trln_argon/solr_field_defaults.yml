@@ -262,6 +262,14 @@ ID:
   solr_field: :id
   label:
     en: ID
+IMPRINT_MAIN:
+  solr_field: :imprint_main_a
+  label:
+    en: Published
+IMPRINT_MULTIPLE:
+  solr_field: :imprint_multiple_a
+  label:
+    en: Published
 IMPRINT:
   solr_field: :imprint_a
   label:

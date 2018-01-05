@@ -9,46 +9,16 @@ describe 'brief records' do
       page.find(:css, '#documents:first-of-type')
     end
 
-    describe 'author field' do
-      it 'displays the statement of responsibility field label' do
-        expect(brief_records).to have_css('dt.blacklight-statement_of_responsibility_a', text: 'Author:')
-      end
-
-      it 'displays the statement of responsibility field value' do
-        expect(brief_records).to have_css('dd.blacklight-statement_of_responsibility_a', text: /.+/)
-      end
+    it 'displays the statement of responsibility field value' do
+      expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
     end
 
-    it 'displays the format field label' do
-      expect(brief_records).to have_css('dt.blacklight-format_a', text: 'Format:')
+    it 'displays the imprint field value' do
+      expect(brief_records).to have_css('li.imprint_a', text: /.+/)
     end
 
     it 'displays the format field value' do
-      expect(brief_records).to have_css('dd.blacklight-format_a', text: /.+/)
-    end
-
-    it 'displays the language field label' do
-      expect(brief_records).to have_css('dt.blacklight-language_a', text: 'Language:')
-    end
-
-    it 'displays the language field value' do
-      expect(brief_records).to have_css('dd.blacklight-language_a', text: /.+/)
-    end
-
-    it 'displays the imprint field label' do
-      expect(brief_records).to have_css('dt.blacklight-imprint_a', text: 'Imprint:')
-    end
-
-    it 'displays the publisher field value' do
-      expect(brief_records).to have_css('dd.blacklight-imprint_a', text: /.+/)
-    end
-
-    it 'displays the institution field label' do
-      expect(brief_records).to have_css('dt.blacklight-institution_a', text: 'Institution:')
-    end
-
-    it 'displays the institution field value' do
-      expect(brief_records).to have_css('dd.blacklight-institution_a', text: /.+/)
+      expect(brief_records).to have_css('li.format_a', text: /.+/)
     end
   end
 

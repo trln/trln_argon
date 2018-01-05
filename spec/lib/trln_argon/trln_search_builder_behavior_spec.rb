@@ -121,7 +121,7 @@ describe TrlnArgon::TrlnSearchBuilderBehavior do
       before { builder_with_params.begins_with_filter(solr_parameters) }
       it 'applies the local holdings query' do
         expect(solr_parameters[:fq]).to(
-          eq(['_query_:"{!q.op=AND df=subject_f}/Technology -- History.*/"'])
+          eq(['_query_:"{!q.op=AND df=subject_f}/Technology \\\\-\\\\- History.*/"'])
         )
       end
     end
