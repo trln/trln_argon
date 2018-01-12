@@ -710,6 +710,10 @@ ROLLUP_ID:
   solr_field: rollup_id
   label:
     en: Rollup ID
+SECONDARY_URLS:
+  solr_field: secondary_urls
+  label:
+    en: Links
 SERIES:
   solr_field: :series_a
   label:
@@ -962,26 +966,10 @@ UPC:
   solr_field: :upc_a
   label:
     en: Upc
-URL_HREF:
-  solr_field: :url_href_a
+URLS:
+  solr_field: url_a
   label:
-    en: Link
-URL_HREF_STR:
-  solr_field: :url_href_str
-  label:
-    en: URL HREF Str
-URL_REL:
-  solr_field: :url_rel_a
-  label:
-    en: URL Rel
-URL_TEXT:
-  solr_field: :url_text_a
-  label:
-    en: URL Text
-URL_TEXT_T:
-  solr_field: :url_text_t
-  label:
-    en: URL Text T
+    en: Links
 VOLUME_DATE_RANGE:
   solr_field: :volume_date_range_a
   label:
