@@ -82,6 +82,7 @@ module TrlnArgon
       end
     end
 
+    # rubocop:disable MethodLength
     def inject_into_solr_document
       line_to_check = 'SolrDocument.repository.blacklight_config.document_solr_path'
       return if IO.read('app/models/solr_document.rb').include?(line_to_check)
@@ -90,7 +91,8 @@ module TrlnArgon
         "\n  # from the Rails console with our Solr configuration."\
         "\n  # Otherwise, it tries to use the non-existent document request handler."\
         "\n  SolrDocument.repository.blacklight_config.document_solr_path = :document"\
-        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil\n"
+        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil"\
+        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)"
       end
     end
 

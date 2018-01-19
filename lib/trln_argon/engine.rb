@@ -25,8 +25,11 @@ module TrlnArgon
                     :apply_local_filter_by_default,
                     :application_name,
                     :solr_fields,
-                    :code_mappings
+                    :code_mappings,
+                    :refworks_url,
+                    :root_url
 
+      # rubocop:disable MethodLength
       def initialize
         @preferred_records             = 'unc'
         @local_institution_code        = 'unc'
@@ -35,6 +38,10 @@ module TrlnArgon
         @application_name              = 'TRLN Argon'
         @solr_fields =
           field_constants(default_fields.merge(override_fields).deep_symbolize_keys)
+        @refworks_url =
+          'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?' \
+          'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
+        @root_url = 'https://discovery.trln.org'
       end
 
       private

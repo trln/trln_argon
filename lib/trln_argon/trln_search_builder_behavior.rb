@@ -89,14 +89,14 @@ module TrlnArgon
 
     def strip_non_isxn_chars(q_blacklight_param)
       return unless q_blacklight_param
-      non_isxn_chars_removed = q_blacklight_param.gsub(/[^0-9Xx]/, '')
+      non_isxn_chars_removed = q_blacklight_param.to_s.gsub(/[^0-9Xx]/, '')
       extracted_isxns = StdNum::ISBN.extract_multiple_numbers(non_isxn_chars_removed)
       normalize_isxn(extracted_isxns.join)
     end
 
     def extract_isxn_vals_from_q(q_blacklight_param)
       return unless q_blacklight_param
-      extracted_isxns = StdNum::ISBN.extract_multiple_numbers(q_blacklight_param)
+      extracted_isxns = StdNum::ISBN.extract_multiple_numbers(q_blacklight_param.to_s)
       extracted_isxns.map { |isxn_value| normalize_isxn(isxn_value) }.join(' ')
     end
 

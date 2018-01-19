@@ -1,4 +1,5 @@
 require_relative './syndetics_helpers'
+require_relative './document_export_helper'
 
 module TrlnArgon
   # Shared helpers for TRLN Argon based applicatilns
@@ -6,6 +7,7 @@ module TrlnArgon
   # in app/helpers/trln_argon_helper.rb
   module TrlnArgonHelperBehavior
     include TrlnArgon::SyndeticsHelpers
+    include TrlnArgon::DocumentExportHelper
 
     def institution_code_to_short_name(options = {})
       options[:value].map do |val|
@@ -102,6 +104,15 @@ module TrlnArgon
       options[:document].imprint_multiple.concat(options[:document].imprint_main).uniq.map do |imprint|
         imprint_entry(imprint)
       end.join('<br />').html_safe
+    end
+
+    def add_icon_to_action_label(document_action_config)
+      if document_action_config.key?(:icon)
+        content_tag(:i, '', class: "glyphicon #{document_action_config[:icon]}", 'aria-hidden' => 'true') + ' ' +
+          document_action_label(document_action_config.key, document_action_config).html_safe
+      else
+        document_action_label(document_action_config.key, document_action_config).html_safe
+      end
     end
 
     private

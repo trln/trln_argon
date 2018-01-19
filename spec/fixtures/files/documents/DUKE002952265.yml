@@ -1,0 +1,78 @@
+---
+- id: DUKE002952265
+  items_a:
+  - '{"loc_b":"DOCS","loc_n":"PGSM","cn_scheme":"3","call_no":"SI 1.27:435","copy_no":"c.1","type":"BOOK","item_id":"HBIE-7234-00001
+    ","status":"Available"}'
+  notes_indexed_a:
+  - Distributed to depository libraries in microfiche.
+  - Includes index.
+  - 'Bibliography: p. 53-56.'
+  owner_a:
+  - duke
+  title_main: Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with
+    description of a new genus and family /
+  title_sort_ssort_single: Revision of the Atlantic Brisingida (Echinodermata:Asteroidea),
+    with description of a new genus and family
+  format_a:
+  - Book
+  - Print
+  series_main_a:
+  - Smithsonian contributions to zoology ; no. 435
+  series_uniform_a:
+  - Smithsonian contributions to zoology ; no. 435.
+  authors_main_a:
+  - Downey, Maureen E.
+  authors_other_a:
+  - Smithsonian Institution. Press.
+  imprint_type_a:
+  - publication
+  imprint_a:
+  - 'Washington : Smithsonian Institution Press, 1986.'
+  misc_id_qual_a:
+  - ''
+  misc_id_type_a:
+  - LCCN
+  misc_id_a:
+  - '86006579'
+  holdings_a:
+  - '{"loc_b":"DOCS","loc_n":"PGSM","call_no":"SI 1.27:435"}'
+  language_a:
+  - English
+  local_id: DUKE002952265
+  subjects_a:
+  - Brisingida -- Atlantic Ocean -- Classification
+  - Echinodermata -- Classification
+  - Echinodermata -- Atlantic Ocean -- Classification
+  available_a:
+  - Available
+  lang_code_a:
+  - eng
+  rollup_id: OCLC13423674
+  collection_a:
+  - general
+  access_type_a:
+  - At the Library
+  description_general_a:
+  - 'iv, 57 p. :'
+  - ill. ;
+  - 27 cm.
+  institution_a:
+  - duke
+  author_facet_a:
+  - Downey, Maureen E.
+  subject_genre_a:
+  - Classification
+  - Nonfiction
+  publication_year_isort_stored_single: '1986'
+  location_hierarchy_a:
+  - duke
+  - duke:dukepers
+  record_data_source_a:
+  - ILSMARC
+  subject_geographic_a:
+  - Atlantic Ocean
+  subject_topic_lcsh_a:
+  - Brisingida
+  - Echinodermata
+  statement_of_responsibility_a:
+  - Maureen E. Downey.

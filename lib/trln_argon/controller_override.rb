@@ -16,6 +16,27 @@ module TrlnArgon
       helper_method :local_filter_applied?
       helper_method :query_has_constraints?
 
+      add_show_tools_partial(:email,
+                             icon: 'glyphicon-envelope',
+                             callback: :email_action,
+                             validator: :validate_email_params)
+      add_show_tools_partial(:sms,
+                             icon: 'glyphicon-phone',
+                             if: :render_sms_action?,
+                             callback: :sms_action,
+                             validator: :validate_sms_params)
+      add_show_tools_partial(:ris,
+                             icon: 'glyphicon-download-alt',
+                             if: :render_ris_action?,
+                             modal: false,
+                             path: :ris_path)
+      add_show_tools_partial(:argon_refworks,
+                             icon: 'glyphicon-export',
+                             if: :render_argon_refworks_action?,
+                             new_window: true,
+                             modal: false,
+                             path: :argon_refworks_path)
+
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
         config.search_builder_class = TrlnArgonSearchBuilder
@@ -39,6 +60,13 @@ module TrlnArgon
                                   show_subjects
                                   show]
 
+        # Disable these tools in the UI for now.
+        # See add_show_tools_partial methods above for
+        # tools configuration
+        config.show.document_actions.delete(:citation)
+        config.show.document_actions.delete(:sms)
+        config.show.document_actions.delete(:email)
+
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
 
@@ -46,7 +74,11 @@ module TrlnArgon
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:query_parser] ||= 'edismax'
-        config.advanced_search[:form_solr_parameters] ||= {}
+        config.advanced_search[:form_solr_parameters] ||= {
+          'facet.field' => [], # don't query for facets
+          'facet.limit' => -1, # return all facet values
+          'facet.sort' => 'index' # sort by byte order of values
+        }
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
 
@@ -311,6 +343,13 @@ module TrlnArgon
           localized_params[:f].blank? &&
           localized_params[:begins_with].blank?)
       end
+
+      def render_ris_action?(_config, options = {})
+        doc = options[:document] || (options[:document_list] || []).first
+        doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
+      end
+
+      alias_method :render_argon_refworks_action?, :render_ris_action?
 
       private
 

@@ -79,6 +79,8 @@ LOCAL_INSTITUTION_CODE: unc
 APPLICATION_NAME: TRLN Argon
 PREFERRED_RECORDS: "unc, trln"
 APPLY_LOCAL_FILTER_BY_DEFAULT: "true"
+REFWORKS_URL: "http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url="
+ROOT_URL: 'https://discovery.trln.org'
 ```
 
 ### Changing field labels and other UI text.
