@@ -147,19 +147,9 @@ module TrlnArgon
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
-        config.add_index_field TrlnArgon::Fields::TITLE_MAIN_VERN.to_s,
-                               label: TrlnArgon::Fields::TITLE_MAIN_VERN.label
-        config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
-                               label: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.label
-        config.add_index_field TrlnArgon::Fields::IMPRINT.to_s,
-                               label: TrlnArgon::Fields::IMPRINT.label
-        config.add_index_field TrlnArgon::Fields::FORMAT.to_s,
-                               label: TrlnArgon::Fields::FORMAT.label
-        config.add_index_field TrlnArgon::Fields::LANGUAGE.to_s,
-                               label: TrlnArgon::Fields::LANGUAGE.label
-        config.add_index_field TrlnArgon::Fields::INSTITUTION.to_s,
-                               label: TrlnArgon::Fields::INSTITUTION.label,
-                               helper_method: :institution_code_to_short_name
+        config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
+        config.add_index_field TrlnArgon::Fields::IMPRINT.to_s
+        config.add_index_field TrlnArgon::Fields::FORMAT.to_s
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -185,9 +175,13 @@ module TrlnArgon
                               label: TrlnArgon::Fields::ISSN_LINKING.label
         config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
                               label: TrlnArgon::Fields::OCLC_NUMBER.label
+        config.add_show_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
+                              label: TrlnArgon::Fields::IMPRINT_MULTIPLE.label,
+                              helper_method: :imprint_multiple
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
-        config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
+                                         helper_method: :imprint_main
         config.add_show_sub_header_field TrlnArgon::Fields::FORMAT.to_s
 
         # TODO: What field should be searched when linking to a search for various

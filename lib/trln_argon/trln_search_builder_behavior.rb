@@ -61,7 +61,11 @@ module TrlnArgon
     end
 
     def join_begins_with_segments(segments)
-      segments.map { |segment| "/#{segment}.*/" }.join(' ')
+      segments.map { |segment| "/#{solr_regex_escape(segment)}.*/" }.join(' ')
+    end
+
+    def solr_regex_escape(segment)
+      segment.gsub(%r([\+\-\&\|\!\(\)\{\}\[\]\^\"\~\*\?\:\\\/])) { |s| "\\\\#{s}" }
     end
 
     def local_holdings_query

@@ -56,10 +56,37 @@ module TrlnArgon
     end
 
     def urls
-      @urls ||= [*self[TrlnArgon::Fields::URLS]].map { |url| deserialize_url(url) }.delete_if { |h| h[:href].empty? }
+      @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::URLS,
+                                               { href: '', type: '', text: '' },
+                                               :href)
+    end
+
+    def imprint_main
+      @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::IMPRINT_MAIN,
+                                               { type: '', label: '', value: '' },
+                                               :value)
+    end
+
+    def imprint_multiple
+      @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::IMPRINT_MULTIPLE,
+                                               { type: '', label: '', value: '' },
+                                               :value)
     end
 
     private
+
+    def deserialize_solr_field(solr_field, hash_spec = {}, required_key = nil)
+      deserialized_fields = [*self[solr_field]].map do |serialized_value|
+        deserialized_hash = begin
+          JSON.parse(serialized_value.to_s)
+        rescue JSON::ParserError
+          {}
+        end
+        hash_spec.merge(deserialized_hash.symbolize_keys)
+      end
+      return deserialized_fields if required_key.nil?
+      deserialized_fields.delete_if { |h| h[required_key].empty? }
+    end
 
     # utility for formatting multi-valued fields
     # when you're not really sure what else to do
@@ -73,15 +100,6 @@ module TrlnArgon
       search_builder = SearchBuilder.new([:add_query_to_solr], controller)
       query = search_builder.where("#{TrlnArgon::Fields::ROLLUP_ID}:#{self[TrlnArgon::Fields::ROLLUP_ID]}")
       controller.repository.search(query)
-    end
-
-    def deserialize_url(serialized_url)
-      url_hash = begin
-        JSON.parse(serialized_url.to_s)
-      rescue JSON::ParserError
-        {}
-      end
-      { href: '', type: '', text: '' }.merge(url_hash.symbolize_keys)
     end
   end
 end

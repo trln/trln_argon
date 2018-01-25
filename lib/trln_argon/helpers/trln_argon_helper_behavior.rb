@@ -92,11 +92,44 @@ module TrlnArgon
       link_to(primary_url_text(url_hash), url_hash[:href], class: "link-type-#{url_hash[:type]}")
     end
 
+    def imprint_main(options = {})
+      options[:document].imprint_main.map do |imprint|
+        imprint_entry(imprint)
+      end.join('<br />').html_safe
+    end
+
+    def imprint_multiple(options = {})
+      options[:document].imprint_multiple.concat(options[:document].imprint_main).uniq.map do |imprint|
+        imprint_entry(imprint)
+      end.join('<br />').html_safe
+    end
+
     private
 
     def primary_url_text(url_hash)
       return url_hash[:text] if url_hash[:text].present?
       I18n.t('trln_argon.online_access')
+    end
+
+    def imprint_entry(imprint)
+      [imprint_type(imprint),
+       imprint_label(imprint),
+       imprint_value(imprint)].compact.join(': ')
+    end
+
+    def imprint_type(imprint)
+      return if imprint[:type].blank? || t("trln_argon.imprint_type.#{imprint[:type]}").blank?
+      content_tag(:span, t("trln_argon.imprint_type.#{imprint[:type]}"), class: 'imprint-type')
+    end
+
+    def imprint_label(imprint)
+      return if imprint[:label].blank?
+      content_tag(:span, imprint[:label], class: 'imprint-label')
+    end
+
+    def imprint_value(imprint)
+      return if imprint[:value].blank?
+      imprint[:value]
     end
 
     def online_access_link_text(url_hrefs, url_text)
@@ -111,26 +144,27 @@ module TrlnArgon
       segments = segments_string.split(delimiter)
       subject_hierarchy = array_to_hierarchy(segments, delimiter)
       zipped_segments = segments.zip(subject_hierarchy)
-      linked_segments = zipped_segments.map { |segment| segment_begins_with_link(segment) }.join(delimiter)
+      linked_segments = zipped_segments.map { |segment| segment_begins_with_link(segment, delimiter) }.join
       linked_segments
     end
 
-    def segment_begins_with_link(segment_hierarchy_pair)
+    def segment_begins_with_link(segment_hierarchy_pair, delimiter = ' -- ')
       params = { begins_with: { TrlnArgon::Fields::SUBJECTS_FACET => Array(segment_hierarchy_pair.last) } }
       params[:local_filter] = local_filter_applied?.to_s
       link_to(search_action_url(params), title: segment_hierarchy_pair.last) do
-        segment_link_content(segment_hierarchy_pair).html_safe
+        segment_link_content(segment_hierarchy_pair, delimiter).html_safe
       end
     end
 
-    def segment_link_content(segment_hierarchy_pair)
+    def segment_link_content(segment_hierarchy_pair, delimiter = ' -- ')
       sr_only_segment = segment_hierarchy_pair.last.sub(segment_hierarchy_pair.first, '')
       if sr_only_segment.present?
         sr_span = content_tag(:span,
-                              sr_only_segment,
+                              sr_only_segment.chomp(delimiter).to_s,
                               class: 'sr-only')
+        apply_delim = delimiter
       end
-      "#{sr_span}#{segment_hierarchy_pair.first}"
+      "#{sr_span}#{apply_delim}#{segment_hierarchy_pair.first}"
     end
 
     def array_to_hierarchy(args, delimiter = ' -- ')
