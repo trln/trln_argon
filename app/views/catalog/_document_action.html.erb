@@ -1,0 +1,6 @@
+<%= link_to add_icon_to_action_label(document_action_config).html_safe,
+            document_action_path(document_action_config, (local_assigns.key?(:url_opts) ? url_opts : {}).merge(({id: document} if document) || {})),
+            class: 'btn btn-default',
+            target: (document_action_config.has_key?(:new_window) && document_action_config[:new_window] == true) ? '_blank' : '',
+            id: document_action_config.fetch(:id, "#{document_action_config.key}Link"),
+            data: {}.merge(({ajax_modal: "trigger"} if document_action_config.modal != false) || {}) %>

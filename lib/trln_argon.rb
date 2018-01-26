@@ -7,6 +7,8 @@ module TrlnArgon
   autoload :MappingsGitFetcher, 'trln_argon/mappings'
   autoload :SyndeticsData, 'trln_argon/syndetics_data'
   require 'trln_argon/controller_override'
+  require 'trln_argon/document/ris'
+  require 'trln_argon/document/ris_field_mapping'
   require 'trln_argon/field'
   require 'trln_argon/fields'
   require 'trln_argon/helpers/blacklight_helper_behavior'

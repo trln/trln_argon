@@ -27,7 +27,19 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the form_solr_parameters' do
-      expect(override_config.advanced_search[:form_solr_parameters]).to eq({})
+      expect(override_config.advanced_search[:form_solr_parameters]).to eq(
+        'facet.field' => [], 'facet.limit' => -1, 'facet.sort' => 'index'
+      )
+    end
+  end
+
+  describe 'show document actions' do
+    it 'sets the RIS show document action' do
+      expect(override_config.show.document_actions).to include(:ris)
+    end
+
+    it 'sets the Argon Refworks show document action' do
+      expect(override_config.show.document_actions).to include(:argon_refworks)
     end
   end
 

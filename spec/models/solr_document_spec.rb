@@ -19,5 +19,11 @@ describe SolrDocument do
     it 'does not set the document_solr_request_handler' do
       expect(described_class.repository.blacklight_config.document_solr_request_handler).to be_nil
     end
+
+    it 'registers Ris as a document extension' do
+      expect(described_class.registered_extensions).to include(
+        module_obj: TrlnArgon::Document::Ris, condition_proc: nil
+      )
+    end
   end
 end

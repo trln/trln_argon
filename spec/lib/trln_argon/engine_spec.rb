@@ -21,6 +21,15 @@ describe TrlnArgon::Engine do
     it 'sets the application_name' do
       expect(config.application_name).to eq('TRLN Argon')
     end
+
+    it 'sets the refworks_url' do
+      expect(config.refworks_url).to eq('http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?'\
+                                        'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=')
+    end
+
+    it 'sets the root url' do
+      expect(config.root_url).to eq('https://discovery.trln.org')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -31,6 +40,9 @@ describe TrlnArgon::Engine do
     config.local_records = 'custom_inst, consortium'
     config.apply_local_filter_by_default = 'false'
     config.application_name = 'Custom App Name'
+    config.refworks_url = 'http://www.refworks.com/express/ExpressImport.asp?'\
+                          'vendor=DUKE&filter=RIS%20Format&encoding=65001&url='
+    config.root_url = 'https://catalog.library.duke.edu'
 
     it 'sets the preferred_records' do
       expect(config.preferred_records).to eq('custom_record_field')
@@ -50,6 +62,15 @@ describe TrlnArgon::Engine do
 
     it 'sets the application_name' do
       expect(config.application_name).to eq('Custom App Name')
+    end
+
+    it 'sets the refworks_url' do
+      expect(config.refworks_url).to eq('http://www.refworks.com/express/ExpressImport.asp?'\
+                                        'vendor=DUKE&filter=RIS%20Format&encoding=65001&url=')
+    end
+
+    it 'sets the root url' do
+      expect(config.root_url).to eq('https://catalog.library.duke.edu')
     end
   end
 end

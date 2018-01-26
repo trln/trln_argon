@@ -1,6 +1,7 @@
 # Mixin for SolrDocument with TRLN Argon Specific Behavior
 module TrlnArgon
   module SolrDocument
+    include TrlnArgon::Document::RisFieldMapping
     TOC_ATTR = 'note_toc_a'.freeze
     SUMMARY_ATTR = 'note_summary_a'.freeze
 
@@ -56,9 +57,9 @@ module TrlnArgon
     end
 
     def urls
-      @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::URLS,
-                                               { href: '', type: '', text: '' },
-                                               :href)
+      @urls ||= deserialize_solr_field(TrlnArgon::Fields::URLS,
+                                       { href: '', type: '', text: '' },
+                                       :href)
     end
 
     def imprint_main
@@ -68,9 +69,9 @@ module TrlnArgon
     end
 
     def imprint_multiple
-      @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::IMPRINT_MULTIPLE,
-                                               { type: '', label: '', value: '' },
-                                               :value)
+      @imprint_multiple ||= deserialize_solr_field(TrlnArgon::Fields::IMPRINT_MULTIPLE,
+                                                   { type: '', label: '', value: '' },
+                                                   :value)
     end
 
     private
