@@ -92,7 +92,8 @@ module TrlnArgon
         "\n  # Otherwise, it tries to use the non-existent document request handler."\
         "\n  SolrDocument.repository.blacklight_config.document_solr_path = :document"\
         "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil"\
-        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)"
+        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)"\
+        "\n  SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev)"
       end
     end
 

@@ -2,6 +2,8 @@
 module TrlnArgon
   module SolrDocument
     include TrlnArgon::Document::RisFieldMapping
+    include TrlnArgon::Document::OpenurlCtxKevFieldMapping
+
     TOC_ATTR = 'note_toc_a'.freeze
     SUMMARY_ATTR = 'note_summary_a'.freeze
 

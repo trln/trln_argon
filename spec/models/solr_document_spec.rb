@@ -25,5 +25,11 @@ describe SolrDocument do
         module_obj: TrlnArgon::Document::Ris, condition_proc: nil
       )
     end
+
+    it 'registers OpenurlCtxKev as a document extension' do
+      expect(described_class.registered_extensions).to include(
+        module_obj: TrlnArgon::Document::OpenurlCtxKev, condition_proc: nil
+      )
+    end
   end
 end

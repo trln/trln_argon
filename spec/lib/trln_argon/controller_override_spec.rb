@@ -110,8 +110,8 @@ describe TrlnArgon::ControllerOverride do
   end
 
   describe 'index fields' do
-    it 'sets the imprint field' do
-      expect(override_config.index_fields).to have_key('imprint_a')
+    it 'sets the imprint main field' do
+      expect(override_config.index_fields).to have_key('imprint_main_a')
     end
 
     it 'sets the statement of responsibility field' do
