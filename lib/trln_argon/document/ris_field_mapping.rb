@@ -1,7 +1,7 @@
 module TrlnArgon
   module Document
     module RisFieldMapping
-      # Override this method in local SolrDocument.rb
+      # Override this method in local models/solr_document.rb
       # to set local RIS field mappings.
       # By default it will fetch values from the specified Solr field.
       # (Use the Solr Field constants, e.g. TrlnArgon::Fields::FIELD_CONSTANT)
