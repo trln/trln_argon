@@ -65,7 +65,6 @@ module TrlnArgon
         # tools configuration
         config.show.document_actions.delete(:citation)
         config.show.document_actions.delete(:sms)
-        config.show.document_actions.delete(:email)
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
