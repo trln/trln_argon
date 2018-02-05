@@ -116,7 +116,7 @@ en:
         item_location: "Located at %{inst_display}: %{loc_b_display} (Call Number: %{call_number})"
 
         email:
-            library_note: "This message was forwarded to you from the %{inst} Catalog. Please do not reply to this message. Questions? Contact us at %{contact_link}"
+            library_note: "This message was forwarded to you from the %{inst} Catalog. Please do not reply to this message."
             label:
                 message: "Message"
                 link_to_record: "Link to Record"
