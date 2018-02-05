@@ -1,8 +1,10 @@
 # Mixin for SolrDocument with TRLN Argon Specific Behavior
 module TrlnArgon
+  # rubocop:disable ModuleLength
   module SolrDocument
-    include TrlnArgon::Document::RisFieldMapping
+    include TrlnArgon::Document::EmailFieldMapping
     include TrlnArgon::Document::OpenurlCtxKevFieldMapping
+    include TrlnArgon::Document::RisFieldMapping
 
     TOC_ATTR = 'note_toc_a'.freeze
     SUMMARY_ATTR = 'note_summary_a'.freeze
@@ -16,6 +18,19 @@ module TrlnArgon
         [doc[TrlnArgon::Fields::INSTITUTION].first,
          doc.holdings]
       end]
+    end
+
+    def expanded_holdings_display
+      expanded_holdings.flat_map do |inst, loc_b_map|
+        loc_b_map.flat_map do |loc_b, loc_n_map|
+          loc_n_map.map do |_loc_n, items|
+            I18n.t('trln_argon.item_location',
+                   inst_display: I18n.t("trln_argon.institution.#{inst}.short_name"),
+                   loc_b_display: TrlnArgon::LookupManager.instance.map("#{inst}.loc_b.#{loc_b}"),
+                   call_number: items['call_no'].strip)
+          end
+        end
+      end
     end
 
     def availability
@@ -64,6 +79,14 @@ module TrlnArgon
                                        :href)
     end
 
+    def imprint_main_display
+      imprint_main.map do |imprint|
+        [imprint_type(imprint),
+         imprint_label(imprint),
+         imprint_value(imprint)].compact.join(': ')
+      end
+    end
+
     def imprint_main
       @imprint_main ||= deserialize_solr_field(TrlnArgon::Fields::IMPRINT_MAIN,
                                                { type: '', label: '', value: '' },
@@ -99,10 +122,27 @@ module TrlnArgon
     end
 
     def expand_docs_search
-      controller = CatalogController.new
-      search_builder = SearchBuilder.new([:add_query_to_solr], controller)
-      query = search_builder.where("#{TrlnArgon::Fields::ROLLUP_ID}:#{self[TrlnArgon::Fields::ROLLUP_ID]}")
-      controller.repository.search(query)
+      @expanded_docs_search ||= begin
+        controller = CatalogController.new
+        search_builder = SearchBuilder.new([:add_query_to_solr], controller)
+        query = search_builder.where("#{TrlnArgon::Fields::ROLLUP_ID}:#{self[TrlnArgon::Fields::ROLLUP_ID]}")
+        controller.repository.search(query)
+      end
+    end
+
+    def imprint_type(imprint)
+      return if imprint[:type].blank? || I18n.t("trln_argon.imprint_type.#{imprint[:type]}").blank?
+      I18n.t("trln_argon.imprint_type.#{imprint[:type]}")
+    end
+
+    def imprint_label(imprint)
+      return if imprint[:label].blank?
+      imprint[:label]
+    end
+
+    def imprint_value(imprint)
+      return if imprint[:value].blank?
+      imprint[:value]
     end
   end
 end

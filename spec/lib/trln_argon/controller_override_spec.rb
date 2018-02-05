@@ -41,6 +41,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Argon Refworks show document action' do
       expect(override_config.show.document_actions).to include(:argon_refworks)
     end
+
+    it 'sets the email show document action' do
+      expect(override_config.show.document_actions).to include(:email)
+    end
   end
 
   describe 'title field' do

@@ -112,3 +112,28 @@ en:
             distribution: "Distributed"
             manufacture: "Manufactured"
             copyright: ""
+
+        item_location: "Located at %{inst_display}: %{loc_b_display} (Call Number: %{call_number})"
+
+        email:
+            library_note: "This message was forwarded to you from the %{inst} Catalog. Please do not reply to this message. Questions? Contact us at %{contact_link}"
+            label:
+                message: "Message"
+                link_to_record: "Link to Record"
+                location: "Location"
+                language: "Language"
+                format: "Format"
+                publisher: "Publisher"
+                author: "Author"
+                title: "Title"
+                date: "Date"
+                series: "Series"
+                subject: "Subject"
+                description: "Description"
+                indentifier: "Identifier"
+                note: "Notes"
+                table_of_contents: "Table of Contents"
+                summary: "Summary"
+                full_text_link: "Full Text Link"
+                findingaid_link: "Finding Aid Link"
+

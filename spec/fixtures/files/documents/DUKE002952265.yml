@@ -26,8 +26,8 @@
   - Smithsonian Institution. Press.
   imprint_type_a:
   - publication
-  imprint_a:
-  - 'Washington : Smithsonian Institution Press, 1986.'
+  imprint_main_a:
+  - '{"type":"imprint", "label":"", "value":"Washington : Smithsonian Institution Press, 1986."}'
   misc_id_qual_a:
   - ''
   misc_id_type_a:
