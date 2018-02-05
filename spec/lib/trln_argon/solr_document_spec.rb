@@ -133,4 +133,97 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  describe 'export as openurl_ctx_kev' do
+    subject(:ctx_kev) do
+      SolrDocument.new(YAML.safe_load(
+        file_fixture('documents/DUKE002952265.yml').read
+      ).first).export_as_openurl_ctx_kev
+    end
+
+    it 'contains a url_ver' do
+      expect(ctx_kev).to match('url_ver=Z39.88-2004')
+    end
+
+    it 'contains a url_ctx_fmt' do
+      expect(ctx_kev).to match('url_ctx_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Actx')
+    end
+
+    it 'contains a ctx_ver' do
+      expect(ctx_kev).to match('ctx_ver=Z39.88-2004')
+    end
+
+    it 'contains an rft.title' do
+      expect(ctx_kev).to match('rft.title=Revision\+of\+the\+Atlantic\+Brisingida\+'\
+                               '%28Echinodermata%3AAsteroidea%29%2C\+with\+description\+'\
+                               'of\+a\+new\+genus\+and\+family\+%2F')
+    end
+
+    it 'contains an rft.date' do
+      expect(ctx_kev).to match('rft.date=1986')
+    end
+
+    it 'contains an rft.au' do
+      expect(ctx_kev).to match('rft.au=Downey%2C\+Maureen\+E.&rft.au=Smithsonian\+Institution.\+Press.')
+    end
+
+    it 'contains an rft_val_fmt' do
+      expect(ctx_kev).to match('rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook')
+    end
+
+    it 'contains an rft_id' do
+      expect(ctx_kev).to match('rft_id=info%3Asid%2Fdiscovery.trln.org%2Fcatalog')
+    end
+  end
+
+  describe 'export to email' do
+    let(:test_document) do
+      SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
+    end
+
+    before do
+      allow(test_document).to receive(:expanded_holdings) do
+        { 'duke' => {
+          'DOCS' => {
+            'PGSM' => {
+              'loc_b' => 'DOCS', 'loc_n' => 'PGSM', 'call_no' => 'SI 1.27:435'
+            }
+          }
+        } }
+      end
+    end
+
+    # rubocop:disable ExampleLength
+    it 'exports the document to email text' do
+      expect(test_document.to_email_text).to eq(
+        "\n"\
+        "Title:\n"\
+        '  Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), '\
+        "with description of a new genus and family /\n"\
+        "\n"\
+        "Author:\n"\
+        "  Maureen E. Downey.\n"\
+        "\n"\
+        "Publisher:\n"\
+        "  Washington : Smithsonian Institution Press, 1986.\n"\
+        "\n"\
+        "Date:\n"\
+        "  1986\n"\
+        "\n"\
+        "Format:\n"\
+        "  Book\n"\
+        "  Print\n"\
+        "\n"\
+        "Subject:\n"\
+        "  Brisingida -- Atlantic Ocean -- Classification\n  Echinodermata -- Classification\n"\
+        "  Echinodermata -- Atlantic Ocean -- Classification\n"\
+        "\n"\
+        "Location:\n"\
+        "  Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
+        "\n"\
+        "Link to Record:\n"\
+        '  https://discovery.trln.org/catalog/DUKE002952265'
+      )
+    end
+  end
 end

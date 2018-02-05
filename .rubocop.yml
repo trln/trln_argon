@@ -9,6 +9,7 @@ AllCops:
     - 'lib/trln_argon/version.rb'
     - 'lib/trln_argon/item_deserializer.rb'
     - 'trln_argon.gemspec'
+    - 'config/initializers/openurl.rb'
 
 Documentation:
   Enabled: false

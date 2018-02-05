@@ -9,7 +9,7 @@ module TrlnArgon
     included do
       send(:include, BlacklightAdvancedSearch::Controller)
 
-      before_action :set_local_filter_param_to_default, only: :index
+      before_action :set_local_filter_param_to_default, only: %i[index show]
 
       before_action :filtered_results_total, only: :index
 
@@ -65,7 +65,6 @@ module TrlnArgon
         # tools configuration
         config.show.document_actions.delete(:citation)
         config.show.document_actions.delete(:sms)
-        config.show.document_actions.delete(:email)
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
@@ -180,7 +179,8 @@ module TrlnArgon
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
         config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
-        config.add_index_field TrlnArgon::Fields::IMPRINT.to_s
+        config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
+                               helper_method: :imprint_main
         config.add_index_field TrlnArgon::Fields::FORMAT.to_s
 
         # solr fields to be displayed in the show (single result) view

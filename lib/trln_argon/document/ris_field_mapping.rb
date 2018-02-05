@@ -1,7 +1,7 @@
 module TrlnArgon
   module Document
     module RisFieldMapping
-      # Override this method in local SolrDocument.rb
+      # Override this method in local models/solr_document.rb
       # to set local RIS field mappings.
       # By default it will fetch values from the specified Solr field.
       # (Use the Solr Field constants, e.g. TrlnArgon::Fields::FIELD_CONSTANT)
@@ -22,17 +22,7 @@ module TrlnArgon
                 )
               end,
           # Location in Archives (Inst., Lib., Call No.)
-          AV: proc do
-                expanded_holdings.flat_map do |inst, loc_b_map|
-                  loc_b_map.flat_map do |loc_b, loc_n_map|
-                    loc_n_map.map do |_loc_n, items|
-                      inst_display = I18n.t("trln_argon.institution.#{inst}.short_name")
-                      loc_b_display = TrlnArgon::LookupManager.instance.map("#{inst}.loc_b.#{loc_b}")
-                      "Located at #{inst_display}: #{loc_b_display} (Call Number: #{items['call_no'].strip})"
-                    end
-                  end
-                end
-              end,
+          AV: proc { expanded_holdings_display },
           # Place Published (TODO: Combined with Publisher in Argon imprint_main)
           # CY: ,
           # Reference ID

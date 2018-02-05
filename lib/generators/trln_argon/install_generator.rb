@@ -91,9 +91,34 @@ module TrlnArgon
         "\n  # from the Rails console with our Solr configuration."\
         "\n  # Otherwise, it tries to use the non-existent document request handler."\
         "\n  SolrDocument.repository.blacklight_config.document_solr_path = :document"\
-        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil"\
-        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)"
+        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil"
       end
+    end
+
+    def inject_ris_action
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::Ris)'
+      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
+      insert_into_file 'app/models/solr_document.rb',
+                       after: 'SolrDocument.repository.blacklight_config.document_solr_request_handler = nil' do
+        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)\n"
+      end
+    end
+
+    def inject_open_url_ctx_kev_action
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev)'
+      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
+      insert_into_file 'app/models/solr_document.rb',
+                       after: 'SolrDocument.use_extension(TrlnArgon::Document::Ris)' do
+        "\n  SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev)\n"
+      end
+    end
+
+    def inject_email_action
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::Email)'
+      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
+      gsub_file 'app/models/solr_document.rb',
+                'SolrDocument.use_extension(Blacklight::Document::Email)',
+                'SolrDocument.use_extension(TrlnArgon::Document::Email)'
     end
 
     def inject_catalog_controller_overrides
