@@ -165,6 +165,20 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  # fields that display below the record title on the 'show' page.
+  describe 'show sub header fields' do
+    it 'sets the Statement of Responsibility' do
+      expect(override_config.show_sub_header_fields).to have_key('statement_of_responsibility_a')
+    end
+
+    it 'sets the Imprint field' do
+      expect(override_config.show_sub_header_fields).to have_key('imprint_main_a')
+    end
+    it 'sets the Edition field' do
+      expect(override_config.show_sub_header_fields).to have_key('edition_a')
+    end
+  end
+
   describe 'search fields' do
     describe 'all fields' do
       it 'sets the all fields field' do
