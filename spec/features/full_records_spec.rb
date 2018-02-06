@@ -34,4 +34,12 @@ describe 'full records' do
       expect(page).to have_css('dd.blacklight-isbn_number_a', text: /.+/)
     end
   end
+
+  context 'when it displays a known record with an edition statement indexed' do
+    before { visit solr_document_path(id: 'UNCb2224383') }
+
+    it 'displays the edition statement' do
+      expect(page).to have_css('li.sub-header.edition_a', text: /5th/)
+    end
+  end
 end
