@@ -69,4 +69,19 @@ describe 'search results' do
       expect(page).to have_css('.pagination')
     end
   end
+
+  # removed for brittleness, leaving in as an example of
+  # how to select a search field.
+  # describe 'when showing results' do
+  #  before do
+  #    # 'Basic child psychiatry', Philip Barker, 5th ed.
+  #    visit search_catalog_path(local_filter: 'true')
+  #    fill_in('q', with: '0632019239')
+  #    select('ISBN/ISSN', from: 'search_field')
+  #    click_button 'search'
+  #  end
+  #  it 'displays edition statement on specific record' do
+  #    expect(page).to have_css('li.index-metadata.edition_a', text: /5th/)
+  #  end
+  # end
 end

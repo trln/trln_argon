@@ -118,6 +118,10 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.index_fields).to have_key('imprint_main_a')
     end
 
+    it 'sets the edition field' do
+      expect(override_config.index_fields).to have_key('edition_a')
+    end
+
     it 'sets the statement of responsibility field' do
       expect(override_config.index_fields).to have_key('statement_of_responsibility_a')
     end
@@ -158,6 +162,20 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the OCLC Number field' do
       expect(override_config.show_fields).to have_key('oclc_number')
+    end
+  end
+
+  # fields that display below the record title on the 'show' page.
+  describe 'show sub header fields' do
+    it 'sets the Statement of Responsibility' do
+      expect(override_config.show_sub_header_fields).to have_key('statement_of_responsibility_a')
+    end
+
+    it 'sets the Imprint field' do
+      expect(override_config.show_sub_header_fields).to have_key('imprint_main_a')
+    end
+    it 'sets the Edition field' do
+      expect(override_config.show_sub_header_fields).to have_key('edition_a')
     end
   end
 

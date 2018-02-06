@@ -181,6 +181,7 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                helper_method: :imprint_main
+        config.add_index_field TrlnArgon::Fields::EDITION.to_s
         config.add_index_field TrlnArgon::Fields::FORMAT.to_s
 
         # solr fields to be displayed in the show (single result) view
@@ -214,6 +215,7 @@ module TrlnArgon
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          helper_method: :imprint_main
+        config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::FORMAT.to_s
 
         # TODO: What field should be searched when linking to a search for various
