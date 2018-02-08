@@ -17,7 +17,7 @@ Documentation:
 Metrics/AbcSize:
   Max: 20
   Exclude:
-    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
 
 Metrics/BlockLength:
   Exclude:
@@ -32,7 +32,7 @@ Metrics/ClassLength:
 
 Metrics/CyclomaticComplexity:
   Exclude:
-    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
 
 Metrics/LineLength:
   Max: 120
@@ -41,19 +41,19 @@ Metrics/LineLength:
 
 Metrics/MethodLength:
   Exclude:
-    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
     - 'lib/trln_argon/mappings.rb'
 
 Metrics/ModuleLength:
   Exclude:
     - 'lib/trln_argon/controller_override.rb'
     - 'lib/trln_argon/fields.rb'
-    - 'lib/trln_argon/helpers/trln_argon_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/trln_argon_helper.rb'
     - 'spec/lib/trln_argon/fields_spec.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
-    - 'lib/trln_argon/helpers/catalog_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
 
 RSpec/DescribeClass:
   Exclude:

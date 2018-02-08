@@ -258,4 +258,36 @@ describe TrlnArgon::ControllerOverride do
       end
     end
   end
+
+  describe '#filter_scope_name' do
+    context 'when the scope is BookmarksController' do
+      before { allow(mock_controller).to receive(:controller_name).and_return('bookmarks') }
+
+      it 'uses the translated scope name for bookmarks' do
+        expect(mock_controller.filter_scope_name).to eq('bookmarked')
+      end
+    end
+
+    context 'when local filter is applied', verify_stubs: false do
+      before do
+        allow(mock_controller).to receive(:controller_name).and_return('catalog')
+        allow(mock_controller).to receive(:local_filter_applied?).and_return(true)
+      end
+
+      it 'uses the translated scope name for bookmarks' do
+        expect(mock_controller.filter_scope_name).to eq('UNC')
+      end
+    end
+
+    context 'when local filter is not applied', verify_stubs: false do
+      before do
+        allow(mock_controller).to receive(:controller_name).and_return('catalog')
+        allow(mock_controller).to receive(:local_filter_applied?).and_return(false)
+      end
+
+      it 'uses the translated scope name for bookmarks' do
+        expect(mock_controller.filter_scope_name).to eq('TRLN')
+      end
+    end
+  end
 end

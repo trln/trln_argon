@@ -3,11 +3,10 @@ require 'blacklight_advanced_search'
 require 'blacklight-hierarchy'
 require 'rails_autolink'
 require 'library_stdnums'
+require 'openurl'
 
 module TrlnArgon
   class Engine < ::Rails::Engine
-    isolate_namespace TrlnArgon
-
     attr_writer :configuration
 
     def self.configuration

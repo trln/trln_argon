@@ -22,13 +22,19 @@ describe SolrDocument do
 
     it 'registers Ris as a document extension' do
       expect(described_class.registered_extensions).to include(
-        module_obj: TrlnArgon::Document::Ris, condition_proc: nil
+        module_obj: TrlnArgon::DocumentExtensions::Ris, condition_proc: nil
       )
     end
 
     it 'registers OpenurlCtxKev as a document extension' do
       expect(described_class.registered_extensions).to include(
-        module_obj: TrlnArgon::Document::OpenurlCtxKev, condition_proc: nil
+        module_obj: TrlnArgon::DocumentExtensions::OpenurlCtxKev, condition_proc: nil
+      )
+    end
+
+    it 'registers Email as a document extension' do
+      expect(described_class.registered_extensions).to include(
+        module_obj: TrlnArgon::DocumentExtensions::Email, condition_proc: nil
       )
     end
   end

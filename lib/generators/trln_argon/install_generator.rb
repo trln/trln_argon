@@ -30,18 +30,11 @@ module TrlnArgon
       copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
     end
 
-    def install_search_builders
-      copy_file 'search_builders/trln_argon_search_builder.rb', 'app/models/trln_argon_search_builder.rb'
-      copy_file 'search_builders/local_search_builder.rb', 'app/models/local_search_builder.rb'
-      copy_file 'search_builders/consortium_search_builder.rb', 'app/models/consortium_search_builder.rb'
-    end
-
-    def install_helpers
-      copy_file 'helpers/catalog_helper.rb', 'app/helpers/catalog_helper.rb'
-      copy_file 'helpers/blacklight_helper.rb', 'app/helpers/blacklight_helper.rb'
-      copy_file 'helpers/trln_argon_helper.rb', 'app/helpers/trln_argon_helper.rb'
-      copy_file 'helpers/render_constraints_helper.rb', 'app/helpers/render_constraints_helper.rb'
-      copy_file 'helpers/hierarchy_helper.rb', 'app/helpers/hierarchy_helper.rb'
+    def load_helpers_in_host_application
+      insert_into_file 'app/controllers/application_controller.rb',
+                       after: 'protect_from_forgery with: :exception' do
+        "\n  helper TrlnArgon::Engine.helpers"
+      end
     end
 
     def install_stylesheet
@@ -96,29 +89,29 @@ module TrlnArgon
     end
 
     def inject_ris_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::Ris)'
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)'
       return if IO.read('app/models/solr_document.rb').include?(line_to_check)
       insert_into_file 'app/models/solr_document.rb',
                        after: 'SolrDocument.repository.blacklight_config.document_solr_request_handler = nil' do
-        "\n  SolrDocument.use_extension(TrlnArgon::Document::Ris)\n"
+        "\n  SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)\n"
       end
     end
 
     def inject_open_url_ctx_kev_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev)'
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::OpenurlCtxKev)'
       return if IO.read('app/models/solr_document.rb').include?(line_to_check)
       insert_into_file 'app/models/solr_document.rb',
-                       after: 'SolrDocument.use_extension(TrlnArgon::Document::Ris)' do
-        "\n  SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev)\n"
+                       after: 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)' do
+        "\n  SolrDocument.use_extension(TrlnArgon::DocumentExtensions::OpenurlCtxKev)\n"
       end
     end
 
     def inject_email_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::Document::Email)'
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Email)'
       return if IO.read('app/models/solr_document.rb').include?(line_to_check)
       gsub_file 'app/models/solr_document.rb',
                 'SolrDocument.use_extension(Blacklight::Document::Email)',
-                'SolrDocument.use_extension(TrlnArgon::Document::Email)'
+                'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Email)'
     end
 
     def inject_catalog_controller_overrides
@@ -157,10 +150,10 @@ module TrlnArgon
     end
 
     def inject_search_builder_behavior
-      return if IO.read('app/models/search_builder.rb').include?('TrlnSearchBuilderBehavior')
+      return if IO.read('app/models/search_builder.rb').include?('TrlnArgon::ArgonSearchBuilder')
       insert_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
         "\n  include BlacklightAdvancedSearch::AdvancedSearchBuilder"\
-        "\n  include TrlnArgon::TrlnSearchBuilderBehavior"\
+        "\n  include TrlnArgon::ArgonSearchBuilder"\
         "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
       end
     end

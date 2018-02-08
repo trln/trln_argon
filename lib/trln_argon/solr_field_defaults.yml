@@ -646,6 +646,14 @@ NOTES_SERIALS_SUMMARY_T:
   solr_field: :notes_serials_summary_t
   label:
     en: Notes Serials Summary T
+NOTE_SUMMARY:
+  solr_field: :note_summary_a
+  label:
+    en: Summary
+NOTE_TOC:
+  solr_field: note_toc_a
+  label:
+    en: Table of Contents
 OCLC_NUMBER:
   solr_field: :oclc_number
   label:
