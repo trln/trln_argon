@@ -14,8 +14,6 @@ module TrlnArgon
       send(:include, LocalFilter)
       send(:include, BlacklightAdvancedSearch::Controller)
 
-      before_action :set_local_filter_param_to_default, only: %i[index show]
-
       helper_method :query_has_constraints?
 
       add_show_tools_partial(:email,
@@ -98,7 +96,7 @@ module TrlnArgon
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
-                               filter_element_helper: :location_filter_display,
+                               helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
@@ -172,7 +170,7 @@ module TrlnArgon
         cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
         lf_components = TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s.split('_')
         config.facet_display[:hierarchy] = {
-          # blacklight-hiearchy requires this mapping;
+          # blacklight-hierarchy requires this mapping;
           # prefix + final component (separated by _)
           cnf_components[0..-2].join('_') => [[cnf_components[-1]], ':'],
           lf_components[0..-2].join('_') => [[lf_components[-1]], ':']

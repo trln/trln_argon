@@ -13,35 +13,6 @@ module TrlnArgon
       end
 
       ##
-      # Render a single facet's constraint
-      #
-      # @param [String] facet field
-      # @param [Array<String>] selected facet values
-      # @param [Hash] query parameters
-      # @return [String]
-      def render_filter_element(facet, values, _localized_params)
-        facet_config = facet_configuration_for_field(facet)
-
-        safe_join(values.map do |val|
-          next if val.blank? # skip empty string
-          display_value = filter_element_display_value(facet_config, facet, val)
-          render_constraint_element(
-            facet_field_label(facet_config.key), display_value,
-            remove: search_action_path(search_state.remove_facet_params(facet, val)),
-            classes: ['filter', 'filter-' + facet.parameterize]
-          )
-        end, "\n")
-      end
-
-      def filter_element_display_value(facet_config, facet, val)
-        if facet_config.filter_element_helper
-          send(facet_config.filter_element_helper, facet_display_value(facet, val))
-        else
-          facet_display_value(facet, val)
-        end
-      end
-
-      ##
       # Render the begins_with constraints
       #
       # @param [Hash] query parameters

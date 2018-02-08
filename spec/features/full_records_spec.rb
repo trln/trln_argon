@@ -30,8 +30,23 @@ describe 'full records' do
       expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN:')
     end
 
-    it 'displays the ISBN field value' do
-      expect(page).to have_css('dd.blacklight-isbn_with_qualifying_info', text: /.+/)
+    it 'displays the ISBN field value with qualifying info' do
+      expect(page).to have_css(
+        'dd.blacklight-isbn_with_qualifying_info',
+        text: '0195069714 (cloth : alk. paper) and 0195069722 (pbk. : alk paper)'
+      )
+    end
+  end
+
+  context 'when viewing a rolled up record' do
+    before { visit solr_document_path(id: 'DUKE002952265', local_filter: false) }
+
+    it 'shows location information for Duke' do
+      expect(page).to have_css('#doc_duke002952265 h3', text: 'Duke Libraries')
+    end
+
+    it 'shows location information for NCSU' do
+      expect(page).to have_css('#doc_duke002952265 h3', text: 'NCSU Libraries')
     end
   end
 
