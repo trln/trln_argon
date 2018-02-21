@@ -28,8 +28,8 @@ module TrlnArgon
       # rubocop:disable MethodLength
       def get_params(doc, client = 'trlnet', format_spec = 'XML.XML')
         params = {
-          isbn: doc.fetch('isbn_number_a', []).dup,
-          oclc: doc.fetch('oclc_number', []).dup
+          isbn: [doc.fetch(TrlnArgon::Fields::ISBN_NUMBER, []).first],
+          oclc: doc.fetch(TrlnArgon::Fields::OCLC_NUMBER, []).dup
           # placeholder for UPC and EAN when they are added
         }
         %i[isbn oclc upc ean].each do |k|

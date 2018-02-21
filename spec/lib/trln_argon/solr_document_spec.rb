@@ -204,6 +204,12 @@ describe TrlnArgon::SolrDocument do
         "Author:\n"\
         "  Maureen E. Downey.\n"\
         "\n"\
+        "Link to Record:\n"\
+        "  https://discovery.trln.org/catalog/DUKE002952265\n"\
+        "\n"\
+        "Location:\n"\
+        "  Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
+        "\n"\
         "Publisher:\n"\
         "  Washington : Smithsonian Institution Press, 1986.\n"\
         "\n"\
@@ -216,13 +222,7 @@ describe TrlnArgon::SolrDocument do
         "\n"\
         "Subject:\n"\
         "  Brisingida -- Atlantic Ocean -- Classification\n  Echinodermata -- Classification\n"\
-        "  Echinodermata -- Atlantic Ocean -- Classification\n"\
-        "\n"\
-        "Location:\n"\
-        "  Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
-        "\n"\
-        "Link to Record:\n"\
-        '  https://discovery.trln.org/catalog/DUKE002952265'
+        '  Echinodermata -- Atlantic Ocean -- Classification'
       )
     end
   end
