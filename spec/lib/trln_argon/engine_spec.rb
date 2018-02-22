@@ -30,6 +30,18 @@ describe TrlnArgon::Engine do
     it 'sets the root url' do
       expect(config.root_url).to eq('https://discovery.trln.org')
     end
+
+    it 'sets the article search url' do
+      expect(config.article_search_url).to eq(
+        'http://libproxy.lib.unc.edu/login?'\
+        'url=http://unc.summon.serialssolutions.com/search?'\
+        's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
+      )
+    end
+
+    it 'sets the contact URL' do
+      expect(config.contact_url).to eq('https://library.unc.edu/ask/')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -43,6 +55,11 @@ describe TrlnArgon::Engine do
     config.refworks_url = 'http://www.refworks.com/express/ExpressImport.asp?'\
                           'vendor=DUKE&filter=RIS%20Format&encoding=65001&url='
     config.root_url = 'https://catalog.library.duke.edu'
+    config.article_search_url = 'https://duke.summon.serialssolutions.com/'\
+                                 'advanced#!/search?'\
+                                 'ho=t&fvf=ContentType,Journal%20Article,f|'\
+                                 'ContentType,Magazine%20Article,f&l=en&q='
+    config.contact_url = 'https://library.duke.edu/research/ask'
 
     it 'sets the preferred_records' do
       expect(config.preferred_records).to eq('custom_record_field')
@@ -71,6 +88,17 @@ describe TrlnArgon::Engine do
 
     it 'sets the root url' do
       expect(config.root_url).to eq('https://catalog.library.duke.edu')
+    end
+
+    it 'sets the article search url' do
+      expect(config.article_search_url).to eq('https://duke.summon.serialssolutions.com/'\
+                                    'advanced#!/search?'\
+                                    'ho=t&fvf=ContentType,Journal%20Article,f|'\
+                                    'ContentType,Magazine%20Article,f&l=en&q=')
+    end
+
+    it 'sets the contact url' do
+      expect(config.contact_url).to eq('https://library.duke.edu/research/ask')
     end
   end
 end

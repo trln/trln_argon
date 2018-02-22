@@ -80,7 +80,7 @@ en:
             author: "Author"
             title: "Title"
             subject: "Subject"
-            isbn_issn: "ISBN/ISSN"
+            isbn_issn: "ISBN/ISSN/barcode"
 
         sort_options:
             relevance: "Relevance"
@@ -95,6 +95,20 @@ en:
         search_constraints:
             begins_with: "begins with"
             location_separator: ", "
+
+        search:
+            zero_results:
+                title: 'No results for your search.'
+                modify_search: 'Try these other options:'
+                search_fields: 'You searched by %{search_fields}.'
+                search_everything: 'Try searching everything.'
+                article_search: 'Search for articles related to "%{query}"'
+                expand_search_html:
+                    one: 'There is 1 result at all Triangle Research Libraries. %{href}'
+                    other: 'There are %{count} results at all Triangle Research Libraries. %{href}'
+                expand_search_href: 'Expand your search.'
+                contact_us_html: 'Or %{href} for help.'
+                contact_us_href: 'contact us'
 
         show:
             heading:

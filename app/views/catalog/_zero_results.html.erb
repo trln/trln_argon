@@ -1,0 +1,39 @@
+<h2><%= t 'trln_argon.search.zero_results.title' %></h2>
+<div id="documents" class="noresults">
+  <h3><%= t 'trln_argon.search.zero_results.modify_search' %></h3>
+  <ul>
+    <!-- EXPAND TO TRLN -->
+    <% if @filtered_results_total > 0 && local_filter_applied? %>
+      <li>
+        <%= t('trln_argon.search.zero_results.expand_search_html',
+            count: @filtered_results_total,
+            href: link_to(t('trln_argon.search.zero_results.expand_search_href'), url_for(search_state.to_h.merge(local_filter: 'false', page: '1')))).html_safe %></li>
+    <% end %>
+
+    <!-- ARTICLE SEARCH -->
+    <% if params[:q] %>
+      <li>
+        <%= link_to t('trln_argon.search.zero_results.article_search',
+                      query: truncate(params[:q], length: 60, escape: false)),
+                      "#{TrlnArgon::Engine.configuration.article_search_url}#{CGI::escape(params[:q])}" %>
+      </li>
+    <% end %>
+
+    <!-- KEYWORD SEARCH INSTEAD -->
+    <% if params[:q] and params[:search_field] and params[:search_field] != blacklight_config.default_search_field.try(:key) %>
+        <li>
+          <%= t 'trln_argon.search.zero_results.search_fields', :search_fields => search_field_label(params) %>
+          <%= link_to t('trln_argon.search.zero_results.search_everything',
+                      field: blacklight_config.default_search_field.label),
+                      url_for(search_state.params_for_search(search_field: blacklight_config.default_search_field.key)) %>
+      </li>
+    <% end %>
+
+    <!-- CONTACT US -->
+    <li>
+      <%= t('trln_argon.search.zero_results.contact_us_html',
+            href: link_to(t('trln_argon.search.zero_results.contact_us_href'),
+            TrlnArgon::Engine.configuration.contact_url)).html_safe %>
+    </li>
+  </ul>
+</div>

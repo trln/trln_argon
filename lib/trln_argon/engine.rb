@@ -26,7 +26,9 @@ module TrlnArgon
                     :solr_fields,
                     :code_mappings,
                     :refworks_url,
-                    :root_url
+                    :root_url,
+                    :article_search_url,
+                    :contact_url
 
       # rubocop:disable MethodLength
       def initialize
@@ -41,6 +43,11 @@ module TrlnArgon
           'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?' \
           'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
         @root_url = 'https://discovery.trln.org'
+        @article_search_url =
+          'http://libproxy.lib.unc.edu/login?'\
+          'url=http://unc.summon.serialssolutions.com/search?'\
+          's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
+        @contact_url = 'https://library.unc.edu/ask/'
       end
 
       private

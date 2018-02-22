@@ -4,7 +4,7 @@ describe 'search results' do
       visit search_catalog_path
       fill_in 'q', with: 'qwertyuiopasdfdghjklzxcvbnm'
       click_button 'search'
-      expect(page).to have_content 'No results found for your search'
+      expect(page).to have_content 'No results for your search'
     end
   end
 
