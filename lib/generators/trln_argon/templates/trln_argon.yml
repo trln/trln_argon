@@ -6,6 +6,8 @@ development:
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
+  article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
+  contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>
 
 test:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
@@ -15,6 +17,8 @@ test:
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
+  article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
+  contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>
 
 production:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
@@ -24,4 +28,5 @@ production:
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
-
+  article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
+  contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>

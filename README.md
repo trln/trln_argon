@@ -81,6 +81,8 @@ PREFERRED_RECORDS: "unc, trln"
 APPLY_LOCAL_FILTER_BY_DEFAULT: "true"
 REFWORKS_URL: "http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url="
 ROOT_URL: 'https://discovery.trln.org'
+ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
+CONTACT_URL: 'https://library.unc.edu/ask/'
 ```
 
 ### Changing field labels and other UI text.
