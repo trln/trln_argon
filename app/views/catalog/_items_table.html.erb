@@ -1,6 +1,6 @@
 <div class="items">
   <% if document.fulltext_urls.any? || document.findingaid_urls.any? %>
-    <h3>Online</h3>
+    <h3 class="online-header">Online Access:</h3>
     <div class="fulltext-url">
       <ul>
       <% document.fulltext_urls.each do |url| %>
@@ -13,7 +13,8 @@
     </div>
   <% end %>
   <% unless document.read_items.key?(nil) %>
-    <h3>At the Library</h3>
+    <!--<h3>At the Library</h3>-->
+    <h3>Availability:</h3>
     <% if context == 'index' %>
       <%= render partial: "items_table_index", locals: { document: document} %>
     <% else %>

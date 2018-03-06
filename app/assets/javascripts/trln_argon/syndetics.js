@@ -31,4 +31,32 @@ Blacklight.onLoad(function() {
     parent.find('.more').on('click', expand);
     parent.find('.less').on('click', contract);
   });
+
+
+
+  // Get natural width of thumbnails and hide empty syndetics thumbs
+
+  (function($){
+
+  	$(window).load(function(){
+
+  		$('#documents div.thumbnail').find('img').each(function () {
+
+  			var $this = $(this), width = $(this).get(0).naturalWidth;
+  			var $parentdiv = $(this).closest('div');
+
+  			if (width < 2) {
+  				//$this.addClass('hide');
+  				$parentdiv.addClass('hide');
+
+  			}
+
+  		});
+
+  	});
+
+
+  })(jQuery);
+
+
 });
