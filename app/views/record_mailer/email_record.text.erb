@@ -1,8 +1,8 @@
-<%= t('trln_argon.email.library_note', inst: t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name"), contact_link: "Contact Link???") %>
+<%= t('trln_argon.email.library_note', inst: t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name"), contact_url: TrlnArgon::Engine.configuration.contact_url) %>
+<%= "\n" %>
+<%= t('trln_argon.email.label.message') %>:
+<%="\s\s#{@message}\n"%>
 <% @documents.each do |document| %>
 <%= document.to_email_text %>
 <%= "\n" %>
 <% end %>
-<%= "\n" %>
-<%= t('trln_argon.email.label.message') %>:
-<%="\s\s#{@message}\n"%>

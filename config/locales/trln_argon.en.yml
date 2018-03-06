@@ -28,6 +28,12 @@ en:
             argon_refworks: "Refworks"
             ris: "RIS File"
 
+        email:
+            text:
+                subject:
+                    one: 'Library catalog record: %{title}'
+                    other: 'Library catalog records'
+
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
@@ -130,7 +136,7 @@ en:
         item_location: "Located at %{inst_display}: %{loc_b_display} (Call Number: %{call_number})"
 
         email:
-            library_note: "This message was forwarded to you from the %{inst} Catalog. Please do not reply to this message."
+            library_note: "This message was sent from the %{inst} catalog. Please do not reply to this message. For assistance, see %{contact_url}."
             label:
                 message: "Message"
                 link_to_record: "Link to Record"
@@ -138,6 +144,7 @@ en:
                 language: "Language"
                 format: "Format"
                 publisher: "Publisher"
+                edition: "Edition"
                 author: "Author"
                 title: "Title"
                 date: "Date"

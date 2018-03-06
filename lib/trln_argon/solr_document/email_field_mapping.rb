@@ -13,7 +13,13 @@ module TrlnArgon
         @email_field_mapping ||= {
           title: TrlnArgon::Fields::TITLE_MAIN,
           author: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
+          link_to_record: proc do
+                            TrlnArgon::Engine.configuration.root_url.chomp('/') +
+                              Rails.application.routes.url_helpers.solr_document_path(self)
+                          end,
+          location: proc { expanded_holdings_to_text },
           publisher: proc { imprint_main_to_text },
+          edition: TrlnArgon::Fields::EDITION,
           date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
           format: TrlnArgon::Fields::FORMAT,
           # series:
@@ -23,13 +29,8 @@ module TrlnArgon
           # notes:
           # contents:
           # summary:
-          location: proc { expanded_holdings_to_text },
           full_text_link: proc { fulltext_urls.map { |u| u[:href] } },
-          findingaid_link: proc { findingaid_urls.map { |u| u[:href] } },
-          link_to_record: proc do
-                            TrlnArgon::Engine.configuration.root_url.chomp('/') +
-                              Rails.application.routes.url_helpers.solr_document_path(self)
-                          end
+          findingaid_link: proc { findingaid_urls.map { |u| u[:href] } }
         }
       end
     end
