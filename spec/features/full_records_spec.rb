@@ -27,11 +27,11 @@ describe 'full records' do
     end
 
     it 'displays the ISBN field label' do
-      expect(page).to have_css('dt.blacklight-isbn_number_a', text: 'ISBN:')
+      expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN:')
     end
 
     it 'displays the ISBN field value' do
-      expect(page).to have_css('dd.blacklight-isbn_number_a', text: /.+/)
+      expect(page).to have_css('dd.blacklight-isbn_with_qualifying_info', text: /.+/)
     end
   end
 
