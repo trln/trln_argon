@@ -121,7 +121,7 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
                                query: { '2000_to_present' =>
                                         { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
-                                          q: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[2000 TO *]" },
+                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[2000 TO *]" },
                                         '1900_to_1999' =>
                                         { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
                                           fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1900 TO 1999]" },
@@ -204,8 +204,9 @@ module TrlnArgon
                               label: TrlnArgon::Fields::SECONDARY_URLS.label,
                               accessor: :secondary_urls,
                               helper_method: :link_to_secondary_urls
-        config.add_show_field TrlnArgon::Fields::ISBN_NUMBER.to_s,
-                              label: TrlnArgon::Fields::ISBN_NUMBER.label
+        config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
+                              label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
+                              accessor: :isbn_with_qualifying_info
         config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
                               label: TrlnArgon::Fields::ISSN_LINKING.label
         config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,

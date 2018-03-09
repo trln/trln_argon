@@ -25,6 +25,13 @@ module TrlnArgon
       end
     end
 
+    def isbn_with_qualifying_info
+      @isbn_with_qualifying_info ||=
+        [*self[TrlnArgon::Fields::ISBN_NUMBER]].zip(
+          [*self[TrlnArgon::Fields::ISBN_QUALIFYING_INFO]]
+        ).map { |isbn_info_pairs| isbn_info_pairs.join(' ') }
+    end
+
     def marc_summary
       format_for_display(self[TrlnArgon::Fields::NOTE_SUMMARY])
     end

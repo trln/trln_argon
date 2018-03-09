@@ -226,4 +226,20 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  describe 'isbn_with_qualifying_info' do
+    let(:isbn_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNCb6060605',
+        isbn_number_a: %w[9780891125303 0891125302 9780891125310 0891125310],
+        isbn_qualifying_info_a: ['(cloth)', '(cloth)', '(pbk.)', '(pbk.)']
+      )
+    end
+
+    it 'combines isbn and qualifying info field arrays into a single array of joined values' do
+      expect(isbn_document.isbn_with_qualifying_info).to eq(
+        ['9780891125303 (cloth)', '0891125302 (cloth)', '9780891125310 (pbk.)', '0891125310 (pbk.)']
+      )
+    end
+  end
 end

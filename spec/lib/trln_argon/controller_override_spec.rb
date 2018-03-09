@@ -152,8 +152,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('notes_indexed_a')
     end
 
-    it 'sets the ISBN field' do
-      expect(override_config.show_fields).to have_key('isbn_number_a')
+    it 'sets the ISBN with Qualifying Info field' do
+      expect(override_config.show_fields).to have_key('isbn_with_qualifying_info')
     end
 
     it 'sets the ISSN field' do

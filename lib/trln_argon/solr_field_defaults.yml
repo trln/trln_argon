@@ -310,6 +310,10 @@ ISBN_QUALIFYING_INFO_T:
   solr_field: :isbn_qualifying_info_t
   label:
     en: ISBN Qualifying Info T
+ISBN_WITH_QUALIFYING_INFO:
+  solr_field: isbn_with_qualifying_info
+  label:
+    en: "ISBN"
 ISSN:
   solr_field: :issn_a
   label:
