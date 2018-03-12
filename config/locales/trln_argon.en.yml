@@ -56,8 +56,8 @@ en:
 
 
         local_filter:
-            applied: "Show %{filtered_results_total} %{entry_name} at all %{consortium_name}"
-            not_applied: "Show %{filtered_results_total} %{entry_name} at %{local_institution_name}"
+            applied: 'Show %{filtered_results_total} %{entry_name} at all %{consortium_name}'
+            not_applied: 'Show %{filtered_results_total} %{entry_name} at %{local_institution_name}'
 
         scope_name:
             bookmarks: 'bookmarked'
@@ -157,4 +157,3 @@ en:
                 summary: "Summary"
                 full_text_link: "Full Text Link"
                 findingaid_link: "Finding Aid Link"
-

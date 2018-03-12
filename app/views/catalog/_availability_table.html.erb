@@ -1,7 +1,13 @@
 <div class="availability">
+  <h3>Availability:</h3>
   <table  width='100%' class='table table-condensed'>
-    <caption>Location</caption>
+    <!--<caption>Location</caption>-->
     <tbody>
+
+    <tr>
+      <th>Location</th>
+    </tr>
+
       <% expanded_availability.each do |institution, doc| %>
         <tr>
           <td><%= t("trln_argon.institution.#{institution}.long_name") %></td>

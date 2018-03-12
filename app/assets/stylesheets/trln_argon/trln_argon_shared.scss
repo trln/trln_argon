@@ -36,7 +36,7 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     color: #fff;
 }
 
-.facet_limit-active .panel-heading { 
+.facet_limit-active .panel-heading {
     a:hover {
         color: #fff;
     }
@@ -105,9 +105,13 @@ div.items table {
     width: 100%;
 }
 
-div.items h3 {
-    font-size: 14px;
-    font-weight: bolder;
+div.items h3,
+div.availability h3 {
+  /*font-size: 14px;
+  font-weight: bolder;*/
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-top: 0;
 }
 
 .input-group {
@@ -122,12 +126,29 @@ div.items h3 {
 
 .input-group-addon.for-search-field {
     border-bottom: 0;
-    border-top: 0;   
+    border-top: 0;
 }
 
 #search_field {
     position: relative;
-    top: -.6em;
+    /*top: -.6em;*/
+}
+
+.mast-search {
+  width: 100%;
+  padding-top: 2em;
+}
+
+#mast-select {
+  width: 7em;
+}
+
+@media screen and (min-width: $screen-md) {
+
+  .twitter-typeahead {
+    min-width: 25em;
+  }
+
 }
 
 .input-group-element h3 {
@@ -139,6 +160,11 @@ div.items h3 {
 
 .search-extra-controls {
     clear: left;
+    margin-top: .5em;
+}
+
+.search-extra-controls label {
+  font-weight: normal;
 }
 
 #search-navbar .search-query-form {
@@ -146,10 +172,19 @@ div.items h3 {
 }
 
 .fulltext-url {
+  /*
     border: 2px solid #ddd;
     border-radius: 2px;
     padding: 4px;
     width: 50%;
+  */
+  display: inline-block;
+}
+
+.fulltext-url ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .expander[aria-expanded=false] .hider {
@@ -193,7 +228,7 @@ div.items h3 {
     display: inline;
 }
 
-.show-document, #index-document-metadata {
+.show-document, .index-document-metadata {
     ul {
         list-style-type: none;
         padding-left: 0;
@@ -215,4 +250,98 @@ div.items h3 {
 
 .imprint-label {
     font-style: italic;
+}
+
+
+
+/* masthead styles */
+
+.blacklight-catalog-index #sortAndPerPage .search-widgets .btn-default {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+
+
+/* sidebar styles */
+
+.panel-group .panel + .panel {
+    margin-top: 15px;
+}
+
+#facets ul.facet-hierarchy {
+  margin-left: 0;
+  padding-left: 20px;
+}
+
+#facets ul.facet-hierarchy ul {
+  padding-left: 10px;
+}
+
+
+
+/* Typography */
+
+#documents .document h3.document-title-heading {
+  font-size: 1.4em;
+  font-weight: 400;
+
+  .document-counter {
+    color: #999;
+  }
+
+}
+
+
+/* results styles */
+
+#content .page-header {
+  margin-left: 1em;
+}
+
+
+#documents .document {
+    padding-top: 2em;
+    padding-bottom: 4em;
+}
+
+.index-document-metadata ul {
+  margin-left: 1em;
+}
+
+h3.online-header {
+  font-weight: 500 !important;
+}
+
+
+.items,
+.availability {
+  margin-left: 1em;
+  margin-right: 1em;
+  padding: 20px;
+  margin-top: 2em;
+  border-left: 20px solid #f6f6f6;
+  background: #fbfbfb;
+}
+
+.items table,
+.availability table {
+  margin-bottom: 0;
+}
+
+.items .table > tbody + tbody {
+    border-top: none;
+}
+
+.items .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > th, .table > tbody > tr > td, .table > tfoot > tr > th, .table > tfoot > tr > td {
+    border-top: none;
+}
+
+.thumbnail img {
+  padding: 10px;
+  border: 1px solid #ddd !important;
+  border-radius: 0;
+  box-shadow: rgba(0,0,0,.2) 0 0 30px;
 }
