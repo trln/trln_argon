@@ -15,6 +15,9 @@
     <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
 
       <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
+      <% unless search_state.params_for_search.key?(:local_filter) %>
+        <%= hidden_field_tag :local_filter, TrlnArgon::Engine.configuration.apply_local_filter_by_default %>
+      <% end %>
 
       <div class="row">
 

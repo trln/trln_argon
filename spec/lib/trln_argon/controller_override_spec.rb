@@ -290,4 +290,27 @@ describe TrlnArgon::ControllerOverride do
       end
     end
   end
+
+  describe '#local_filter_applied?' do
+    it 'uses the local_filter value from params if present and valid' do
+      allow(mock_controller).to receive(:params).and_return(local_filter: 'false')
+      expect(mock_controller.local_filter_applied?).to be false
+    end
+
+    # rubocop:disable VerifiedDoubles
+    it 'uses the local_filter value set in current_search_session if present' do
+      allow(mock_controller).to receive(:params).and_return(nothing: 'here')
+      allow(mock_controller).to receive(:current_search_session_has_local_filter?).and_return(true)
+      allow(mock_controller).to receive(:current_search_session).and_return(
+        double(query_params: { q: 'query', f: 'facets', controller: 'catalog', local_filter: 'false' })
+      )
+      expect(mock_controller.local_filter_applied?).to be false
+    end
+
+    it 'uses the default local_filter value when param and session not set' do
+      allow(mock_controller).to receive(:local_filter_param_present?).and_return(false)
+      allow(mock_controller).to receive(:current_search_session_has_local_filter?).and_return(false)
+      expect(mock_controller.local_filter_applied?).to be true
+    end
+  end
 end
