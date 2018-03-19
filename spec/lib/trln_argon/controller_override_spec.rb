@@ -55,13 +55,13 @@ describe TrlnArgon::ControllerOverride do
 
   describe 'display type field' do
     it 'sets the display type field' do
-      expect(override_config.index.display_type_field).to eq('format_a')
+      expect(override_config.index.display_type_field).to eq('resource_type_a')
     end
   end
 
   describe 'facet fields' do
-    it 'sets the format facet' do
-      expect(override_config.facet_fields).to have_key('format_f')
+    it 'sets the resource type facet' do
+      expect(override_config.facet_fields).to have_key('resource_type_f')
     end
 
     it 'sets the subject topic lcsh facet' do
@@ -126,8 +126,8 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.index_fields).to have_key('statement_of_responsibility_a')
     end
 
-    it 'sets the format field' do
-      expect(override_config.index_fields).to have_key('format_a')
+    it 'sets the resource type field' do
+      expect(override_config.index_fields).to have_key('resource_type_a')
     end
   end
 
@@ -176,6 +176,9 @@ describe TrlnArgon::ControllerOverride do
     end
     it 'sets the Edition field' do
       expect(override_config.show_sub_header_fields).to have_key('edition_a')
+    end
+    it 'sets the Resource Type field' do
+      expect(override_config.show_sub_header_fields).to have_key('resource_type_a')
     end
   end
 

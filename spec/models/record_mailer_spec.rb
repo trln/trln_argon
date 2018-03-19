@@ -8,7 +8,7 @@ describe RecordMailer do
     let(:document) do
       SolrDocument.new(id: '123456',
                        institution_a: 'unc',
-                       format: ['book'],
+                       resource_type_a: ['Book'],
                        title_main: 'The horn',
                        statement_of_responsibility_a: 'Janetzky, Kurt')
     end

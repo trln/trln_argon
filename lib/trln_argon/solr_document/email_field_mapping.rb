@@ -21,9 +21,8 @@ module TrlnArgon
           publisher: proc { imprint_main_to_text },
           edition: TrlnArgon::Fields::EDITION,
           date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
-          format: TrlnArgon::Fields::FORMAT,
+          format: TrlnArgon::Fields::RESOURCE_TYPE,
           # series:
-          subject: TrlnArgon::Fields::SUBJECTS,
           # description:
           # identifiers:
           # notes:

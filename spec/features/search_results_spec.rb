@@ -21,21 +21,15 @@ describe 'search results' do
     before do
       visit search_catalog_path(local_filter: 'false')
       click_button 'search'
-      click_link 'Format'
-      click_link 'Print'
-      click_link 'Book'
+      click_link 'History and criticism'
     end
 
-    it 'displays the Format facet breadcrumb field label' do
-      expect(page).to have_css('.filterName', text: 'Format')
+    it 'displays the Subject facet breadcrumb field label' do
+      expect(page).to have_css('.filterName', text: 'Subject')
     end
 
-    it 'displays the Format > Print facet breadcrumb field value' do
-      expect(page).to have_css('.filterValue', text: 'Print')
-    end
-
-    it 'displays the Format > Book facet breadcrumb field value' do
-      expect(page).to have_css('.filterValue', text: 'Book')
+    it 'displays the Subject > History facet breadcrumb field value' do
+      expect(page).to have_css('.filterValue', text: 'History and criticism')
     end
 
     it 'adds the facet(s) as a GET parameter to the URL' do
@@ -45,11 +39,11 @@ describe 'search results' do
       end
       expect(page).to have_current_path(
         root_path(
-          :q                  => '',
-          'f[format_f]'       => %w[Print Book],
-          'f[institution_f]'  => %w[ncsu],
-          :local_filter       => 'false',
-          :search_field       => 'all_fields'
+          :q                        => '',
+          'f[subject_topic_lcsh_f]' => ['History and criticism'],
+          'f[institution_f]'        => %w[ncsu],
+          :local_filter             => 'false',
+          :search_field             => 'all_fields'
         )
       )
     end
