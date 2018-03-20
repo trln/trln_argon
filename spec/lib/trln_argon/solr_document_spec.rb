@@ -217,12 +217,7 @@ describe TrlnArgon::SolrDocument do
         "  1986\n"\
         "\n"\
         "Format:\n"\
-        "  Book\n"\
-        "  Print\n"\
-        "\n"\
-        "Subject:\n"\
-        "  Brisingida -- Atlantic Ocean -- Classification\n  Echinodermata -- Classification\n"\
-        '  Echinodermata -- Atlantic Ocean -- Classification'
+        '  Book'
       )
     end
   end

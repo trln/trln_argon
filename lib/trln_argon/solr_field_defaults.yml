@@ -230,14 +230,6 @@ EDITION_VERNACULAR_LANG:
   solr_field: :edition_vernacular_lang_a
   label:
     en: Edition Vernacular Lang
-FORMAT:
-  solr_field: :format_a
-  label:
-    en: Format
-FORMAT_FACET:
-  solr_field: :format_f
-  label:
-    en: Format
 FREQUENCY_CURRENT:
   solr_field: :frequency_current_a
   label:
@@ -726,6 +718,14 @@ PUBLISHER_VERNACULAR_LANG:
   solr_field: :publisher_vernacular_lang_a
   label:
     en: Publisher Vernacular Lang
+RESOURCE_TYPE:
+  solr_field: :resource_type_a
+  label:
+    en: Resource Type
+RESOURCE_TYPE_FACET:
+  solr_field: :resource_type_f
+  label:
+    en: Resource Type
 ROLLUP_ID:
   solr_field: rollup_id
   label:

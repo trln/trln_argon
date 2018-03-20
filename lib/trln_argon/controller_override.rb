@@ -81,7 +81,7 @@ module TrlnArgon
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
 
-        config.index.display_type_field = TrlnArgon::Fields::FORMAT.to_s
+        config.index.display_type_field = TrlnArgon::Fields::RESOURCE_TYPE.to_s
 
         config.add_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
@@ -99,8 +99,8 @@ module TrlnArgon
                                helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::FORMAT_FACET.to_s,
-                               label: TrlnArgon::Fields::FORMAT_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                               label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.to_s,
@@ -182,7 +182,7 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                helper_method: :imprint_main
         config.add_index_field TrlnArgon::Fields::EDITION.to_s
-        config.add_index_field TrlnArgon::Fields::FORMAT.to_s
+        config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -217,7 +217,7 @@ module TrlnArgon
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          helper_method: :imprint_main
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
-        config.add_show_sub_header_field TrlnArgon::Fields::FORMAT.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s
 
         # TODO: What field should be searched when linking to a search for various
         #       author/contributer fields from the record show page?
