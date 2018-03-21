@@ -108,6 +108,10 @@ module TrlnArgon
         end
       end
 
+      def join_with_commas(options = {})
+        options[:value].join(', ')
+      end
+
       private
 
       def primary_url_text(url_hash)

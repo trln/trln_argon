@@ -99,6 +99,26 @@ describe 'search results' do
     end
   end
 
+  describe 'more facet links contain correct local_filter parameter' do
+    it 'retains local_filter=true when set' do
+      visit search_catalog_path(local_filter: true)
+      click_button 'search'
+      expect(page).to have_selector(:css,
+                                    '#facet-subject_topic_lcsh_f '\
+                                    'a.more_facets_link[href="/catalog/facet/subject_topic_lcsh_f?'\
+                                    'local_filter=true&q=&search_field=all_fields&utf8=%E2%9C%93"]')
+    end
+
+    it 'retains local_filter=false when set' do
+      visit search_catalog_path(local_filter: false)
+      click_button 'search'
+      expect(page).to have_selector(:css,
+                                    '#facet-subject_topic_lcsh_f '\
+                                    'a.more_facets_link[href="/catalog/facet/subject_topic_lcsh_f?'\
+                                    'local_filter=false&q=&search_field=all_fields&utf8=%E2%9C%93"]')
+    end
+  end
+
   # removed for brittleness, leaving in as an example of
   # how to select a search field.
   # describe 'when showing results' do
