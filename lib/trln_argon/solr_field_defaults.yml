@@ -233,11 +233,11 @@ EDITION_VERNACULAR_LANG:
 FREQUENCY_CURRENT:
   solr_field: :frequency_current_a
   label:
-    en: Frequency
+    en: Current Frequency
 FREQUENCY_FORMER:
   solr_field: :frequency_former_a
   label:
-    en: Frequency Former
+    en: Former Frequency
 HOLDINGS:
   solr_field: :holdings_a
   label:

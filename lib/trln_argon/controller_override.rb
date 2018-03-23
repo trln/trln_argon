@@ -182,7 +182,8 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                helper_method: :imprint_main
         config.add_index_field TrlnArgon::Fields::EDITION.to_s
-        config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s
+        config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
+                               helper_method: :join_with_commas
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -190,6 +191,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::TITLE_UNIFORM.label
         config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
                               label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
+        config.add_show_field TrlnArgon::Fields::FREQUENCY_FORMER.to_s,
+                              label: TrlnArgon::Fields::FREQUENCY_FORMER.label
         config.add_show_field TrlnArgon::Fields::DESCRIPTION_GENERAL.to_s,
                               label: TrlnArgon::Fields::DESCRIPTION_GENERAL.label
         config.add_show_field TrlnArgon::Fields::DESCRIPTION_VOLUMES.to_s,
@@ -217,7 +220,8 @@ module TrlnArgon
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          helper_method: :imprint_main
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
-        config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
+                                         helper_method: :join_with_commas
 
         # TODO: What field should be searched when linking to a search for various
         #       author/contributer fields from the record show page?
@@ -327,6 +331,16 @@ module TrlnArgon
         #                       "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
       end
+
+      # For reasons that are a bit opaque this #search_facet_url method
+      # needs to be duplicated here so that the "more" facet links will pick up
+      # the correct local_filter parameter. Otherwise, it seems to pick up the default
+      # no matter what.
+      def search_facet_url(options = {})
+        opts = search_state.to_h.merge(action: 'facet').merge(options).except(:page)
+        url_for opts
+      end
+      deprecation_deprecate search_facet_url: 'Use search_facet_path instead.'
 
       def has_search_parameters? # rubocop:disable Style/PredicateName
         !params[:q].blank? ||

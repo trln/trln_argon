@@ -1,4 +1,4 @@
-SOLR_URL: https://query.discovery.trln.org/trln-dev
+SOLR_URL: https://query.discovery.trln.org/trlnbib
 LOCAL_INSTITUTION_CODE: unc
 PREFERRED_RECORDS: unc
 LOCAL_RECORDS: 'unc, trln'
