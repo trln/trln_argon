@@ -3,37 +3,50 @@
   <% summary = ( (s && s.summary? && s.summary) || @document.marc_summary ) %>
   <% toc = ( (s && s.toc? && s.toc ) || @document.marc_toc ) %>
   <% samplechapter = ( s && s.samplechapter? && s.samplechapter ) || nil %>
+
   <% unless summary.nil? || summary.empty? %>
     <section class="summary">
 
-      <h2>Summary <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
-      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h2>
-      
+      <h2>Summary </h2>
+
       <div class="content">
         <%= summary.html_safe %>
       </div>
-     
+
+      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+      <span class='show-control less'><a href="javascript:void(0);" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+
     </section>
   <% end %>
+
   <% unless toc.nil? || toc.empty? %>
     <section class="table-of-contents">
-  	  <h2>Contents <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
-      <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h2>
-      
+      <h2>Contents </h2>
+
       <div class="content">
-  	   <%= toc.html_safe %>
-     </div>
-  	</section>
+        <%= toc.html_safe %>
+      </div>
+
+      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+      <span class='show-control less'><a href="javascript:void(0);" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+
+
+    </section>
   <% end %>
+
   <% unless samplechapter.nil? || samplechapter.empty? %>
   <section class="sample-chapter">
-    <h2>Sample Chapter <span class='show-control more'><a href="javascript:void(0);">(show more)</a></span>
-    <span class='show-control less'><a href="javascript:void(0);">(show less)</a></span></h2>
-    
+    <h2>Sample Chapter</h2>
+
     <div class='content'>
       <%= samplechapter.html_safe %>
     </div>
-    
+
+    <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+    <span class='show-control less'><a href="javascript:void(0);" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+
+
   </section>
   <% end %>
+
 </div>

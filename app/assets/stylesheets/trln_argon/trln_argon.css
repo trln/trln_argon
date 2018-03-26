@@ -10,3 +10,9 @@
 
 /* additional stylesheets */
 @import 'trln_argon_shared';
+
+/* font-awesome */
+@import 'font-awesome';
+
+/* font-awesome */
+@import 'bootstrap-select';

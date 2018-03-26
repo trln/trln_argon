@@ -1,20 +1,19 @@
 <div class="items">
   <% if document.fulltext_urls.any? || document.findingaid_urls.any? %>
-    <h3 class="online-header">Online Access:</h3>
+    <h3 class="online-header"> Access Online <i class="fa fa-laptop" aria-hidden="true"></i></h3>
     <div class="fulltext-url">
       <ul>
       <% document.fulltext_urls.each do |url| %>
-        <li><%= link_to_primary_url(url) %></li>
+        <li><i class="fa fa-square"></i> <%= link_to_primary_url(url) %></li>
       <% end %>
       <% document.findingaid_urls.each do |url| %>
-        <li><%= link_to_primary_url(url) %></li>
+        <li><i class="fa fa-square"></i> <%= link_to_primary_url(url) %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-  <% unless document.read_items.key?(nil) %>
-    <!--<h3>At the Library</h3>-->
-    <h3>Availability:</h3>
+  <% unless document.holdings.empty? %>
+    <h3>Access at the Library <i class="fa fa-map-marker" aria-hidden="true"></i></h3>
     <% if context == 'index' %>
       <%= render partial: "items_table_index", locals: { document: document} %>
     <% else %>

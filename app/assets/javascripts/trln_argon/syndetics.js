@@ -36,27 +36,25 @@ Blacklight.onLoad(function() {
 
   // Get natural width of thumbnails and hide empty syndetics thumbs
 
-  (function($){
-
   	$(window).load(function(){
 
-  		$('#documents div.thumbnail').find('img').each(function () {
-
+      $('#documents div.thumbnail').find('img').each(function () {
   			var $this = $(this), width = $(this).get(0).naturalWidth;
-  			var $parentdiv = $(this).closest('div');
+        var $parentdiv = $(this).closest('div');
+        if (width < 2) {
+          $parentdiv.addClass('hide');
+        }
+  		});
 
-  			if (width < 2) {
-  				//$this.addClass('hide');
-  				$parentdiv.addClass('hide');
-
-  			}
-
+      $('#document div.thumbnail').find('img').each(function () {
+  			var $this = $(this), width = $(this).get(0).naturalWidth;
+        var $parentdiv = $(this).closest('div');
+        if (width < 2) {
+          $parentdiv.addClass('hide');
+        }
   		});
 
   	});
-
-
-  })(jQuery);
 
 
 });

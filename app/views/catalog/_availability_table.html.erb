@@ -1,33 +1,53 @@
 <div class="availability">
+
   <h3>Availability:</h3>
-  <table  width='100%' class='table table-condensed'>
-    <!--<caption>Location</caption>-->
-    <tbody>
 
-    <tr>
-      <th>Location</th>
-    </tr>
+  <div class="table-responsive">
 
-      <% expanded_availability.each do |institution, doc| %>
-        <tr>
-          <td><%= t("trln_argon.institution.#{institution}.long_name") %></td>
-          <td><%= doc.availability %></td>
-          <% if doc.fulltext_urls.any? || doc.findingaid_urls.any? %>
-            <td>
-              <ul>
-              <% doc.fulltext_urls.each do |url| %>
-                <li><%= link_to_primary_url(url) %></li>
+    <table class='table table-condensed institution-availability'>
+
+      <tbody>
+
+      <tr class="sr-only">
+        <th colspan="3">Location</th>
+      </tr>
+
+        <% expanded_availability.each do |institution, doc| %>
+          <tr>
+            <td class="institution"><i class="fa fa-square"></i> <%= t("trln_argon.institution.#{institution}.long_name") %></td>
+
+            <td class="available">
+
+              <% if doc.availability == 'Available' %>
+                <span class="item-available"><%= doc.availability %></span>
+              <% elsif doc.availability == 'Not Available' %>
+                <span class="item-not-available"><%= doc.availability %> </span>
+              <% else %>
+                  <%= doc.availability %>
               <% end %>
-              <% doc.findingaid_urls.each do |url| %>
-                <li><%= link_to_primary_url(url) %></li>
-              <% end %>
-              </ul>
+
             </td>
-          <% else %>
-            <td></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+
+            <% if doc.fulltext_urls.any? || doc.findingaid_urls.any? %>
+              <td class="urls">
+                <ul>
+                <% doc.fulltext_urls.each do |url| %>
+                  <li><i class="fa fa-laptop" aria-hidden="true"></i> <%= link_to_primary_url(url) %></li>
+                <% end %>
+                <% doc.findingaid_urls.each do |url| %>
+                  <li><i class="fa fa-laptop" aria-hidden="true"></i> <%= link_to_primary_url(url) %></li>
+                <% end %>
+                </ul>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>

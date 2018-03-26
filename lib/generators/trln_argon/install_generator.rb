@@ -157,5 +157,14 @@ module TrlnArgon
         "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
       end
     end
+
+    def remove_turbolinks # via http://codkal.com/rails-how-to-remove-turbolinks/
+      gsub_file('Gemfile', "gem 'turbolinks',", '')
+      gsub_file('app/assets/javascripts/application.js', '//= require turbolinks', '')
+      gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all',
+        'data-turbolinks-track': 'reload' %>", '')
+      gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application',
+        'data-turbolinks-track': 'reload' %>", '')
+    end
   end
 end
