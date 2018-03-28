@@ -593,7 +593,7 @@ NORMALIZED_CALL_NUMBERS:
 NOTES_ADDITIONAL:
   solr_field: :notes_additional_a
   label:
-    en: Notes Additional
+    en: Additional Notes
 NOTES_ADDITIONAL_VERNACULAR_LANG:
   solr_field: :notes_additional_vernacular_lang_a
   label:
@@ -630,14 +630,90 @@ NOTES_SERIALS_SUMMARY_T:
   solr_field: :notes_serials_summary_t
   label:
     en: Notes Serials Summary T
+NOTE_ACCESS_RESTRICTIONS:
+  solr_field: note_access_restrictions_a
+  label:
+    en: Access Restrictions Note
+NOTE_ADMIN_HISTORY:
+  solr_field: note_admin_history_a
+  label:
+    en: Admin History Note
+NOTE_BINDING:
+  solr_field: note_binding_a
+  label:
+    en: Binding Note
+NOTE_BIOGRAPHICAL:
+  solr_field: note_biographical_a
+  label:
+    en: Biographical Note
+NOTE_COPY_VERSION:
+  solr_field: note_copy_version_a
+  label:
+    en: Copy Version Note
+NOTE_DATA_QUALITY:
+  solr_field: note_data_quality_a
+  label:
+    en: Data Quality Note
+NOTE_DISSERTATION:
+  solr_field: note_dissertation_a
+  label:
+    en: Dissertation Note
+NOTE_FILE_TYPE:
+  solr_field: note_file_type_a
+  label:
+    en: File Type Note
+NOTE_ISSUANCE:
+  solr_field: note_issuance_a
+  label:
+    en: Issuance Note
+NOTE_NUMBERING:
+  solr_field: note_numbering_a
+  label:
+    en: Numbering Note
+NOTE_ORGANIZATION:
+  solr_field: note_organization_a
+  label:
+    en: Organization Note
+NOTE_PERFORMER_CREDITS:
+  solr_field: note_performer_credits_a
+  label:
+    en: Performer Credit Note
+NOTE_PRODUCTION_CREDITS:
+  solr_field: note_production_credits_a
+  label:
+    en: Production Credit Note
+NOTE_REPORT_COVERAGE:
+  solr_field: note_report_coverage_a
+  label:
+    en: Report Coverage Note
+NOTE_REPORT_TYPE:
+  solr_field: note_report_type_a
+  label:
+    en: Report Type Note
+NOTE_SCALE:
+  solr_field: note_scale_a
+  label:
+    en: Scale Note
 NOTE_SUMMARY:
   solr_field: :note_summary_a
   label:
     en: Summary
+NOTE_SUPPLEMENT:
+  solr_field: note_supplement_a
+  label:
+    en: Supplement Note
+NOTE_SYSTEM_DETAILS:
+  solr_field: note_system_details_a
+  label:
+    en: System Details Note
 NOTE_TOC:
   solr_field: note_toc_a
   label:
     en: Table of Contents
+NOTE_WITH:
+  solr_field: note_with_a
+  label:
+    en: With Note
 OCLC_NUMBER:
   solr_field: :oclc_number
   label:
