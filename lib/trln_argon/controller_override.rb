@@ -193,10 +193,6 @@ module TrlnArgon
                               label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
         config.add_show_field TrlnArgon::Fields::FREQUENCY_FORMER.to_s,
                               label: TrlnArgon::Fields::FREQUENCY_FORMER.label
-        config.add_show_field TrlnArgon::Fields::DESCRIPTION_GENERAL.to_s,
-                              label: TrlnArgon::Fields::DESCRIPTION_GENERAL.label
-        config.add_show_field TrlnArgon::Fields::DESCRIPTION_VOLUMES.to_s,
-                              label: TrlnArgon::Fields::DESCRIPTION_VOLUMES.label
         config.add_show_field TrlnArgon::Fields::NOTES_INDEXED.to_s,
                               label: TrlnArgon::Fields::NOTES_INDEXED.label
         config.add_show_field TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.to_s,

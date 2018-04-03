@@ -162,14 +162,6 @@ DESCRIPTION_DIGITAL_FILE_T:
   solr_field: :description_digital_file_t
   label:
     en: Description Digital File T
-DESCRIPTION_GENERAL:
-  solr_field: :description_general_a
-  label:
-    en: Physical Description
-DESCRIPTION_GENERAL_T:
-  solr_field: :description_general_t
-  label:
-    en: Description General T
 DESCRIPTION_ORGANIZATION:
   solr_field: :description_organization_a
   label:
@@ -198,10 +190,6 @@ DESCRIPTION_VIDEO_T:
   solr_field: :description_video_t
   label:
     en: Description Video T
-DESCRIPTION_VOLUMES:
-  solr_field: :description_volumes_a
-  label:
-    en: Volume/Date Range
 DISTRIBUTION_STATEMENT:
   solr_field: :distribution_statement_a
   label:

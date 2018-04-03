@@ -10,14 +10,6 @@ describe 'full records' do
       expect(page).to have_css('dd.blacklight-authors_main_a', text: /.+/)
     end
 
-    it 'displays the physical description field label' do
-      expect(page).to have_css('dt.blacklight-description_general_a', text: 'Physical Description:')
-    end
-
-    it 'displays the physical description field value' do
-      expect(page).to have_css('dd.blacklight-description_general_a', text: /.+/)
-    end
-
     it 'displays the notes field label' do
       expect(page).to have_css('dt.blacklight-notes_indexed_a', text: 'Notes:')
     end
