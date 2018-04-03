@@ -140,10 +140,6 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('frequency_current_a')
     end
 
-    it 'sets the General Description field' do
-      expect(override_config.show_fields).to have_key('description_general_a')
-    end
-
     it 'sets the Volume Description field' do
       expect(override_config.show_fields).to have_key('description_volumes_a')
     end
