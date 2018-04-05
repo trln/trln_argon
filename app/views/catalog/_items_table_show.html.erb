@@ -11,22 +11,21 @@
   <% document.holdings.each do |loc_b, loc_narrow_map| %>
     <% next if loc_b == 'ONLINE' %>
     <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
-      <!--<th colspan="3" style='background-color: #ddd;'>-->
-      <th colspan="3">
+      <% has_notes = holdings_location_has_notes?(loc_narrow_map) %>
+      <% column_count = has_notes ? '4' : '3' %>
+      <th colspan="<%= column_count %>">
         <%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
       </th>
     </tr>
     <% loc_narrow_map.each do |loc_n, item_data|  %>
-      <% has_summary = !item_data.fetch('summary', 'LOOK MA').blank? %>
+      <% has_summary = !item_data.fetch('summary', '').blank? %>
       <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
       <% if has_summary %>
       <tr class="loc-narrow-banner" data-locbroad="<%= loc_b %>"
         data-locnarrow="<%= loc_n %>" id="<%= "item-details-#{loc_b}-#{loc_n}" %>">
-        <!--<th style="width: 20%;">-->
         <th>
           <%= narrow_loc if loc_n %>
         </th>
-        <!--<th style="width: 30%;">-->
         <th>
           <%= item_data['call_no'] %>
         </th>
@@ -41,15 +40,22 @@
             </span>
           </a>
         </th>
+        <% if has_notes %>
+        <th>&nbsp;</th>
+        <% end %>
       </tr>
       <% end %>
 
       <tbody class="item-group<%= has_summary ? '' : '-display' %>" id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
+        <% items_have_notes = items_have_notes?(item_data['items']) %>
         <% item_data['items'].each_with_index do |item, index| %>
           <tr class="item <%= loc_n %> <%= loc_b %>">
-            <td><%= index == 0 ? "\u2937" : "\u00a0\u00a0\u00a0" %><%= narrow_loc if loc_n %></td>
-            <td><%= item['call_no'] %></td>
-            <td><%= item['status'] %></td>
+            <td class='location'><%= index == 0 ? "\u2937" : "\u00a0\u00a0\u00a0" %><%= narrow_loc if loc_n %></td>
+            <td class='callnumber'><%= call_number_display(item) %></td>
+            <td class='status'><%= item['status'] %></td>
+            <% if items_have_notes %>
+            <td class='notes'><%= item_notes_display(item) %></td>
+              <% end %>
           </tr>
         <% end %>
         </tbody>

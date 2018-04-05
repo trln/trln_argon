@@ -45,6 +45,20 @@ module TrlnArgon
         TrlnArgon::LookupManager.instance.map([inst, context, value].join('.'))
       end
 
+      def call_number_display(item)
+        return '' if item.nil? || item.empty? || !item.respond_to?(:fetch)
+        r = item['call_no']
+        r << " #{item['vol']}" if item.key?('vol')
+        r << " c.#{item['copy_no']}" if item.key?('copy_no')
+        r
+      end
+
+      def item_notes_display(item)
+        item.fetch('notes', []).collect do |n|
+          "<span class='item-note'>#{n}</span>"
+        end.join('<br />').html_safe
+      end
+
       def list_of_linked_subjects_segments(options = {})
         link_to_subject_segments(options).map do |subject|
           content_tag(:li, subject, class: options[:field])
@@ -182,6 +196,27 @@ module TrlnArgon
           result << acc.join(delimiter)
         end
         result
+      end
+
+      def holdings_have_notes?(holdings)
+        return false if holdings.nil? || holdings.empty? || !holdings.respond_to?(:fetch)
+        holdings.any? { |_loc_b, loc_narrow_map| holdings_location_has_notes?(loc_narrow_map) }
+      end
+
+      # Tests whether a given holdings for a broad location
+      # has notes to show
+      def holdings_location_has_notes?(holdings_loc)
+        return false if holdings_loc.nil? || holdings_loc.empty?
+        holdings_loc.any? do |_loc_n, item_data|
+          items_have_notes?(item_data['items'])
+        end
+      end
+
+      # tests whether there are notes for any of the items
+      # in an array
+      def items_have_notes?(items)
+        return false if items.nil? || items.empty?
+        items.any? { |i| !i.fetch('notes', '').empty? }
       end
     end
   end
