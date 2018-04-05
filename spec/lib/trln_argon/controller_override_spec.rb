@@ -140,10 +140,6 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('frequency_current_a')
     end
 
-    it 'sets the Notes field' do
-      expect(override_config.show_fields).to have_key('notes_indexed_a')
-    end
-
     it 'sets the ISBN with Qualifying Info field' do
       expect(override_config.show_fields).to have_key('isbn_with_qualifying_info')
     end
@@ -154,6 +150,82 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the OCLC Number field' do
       expect(override_config.show_fields).to have_key('oclc_number')
+    end
+
+    it 'sets the Access Restrictions Note field' do
+      expect(override_config.show_fields).to have_key('note_access_restrictions_a')
+    end
+
+    it 'sets the Admin History Note field' do
+      expect(override_config.show_fields).to have_key('note_admin_history_a')
+    end
+
+    it 'sets the Binding Note field' do
+      expect(override_config.show_fields).to have_key('note_binding_a')
+    end
+
+    it 'sets the Biographical Note field' do
+      expect(override_config.show_fields).to have_key('note_biographical_a')
+    end
+
+    it 'sets the Copy Version Note field' do
+      expect(override_config.show_fields).to have_key('note_copy_version_a')
+    end
+
+    it 'sets the Data Quality Note field' do
+      expect(override_config.show_fields).to have_key('note_data_quality_a')
+    end
+
+    it 'sets the Dissertation Note field' do
+      expect(override_config.show_fields).to have_key('note_dissertation_a')
+    end
+
+    it 'sets the File Type Note field' do
+      expect(override_config.show_fields).to have_key('note_file_type_a')
+    end
+
+    it 'sets the Issuance Note field' do
+      expect(override_config.show_fields).to have_key('note_issuance_a')
+    end
+
+    it 'sets the Numbering Note field' do
+      expect(override_config.show_fields).to have_key('note_numbering_a')
+    end
+
+    it 'sets the Organization Note field' do
+      expect(override_config.show_fields).to have_key('note_organization_a')
+    end
+
+    it 'sets the Performer Credits Note field' do
+      expect(override_config.show_fields).to have_key('note_performer_credits_a')
+    end
+
+    it 'sets the Production Credits Note field' do
+      expect(override_config.show_fields).to have_key('note_production_credits_a')
+    end
+
+    it 'sets the Report Coverage Note field' do
+      expect(override_config.show_fields).to have_key('note_report_coverage_a')
+    end
+
+    it 'sets the Report Type Note field' do
+      expect(override_config.show_fields).to have_key('note_report_type_a')
+    end
+
+    it 'sets the Scale Note field' do
+      expect(override_config.show_fields).to have_key('note_scale_a')
+    end
+
+    it 'sets the Supplement Note field' do
+      expect(override_config.show_fields).to have_key('note_supplement_a')
+    end
+
+    it 'sets the System Details Note field' do
+      expect(override_config.show_fields).to have_key('note_system_details_a')
+    end
+
+    it 'sets the With Note field' do
+      expect(override_config.show_fields).to have_key('note_with_a')
     end
   end
 

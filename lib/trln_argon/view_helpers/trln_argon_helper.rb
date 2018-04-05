@@ -126,6 +126,10 @@ module TrlnArgon
         options[:value].join(', ')
       end
 
+      def join_with_br(options = {})
+        options[:value].join('<br />').html_safe
+      end
+
       private
 
       def primary_url_text(url_hash)

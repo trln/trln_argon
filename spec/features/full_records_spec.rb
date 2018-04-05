@@ -10,14 +10,6 @@ describe 'full records' do
       expect(page).to have_css('dd.blacklight-authors_main_a', text: /.+/)
     end
 
-    it 'displays the notes field label' do
-      expect(page).to have_css('dt.blacklight-notes_indexed_a', text: 'Notes:')
-    end
-
-    it 'displays the notes field value' do
-      expect(page).to have_css('dd.blacklight-notes_indexed_a', text: /.+/)
-    end
-
     it 'displays the ISBN field label' do
       expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN:')
     end
