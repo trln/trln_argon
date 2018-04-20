@@ -50,8 +50,8 @@
           <td class='status'>
             <% if item['status'] == 'Available' %>
               <span class="item-available"><%= item['status'] %></span>
-            <% elsif item['status'] == 'Checked out' %>
-              <span class="item-not-available"><%= item['status'] %></span>
+            <% elsif item['status'] == 'Checked out' || item['status'] == 'Checked Out' %>
+              <span class="item-not-available"><%= item['status'] %> <% if item.has_key?('due_date') %> (Due <%= item['due_date'].to_time.strftime("%m/%d/%Y") %>)<% end %> </span>
             <% elsif item['status'] == 'In-Library Use Only' %>
               <span class="item-library-only"><%= item['status'] %></span>
             <% else %>
