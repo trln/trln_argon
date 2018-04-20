@@ -80,6 +80,7 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
         margin: 5px;
         background: transparent image_url($header-logo) no-repeat top left;
         background-size: 103px;
+        color: #666;
     }
 
     .navbar-header {
@@ -730,6 +731,7 @@ h3.online-header {
   dt {
     font-size: 1.2em;
     margin-top: 1em;
+    color: #757575;
   }
   dt:first-of-type {
     margin-top: 0;
