@@ -1,59 +1,77 @@
-<!--<table class='table table-condensed table-striped table-hover'>
-  <thead>-->
-<table class='table table-condensed'>
-  <thead class="sr-only">
-    <tr class="holdings-header">
-      <th class="location-header">Location</th>
-      <th class="callnum-header">Call Number</th>
-      <th class="status-header">Status</th>
-    </tr>
-  </thead>
+<div class="table-responsive">
+
+  <table class='table table-condensed'>
+
+    <thead class="sr-only">
+      <tr class="holdings-header">
+        <th class="location-header">Location</th>
+        <th class="callnum-header">Call Number</th>
+        <th class="status-header">Status</th>
+      </tr>
+    </thead>
+
   <% document.holdings.each do |loc_b, loc_narrow_map| %>
     <% next if loc_b == 'ONLINE' %>
-    <% has_notes = holdings_location_has_notes?(loc_narrow_map) %>
-    <% column_count = has_notes ? '4' : '3' %>
-    <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
-      <th colspan="<%= column_count %>">
-        <%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
-      </th>
-    </tr>
-  <% loc_narrow_map.each do |loc_n, item_data|  %>
-    <% has_summary =!item_data.fetch('summary', '').blank? %>
-      <% if has_summary %>
-      <tr class='location-narrow-group'>
-        <th>
-         <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
-        </th>
-        <th>
-          <%= item_data['call_no'] %>
-        </th>
-        <th class='summary-holdings'>
-          <%= item_data.fetch('summary', '') %>
-          <span class="item-details-link">
-            <%= link_to "Details", controller: "catalog", action: 'show', id: document.id, anchor: "item-container-#{loc_b}-#{loc_n}" %>
-          </span>
-        </th>
-        <% if has_notes %>
-        <th>Notes</th>
-        <% end %>
-      </tr>
-      <% end %>
+      <% has_notes = holdings_location_has_notes?(loc_narrow_map) %>
+        <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
+          <th colspan="3">
+            <%= map_argon_code(document.record_owner, 'loc_b', loc_b) %>
+          </th>
+        </tr>
 
-    <% unless has_summary %>
-      <tbody class='item-group-display' id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
-        <% items_have_notes = items_have_notes?(item_data['items']) %>
-        <% item_data['items'].each do |item| %>
-        <tr class="item <%= loc_n %> <%= loc_b %>">
-          <td class='location'><%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %></td>
-          <td class='callnumber'><%= call_number_display(item) %></td>
-          <td class='status'><%= item['status'] %></td>
-          <% if items_have_notes %>
-          <td class='notes'><%= item_notes_display(item) %></td>
-          <% end %>
+    <% loc_narrow_map.each do |loc_n, item_data|  %>
+      <% has_summary =!item_data.fetch('summary', '').blank? %>
+      <% if has_summary %>
+        <tr class='location-narrow-group'>
+          <th>
+            <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %>
+          </th>
+          <th>
+            <%= item_data['call_no'] %>
+          </th>
+          <th class='summary-holdings'>
+            <%= item_data.fetch('summary', '') %>
+            <span class="item-details-link">
+              <%= link_to "Details", controller: "catalog", action: 'show', id: document.id, anchor: "item-container-#{loc_b}-#{loc_n}" %>
+            </span>
+          </th>
         </tr>
       <% end %>
-    </tbody>
+
+  <% unless has_summary %>
+
+    <tbody class='item-group-display' id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
+      <% items_have_notes = items_have_notes?(item_data['items']) %>
+      <% item_data['items'].each do |item| %>
+        <tr class="item <%= loc_n %> <%= loc_b %>">
+          <td class='location'><i class="fa fa-square"></i> <%= map_argon_code(document.record_owner, 'loc_n', loc_n) if loc_n %></td>
+          <td class='callnumber'><%= call_number_display(item) %></td>
+
+          <td class='status'>
+            <% if item['status'] == 'Available' %>
+              <span class="item-available"><%= item['status'] %></span>
+            <% elsif item['status'] == 'Checked out' || item['status'] == 'Checked Out' %>
+              <span class="item-not-available"><%= item['status'] %> <% if item.has_key?('due_date') %> (Due <%= item['due_date'].to_time.strftime("%m/%d/%Y") %>)<% end %> </span>
+            <% elsif item['status'] == 'In-Library Use Only' %>
+              <span class="item-library-only"><%= item['status'] %></span>
+            <% else %>
+              <%= item['status'] %>
+            <% end %>
+          </td>
+        </tr>
+
+      <% if items_have_notes %>
+        <tr>
+          <td class='notes' colspan="3">Note &mdash; <%= item_notes_display(item) %></td>
+        </tr>
+      <% end %>
+
     <% end %>
+    </tbody>
+
   <% end %>
-<% end %>
-</table>
+  <% end %>
+  <% end %>
+  </table>
+
+</div>

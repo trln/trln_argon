@@ -1,10 +1,25 @@
 
 $header-logo: 'trln_argon/trln-logo.png';
 
-$green: #1e9d8b;
+/*$green: #1e9d8b;
 $purple-dark: #490e6f;
 $purple-light: #c21dac;
-$orange: #ff6d22;
+$orange: #ff6d22;*/
+
+
+// Note: it is important to make sure that $primary-color and $primary-link-color
+// maintain adequate contrast ratio (> 4.5:1 on white background) for AxS purposes !
+
+$primary-color: #4b7ca9;
+$secondary-color: #2a5a8a; // this should be a darker hue than primary
+$tertiary-color: #689bc9; // this should be a lighter hue than primary
+
+$primary-link-color: #34679a;
+$secondary-link-color: #265584;
+
+$available-color: #157d1e; // default is green
+$not-available-color: #b11f1f; // default is red
+$alt-available-color: #7d6816; // default is brown
 
 
 

@@ -53,7 +53,7 @@ module TrlnArgon
         config.document_solr_path = :document
         config.document_solr_request_handler = nil
 
-        config.show.heading_partials = %i[show_thumbnail show_header show_sub_header]
+        config.show.heading_partials = %i[show_header show_thumbnail show_sub_header]
         config.show.partials = %i[show_items
                                   show_authors
                                   show_summary

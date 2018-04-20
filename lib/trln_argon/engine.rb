@@ -4,6 +4,8 @@ require 'blacklight-hierarchy'
 require 'rails_autolink'
 require 'library_stdnums'
 require 'openurl'
+require 'font-awesome-rails'
+require 'bootstrap-select-rails'
 
 module TrlnArgon
   class Engine < ::Rails::Engine
