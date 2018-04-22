@@ -189,6 +189,9 @@ module TrlnArgon
         #   The ordering of the field names is the order of the display
         config.add_show_field TrlnArgon::Fields::TITLE_UNIFORM.to_s,
                               label: TrlnArgon::Fields::TITLE_UNIFORM.label
+        config.add_show_field TrlnArgon::Fields::NOTE_FORMER_TITLE.to_s,
+                              label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
                               label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
         config.add_show_field TrlnArgon::Fields::FREQUENCY_FORMER.to_s,
@@ -214,6 +217,9 @@ module TrlnArgon
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_ORGANIZATION.to_s,
                               label: TrlnArgon::Fields::NOTE_ORGANIZATION.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_RELATED_WORK.to_s,
+                              label: TrlnArgon::Fields::NOTE_RELATED_WORK.label,
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_WITH.to_s,
                               label: TrlnArgon::Fields::NOTE_WITH.label,
@@ -242,6 +248,9 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::NOTE_DATA_QUALITY.to_s,
                               label: TrlnArgon::Fields::NOTE_DATA_QUALITY.label,
                               helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_METHODOLOGY.to_s,
+                              label: TrlnArgon::Fields::NOTE_METHODOLOGY.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_NUMBERING.to_s,
                               label: TrlnArgon::Fields::NOTE_NUMBERING.label,
                               helper_method: :join_with_br
@@ -265,6 +274,18 @@ module TrlnArgon
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_BINDING.to_s,
                               label: TrlnArgon::Fields::NOTE_BINDING.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_ACQUISITION_SOURCE.to_s,
+                              label: TrlnArgon::Fields::NOTE_ACQUISITION_SOURCE.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_REPRODUCTION.to_s,
+                              label: TrlnArgon::Fields::NOTE_REPRODUCTION.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_GENERAL.to_s,
+                              label: TrlnArgon::Fields::NOTE_GENERAL.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
+                              label: TrlnArgon::Fields::NOTE_LOCAL.label,
                               helper_method: :join_with_br
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s

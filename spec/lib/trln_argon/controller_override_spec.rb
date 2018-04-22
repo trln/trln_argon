@@ -227,6 +227,30 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the With Note field' do
       expect(override_config.show_fields).to have_key('note_with_a')
     end
+
+    it 'sets the Former Title Note field' do
+      expect(override_config.show_fields).to have_key('note_former_title_a')
+    end
+
+    it 'sets the General Note field' do
+      expect(override_config.show_fields).to have_key('note_general_a')
+    end
+
+    it 'sets the Local Note field' do
+      expect(override_config.show_fields).to have_key('note_local_a')
+    end
+
+    it 'sets the Methodology Note field' do
+      expect(override_config.show_fields).to have_key('note_methodology_a')
+    end
+
+    it 'sets the Related Work Note field' do
+      expect(override_config.show_fields).to have_key('note_related_work_a')
+    end
+
+    it 'sets the Reproduction Note field' do
+      expect(override_config.show_fields).to have_key('note_reproduction_a')
+    end
   end
 
   # fields that display below the record title on the 'show' page.
