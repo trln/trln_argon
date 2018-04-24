@@ -633,27 +633,31 @@ NOTES_SERIALS_SUMMARY_T:
 NOTE_ACCESS_RESTRICTIONS:
   solr_field: note_access_restrictions_a
   label:
-    en: Access Restrictions Note
+    en: Access Restriction
+NOTE_ACQUISITION_SOURCE:
+  solr_field: note_acquisition_source_a
+  label:
+    en: Source of Acquisition
 NOTE_ADMIN_HISTORY:
   solr_field: note_admin_history_a
   label:
-    en: Admin History Note
+    en: History of Originating Institutions
 NOTE_BINDING:
   solr_field: note_binding_a
   label:
-    en: Binding Note
+    en: Binding Details
 NOTE_BIOGRAPHICAL:
   solr_field: note_biographical_a
   label:
-    en: Biographical Note
+    en: Biographical Sketch of Creators
 NOTE_COPY_VERSION:
   solr_field: note_copy_version_a
   label:
-    en: Copy Version Note
+    en: Copy Version
 NOTE_DATA_QUALITY:
   solr_field: note_data_quality_a
   label:
-    en: Data Quality Note
+    en: Data Quality
 NOTE_DISSERTATION:
   solr_field: note_dissertation_a
   label:
@@ -661,39 +665,63 @@ NOTE_DISSERTATION:
 NOTE_FILE_TYPE:
   solr_field: note_file_type_a
   label:
-    en: File Type Note
+    en:  File/Data Type
+NOTE_FORMER_TITLE:
+  solr_field: note_former_title_a
+  label:
+    en: Former Title
+NOTE_GENERAL:
+  solr_field: note_general_a
+  label:
+    en: Notes
 NOTE_ISSUANCE:
   solr_field: note_issuance_a
   label:
-    en: Issuance Note
+    en: Issuance
+NOTE_LOCAL:
+  solr_field: note_local_a
+  label:
+    en: Local Notes
+NOTE_METHODOLOGY:
+  solr_field: note_methodology_a
+  label:
+    en: Methodology
 NOTE_NUMBERING:
   solr_field: note_numbering_a
   label:
-    en: Numbering Note
+    en: Numbering Peculiarities
 NOTE_ORGANIZATION:
   solr_field: note_organization_a
   label:
-    en: Organization Note
+    en: Organization of Collection
 NOTE_PERFORMER_CREDITS:
   solr_field: note_performer_credits_a
   label:
-    en: Performer Credit Note
+    en: Performers/Participants
 NOTE_PRODUCTION_CREDITS:
   solr_field: note_production_credits_a
   label:
-    en: Production Credit Note
+    en: Credits
+NOTE_RELATED_WORK:
+  solr_field: note_related_work_a
+  label:
+    en: Related Items
 NOTE_REPORT_COVERAGE:
   solr_field: note_report_coverage_a
   label:
-    en: Report Coverage Note
+    en: Report Covers
 NOTE_REPORT_TYPE:
   solr_field: note_report_type_a
   label:
-    en: Report Type Note
+    en: Type of Report
+NOTE_REPRODUCTION:
+  solr_field: note_reproduction_a
+  label:
+    en: Reproduction Details
 NOTE_SCALE:
   solr_field: note_scale_a
   label:
-    en: Scale Note
+    en: Scale
 NOTE_SUMMARY:
   solr_field: :note_summary_a
   label:
@@ -701,19 +729,19 @@ NOTE_SUMMARY:
 NOTE_SUPPLEMENT:
   solr_field: note_supplement_a
   label:
-    en: Supplement Note
+    en: Supplement
 NOTE_SYSTEM_DETAILS:
   solr_field: note_system_details_a
   label:
-    en: System Details Note
+    en: System Details
 NOTE_TOC:
   solr_field: note_toc_a
   label:
-    en: Table of Contents
+    en: Contents
 NOTE_WITH:
   solr_field: note_with_a
   label:
-    en: With Note
+    en: With
 OCLC_NUMBER:
   solr_field: :oclc_number
   label:
