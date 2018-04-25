@@ -1,0 +1,9 @@
+localhost:8080 {
+    gzip
+    root public
+    proxy / localhost:3000 {
+        transparent
+        except /assets
+    }
+    log log/access.log
+}
