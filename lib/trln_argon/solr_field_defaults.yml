@@ -1002,6 +1002,10 @@ TITLE_EARLIER_T:
   solr_field: :title_earlier_t
   label:
     en: Title Earlier T
+TITLE_FORMER:
+  solr_field: :title_former_a
+  label:
+    en: Former Title
 TITLE_JOURNAL:
   solr_field: :title_journal_a
   label:
@@ -1074,6 +1078,10 @@ TITLE_UNIFORM_T:
   solr_field: :title_uniform_t
   label:
     en: Title Uniform T
+TITLE_VARIANT:
+  solr_field: :title_variant_a
+  label:
+    en: Variant Title
 UPC:
   solr_field: :upc_a
   label:
