@@ -136,6 +136,14 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('title_uniform_a')
     end
 
+    it 'sets the Variant Title field' do
+      expect(override_config.show_fields).to have_key('title_variant_a')
+    end
+
+    it 'sets the Former Title field' do
+      expect(override_config.show_fields).to have_key('title_former_a')
+    end
+
     it 'sets the Current Frequency field' do
       expect(override_config.show_fields).to have_key('frequency_current_a')
     end

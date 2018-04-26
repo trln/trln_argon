@@ -189,6 +189,12 @@ module TrlnArgon
         #   The ordering of the field names is the order of the display
         config.add_show_field TrlnArgon::Fields::TITLE_UNIFORM.to_s,
                               label: TrlnArgon::Fields::TITLE_UNIFORM.label
+        config.add_show_field TrlnArgon::Fields::TITLE_VARIANT.to_s,
+                              label: TrlnArgon::Fields::TITLE_VARIANT.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::TITLE_FORMER.to_s,
+                              label: TrlnArgon::Fields::TITLE_FORMER.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_FORMER_TITLE.to_s,
                               label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label,
                               helper_method: :join_with_br
