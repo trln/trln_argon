@@ -774,6 +774,14 @@ PRODUCTION_STATEMENT:
   solr_field: :production_statement_a
   label:
     en: Production Statement
+PHYSICAL_MEDIA:
+  solr_field: physical_media_a
+  label:
+    en: Physical Media
+PHYSICAL_MEDIA_FACET:
+  solr_field: physical_media_f
+  label:
+    en: Physical Media
 PUBLICATION_YEAR_SORT:
   solr_field: :publication_year_isort_stored_single
   label:

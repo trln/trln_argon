@@ -64,6 +64,10 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('resource_type_f')
     end
 
+    it 'sets the physical media facet' do
+      expect(override_config.facet_fields).to have_key('physical_media_f')
+    end
+
     it 'sets the subject topic lcsh facet' do
       expect(override_config.facet_fields).to have_key('subject_topic_lcsh_f')
     end
@@ -107,10 +111,6 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the availability facet' do
       expect(override_config.facet_fields).to have_key('available_f')
     end
-
-    it 'sets the institution facet' do
-      expect(override_config.facet_fields).to have_key('institution_f')
-    end
   end
 
   describe 'index fields' do
@@ -128,6 +128,10 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the resource type field' do
       expect(override_config.index_fields).to have_key('resource_type_a')
+    end
+
+    it 'sets the physical media field' do
+      expect(override_config.index_fields).to have_key('physical_media_a')
     end
   end
 
@@ -275,6 +279,10 @@ describe TrlnArgon::ControllerOverride do
     end
     it 'sets the Resource Type field' do
       expect(override_config.show_sub_header_fields).to have_key('resource_type_a')
+    end
+
+    it 'sets the physical media facet' do
+      expect(override_config.show_sub_header_fields).to have_key('physical_media_a')
     end
   end
 

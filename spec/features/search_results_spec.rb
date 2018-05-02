@@ -31,22 +31,6 @@ describe 'search results' do
     it 'displays the Subject > History facet breadcrumb field value' do
       expect(page).to have_css('.filterValue', text: 'History and criticism')
     end
-
-    it 'adds the facet(s) as a GET parameter to the URL' do
-      click_link 'Institution'
-      within('#facet-institution_f') do
-        click_link 'ncsu'
-      end
-      expect(page).to have_current_path(
-        root_path(
-          :q                        => '',
-          'f[subject_topic_lcsh_f]' => ['History and criticism'],
-          'f[institution_f]'        => %w[ncsu],
-          :local_filter             => 'false',
-          :search_field             => 'all_fields'
-        )
-      )
-    end
   end
 
   context 'when location facet applied to search' do
