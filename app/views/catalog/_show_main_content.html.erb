@@ -17,14 +17,19 @@
       <div class="col-md-12 title-and-thumbnail">
         <%= render_document_partials @document, blacklight_config.view_config(:show).heading_partials %>
       </div>
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10">
         <%= render_document_partials @document, blacklight_config.view_config(:show).partials %>
         <div class="librarian-tools">
           <!-- TODO: Placeholder based on wireframes. Not functional yet.
                      Should probably create a partial for this and wire it through
                      the blacklight partials config. -->
-          <p><a href="#" class="btn btn-primary">View MARC record for this title</a></p>
+
         </div>
+
+        <div class="marc-record">
+          <p><a href="#">View MARC record for this title</a></p>
+        </div>
+
       </div>
 
     </div>

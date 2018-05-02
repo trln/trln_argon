@@ -20,6 +20,15 @@ module TrlnArgon
           (document.has_highlight_field? field_config.field if field_config.highlight) ||
           (field_config.accessor && document.send(field_config.accessor).present?)
       end
+
+      # Add class to body when local filter is applied
+      def extra_body_classes
+        if local_filter_applied?
+          super << 'local-filter'
+        else
+          super
+        end
+      end
     end
   end
 end

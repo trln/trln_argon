@@ -1,0 +1,55 @@
+<% # main container for facets/limits menu -%>
+
+<% inst = TrlnArgon::Engine.configuration.local_institution_code #vs ENV["LOCAL_INSTITUTION_CODE"]%>
+<% instname = TrlnArgon::LookupManager.instance.map("#{inst}.facet.#{inst}") %>
+
+<div id="location-data"
+  data-argon-institution="<%= instname %>"
+  data-argon-hsl="<%= TrlnArgon::LookupManager.instance.map('hsl.facet.hsl') %>"
+  data-argon-law="<%= TrlnArgon::LookupManager.instance.map('law.facet.law') %>"
+  ></div>
+
+
+<% if has_search_parameters? %>
+
+  <div id="trln-toggle" class="sidenav">
+
+    <% unless @response.empty? %>
+
+      <div class="well well-sm">
+
+        <div id="viewAllResults" class="clearfix">
+          <%= render :partial => "local_filter" %>
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+<% end %>
+
+<% if has_facet_values?  %>
+
+  <div id="facets" class="facets sidenav">
+
+    <div class="top-panel-heading panel-heading">
+      <button type="button" class="facets-toggle" data-toggle="collapse" data-target="#facet-panel-collapse">
+        <span class="sr-only">Toggle facets</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <h2 class='facets-heading'>
+        <%= t('blacklight.search.facets.title') %>
+      </h2>
+    </div>
+
+    <div id="facet-panel-collapse" class="collapse panel-group">
+      <%= render_facet_partials %>
+    </div>
+  </div>
+
+<% end %>

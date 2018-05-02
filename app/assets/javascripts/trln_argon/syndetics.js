@@ -42,7 +42,7 @@ Blacklight.onLoad(function() {
   			var $this = $(this), width = $(this).get(0).naturalWidth;
         var $parentdiv = $(this).closest('div');
         if (width < 2) {
-          $parentdiv.addClass('hide');
+          $parentdiv.addClass('hidden');
         }
   		});
 
@@ -50,7 +50,7 @@ Blacklight.onLoad(function() {
   			var $this = $(this), width = $(this).get(0).naturalWidth;
         var $parentdiv = $(this).closest('div');
         if (width < 2) {
-          $parentdiv.addClass('hide');
+          $parentdiv.addClass('hidden');
         }
   		});
 

@@ -1,9 +1,3 @@
-<% unless @response.empty? %>
-<div id="viewAllResults" class="clearfix">
-  <%= render :partial => "local_filter" %>
-</div>
-<% end %>
-
 <div id="sortAndPerPage" class="clearfix">
   <% unless @response.empty? %>
     <%= render :partial => "paginate_compact", :object => @response if show_pagination? %>
