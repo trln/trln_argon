@@ -12,11 +12,10 @@
   <div id="document-tools">
     <ul class="<%= controller_name %>Tools nav nav-pills">
       <%= render_show_doc_actions @document do |config, inner| %>
-        <li>
+        <li class="<%= config.name %>" >
           <%= inner %>
         </li>
       <% end %>
     </ul>
   </div>
 <% end %>
-

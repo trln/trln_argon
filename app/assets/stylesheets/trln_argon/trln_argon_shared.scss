@@ -26,10 +26,24 @@ a:hover, a:focus {
     border-color: $secondary-color;
 }
 
+.panel-default {
+    border-color: darken( $facet-grey, 10% );
+}
+
+.panel-default > .panel-heading {
+    background-color: $facet-grey;
+    border-color: darken( $facet-grey, 10% );
+}
+
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+    border-top-color: darken( $facet-grey, 10% );
+}
+
+
 panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     color: #fff;
-    background-color: $primary-color;
-    border-color: $primary-color;
+    background-color: $secondary-color;
+    border-color: $secondary-color;
 }
 
 .facet_limit-active .panel-heading.collapse-toggle .panel-title:after {
@@ -70,16 +84,34 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     }
 }
 
+
+
+
+body {
+  border-top: 7px solid $trln-green; // visual aid for TRLN context
+}
+
 .navbar-static-top {
-    border-width: 10px 0 0;
+    border-width: 3px 0 0;
+}
+
+body.local-filter { // hide visual aid for TRLN context
+
+  border-top: none;
+
+  .navbar-static-top {
+      border-width: 10px 0 0;
+  }
+
 }
 
 #header-navbar {
 
     .navbar-brand {
-        margin: 5px;
+        margin: 8px;
         background: transparent image_url($header-logo) no-repeat top left;
-        background-size: 103px;
+        width: 300px;
+        background-size: contain;
         color: #666;
     }
 
@@ -369,7 +401,7 @@ div.items table {
   .show-document .show-subjects ul {
     /*list-style-type: none;*/
     list-style-type: square;
-    column-width: 15em;
+    column-width: 20em;
     column-gap: 3em;
     column-fill: balance;
     padding-left: 0;
@@ -431,18 +463,211 @@ div.items table {
     margin-top: 15px;
 }
 
-#facets ul.facet-hierarchy {
-  margin-left: 0;
-  padding-left: 20px;
-}
 
-#facets ul.facet-hierarchy ul {
-  padding-left: 10px;
-}
+  /* Facets */
+
+  #facets ul.facet-hierarchy {
+    margin-left: 0;
+    padding-left: 10px;
+  }
+
+  #facets ul.facet-hierarchy ul {
+    padding-left: 15px;
+    padding-top: 6px;
+    /*display: table;
+    width: 100%;*/
+  }
+
+  #facets ul.facet-hierarchy ul ul {
+    padding-left: 0;
+    /*display: table;
+    width: 100%;*/
+  }
+
+  #facets ul.facet-hierarchy li.h-node {
+    padding-bottom: 6px;
+
+    a, .facet-count {
+        padding-bottom: 6px;
+    }
+
+    .facet-count {
+        float: right;
+    }
+
+  }
+
+  #facets ul.facet-hierarchy li.h-leaf {
+    list-style-image: none;
+    list-style: none;
+    margin-left: 0;
+    overflow: hidden;
+    /*display: table-row;*/
+
+    a:not(.remove) {
+        /*display: table-cell;*/
+        padding-bottom: 6px;
+        display: block;
+        float: left;
+        max-width: 240px;
+    }
+
+    .facet-count {
+        text-align: right;
+        float: right;
+        /*display: table-cell;*/
+    }
+
+  }
+
+
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-lg) { // account for 'twiddles' weird behavior
+
+    #facets ul.facet-hierarchy .twiddle > .facet_select {
+      display: inline-block;
+      width: 120.5px;
+      margin-right: 7px;
+      float: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      height: 1.2em;
+      white-space: nowrap;
+    }
+
+    #facets ul.facet-hierarchy ul .twiddle > .facet_select {
+      width: 105px;
+    }
+
+    #facets ul.facet-hierarchy .twiddle > .facet-count {
+      width: 43px;
+      float: left;
+      text-align: right;
+      display: block;
+    }
+
+    #facets ul.facet-hierarchy .twiddle-open > .facet_select {
+      display: auto;
+      width: 120.5px;
+      margin-right: 7px;
+      float: none;
+    }
+
+  }
+
+
+  @media screen and (min-width: $screen-xs) and (max-width: $screen-sm) { // have to manually set widths on children at different breakpoints
+    #facets ul.facet-hierarchy li.h-leaf a { max-width: 300px; }
+  }
+
+  @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+    #facets ul.facet-hierarchy li.h-leaf {
+      width: 163px;
+      a { width: 117px; }
+    }
+  }
+
+  @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
+    #facets ul.facet-hierarchy li.h-leaf {
+      width: 155px;
+      a { width: 110px; }
+    }
+  }
+
+  @media screen and (min-width: $screen-lg) {
+    #facets ul.facet-hierarchy li.h-leaf {
+      width: 205px;
+      a { width: 160px; }
+    }
+  }
+
+
+  #facets ul.facet-hierarchy li.h-leaf:only-child {
+
+    display: block;
+
+    a {
+        display: inline-block;
+        padding-bottom: 6px;
+    }
+
+    .facet-count {
+        text-align: right;
+        float: right;
+        display: block;
+    }
+
+  }
+
+  #facets .h-node .twiddle {
+    margin-left: 0;
+  }
+
+
+  #facets ul.facet-hierarchy li.h-node.twiddle-open {
+    border-top: 1px solid #eee;
+    padding-top: 6px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 6px;
+  }
+
+  #facets ul.facet-hierarchy li.h-node.twiddle-open > a {
+    font-weight: bold;
+  }
+
+  #facets ul.facet-hierarchy li.h-node.twiddle-open > a ~ a {
+    font-weight: normal;
+  }
+
+  /* END Facets */
+
+
 
 .text-success, .facet-values li .selected {
   color: $secondary-color;
 }
+
+#trln-toggle .well {
+  border-color: rgba( $tertiary-color, .50 );
+  background-color: rgba( $tertiary-color, .10 );
+}
+
+#viewAllResults {
+  text-align: center;
+
+  a {
+    display: block;
+    padding: 5px;
+  }
+
+}
+
+@media screen and (min-width: $screen-sm) {
+
+  #viewAllResults {
+    margin-left: 42px;
+    text-align: left;
+  }
+
+  .trln-results-link::before,
+  .institution-results-link::before {
+    display: block;
+    display: block;
+    position: absolute;
+    left: 35px;
+  }
+
+  .trln-results-link::before {
+    content: url($trln-icon);
+  }
+
+  .institution-results-link::before {
+    content: url($institution-icon);
+  }
+
+}
+
+
+
 
 
 
@@ -458,24 +683,34 @@ div.items table {
 
 }
 
-#document h2 {
-  color: #555;
-  font-size: 1.8em;
-  font-weight: 400;
-  margin-top: 2em;
-  padding-bottom: .15em;
-  border-bottom: 2px solid #eee;
-}
+#document {
 
-#document h3 {
-  color: #444;
-  font-size: 1.3em;
-  font-weight: 500;
-  margin-top: 1.5em;
-}
+  h2 {
+    color: #555;
+    font-size: 1.8em;
+    font-weight: 400;
+    margin-top: 2em;
+    padding-bottom: .15em;
+    border-bottom: 2px solid #eee;
+  }
 
-#document h3:first-of-type {
-  margin-top: .75em;
+  @media screen and (min-width: $screen-sm) {
+    .holdings h2 {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    color: #444;
+    font-size: 1.3em;
+    font-weight: 500;
+    margin-top: 1.5em;
+  }
+
+  h3:first-of-type {
+    margin-top: .75em;
+  }
+
 }
 
 #document,
@@ -532,8 +767,8 @@ h3.online-header {
 .items,
 .availability {
   padding: 10px;
-  border-left: 5px solid #f6f6f6;
-  background: #fbfbfb;
+  border-left: 5px solid $facet-grey;
+  background: lighten($facet-grey, 2.75%);
 }
 
 @media screen and (min-width: $screen-sm) {
@@ -581,7 +816,7 @@ h3.online-header {
 
 .items .table tbody,
 .items .table > tbody + tbody {
-  border-top: 1em solid #fbfbfb;
+  border-top: 1em solid lighten( $facet-grey, 2.75% );
 }
 
 .items .table tbody:nth-of-type(1),
@@ -713,7 +948,7 @@ h3.online-header {
   color: $secondary-link-color;
 }
 
-#document-tools li:first-of-type {
+#document-tools li.bookmark {
   display: block;
   float: right;
   margin-top: 5px;
@@ -723,7 +958,6 @@ h3.online-header {
 
 #show-sub-header {
   margin-top: 2em;
-  margin-left: 2em;
 }
 
 
@@ -754,6 +988,10 @@ h3.online-header {
   width: 70%;
   height: 1.5em;
   background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+div.marc-record {
+  text-align: right;
 }
 
 

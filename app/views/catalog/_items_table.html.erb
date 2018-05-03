@@ -1,6 +1,6 @@
 <div class="items">
   <% if document.fulltext_urls.any? || document.findingaid_urls.any? %>
-    <h3 class="online-header"> Access Online <i class="fa fa-laptop" aria-hidden="true"></i></h3>
+    <h3 class="online-header"><%= t('trln_argon.search.results.online') %> <i class="fa fa-laptop" aria-hidden="true"></i></h3>
     <div class="fulltext-url">
       <ul>
       <% document.fulltext_urls.each do |url| %>
@@ -13,7 +13,9 @@
     </div>
   <% end %>
   <% unless document.holdings.empty? %>
-    <h3>Access at the Library <i class="fa fa-map-marker" aria-hidden="true"></i></h3>
+
+    <h3><%= t('trln_argon.search.results.location') %> <i class="fa fa-map-marker" aria-hidden="true"></i></h3>
+
     <% if context == 'index' %>
       <%= render partial: "items_table_index", locals: { document: document} %>
     <% else %>

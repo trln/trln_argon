@@ -1,16 +1,6 @@
 <div class="row">
 
-  <div class="col-md-4">
-
-    <section class="branding">
-      <% inst = TrlnArgon::Engine.configuration.local_institution_code %>
-      <h1><%= t("trln_argon.institution.#{inst}.long_name") %></h1>
-      <h4>Argonic Catalog</h4>
-    </section>
-
-  </div>
-
-  <div class="col-md-8">
+  <div class="col-md-10 col-md-offset-1">
 
     <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
 

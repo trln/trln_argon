@@ -15,6 +15,10 @@ en:
                     one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
                     other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
 
+            facets:
+              title: 'Limit your search'
+              inverse-title: 'Expand your search'
+
         entry_name:
             default: 'result'
             bookmarks: 'item'
@@ -115,6 +119,10 @@ en:
                 expand_search_href: 'Expand your search.'
                 contact_us_html: 'Or %{href} for help.'
                 contact_us_href: 'contact us'
+
+            results:
+              location: 'At the Library'
+              online: 'Online'
 
         show:
             heading:
