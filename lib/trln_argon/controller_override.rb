@@ -90,10 +90,6 @@ module TrlnArgon
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::INSTITUTION_FACET.to_s,
-                               label: TrlnArgon::Fields::INSTITUTION_FACET.label,
-                               limit: true,
-                               collapse: false
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                helper_method: :location_filter_display,
@@ -101,6 +97,10 @@ module TrlnArgon
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
+                               limit: true,
+                               collapse: false
+        config.add_facet_field TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
+                               label: TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.label,
                                limit: true,
                                collapse: false
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.to_s,
@@ -183,6 +183,8 @@ module TrlnArgon
                                helper_method: :imprint_main
         config.add_index_field TrlnArgon::Fields::EDITION.to_s
         config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
+                               helper_method: :join_with_commas
+        config.add_index_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
                                helper_method: :join_with_commas
 
         # solr fields to be displayed in the show (single result) view
@@ -299,6 +301,8 @@ module TrlnArgon
                                          helper_method: :imprint_main
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
+                                         helper_method: :join_with_commas
+        config.add_show_sub_header_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
                                          helper_method: :join_with_commas
 
         # TODO: What field should be searched when linking to a search for various
