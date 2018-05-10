@@ -210,13 +210,6 @@ module TrlnArgon
                               label: TrlnArgon::Fields::SECONDARY_URLS.label,
                               accessor: :secondary_urls,
                               helper_method: :link_to_secondary_urls
-        config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
-                              label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
-                              accessor: :isbn_with_qualifying_info
-        config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
-                              label: TrlnArgon::Fields::ISSN_LINKING.label
-        config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
-                              label: TrlnArgon::Fields::OCLC_NUMBER.label
         config.add_show_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                               label: TrlnArgon::Fields::IMPRINT_MULTIPLE.label,
                               helper_method: :imprint_multiple
@@ -294,6 +287,19 @@ module TrlnArgon
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
                               label: TrlnArgon::Fields::NOTE_LOCAL.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
+                              label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
+                              accessor: :isbn_with_qualifying_info,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
+                              label: TrlnArgon::Fields::ISSN_LINKING.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
+                              label: TrlnArgon::Fields::OCLC_NUMBER.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::MISC_ID.to_s,
+                              label: TrlnArgon::Fields::MISC_ID.label,
                               helper_method: :join_with_br
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s

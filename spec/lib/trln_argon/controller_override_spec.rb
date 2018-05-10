@@ -263,6 +263,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Reproduction Note field' do
       expect(override_config.show_fields).to have_key('note_reproduction_a')
     end
+
+    it 'sets the Misc ID field' do
+      expect(override_config.show_fields).to have_key('misc_id_a')
+    end
   end
 
   # fields that display below the record title on the 'show' page.
