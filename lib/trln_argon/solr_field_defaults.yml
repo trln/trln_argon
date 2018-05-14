@@ -586,6 +586,10 @@ MANUFACTURER_STATEMENT:
   solr_field: :manufacturer_statement_a
   label:
     en: Manufacturer Statement
+MISC_ID:
+  solr_field: misc_id_a
+  label:
+    en: Other Identifiers
 NORMALIZED_CALL_NUMBERS:
   solr_field: :normalized_call_numbers_a
   label:

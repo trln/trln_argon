@@ -657,11 +657,11 @@ div.items table {
   }
 
   .trln-results-link::before {
-    content: url($trln-icon);
+    content: image_url($trln-icon);
   }
 
   .institution-results-link::before {
-    content: url($institution-icon);
+    content: image_url($institution-icon);
   }
 
 }
