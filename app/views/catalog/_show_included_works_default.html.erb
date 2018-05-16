@@ -1,0 +1,11 @@
+<% display_values = show_configured_fields_and_values(blacklight_config.show_included_works_fields, document) %>
+<div class="show-included-works">
+  <% if display_values.any? %>
+    <h2><%= t('trln_argon.show.heading.included_works') %></h2>
+    <ul>
+      <% display_values.each do |value| %>
+          <%= value[:value] %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

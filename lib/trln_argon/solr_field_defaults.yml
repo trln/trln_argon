@@ -262,6 +262,10 @@ IMPRINT_TYPE:
   solr_field: :imprint_type_a
   label:
     en: Imprint Type
+INCLUDED_WORK:
+  solr_field: :included_work_a
+  label:
+    en: This item includes
 INSTITUTION:
   solr_field: :institution_a
   label:

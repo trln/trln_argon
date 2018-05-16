@@ -119,13 +119,68 @@ describe TrlnArgonHelper, type: :helper do
       allow(context).to receive(:local_filter_applied?).and_return(false)
       allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
       expect(context.helpers.link_to_subject_segments(options)).to(
-        eq(['<a title="Technology" href="/catalog?begins_with=something">Technology</a>'\
-            '<a title="Technology -- History" href="/catalog?begins_with=something">'\
+        eq(['<a title="Technology" class="progressive-link" href="/catalog?begins_with=something">Technology</a>'\
+            '<a title="Technology -- History" class="progressive-link" href="/catalog?begins_with=something">'\
             '<span class="sr-only">Technology</span> -- History</a>'\
-            '<a title="Technology -- History -- Science" href="/catalog?begins_with=something">'\
+            '<a title="Technology -- History -- Science" class="progressive-link" '\
+            'href="/catalog?begins_with=something">'\
             '<span class="sr-only">Technology -- History</span> -- Science</a>',
-            '<a title="Galilei, Galileo, 1564-1642" href="/catalog?begins_with=something">'\
+            '<a title="Galilei, Galileo, 1564-1642" class="progressive-link" href="/catalog?begins_with=something">'\
             'Galilei, Galileo, 1564-1642</a>'])
+      )
+    end
+  end
+
+  describe '#work_entry_display' do
+    let(:options) do
+      { value: [{ label: '',
+                  author: 'Author',
+                  title: %w['One Two Three Four],
+                  title_variation: '',
+                  details: '',
+                  isbn: [],
+                  issn: '',
+                  title_linking:
+                    [{ params:
+                       { author: 'Author', title: 'One' },
+                       display_segments: %w[Author One] },
+                     { params:
+                       { author: 'Author',
+                         title: 'One Two' },
+                       display_segments:
+                         %w[Author One Two] },
+                     { params:
+                       { author: 'Author',
+                         title: 'One Two Three' },
+                       display_segments:
+                         %w[Author One Two Three] },
+                     { params:
+                       { author: 'Author',
+                         title: 'One Two Three Four' },
+                       display_segments:
+                         %w[Author One Two Three Four] }] }] }
+    end
+
+    it 'creates a display value with links from the supplied work entry data' do
+      expect(helper.work_entry_display(options)).to eq(
+        '<li>'\
+        '<a class="progressive-link" href="/catalog?q=Author&amp;search_field=author">Author</a>'\
+        '<a class="progressive-link" href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One">'\
+        '<span class="sr-only">Author One</span> One'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two">'\
+        '<span class="sr-only">Author One Two</span> Two'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two+Three">'\
+        '<span class="sr-only">Author One Two Three</span> Three'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two+Three+Four">'\
+        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '</a>'\
+        '</li>'
       )
     end
   end

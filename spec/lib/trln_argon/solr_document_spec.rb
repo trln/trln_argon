@@ -237,4 +237,69 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  describe 'included_work' do
+    let(:included_work_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        included_work_a: ['{"author":"Saint-Saëns, Camille, 1835-1921.","title":["Quartets,",'\
+                          '"violins (2), viola, cello,","no. 2, op. 153,","G major"]}',
+                          '{"author":"Masson, VeNeta.","title":["Rehab at the Florida Avenue Grill."],'\
+                          '"isbn":["0967368804"]}']
+      )
+    end
+
+    it 'deserializes the string and mixes in a title_linking field for building progressive links' do
+      expect(included_work_document.included_work).to eq(
+        [{ label: '',
+           author: 'Saint-Saëns, Camille, 1835-1921.',
+           title: ['Quartets,', 'violins (2), viola, cello,', 'no. 2, op. 153,', 'G major'],
+           title_variation: '',
+           details: '',
+           isbn: [],
+           issn: '',
+           title_linking:
+             [{ params:
+                { author: 'Saint-Saëns, Camille, 1835-1921.', title: 'Quartets,' },
+                display_segments: ['Saint-Saëns, Camille, 1835-1921.', 'Quartets,'] },
+              { params:
+                { author: 'Saint-Saëns, Camille, 1835-1921.',
+                  title: 'Quartets, violins (2), viola, cello,' },
+                display_segments:
+                  ['Saint-Saëns, Camille, 1835-1921.',
+                   'Quartets,',
+                   'violins (2), viola, cello,'] },
+              { params:
+                { author: 'Saint-Saëns, Camille, 1835-1921.',
+                  title: 'Quartets, violins (2), viola, cello, no. 2, op. 153,' },
+                display_segments:
+                  ['Saint-Saëns, Camille, 1835-1921.',
+                   'Quartets,',
+                   'violins (2), viola, cello,',
+                   'no. 2, op. 153,'] },
+              { params:
+                { author: 'Saint-Saëns, Camille, 1835-1921.',
+                  title: 'Quartets, violins (2), viola, cello, no. 2, op. 153, G major' },
+                display_segments:
+                  ['Saint-Saëns, Camille, 1835-1921.',
+                   'Quartets,',
+                   'violins (2), viola, cello,',
+                   'no. 2, op. 153,',
+                   'G major'] }] },
+         { label: '',
+           author: 'Masson, VeNeta.',
+           title: ['Rehab at the Florida Avenue Grill.'],
+           title_variation: '',
+           details: '',
+           isbn: ['0967368804'],
+           issn: '',
+           title_linking:
+            [{ params:
+               { author: 'Masson, VeNeta.',
+                 title: 'Rehab at the Florida Avenue Grill.' },
+               display_segments:
+                 ['Masson, VeNeta.', 'Rehab at the Florida Avenue Grill.'] }] }]
+      )
+    end
+  end
 end

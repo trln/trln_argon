@@ -269,6 +269,12 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  describe 'show included works fields' do
+    it 'sets the Included Works field' do
+      expect(override_config.show_included_works_fields).to have_key('included_work_a')
+    end
+  end
+
   # fields that display below the record title on the 'show' page.
   describe 'show sub header fields' do
     it 'sets the Statement of Responsibility' do
@@ -278,14 +284,16 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Imprint field' do
       expect(override_config.show_sub_header_fields).to have_key('imprint_main_a')
     end
+
     it 'sets the Edition field' do
       expect(override_config.show_sub_header_fields).to have_key('edition_a')
     end
+
     it 'sets the Resource Type field' do
       expect(override_config.show_sub_header_fields).to have_key('resource_type_a')
     end
 
-    it 'sets the physical media facet' do
+    it 'sets the Physical Media field' do
       expect(override_config.show_sub_header_fields).to have_key('physical_media_a')
     end
   end
