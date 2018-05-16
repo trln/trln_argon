@@ -105,13 +105,16 @@ body.local-filter { // hide visual aid for TRLN context
 
 }
 
+/* set logo based on local filter */
+#header-navbar .navbar-brand { background: transparent image_url($trln-logo) no-repeat top left; }
+body.local-filter #header-navbar .navbar-brand { background: transparent image_url($institution-logo) no-repeat top left; }
+
 #header-navbar {
 
     .navbar-brand {
         margin: 8px;
-        background: transparent image_url($header-logo) no-repeat top left;
         width: 300px;
-        background-size: contain;
+        background-size: contain !important;
         color: #666;
     }
 
@@ -644,24 +647,19 @@ div.items table {
 @media screen and (min-width: $screen-sm) {
 
   #viewAllResults {
-    margin-left: 42px;
     text-align: left;
   }
 
-  .trln-results-link::before,
-  .institution-results-link::before {
-    display: block;
-    display: block;
-    position: absolute;
-    left: 35px;
+  .trln-results-link {
+    background: transparent image_url($trln-icon) no-repeat left;
+    padding-left: 36px !important;
+    margin-left: 8px;
   }
 
-  .trln-results-link::before {
-    content: image_url($trln-icon);
-  }
-
-  .institution-results-link::before {
-    content: image_url($institution-icon);
+  .institution-results-link {
+    background: transparent image_url($institution-icon) no-repeat left;
+    padding-left: 36px !important;
+    margin-left: 8px;
   }
 
 }

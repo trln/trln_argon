@@ -18,22 +18,22 @@ Blacklight.onLoad(function() {
         $('.facet_select:contains("' + argonInstitution + '")').parent().children("ul").css("display", "block");
 
         // hide results after 10
-        $('.twiddle-open > ul > li:gt(9)').hide();
+        $('ul.facet-hierarchy > .twiddle-open > ul > li:gt(9)').hide();
 
         // add 'more' and 'less' button at end
-        $('#facet-location_hierarchy_f .twiddle-open ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
-        $('#facet-location_hierarchy_f .twiddle-open ul').append( "<div><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></div>" );
+        $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
+        $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></div>" );
 
         // click 'more' to show all
         $('.more_locations_link').click(function() {
-            $('.twiddle-open > ul > li:gt(9)').show();
+            $('ul.facet-hierarchy .twiddle-open > ul > li:gt(9)').show();
             $('.more_locations_link').hide();
             $('.less_locations_link').show();
         });
 
         // click 'less' to hide
         $('.less_locations_link').click(function() {
-            $('.twiddle-open > ul > li:gt(9)').hide();
+            $('ul.facet-hierarchy .twiddle-open > ul > li:gt(9)').hide();
             $('.more_locations_link').show();
             $('.less_locations_link').hide();
         });

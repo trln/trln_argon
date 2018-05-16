@@ -12,4 +12,9 @@
           url_for(search_state.to_h.merge(local_filter: 'true', page: '1')),
           class: "institution-results-link" %>
   <% end %>
+
+<% elsif @filtered_results_total = 0 %>
+
+    <%= link_to t("trln_argon.local_filter.no_results", local_institution_name: institution_long_name), root_path, class: "institution-results-link" %>
+
 <% end %>
