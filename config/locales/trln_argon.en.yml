@@ -62,6 +62,9 @@ en:
         local_filter:
             applied: 'Show %{filtered_results_total} %{entry_name} at all %{consortium_name}'
             not_applied: 'Show %{filtered_results_total} %{entry_name} at %{local_institution_name}'
+            no_results: 'Go back to %{local_institution_name} Catalog'
+            searching_local: 'Searching %{local_institution_name}'
+            searching_trln: 'Searching all Triangle Research Libraries'
 
         scope_name:
             bookmarks: 'bookmarked'

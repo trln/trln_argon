@@ -10,7 +10,12 @@
 
     <% inst = TrlnArgon::Engine.configuration.local_institution_code %>
 
-    <%= link_to content_tag(:span, t("trln_argon.institution.#{inst}.long_name"), class: "sr-only"), root_path, class: "navbar-brand" %>
+    <% if local_filter_applied? %>
+      <%= link_to content_tag(:span, t("trln_argon.institution.#{inst}.long_name"), class: "sr-only"), root_path, class: "navbar-brand" %>
+    <% else %>
+      <%= link_to content_tag(:span, t("trln_argon.consortium.long_name"), class: "sr-only"), root_path, class: "navbar-brand" %>
+    <% end %>
+
     </div>
 
     <div class="collapse navbar-collapse" id="user-util-collapse">

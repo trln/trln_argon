@@ -10,25 +10,36 @@
   ></div>
 
 
-<% if has_search_parameters? && @filtered_results_total > 0 %>
+<div id="trln-toggle" class="sidenav facets top-panel-heading">
 
-  <div id="trln-toggle" class="sidenav">
+  <% unless @response.empty? %>
 
-    <% unless @response.empty? %>
+    <div class="top-panel-heading panel-heading">
 
-      <div class="well well-sm">
+      <% if local_filter_applied? %>
 
-        <div id="viewAllResults" class="clearfix">
-          <%= render :partial => "local_filter" %>
-        </div>
+        <h2 class="facets-heading"><%= t('trln_argon.local_filter.searching_local', local_institution_name: institution_long_name) %></h2>
 
+      <% else %>
+
+        <h2 class="facets-heading"><%= t('trln_argon.local_filter.searching_trln') %></h2>
+
+      <% end %>
+
+    </div>
+
+    <div class="well well-sm">
+
+      <div id="viewAllResults" class="clearfix">
+        <%= render :partial => "local_filter" %>
       </div>
 
-    <% end %>
+    </div>
 
-  </div>
+  <% end %>
 
-<% end %>
+</div>
+
 
 <% if has_facet_values?  %>
 
