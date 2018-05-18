@@ -13,8 +13,8 @@
           class: "institution-results-link" %>
   <% end %>
 
-<% elsif @filtered_results_total = 0 %>
+<% elsif !local_filter_applied? %>
 
-    <%= link_to t("trln_argon.local_filter.no_results", local_institution_name: institution_long_name), root_path, class: "institution-results-link" %>
+    <%= link_to t("trln_argon.local_filter.no_results", local_institution_name: institution_long_name), root_path(local_filter: 'true'), class: "institution-results-link" %>
 
 <% end %>

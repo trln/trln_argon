@@ -133,6 +133,7 @@ en:
                 authors: "Authors, etc."
                 summary: "Summary"
                 contents: "Contents"
+                included_works: This item includes
                 subjects: "This item is about"
                 metadata: "Other details"
 

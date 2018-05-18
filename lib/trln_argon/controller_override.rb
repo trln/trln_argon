@@ -57,6 +57,7 @@ module TrlnArgon
         config.show.partials = %i[show_items
                                   show_authors
                                   show_summary
+                                  show_included_works
                                   show_subjects
                                   show]
 
@@ -319,6 +320,11 @@ module TrlnArgon
                                       label: TrlnArgon::Fields::AUTHORS_OTHER.label
         config.add_show_authors_field TrlnArgon::Fields::AUTHORS_DIRECTOR.to_s,
                                       label: TrlnArgon::Fields::AUTHORS_DIRECTOR.label
+
+        config.add_show_included_works_field TrlnArgon::Fields::INCLUDED_WORK.to_s,
+                                             label: TrlnArgon::Fields::INCLUDED_WORK.label,
+                                             accessor: :included_work,
+                                             helper_method: :work_entry_display
 
         config.add_show_subjects_field TrlnArgon::Fields::SUBJECTS.to_s,
                                        helper_method: :list_of_linked_subjects_segments
