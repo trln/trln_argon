@@ -9,7 +9,7 @@
             count: @filtered_results_total,
             href: link_to(t('trln_argon.search.zero_results.expand_search_href'), url_for(search_state.to_h.merge(local_filter: 'false', page: '1')))).html_safe %></li>
 
-    <% elsif @filtered_results_total = 0 %>
+    <% elsif @filtered_results_total == 0 %>
 
       <li>
         <%= t('trln_argon.search.zero_results.expand_search_html.none',

@@ -16,7 +16,7 @@ module TrlnArgon
 
       def expanded_holdings
         @expanded_holdings ||= Hash[expanded_documents.map do |doc|
-          [doc[TrlnArgon::Fields::INSTITUTION].first,
+          [doc.institution,
            doc.holdings]
         end]
       end

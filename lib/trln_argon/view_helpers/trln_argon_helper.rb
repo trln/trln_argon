@@ -16,6 +16,14 @@ module TrlnArgon
       include SyndeticsHelper
       include WorkEntryHelper
 
+      # Defined here so the helper is available within all
+      # controller contexts.
+      # Overriden by ControllerOverride::LocalFilter#local_filter_applied?
+      # when called within the CatalogController context.
+      def local_filter_applied?
+        TrlnArgon::Engine.configuration.apply_local_filter_by_default
+      end
+
       def institution_code_to_short_name(options = {})
         options[:value].map do |val|
           t("trln_argon.institution.#{val}.short_name", default: val)
@@ -61,7 +69,7 @@ module TrlnArgon
 
       def item_notes_display(item)
         item.fetch('notes', []).collect do |n|
-          "<span class='item-note'>#{n}</span>"
+          "<span class='item-note'>#{CGI.escapeHTML(n)}</span>"
         end.join('<br />').html_safe
       end
 
@@ -85,9 +93,9 @@ module TrlnArgon
       def link_to_secondary_urls(options = {})
         options[:value].map do |url|
           link_text = if url[:text].present?
-                        url[:text]
+                        CGI.escapeHTML(url[:text])
                       else
-                        url[:href]
+                        CGI.escapeHTML(url[:href])
                       end
           link_to link_text, url[:href]
         end.join('<br />').html_safe
@@ -111,7 +119,7 @@ module TrlnArgon
       end
 
       def join_with_br(options = {})
-        options[:value].join('<br />').html_safe
+        options[:value].map { |v| CGI.escapeHTML(v) }.join('<br />').html_safe
       end
 
       private

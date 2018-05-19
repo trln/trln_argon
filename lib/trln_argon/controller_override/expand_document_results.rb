@@ -21,7 +21,7 @@ module TrlnArgon
         end.first
         group_docs = group_docs.respond_to?(:docs) ? group_docs.docs : [doc]
         Hash[group_docs.map do |gr_doc|
-          [gr_doc[TrlnArgon::Fields::INSTITUTION].first, gr_doc]
+          [gr_doc.institution, gr_doc]
         end]
       end
 

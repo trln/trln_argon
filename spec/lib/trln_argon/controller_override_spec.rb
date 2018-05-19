@@ -275,6 +275,64 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  describe 'show Related Work fields' do
+    it 'sets the Related Work field' do
+      expect(override_config.show_related_works_fields).to have_key('related_work_a')
+    end
+
+    it 'sets the This Work field' do
+      expect(override_config.show_related_works_fields).to have_key('this_work_a')
+    end
+
+    it 'sets the Series Work field' do
+      expect(override_config.show_related_works_fields).to have_key('series_work_a')
+    end
+
+    it 'sets the Subseries Work field' do
+      expect(override_config.show_related_works_fields).to have_key('subseries_work_a')
+    end
+
+    it 'sets the Translation Of Work field' do
+      expect(override_config.show_related_works_fields).to have_key('translation_of_work_a')
+    end
+
+    it 'sets the Translated As Work field' do
+      expect(override_config.show_related_works_fields).to have_key('translated_as_work_a')
+    end
+
+    it 'sets the Has Supplement To Work field' do
+      expect(override_config.show_related_works_fields).to have_key('has_supplement_to_work_a')
+    end
+
+    it 'sets the Has Supplement Work field' do
+      expect(override_config.show_related_works_fields).to have_key('has_supplement_work_a')
+    end
+
+    it 'sets the Host Item Work field' do
+      expect(override_config.show_related_works_fields).to have_key('host_item_work_a')
+    end
+
+    it 'sets the Alt Edition Work field' do
+      expect(override_config.show_related_works_fields).to have_key('alt_edition_work_a')
+    end
+
+    it 'sets the Issued With Work field' do
+      expect(override_config.show_related_works_fields).to have_key('issued_with_work_a')
+    end
+
+    it 'sets the Earlier Work field' do
+      expect(override_config.show_related_works_fields).to have_key('earlier_work_a')
+    end
+
+    it 'sets the Later Work field' do
+      expect(override_config.show_related_works_fields).to have_key('later_work_a')
+    end
+
+    it 'sets the Data Source Work field' do
+      expect(override_config.show_related_works_fields).to have_key('data_source_work_a')
+    end
+  end
+
   # fields that display below the record title on the 'show' page.
   describe 'show sub header fields' do
     it 'sets the Statement of Responsibility' do

@@ -61,7 +61,7 @@ module TrlnArgon
     # location and status codes when displaying items, and the items themselves
     # don't contain this data.
     def record_owner
-      self[TrlnArgon::Fields::INSTITUTION].first
+      self.institution
     end
   end
 end
