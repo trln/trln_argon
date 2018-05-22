@@ -25,7 +25,7 @@ describe 'search results' do
     end
 
     it 'displays the Subject facet breadcrumb field label' do
-      expect(page).to have_css('.filterName', text: 'Subject')
+      expect(page).to have_css('.filterName', text: 'About Topic')
     end
 
     it 'displays the Subject > History facet breadcrumb field value' do
