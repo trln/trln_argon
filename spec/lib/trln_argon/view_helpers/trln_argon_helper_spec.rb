@@ -82,7 +82,7 @@ describe TrlnArgonHelper, type: :helper do
 
   describe '#consortium_long_name' do
     it 'uses the translated name' do
-      expect(helper.consortium_long_name).to eq('TRLN Libraries')
+      expect(helper.consortium_long_name).to eq('Triangle Research Libraries')
     end
   end
 
