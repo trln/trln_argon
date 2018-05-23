@@ -581,7 +581,7 @@ LOCAL_ID_STR:
 LOCATION_HIERARCHY_FACET:
   solr_field: location_hierarchy_f
   label:
-    en: Location
+    en: Library Location
 MANUFACTURER:
   solr_field: :manufacturer_a
   label:
@@ -921,7 +921,7 @@ SUBJECT_CHRONOLOGICAL:
 SUBJECT_CHRONOLOGICAL_FACET:
   solr_field: :subject_chronological_f
   label:
-    en: Time Period
+    en: About Time Period
 SUBJECT_GENRE:
   solr_field: :subject_genre_a
   label:
@@ -941,7 +941,7 @@ SUBJECT_GEOGRAPHIC:
 SUBJECT_GEOGRAPHIC_FACET:
   solr_field: :subject_geographic_f
   label:
-    en: Region
+    en: About Places
 SUBJECT_MEDICAL_FACET:
   solr_field: :subject_medical_f
   label:
@@ -953,7 +953,7 @@ SUBJECT_TOPIC_LCSH:
 SUBJECT_TOPIC_LCSH_FACET:
   solr_field: :subject_topic_lcsh_f
   label:
-    en: Subject
+    en: About Topic
 SUBJECTS:
   solr_field: :subjects_a
   label:
