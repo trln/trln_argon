@@ -5,7 +5,7 @@ en:
         home:
 
             welcome: "Welcome to Search TRLN"
-            blurb: "Search TRLN provides a single search interface to the TRLN Libraries' Collections."
+            blurb: "Search TRLN provides a single search interface to the Triangle Research Libraries' Collections."
 
         search:
             pagination_info:
@@ -71,7 +71,7 @@ en:
 
         consortium:
             short_name: "TRLN"
-            long_name: "TRLN Libraries"
+            long_name: "Triangle Research Libraries"
 
         availability:
             available: "Available"
