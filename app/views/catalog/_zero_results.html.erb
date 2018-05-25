@@ -8,6 +8,13 @@
         <%= t('trln_argon.search.zero_results.expand_search_html',
             count: @filtered_results_total,
             href: link_to(t('trln_argon.search.zero_results.expand_search_href'), url_for(search_state.to_h.merge(local_filter: 'false', page: '1')))).html_safe %></li>
+
+    <% elsif @filtered_results_total = 0 %>
+
+      <li>
+        <%= t('trln_argon.search.zero_results.expand_search_html.none',
+            href: link_to(t('trln_argon.search.zero_results.different_search_href'), root_path)).html_safe %></li>
+
     <% end %>
 
     <!-- ARTICLE SEARCH -->
