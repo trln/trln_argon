@@ -762,6 +762,10 @@ NOTE_SCALE:
   solr_field: note_scale_a
   label:
     en: Scale
+NOTE_SERIAL_DATES:
+  solr_field: :note_serial_dates_a
+  label:
+    en: Serial Dates
 NOTE_SUMMARY:
   solr_field: :note_summary_a
   label:
