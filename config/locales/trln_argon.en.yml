@@ -136,6 +136,7 @@ en:
                 summary: "Summary"
                 contents: "Contents"
                 included_works: This item includes
+                related_works: Related items
                 subjects: "This item is about"
                 metadata: "Other details"
 

@@ -132,6 +132,8 @@ describe TrlnArgonHelper, type: :helper do
   end
 
   describe '#work_entry_display' do
+    let(:context) { CatalogController.new }
+
     let(:options) do
       { value: [{ label: '',
                   author: 'Author',
@@ -161,23 +163,28 @@ describe TrlnArgonHelper, type: :helper do
                          %w[Author One Two Three Four] }] }] }
     end
 
+    before do
+      allow(context).to receive(:local_filter_applied?).and_return(false)
+      allow(context).to receive(:search_action_url).and_return('/catalog?search=something')
+    end
+
     it 'creates a display value with links from the supplied work entry data' do
-      expect(helper.work_entry_display(options)).to eq(
+      expect(context.helpers.work_entry_display(options)).to eq(
         '<li>'\
-        '<a class="progressive-link" href="/catalog?q=Author&amp;search_field=author">Author</a>'\
-        '<a class="progressive-link" href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One">'\
+        '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
+        '<a class="progressive-link" href="/catalog?search=something">'\
         '<span class="sr-only">Author One</span> One'\
         '</a>'\
         '<a class="progressive-link" '\
-        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two">'\
+        'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two</span> Two'\
         '</a>'\
         '<a class="progressive-link" '\
-        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two+Three">'\
+        'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two Three</span> Three'\
         '</a>'\
         '<a class="progressive-link" '\
-        'href="/catalog?author=Author&amp;op=AND&amp;search_field=advanced&amp;title=One+Two+Three+Four">'\
+        'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
         '</li>'
@@ -268,7 +275,7 @@ describe TrlnArgonHelper, type: :helper do
     it 'generates an imprint_main for display' do
       expect(helper.imprint_main(document: document)).to(
         eq('<span class="imprint-label">Fall/Winter 2002-</span>: Savannah, GA : Dept. of Languages, '\
-           'Literature & Philosophy, Armstrong Atlantic State University')
+           'Literature &amp; Philosophy, Armstrong Atlantic State University')
       )
     end
 
@@ -281,7 +288,7 @@ describe TrlnArgonHelper, type: :helper do
           ': Charlotte, N.C. : Advancment Studies, CPCC<br /><span class="imprint-label">'\
           'Summer 2000-summer 2001</span>: Charlotte, N.C. : English Dept., CPCC<br />'\
           '<span class="imprint-label">Fall/Winter 2002-</span>: Savannah, GA : Dept. of Languages, '\
-          'Literature & Philosophy, Armstrong Atlantic State University')
+          'Literature &amp; Philosophy, Armstrong Atlantic State University')
       )
     end
   end

@@ -22,7 +22,9 @@ module TrlnArgon
       def segment_begins_with_link(segment_hierarchy_pair, delimiter = ' -- ')
         params = { begins_with: { TrlnArgon::Fields::SUBJECTS_FACET => Array(segment_hierarchy_pair.last) } }
         params[:local_filter] = local_filter_applied?.to_s
-        link_to(search_action_url(params), title: segment_hierarchy_pair.last, class: 'progressive-link') do
+        link_to(search_action_url(params),
+                title: CGI.escapeHTML(segment_hierarchy_pair.last),
+                class: 'progressive-link') do
           segment_link_content(segment_hierarchy_pair, delimiter).html_safe
         end
       end
@@ -31,11 +33,11 @@ module TrlnArgon
         sr_only_segment = segment_hierarchy_pair.last.sub(segment_hierarchy_pair.first, '')
         if sr_only_segment.present?
           sr_span = content_tag(:span,
-                                sr_only_segment.chomp(delimiter).to_s,
+                                CGI.escapeHTML(sr_only_segment.chomp(delimiter).to_s),
                                 class: 'sr-only')
           apply_delim = delimiter
         end
-        "#{sr_span}#{apply_delim}#{segment_hierarchy_pair.first}"
+        "#{sr_span}#{apply_delim}#{CGI.escapeHTML(segment_hierarchy_pair.first)}"
       end
 
       def array_to_hierarchy(args, delimiter = ' -- ')

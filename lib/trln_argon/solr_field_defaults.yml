@@ -2,6 +2,10 @@ ACCESS_TYPE_FACET:
   solr_field: :access_type_f
   label:
     en: Access Type
+ALT_EDITION_WORK:
+  solr_field: :alt_edition_work_a
+  label:
+    en: Alternate Edition
 AUTHOR_FACET:
   solr_field: :author_facet_f
   label:
@@ -146,6 +150,10 @@ COPYRIGHT_YEAR_I:
   solr_field: :copyright_year_i
   label:
     en: Copyright Year I
+DATA_SOURCE_WORK:
+  solr_field: :data_source_work_a
+  label:
+    en: Data Source
 DATE_CATALOGED:
   solr_field: :date_cataloged_a
   label:
@@ -198,6 +206,10 @@ DISTRIBUTOR:
   solr_field: :distributor_a
   label:
     en: Distributor
+EARLIER_WORK:
+  solr_field: :earlier_work_a
+  label:
+    en: Earlier Work
 EDITION:
   solr_field: :edition_a
   label:
@@ -226,6 +238,14 @@ FREQUENCY_FORMER:
   solr_field: :frequency_former_a
   label:
     en: Former Frequency
+HAS_SUPPLEMENT_WORK:
+  solr_field: :has_supplement_work_a
+  label:
+    en: Has Supplement
+HAS_SUPPLEMENT_TO_WORK:
+  solr_field: :has_supplement_to_work_a
+  label:
+    en: Has Supplement To
 HOLDINGS:
   solr_field: :holdings_a
   label:
@@ -238,6 +258,10 @@ HOLDINGS_T:
   solr_field: :holdings_t
   label:
     en: Holdings
+HOST_ITEM_WORK:
+  solr_field: :host_item_work_a
+  label:
+    en: Host Item
 ID:
   solr_field: :id
   label:
@@ -338,6 +362,10 @@ ISSN_SERIES_NUM:
   solr_field: :issn_series_num
   label:
     en: ISSN Series Num
+ISSUED_WITH_WORK:
+  solr_field: :issued_with_work_a
+  label:
+    en: Issued With
 ITEMS:
   solr_field: :items_a
   label:
@@ -438,6 +466,10 @@ LANGUAGE_FACET:
   solr_field: :language_f
   label:
     en: Language
+LATER_WORK:
+  solr_field: :later_work_a
+  label:
+    en: Later Work
 LCC_CALLNUM_CLASSIFICATION:
   solr_field: :lcc_callnum_classification_a
   label:
@@ -826,6 +858,10 @@ PUBLISHER_VERNACULAR_LANG:
   solr_field: :publisher_vernacular_lang_a
   label:
     en: Publisher Vernacular Lang
+RELATED_WORK:
+  solr_field: :related_work_a
+  label:
+    en: Related Items
 RESOURCE_TYPE:
   solr_field: :resource_type_a
   label:
@@ -886,6 +922,10 @@ SERIES_VOLUMES:
   solr_field: :series_volumes_a
   label:
     en: Series Volumes
+SERIES_WORK:
+  solr_field: :series_work_a
+  label:
+    en: Series
 SOURCE:
   solr_field: :source_a
   label:
@@ -966,6 +1006,10 @@ SUBJECTS_T:
   solr_field: :subjects_t
   label:
     en: Subjects T
+SUBSERIES_WORK:
+  solr_field: :subseries_work_a
+  label:
+    en: Subseries
 SYNDETICS_ID:
   solr_field: :syndetics_id_a
   label:
@@ -974,6 +1018,10 @@ SYNDETICS_ISBN:
   solr_field: :syndetics_isbn_a
   label:
     en: Syndetics Isbn
+THIS_WORK:
+  solr_field: :this_work_a
+  label:
+    en: This Work
 TITLE_ABBREVIATION:
   solr_field: :title_abbreviation_a
   label:
@@ -1098,6 +1146,14 @@ TITLE_VARIANT:
   solr_field: :title_variant_a
   label:
     en: Variant Title
+TRANSLATED_AS_WORK:
+  solr_field: :translated_as_work_a
+  label:
+    en: Translated as
+TRANSLATION_OF_WORK:
+  solr_field: :translation_of_work_a
+  label:
+    en: Translation of
 UPC:
   solr_field: :upc_a
   label:

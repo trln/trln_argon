@@ -59,7 +59,8 @@ module TrlnArgon
                                   show_summary
                                   show_included_works
                                   show_subjects
-                                  show]
+                                  show
+                                  show_related_works]
 
         # Disable these tools in the UI for now.
         # See add_show_tools_partial methods above for
@@ -202,11 +203,11 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label,
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
-                              label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
+                              label: TrlnArgon::Fields::FREQUENCY_CURRENT.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::FREQUENCY_FORMER.to_s,
-                              label: TrlnArgon::Fields::FREQUENCY_FORMER.label
-        config.add_show_field TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.to_s,
-                              label: TrlnArgon::Fields::LINKING_HAS_SUPPLEMENT.label
+                              label: TrlnArgon::Fields::FREQUENCY_FORMER.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::SECONDARY_URLS.to_s,
                               label: TrlnArgon::Fields::SECONDARY_URLS.label,
                               accessor: :secondary_urls,
@@ -325,6 +326,63 @@ module TrlnArgon
                                              label: TrlnArgon::Fields::INCLUDED_WORK.label,
                                              accessor: :included_work,
                                              helper_method: :work_entry_display
+
+        config.add_show_related_works_field TrlnArgon::Fields::RELATED_WORK.to_s,
+                                            label: TrlnArgon::Fields::RELATED_WORK.label,
+                                            accessor: :related_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::THIS_WORK.to_s,
+                                            label: TrlnArgon::Fields::THIS_WORK.label,
+                                            accessor: :this_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::SERIES_WORK.to_s,
+                                            label: TrlnArgon::Fields::SERIES_WORK.label,
+                                            accessor: :series_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::SUBSERIES_WORK.to_s,
+                                            label: TrlnArgon::Fields::SUBSERIES_WORK.label,
+                                            accessor: :subseries_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::TRANSLATION_OF_WORK.to_s,
+                                            label: TrlnArgon::Fields::TRANSLATION_OF_WORK.label,
+                                            accessor: :translation_of_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::TRANSLATED_AS_WORK.to_s,
+                                            label: TrlnArgon::Fields::TRANSLATED_AS_WORK.label,
+                                            accessor: :translated_as_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::HAS_SUPPLEMENT_WORK.to_s,
+                                            label: TrlnArgon::Fields::HAS_SUPPLEMENT_WORK.label,
+                                            accessor: :has_supplement_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK.to_s,
+                                            label: TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK.label,
+                                            accessor: :has_supplement_to_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::HOST_ITEM_WORK.to_s,
+                                            label: TrlnArgon::Fields::HOST_ITEM_WORK.label,
+                                            accessor: :host_item_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::ALT_EDITION_WORK.to_s,
+                                            label: TrlnArgon::Fields::ALT_EDITION_WORK.label,
+                                            accessor: :alt_edition_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::ISSUED_WITH_WORK.to_s,
+                                            label: TrlnArgon::Fields::ISSUED_WITH_WORK.label,
+                                            accessor: :issued_with_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::EARLIER_WORK.to_s,
+                                            label: TrlnArgon::Fields::EARLIER_WORK.label,
+                                            accessor: :earlier_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::LATER_WORK.to_s,
+                                            label: TrlnArgon::Fields::LATER_WORK.label,
+                                            accessor: :later_work,
+                                            helper_method: :work_entry_display
+        config.add_show_related_works_field TrlnArgon::Fields::DATA_SOURCE_WORK.to_s,
+                                            label: TrlnArgon::Fields::DATA_SOURCE_WORK.label,
+                                            accessor: :data_source_work,
+                                            helper_method: :work_entry_display
 
         config.add_show_subjects_field TrlnArgon::Fields::SUBJECTS.to_s,
                                        helper_method: :list_of_linked_subjects_segments

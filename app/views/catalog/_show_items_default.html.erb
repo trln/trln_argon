@@ -4,7 +4,7 @@
     <%= render partial: "items_table", locals: { document: document, context: 'show' } %>
   <% else %>
     <% document.expanded_documents.each do |doc| %>
-    <h3><%= t("trln_argon.institution.#{doc[TrlnArgon::Fields::INSTITUTION].first}.long_name") %></h3>
+    <h3><%= t("trln_argon.institution.#{doc.institution}.long_name") %></h3>
       <%= render partial: "items_table", locals: { document: doc, context: 'show' } %>
     <% end %>
   <% end %>

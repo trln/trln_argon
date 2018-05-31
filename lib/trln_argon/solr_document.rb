@@ -2,10 +2,10 @@ require 'trln_argon/solr_document/email_field_mapping'
 require 'trln_argon/solr_document/expand_document'
 require 'trln_argon/solr_document/field_deserializer'
 require 'trln_argon/solr_document/imprint'
-require 'trln_argon/solr_document/included_work'
 require 'trln_argon/solr_document/openurl_ctx_kev_field_mapping'
 require 'trln_argon/solr_document/ris_field_mapping'
 require 'trln_argon/solr_document/urls'
+require 'trln_argon/solr_document/work_entry'
 
 module TrlnArgon
   # Mixin for SolrDocument with TRLN Argon Specific Behavior
@@ -14,10 +14,10 @@ module TrlnArgon
     include ExpandDocument
     include FieldDeserializer
     include Imprint
-    include IncludedWork
     include OpenurlCtxKevFieldMapping
     include RisFieldMapping
     include Urls
+    include WorkEntry
 
     def availability
       if self[TrlnArgon::Fields::AVAILABLE].present?
@@ -25,6 +25,10 @@ module TrlnArgon
       else
         I18n.t('trln_argon.availability.not_available')
       end
+    end
+
+    def institution
+      fetch(TrlnArgon::Fields::INSTITUTION, []).first
     end
 
     def isbn_with_qualifying_info
