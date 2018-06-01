@@ -215,6 +215,9 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                               label: TrlnArgon::Fields::IMPRINT_MULTIPLE.label,
                               helper_method: :imprint_multiple
+        config.add_show_field TrlnArgon::Fields::NOTE_SERIAL_DATES.to_s,
+                              label: TrlnArgon::Fields::NOTE_SERIAL_DATES.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_ISSUANCE.to_s,
                               label: TrlnArgon::Fields::NOTE_ISSUANCE.label,
                               helper_method: :join_with_br

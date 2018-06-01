@@ -267,6 +267,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Misc ID field' do
       expect(override_config.show_fields).to have_key('misc_id_a')
     end
+
+    it 'sets the Note Serial Dates field' do
+      expect(override_config.show_fields).to have_key('note_serial_dates_a')
+    end
   end
 
   describe 'show included works fields' do
