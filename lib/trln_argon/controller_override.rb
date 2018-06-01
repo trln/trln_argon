@@ -306,6 +306,9 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::MISC_ID.to_s,
                               label: TrlnArgon::Fields::MISC_ID.label,
                               helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::UPC.to_s,
+                              label: TrlnArgon::Fields::UPC.label,
+                              helper_method: :join_with_br
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
