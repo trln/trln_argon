@@ -268,6 +268,10 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('misc_id_a')
     end
 
+    it 'sets the UPC field' do
+      expect(override_config.show_fields).to have_key('upc_a')
+    end
+
     it 'sets the Note Serial Dates field' do
       expect(override_config.show_fields).to have_key('note_serial_dates_a')
     end
