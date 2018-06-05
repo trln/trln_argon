@@ -818,6 +818,14 @@ PRODUCTION_STATEMENT:
   solr_field: :production_statement_a
   label:
     en: Production Statement
+PHYSICAL_DESCRIPTION:
+  solr_field: :physical_description_a
+  label:
+    en: Description
+PHYSICAL_DESCRIPTION_DETAILS:
+  solr_field: :physical_description_details_a
+  label:
+    en: Description
 PHYSICAL_MEDIA:
   solr_field: physical_media_a
   label:
