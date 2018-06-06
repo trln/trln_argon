@@ -293,6 +293,12 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
                               label: TrlnArgon::Fields::NOTE_LOCAL.label,
                               helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION.to_s,
+                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION.label,
+                              helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.to_s,
+                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
                               label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
                               accessor: :isbn_with_qualifying_info,
