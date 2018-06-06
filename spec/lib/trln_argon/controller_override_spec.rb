@@ -283,6 +283,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Physical Description Details field' do
       expect(override_config.show_fields).to have_key('physical_description_details_a')
     end
+
+    it 'sets the Series Statement field' do
+      expect(override_config.show_fields).to have_key('series_statement_a')
+    end
   end
 
   describe 'show included works fields' do

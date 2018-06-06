@@ -202,6 +202,9 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::NOTE_FORMER_TITLE.to_s,
                               label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label,
                               helper_method: :join_with_br
+        config.add_show_field TrlnArgon::Fields::SERIES_STATEMENT.to_s,
+                              label: TrlnArgon::Fields::SERIES_STATEMENT.label,
+                              helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
                               label: TrlnArgon::Fields::FREQUENCY_CURRENT.label,
                               helper_method: :join_with_br
