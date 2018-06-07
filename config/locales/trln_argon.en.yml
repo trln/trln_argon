@@ -111,17 +111,17 @@ en:
 
         search:
             zero_results:
-                title: 'No results for your search.'
-                modify_search: 'Try these other options:'
+                title: 'No results for your search'
+                modify_search: 'Try these options:'
                 search_fields: 'You searched by %{search_fields}.'
                 search_everything: 'Try searching everything.'
-                article_search: 'Search for articles related to "%{query}"'
+                article_search: 'Search for articles related to "%{query}."'
                 expand_search_html:
                     one: 'There is 1 result at all Triangle Research Libraries. %{href}'
                     other: 'There are %{count} results at all Triangle Research Libraries. %{href}'
                     none: 'There are no results at any Triangle Research Libraries. %{href}'
                 expand_search_href: 'Expand your search.'
-                different_search_href: 'Try a different search'
+                different_search_href: 'Try a different search.'
                 contact_us_html: 'Or %{href} for help.'
                 contact_us_href: 'contact us'
 
