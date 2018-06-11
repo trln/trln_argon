@@ -2,14 +2,6 @@ describe 'full records' do
   context 'when it displays multiple fields from the record' do
     before { visit solr_document_path(id: 'DUKE002960043') }
 
-    it 'displays the author field label' do
-      expect(page).to have_css('dt.blacklight-authors_main_a', text: 'Author:')
-    end
-
-    it 'displays the author field value' do
-      expect(page).to have_css('dd.blacklight-authors_main_a', text: /.+/)
-    end
-
     it 'displays the ISBN field label' do
       expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN:')
     end

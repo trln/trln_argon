@@ -328,14 +328,10 @@ module TrlnArgon
         config.add_show_sub_header_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
                                          helper_method: :join_with_commas
 
-        # TODO: What field should be searched when linking to a search for various
-        #       author/contributer fields from the record show page?
-        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_MAIN.to_s,
-                                      label: TrlnArgon::Fields::AUTHORS_MAIN.label
-        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_OTHER.to_s,
-                                      label: TrlnArgon::Fields::AUTHORS_OTHER.label
-        config.add_show_authors_field TrlnArgon::Fields::AUTHORS_DIRECTOR.to_s,
-                                      label: TrlnArgon::Fields::AUTHORS_DIRECTOR.label
+        config.add_show_authors_field TrlnArgon::Fields::NAMES.to_s,
+                                      label: TrlnArgon::Fields::NAMES.label,
+                                      accessor: :names,
+                                      helper_method: :names_display
 
         config.add_show_included_works_field TrlnArgon::Fields::INCLUDED_WORK.to_s,
                                              label: TrlnArgon::Fields::INCLUDED_WORK.label,

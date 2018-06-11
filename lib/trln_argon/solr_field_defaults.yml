@@ -626,6 +626,10 @@ MISC_ID:
   solr_field: misc_id_a
   label:
     en: Other Identifiers
+NAMES:
+  solr_field: names_a
+  label:
+    en: Names
 NORMALIZED_CALL_NUMBERS:
   solr_field: :normalized_call_numbers_a
   label:

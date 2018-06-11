@@ -376,6 +376,12 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  describe 'show author fields' do
+    it 'set the Names field' do
+      expect(override_config.show_authors_fields).to have_key('names_a')
+    end
+  end
+
   describe 'search fields' do
     describe 'all fields' do
       it 'sets the all fields field' do
