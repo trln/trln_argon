@@ -9,6 +9,7 @@
       </tr>
     </thead>
     <% document.holdings.each do |loc_b, loc_narrow_map| %>
+
       <% next if loc_b == 'ONLINE' %>
       <tr class='loc-broad-group <%= loc_b %>loc-broad-banner'>
         <th colspan="3">
@@ -16,6 +17,7 @@
         </th>
       </tr>
       <% loc_narrow_map.each do |loc_n, item_data|  %>
+        <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
         <% has_summary = !item_data.fetch('summary', '').blank? %>
         <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
         <% if has_summary %>
@@ -63,15 +65,25 @@
 
             </tr>
 
-          <% if items_have_notes %>
-            <tr>
-              <td class='notes' colspan="3">Note &mdash; <%= item_notes_display(item) %></td>
-            </tr>
-          <% end %>
+            <% if items_have_notes %>
+              <tr>
+                <td class='notes' colspan="3">Note &mdash; <%= item_notes_display(item) %></td>
+              </tr>
+            <% end %>
 
 
           <% end %>
+
           </tbody>
+
+          <% if has_holding_notes %>
+
+            <tr>
+              <td class='notes' colspan="3">Note &mdash; <em><%= [*item_data['notes']].join("; "); %></em></td>
+            </tr>
+
+          <% end %>
+
         <% end %>
       <% end %>
   </table>
