@@ -917,7 +917,7 @@ SERIES_SOUND:
 SERIES_STATEMENT:
   solr_field: :series_statement_a
   label:
-    en: Series Statement
+    en: Series
 SERIES_STATEMENT_VERNACULAR_LANG:
   solr_field: :series_statement_vernacular_lang_a
   label:
