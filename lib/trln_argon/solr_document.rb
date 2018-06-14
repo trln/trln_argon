@@ -38,6 +38,10 @@ module TrlnArgon
         ).map { |isbn_info_pairs| isbn_info_pairs.join(' ') }
     end
 
+    def names
+      @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES, name: '', rel: '')
+    end
+
     def marc_summary
       format_for_display(self[TrlnArgon::Fields::NOTE_SUMMARY])
     end

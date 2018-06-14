@@ -131,6 +131,27 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe '#names_display' do
+    let(:context) { CatalogController.new }
+
+    let(:options) do
+      { value: [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author' },
+                { name: 'Appel, Alfred', rel: '' }] }
+    end
+
+    before do
+      allow(context).to receive(:local_filter_applied?).and_return(false)
+      allow(context).to receive(:search_action_url).and_return('/catalog?search=something')
+    end
+
+    it 'creates a display value with links from the supplied names data' do
+      expect(context.helpers.names_display(options)).to eq(
+        '<li><a href="/catalog?search=something">Nabokov, Vladimir Vladimirovich, 1899-1977</a>, author</li>'\
+        '<li><a href="/catalog?search=something">Appel, Alfred</a></li>'
+      )
+    end
+  end
+
   describe '#work_entry_display' do
     let(:context) { CatalogController.new }
 

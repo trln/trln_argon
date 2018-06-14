@@ -1,5 +1,6 @@
 require 'trln_argon/view_helpers/document_export_helper'
 require 'trln_argon/view_helpers/imprint_helper'
+require 'trln_argon/view_helpers/names_helper'
 require 'trln_argon/view_helpers/subjects_helper'
 require 'trln_argon/view_helpers/syndetics_helper'
 require 'trln_argon/view_helpers/work_entry_helper'
@@ -12,6 +13,7 @@ module TrlnArgon
     module TrlnArgonHelper
       include DocumentExportHelper
       include ImprintHelper
+      include NamesHelper
       include SubjectsHelper
       include SyndeticsHelper
       include WorkEntryHelper

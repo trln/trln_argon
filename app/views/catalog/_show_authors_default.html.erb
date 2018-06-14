@@ -2,11 +2,10 @@
 <div class="show-authors">
   <% if display_values.any? %>
     <h2><%= t('trln_argon.show.heading.authors') %></h2>
-    <dl class="dl-invert">
+    <ul>
       <% display_values.each do |value| %>
-          <dt class="blacklight-<%= value[:field].parameterize %>"><%= "#{value[:label]}:" %></dt>
-          <dd class="blacklight-<%= value[:field].parameterize %>"><%= value[:value] %></dd>
-      <% end -%>
-    </dl>
+          <%= value[:value] %>
+      <% end %>
+    </ul>
   <% end %>
 </div>

@@ -238,6 +238,23 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe 'names' do
+    let(:names_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE000007907',
+        names_a: ['{"name":"Nabokov, Vladimir Vladimirovich, 1899-1977", "rel":"author"}',
+                  '{"name":"Appel, Alfred"}']
+      )
+    end
+
+    it 'deserializes the names string' do
+      expect(names_document.names).to eq(
+        [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author' },
+         { name: 'Appel, Alfred', rel: '' }]
+      )
+    end
+  end
+
   describe 'included_work' do
     let(:included_work_document) do
       SolrDocumentTestClass.new(
