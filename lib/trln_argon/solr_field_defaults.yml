@@ -1173,7 +1173,7 @@ TRANSLATION_OF_WORK:
 UPC:
   solr_field: :upc_a
   label:
-    en: Upc
+    en: UPC
 URLS:
   solr_field: url_a
   label:
