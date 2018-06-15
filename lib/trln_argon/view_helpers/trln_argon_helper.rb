@@ -70,7 +70,7 @@ module TrlnArgon
       end
 
       def item_notes_display(item)
-        item.fetch('notes', []).collect do |n|
+        [*item.fetch('notes', [])].collect do |n|
           "<span class='item-note'>#{CGI.escapeHTML(n)}</span>"
         end.join('<br />').html_safe
       end
