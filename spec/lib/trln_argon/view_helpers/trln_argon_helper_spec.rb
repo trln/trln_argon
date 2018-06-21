@@ -191,7 +191,7 @@ describe TrlnArgonHelper, type: :helper do
 
     it 'creates a display value with links from the supplied work entry data' do
       expect(context.helpers.work_entry_display(options)).to eq(
-        '<li>'\
+        '<dd>'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
         '<span class="sr-only">Author One</span> One'\
@@ -208,7 +208,7 @@ describe TrlnArgonHelper, type: :helper do
         'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
-        '</li>'
+        '</dd>'
       )
     end
   end

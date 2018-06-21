@@ -180,7 +180,8 @@ module TrlnArgon
 
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
-        config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
+        config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
+                               accessor: :statement_of_responsibility
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                helper_method: :imprint_main
         config.add_index_field TrlnArgon::Fields::EDITION.to_s
@@ -319,7 +320,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::UPC.label,
                               helper_method: :join_with_br
 
-        config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
+                                         accessor: :statement_of_responsibility
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          helper_method: :imprint_main
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
@@ -350,10 +352,6 @@ module TrlnArgon
                                             label: TrlnArgon::Fields::SERIES_WORK.label,
                                             accessor: :series_work,
                                             helper_method: :work_entry_display
-        config.add_show_related_works_field TrlnArgon::Fields::SUBSERIES_WORK.to_s,
-                                            label: TrlnArgon::Fields::SUBSERIES_WORK.label,
-                                            accessor: :subseries_work,
-                                            helper_method: :work_entry_display
         config.add_show_related_works_field TrlnArgon::Fields::TRANSLATION_OF_WORK.to_s,
                                             label: TrlnArgon::Fields::TRANSLATION_OF_WORK.label,
                                             accessor: :translation_of_work,
@@ -365,10 +363,6 @@ module TrlnArgon
         config.add_show_related_works_field TrlnArgon::Fields::HAS_SUPPLEMENT_WORK.to_s,
                                             label: TrlnArgon::Fields::HAS_SUPPLEMENT_WORK.label,
                                             accessor: :has_supplement_work,
-                                            helper_method: :work_entry_display
-        config.add_show_related_works_field TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK.to_s,
-                                            label: TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK.label,
-                                            accessor: :has_supplement_to_work,
                                             helper_method: :work_entry_display
         config.add_show_related_works_field TrlnArgon::Fields::HOST_ITEM_WORK.to_s,
                                             label: TrlnArgon::Fields::HOST_ITEM_WORK.label,
