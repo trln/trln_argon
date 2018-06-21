@@ -12,7 +12,7 @@ module TrlnArgon
       end
 
       def findingaid_urls
-        @findingaid_urls ||= select_urls('finding_aid')
+        @findingaid_urls ||= select_urls('findingaid')
       end
 
       def thumbnail_urls
