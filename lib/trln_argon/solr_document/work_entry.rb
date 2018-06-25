@@ -28,10 +28,10 @@ module TrlnArgon
         @translated_as_work ||= deserialize_work_entry(TrlnArgon::Fields::TRANSLATED_AS_WORK)
       end
 
-      # NOTE: Combines HAS_SUPPLEMENT_WORK and HAS_SUPPLMENT_TO_WORK
+      # NOTE: Combines HAS_SUPPLEMENT_WORK and SUPPLEMENT_TO_WORK
       def has_supplement_work # rubocop:disable Style/PredicateName
         @has_supplement_work ||= deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_WORK).concat(
-          deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK)
+          deserialize_work_entry(TrlnArgon::Fields::SUPPLEMENT_TO_WORK)
         )
       end
 
