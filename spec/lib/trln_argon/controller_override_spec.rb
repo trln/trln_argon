@@ -308,20 +308,12 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_related_works_fields).to have_key('series_work_a')
     end
 
-    it 'sets the Subseries Work field' do
-      expect(override_config.show_related_works_fields).to have_key('subseries_work_a')
-    end
-
     it 'sets the Translation Of Work field' do
       expect(override_config.show_related_works_fields).to have_key('translation_of_work_a')
     end
 
     it 'sets the Translated As Work field' do
       expect(override_config.show_related_works_fields).to have_key('translated_as_work_a')
-    end
-
-    it 'sets the Has Supplement To Work field' do
-      expect(override_config.show_related_works_fields).to have_key('has_supplement_to_work_a')
     end
 
     it 'sets the Has Supplement Work field' do

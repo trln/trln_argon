@@ -2,10 +2,11 @@
 <div class="show-included-works">
   <% if display_values.any? %>
     <h2><%= t('trln_argon.show.heading.related_works') %></h2>
-    <ul>
+      <dl class="dl-invert">
       <% display_values.each do |value| %>
+          <dt><%= value[:label] %></dt>
           <%= value[:value] %>
       <% end %>
-    </ul>
+    </dl>
   <% end %>
 </div>

@@ -209,7 +209,7 @@ DISTRIBUTOR:
 EARLIER_WORK:
   solr_field: :earlier_work_a
   label:
-    en: Earlier Work
+    en: Earlier Title
 EDITION:
   solr_field: :edition_a
   label:
@@ -241,11 +241,11 @@ FREQUENCY_FORMER:
 HAS_SUPPLEMENT_WORK:
   solr_field: :has_supplement_work_a
   label:
-    en: Has Supplement
+    en: Supplements
 HAS_SUPPLEMENT_TO_WORK:
   solr_field: :has_supplement_to_work_a
   label:
-    en: Has Supplement To
+    en: Supplements
 HOLDINGS:
   solr_field: :holdings_a
   label:
@@ -261,7 +261,7 @@ HOLDINGS_T:
 HOST_ITEM_WORK:
   solr_field: :host_item_work_a
   label:
-    en: Host Item
+    en: Collection or other items this is a part of
 ID:
   solr_field: :id
   label:
@@ -469,7 +469,7 @@ LANGUAGE_FACET:
 LATER_WORK:
   solr_field: :later_work_a
   label:
-    en: Later Work
+    en: Later Title
 LCC_CALLNUM_CLASSIFICATION:
   solr_field: :lcc_callnum_classification_a
   label:
@@ -829,7 +829,7 @@ PHYSICAL_DESCRIPTION:
 PHYSICAL_DESCRIPTION_DETAILS:
   solr_field: :physical_description_details_a
   label:
-    en: Description
+    en: Description Details
 PHYSICAL_MEDIA:
   solr_field: physical_media_a
   label:
@@ -877,7 +877,7 @@ PUBLISHER_VERNACULAR_LANG:
 RELATED_WORK:
   solr_field: :related_work_a
   label:
-    en: Related Items
+    en: Related Titles
 RESOURCE_TYPE:
   solr_field: :resource_type_a
   label:
@@ -949,27 +949,11 @@ SOURCE:
 STATEMENT_OF_RESPONSIBILITY:
   solr_field: :statement_of_responsibility_a
   label:
-    en: Author
-STATEMENT_OF_RESPONSIBILITY_CJK_V:
-  solr_field: :statement_of_responsibility_cjk_v
-  label:
-    en: Statement Of Responsibility Cjk V
-STATEMENT_OF_RESPONSIBILITY_RUS_V:
-  solr_field: :statement_of_responsibility_rus_v
-  label:
-    en: Statement Of Responsibility Rus V
-STATEMENT_OF_RESPONSIBILITY_T:
-  solr_field: :statement_of_responsibility_t
-  label:
-    en: Statement Of Responsibility T
+    en: Statement of Reponsibility
 STATEMENT_OF_RESPONSIBILITY_VERN:
   solr_field: :statement_of_responsibility_vern
   label:
     en: Statement Of Responsibility Vern
-STATEMENT_OF_RESPONSIBILITY_VERNACULAR_LANG:
-  solr_field: :statement_of_responsibility_vernacular_lang_a
-  label:
-    en: Statement Of Responsibility Vernacular Lang
 SUBJECT_CHRONOLOGICAL:
   solr_field: :subject_chronological_a
   label:
@@ -1025,7 +1009,7 @@ SUBJECTS_T:
 SUBSERIES_WORK:
   solr_field: :subseries_work_a
   label:
-    en: Subseries
+    en: Series
 SYNDETICS_ID:
   solr_field: :syndetics_id_a
   label:
@@ -1037,7 +1021,7 @@ SYNDETICS_ISBN:
 THIS_WORK:
   solr_field: :this_work_a
   label:
-    en: This Work
+    en: This Title
 TITLE_ABBREVIATION:
   solr_field: :title_abbreviation_a
   label:
@@ -1118,26 +1102,10 @@ TITLE_MAIN:
   solr_field: :title_main
   label:
     en: Title
-TITLE_MAIN_CJK_V:
-  solr_field: :title_main_cjk_v
-  label:
-    en: Title Main Cjk V
-TITLE_MAIN_RUS_V:
-  solr_field: :title_main_rus_v
-  label:
-    en: Title Main Rus V
-TITLE_MAIN_T:
-  solr_field: :title_main_t
-  label:
-    en: Title Main T
 TITLE_MAIN_VERN:
   solr_field: :title_main_vern
   label:
-    en: Title Main Vern
-TITLE_MAIN_VERNACULAR_LANG:
-  solr_field: :title_main_vernacular_lang_a
-  label:
-    en: Title Main Vernacular Lang
+    en: Title
 TITLE_SORT:
   solr_field: :title_sort_ssort_single
   label:

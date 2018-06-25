@@ -50,6 +50,12 @@ module TrlnArgon
       format_for_display(self[TrlnArgon::Fields::NOTE_TOC])
     end
 
+    def statement_of_responsibility
+      [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY]].concat(
+        [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY_VERN]]
+      ).join(' / ')
+    end
+
     private
 
     # utility for formatting multi-valued fields

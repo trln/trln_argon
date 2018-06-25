@@ -13,12 +13,11 @@ module TrlnArgon
         @this_work ||= deserialize_work_entry(TrlnArgon::Fields::THIS_WORK)
       end
 
+      # NOTE: Combines SERIES_WORK and SUBSERIES_WORK
       def series_work
-        @series_work ||= deserialize_work_entry(TrlnArgon::Fields::SERIES_WORK)
-      end
-
-      def subseries_work
-        @subseries_work ||= deserialize_work_entry(TrlnArgon::Fields::SUBSERIES_WORK)
+        @series_work ||= deserialize_work_entry(TrlnArgon::Fields::SERIES_WORK).concat(
+          deserialize_work_entry(TrlnArgon::Fields::SUBSERIES_WORK)
+        )
       end
 
       def translation_of_work
@@ -29,12 +28,11 @@ module TrlnArgon
         @translated_as_work ||= deserialize_work_entry(TrlnArgon::Fields::TRANSLATED_AS_WORK)
       end
 
+      # NOTE: Combines HAS_SUPPLEMENT_WORK and HAS_SUPPLMENT_TO_WORK
       def has_supplement_work # rubocop:disable Style/PredicateName
-        @has_supplement_work ||= deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_WORK)
-      end
-
-      def has_supplement_to_work # rubocop:disable Style/PredicateName
-        @has_supplement_to_work ||= deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK)
+        @has_supplement_work ||= deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_WORK).concat(
+          deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_TO_WORK)
+        )
       end
 
       def host_item_work
