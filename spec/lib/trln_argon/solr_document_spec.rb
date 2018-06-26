@@ -114,17 +114,13 @@ describe TrlnArgon::SolrDocument do
     it 'exports the document as RIS' do
       expect(test_document.export_as_ris).to eq(
         "TY  - GEN\r\n"\
-        "A1  - Downey, Maureen E.\r\n"\
-        "A2  - Smithsonian Institution. Press.\r\n"\
+        "A1  - Maureen E. Downey.\r\n"\
         "AV  - Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\r\n"\
         "ID  - DUKE002952265\r\n"\
         "KW  - Brisingida -- Atlantic Ocean -- Classification\r\n"\
         "KW  - Echinodermata -- Classification\r\n"\
         "KW  - Echinodermata -- Atlantic Ocean -- Classification\r\n"\
         "LA  - English\r\n"\
-        "N1  - Distributed to depository libraries in microfiche.\r\n"\
-        "N1  - Includes index.\r\n"\
-        "N1  - Bibliography: p. 53-56.\r\n"\
         "PY  - 1986\r\n"\
         'TI  - Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), '\
         "with description of a new genus and family /\r\n"\
@@ -164,7 +160,7 @@ describe TrlnArgon::SolrDocument do
     end
 
     it 'contains an rft.au' do
-      expect(ctx_kev).to match('rft.au=Downey%2C\+Maureen\+E.&rft.au=Smithsonian\+Institution.\+Press.')
+      expect(ctx_kev).to match('rft.au=Maureen\+E.\+Downey.')
     end
 
     it 'contains an rft_val_fmt' do

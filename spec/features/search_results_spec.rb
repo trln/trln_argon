@@ -21,15 +21,15 @@ describe 'search results' do
     before do
       visit search_catalog_path(local_filter: 'false')
       click_button 'search'
-      click_link 'History and criticism'
+      click_link 'Music recording'
     end
 
-    it 'displays the Subject facet breadcrumb field label' do
-      expect(page).to have_css('.filterName', text: 'About Topic')
+    it 'displays the Resource Type facet breadcrumb field label' do
+      expect(page).to have_css('.filterName', text: 'Resource Type')
     end
 
-    it 'displays the Subject > History facet breadcrumb field value' do
-      expect(page).to have_css('.filterValue', text: 'History and criticism')
+    it 'displays the Music Recording facet breadcrumb field value' do
+      expect(page).to have_css('.filterValue', text: 'Music recording')
     end
   end
 
@@ -88,8 +88,8 @@ describe 'search results' do
       visit search_catalog_path(local_filter: true)
       click_button 'search'
       expect(page).to have_selector(:css,
-                                    '#facet-subject_topic_lcsh_f '\
-                                    'a.more_facets_link[href="/catalog/facet/subject_topic_lcsh_f?'\
+                                    '#facet-resource_type_f '\
+                                    'a.more_facets_link[href="/catalog/facet/resource_type_f?'\
                                     'local_filter=true&q=&search_field=all_fields&utf8=%E2%9C%93"]')
     end
 
@@ -97,8 +97,8 @@ describe 'search results' do
       visit search_catalog_path(local_filter: false)
       click_button 'search'
       expect(page).to have_selector(:css,
-                                    '#facet-subject_topic_lcsh_f '\
-                                    'a.more_facets_link[href="/catalog/facet/subject_topic_lcsh_f?'\
+                                    '#facet-resource_type_f '\
+                                    'a.more_facets_link[href="/catalog/facet/resource_type_f?'\
                                     'local_filter=false&q=&search_field=all_fields&utf8=%E2%9C%93"]')
     end
   end

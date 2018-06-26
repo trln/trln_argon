@@ -10,90 +10,6 @@ AUTHOR_FACET:
   solr_field: :author_facet_f
   label:
     en: Author
-AUTHORS_DIRECTOR:
-  solr_field: :authors_director_a
-  label:
-    en: Director
-AUTHORS_DIRECTOR_MARC_SOURCE:
-  solr_field: :authors_director_marc_source_a
-  label:
-    en: Authors Director Marc Source
-AUTHORS_MAIN:
-  solr_field: :authors_main_a
-  label:
-    en: Author
-AUTHORS_MAIN_CJK_V:
-  solr_field: :authors_main_cjk_v
-  label:
-    en: Authors Main Cjk V
-AUTHORS_MAIN_FACET:
-  solr_field: :authors_main_f
-  label:
-    en: Main Author
-AUTHORS_MAIN_MARC_SOURCE:
-  solr_field: :authors_main_marc_source_a
-  label:
-    en: Authors Main Marc Source
-AUTHORS_MAIN_RUS_V:
-  solr_field: :authors_main_rus_v
-  label:
-    en: Authors Main Rus V
-AUTHORS_MAIN_T:
-  solr_field: :authors_main_t
-  label:
-    en: Authors Main T
-AUTHORS_MAIN_VERN:
-  solr_field: :authors_main_vern
-  label:
-    en: Authors Main Vern
-AUTHORS_MAIN_VERNACULAR_LANG:
-  solr_field: :authors_main_vernacular_lang_a
-  label:
-    en: Authors Main Vernacular Lang
-AUTHORS_OTHER:
-  solr_field: :authors_other_a
-  label:
-    en: Author
-AUTHORS_OTHER_CJK_V:
-  solr_field: :authors_other_cjk_v
-  label:
-    en: Authors Other Cjk V
-AUTHORS_OTHER_MARC_SOURCE:
-  solr_field: :authors_other_marc_source_a
-  label:
-    en: Authors Other Marc Source
-AUTHORS_OTHER_RUS_V:
-  solr_field: :authors_other_rus_v
-  label:
-    en: Authors Other Rus V
-AUTHORS_OTHER_T:
-  solr_field: :authors_other_t
-  label:
-    en: Authors Other T
-AUTHORS_OTHER_VERN:
-  solr_field: :authors_other_vern
-  label:
-    en: Authors Other Vern
-AUTHORS_OTHER_VERNACULAR_LANG:
-  solr_field: :authors_other_vernacular_lang_a
-  label:
-    en: Authors Other Vernacular Lang
-AUTHORS_SORT:
-  solr_field: :authors_sort_a
-  label:
-    en: Authors Sort
-AUTHORS_UNCONTROLLED:
-  solr_field: :authors_uncontrolled_a
-  label:
-    en: Authors Uncontrolled
-AUTHORS_UNCONTROLLED_MARC_SOURCE:
-  solr_field: :authors_uncontrolled_marc_source_a
-  label:
-    en: Authors Uncontrolled Marc Source
-AUTHORS_UNCONTROLLED_T:
-  solr_field: :authors_uncontrolled_t
-  label:
-    en: Authors Uncontrolled T
 AVAILABLE:
   solr_field: :available_a
   label:
@@ -106,50 +22,10 @@ CALL_NUMBER_SCHEMES:
   solr_field: :call_number_schemes_a
   label:
     en: Call Number Schemes
-CARTOGRAPHIC_DATA:
-  solr_field: :cartographic_data_a
-  label:
-    en: Cartographic Data
-CARTOGRAPHIC_DATA_T:
-  solr_field: :cartographic_data_t
-  label:
-    en: Cartographic Data T
-CHARACTERISTICS_DIGITAL_FILE:
-  solr_field: :characteristics_digital_file_a
-  label:
-    en: Characteristics Digital File
-CHARACTERISTICS_PROJECTION:
-  solr_field: :characteristics_projection_a
-  label:
-    en: Characteristics Projection
-CHARACTERISTICS_SOUND:
-  solr_field: :characteristics_sound_a
-  label:
-    en: Characteristics Sound
-CHARACTERISTICS_VIDEO:
-  solr_field: :characteristics_video_a
-  label:
-    en: Characteristics Video
 COLLECTION:
   solr_field: :collection_a
   label:
     en: Collection
-COPYRIGHT:
-  solr_field: :copyright_a
-  label:
-    en: Copyright
-COPYRIGHT_STATEMENT:
-  solr_field: :copyright_statement_a
-  label:
-    en: Copyright Statement
-COPYRIGHT_YEAR:
-  solr_field: :copyright_year_a
-  label:
-    en: Copyright Year
-COPYRIGHT_YEAR_I:
-  solr_field: :copyright_year_i
-  label:
-    en: Copyright Year I
 DATA_SOURCE_WORK:
   solr_field: :data_source_work_a
   label:
@@ -162,50 +38,6 @@ DATE_CATALOGED_FACET:
   solr_field: :date_cataloged_dt
   label:
     en: New Titles
-DESCRIPTION_DIGITAL_FILE:
-  solr_field: :description_digital_file_a
-  label:
-    en: Description Digital File
-DESCRIPTION_DIGITAL_FILE_T:
-  solr_field: :description_digital_file_t
-  label:
-    en: Description Digital File T
-DESCRIPTION_ORGANIZATION:
-  solr_field: :description_organization_a
-  label:
-    en: Description Organization
-DESCRIPTION_PROJECTION:
-  solr_field: :description_projection_a
-  label:
-    en: Description Projection
-DESCRIPTION_PROJECTION_T:
-  solr_field: :description_projection_t
-  label:
-    en: Description Projection T
-DESCRIPTION_SOUND:
-  solr_field: :description_sound_a
-  label:
-    en: Description Sound
-DESCRIPTION_SOUND_T:
-  solr_field: :description_sound_t
-  label:
-    en: Description Sound T
-DESCRIPTION_VIDEO:
-  solr_field: :description_video_a
-  label:
-    en: Description Video
-DESCRIPTION_VIDEO_T:
-  solr_field: :description_video_t
-  label:
-    en: Description Video T
-DISTRIBUTION_STATEMENT:
-  solr_field: :distribution_statement_a
-  label:
-    en: Distribution Statement
-DISTRIBUTOR:
-  solr_field: :distributor_a
-  label:
-    en: Distributor
 EARLIER_WORK:
   solr_field: :earlier_work_a
   label:
@@ -214,22 +46,10 @@ EDITION:
   solr_field: :edition_a
   label:
     en: Edition
-EDITION_CJK_V:
-  solr_field: :edition_cjk_v
-  label:
-    en: Edition Cjk V
-EDITION_T:
-  solr_field: :edition_t
-  label:
-    en: Edition T
 EDITION_VERN:
   solr_field: :edition_vern
   label:
     en: Edition Vern
-EDITION_VERNACULAR_LANG:
-  solr_field: :edition_vernacular_lang_a
-  label:
-    en: Edition Vernacular Lang
 FREQUENCY_CURRENT:
   solr_field: :frequency_current_a
   label:
@@ -244,14 +64,6 @@ HAS_SUPPLEMENT_WORK:
     en: Supplements
 HOLDINGS:
   solr_field: :holdings_a
-  label:
-    en: Holdings
-HOLDINGS_LIBRARY:
-  solr_field: :holdings_library_a
-  label:
-    en: Holdings Library
-HOLDINGS_T:
-  solr_field: :holdings_t
   label:
     en: Holdings
 HOST_ITEM_WORK:
@@ -270,18 +82,6 @@ IMPRINT_MULTIPLE:
   solr_field: :imprint_multiple_a
   label:
     en: Published
-IMPRINT:
-  solr_field: :imprint_a
-  label:
-    en: Imprint
-IMPRINT_T:
-  solr_field: :imprint_t
-  label:
-    en: Imprint T
-IMPRINT_TYPE:
-  solr_field: :imprint_type_a
-  label:
-    en: Imprint Type
 INCLUDED_WORK:
   solr_field: :included_work_a
   label:
@@ -294,10 +94,6 @@ INSTITUTION_FACET:
   solr_field: :institution_f
   label:
     en: Institution
-ISBN:
-  solr_field: :isbn_a
-  label:
-    en: ISBN
 ISBN_NUMBER:
   solr_field: :isbn_number_a
   label:
@@ -310,48 +106,20 @@ ISBN_QUALIFYING_INFO:
   solr_field: :isbn_qualifying_info_a
   label:
     en: ISBN Qualifying Info
-ISBN_QUALIFYING_INFO_T:
-  solr_field: :isbn_qualifying_info_t
-  label:
-    en: ISBN Qualifying Info T
 ISBN_WITH_QUALIFYING_INFO:
-  solr_field: isbn_with_qualifying_info
+  solr_field: :isbn_with_qualifying_info
   label:
     en: "ISBN"
-ISSN:
-  solr_field: :issn_a
-  label:
-    en: ISSN
 ISSN_LINKING:
   solr_field: :issn_linking_a
   label:
     en: ISSN
-ISSN_LINKING_ISBN:
-  solr_field: :issn_linking_isbn
-  label:
-    en: ISSN Linking
 ISSN_LINKING_NUM:
   solr_field: :issn_linking_num
   label:
     en: ISSN Linking Num
-ISSN_PRIMARY:
-  solr_field: :issn_primary_a
-  label:
-    en: ISSN Primary
-ISSN_PRIMARY_ISBN:
-  solr_field: :issn_primary_isbn
-  label:
-    en: ISSN Primary
-ISSN_PRIMARY_NUM:
-  solr_field: :issn_primary_num
-  label:
-    en: ISSN Primary Num
 ISSN_SERIES:
   solr_field: :issn_series_a
-  label:
-    en: ISSN Series
-ISSN_SERIES_ISBN:
-  solr_field: :issn_series_isbn
   label:
     en: ISSN Series
 ISSN_SERIES_NUM:
@@ -366,90 +134,6 @@ ITEMS:
   solr_field: :items_a
   label:
     en: Items
-ITEMS_BARCODE:
-  solr_field: :items_barcode_a
-  label:
-    en: Items Barcode
-ITEMS_BARCODE_STR:
-  solr_field: :items_barcode_str
-  label:
-    en: Items Barcode Str
-ITEMS_CALL_NUMBER:
-  solr_field: :items_call_number_a
-  label:
-    en: Items Call Number
-ITEMS_CALL_NUMBER_LCCN:
-  solr_field: :items_call_number_lccn
-  label:
-    en: Items Call Number Lccn
-ITEMS_CALL_NUMBER_SCHEME:
-  solr_field: :items_call_number_scheme_a
-  label:
-    en: Items Call Number Scheme
-ITEMS_CHECKOUTS:
-  solr_field: :items_checkouts_a
-  label:
-    en: Items Checkouts
-ITEMS_COPY_NUMBER:
-  solr_field: :items_copy_number_a
-  label:
-    en: Items Copy Number
-ITEMS_DUE_DATE:
-  solr_field: :items_due_date_a
-  label:
-    en: Items Due Date
-ITEMS_ILS_ID:
-  solr_field: :items_ils_id_a
-  label:
-    en: Items Ils Id
-ITEMS_LCC_TOP:
-  solr_field: :items_lcc_top_a
-  label:
-    en: Items Lcc Top
-ITEMS_LCC_TOP_FACET:
-  solr_field: :items_lcc_top_f
-  label:
-    en: Items Lcc Top
-ITEMS_LOCATION:
-  solr_field: :items_location_a
-  label:
-    en: Items Location
-ITEMS_LOCATION_FACET:
-  solr_field: :items_location_f
-  label:
-    en: Location
-ITEMS_LOCATION_T:
-  solr_field: :items_location_t
-  label:
-    en: Items Location T
-ITEMS_NOTE:
-  solr_field: :items_note_a
-  label:
-    en: Items Note
-ITEMS_NOTE_T:
-  solr_field: :items_note_t
-  label:
-    en: Items Note T
-ITEMS_STATUS:
-  solr_field: :items_status_a
-  label:
-    en: Items Status
-ITEMS_STATUS_STR:
-  solr_field: :items_status_str
-  label:
-    en: Items Status Str
-ITEMS_STR:
-  solr_field: :items_str
-  label:
-    en: Items Str
-ITEMS_TYPE:
-  solr_field: :items_type_a
-  label:
-    en: Items Type
-ITEMS_VOLUME:
-  solr_field: :items_volume_a
-  label:
-    en: Items Volume
 LANG_CODE:
   solr_field: :lang_code_a
   label:
@@ -474,150 +158,18 @@ CALL_NUMBER_FACET:
   solr_field: :lcc_callnum_classification_f
   label:
     en: Call Number
-LCC_CALLNUM_CLASSIFICATION_T:
-  solr_field: :lcc_callnum_classification_t
-  label:
-    en: Lcc Callnum Classification T
 LCC_TOP:
   solr_field: :lcc_top_a
   label:
     en: Lcc Top
-LINKING_ADDED_ENTRY:
-  solr_field: :linking_added_entry_a
-  label:
-    en: Linking Added Entry
-LINKING_ADDED_ENTRY_T:
-  solr_field: :linking_added_entry_t
-  label:
-    en: Linking Added Entry T
-LINKING_HAS_SUPPLEMENT:
-  solr_field: :linking_has_supplement_a
-  label:
-    en: Has Supplement
-LINKING_HAS_SUPPLEMENT_ISN:
-  solr_field: :linking_has_supplement_isn_a
-  label:
-    en: Linking Has Supplement Isn
-LINKING_HAS_SUPPLEMENT_ISN_STR:
-  solr_field: :linking_has_supplement_isn_str
-  label:
-    en: Linking Has Supplement Isn Str
-LINKING_HAS_SUPPLEMENT_T:
-  solr_field: :linking_has_supplement_t
-  label:
-    en: Linking Has Supplement T
-LINKING_HOST_ITEM:
-  solr_field: :linking_host_item_a
-  label:
-    en: Linking Host Item
-LINKING_HOST_ITEM_T:
-  solr_field: :linking_host_item_t
-  label:
-    en: Linking Host Item T
-LINKING_HOST_ITEM_TITLE:
-  solr_field: :linking_host_item_title_a
-  label:
-    en: Linking Host Item Title
-LINKING_ISN:
-  solr_field: :linking_isn_a
-  label:
-    en: Linking Isn
-LINKING_MAIN_SERIES:
-  solr_field: :linking_main_series_a
-  label:
-    en: Linking Main Series
-LINKING_MAIN_SERIES_ISN:
-  solr_field: :linking_main_series_isn_a
-  label:
-    en: Linking Main Series Isn
-LINKING_MAIN_SERIES_ISN_STR:
-  solr_field: :linking_main_series_isn_str
-  label:
-    en: Linking Main Series Isn Str
-LINKING_MAIN_SERIES_T:
-  solr_field: :linking_main_series_t
-  label:
-    en: Linking Main Series T
-LINKING_SUPPLEMENT_TO:
-  solr_field: :linking_supplement_to_a
-  label:
-    en: Linking Supplement To
-LINKING_SUPPLEMENT_TO_ISN:
-  solr_field: :linking_supplement_to_isn_a
-  label:
-    en: Linking Supplement To Isn
-LINKING_SUPPLEMENT_TO_ISN_STR:
-  solr_field: :linking_supplement_to_isn_str
-  label:
-    en: Linking Supplement To Isn Str
-LINKING_SUPPLEMENT_TO_T:
-  solr_field: :linking_supplement_to_t
-  label:
-    en: Linking Supplement To T
-LINKING_TRANSLATED_AS:
-  solr_field: :linking_translated_as_a
-  label:
-    en: Linking Translated As
-LINKING_TRANSLATED_AS_ISN:
-  solr_field: :linking_translated_as_isn_a
-  label:
-    en: Linking Translated As Isn
-LINKING_TRANSLATED_AS_ISN_STR:
-  solr_field: :linking_translated_as_isn_str
-  label:
-    en: Linking Translated As Isn Str
-LINKING_TRANSLATED_AS_T:
-  solr_field: :linking_translated_as_t
-  label:
-    en: Linking Translated As T
-LINKING_TRANSLATED_AS_TITLE:
-  solr_field: :linking_translated_as_title_a
-  label:
-    en: Linking Translated As Title
-LINKING_TRANSLATION_OF:
-  solr_field: :linking_translation_of_a
-  label:
-    en: Linking Translation Of
-LINKING_TRANSLATION_OF_ISN:
-  solr_field: :linking_translation_of_isn_a
-  label:
-    en: Linking Translation Of Isn
-LINKING_TRANSLATION_OF_ISN_STR:
-  solr_field: :linking_translation_of_isn_str
-  label:
-    en: Linking Translation Of Isn Str
-LINKING_TRANSLATION_OF_T:
-  solr_field: :linking_translation_of_t
-  label:
-    en: Linking Translation Of T
-LINKING_TRANSLATION_OF_TITLE:
-  solr_field: :linking_translation_of_title_a
-  label:
-    en: Linking Translation Of Title
-LINKINT_SUPPLEMENT_TO:
-  solr_field: :linkint_supplement_to_a
-  label:
-    en: Linkint Supplement To
 LOCAL_ID:
   solr_field: :local_id
   label:
     en: Local
-LOCAL_ID_STR:
-  solr_field: :local_id_str
-  label:
-    en: Local Id Str
 LOCATION_HIERARCHY_FACET:
   solr_field: location_hierarchy_f
   label:
     en: Library Location
-MANUFACTURER:
-  solr_field: :manufacturer_a
-  label:
-    en: Manufacturer
-MANUFACTURER_STATEMENT:
-  solr_field: :manufacturer_statement_a
-  label:
-    en: Manufacturer Statement
 MISC_ID:
   solr_field: misc_id_a
   label:
@@ -630,54 +182,10 @@ NORMALIZED_CALL_NUMBERS:
   solr_field: :normalized_call_numbers_a
   label:
     en: Normalized Call Numbers
-NOTES_ADDITIONAL:
-  solr_field: :notes_additional_a
-  label:
-    en: Additional Notes
-NOTES_ADDITIONAL_VERNACULAR_LANG:
-  solr_field: :notes_additional_vernacular_lang_a
-  label:
-    en: Notes Additional Vernacular Lang
-NOTES_INDEXED:
-  solr_field: :notes_indexed_a
-  label:
-    en: Notes
-NOTES_INDEXED_CJK_V:
-  solr_field: :notes_indexed_cjk_v
-  label:
-    en: Notes Indexed Cjk V
-NOTES_INDEXED_RUS_V:
-  solr_field: :notes_indexed_rus_v
-  label:
-    en: Notes Indexed Rus V
-NOTES_INDEXED_T:
-  solr_field: :notes_indexed_t
-  label:
-    en: Notes Indexed T
-NOTES_INDEXED_VERN:
-  solr_field: :notes_indexed_vern
-  label:
-    en: Notes Indexed Vern
-NOTES_INDEXED_VERNACULAR_LANG:
-  solr_field: :notes_indexed_vernacular_lang_a
-  label:
-    en: Notes Indexed Vernacular Lang
-NOTES_SERIALS_SUMMARY:
-  solr_field: :notes_serials_summary_a
-  label:
-    en: Notes Serials Summary
-NOTES_SERIALS_SUMMARY_T:
-  solr_field: :notes_serials_summary_t
-  label:
-    en: Notes Serials Summary T
 NOTE_ACCESS_RESTRICTIONS:
   solr_field: note_access_restrictions_a
   label:
     en: Access Restriction
-NOTE_ACQUISITION_SOURCE:
-  solr_field: note_acquisition_source_a
-  label:
-    en: Source of Acquisition
 NOTE_ADMIN_HISTORY:
   solr_field: note_admin_history_a
   label:
@@ -790,34 +298,6 @@ OCLC_NUMBER:
   solr_field: :oclc_number
   label:
     en: OCLC Number
-OCLC_NUMBER_OLD:
-  solr_field: :oclc_number_old_a
-  label:
-    en: Oclc Number Old
-OCLC_NUMBER_OLD_STR:
-  solr_field: :oclc_number_old_str
-  label:
-    en: Oclc Number Old Str
-OCLC_NUMBER_STR:
-  solr_field: :oclc_number_str
-  label:
-    en: Oclc Number Str
-ORGANIZATION_ARRANGEMENT:
-  solr_field: :organization_arrangement_a
-  label:
-    en: Organization Arrangement
-OWNER:
-  solr_field: :owner_a
-  label:
-    en: Owner
-PRODUCER:
-  solr_field: :producer_a
-  label:
-    en: Producer
-PRODUCTION_STATEMENT:
-  solr_field: :production_statement_a
-  label:
-    en: Production Statement
 PHYSICAL_DESCRIPTION:
   solr_field: :physical_description_a
   label:
@@ -838,38 +318,6 @@ PUBLICATION_YEAR_SORT:
   solr_field: :publication_year_isort_stored_single
   label:
     en: Publication Year
-PUBLISHER:
-  solr_field: :publisher_a
-  label:
-    en: Publisher
-PUBLISHER_ETC:
-  solr_field: :publisher_etc_a
-  label:
-    en: Publisher Etc
-PUBLISHER_ETC_TYPE:
-  solr_field: :publisher_etc_type_a
-  label:
-    en: Publisher Etc Type
-PUBLISHER_IMPRINT:
-  solr_field: :publisher_imprint_a
-  label:
-    en: Publisher Imprint
-PUBLISHER_MARC_SOURCE:
-  solr_field: :publisher_marc_source_a
-  label:
-    en: Publisher Marc Source
-PUBLISHER_NUMBER:
-  solr_field: :publisher_number_a
-  label:
-    en: Publisher Number
-PUBLISHER_NUMBER_STR:
-  solr_field: :publisher_number_str
-  label:
-    en: Publisher Number Str
-PUBLISHER_VERNACULAR_LANG:
-  solr_field: :publisher_vernacular_lang_a
-  label:
-    en: Publisher Vernacular Lang
 RELATED_WORK:
   solr_field: :related_work_a
   label:
@@ -890,58 +338,14 @@ SECONDARY_URLS:
   solr_field: secondary_urls
   label:
     en: Links
-SERIES:
-  solr_field: :series_a
-  label:
-    en: Series
-SERIES_DIGITAL_FILE:
-  solr_field: :series_digital_file_a
-  label:
-    en: Series Digital File
-SERIES_GENERAL:
-  solr_field: :series_general_a
-  label:
-    en: Series General
-SERIES_ORGANIZATION:
-  solr_field: :series_organization_a
-  label:
-    en: Series Organization
-SERIES_PROJECTION:
-  solr_field: :series_projection_a
-  label:
-    en: Series Projection
-SERIES_SOUND:
-  solr_field: :series_sound_a
-  label:
-    en: Series Sound
 SERIES_STATEMENT:
   solr_field: :series_statement_a
   label:
     en: Series
-SERIES_STATEMENT_VERNACULAR_LANG:
-  solr_field: :series_statement_vernacular_lang_a
-  label:
-    en: Series Statement Vernacular Lang
-SERIES_TITLE_INDEX:
-  solr_field: :series_title_index_a
-  label:
-    en: Series Title Index
-SERIES_VIDEO:
-  solr_field: :series_video_a
-  label:
-    en: Series Video
-SERIES_VOLUMES:
-  solr_field: :series_volumes_a
-  label:
-    en: Series Volumes
 SERIES_WORK:
   solr_field: :series_work_a
   label:
     en: Series
-SOURCE:
-  solr_field: :source_a
-  label:
-    en: Source
 STATEMENT_OF_RESPONSIBILITY:
   solr_field: :statement_of_responsibility_a
   label:
@@ -966,10 +370,6 @@ SUBJECT_GENRE_FACET:
   solr_field: :subject_genre_f
   label:
     en: Genre
-SUBJECT_GENRE_T:
-  solr_field: :subject_genre_t
-  label:
-    en: Genre
 SUBJECT_GEOGRAPHIC:
   solr_field: :subject_geographic_a
   label:
@@ -978,30 +378,22 @@ SUBJECT_GEOGRAPHIC_FACET:
   solr_field: :subject_geographic_f
   label:
     en: About Places
-SUBJECT_MEDICAL_FACET:
-  solr_field: :subject_medical_f
-  label:
-    en: Medical Subject
-SUBJECT_TOPIC_LCSH:
-  solr_field: :subject_topic_lcsh_a
+SUBJECT_TOPICAL:
+  solr_field: :subject_topical_a
   label:
     en: Subject Topic Lcsh
-SUBJECT_TOPIC_LCSH_FACET:
-  solr_field: :subject_topic_lcsh_f
+SUBJECT_TOPICAL_FACET:
+  solr_field: :subject_topical_f
   label:
     en: About Topic
-SUBJECTS:
-  solr_field: :subjects_a
+SUBJECT_HEADINGS:
+  solr_field: :subject_headings_a
   label:
     en: Subjects
-SUBJECTS_FACET:
-  solr_field: :subjects_f
+SUBJECT_HEADINGS_FACET:
+  solr_field: :subject_headings_f
   label:
     en: Subjects
-SUBJECTS_T:
-  solr_field: :subjects_t
-  label:
-    en: Subjects T
 SUBSERIES_WORK:
   solr_field: :subseries_work_a
   label:
@@ -1010,94 +402,14 @@ SUPPLEMENT_TO_WORK:
   solr_field: :supplement_to_work_a
   label:
     en: Supplements
-SYNDETICS_ID:
-  solr_field: :syndetics_id_a
-  label:
-    en: Syndetics Id
-SYNDETICS_ISBN:
-  solr_field: :syndetics_isbn_a
-  label:
-    en: Syndetics Isbn
 THIS_WORK:
   solr_field: :this_work_a
   label:
     en: This Title
-TITLE_ABBREVIATION:
-  solr_field: :title_abbreviation_a
-  label:
-    en: Title Abbreviation
-TITLE_ABBREVIATION_T:
-  solr_field: :title_abbreviation_t
-  label:
-    en: Title Abbreviation T
-TITLE_ABBRV:
-  solr_field: :title_abbrv_a
-  label:
-    en: Title Abbrv
-TITLE_ALT:
-  solr_field: :title_alt_a
-  label:
-    en: Title Alt
-TITLE_ALT_VERNACULAR_LANG:
-  solr_field: :title_alt_vernacular_lang_a
-  label:
-    en: Title Alt Vernacular Lang
-TITLE_ALTERNATE:
-  solr_field: :title_alternate_a
-  label:
-    en: Title Alternate
-TITLE_ALTERNATE_T:
-  solr_field: :title_alternate_t
-  label:
-    en: Title Alternate T
-TITLE_ANALYTICAL:
-  solr_field: :title_analytical_a
-  label:
-    en: Title Analytical
-TITLE_ANALYTICAL_T:
-  solr_field: :title_analytical_t
-  label:
-    en: Title Analytical T
-TITLE_EARLIER:
-  solr_field: :title_earlier_a
-  label:
-    en: Title Earlier
-TITLE_EARLIER_T:
-  solr_field: :title_earlier_t
-  label:
-    en: Title Earlier T
 TITLE_FORMER:
   solr_field: :title_former_a
   label:
     en: Former Title
-TITLE_JOURNAL:
-  solr_field: :title_journal_a
-  label:
-    en: Title Journal
-TITLE_JOURNAL_CJK_V:
-  solr_field: :title_journal_cjk_v
-  label:
-    en: Title Journal Cjk V
-TITLE_JOURNAL_T:
-  solr_field: :title_journal_t
-  label:
-    en: Title Journal T
-TITLE_JOURNAL_VERN:
-  solr_field: :title_journal_vern
-  label:
-    en: Title Journal Vern
-TITLE_JOURNAL_VERNACULAR_LANG:
-  solr_field: :title_journal_vernacular_lang_a
-  label:
-    en: Title Journal Vernacular Lang
-TITLE_LATER:
-  solr_field: :title_later_a
-  label:
-    en: Title Later
-TITLE_LATER_T:
-  solr_field: :title_later_t
-  label:
-    en: Title Later T
 TITLE_MAIN:
   solr_field: :title_main
   label:
@@ -1110,22 +422,6 @@ TITLE_SORT:
   solr_field: :title_sort_ssort_single
   label:
     en: Title Sort Ssort Single
-TITLE_TRANSLATION:
-  solr_field: :title_translation_a
-  label:
-    en: Title Translation
-TITLE_TRANSLATION_T:
-  solr_field: :title_translation_t
-  label:
-    en: Title Translation T
-TITLE_UNIFORM:
-  solr_field: :title_uniform_a
-  label:
-    en: Uniform Title
-TITLE_UNIFORM_T:
-  solr_field: :title_uniform_t
-  label:
-    en: Title Uniform T
 TITLE_VARIANT:
   solr_field: :title_variant_a
   label:
@@ -1146,7 +442,3 @@ URLS:
   solr_field: url_a
   label:
     en: Links
-VOLUME_DATE_RANGE:
-  solr_field: :volume_date_range_a
-  label:
-    en: Volume Date Range

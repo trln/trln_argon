@@ -16,11 +16,7 @@ module TrlnArgon
             proc { 'info:sid/discovery.trln.org/catalog' }
           ],
           metadata: {
-            au: proc do
-                  fetch(TrlnArgon::Fields::AUTHORS_MAIN, []).concat(
-                    fetch(TrlnArgon::Fields::AUTHORS_DIRECTOR, [])
-                  ).concat(fetch(TrlnArgon::Fields::AUTHORS_OTHER, []))
-                end,
+            au: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
             btitle: TrlnArgon::Fields::TITLE_MAIN,
             date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
             edition: TrlnArgon::Fields::EDITION,
