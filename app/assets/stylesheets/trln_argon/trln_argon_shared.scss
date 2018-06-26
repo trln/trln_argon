@@ -1009,6 +1009,69 @@ div.marc-record {
 
 
 
+
+/* Results Display */
+
+.fulltext-url {
+  margin-bottom: 10px;
+}
+
+
+.items tr.location-narrow-group th,
+ .items tr.loc-narrow-banner th {
+  border-bottom: none;
+  text-transform: none;
+}
+
+  .items tr.loc-narrow-banner th,
+  .items tr.location-narrow-group th {
+    min-width: 100px;
+    text-align: center;
+  }
+
+  .items tr.loc-narrow-banner th:first-of-type,
+  .items tr.location-narrow-group th:first-of-type {
+    width: 30%;
+    text-align: left;
+  }
+
+  .items tr.loc-narrow-banner th:last-of-type,
+  .items tr.location-narrow-group th:last-of-type {
+    text-align: right;
+  }
+
+
+.items .table tbody.item-group.collapse.in td {
+  color: #555;
+}
+
+.items .table tbody.item-group.collapse.in td:last-of-type {
+  width: auto;
+  text-align: center;
+}
+
+.items .table tbody, .items .table > tbody + tbody {
+
+}
+
+
+.items .loc-narrow-banner a.expander,
+.item-details-link a {
+  padding: 3px 6px 3px 6px;
+  background-color: #e3e3e3;
+  margin-left: 5px;
+  font-size: 90%;
+  color: #333;
+  white-space: nowrap;
+}
+
+.item-details-link a::after {
+  content: ' »';
+}
+
+
+
+
 /* AxS Tweaks */
 
 .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {

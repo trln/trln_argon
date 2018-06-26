@@ -20,6 +20,8 @@
         </tr>
 
     <% loc_narrow_map.each do |loc_n, item_data|  %>
+
+      <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
       <% has_summary =!item_data.fetch('summary', '').blank? %>
       <% if has_summary %>
         <tr class='location-narrow-group'>
@@ -36,6 +38,15 @@
             </span>
           </th>
         </tr>
+
+        <% if has_holding_notes %>
+
+          <tr>
+            <td class='notes' colspan="3">Note &mdash; <em><%= [*item_data['notes']].join("; "); %></em></td>
+          </tr>
+
+        <% end %>
+
       <% end %>
 
   <% unless has_summary %>

@@ -75,6 +75,12 @@ module TrlnArgon
         end.join('<br />').html_safe
       end
 
+      def holding_notes_display(holding)
+        holding.fetch('notes', []).collect do |n|
+          "<span class='holding-note'>#{CGI.escapeHTML(n)}</span>"
+        end.join('<br />').html_safe
+      end
+
       def location_filter_display(value = '')
         values = value.split(':')
 
@@ -142,6 +148,11 @@ module TrlnArgon
       def holdings_have_notes?(holdings)
         return false if holdings.nil? || holdings.empty? || !holdings.respond_to?(:fetch)
         holdings.any? { |_loc_b, loc_narrow_map| holdings_location_has_notes?(loc_narrow_map) }
+      end
+
+      def holding_has_notes?(holding)
+        return false if holding.nil? || holding.empty? || !holding.respond_to?(:fetch)
+        holding.any? { |i| !i.fetch('notes', '').empty? }
       end
 
       # Tests whether a given holdings for a broad location
