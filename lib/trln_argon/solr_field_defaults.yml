@@ -242,10 +242,6 @@ HAS_SUPPLEMENT_WORK:
   solr_field: :has_supplement_work_a
   label:
     en: Supplements
-HAS_SUPPLEMENT_TO_WORK:
-  solr_field: :has_supplement_to_work_a
-  label:
-    en: Supplements
 HOLDINGS:
   solr_field: :holdings_a
   label:
@@ -261,7 +257,7 @@ HOLDINGS_T:
 HOST_ITEM_WORK:
   solr_field: :host_item_work_a
   label:
-    en: Collection or other items this is a part of
+    en: Collection or other item this is a part of
 ID:
   solr_field: :id
   label:
@@ -1010,6 +1006,10 @@ SUBSERIES_WORK:
   solr_field: :subseries_work_a
   label:
     en: Series
+SUPPLEMENT_TO_WORK:
+  solr_field: :supplement_to_work_a
+  label:
+    en: Supplements
 SYNDETICS_ID:
   solr_field: :syndetics_id_a
   label:
