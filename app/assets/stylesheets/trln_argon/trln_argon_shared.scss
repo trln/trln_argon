@@ -256,6 +256,10 @@ div.items table {
 
 }
 
+#startOverLink {
+  margin-right: 1em;
+}
+
 
 
 @media screen and (max-width: $screen-xs) {
@@ -410,9 +414,9 @@ div.items table {
     padding-left: 0;
   }
   .show-document .show-subjects ul li {
-    padding-bottom: .5em;
+    margin-bottom: 6px;
     display: inline-block;
-    padding-left: 1em;
+    margin-left: 1em;
     width: 100%;
   }
   .show-document .show-subjects ul li::before {
@@ -546,6 +550,8 @@ div.items table {
       float: left;
       text-align: right;
       display: block;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     #facets ul.facet-hierarchy .twiddle-open > .facet_select {
@@ -572,14 +578,14 @@ div.items table {
   @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
       width: 155px;
-      a { width: 110px; }
+      a { width: 100px; }
     }
   }
 
   @media screen and (min-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
       width: 205px;
-      a { width: 160px; }
+      a { width: 150px; }
     }
   }
 
@@ -677,10 +683,28 @@ div.items table {
 
 
 
+/* Elements */
 
+hr.dashed {
+  border-top: 2px dotted rgba(0,0,0,.1);
+}
+
+.jumbotron-border {
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  margin-top: 2em;
+}
+
+ul.lead li {
+  font-weight: 400;
+}
 
 
 /* Typography */
+
+h1, h2, h3, h4, h5 {
+  line-height: 1.2;
+}
 
 #documents .document h3.document-title-heading {
   font-size: 1.4em;
@@ -951,6 +975,7 @@ h3.online-header {
   font-size: 125%;
 }
 
+
 /* show styles */
 
 #document-tools .btn-default {
@@ -1006,6 +1031,48 @@ h3.online-header {
 div.marc-record {
   text-align: right;
 }
+
+.progressive-link-hover {
+  text-decoration: underline
+}
+
+.show-subjects li {
+  padding: 2px;
+}
+
+.show-subjects .progressive-link-wrapper {
+  padding: 2px 0 2px 0;
+  margin-left: -2px;
+}
+
+.show-subjects .progressive-link-wrapper a {
+  padding: 2px;
+}
+
+.show-subjects .progressive-link-wrapper:hover {
+  background-color: lighten( $primary-link-color, 50% );
+}
+
+.show-subjects .progressive-link-hover {
+  background-color: $primary-link-color;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.show-subjects .subject-separator {
+  text-decoration: none !important;
+  display: inline-block;
+  margin-left: 2px;
+  margin-right: 5px;
+  font-size: .75em;
+  font-weight: bolder;
+  color: #999;
+}
+
+.show-subjects .progressive-link-hover .subject-separator {
+  color: lighten( $primary-link-color, 25% );
+}
+
 
 
 
