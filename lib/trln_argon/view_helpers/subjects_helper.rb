@@ -20,7 +20,7 @@ module TrlnArgon
       end
 
       def segment_begins_with_link(segment_hierarchy_pair, delimiter = ' -- ')
-        params = { begins_with: { TrlnArgon::Fields::SUBJECTS_FACET => Array(segment_hierarchy_pair.last) } }
+        params = { begins_with: { TrlnArgon::Fields::SUBJECT_HEADINGS_FACET => Array(segment_hierarchy_pair.last) } }
         params[:local_filter] = local_filter_applied?.to_s
         link_to(search_action_url(params),
                 title: CGI.escapeHTML(segment_hierarchy_pair.last),

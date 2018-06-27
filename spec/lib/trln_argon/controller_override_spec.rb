@@ -69,15 +69,11 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the subject topic lcsh facet' do
-      expect(override_config.facet_fields).to have_key('subject_topic_lcsh_f')
+      expect(override_config.facet_fields).to have_key('subject_topical_f')
     end
 
     it 'sets the subject genre facet' do
       expect(override_config.facet_fields).to have_key('subject_genre_f')
-    end
-
-    it 'sets the subject medical facet' do
-      expect(override_config.facet_fields).to have_key('subject_medical_f')
     end
 
     it 'sets the subject geographic facet' do
@@ -136,10 +132,6 @@ describe TrlnArgon::ControllerOverride do
   end
 
   describe 'show fields' do
-    it 'sets the Uniform Title field' do
-      expect(override_config.show_fields).to have_key('title_uniform_a')
-    end
-
     it 'sets the Variant Title field' do
       expect(override_config.show_fields).to have_key('title_variant_a')
     end

@@ -8,19 +8,14 @@ module TrlnArgon
       # For more complex data mappings see proc examples.
 
       # rubocop:disable MethodLength
-      # rubocop:disable AbcSize
       def ris_field_mapping
         @ris_field_mapping ||= {
           # Type of reference (TODO: Translate Argon format to RIS type code)
           TY: proc { ['GEN'] },
           # First Author
-          A1: TrlnArgon::Fields::AUTHORS_MAIN,
+          A1: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
           # Second Author
-          A2: proc do
-                fetch(TrlnArgon::Fields::AUTHORS_DIRECTOR, []).concat(
-                  fetch(TrlnArgon::Fields::AUTHORS_OTHER, [])
-                )
-              end,
+          # A2: ,
           # Location in Archives (Inst., Lib., Call No.)
           AV: proc { expanded_holdings_to_text },
           # Place Published (TODO: Combined with Publisher in Argon imprint_main)
@@ -28,7 +23,7 @@ module TrlnArgon
           # Reference ID
           ID: TrlnArgon::Fields::ID,
           # Keywords (Subjects)
-          KW: TrlnArgon::Fields::SUBJECTS,
+          KW: TrlnArgon::Fields::SUBJECT_HEADINGS,
           # Link to Full-text (TODO: Include findingaid URLs?)
           L2: proc { fulltext_urls.map { |v| v[:href] } },
           # Language
@@ -38,7 +33,7 @@ module TrlnArgon
           # Type of Work (TODO: Looks like TOC? Summary?)
           # M3: ,
           # Notes
-          N1: TrlnArgon::Fields::NOTES_INDEXED,
+          N1: TrlnArgon::Fields::NOTE_GENERAL,
           # Publisher (TODO: Combined with Place Published in Argon imprint_main)
           # PB: # Publisher,
           # Publication year (YYYY/MM/DD)

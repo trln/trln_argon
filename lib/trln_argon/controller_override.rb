@@ -105,13 +105,10 @@ module TrlnArgon
                                label: TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.label,
                                limit: true,
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECT_TOPIC_LCSH_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECT_MEDICAL_FACET.label,
-                               limit: true
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                partial: 'blacklight/hierarchy/facet_hierarchy'
@@ -156,15 +153,12 @@ module TrlnArgon
                                },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::AUTHORS_MAIN_FACET.to_s,
-                               label: TrlnArgon::Fields::AUTHORS_MAIN_FACET.label,
-                               show: false
 
         # Subject is configured as a facet and set not to display so that the field
         # label will be accessible for the begins_with filter. Set other fields that will
         # be used for begins with searches in the same way.
-        config.add_facet_field TrlnArgon::Fields::SUBJECTS_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECTS_FACET.label,
+        config.add_facet_field TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.to_s,
+                               label: TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.label,
                                show: false
 
         # hierarchical facet configuration
@@ -192,8 +186,6 @@ module TrlnArgon
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
-        config.add_show_field TrlnArgon::Fields::TITLE_UNIFORM.to_s,
-                              label: TrlnArgon::Fields::TITLE_UNIFORM.label
         config.add_show_field TrlnArgon::Fields::TITLE_VARIANT.to_s,
                               label: TrlnArgon::Fields::TITLE_VARIANT.label,
                               helper_method: :join_with_br
@@ -284,9 +276,6 @@ module TrlnArgon
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_BINDING.to_s,
                               label: TrlnArgon::Fields::NOTE_BINDING.label,
-                              helper_method: :join_with_br
-        config.add_show_field TrlnArgon::Fields::NOTE_ACQUISITION_SOURCE.to_s,
-                              label: TrlnArgon::Fields::NOTE_ACQUISITION_SOURCE.label,
                               helper_method: :join_with_br
         config.add_show_field TrlnArgon::Fields::NOTE_REPRODUCTION.to_s,
                               label: TrlnArgon::Fields::NOTE_REPRODUCTION.label,
@@ -389,7 +378,7 @@ module TrlnArgon
                                             accessor: :data_source_work,
                                             helper_method: :work_entry_display
 
-        config.add_show_subjects_field TrlnArgon::Fields::SUBJECTS.to_s,
+        config.add_show_subjects_field TrlnArgon::Fields::SUBJECT_HEADINGS.to_s,
                                        helper_method: :list_of_linked_subjects_segments
 
         # "fielded" search configuration. Used by pulldown among other places.
