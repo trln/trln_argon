@@ -39,6 +39,7 @@ module TrlnArgon
         @expanded_documents_query ||= expanded_documents_search_builder
                                       .where("_query_:\"{!q.op=OR df=#{TrlnArgon::Fields::ROLLUP_ID} v=$rollup_ids}\"")
                                       .merge(rollup_ids: rollup_ids_from_response,
+                                             defType: 'lucene',
                                              group: 'true',
                                              'group.field' => TrlnArgon::Fields::ROLLUP_ID,
                                              'group.limit' => '4',

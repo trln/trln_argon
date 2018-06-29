@@ -1,15 +1,6 @@
 module TrlnArgon
   module ArgonSearchBuilder
     module LocalFilter
-      def apply_local_filter(solr_parameters)
-        solr_parameters[:fq] ||= []
-        solr_parameters[:fq] << if blacklight_params[:local_filter].to_s == 'true'
-                                  local_records_query
-                                else
-                                  record_rollup_query
-                                end
-      end
-
       def show_only_local_holdings(solr_parameters)
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] << local_records_query

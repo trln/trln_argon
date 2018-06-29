@@ -15,7 +15,7 @@ describe 'full records' do
   end
 
   context 'when viewing a rolled up record' do
-    before { visit solr_document_path(id: 'DUKE002952265', local_filter: false) }
+    before { visit trln_solr_document_path(id: 'DUKE002952265') }
 
     it 'shows location information for Duke' do
       expect(page).to have_css('#doc_duke002952265 h3', text: 'Duke Libraries')

@@ -189,9 +189,11 @@ describe TrlnArgonHelper, type: :helper do
       allow(context).to receive(:search_action_url).and_return('/catalog?search=something')
     end
 
+    # rubocop:disable ExampleLength
     it 'creates a display value with links from the supplied work entry data' do
       expect(context.helpers.work_entry_display(options)).to eq(
         '<dd>'\
+        '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
         '<span class="sr-only">Author One</span> One'\
@@ -208,6 +210,7 @@ describe TrlnArgonHelper, type: :helper do
         'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
+        '</span>'\
         '</dd>'
       )
     end

@@ -3,7 +3,9 @@ module TrlnArgon
     module WorkEntryHelper
       def work_entry_display(options = {})
         assemble_work_entry_list_value(options[:value]).map do |work|
-          content_tag(:dd, work.html_safe, class: options[:field])
+          content_tag :dd, class: options[:field] do
+            content_tag :span, work.html_safe, class: 'progressive-link-wrapper'
+          end
         end.join('').html_safe
       end
 

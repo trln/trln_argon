@@ -1,4 +1,4 @@
-describe ConsortiumSearchBuilder do
+describe RollupOnlySearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do

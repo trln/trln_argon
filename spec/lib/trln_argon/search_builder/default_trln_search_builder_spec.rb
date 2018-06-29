@@ -1,13 +1,9 @@
-describe TrlnArgonSearchBuilder do
+describe DefaultTrlnSearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do
     it 'adds the local filter method to the processor chain' do
-      expect(obj.processor_chain).to include(:apply_local_filter)
-    end
-
-    it 'adds the isxn boost method to the processor chain' do
-      expect(obj.processor_chain).to include(:boost_isxn_matches)
+      expect(obj.processor_chain).to include(:rollup_duplicate_records)
     end
 
     it 'adds the before filter method to the processor chain' do

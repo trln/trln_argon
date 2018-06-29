@@ -1,4 +1,4 @@
-describe LocalSearchBuilder do
+describe LocalOnlySearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do

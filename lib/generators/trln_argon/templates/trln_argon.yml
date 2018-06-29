@@ -2,7 +2,6 @@ development:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
   local_institution_code: <%= ENV['LOCAL_INSTITUTION_CODE'] || 'unc' %>
   local_records: <%= ENV['LOCAL_RECORDS'] || 'unc,trln' %>
-  apply_local_filter_by_default: <%= ENV['APPLY_LOCAL_FILTER_BY_DEFAULT'] || 'true' %>
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
@@ -13,7 +12,6 @@ test:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
   local_institution_code: <%= ENV['LOCAL_INSTITUTION_CODE'] || 'unc' %>
   local_records: <%= ENV['LOCAL_RECORDS'] || 'unc,trln' %>
-  apply_local_filter_by_default: <%= ENV['APPLY_LOCAL_FILTER_BY_DEFAULT'] || 'true' %>
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
@@ -24,7 +22,6 @@ production:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
   local_institution_code: <%= ENV['LOCAL_INSTITUTION_CODE'] || 'unc' %>
   local_records: <%= ENV['LOCAL_RECORDS'] || 'unc,trln' %>
-  apply_local_filter_by_default: <%= ENV['APPLY_LOCAL_FILTER_BY_DEFAULT'] || 'true' %>
   application_name: <%= ENV['APPLICATION_NAME'] || 'TRLN Argon' %>
   refworks_url: <%= ENV['REFWORKS_URL'] || 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=' %>
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>

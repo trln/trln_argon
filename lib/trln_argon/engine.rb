@@ -23,7 +23,6 @@ module TrlnArgon
       attr_accessor :preferred_records,
                     :local_institution_code,
                     :local_records,
-                    :apply_local_filter_by_default,
                     :application_name,
                     :solr_fields,
                     :code_mappings,
@@ -37,7 +36,6 @@ module TrlnArgon
         @preferred_records             = 'unc'
         @local_institution_code        = 'unc'
         @local_records                 = 'unc,trln'
-        @apply_local_filter_by_default = 'true'
         @application_name              = 'TRLN Argon'
         @solr_fields =
           field_constants(default_fields.merge(override_fields).deep_symbolize_keys)

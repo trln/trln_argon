@@ -4,9 +4,7 @@ module TrlnArgon
       extend ActiveSupport::Concern
 
       included do
-        before_action :set_local_filter_param_to_default, only: %i[index]
-        before_action :filtered_results_total, only: :index
-
+        helper_method :filtered_results_total
         helper_method :filter_scope_name
         helper_method :local_filter_applied?
       end
@@ -22,64 +20,15 @@ module TrlnArgon
       end
 
       def local_filter_applied?
-        if local_filter_param_present?
-          params[:local_filter] == 'true'
-        elsif current_search_session_has_local_filter?
-          current_search_session.query_params['local_filter'] == 'true'
-        else
-          local_filter_default.to_s == 'true'
-        end
-      end
-
-      # Override method mixed into CatalogController from Blacklight
-      # Blacklight::Controller
-      # This override ensures that the local_filter param with
-      # the default value is added to all search actions URLs
-      # unless it is already set.
-      def search_action_url(options = {})
-        merge_local_filter_param(options)
-        super
-      end
-
-      # Override method mixed into CatalogController from Blacklight
-      # Blacklight::Controller
-      # This override ensures that the local_filter param with
-      # the default value is added to all facet action URLs
-      # unless it is already set.
-      def search_facet_url(options = {})
-        merge_local_filter_param(options)
-        super
-      end
-
-      # Override method mixed into CatalogController from Blacklight
-      # Blacklight::SearchContext
-      # This override ensures that local_filter is saved as a parameter
-      # in search history even if not set in the URL.
-      def find_or_initialize_search_session_from_params(params)
-        params_copy = params.reject { |k, v| blacklisted_search_session_params.include?(k.to_sym) || v.blank? }
-
-        return if params_copy.reject { |k, _v| %i[action controller].include? k.to_sym }.blank?
-
-        saved_search = searches_from_history.find { |x| x.query_params == params_copy }
-
-        merge_local_filter_param(params_copy)
-
-        saved_search || Search.create(query_params: params_copy).tap do |s|
-          add_to_search_history(s)
-        end
-      end
-
-      private
-
-      def set_local_filter_param_to_default
-        return if local_filter_param_present?
-        params[:local_filter] = local_filter_default.to_s
+        true
       end
 
       def filtered_results_total
         @filtered_results_total ||=
           filtered_results_query_response['response']['numFound']
       end
+
+      private
 
       def filtered_results_query_response
         repository.search(local_filter_search_builder
@@ -97,39 +46,16 @@ module TrlnArgon
       end
 
       def excluded_processor_chain_methods
-        [:apply_local_filter]
+        %i[show_only_local_holdings rollup_duplicate_records]
       end
 
       def local_filter_search_builder
         @local_filter_search_builder ||=
           if local_filter_applied?
-            ConsortiumSearchBuilder.new(CatalogController)
+            RollupOnlySearchBuilder.new(CatalogController)
           else
-            LocalSearchBuilder.new(CatalogController)
+            LocalOnlySearchBuilder.new(CatalogController)
           end
-      end
-
-      def current_search_session_has_local_filter?
-        current_search_session.present? &&
-          current_search_session.respond_to?(:query_params) &&
-          current_search_session.try(:query_params).key?('local_filter')
-      end
-
-      def local_filter_param_present?
-        local_filter_whitelist.include?(params[:local_filter])
-      end
-
-      def local_filter_whitelist
-        %w[true false]
-      end
-
-      def merge_local_filter_param(options = {})
-        return if options.key?(:local_filter)
-        options.merge!(local_filter: local_filter_default)
-      end
-
-      def local_filter_default
-        TrlnArgon::Engine.configuration.apply_local_filter_by_default
       end
     end
   end

@@ -1,6 +1,7 @@
 require 'trln_argon/view_helpers/document_export_helper'
 require 'trln_argon/view_helpers/imprint_helper'
 require 'trln_argon/view_helpers/names_helper'
+require 'trln_argon/view_helpers/search_scope_toggle_helper'
 require 'trln_argon/view_helpers/subjects_helper'
 require 'trln_argon/view_helpers/syndetics_helper'
 require 'trln_argon/view_helpers/work_entry_helper'
@@ -14,6 +15,7 @@ module TrlnArgon
       include DocumentExportHelper
       include ImprintHelper
       include NamesHelper
+      include SearchScopeToggleHelper
       include SubjectsHelper
       include SyndeticsHelper
       include WorkEntryHelper
@@ -23,7 +25,7 @@ module TrlnArgon
       # Overriden by ControllerOverride::LocalFilter#local_filter_applied?
       # when called within the CatalogController context.
       def local_filter_applied?
-        TrlnArgon::Engine.configuration.apply_local_filter_by_default
+        false
       end
 
       def institution_code_to_short_name(options = {})

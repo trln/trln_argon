@@ -10,6 +10,7 @@ AllCops:
     - 'lib/trln_argon/item_deserializer.rb'
     - 'trln_argon.gemspec'
     - 'config/initializers/openurl.rb'
+    - 'lib/trln_argon/argon_search_builder/add_query_to_solr.rb'
 
 Documentation:
   Enabled: false
@@ -66,3 +67,6 @@ RSpec/ExampleLength:
 RSpec/VerifiedDoubles:
   Exclude:
     - 'spec/helpers/catalog_helper_spec.rb'
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive

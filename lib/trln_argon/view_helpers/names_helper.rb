@@ -17,7 +17,6 @@ module TrlnArgon
       def names_name(name)
         return if name[:name].empty?
         search_params = { search_field: 'author', q: name[:name] }
-        search_params[:local_filter] = local_filter_applied? ? 'true' : 'false'
         link_to(CGI.escapeHTML(name[:name]),
                 search_action_url(search_params))
       end
