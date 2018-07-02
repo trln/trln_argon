@@ -3,7 +3,14 @@ module TrlnArgon
     module SubjectsHelper
       def list_of_linked_subjects_segments(options = {})
         link_to_subject_segments(options).map do |subject|
-          content_tag(:li, subject, class: options[:field])
+          content_tag :li, class: options[:field] do
+            content_tag :span,
+                        subject.gsub(
+                          '-- ',
+                          "<div class='subject-separator'><span aria-hidden='true'>&gt;</span></div>"
+                        ).html_safe,
+                        class: 'progressive-link-wrapper'
+          end
         end.join('').html_safe
       end
 

@@ -1,46 +1,68 @@
-<h2><%= t 'trln_argon.search.zero_results.title' %></h2>
-<div id="documents" class="noresults">
-  <h3><%= t 'trln_argon.search.zero_results.modify_search' %></h3>
-  <ul>
-    <!-- EXPAND TO TRLN -->
-    <% if @filtered_results_total > 0 && local_filter_applied? %>
-      <li>
-        <%= t('trln_argon.search.zero_results.expand_search_html',
-            count: @filtered_results_total,
-            href: link_to(t('trln_argon.search.zero_results.expand_search_href'), url_for(search_state.to_h.merge(local_filter: 'false', page: '1')))).html_safe %></li>
 
-    <% elsif @filtered_results_total == 0 %>
+<div class="jumbotron jumbotron-border">
 
-      <li>
-        <%= t('trln_argon.search.zero_results.expand_search_html.none',
-            href: link_to(t('trln_argon.search.zero_results.different_search_href'), root_path)).html_safe %></li>
+  <% if @filtered_results_total > 0 && local_filter_applied? %>
+    <h2>
 
-    <% end %>
+      <% if @filtered_results_total == 1
+          expand_link_text = t('trln_argon.search.zero_results.expand_search_singular_href_html')
+        else
+          expand_link_text = t('trln_argon.search.zero_results.expand_search_plural_href_html')
+        end %>
 
-    <!-- ARTICLE SEARCH -->
-    <% if params[:q] %>
-      <li>
-        <%= link_to t('trln_argon.search.zero_results.article_search',
+      <%= t('trln_argon.search.zero_results.expand_search_html',
+                    count: @filtered_results_total,
+                    href: link_to( expand_link_text,
+                    url_for(search_state.to_h.merge(local_filter: 'false', page: '1')
+                    ))).html_safe %></h2>
+
+  <% elsif @filtered_results_total == 0 %>
+
+    <h2>
+      <%= t('trln_argon.search.zero_results.expand_search_html.none',
+                    href: link_to( t('trln_argon.search.zero_results.different_search_href_html'),
+                    root_path
+                    )).html_safe %></h2>
+
+  <% end %>
+
+
+
+  <!--<h2><%= t 'trln_argon.search.zero_results.title' %></h2>-->
+  <div id="documents" class="noresults">
+
+    <hr class="dashed" />
+
+    <h3><%= t 'trln_argon.search.zero_results.modify_search' %></h3>
+
+    <ul class="lead">
+
+      <!-- ARTICLE SEARCH -->
+      <% if params[:q] %>
+        <li>
+          <%= link_to t('trln_argon.search.zero_results.article_search',
                       query: truncate(params[:q], length: 60, escape: false)),
                       "#{TrlnArgon::Engine.configuration.article_search_url}#{CGI::escape(params[:q])}" %>
-      </li>
-    <% end %>
+        </li>
+      <% end %>
 
-    <!-- KEYWORD SEARCH INSTEAD -->
-    <% if params[:q] and params[:search_field] and params[:search_field] != blacklight_config.default_search_field.try(:key) %>
+      <!-- KEYWORD SEARCH INSTEAD -->
+      <% if params[:q] and params[:search_field] and params[:search_field] != blacklight_config.default_search_field.try(:key) %>
         <li>
           <%= t 'trln_argon.search.zero_results.search_fields', :search_fields => search_field_label(params) %>
           <%= link_to t('trln_argon.search.zero_results.search_everything',
                       field: blacklight_config.default_search_field.label),
                       url_for(search_state.params_for_search(search_field: blacklight_config.default_search_field.key)) %>
-      </li>
-    <% end %>
+        </li>
+      <% end %>
 
-    <!-- CONTACT US -->
-    <li>
-      <%= t('trln_argon.search.zero_results.contact_us_html',
-            href: link_to(t('trln_argon.search.zero_results.contact_us_href'),
-            TrlnArgon::Engine.configuration.contact_url)).html_safe %>
-    </li>
-  </ul>
+      <!-- CONTACT US -->
+      <li>
+        <%= t('trln_argon.search.zero_results.contact_us_html',
+                      href: link_to(t('trln_argon.search.zero_results.contact_us_href'),
+                      TrlnArgon::Engine.configuration.contact_url)).html_safe %>
+      </li>
+    </ul>
+  </div>
+
 </div>

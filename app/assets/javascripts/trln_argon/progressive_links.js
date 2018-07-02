@@ -1,7 +1,7 @@
 Blacklight.onLoad(function() {
     $('a.progressive-link').hover(function (){
-        $(this).prevAll().addBack().css("text-decoration", "underline");
+        $(this).prevAll().addBack().addClass('progressive-link-hover');
     },function(){
-        $(this).prevAll().addBack().css("text-decoration", "none");
+        $(this).prevAll().addBack().removeClass('progressive-link-hover');
     });
 });
