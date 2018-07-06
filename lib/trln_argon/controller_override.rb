@@ -153,6 +153,9 @@ module TrlnArgon
                                },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
+        config.add_facet_field TrlnArgon::Fields::GENRE_HEADINGS_FACET.to_s,
+                               label: TrlnArgon::Fields::GENRE_HEADINGS_FACET.label,
+                               show: false
 
         # Subject is configured as a facet and set not to display so that the field
         # label will be accessible for the begins_with filter. Set other fields that will
@@ -187,23 +190,17 @@ module TrlnArgon
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
         config.add_show_field TrlnArgon::Fields::TITLE_VARIANT.to_s,
-                              label: TrlnArgon::Fields::TITLE_VARIANT.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::TITLE_VARIANT.label
         config.add_show_field TrlnArgon::Fields::TITLE_FORMER.to_s,
-                              label: TrlnArgon::Fields::TITLE_FORMER.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::TITLE_FORMER.label
         config.add_show_field TrlnArgon::Fields::NOTE_FORMER_TITLE.to_s,
-                              label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_FORMER_TITLE.label
         config.add_show_field TrlnArgon::Fields::SERIES_STATEMENT.to_s,
-                              label: TrlnArgon::Fields::SERIES_STATEMENT.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::SERIES_STATEMENT.label
         config.add_show_field TrlnArgon::Fields::FREQUENCY_CURRENT.to_s,
-                              label: TrlnArgon::Fields::FREQUENCY_CURRENT.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::FREQUENCY_CURRENT.label
         config.add_show_field TrlnArgon::Fields::FREQUENCY_FORMER.to_s,
-                              label: TrlnArgon::Fields::FREQUENCY_FORMER.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::FREQUENCY_FORMER.label
         config.add_show_field TrlnArgon::Fields::SECONDARY_URLS.to_s,
                               label: TrlnArgon::Fields::SECONDARY_URLS.label,
                               accessor: :secondary_urls,
@@ -212,102 +209,73 @@ module TrlnArgon
                               label: TrlnArgon::Fields::IMPRINT_MULTIPLE.label,
                               helper_method: :imprint_multiple
         config.add_show_field TrlnArgon::Fields::NOTE_SERIAL_DATES.to_s,
-                              label: TrlnArgon::Fields::NOTE_SERIAL_DATES.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_SERIAL_DATES.label
         config.add_show_field TrlnArgon::Fields::NOTE_ISSUANCE.to_s,
-                              label: TrlnArgon::Fields::NOTE_ISSUANCE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_ISSUANCE.label
         config.add_show_field TrlnArgon::Fields::NOTE_ORGANIZATION.to_s,
-                              label: TrlnArgon::Fields::NOTE_ORGANIZATION.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_ORGANIZATION.label
         config.add_show_field TrlnArgon::Fields::NOTE_RELATED_WORK.to_s,
-                              label: TrlnArgon::Fields::NOTE_RELATED_WORK.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_RELATED_WORK.label
         config.add_show_field TrlnArgon::Fields::NOTE_WITH.to_s,
-                              label: TrlnArgon::Fields::NOTE_WITH.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_WITH.label
         config.add_show_field TrlnArgon::Fields::NOTE_DISSERTATION.to_s,
-                              label: TrlnArgon::Fields::NOTE_DISSERTATION.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_DISSERTATION.label
         config.add_show_field TrlnArgon::Fields::NOTE_ACCESS_RESTRICTIONS.to_s,
-                              label: TrlnArgon::Fields::NOTE_ACCESS_RESTRICTIONS.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_ACCESS_RESTRICTIONS.label
         config.add_show_field TrlnArgon::Fields::NOTE_SCALE.to_s,
-                              label: TrlnArgon::Fields::NOTE_SCALE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_SCALE.label
         config.add_show_field TrlnArgon::Fields::NOTE_PRODUCTION_CREDITS.to_s,
-                              label: TrlnArgon::Fields::NOTE_PRODUCTION_CREDITS.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_PRODUCTION_CREDITS.label
         config.add_show_field TrlnArgon::Fields::NOTE_PERFORMER_CREDITS.to_s,
-                              label: TrlnArgon::Fields::NOTE_PERFORMER_CREDITS.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_PERFORMER_CREDITS.label
         config.add_show_field TrlnArgon::Fields::NOTE_REPORT_TYPE.to_s,
-                              label: TrlnArgon::Fields::NOTE_REPORT_TYPE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_REPORT_TYPE.label
         config.add_show_field TrlnArgon::Fields::NOTE_REPORT_COVERAGE.to_s,
-                              label: TrlnArgon::Fields::NOTE_REPORT_COVERAGE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_REPORT_COVERAGE.label
         config.add_show_field TrlnArgon::Fields::NOTE_DATA_QUALITY.to_s,
-                              label: TrlnArgon::Fields::NOTE_DATA_QUALITY.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_DATA_QUALITY.label
         config.add_show_field TrlnArgon::Fields::NOTE_METHODOLOGY.to_s,
-                              label: TrlnArgon::Fields::NOTE_METHODOLOGY.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_METHODOLOGY.label
         config.add_show_field TrlnArgon::Fields::NOTE_NUMBERING.to_s,
-                              label: TrlnArgon::Fields::NOTE_NUMBERING.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_NUMBERING.label
         config.add_show_field TrlnArgon::Fields::NOTE_FILE_TYPE.to_s,
-                              label: TrlnArgon::Fields::NOTE_FILE_TYPE.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_FILE_TYPE.label
         config.add_show_field TrlnArgon::Fields::NOTE_SUPPLEMENT.to_s,
-                              label: TrlnArgon::Fields::NOTE_SUPPLEMENT.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_SUPPLEMENT.label
         config.add_show_field TrlnArgon::Fields::NOTE_SYSTEM_DETAILS.to_s,
-                              label: TrlnArgon::Fields::NOTE_SYSTEM_DETAILS.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_SYSTEM_DETAILS.label
         config.add_show_field TrlnArgon::Fields::NOTE_ADMIN_HISTORY.to_s,
-                              label: TrlnArgon::Fields::NOTE_ADMIN_HISTORY.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_ADMIN_HISTORY.label
         config.add_show_field TrlnArgon::Fields::NOTE_BIOGRAPHICAL.to_s,
-                              label: TrlnArgon::Fields::NOTE_BIOGRAPHICAL.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_BIOGRAPHICAL.label
         config.add_show_field TrlnArgon::Fields::NOTE_COPY_VERSION.to_s,
-                              label: TrlnArgon::Fields::NOTE_COPY_VERSION.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_COPY_VERSION.label
         config.add_show_field TrlnArgon::Fields::NOTE_BINDING.to_s,
-                              label: TrlnArgon::Fields::NOTE_BINDING.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_BINDING.label
         config.add_show_field TrlnArgon::Fields::NOTE_REPRODUCTION.to_s,
-                              label: TrlnArgon::Fields::NOTE_REPRODUCTION.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_REPRODUCTION.label
         config.add_show_field TrlnArgon::Fields::NOTE_GENERAL.to_s,
-                              label: TrlnArgon::Fields::NOTE_GENERAL.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_GENERAL.label
         config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
-                              label: TrlnArgon::Fields::NOTE_LOCAL.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::NOTE_LOCAL.label
         config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION.to_s,
-                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION.label
         config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.to_s,
-                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.label
+        config.add_show_field TrlnArgon::Fields::GENRE_HEADINGS.to_s,
+                              label: TrlnArgon::Fields::GENRE_HEADINGS.label,
+                              link_to_search: TrlnArgon::Fields::GENRE_HEADINGS_FACET
         config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
                               label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
-                              accessor: :isbn_with_qualifying_info,
-                              helper_method: :join_with_br
+                              accessor: :isbn_with_qualifying_info
         config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
-                              label: TrlnArgon::Fields::ISSN_LINKING.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::ISSN_LINKING.label
         config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
-                              label: TrlnArgon::Fields::OCLC_NUMBER.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::OCLC_NUMBER.label
         config.add_show_field TrlnArgon::Fields::MISC_ID.to_s,
-                              label: TrlnArgon::Fields::MISC_ID.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::MISC_ID.label
         config.add_show_field TrlnArgon::Fields::UPC.to_s,
-                              label: TrlnArgon::Fields::UPC.label,
-                              helper_method: :join_with_br
+                              label: TrlnArgon::Fields::UPC.label
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                          accessor: :statement_of_responsibility

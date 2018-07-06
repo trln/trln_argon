@@ -14,6 +14,8 @@ en:
                 pages:
                     one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
                     other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
+            show:
+                label: '%{label}'
 
             facets:
               title: 'Limit your search'
