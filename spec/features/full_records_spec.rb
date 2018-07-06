@@ -3,7 +3,7 @@ describe 'full records' do
     before { visit solr_document_path(id: 'DUKE002960043') }
 
     it 'displays the ISBN field label' do
-      expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN:')
+      expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN')
     end
 
     it 'displays the ISBN field value with qualifying info' do

@@ -58,6 +58,14 @@ FREQUENCY_FORMER:
   solr_field: :frequency_former_a
   label:
     en: Former Frequency
+GENRE_HEADINGS:
+  solr_field: genre_headings_a
+  label:
+    en: Genre or Form
+GENRE_HEADINGS_FACET:
+  solr_field: genre_headings_f
+  label:
+    en: Genre or Form
 HAS_SUPPLEMENT_WORK:
   solr_field: :has_supplement_work_a
   label:
@@ -69,7 +77,7 @@ HOLDINGS:
 HOST_ITEM_WORK:
   solr_field: :host_item_work_a
   label:
-    en: Collection or other item this is a part of
+    en: Part Of
 ID:
   solr_field: :id
   label:

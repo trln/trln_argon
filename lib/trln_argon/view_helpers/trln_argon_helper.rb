@@ -126,10 +126,6 @@ module TrlnArgon
         options[:value].join(', ')
       end
 
-      def join_with_br(options = {})
-        options[:value].map { |v| CGI.escapeHTML(v) }.join('<br />').html_safe
-      end
-
       private
 
       def primary_url_text(url_hash)
