@@ -19,11 +19,7 @@ module TrlnArgon
       end
 
       def q_facet_params(facet_solr_field, item)
-        facet_params = search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
-        unless search_state.to_h.key?(:local_filter)
-          facet_params[:local_filter] = TrlnArgon::Engine.configuration.apply_local_filter_by_default
-        end
-        facet_params
+        search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
       end
 
       def map_argon_facet_codes(item)

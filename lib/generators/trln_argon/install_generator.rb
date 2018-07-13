@@ -153,8 +153,8 @@ module TrlnArgon
       return if IO.read('app/models/search_builder.rb').include?('TrlnArgon::ArgonSearchBuilder')
       insert_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
         "\n  include BlacklightAdvancedSearch::AdvancedSearchBuilder"\
-        "\n  include TrlnArgon::ArgonSearchBuilder"\
-        "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
+        "\n  include TrlnArgon::ArgonSearchBuilder\n"\
+        # "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
       end
     end
 
@@ -165,6 +165,22 @@ module TrlnArgon
         'data-turbolinks-track': 'reload' %>", '')
       gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application',
         'data-turbolinks-track': 'reload' %>", '')
+    end
+
+    def add_trln_routes
+      return if IO.read('config/routes.rb').include?('resource :trln')
+      insert_into_file 'config/routes.rb', after: 'concern :searchable, Blacklight::Routes::Searchable.new' do
+        "\n  resource :trln, only: [:index], as: 'trln', path: '/trln', controller: 'trln' do"\
+        "\n    concerns :searchable"\
+        "\n  end\n"\
+      end
+    end
+
+    def add_trln_document_routes
+      return if IO.read('config/routes.rb').include?('get "trln/:id"')
+      insert_into_file 'config/routes.rb', after: 'concern :exportable, Blacklight::Routes::Exportable.new' do
+        "\n  get \"trln/:id\", to: \"trln#show\", as: \"trln_solr_document\"\n"
+      end
     end
   end
 end

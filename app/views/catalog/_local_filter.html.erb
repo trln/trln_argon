@@ -1,20 +1,14 @@
-<% if @filtered_results_total > 0 %>
-  <% if local_filter_applied? %>
-    <%= link_to t("trln_argon.local_filter.applied", consortium_name: consortium_long_name,
-                                                     filtered_results_total: number_with_delimiter(@filtered_results_total),
-                                                     entry_name: entry_name(@filtered_results_total)),
-          url_for(search_state.to_h.merge(local_filter: 'false', page: '1')),
-          class: "trln-results-link" %>
-  <% else %>
-    <%= link_to t("trln_argon.local_filter.not_applied", local_institution_name: institution_long_name,
-                                                         filtered_results_total: number_with_delimiter(@filtered_results_total),
-                                                         entry_name: entry_name(@filtered_results_total)),
-          url_for(search_state.to_h.merge(local_filter: 'true', page: '1')),
-          class: "institution-results-link" %>
-  <% end %>
+<h2 class="local-filter-heading"><%= t("trln_argon.local_filter.showing_results") %></h2>
+<div class="btn-group" role="group">
+  <% query_state = query_state_from_search_state(search_state) %>
 
-<% elsif !local_filter_applied? %>
+  <%= link_to t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name),
+              search_catalog_path(query_state),
+              class: "btn btn-sm #{local_search_button_class}",
+              role: "button" %>
 
-    <%= link_to t("trln_argon.local_filter.no_results", local_institution_name: institution_long_name), root_path(local_filter: 'true'), class: "institution-results-link" %>
-
-<% end %>
+  <%= link_to t("trln_argon.local_filter.searching_trln"),
+              search_trln_path(query_state),
+              class: "btn btn-sm #{trln_search_button_class}",
+              role: "button" %>
+</div>

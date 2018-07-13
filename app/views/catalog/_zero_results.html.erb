@@ -1,34 +1,13 @@
+<h1><%= t('trln_argon.search.zero_results.title', local_institution_name: institution_long_name) %></h1>
 
 <div class="jumbotron jumbotron-border">
 
-  <% if @filtered_results_total > 0 && local_filter_applied? %>
-    <h2>
+<h2><%= t("trln_argon.search.zero_results.expand_search_html",
+                      count: filtered_results_total,
+                      href: link_to(raw(t("trln_argon.search.zero_results.expand_search_html_href",
+                                    count: filtered_results_total)),
+                                    no_results_escape_href_url)) %></h2>
 
-      <% if @filtered_results_total == 1
-          expand_link_text = t('trln_argon.search.zero_results.expand_search_singular_href_html')
-        else
-          expand_link_text = t('trln_argon.search.zero_results.expand_search_plural_href_html')
-        end %>
-
-      <%= t('trln_argon.search.zero_results.expand_search_html',
-                    count: @filtered_results_total,
-                    href: link_to( expand_link_text,
-                    url_for(search_state.to_h.merge(local_filter: 'false', page: '1')
-                    ))).html_safe %></h2>
-
-  <% elsif @filtered_results_total == 0 %>
-
-    <h2>
-      <%= t('trln_argon.search.zero_results.expand_search_html.none',
-                    href: link_to( t('trln_argon.search.zero_results.different_search_href_html'),
-                    root_path
-                    )).html_safe %></h2>
-
-  <% end %>
-
-
-
-  <!--<h2><%= t 'trln_argon.search.zero_results.title' %></h2>-->
   <div id="documents" class="noresults">
 
     <hr class="dashed" />

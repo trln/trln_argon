@@ -12,31 +12,9 @@
 
 <div id="trln-toggle" class="sidenav facets top-panel-heading">
 
-  <% unless @response.empty? %>
-
-    <div class="top-panel-heading panel-heading">
-
-      <% if local_filter_applied? %>
-
-        <h2 class="facets-heading"><%= t('trln_argon.local_filter.searching_local', local_institution_name: institution_long_name) %></h2>
-
-      <% else %>
-
-        <h2 class="facets-heading"><%= t('trln_argon.local_filter.searching_trln') %></h2>
-
-      <% end %>
-
+    <div id="viewAllResults" class="clearfix">
+      <%= render :partial => "local_filter" %>
     </div>
-
-    <div class="well well-sm">
-
-      <div id="viewAllResults" class="clearfix">
-        <%= render :partial => "local_filter" %>
-      </div>
-
-    </div>
-
-  <% end %>
 
 </div>
 

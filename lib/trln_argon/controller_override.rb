@@ -39,12 +39,8 @@ module TrlnArgon
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
-        config.search_builder_class = TrlnArgonSearchBuilder
+        config.search_builder_class = DefaultLocalSearchBuilder
         config.default_per_page = 20
-
-        config.default_solr_params = {
-          defType: 'edismax'
-        }
 
         # Use Solr search requestHandler for search requests
         config.solr_path = :select
@@ -74,7 +70,6 @@ module TrlnArgon
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
         config.advanced_search[:url_key] ||= 'advanced'
-        config.advanced_search[:query_parser] ||= 'edismax'
         config.advanced_search[:form_solr_parameters] ||= {
           'facet.field' => [], # don't query for facets
           'facet.limit' => -1, # return all facet values
@@ -378,7 +373,7 @@ module TrlnArgon
           # solr_parameters hash are sent to Solr as ordinary url query params.
           # field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
           field.label = I18n.t('trln_argon.search_fields.title')
-
+          field.def_type = 'edismax'
           # :solr_local_parameters will be sent using Solr LocalParams
           # syntax, as eg {! qf=$title_qf }. This is neccesary to use
           # Solr parameter de-referencing like $title_qf.
@@ -391,6 +386,7 @@ module TrlnArgon
 
         config.add_search_field('author') do |field|
           field.label = I18n.t('trln_argon.search_fields.author')
+          field.def_type = 'edismax'
           field.solr_local_parameters = {
             qf: '$author_qf',
             pf: '$author_pf'
@@ -402,7 +398,7 @@ module TrlnArgon
         # config[:default_solr_parameters][:qt], so isn't actually neccesary.
         config.add_search_field('subject') do |field|
           field.label = I18n.t('trln_argon.search_fields.subject')
-          field.qt = 'search'
+          field.def_type = 'edismax'
           field.solr_local_parameters = {
             qf: '$subject_qf',
             pf: '$subject_pf'
@@ -411,6 +407,7 @@ module TrlnArgon
 
         config.add_search_field('isbn_issn') do |field|
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
+          field.def_type = 'edismax'
           field.solr_local_parameters = {
             qf: '$isbn_issn_qf'
           }

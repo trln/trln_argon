@@ -1032,8 +1032,15 @@ div.marc-record {
   text-align: right;
 }
 
+
+/* progressive links */
+
 .progressive-link-hover {
   text-decoration: underline
+}
+
+.show-included-works .progressive-link-wrapper {
+  padding: 2px 0 2px 0;
 }
 
 .show-subjects li {
@@ -1045,24 +1052,16 @@ div.marc-record {
   margin-left: -2px;
 }
 
-.show-subjects .progressive-link-wrapper a {
-  padding: 2px;
-}
 
-.show-subjects .progressive-link-wrapper:hover {
+.show-subjects .progressive-link-wrapper:hover,
+.show-included-works .progressive-link-wrapper:hover {
   background-color: lighten( $primary-link-color, 50% );
-}
-
-.show-subjects .progressive-link-hover {
-  background-color: $primary-link-color;
-  color: #fff !important;
-  text-decoration: none;
 }
 
 .show-subjects .subject-separator {
   text-decoration: none !important;
   display: inline-block;
-  margin-left: 2px;
+  margin-left: 5px;
   margin-right: 5px;
   font-size: .75em;
   font-weight: bolder;
@@ -1136,7 +1135,9 @@ div.marc-record {
   content: ' »';
 }
 
-
+h2.local-filter-heading  {
+  font-size: 18px;
+}
 
 
 /* AxS Tweaks */

@@ -7,7 +7,7 @@ describe TrlnArgon::ControllerOverride do
 
   describe 'search builder' do
     it 'uses the expected search builder' do
-      expect(override_config.search_builder_class).to eq(TrlnArgonSearchBuilder)
+      expect(override_config.search_builder_class).to eq(DefaultLocalSearchBuilder)
     end
   end
 
@@ -23,7 +23,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the query_parser' do
-      expect(override_config.advanced_search[:query_parser]).to eq('edismax')
+      expect(override_config.advanced_search[:query_parser]).to be_nil
     end
 
     it 'sets the form_solr_parameters' do
@@ -480,28 +480,11 @@ describe TrlnArgon::ControllerOverride do
         expect(mock_controller.filter_scope_name).to eq('TRLN')
       end
     end
-  end
 
-  describe '#local_filter_applied?' do
-    it 'uses the local_filter value from params if present and valid' do
-      allow(mock_controller).to receive(:params).and_return(local_filter: 'false')
-      expect(mock_controller.local_filter_applied?).to be false
-    end
-
-    # rubocop:disable VerifiedDoubles
-    it 'uses the local_filter value set in current_search_session if present' do
-      allow(mock_controller).to receive(:params).and_return(nothing: 'here')
-      allow(mock_controller).to receive(:current_search_session_has_local_filter?).and_return(true)
-      allow(mock_controller).to receive(:current_search_session).and_return(
-        double(query_params: { q: 'query', f: 'facets', controller: 'catalog', local_filter: 'false' })
-      )
-      expect(mock_controller.local_filter_applied?).to be false
-    end
-
-    it 'uses the default local_filter value when param and session not set' do
-      allow(mock_controller).to receive(:local_filter_param_present?).and_return(false)
-      allow(mock_controller).to receive(:current_search_session_has_local_filter?).and_return(false)
-      expect(mock_controller.local_filter_applied?).to be true
+    describe '#local_filter_applied?' do
+      it 'returns false' do
+        expect(mock_controller.local_filter_applied?).to be true
+      end
     end
   end
 end

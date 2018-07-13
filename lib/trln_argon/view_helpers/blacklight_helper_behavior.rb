@@ -6,6 +6,12 @@ module TrlnArgon
     module BlacklightHelperBehavior
       include Blacklight::BlacklightHelperBehavior
 
+      def url_for_document(doc, options = {})
+        return unless doc.respond_to?(:id)
+        return solr_document_url(doc, options) if local_filter_applied?
+        trln_solr_document_url(doc, options)
+      end
+
       def application_name
         TrlnArgon::Engine.configuration.application_name
       end
