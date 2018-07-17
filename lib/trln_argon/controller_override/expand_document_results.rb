@@ -3,12 +3,6 @@ module TrlnArgon
     module ExpandDocumentResults
       extend ActiveSupport::Concern
 
-      def index
-        super
-        return if local_filter_applied?
-        expanded_documents_hash
-      end
-
       private
 
       def expanded_documents_hash

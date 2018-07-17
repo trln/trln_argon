@@ -10,11 +10,7 @@
 
     <% inst = TrlnArgon::Engine.configuration.local_institution_code %>
 
-    <% if local_filter_applied? %>
-      <%= link_to content_tag(:span, t("trln_argon.institution.#{inst}.long_name"), class: "sr-only"), root_path, class: "navbar-brand" %>
-    <% else %>
-      <%= link_to content_tag(:span, t("trln_argon.consortium.long_name"), class: "sr-only"), root_path, class: "navbar-brand" %>
-    <% end %>
+    <%= link_to content_tag(:span, filter_scope_name, class: "sr-only"), root_path, class: "navbar-brand" %>
 
     </div>
 

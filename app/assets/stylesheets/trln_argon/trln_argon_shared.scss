@@ -84,30 +84,30 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     }
 }
 
-
-
-
 body {
-  border-top: 7px solid $trln-green; // visual aid for TRLN context
+  border-top: none;
 }
 
 .navbar-static-top {
-    border-width: 3px 0 0;
+    border-width: 10px 0 0;
 }
 
-body.local-filter { // hide visual aid for TRLN context
+#header-navbar .navbar-brand { background: transparent image_url($institution-logo) no-repeat top left; }
 
-  border-top: none;
+body {
+  &.blacklight-trln,
+  &.blacklight-advanced_trln {
+    border-top: 7px solid $trln-green; // visual aid for TRLN context
 
-  .navbar-static-top {
-      border-width: 10px 0 0;
+    .navbar-static-top {
+      border-width: 3px 0 0;
+    }
+
+    #header-navbar .navbar-brand {
+      background: transparent image_url($trln-logo) no-repeat top left;
+    }
   }
-
 }
-
-/* set logo based on local filter */
-#header-navbar .navbar-brand { background: transparent image_url($trln-logo) no-repeat top left; }
-body.local-filter #header-navbar .navbar-brand { background: transparent image_url($institution-logo) no-repeat top left; }
 
 #header-navbar {
 
@@ -269,7 +269,7 @@ div.items table {
 
 }
 
-#startOverLink {
+#startOverLink, #editSearchLink {
   margin-right: 1em;
 }
 
@@ -702,7 +702,7 @@ div.items table {
     background: transparent image_url($institution-icon) no-repeat left;
   }
 
-  body.local-filter & {
+  body.blacklight-catalog & {
 
     #toggle-trln-btn .icon-wrapper {
       background: transparent image_url($trln-icon) no-repeat left;
@@ -1291,6 +1291,11 @@ h2.local-filter-heading  {
   font-size: 18px;
 }
 
+/* Advanced Search */
+
+.blacklight-advanced .search-query-form, .blacklight-advanced_trln .search-query-form {
+  display: none;
+}
 
 /* AxS Tweaks */
 

@@ -154,7 +154,7 @@ module TrlnArgon
       insert_into_file 'app/models/search_builder.rb', after: 'include Blacklight::Solr::SearchBuilderBehavior' do
         "\n  include BlacklightAdvancedSearch::AdvancedSearchBuilder"\
         "\n  include TrlnArgon::ArgonSearchBuilder\n"\
-        # "\n\n  self.default_processor_chain += [:add_advanced_parse_q_to_solr, :add_advanced_search_to_solr]\n"
+        "\n\n  self.default_processor_chain += [:add_advanced_search_to_solr]\n"
       end
     end
 
@@ -181,6 +181,17 @@ module TrlnArgon
       insert_into_file 'config/routes.rb', after: 'concern :exportable, Blacklight::Routes::Exportable.new' do
         "\n  get \"trln/:id\", to: \"trln#show\", as: \"trln_solr_document\"\n"
       end
+    end
+
+    def comment_out_blacklight_generated_suggest_config
+      file = 'app/controllers/catalog_controller.rb'
+
+      gsub_file(file,
+                /^\s*config.autocomplete_enabled = true/,
+                '    # config.autocomplete_enabled = true')
+      gsub_file(file,
+                /^\s*config.autocomplete_path = 'suggest'/,
+                "    # config.autocomplete_path = 'suggest'")
     end
   end
 end

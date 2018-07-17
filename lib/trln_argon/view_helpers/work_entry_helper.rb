@@ -31,7 +31,6 @@ module TrlnArgon
       def work_entry_author(work)
         return if work[:author].empty?
         search_params = { search_field: 'author', q: work[:author] }
-        search_params[:local_filter] = local_filter_applied? ? 'true' : 'false'
         link_to(CGI.escapeHTML(work[:author]),
                 search_action_url(search_params),
                 class: 'progressive-link')
@@ -81,7 +80,6 @@ module TrlnArgon
       end
 
       def work_entry_link_url(params_segments)
-        params_segments[:local_filter] = local_filter_applied? ? 'true' : 'false'
         search_action_url(params_segments.merge(op: 'AND', search_field: 'advanced'))
       end
     end

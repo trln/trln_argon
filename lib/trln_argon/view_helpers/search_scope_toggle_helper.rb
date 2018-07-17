@@ -9,27 +9,22 @@ module TrlnArgon
       end
 
       def local_search_button_class
-        return 'btn-primary active' if local_filter_applied?
-        'btn-default'
-      end
-
-      def trln_search_button_class
-        return 'btn-default' if local_filter_applied?
         'btn-primary active'
       end
 
-      def local_search_button_label_class
-        return 'active' if local_filter_applied?
-        ''
+      def trln_search_button_class
+        'btn-default'
       end
 
-      def trln_search_button_label_class
-        return '' if local_filter_applied?
+      def local_search_button_label_class
         'active'
       end
 
+      def trln_search_button_label_class
+        ''
+      end
+
       def no_results_escape_href_url
-        return search_trln_path unless local_filter_applied?
         case filtered_results_total
         when 0
           search_catalog_path

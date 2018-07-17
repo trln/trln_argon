@@ -22,6 +22,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
+    - 'lib/trln_argon/trln_controller_behavior.rb'
     - 'lib/trln_argon/controller_override.rb'
     - 'lib/tasks/trln_argon_tasks.rake'
     - 'spec/lib/trln_argon/fields_spec.rb'
