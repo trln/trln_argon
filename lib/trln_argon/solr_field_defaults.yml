@@ -206,6 +206,10 @@ NOTE_BIOGRAPHICAL:
   solr_field: note_biographical_a
   label:
     en: Biographical Sketch of Creators
+NOTE_CITED_IN:
+  solr_field: note_cited_in_a
+  label:
+    en: Cited In
 NOTE_COPY_VERSION:
   solr_field: note_copy_version_a
   label:
@@ -214,6 +218,10 @@ NOTE_DATA_QUALITY:
   solr_field: note_data_quality_a
   label:
     en: Data Quality
+NOTE_DESCRIBED_BY:
+  solr_field: note_described_by_a
+  label:
+    en: Described By
 NOTE_DISSERTATION:
   solr_field: note_dissertation_a
   label:

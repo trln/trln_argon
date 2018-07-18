@@ -237,6 +237,10 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTE_FILE_TYPE.label
         config.add_show_field TrlnArgon::Fields::NOTE_SUPPLEMENT.to_s,
                               label: TrlnArgon::Fields::NOTE_SUPPLEMENT.label
+        config.add_show_field TrlnArgon::Fields::NOTE_CITED_IN.to_s,
+                              label: TrlnArgon::Fields::NOTE_CITED_IN.label
+        config.add_show_field TrlnArgon::Fields::NOTE_DESCRIBED_BY.to_s,
+                              label: TrlnArgon::Fields::NOTE_DESCRIBED_BY.label
         config.add_show_field TrlnArgon::Fields::NOTE_SYSTEM_DETAILS.to_s,
                               label: TrlnArgon::Fields::NOTE_SYSTEM_DETAILS.label
         config.add_show_field TrlnArgon::Fields::NOTE_ADMIN_HISTORY.to_s,
