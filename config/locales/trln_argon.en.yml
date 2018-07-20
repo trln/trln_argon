@@ -4,8 +4,8 @@ en:
 
         home:
 
-            welcome: "Welcome to Search TRLN"
-            blurb: "Search TRLN provides a single search interface to the Triangle Research Libraries' Collections."
+            welcome: "Welcome to TRLN Discovery"
+            blurb: "TRLN Discovery provides a single search interface to the Triangle Research Libraries' Collections."
 
         search:
             pagination_info:
@@ -67,6 +67,7 @@ en:
             applied: 'Show %{filtered_results_total} %{entry_name} at all %{consortium_name}'
             not_applied: 'Show %{filtered_results_total} %{entry_name} at %{local_institution_name}'
             no_results: 'Go back to %{local_institution_name} Catalog'
+            search_verb: 'Search'
             searching_local: '%{local_institution_name}'
             searching_trln: 'All Triangle Research Libraries'
             showing_results: 'Searching:'
@@ -135,6 +136,7 @@ en:
             results:
               location: 'At the Library'
               online: 'Online'
+              findingaid: 'Collection Guide'
 
         show:
             heading:
