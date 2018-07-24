@@ -7,3 +7,4 @@ REFWORKS_URL: 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImpor
 ROOT_URL: 'https://discovery.trln.org'
 ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
 CONTACT_URL: 'https://library.unc.edu/ask/'
+FEEDBACK_URL: ''

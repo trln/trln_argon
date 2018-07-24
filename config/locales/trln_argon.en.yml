@@ -64,6 +64,10 @@ en:
                 long_name: "UNC Libraries"
 
 
+        feedback:
+            link_text: 'Feedback'
+
+
         local_filter:
             applied: 'Show %{filtered_results_total} %{entry_name} at all %{consortium_name}'
             not_applied: 'Show %{filtered_results_total} %{entry_name} at %{local_institution_name}'

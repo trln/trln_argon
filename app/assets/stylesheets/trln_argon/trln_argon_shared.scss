@@ -1302,3 +1302,41 @@ h2.local-filter-heading  {
 .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
   color: #686868;
 }
+
+
+/* Feedback Link */
+
+.feedback-link-wrapper {
+  position: fixed;
+  bottom: 25%;
+  right: -46px;
+  transform: rotate(-90deg);
+  z-index: 100000000;
+  margin-right: -4px;
+
+  &:hover {
+    margin-right: 0;
+  }
+
+}
+
+.feedback-link {
+  background-color: $primary-link-color;
+  color: #fff;
+  text-transform: uppercase;
+  padding: 12px 24px 18px 24px;
+  border-radius: 8px 8px 0 0;
+  font-weight: 600;
+  letter-spacing: .125em;
+  font-size: .9em;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-right: -2px;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+    color: #fff;
+    background-color: $secondary-link-color;
+  }
+
+}

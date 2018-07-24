@@ -17,6 +17,7 @@ if File.exist?(config_file)
     config.root_url                      = apply_local_config(local_config, 'root_url')
     config.article_search_url            = apply_local_config(local_config, 'article_search_url')
     config.contact_url                   = apply_local_config(local_config, 'contact_url')
+    config.feedback_url                  = apply_local_config(local_config, 'feedback_url')
 
     config.code_mappings = {
       git_url: 'https://github.com/trln/argon_code_mappings',

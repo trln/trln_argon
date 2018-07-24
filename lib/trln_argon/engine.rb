@@ -30,7 +30,8 @@ module TrlnArgon
                     :refworks_url,
                     :root_url,
                     :article_search_url,
-                    :contact_url
+                    :contact_url,
+                    :feedback_url
 
       # rubocop:disable MethodLength
       def initialize
@@ -49,6 +50,7 @@ module TrlnArgon
           'url=http://unc.summon.serialssolutions.com/search?'\
           's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
         @contact_url = 'https://library.unc.edu/ask/'
+        @feedback_url = ''
       end
 
       private
