@@ -2,35 +2,33 @@
 
 <% query_state = query_state_from_search_state(search_state) %>
 
-<form class="toggle-wrapper">
+<div class="toggle toggle-local">
 
-  <div class="toggle toggle-local">
+  <%= button_tag( type: "button",
+                  id: "toggle-local-btn",
+                  class: "btn btn-md #{local_search_button_class}",
+                  title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}",
+                  onclick: "window.location='#{search_catalog_path(query_state)}'"
+                ) do %>
+    <span class="sr-only">icon</span><span class="icon-wrapper"></span>
+  <% end %>
 
-    <%= link_to search_catalog_path(query_state), { title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}" } do %>
+  <%= label_tag( "toggle-local-btn", t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name), class: "#{local_search_button_label_class}" ) %>
 
-      <%= button_tag( type: "button", id: "toggle-local-btn", class: "btn btn-md #{local_search_button_class}" ) do %>
-        <span class="sr-only">icon</span><span class="icon-wrapper"></span>
-      <% end %>
-
-      <%= label_tag( "toggle-local-btn", t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name), class: "#{local_search_button_label_class}" ) %>
-
-    <% end %>
-
-  </div>
+</div>
 
 
-  <div class="toggle toggle-trln">
+<div class="toggle toggle-trln">
 
-    <%= link_to search_trln_path(query_state), { title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_trln")}" } do %>
+  <%= button_tag( type: "button",
+                  id: "toggle-trln-btn",
+                  class: "btn btn-md #{trln_search_button_class}",
+                  title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_trln")}",
+                  onclick: "window.location='#{search_trln_path(query_state)}'"
+                ) do %>
+    <span class="sr-only">icon</span><span class="icon-wrapper"></span>
+  <% end %>
 
-      <%= button_tag( type: "button", id: "toggle-trln-btn", class: "btn btn-md #{trln_search_button_class}" ) do %>
-        <span class="sr-only">icon</span><span class="icon-wrapper"></span>
-      <% end %>
+  <%= label_tag( "toggle-trln-btn", t("trln_argon.local_filter.searching_trln"), class: "#{trln_search_button_label_class}" ) %>
 
-      <%= label_tag( "toggle-trln-btn", t("trln_argon.local_filter.searching_trln"), class: "#{trln_search_button_label_class}" ) %>
-
-    <% end %>
-
-  </div>
-
-</form>
+</div>

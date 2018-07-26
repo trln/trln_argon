@@ -650,10 +650,6 @@ div.items table {
   color: $secondary-color;
 }
 
-#trln-toggle .well {
-  border-color: rgba( $tertiary-color, .50 );
-  background-color: rgba( $tertiary-color, .10 );
-}
 
 #viewAllResults {
 
@@ -737,14 +733,17 @@ div.items table {
         margin: 0;
       }
 
-      a { display: table; }
+      &.toggle-local {
+        text-align: left;
+      }
 
-      .btn { margin-right: 10px; }
+      .btn { margin-right: 7px; }
 
       #toggle-trln-btn,
       #toggle-local-btn {
         padding-left: 12px;
         padding-right: 12px;
+        display: inline-block;
       }
 
       #toggle-trln-btn { border-bottom-left-radius: 4px; border-top-left-radius: 0; border-top-right-radius: 0; }
@@ -752,9 +751,9 @@ div.items table {
       #toggle-local-btn { border-top-right-radius: 4px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
 
       label {
-       max-width: calc(100% - 70px);
+       max-width: calc(100% - 65px);
        line-height: 1.2;
-       display: table-cell;
+       display: inline-block;
        vertical-align: middle;
        font-weight: normal;
        color: #767676;
