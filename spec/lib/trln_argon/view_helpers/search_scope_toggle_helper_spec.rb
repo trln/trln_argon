@@ -15,7 +15,7 @@ describe TrlnArgon::ViewHelpers::SearchScopeToggleHelper, type: :helper do
     context 'when local filter is applied to search' do
       it 'returns the expected class' do
         allow(helper).to receive(:local_filter_applied?).and_return(true)
-        expect(helper.local_search_button_class).to eq('btn-primary')
+        expect(helper.local_search_button_class).to eq('btn-primary active')
       end
     end
 
@@ -38,7 +38,7 @@ describe TrlnArgon::ViewHelpers::SearchScopeToggleHelper, type: :helper do
     context 'when local filter is NOT applied to search' do
       it 'returns the expected class' do
         allow(helper).to receive(:local_filter_applied?).and_return(false)
-        expect(helper.trln_search_button_class).to eq('btn-primary')
+        expect(helper.trln_search_button_class).to eq('btn-primary active')
       end
     end
   end
