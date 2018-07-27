@@ -116,7 +116,6 @@ describe TrlnArgonHelper, type: :helper do
     let(:context) { CatalogController.new }
 
     it 'generates links to a search for each segment' do
-      allow(context).to receive(:local_filter_applied?).and_return(false)
       allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
       expect(context.helpers.link_to_subject_segments(options)).to(
         eq(['<a title="Technology" class="progressive-link" href="/catalog?begins_with=something">Technology</a>'\
@@ -140,7 +139,6 @@ describe TrlnArgonHelper, type: :helper do
     end
 
     before do
-      allow(context).to receive(:local_filter_applied?).and_return(false)
       allow(context).to receive(:search_action_url).and_return('/catalog?search=something')
     end
 
@@ -185,7 +183,6 @@ describe TrlnArgonHelper, type: :helper do
     end
 
     before do
-      allow(context).to receive(:local_filter_applied?).and_return(false)
       allow(context).to receive(:search_action_url).and_return('/catalog?search=something')
     end
 

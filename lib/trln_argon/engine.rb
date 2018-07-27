@@ -6,6 +6,7 @@ require 'library_stdnums'
 require 'openurl'
 require 'font-awesome-rails'
 require 'bootstrap-select-rails'
+require 'chosen-rails'
 
 module TrlnArgon
   class Engine < ::Rails::Engine

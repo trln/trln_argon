@@ -70,10 +70,21 @@ module TrlnArgon
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
         config.advanced_search[:url_key] ||= 'advanced'
+        config.advanced_search[:form_facet_partial] ||= 'advanced_search_facets_as_select'
         config.advanced_search[:form_solr_parameters] ||= {
-          'facet.field' => [], # don't query for facets
+          # NOTE: You will not get any facets back
+          #       on the advanced search page
+          #       unless defType is set to lucene.
+          'defType' => 'lucene',
+          'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                            TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::LANGUAGE_FACET.to_s],
+          'f.resource_type_f.facet.limit' => -1, # return all resource type values
+          'f.language_f.facet.limit' => -1, # return all language facet values
           'facet.limit' => -1, # return all facet values
-          'facet.sort' => 'index' # sort by byte order of values
+          'facet.sort' => 'index', # sort by byte order of values
+          'facet.query' => ''
         }
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
@@ -369,19 +380,9 @@ module TrlnArgon
         config.add_search_field 'all_fields',
                                 label: I18n.t('trln_argon.search_fields.all_fields')
 
-        # Now we see how to over-ride Solr request handler defaults, in this
-        # case for a BL "search field", which is really a dismax aggregate
-        # of Solr search fields.
-
         config.add_search_field('title') do |field|
-          # solr_parameters hash are sent to Solr as ordinary url query params.
-          # field.solr_parameters = { :'spellcheck.dictionary' => 'title' }
           field.label = I18n.t('trln_argon.search_fields.title')
           field.def_type = 'edismax'
-          # :solr_local_parameters will be sent using Solr LocalParams
-          # syntax, as eg {! qf=$title_qf }. This is neccesary to use
-          # Solr parameter de-referencing like $title_qf.
-          # See: http://wiki.apache.org/solr/LocalParams
           field.solr_local_parameters = {
             qf: '$title_qf',
             pf: '$title_pf'
@@ -397,9 +398,6 @@ module TrlnArgon
           }
         end
 
-        # Specifying a :qt only to show it's possible, and so our internal automated
-        # tests can test it. In this case it's the same as
-        # config[:default_solr_parameters][:qt], so isn't actually neccesary.
         config.add_search_field('subject') do |field|
           field.label = I18n.t('trln_argon.search_fields.subject')
           field.def_type = 'edismax'
@@ -447,16 +445,6 @@ module TrlnArgon
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
       end
 
-      # For reasons that are a bit opaque this #search_facet_url method
-      # needs to be duplicated here so that the "more" facet links will pick up
-      # the correct local_filter parameter. Otherwise, it seems to pick up the default
-      # no matter what.
-      def search_facet_url(options = {})
-        opts = search_state.to_h.merge(action: 'facet').merge(options).except(:page)
-        url_for opts
-      end
-      deprecation_deprecate search_facet_url: 'Use search_facet_path instead.'
-
       def has_search_parameters? # rubocop:disable Style/PredicateName
         !params[:q].blank? ||
           !params[:f].blank? ||
@@ -465,9 +453,14 @@ module TrlnArgon
       end
 
       def query_has_constraints?(localized_params = params)
-        !(localized_params[:q].blank? &&
-          localized_params[:f].blank? &&
-          localized_params[:begins_with].blank?)
+        if is_advanced_search? localized_params
+          true
+        else
+          !(localized_params[:q].blank? &&
+            localized_params[:f].blank? &&
+            localized_params[:f_inclusive].blank? &&
+            localized_params[:begins_with].blank?)
+        end
       end
 
       def render_ris_action?(_config, options = {})

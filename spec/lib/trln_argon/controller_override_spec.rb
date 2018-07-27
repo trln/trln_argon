@@ -28,7 +28,16 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the form_solr_parameters' do
       expect(override_config.advanced_search[:form_solr_parameters]).to eq(
-        'facet.field' => [], 'facet.limit' => -1, 'facet.sort' => 'index'
+        'defType' => 'lucene',
+        'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                          TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                          TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                          TrlnArgon::Fields::LANGUAGE_FACET.to_s],
+        'f.resource_type_f.facet.limit' => -1,
+        'f.language_f.facet.limit' => -1,
+        'facet.limit' => -1,
+        'facet.sort' => 'index',
+        'facet.query' => ''
       )
     end
   end
@@ -446,44 +455,6 @@ describe TrlnArgon::ControllerOverride do
 
       it 'sets the label' do
         expect(override_config.sort_fields[fields].label).to eq('Title (A-Z)')
-      end
-    end
-  end
-
-  describe '#filter_scope_name' do
-    context 'when the scope is BookmarksController' do
-      before { allow(mock_controller).to receive(:controller_name).and_return('bookmarks') }
-
-      it 'uses the translated scope name for bookmarks' do
-        expect(mock_controller.filter_scope_name).to eq('bookmarked')
-      end
-    end
-
-    context 'when local filter is applied', verify_stubs: false do
-      before do
-        allow(mock_controller).to receive(:controller_name).and_return('catalog')
-        allow(mock_controller).to receive(:local_filter_applied?).and_return(true)
-      end
-
-      it 'uses the translated scope name for bookmarks' do
-        expect(mock_controller.filter_scope_name).to eq('UNC')
-      end
-    end
-
-    context 'when local filter is not applied', verify_stubs: false do
-      before do
-        allow(mock_controller).to receive(:controller_name).and_return('catalog')
-        allow(mock_controller).to receive(:local_filter_applied?).and_return(false)
-      end
-
-      it 'uses the translated scope name for bookmarks' do
-        expect(mock_controller.filter_scope_name).to eq('TRLN')
-      end
-    end
-
-    describe '#local_filter_applied?' do
-      it 'returns false' do
-        expect(mock_controller.local_filter_applied?).to be true
       end
     end
   end

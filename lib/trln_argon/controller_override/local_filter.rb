@@ -5,22 +5,6 @@ module TrlnArgon
 
       included do
         helper_method :filtered_results_total
-        helper_method :filter_scope_name
-        helper_method :local_filter_applied?
-      end
-
-      def filter_scope_name
-        if controller_name == 'bookmarks'
-          t('trln_argon.scope_name.bookmarks')
-        elsif local_filter_applied?
-          t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
-        else
-          t('trln_argon.consortium.short_name')
-        end
-      end
-
-      def local_filter_applied?
-        true
       end
 
       def filtered_results_total
@@ -50,12 +34,7 @@ module TrlnArgon
       end
 
       def local_filter_search_builder
-        @local_filter_search_builder ||=
-          if local_filter_applied?
-            RollupOnlySearchBuilder.new(CatalogController)
-          else
-            LocalOnlySearchBuilder.new(CatalogController)
-          end
+        RollupOnlySearchBuilder.new(CatalogController)
       end
     end
   end

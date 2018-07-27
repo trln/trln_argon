@@ -1,11 +1,14 @@
+
 <div class="row">
 
   <div class="col-md-10 col-md-offset-1">
 
     <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
-
-      <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
-
+      <% params_to_block = blacklight_config.search_fields
+                                            .keys
+                                            .map(&:to_sym)
+                                            .concat(%i[q search_field qt page utf8 op]) %>
+      <%= render_hash_as_hidden_fields(search_state.params_for_search.except(*params_to_block)) %>
       <div class="row">
 
         <div class="form-group mast-search">
@@ -44,7 +47,7 @@
               <!-- <label for='search_within'>Search within results</label> -->
             </div>
             <div class='input-group'>
-              <%= link_to t('blacklight_advanced_search.form.title'), blacklight_advanced_search_engine.advanced_search_path, class: 'advanced_search'%>
+              <%= link_to t('blacklight_advanced_search.form.title'), advanced_search_url, class: 'advanced_search'%>
             </div>
           </div>
         </div>

@@ -20,12 +20,12 @@ module TrlnArgon
       include SyndeticsHelper
       include WorkEntryHelper
 
-      # Defined here so the helper is available within all
-      # controller contexts.
-      # Overriden by ControllerOverride::LocalFilter#local_filter_applied?
-      # when called within the CatalogController context.
-      def local_filter_applied?
-        false
+      def filter_scope_name
+        t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.short_name")
+      end
+
+      def advanced_search_url(options = {})
+        blacklight_advanced_search_engine.url_for(options.merge(controller: 'advanced', action: 'index'))
       end
 
       def institution_code_to_short_name(options = {})

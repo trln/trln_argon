@@ -12,47 +12,26 @@ describe TrlnArgon::ViewHelpers::SearchScopeToggleHelper, type: :helper do
   end
 
   describe '#local_search_button_class' do
-    context 'when local filter is applied to search' do
-      it 'returns the expected class' do
-        allow(helper).to receive(:local_filter_applied?).and_return(true)
-        expect(helper.local_search_button_class).to eq('btn-primary active')
-      end
-    end
-
-    context 'when local filter is NOT applied to search' do
-      it 'returns the expected class' do
-        allow(helper).to receive(:local_filter_applied?).and_return(false)
-        expect(helper.local_search_button_class).to eq('btn-default')
-      end
+    it 'returns the expected class' do
+      expect(helper.local_search_button_class).to eq('btn-primary active')
     end
   end
 
   describe '#trln_search_button_class' do
-    context 'when local filter is applied to search' do
-      it 'returns the expected class' do
-        allow(helper).to receive(:local_filter_applied?).and_return(true)
-        expect(helper.trln_search_button_class).to eq('btn-default')
-      end
-    end
-
-    context 'when local filter is NOT applied to search' do
-      it 'returns the expected class' do
-        allow(helper).to receive(:local_filter_applied?).and_return(false)
-        expect(helper.trln_search_button_class).to eq('btn-primary active')
-      end
+    it 'returns the expected class' do
+      expect(helper.trln_search_button_class).to eq('btn-default')
     end
   end
 
-  # rubocop:disable VerifiedDoubles
-  describe '#no_results_escape_href_url' do
-    let(:search_trln_path) { double('search_trln_path') }
+  describe '#local_search_button_label_class' do
+    it 'returns the expected class' do
+      expect(helper.local_search_button_label_class).to eq('active')
+    end
+  end
 
-    context 'local filter is NOT applied' do
-      it 'receives the search_trln_path' do
-        allow(helper).to receive(:local_filter_applied?).and_return(false)
-        expect(helper).to receive(:search_trln_path)
-        helper.no_results_escape_href_url
-      end
+  describe '#trln_search_button_label_class' do
+    it 'returns the expected class' do
+      expect(helper.trln_search_button_label_class).to eq('')
     end
   end
 end
