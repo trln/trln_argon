@@ -7,6 +7,7 @@ development:
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
   article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
   contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>
+  feedback_url: <%= ENV['FEEDBACK_URL'] || '' %>
 
 test:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
@@ -17,6 +18,7 @@ test:
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
   article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
   contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>
+  feedback_url: <%= ENV['FEEDBACK_URL'] || '' %>
 
 production:
   preferred_records: <%= ENV['PREFERRED_RECORDS'] || 'unc' %>
@@ -27,3 +29,4 @@ production:
   root_url: <%= ENV['ROOT_URL'] || 'https://discovery.trln.org' %>
   article_search_url: <%= ENV['ARTICLE_SEARCH_URL'] || 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q=' %>
   contact_url: <%= ENV['CONTACT_URL'] || 'https://library.unc.edu/ask/' %>
+  feedback_url: <%= ENV['FEEDBACK_URL'] || '' %>
