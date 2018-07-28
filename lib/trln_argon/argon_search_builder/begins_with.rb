@@ -28,7 +28,7 @@ module TrlnArgon
       end
 
       def solr_regex_escape(segment)
-        segment.gsub(%r([\+\-\&\|\!\(\)\{\}\[\]\^\"\~\*\?\:\\\/])) { |s| "\\\\#{s}" }
+        segment.gsub(%r([\<\>\+\-\&\|\!\(\)\{\}\[\]\^\"\~\*\?\:\\\/])) { |s| "\\\\#{s}" }
       end
     end
   end

@@ -31,7 +31,7 @@ module TrlnArgon
       def work_entry_author(work)
         return if work[:author].empty?
         search_params = { search_field: 'author', q: work[:author] }
-        link_to(CGI.escapeHTML(work[:author]),
+        link_to(work[:author],
                 search_action_url(search_params),
                 class: 'progressive-link')
       end
@@ -53,8 +53,7 @@ module TrlnArgon
 
       def work_entry_isbn(work)
         return if work[:isbn].empty?
-        isbn = work[:isbn].map { |v| CGI.escapeHTML(v) }.join(', ')
-        "ISBN: #{isbn} "
+        "ISBN: #{CGI.escapeHTML(work[:isbn].join(', '))} "
       end
 
       def work_entry_issn(work)
@@ -74,7 +73,7 @@ module TrlnArgon
         sr_only_segment = title_segments[0..-1].join(' ')
         last_segment = title_segments[-1]
         if sr_only_segment != last_segment
-          sr_span = content_tag(:span, CGI.escapeHTML(sr_only_segment), class: 'sr-only')
+          sr_span = content_tag(:span, sr_only_segment, class: 'sr-only')
         end
         "#{sr_span} #{CGI.escapeHTML(last_segment)}"
       end

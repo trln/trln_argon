@@ -1,4 +1,4 @@
-<% document.expanded_documents.each do |doc| %>
-<h3><%= t("trln_argon.institution.#{doc.institution}.long_name") %></h3>
+<% document.docs_with_merged_holdings.each do |doc| %>
+  <h3><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h3>
   <%= render partial: "items_table", locals: { document: doc, context: 'show' } %>
 <% end %>

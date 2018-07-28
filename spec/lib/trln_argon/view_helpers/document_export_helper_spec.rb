@@ -23,8 +23,8 @@ describe TrlnArgon::ViewHelpers::DocumentExportHelper, type: :helper do
   end
 
   describe '#render_ris' do
-    let(:doc_1) { SolrDocument.new(id: 'DUKE001', institution_a: 'duke') }
-    let(:doc_2) { SolrDocument.new(id: 'DUKE002', institution_a: 'duke') }
+    let(:doc_1) { SolrDocument.new(id: 'DUKE001', institution_a: 'duke', owner_a: 'duke') }
+    let(:doc_2) { SolrDocument.new(id: 'DUKE002', institution_a: 'duke', owner_a: 'duke') }
 
     it 'returns an ris file assembled from multiple documents' do
       expect(helper.render_ris([doc_1, doc_2])).to eq(

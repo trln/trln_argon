@@ -1,24 +1,20 @@
 module TrlnArgon
   module SolrDocument
     module ExpandDocument
-      def expanded_holdings_to_text
-        @expanded_holdings_to_text ||= expanded_holdings.flat_map do |inst, loc_b_map|
-          loc_b_map.flat_map do |loc_b, loc_n_map|
-            loc_n_map.map do |_loc_n, items|
-              I18n.t('trln_argon.item_location',
-                     inst_display: I18n.t("trln_argon.institution.#{inst}.short_name"),
-                     loc_b_display: TrlnArgon::LookupManager.instance.map("#{inst}.loc_b.#{loc_b}"),
-                     call_number: items['call_no'].strip)
-            end
-          end
+      def docs_with_merged_holdings
+        array = []
+        docs_grouped_by_association.each do |_, docs|
+          rolled_up_record = docs.first.dup.to_h
+          rolled_up_record[TrlnArgon::Fields::ITEMS] = docs.flat_map { |d| d[TrlnArgon::Fields::ITEMS] }.compact
+          rolled_up_record[TrlnArgon::Fields::HOLDINGS] = docs.flat_map { |d| d[TrlnArgon::Fields::HOLDINGS] }.compact
+          rolled_up_record[TrlnArgon::Fields::URLS] = docs.flat_map { |d| d[TrlnArgon::Fields::URLS] }.compact
+          array << ::SolrDocument.new(rolled_up_record)
         end
+        array
       end
 
-      def expanded_holdings
-        @expanded_holdings ||= Hash[expanded_documents.map do |doc|
-          [doc.institution,
-           doc.holdings]
-        end]
+      def docs_grouped_by_association
+        @docs_grouped_by_association ||= expanded_documents.group_by(&:record_association)
       end
 
       def expanded_documents
@@ -32,6 +28,7 @@ module TrlnArgon
           controller = CatalogController.new
           search_builder = SearchBuilder.new([:add_query_to_solr], controller)
           query = search_builder.where("#{TrlnArgon::Fields::ROLLUP_ID}:#{self[TrlnArgon::Fields::ROLLUP_ID]}")
+                                .merge(rows: 100)
           controller.repository.search(query)
         end
       end

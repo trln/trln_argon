@@ -2,16 +2,8 @@ describe TrlnArgon::Engine do
   describe 'default configuration' do
     config = TrlnArgon::Engine::Configuration.new
 
-    it 'sets the preferred_records' do
-      expect(config.preferred_records).to eq('unc')
-    end
-
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('unc')
-    end
-
-    it 'sets the local_records' do
-      expect(config.local_records).to eq('unc,trln')
     end
 
     it 'sets the application_name' do
@@ -43,9 +35,7 @@ describe TrlnArgon::Engine do
   describe 'it should accept custom configuration values' do
     config = TrlnArgon::Engine::Configuration.new
 
-    config.preferred_records = 'custom_record_field'
     config.local_institution_code = 'custom_institution'
-    config.local_records = 'custom_inst, consortium'
     config.application_name = 'Custom App Name'
     config.refworks_url = 'http://www.refworks.com/express/ExpressImport.asp?'\
                           'vendor=DUKE&filter=RIS%20Format&encoding=65001&url='
@@ -56,16 +46,8 @@ describe TrlnArgon::Engine do
                                  'ContentType,Magazine%20Article,f&l=en&q='
     config.contact_url = 'https://library.duke.edu/research/ask'
 
-    it 'sets the preferred_records' do
-      expect(config.preferred_records).to eq('custom_record_field')
-    end
-
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('custom_institution')
-    end
-
-    it 'sets the local_records' do
-      expect(config.local_records).to eq('custom_inst, consortium')
     end
 
     it 'sets the application_name' do

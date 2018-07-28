@@ -314,6 +314,10 @@ OCLC_NUMBER:
   solr_field: :oclc_number
   label:
     en: OCLC Number
+OWNER:
+  solr_field: :owner_a
+  label:
+    en: Record Owner
 PHYSICAL_DESCRIPTION:
   solr_field: :physical_description_a
   label:

@@ -17,7 +17,7 @@ module TrlnArgon
                             TrlnArgon::Engine.configuration.root_url.chomp('/') +
                               Rails.application.routes.url_helpers.solr_document_path(self)
                           end,
-          location: proc { expanded_holdings_to_text },
+          location: proc { holdings_to_text },
           publisher: proc { imprint_main_to_text },
           edition: TrlnArgon::Fields::EDITION,
           date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,

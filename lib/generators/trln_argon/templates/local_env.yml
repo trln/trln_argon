@@ -1,7 +1,5 @@
 SOLR_URL: https://query.discovery.trln.org/trlnbib
 LOCAL_INSTITUTION_CODE: unc
-PREFERRED_RECORDS: unc
-LOCAL_RECORDS: 'unc, trln'
 APPLICATION_NAME: TRLN Argon
 REFWORKS_URL: 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
 ROOT_URL: 'https://discovery.trln.org'

@@ -67,19 +67,19 @@ module TrlnArgon
         return '' if item.nil? || item.empty? || !item.respond_to?(:fetch)
         r = item.fetch('call_no', '')
         r << " #{item['vol']}" if item.key?('vol')
-        r << " c.#{item['copy_no']}" if item.key?('copy_no')
+        r << " #{item['copy_no']}" if item.key?('copy_no')
         r
       end
 
       def item_notes_display(item)
         [*item.fetch('notes', [])].collect do |n|
-          "<span class='item-note'>#{CGI.escapeHTML(n)}</span>"
+          content_tag(:span, n, class: 'item-note')
         end.join('<br />').html_safe
       end
 
       def holding_notes_display(holding)
         holding.fetch('notes', []).collect do |n|
-          "<span class='holding-note'>#{CGI.escapeHTML(n)}</span>"
+          content_tag(:span, n, class: 'holding-note')
         end.join('<br />').html_safe
       end
 
@@ -103,9 +103,9 @@ module TrlnArgon
       def link_to_secondary_urls(options = {})
         options[:value].map do |url|
           link_text = if url[:text].present?
-                        CGI.escapeHTML(url[:text])
+                        url[:text]
                       else
-                        CGI.escapeHTML(url[:href])
+                        url[:href]
                       end
           link_to link_text, url[:href]
         end.join('<br />').html_safe
