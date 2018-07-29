@@ -1,8 +1,8 @@
 Blacklight.onLoad(function() {
 
-  	$(window).load(function(){
+    $(window).load(function(){
 
-      if ($("body").hasClass("local-filter")) {
+      if ($("body").hasClass("blacklight-catalog-index")) {
 
         // get values from rails (_facets.html.erb)
         var argonHSL = $('#location-data').data('argon-hsl');
@@ -40,6 +40,6 @@ Blacklight.onLoad(function() {
 
       }
 
-  	});
+    });
 
 });
