@@ -300,7 +300,8 @@ div.items table {
 
 @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
 
-  .twitter-typeahead {
+  .twitter-typeahead,
+  .search_q {
     min-width: 35em;
   }
 
@@ -309,7 +310,8 @@ div.items table {
 
 @media screen and (min-width: $screen-md) {
 
-  .twitter-typeahead {
+  .twitter-typeahead,
+  .search_q {
     min-width: 25em;
   }
 
