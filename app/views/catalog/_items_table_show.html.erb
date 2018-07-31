@@ -65,12 +65,11 @@
 
             </tr>
 
-            <% if items_have_notes %>
+            <% if item_notes_display(item).present? %>
               <tr>
                 <td class='notes' colspan="3">Note &mdash; <%= item_notes_display(item) %></td>
               </tr>
             <% end %>
-
 
           <% end %>
 
@@ -79,7 +78,7 @@
           <% if has_holding_notes %>
 
             <tr>
-              <td class='notes' colspan="3">Note &mdash; <em><%= [*item_data['notes']].join("; "); %></em></td>
+              <td class='notes holding-note' colspan="3">Note &mdash; <em><%= [*item_data['notes']].join("; "); %></em></td>
             </tr>
 
           <% end %>
