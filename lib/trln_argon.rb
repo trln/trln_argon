@@ -12,6 +12,7 @@ module TrlnArgon
   autoload :Lookups, 'trln_argon/mappings'
   autoload :MappingsGitFetcher, 'trln_argon/mappings'
   autoload :SolrDocument, 'trln_argon/solr_document'
+  autoload :SolrEscape, 'trln_argon/solr_escape'
   autoload :SyndeticsData, 'trln_argon/syndetics_data'
   autoload :TrlnControllerBehavior, 'trln_argon/trln_controller_behavior'
   autoload :ViewHelpers, 'trln_argon/view_helpers'
