@@ -3,7 +3,7 @@ module TrlnArgon
     module AddQueryToSolr
       ##
       # NOTE: This is an override of the Blacklight SearchBuilder
-      #       method of the same name to address the Solr 7
+      #       method of the same name to address the Solr 7.2+
       #       local params compatibility issue.
       #
       #       Applying approach proposed here:
@@ -47,14 +47,14 @@ module TrlnArgon
                                   "{!lucene}NOT *:*"
                                 else
                                   "{!lucene}" + q.map do |field, values|
-                                    "#{field}:(#{Array(values).map { |x| solr_param_quote(x) }.join(' OR ')})"
+                                    "#{field}:(#{Array(values).map { |x| solr_param_quote(TrlnArgon::SolrEscape.escape_colon_after_space(x)) }.join(' OR ')})"
                                   end.join(" AND ")
                                 end
 
           solr_parameters[:defType] = 'lucene'
           solr_parameters[:spellcheck] = 'false'
         elsif blacklight_params[:q]
-          solr_parameters[:q] = blacklight_params[:q]
+          solr_parameters[:q] = TrlnArgon::SolrEscape.escape_colon_after_space(blacklight_params[:q])
         end
       end
 
@@ -69,12 +69,12 @@ module TrlnArgon
         solr_parameters[:defType] = 'lucene' # to enable parsing of local params
         local_params = if search_field.solr_local_parameters.present?
                          search_field.solr_local_parameters.map do |key, val|
-                           key.to_s + "=" + solr_param_quote(val, quote: "'")
+                           key.to_s + "=" + solr_param_quote(TrlnArgon::SolrEscape.escape_colon_after_space(val), quote: "'")
                          end.join(" ")
                        else
                          ''
                        end
-        solr_parameters[:q] = "{!#{q_parser}#{local_params}}#{blacklight_params[:q]}"
+        solr_parameters[:q] = "{!#{q_parser}#{local_params}}#{TrlnArgon::SolrEscape.escape_colon_after_space(blacklight_params[:q])}"
       end
     end
   end
