@@ -4,7 +4,7 @@ class RecordMailer < ActionMailer::Base
   def email_record(documents, details, url_gen_params)
     title = begin
               documents.first[TrlnArgon::Fields::TITLE_MAIN]
-            rescue
+            rescue StandardError
               I18n.t('blacklight.email.text.default_title')
             end
     subject = I18n.t('blacklight.email.text.subject', count: documents.length, title: title)
