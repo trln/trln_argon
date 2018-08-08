@@ -1,6 +1,7 @@
 <h2 class="local-filter-heading"><%= t("trln_argon.local_filter.showing_results") %></h2>
 
 <% query_state = query_state_from_search_state(search_state) %>
+<% query_state.delete('page') %>
 
 <div class="toggle toggle-local">
 
