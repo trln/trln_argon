@@ -8,15 +8,6 @@ describe 'search results' do
     end
   end
 
-  context 'when some results found' do
-    it 'displays the number of results found' do
-      visit search_catalog_path
-      fill_in 'q', with: ''
-      click_button 'search'
-      expect(page).to have_content(/\d+ UNC results/)
-    end
-  end
-
   context 'when facets applied to search' do
     before do
       visit search_catalog_path(local_filter: 'false')

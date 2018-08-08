@@ -15,7 +15,7 @@ describe TrlnArgon::ArgonSearchBuilder do
     before { search_builder.show_only_local_holdings(solr_parameters) }
     it 'adds parameters to restrict results to local holdings' do
       expect(solr_parameters[:fq]).to(
-        eq(['institution_f:unc OR institution_f:trln'])
+        eq(['institution_f:unc'])
       )
     end
   end

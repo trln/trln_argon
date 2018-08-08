@@ -15,7 +15,7 @@ module TrlnArgon
         end.first
         group_docs = group_docs.respond_to?(:docs) ? group_docs.docs : [doc]
         Hash[group_docs.map do |gr_doc|
-          [gr_doc.institution, gr_doc]
+          [gr_doc.record_association, gr_doc]
         end]
       end
 
@@ -38,8 +38,8 @@ module TrlnArgon
                                              'group.field' => TrlnArgon::Fields::ROLLUP_ID,
                                              'group.limit' => '4',
                                              fl: "#{TrlnArgon::Fields::ID}, #{TrlnArgon::Fields::ROLLUP_ID}, "\
-                                                 "#{TrlnArgon::Fields::INSTITUTION}, #{TrlnArgon::Fields::AVAILABLE}, "\
-                                                 "#{TrlnArgon::Fields::URLS}")
+                                                 "#{TrlnArgon::Fields::OWNER}, #{TrlnArgon::Fields::INSTITUTION}, "\
+                                                 "#{TrlnArgon::Fields::AVAILABLE}, #{TrlnArgon::Fields::URLS}")
       end
 
       def expanded_documents_response

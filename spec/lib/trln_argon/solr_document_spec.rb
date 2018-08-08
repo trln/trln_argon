@@ -99,23 +99,11 @@ describe TrlnArgon::SolrDocument do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
     end
 
-    before do
-      allow(test_document).to receive(:expanded_holdings) do
-        { 'duke' => {
-          'DOCS' => {
-            'PGSM' => {
-              'loc_b' => 'DOCS', 'loc_n' => 'PGSM', 'call_no' => 'SI 1.27:435'
-            }
-          }
-        } }
-      end
-    end
-
     it 'exports the document as RIS' do
       expect(test_document.export_as_ris).to eq(
         "TY  - GEN\r\n"\
         "A1  - Maureen E. Downey.\r\n"\
-        "AV  - Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\r\n"\
+        "AV  - Perkins Public Documents/Maps (Call Number: SI 1.27:435)\r\n"\
         "ID  - DUKE002952265\r\n"\
         "KW  - Brisingida -- Atlantic Ocean -- Classification\r\n"\
         "KW  - Echinodermata -- Classification\r\n"\
@@ -177,18 +165,6 @@ describe TrlnArgon::SolrDocument do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
     end
 
-    before do
-      allow(test_document).to receive(:expanded_holdings) do
-        { 'duke' => {
-          'DOCS' => {
-            'PGSM' => {
-              'loc_b' => 'DOCS', 'loc_n' => 'PGSM', 'call_no' => 'SI 1.27:435'
-            }
-          }
-        } }
-      end
-    end
-
     # rubocop:disable ExampleLength
     it 'exports the document to email text' do
       expect(test_document.to_email_text).to eq(
@@ -204,7 +180,7 @@ describe TrlnArgon::SolrDocument do
         "  https://discovery.trln.org/catalog/DUKE002952265\n"\
         "\n"\
         "Location:\n"\
-        "  Located at Duke: Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
+        "  Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
         "\n"\
         "Publisher:\n"\
         "  Washington : Smithsonian Institution Press, 1986.\n"\
@@ -313,6 +289,49 @@ describe TrlnArgon::SolrDocument do
                display_segments:
                  ['Masson, VeNeta.', 'Rehab at the Florida Avenue Grill.'] }] }]
       )
+    end
+  end
+
+  describe '#record_association' do
+    context 'it is a local record' do
+      let(:local_document) do
+        SolrDocumentTestClass.new(
+          id: 'UNC002981535',
+          owner_a: ['unc'],
+          institution_a: ['unc']
+        )
+      end
+
+      it 'returns the association code for the record' do
+        expect(local_document.record_association).to eq('unc')
+      end
+    end
+
+    context 'it is a shared record' do
+      let(:local_document) do
+        SolrDocumentTestClass.new(
+          id: 'UNC002981535',
+          owner_a: ['unc'],
+          institution_a: %w[unc duke nccu ncsu']
+        )
+      end
+
+      it 'returns the association code for the record' do
+        expect(local_document.record_association).to eq('trln')
+      end
+    end
+  end
+
+  describe '#record_owner' do
+    let(:owned_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        owner_a: ['unc']
+      )
+    end
+
+    it 'returns the code for the owner of the record' do
+      expect(owned_document.record_owner).to eq('unc')
     end
   end
 end

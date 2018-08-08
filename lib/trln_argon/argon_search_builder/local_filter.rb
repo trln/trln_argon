@@ -14,20 +14,15 @@ module TrlnArgon
       private
 
       def local_records_query
-        local_values.map do |value|
-          "#{TrlnArgon::Fields::INSTITUTION_FACET}:#{value}"
-        end.join(' OR ')
-      end
-
-      def local_values
-        TrlnArgon::Engine.configuration.local_records.split(',').map(&:strip)
+        "#{TrlnArgon::Fields::INSTITUTION_FACET}:"\
+        "#{TrlnArgon::Engine.configuration.local_institution_code}"
       end
 
       def record_rollup_query
         "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
         'nullPolicy=expand '\
         "max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
-        "\"#{TrlnArgon::Engine.configuration.preferred_records}\")}"
+        "\"#{TrlnArgon::Engine.configuration.local_institution_code}\")}"
       end
     end
   end

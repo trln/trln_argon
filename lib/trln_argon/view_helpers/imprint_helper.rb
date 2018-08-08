@@ -28,7 +28,7 @@ module TrlnArgon
 
       def imprint_label(imprint)
         return if imprint[:label].blank?
-        content_tag(:span, CGI.escapeHTML(imprint[:label]), class: 'imprint-label')
+        content_tag(:span, imprint[:label], class: 'imprint-label')
       end
 
       def imprint_value(imprint)

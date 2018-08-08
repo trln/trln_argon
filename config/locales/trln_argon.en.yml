@@ -8,12 +8,6 @@ en:
             blurb: "TRLN Discovery provides a single search interface to the Triangle Research Libraries' Collections."
 
         search:
-            pagination_info:
-                no_items_found: 'No %{filter_scope_name} %{entry_name} found'
-                single_item_found: '<strong>1</strong> %{filter_scope_name} %{entry_name} found'
-                pages:
-                    one: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
-                    other: '<strong>%{start_num}</strong> - <strong>%{end_num}</strong> of <strong>%{total_num} %{filter_scope_name} %{entry_name}</strong>'
             show:
                 label: '%{label}'
 
@@ -62,6 +56,9 @@ en:
             unc:
                 short_name: "UNC"
                 long_name: "UNC Libraries"
+            trln:
+                short_name: "TRLN"
+                long_name: "Triangle Research Libraries"
 
 
         feedback:
@@ -162,7 +159,7 @@ en:
             manufacture: "Manufactured"
             copyright: ""
 
-        item_location: "Located at %{inst_display}: %{loc_b_display} (Call Number: %{call_number})"
+        item_location: "%{loc_b_display} (Call Number: %{call_number})"
 
         email:
             library_note: "This message was sent from the %{inst} catalog. Please do not reply to this message. For assistance, see %{contact_url}."

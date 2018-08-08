@@ -22,7 +22,10 @@
     </div>
   <% end %>
 
-  <% unless document.holdings.empty? %>
+  <!-- List all the holdings keys and remove empty/nil and online keys. -->
+  <!-- If there are any keys left then go ahead and show the items. -->
+  <!-- Otherwise don't display the items. -->
+  <% unless (document.holdings.keys - ['ONLINE', 'DUKIR', '', nil]).empty? %>
 
     <h3><%= t('trln_argon.search.results.location') %> <i class="fa fa-map-marker" aria-hidden="true"></i></h3>
 

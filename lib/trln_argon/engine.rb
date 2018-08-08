@@ -21,9 +21,7 @@ module TrlnArgon
     end
 
     class Configuration
-      attr_accessor :preferred_records,
-                    :local_institution_code,
-                    :local_records,
+      attr_accessor :local_institution_code,
                     :application_name,
                     :solr_fields,
                     :code_mappings,
@@ -35,9 +33,7 @@ module TrlnArgon
 
       # rubocop:disable MethodLength
       def initialize
-        @preferred_records             = 'unc'
         @local_institution_code        = 'unc'
-        @local_records                 = 'unc,trln'
         @application_name              = 'TRLN Argon'
         @solr_fields =
           field_constants(default_fields.merge(override_fields).deep_symbolize_keys)

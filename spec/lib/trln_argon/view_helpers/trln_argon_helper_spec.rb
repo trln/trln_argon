@@ -118,13 +118,13 @@ describe TrlnArgonHelper, type: :helper do
     it 'generates links to a search for each segment' do
       allow(context).to receive(:search_action_url).and_return('/catalog?begins_with=something')
       expect(context.helpers.link_to_subject_segments(options)).to(
-        eq(['<a title="Technology" class="progressive-link" href="/catalog?begins_with=something">Technology</a>'\
-            '<a title="Technology -- History" class="progressive-link" href="/catalog?begins_with=something">'\
+        eq(['<a class="progressive-link" href="/catalog?begins_with=something">Technology</a>'\
+            '<a class="progressive-link" href="/catalog?begins_with=something">'\
             '<span class="sr-only">Technology</span> -- History</a>'\
-            '<a title="Technology -- History -- Science" class="progressive-link" '\
+            '<a class="progressive-link" '\
             'href="/catalog?begins_with=something">'\
             '<span class="sr-only">Technology -- History</span> -- Science</a>',
-            '<a title="Galilei, Galileo, 1564-1642" class="progressive-link" href="/catalog?begins_with=something">'\
+            '<a class="progressive-link" href="/catalog?begins_with=something">'\
             'Galilei, Galileo, 1564-1642</a>'])
       )
     end

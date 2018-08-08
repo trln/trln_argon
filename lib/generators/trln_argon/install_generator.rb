@@ -22,12 +22,7 @@ module TrlnArgon
 
     def install_configuration_files
       copy_file 'local_env.yml', 'config/local_env.yml'
-      copy_file 'trln_argon.yml', 'config/trln_argon.yml'
       copy_file 'solr_field_overrides.yml', 'config/solr_field_overrides.yml'
-    end
-
-    def copy_asset_files
-      copy_file 'trln_argon.js', 'app/assets/javascripts/trln_argon_application.js'
     end
 
     def load_helpers_in_host_application
@@ -39,6 +34,14 @@ module TrlnArgon
 
     def install_stylesheet
       copy_file 'trln_argon.scss', 'app/assets/stylesheets/trln_argon.scss'
+      copy_file 'trln_argon_defaults.scss', 'app/assets/stylesheets/trln_argon_defaults.scss'
+    end
+
+    def inject_javascript_include
+      return if IO.read('app/assets/javascripts/application.js').include?('trl_argon')
+      insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+        "\n//= require trln_argon/trln_argon\n"
+      end
     end
 
     def inject_local_env_loader
