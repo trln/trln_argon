@@ -9,7 +9,7 @@ bootstrap a Blacklight catalog for the TRLN shared catalog index.
 We use [Engine Cart](https://github.com/cbeer/engine_cart) to run a development instance.  To run with `engine_cart`, clone this repository and change into the directory, then run:
 
        $ bundle exec rake engine_cart:prepare
-       $ bundle exec rake engine_cart:server 
+       $ bundle exec rake engine_cart:server
        $ # if you already have something on port 3000 and want to use a different port
     $ bundle exec rake engine_cart:server['-p 3001']
 
@@ -95,10 +95,10 @@ You can see what the generator does in this file: [install_generator.rb](https:/
 
 ### Basic Settings
 
-The Argon engine will add a configuration file to customize your application. Copy the sample file to use it
+The Argon engine will add a configuration file to customize your application.
 
 ```
-cp config/local_env.yml.sample config/local_env.yml
+config/local_env.yml
 ```
 
 You will need to change settings in this file so that features like record rollup and filtering to just your local collection will work as expected.
@@ -107,18 +107,20 @@ You will need to change settings in this file so that features like record rollu
 SOLR_URL: http://127.0.0.1:8983/solr/trln
 LOCAL_INSTITUTION_CODE: unc
 APPLICATION_NAME: TRLN Argon
-PREFERRED_RECORDS: "unc, trln"
 REFWORKS_URL: "http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url="
 ROOT_URL: 'https://discovery.trln.org'
 ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
 CONTACT_URL: 'https://library.unc.edu/ask/'
+FEEDBACK_URL: ''
 ```
 
 ### Changing Styles
 
-Sass variables and other styles may be overridden in:
-`your_app/assets/stylesheets/trln_argon.scss`  See
-`assets/stylesheet/application.scss` for other stylesheets that are imported.
+Sass Variables are set in:
+`app/assets/stylesheets/trln_argon_defaults.scss`
+
+To override other styles from the gem make changes after the import statements in:
+`app/assets/stylesheets/trln_argon.scss`
 
 ### Changing field labels and other UI text.
 
@@ -129,6 +131,8 @@ You can see the default Argon translations in
 [trln_argon.en.yml](https://github.com/trln/trln_argon/blob/master/config/locales/trln_argon.en.yml).
 You can override any of these values by adding your own translations to a
 locales file in your application, such as in config/locales/blacklight.en.yml.
+
+You can change labels used for display of metadata fields in `config/solr_field_overrides.yml`
 
 ### Changing blacklight configurations related to search, metadata display, and faceting.
 
