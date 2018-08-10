@@ -34,7 +34,7 @@ module TrlnArgon
 
     def install_stylesheet
       copy_file 'trln_argon.scss', 'app/assets/stylesheets/trln_argon.scss'
-      copy_file 'trln_argon_defaults.scss', 'app/assets/stylesheets/trln_argon_defaults.scss'
+      copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
     def inject_javascript_include
