@@ -69,7 +69,7 @@ module TrlnArgon
         ctx = ctx[k]
         break if ctx.nil? || ctx.empty?
       end
-      ctx.nil? || ctx.empty? ? path : ctx
+      ctx.nil? ? path : ctx
     end
 
     def mappings

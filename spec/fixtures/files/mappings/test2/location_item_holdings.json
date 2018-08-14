@@ -5,7 +5,8 @@
     },
     "loc_n" : {
         "loc1" : "Test 2 Location One",
-        "loc2" : "Test2 Location Two"
+        "loc2" : "Test2 Location Two",
+        "loc3" : ""
     }
 }
 

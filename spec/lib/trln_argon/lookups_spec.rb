@@ -10,6 +10,11 @@ describe TrlnArgon::Lookups do
     expect(lookups.lookup(pathspec)).to eq(pathspec)
   end
 
+  it 'returns an empty string when code is mapped to an empty string' do
+    pathspec = 'test2.loc_n.loc3'
+    expect(lookups.lookup(pathspec)).to eq('')
+  end
+
   it 'can be safely marshaled' do
     expect(Marshal.dump(lookups)).not_to be_nil
   end
