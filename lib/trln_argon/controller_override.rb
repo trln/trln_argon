@@ -430,7 +430,7 @@ module TrlnArgon
 
         config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
-                               label: "Year (old to new)"
+                              label: I18n.t('trln_argon.sort_options.year_asc')
 
         # config.add_sort_field "#{TrlnArgon::Fields::AUTHOR_SORT} asc, "\
         #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
