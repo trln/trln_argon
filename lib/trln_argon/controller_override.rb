@@ -428,9 +428,9 @@ module TrlnArgon
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.year_desc')
 
-        # config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
-        #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
-        #                       label: I18n.t('trln_argon.sort_options.year_asc')
+        config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
+                              "#{TrlnArgon::Fields::TITLE_SORT} asc",
+                               label: "Year (old to new)"
 
         # config.add_sort_field "#{TrlnArgon::Fields::AUTHOR_SORT} asc, "\
         #                       "#{TrlnArgon::Fields::TITLE_SORT} asc",
@@ -443,6 +443,7 @@ module TrlnArgon
         # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
         #                       "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
+
       end
 
       def has_search_parameters? # rubocop:disable Style/PredicateName
