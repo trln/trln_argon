@@ -446,6 +446,18 @@ describe TrlnArgon::ControllerOverride do
       end
     end
 
+    describe 'Year: Old to New' do
+      let(:fields) { 'publication_year_isort_stored_single asc, title_sort_ssort_single asc' }
+
+      it 'sets the sort fields' do
+        expect(override_config.sort_fields).to have_key(fields)
+      end
+
+      it 'sets the label' do
+        expect(override_config.sort_fields[fields].label).to eq('Year (old to new)')
+      end
+    end
+
     describe 'Title: A to Z' do
       let(:fields) { 'title_sort_ssort_single asc, publication_year_isort_stored_single asc' }
 
