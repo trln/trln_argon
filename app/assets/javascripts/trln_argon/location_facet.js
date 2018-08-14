@@ -17,26 +17,31 @@ Blacklight.onLoad(function() {
         $('.facet_select:contains("' + argonInstitution + '")').parent().addClass("twiddle-open");
         $('.facet_select:contains("' + argonInstitution + '")').parent().children("ul").css("display", "block");
 
-        // hide results after 10
-        $('ul.facet-hierarchy > .twiddle-open > ul > li:gt(9)').hide();
+        // if there are more than 10 results
+        if ( $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).length > 10 ) {
 
-        // add 'more' and 'less' button at end
-        $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
-        $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></div>" );
+          // hide results after 10
+          $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).slice( 10 ).hide();
 
-        // click 'more' to show all
-        $('.more_locations_link').click(function() {
-            $('ul.facet-hierarchy .twiddle-open > ul > li:gt(9)').show();
-            $('.more_locations_link').hide();
-            $('.less_locations_link').show();
-        });
+          // add 'more' and 'less' button at end
+          $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
+          $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></div>" );
 
-        // click 'less' to hide
-        $('.less_locations_link').click(function() {
-            $('ul.facet-hierarchy .twiddle-open > ul > li:gt(9)').hide();
-            $('.more_locations_link').show();
-            $('.less_locations_link').hide();
-        });
+          // click 'more' to show all
+          $('.more_locations_link').click(function() {
+              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( 10 ).show();
+              $('.more_locations_link').hide();
+              $('.less_locations_link').show();
+          });
+
+          // click 'less' to hide
+          $('.less_locations_link').click(function() {
+              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( 10 ).hide();
+              $('.more_locations_link').show();
+              $('.less_locations_link').hide();
+          });
+
+        }
 
       }
 
