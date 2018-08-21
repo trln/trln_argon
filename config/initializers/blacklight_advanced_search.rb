@@ -20,7 +20,7 @@ module BlacklightAdvancedSearch
           else
             collected_embeddables = embeddables.collect(&:to_embed).join(' ')
             inner_query = build_local_params(solr_params, options[:force_deftype]) +
-                          TrlnArgon::SolrEscape.escape_double_backslashes(
+                          TrlnArgon::SolrEscape.escape_escaped_backslash(
                             TrlnArgon::SolrEscape.escape_colon_after_space(
                               collected_embeddables
                             )
