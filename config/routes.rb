@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   mount BlacklightAdvancedSearch::Engine => '/'
 
   get 'advanced_trln' => 'advanced_trln#index', as: 'advanced_trln'
+  get 'suggest/:category', to: 'suggest#show'
 end

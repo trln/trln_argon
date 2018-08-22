@@ -1,0 +1,25 @@
+---
+responseHeader:
+  status: 200
+suggest:
+  titleSuggester:
+    new:
+      numFound: 3
+      suggestions:
+      - term: new jersey
+        weight: 3
+        payload: ''
+      - term: new jersey bridgeton biography
+        weight: 3
+        payload: ''
+      - term: new jersey bridgeton history
+        weight: 3
+        payload: ''
+  authorSuggester:
+    new:
+      numFound: 0
+      suggestions: []
+  subjectSuggester:
+    new:
+      numFound: 3
+      suggestions: []
