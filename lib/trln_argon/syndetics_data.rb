@@ -29,6 +29,13 @@ module TrlnArgon
     include XMLHandler
     COVERS = { SC: 'small', MC: 'medium', LC: 'large' }.freeze
 
+    COPYRIGHT = %(
+      <div class='syndetics-copyright'>
+      Content provided by Syndetic Solutions, Inc.
+      <a href='http://syndetics.com/termsofuse.htm'
+       rel='nofollow noopener noreferrer'>Terms of Use</a>
+       </div>).freeze
+
     def self.read_stylesheet(name)
       File.read(File.join(File.dirname(__FILE__), 'xslt', "#{name}.xsl"))
     end
@@ -133,7 +140,8 @@ module TrlnArgon
         element_data = data_element.xpath(data[:path])
         unless element_data.nil?
           result = element_data.first.text
-          return (data[:bigtext] ? post_process_bigtext(result) : result).html_safe
+          result = (data[:bigtext] ? post_process_bigtext(result) : result)
+          return (result + COPYRIGHT).html_safe
         end
         ''
       end
@@ -148,4 +156,5 @@ module TrlnArgon
       @present = doc.root.children.map(&:name)
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

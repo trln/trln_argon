@@ -3,9 +3,16 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="html" indent="yes" omit-xml-declaration="yes"
         encoding='utf-8' />
+        <xsl:param name="copyright">
+         <div class="syndetics-copyright">
+          Content provided by Syndetic Solutions, Inc. 
+          <a href='https://syndetics.com/termsofuse.htm' rel='nofollow noopener noreferrer'>Terms of Use</a>
+        </div>
+        </xsl:param>
 
     <xsl:template match="/">
         <xsl:apply-templates match="VarFlds/VarDFlds/SSIFlds"/>
+        <xsl:copy-of select="$copyright" />
     </xsl:template>
 
     <xsl:template match="text()|@*"/>
