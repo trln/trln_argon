@@ -6,7 +6,7 @@
         <xsl:param name="copyright">
          <div class="syndetics-copyright">
           Content provided by Syndetic Solutions, Inc. 
-          <a href='https://syndetics.com/termsofuse.htm'>Terms of Use</a>
+          <a href='https://syndetics.com/termsofuse.htm' rel='nofollow noopener noreferrer'>Terms of Use</a>
         </div>
         </xsl:param>
 
