@@ -29,7 +29,8 @@ module TrlnArgon
                     :root_url,
                     :article_search_url,
                     :contact_url,
-                    :feedback_url
+                    :feedback_url,
+                    :sort_order_in_holding_list
 
       # rubocop:disable MethodLength
       def initialize
@@ -47,6 +48,7 @@ module TrlnArgon
           's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
         @contact_url = 'https://library.unc.edu/ask/'
         @feedback_url = ''
+        @sort_order_in_holding_list = 'unc, duke, ncsu, nccu, trln'
       end
 
       private

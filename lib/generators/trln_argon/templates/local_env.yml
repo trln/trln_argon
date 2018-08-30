@@ -6,3 +6,5 @@ ROOT_URL: 'https://discovery.trln.org'
 ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
 CONTACT_URL: 'https://library.unc.edu/ask/'
 FEEDBACK_URL: ''
+#Define the order of institutions in holding list. Your institution should go first.
+SORT_ORDER_IN_HOLDING_LIST: 'unc, duke, ncsu, nccu, trln'

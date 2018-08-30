@@ -1,0 +1,46 @@
+---
+- id: DUKE003007532
+  items_a:
+  - '{"loc_b":"PERKN","loc_n":"PK","cn_scheme":"LC","call_no":"PR3588 .F57 2001","copy_no":"c.1","type":"BOOK","item_id":"D01665958/\","status":"Available"}"'  
+  owner_a:
+  - duke
+  title_main: How Milton works
+  title_sort_ssort_single: How Milton works
+  resource_type_a:
+  - Book
+  imprint_main_a:
+  - '{"type":"imprint","value":"Cambridge, Mass. : Belknap Press of Harvard University Press, c2001."}'
+  misc_id_a:
+  - "LCCN: 00052977"
+  - "National Bibliography Number: GBA1-37913"
+  holdings_a:
+  - '{"loc_b":"DOCS","loc_n":"PGSM","call_no":"SI 1.27:435"}'
+  language_a:
+  - English
+  local_id: DUKE003007532
+  subject_headings_a:
+  - Milton, John -- 1608-1674 -- Criticism and interpretation
+  available_a:
+  - Available
+  lang_code_a:
+  - eng
+  rollup_id: OCLC45356608
+  access_type_a:
+  - At the Library
+  institution_a:
+  - duke
+  subject_genre_a:
+  - Nonfiction
+  publication_year_isort_stored_single: '2001'
+  location_hierarchy_a:
+  - duke
+  - duke:dukepers
+  record_data_source_a:
+  - ILSMARC
+  subject_geographic_a:
+  - ''
+  subject_topical_a:
+  - Milton, John 1608-1674
+  - Criticism and interpretation
+  statement_of_responsibility_a:
+  - Stanley Fish.
