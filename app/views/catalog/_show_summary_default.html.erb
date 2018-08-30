@@ -9,12 +9,14 @@
 
       <h2 id="summary">Summary</h2>
 
-      <div class="content">
+      <div class="content expandable-content">
         <%= summary.html_safe %>
       </div>
 
-      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-      <span class='show-control less'><a href="#summary" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+      <div class="expandable-content-controls">
+        <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+        <span class='show-control less'><a href="#summary" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+      </div>
 
     </section>
   <% end %>
@@ -23,13 +25,14 @@
     <section class="table-of-contents">
       <h2 id="contents">Contents</h2>
 
-      <div class="content">
+      <div class="content expandable-content">
         <%= toc.html_safe %>
       </div>
 
-      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-      <span class='show-control less'><a href="#contents" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
-
+      <div class="expandable-content-controls">
+        <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+        <span class='show-control less'><a href="#contents" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+      </div>
 
     </section>
   <% end %>
@@ -38,13 +41,14 @@
   <section class="sample-chapter">
     <h2>Sample Chapter</h2>
 
-    <div class='content'>
+    <div class='content expandable-content'>
       <%= samplechapter.html_safe %>
     </div>
 
-    <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show">show more <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-    <span class='show-control less'><a href="javascript:void(0);" class="btn btn-hide">show less <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
-
+    <div class="expandable-content-controls">
+      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+      <span class='show-control less'><a href="javascript:void(0);" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+    </div>
 
   </section>
   <% end %>

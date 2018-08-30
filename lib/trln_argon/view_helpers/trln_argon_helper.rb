@@ -112,7 +112,9 @@ module TrlnArgon
       end
 
       def link_to_primary_url(url_hash)
-        link_to(primary_url_text(url_hash), url_hash[:href], class: "link-type-#{url_hash[:type]}")
+        link_to(url_hash[:href], class: "link-type-#{url_hash[:type]}", target: '_blank') do
+          '<i class="fa fa-external-link" aria-hidden="true"></i>'.html_safe + primary_url_text(url_hash)
+        end
       end
 
       def add_icon_to_action_label(document_action_config)

@@ -155,6 +155,21 @@ en:
                 subjects: "This item is about"
                 metadata: "Other details"
 
+            label:
+                summary: "Summary"
+                call_number: "Call Number"
+                status: "Status"
+                item_note: "Note"
+                holding_note: "Note"
+
+            controls:
+                show: "show"
+                hide: "hide"
+                items: "items"
+                show_more: "show more"
+                show_less: "show less"
+                details: "Details"
+
         imprint_type:
             imprint: ""
             production: "Produced"

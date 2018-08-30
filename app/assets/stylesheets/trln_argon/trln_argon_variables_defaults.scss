@@ -15,8 +15,8 @@ $institution-icon-inverted: 'branding/unc_icon_inverted.png' !default;
 // maintain adequate contrast ratio (> 4.5:1 on white background) for AxS purposes !
 
 $primary-color: #4b7ca9 !default; // this is 'UNC Blue'
-$secondary-color: darken( $primary-color, 20% ) !default; // this should be a darker hue than primary
-$tertiary-color: lighten( $primary-color, 20% ) !default; // this should be a lighter hue than primary
+$secondary-color: #2e4972 !default; // this should be a darker hue than primary
+$tertiary-color: #5099b4 !default; // this should be a lighter hue than primary
 
 $primary-link-color: darken( $primary-color, 5% ) !default;
 $secondary-link-color: darken( $primary-color, 15% ) !default;
@@ -28,8 +28,14 @@ $not-available-color: #b11f1f !default; // default is red
 $alt-available-color: #7d6816 !default; // default is brown
 
 
-$trln-green: #209d8b !default; // this is 'TRLN Green'
+// Institution Colors:
 
+$duke-blue: #003366 !default;
+$nccu-red: #8c2332 !default;
+$ncsu-red: #990000 !default;
+$trln-green: #209d8b !default;
+$trln-purple: #490e6f !default;
+$unc-blue: #467aaa !default;
 
 
 
