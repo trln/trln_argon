@@ -11,6 +11,12 @@ module TrlnArgon
       helper_method :no_results_escape_href_url
       helper_method :filter_scope_name
       helper_method :url_for_document
+      helper_method :ris_path
+      helper_method :ris_url
+      helper_method :email_path
+      helper_method :email_url
+      helper_method :sms_path
+      helper_method :sms_url
 
       configure_blacklight do |config|
         config.search_builder_class = DefaultTrlnSearchBuilder
@@ -58,6 +64,30 @@ module TrlnArgon
 
       def local_filter_search_builder
         LocalOnlySearchBuilder.new(CatalogController)
+      end
+
+      def ris_path(options = {})
+        trln_solr_document_path({ format: :ris }.merge(options))
+      end
+
+      def ris_url(options = {})
+        trln_solr_document_url({ format: :ris }.merge(options))
+      end
+
+      def email_path(options = {})
+        email_trln_solr_document_path(options)
+      end
+
+      def email_url(options = {})
+        email_trln_solr_document_url(options)
+      end
+
+      def sms_path(options = {})
+        sms_trln_solr_document_path(options)
+      end
+
+      def sms_url(options = {})
+        sms_trln_solr_document_url(options)
       end
     end
   end

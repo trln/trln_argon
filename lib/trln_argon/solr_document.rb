@@ -4,6 +4,7 @@ require 'trln_argon/solr_document/field_deserializer'
 require 'trln_argon/solr_document/imprint'
 require 'trln_argon/solr_document/openurl_ctx_kev_field_mapping'
 require 'trln_argon/solr_document/ris_field_mapping'
+require 'trln_argon/solr_document/sms_field_mapping'
 require 'trln_argon/solr_document/urls'
 require 'trln_argon/solr_document/work_entry'
 
@@ -16,6 +17,7 @@ module TrlnArgon
     include Imprint
     include OpenurlCtxKevFieldMapping
     include RisFieldMapping
+    include SmsFieldMapping
     include Urls
     include WorkEntry
 

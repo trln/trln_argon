@@ -46,7 +46,7 @@ module TrlnArgon
 
     def inject_local_env_loader
       return if IO.read('app/controllers/catalog_controller.rb').include?('TrlnArgon')
-      insert_into_file 'app/controllers/catalog_controller.rb', after: 'include Blacklight::Marc::Catalog' do
+      insert_into_file 'app/controllers/catalog_controller.rb', after: 'include Blacklight::Catalog' do
         "\n\n  # CatalogController behavior and configuration for TrlnArgon"\
         "\n  include TrlnArgon::ControllerOverride\n"
       end
@@ -117,6 +117,14 @@ module TrlnArgon
                 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Email)'
     end
 
+    def inject_sms_action
+      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Sms)'
+      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
+      gsub_file 'app/models/solr_document.rb',
+                'SolrDocument.use_extension(Blacklight::Document::Sms)',
+                'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Sms)'
+    end
+
     def inject_catalog_controller_overrides
       return if IO.read('config/application.rb').include?('local_env.yml')
       insert_into_file 'config/application.rb', after: 'class Application < Rails::Application' do
@@ -179,10 +187,12 @@ module TrlnArgon
       end
     end
 
-    def add_trln_document_routes
-      return if IO.read('config/routes.rb').include?('get "trln/:id"')
-      insert_into_file 'config/routes.rb', after: 'concern :exportable, Blacklight::Routes::Exportable.new' do
-        "\n  get \"trln/:id\", to: \"trln#show\", as: \"trln_solr_document\"\n"
+    def add_trln_exportable_routes
+      return if IO.read('config/routes.rb').include?('resources :trln_solr_documents')
+      insert_into_file('config/routes.rb', after: 'concern :exportable, Blacklight::Routes::Exportable.new') do
+        "\n\n  resources :trln_solr_documents, only: [:show], path: '/trln', controller: 'trln' do"\
+        "\n    concerns :exportable"\
+        "\n  end"
       end
     end
 

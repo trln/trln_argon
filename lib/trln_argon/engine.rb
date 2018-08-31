@@ -7,6 +7,7 @@ require 'openurl'
 require 'font-awesome-rails'
 require 'bootstrap-select-rails'
 require 'chosen-rails'
+require 'rsolr'
 
 module TrlnArgon
   class Engine < ::Rails::Engine

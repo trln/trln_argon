@@ -11,6 +11,7 @@ AllCops:
     - 'trln_argon.gemspec'
     - 'config/initializers/openurl.rb'
     - 'lib/trln_argon/argon_search_builder/add_query_to_solr.rb'
+    - 'lib/generators/trln_argon/remove_solr_marc_generator.rb'
 
 Documentation:
   Enabled: false
@@ -23,6 +24,7 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Exclude:
     - 'lib/trln_argon/trln_controller_behavior.rb'
+    - 'lib/trln_argon/bookmarks_controller_behavior.rb'
     - 'lib/trln_argon/controller_override.rb'
     - 'lib/tasks/trln_argon_tasks.rake'
     - 'spec/lib/trln_argon/fields_spec.rb'

@@ -1,24 +1,32 @@
 module TrlnArgon
   module ViewHelpers
     module DocumentExportHelper
-      def argon_refworks_path(options = {})
+      def refworks_path(options = {})
         "#{TrlnArgon::Engine.configuration.refworks_url}#{ris_url(options)}"
       end
 
       def ris_path(options = {})
-        if controller_name == 'bookmarks'
-          bookmarks_path({ format: :ris }.merge(options))
-        else
-          solr_document_path({ format: :ris }.merge(options))
-        end
+        solr_document_path({ format: :ris }.merge(options))
       end
 
       def ris_url(options = {})
-        if controller_name == 'bookmarks'
-          bookmarks_url({ format: :ris }.merge(options))
-        else
-          solr_document_url({ format: :ris }.merge(options))
-        end
+        solr_document_url({ format: :ris }.merge(options))
+      end
+
+      def email_path(options = {})
+        email_solr_document_path(options)
+      end
+
+      def email_url(options = {})
+        email_solr_document_url(options)
+      end
+
+      def sms_path(options = {})
+        sms_solr_document_path(options)
+      end
+
+      def sms_url(options = {})
+        sms_solr_document_url(options)
       end
 
       def render_ris(documents)
