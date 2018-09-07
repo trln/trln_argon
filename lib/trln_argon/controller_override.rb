@@ -19,23 +19,25 @@ module TrlnArgon
       add_show_tools_partial(:email,
                              icon: 'glyphicon-envelope',
                              callback: :email_action,
+                             path: :email_path,
                              validator: :validate_email_params)
       add_show_tools_partial(:sms,
                              icon: 'glyphicon-phone',
                              if: :render_sms_action?,
                              callback: :sms_action,
+                             path: :sms_path,
                              validator: :validate_sms_params)
       add_show_tools_partial(:ris,
                              icon: 'glyphicon-download-alt',
                              if: :render_ris_action?,
                              modal: false,
                              path: :ris_path)
-      add_show_tools_partial(:argon_refworks,
+      add_show_tools_partial(:refworks,
                              icon: 'glyphicon-export',
-                             if: :render_argon_refworks_action?,
+                             if: :render_refworks_action?,
                              new_window: true,
                              modal: false,
-                             path: :argon_refworks_path)
+                             path: :refworks_path)
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -62,7 +64,6 @@ module TrlnArgon
         # See add_show_tools_partial methods above for
         # tools configuration
         config.show.document_actions.delete(:citation)
-        config.show.document_actions.delete(:sms)
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
@@ -468,7 +469,7 @@ module TrlnArgon
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
       end
 
-      alias_method :render_argon_refworks_action?, :render_ris_action?
+      alias_method :render_refworks_action?, :render_ris_action?
     end
   end
 end

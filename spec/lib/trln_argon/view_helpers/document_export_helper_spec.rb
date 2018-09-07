@@ -1,7 +1,7 @@
 describe TrlnArgon::ViewHelpers::DocumentExportHelper, type: :helper do
-  describe '#argon_refworks_path' do
+  describe '#refworks_path' do
     it 'returns a path to refworks export' do
-      expect(helper.argon_refworks_path(id: 'DUKE122335')).to eq(
+      expect(helper.refworks_path(id: 'DUKE122335')).to eq(
         'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?'\
         'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=http://test.host/catalog/DUKE122335.ris'
       )

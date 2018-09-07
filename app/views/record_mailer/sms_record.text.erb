@@ -1,0 +1,4 @@
+<%= t('trln_argon.sms.library_note') %>
+<% @documents.each do |document| %>
+<%= document.to_sms_text %>
+<% end %>

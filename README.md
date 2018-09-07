@@ -35,7 +35,7 @@ gem 'trln_argon', git: 'https://github.com/trln/trln_argon'
 3. Run the following:
 
         $ bundle install
-        $ bundle exec rails generate blacklight:install --devise --marc
+        $ bundle exec rails generate blacklight:install --devise --skip-solr
         $ bundle exec rails generate trln_argon:install
         $ bundle exec rake db:migrate
 

@@ -101,7 +101,7 @@ describe TrlnArgon::SolrDocument do
 
     it 'exports the document as RIS' do
       expect(test_document.export_as_ris).to eq(
-        "TY  - GEN\r\n"\
+        "TY  - BOOK\r\n"\
         "A1  - Maureen E. Downey.\r\n"\
         "AV  - Perkins Public Documents/Maps (Call Number: SI 1.27:435)\r\n"\
         "ID  - DUKE002952265\r\n"\
@@ -109,6 +109,7 @@ describe TrlnArgon::SolrDocument do
         "KW  - Echinodermata -- Classification\r\n"\
         "KW  - Echinodermata -- Atlantic Ocean -- Classification\r\n"\
         "LA  - English\r\n"\
+        "PB  - Washington : Smithsonian Institution Press, 1986.\r\n"\
         "PY  - 1986\r\n"\
         'TI  - Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), '\
         "with description of a new genus and family /\r\n"\
@@ -166,6 +167,39 @@ describe TrlnArgon::SolrDocument do
     end
 
     # rubocop:disable ExampleLength
+    it 'exports the document to email text' do
+      expect(test_document.to_email_text).to eq(
+        "\n"\
+        "Title:\n"\
+        '  Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), '\
+        "with description of a new genus and family /\n"\
+        "\n"\
+        "Author:\n"\
+        "  Maureen E. Downey.\n"\
+        "\n"\
+        "Link to Record:\n"\
+        "  https://discovery.trln.org/catalog/DUKE002952265\n"\
+        "\n"\
+        "Location:\n"\
+        "  Perkins Public Documents/Maps (Call Number: SI 1.27:435)\n"\
+        "\n"\
+        "Publisher:\n"\
+        "  Washington : Smithsonian Institution Press, 1986.\n"\
+        "\n"\
+        "Date:\n"\
+        "  1986\n"\
+        "\n"\
+        "Format:\n"\
+        '  Book'
+      )
+    end
+  end
+
+  describe 'export to sms' do
+    let(:test_document) do
+      SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
+    end
+
     it 'exports the document to email text' do
       expect(test_document.to_email_text).to eq(
         "\n"\

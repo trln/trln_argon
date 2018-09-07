@@ -48,11 +48,15 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the Argon Refworks show document action' do
-      expect(override_config.show.document_actions).to include(:argon_refworks)
+      expect(override_config.show.document_actions).to include(:refworks)
     end
 
     it 'sets the email show document action' do
       expect(override_config.show.document_actions).to include(:email)
+    end
+
+    it 'sets the sms show document action' do
+      expect(override_config.show.document_actions).to include(:sms)
     end
   end
 

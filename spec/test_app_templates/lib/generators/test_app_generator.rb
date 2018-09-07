@@ -18,7 +18,7 @@ class TestAppGenerator < Rails::Generators::Base
   def run_blacklight_generator
     say_status('warning', 'GENERATING BL', :yellow)
 
-    generate 'blacklight:install', '--devise', '--marc'
+    generate 'blacklight:install', '--devise', '--skip-solr'
   end
 
   def install_engine

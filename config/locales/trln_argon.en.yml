@@ -28,7 +28,7 @@ en:
             email: 'Email'
             sms: 'Text'
             clear: 'Clear'
-            argon_refworks: "Refworks"
+            refworks: "Refworks"
             ris: "RIS File"
 
         email:
@@ -36,6 +36,10 @@ en:
                 subject:
                     one: 'Library catalog record: %{title}'
                     other: 'Library catalog records'
+
+        sms:
+          form:
+            title: 'Text This'
 
     blacklight_advanced_search:
         form:
@@ -182,3 +186,8 @@ en:
                 summary: "Summary"
                 full_text_link: "Full Text Link"
                 findingaid_link: "Finding Aid Link"
+        sms:
+            library_note: "(Catalog result)"
+            label:
+                title: "Title"
+                location: "Location"

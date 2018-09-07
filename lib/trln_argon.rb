@@ -3,6 +3,7 @@ require 'trln_argon/version'
 
 module TrlnArgon
   autoload :ArgonSearchBuilder, 'trln_argon/argon_search_builder'
+  autoload :BookmarksControllerBehavior, 'trln_argon/bookmarks_controller_behavior'
   autoload :ControllerOverride, 'trln_argon/controller_override'
   autoload :DocumentExtensions, 'trln_argon/document_extensions'
   autoload :Field, 'trln_argon/field'
