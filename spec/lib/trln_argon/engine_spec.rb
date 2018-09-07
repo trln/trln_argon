@@ -30,6 +30,10 @@ describe TrlnArgon::Engine do
     it 'sets the contact URL' do
       expect(config.contact_url).to eq('https://library.unc.edu/ask/')
     end
+
+    it 'sets sort order in holding_list' do
+      expect(config.sort_order_in_holding_list).to eq('unc, duke, ncsu, nccu, trln')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -72,6 +76,10 @@ describe TrlnArgon::Engine do
 
     it 'sets the contact url' do
       expect(config.contact_url).to eq('https://library.duke.edu/research/ask')
+    end
+
+    it 'sets the sort order in holding list' do
+      expect(config.sort_order_in_holding_list).to eq('unc, duke, ncsu, nccu, trln')
     end
   end
 end

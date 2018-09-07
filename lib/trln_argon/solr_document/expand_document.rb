@@ -15,6 +15,7 @@ module TrlnArgon
 
       def docs_grouped_by_association
         @docs_grouped_by_association ||= expanded_documents.group_by(&:record_association)
+        TrlnArgon::SortHoldingList.by_institution(@docs_grouped_by_association)
       end
 
       def expanded_documents

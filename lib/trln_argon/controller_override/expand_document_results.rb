@@ -14,9 +14,10 @@ module TrlnArgon
           group.key == doc[TrlnArgon::Fields::ROLLUP_ID]
         end.first
         group_docs = group_docs.respond_to?(:docs) ? group_docs.docs : [doc]
-        Hash[group_docs.map do |gr_doc|
+        docs_grouped_by_association = Hash[group_docs.map do |gr_doc|
           [gr_doc.record_association, gr_doc]
         end]
+        TrlnArgon::SortHoldingList.by_institution(docs_grouped_by_association)
       end
 
       def rollup_ids_from_response
