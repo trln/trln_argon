@@ -1,0 +1,167 @@
+<% if document.findingaid_urls.any? || document.fulltext_urls.any? %>
+  <div class="items-spacer col-md-12"></div>
+<% end %>
+
+<div class="items-wrapper items-section-show col-md-12">
+
+  <div class="row">
+
+    <% document.holdings.each do |loc_b, loc_narrow_map| %>
+
+      <% next if (loc_b == 'ONLINE' || loc_b == 'DUKIR' || loc_b.blank?) %>
+
+      <% loc_narrow_map.each do |loc_n, item_data|  %>
+
+        <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
+        <% has_summary = !item_data.fetch('summary', '').blank? %>
+        <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
+
+
+        <div class="location-header col-md-12">
+          <h3>
+            <% # --- display broad location --- %>
+            <% if loc_b.present? %>
+              <% broad_location_display = map_argon_code(document.record_owner, 'loc_b', loc_b) %>
+              <span class='location loc-broad loc_b__<%= loc_b %>'>
+                <%= broad_location_display %>
+              </span>
+            <% end %>
+
+            <% # --- display narrow location --- %>
+            <% if loc_n.present? %>
+              <% # is loc_n different? %>
+              <% if narrow_loc != broad_location_display %>
+                <span class='location loc-narrow loc_n__<%= loc_n %>'> &mdash; <%= narrow_loc %></span>
+              <% end %>
+            <% end %>
+          </h3>
+        </div>
+
+
+        <% if has_summary %>
+
+          <% # --- SUMMARY --- %>
+          <div class="row">
+
+            <div class='loc-narrow-banner col-md-12' data-locbroad='<%= loc_b %>' data-locnarrow='<%= loc_n %>' id='<%= "item-details-#{loc_b}-#{loc_n}" %>'>
+
+              <div class='col-sm-4 call-number-wrapper'>
+                <dl class="dl-horizontal">
+                  <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+                  <dd><span class='call-number'><%= item_data['call_no'] %></span></dd>
+                </dl>
+              </div>
+
+              <div class='col-sm-8 summary-wrapper'>
+                <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>">
+                  <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
+                  <dd>
+
+                    <div class="summary-text-wrapper expandable-content">
+                      <span class="summary-text"><%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %></span>
+                    </div>
+
+                    <div class="expandable-content-controls">
+                      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+                      <span class='show-control less'><a href="#item-summary-<%= loc_b %>-<%= loc_n %>" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+                    </div>
+
+                  </dd>
+
+                </dl>
+                <div class="summary-toggle text-center">
+                  <a class="expander btn btn-sm btn-info" data-toggle='collapse' href='<%= "#item-container-#{loc_b}-#{loc_n}" %>' aria-expanded='false' aria-controls='this'>
+                    <span class='shower'><%= t('trln_argon.show.controls.show') %> <%= item_data['items'].length %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-plus-circle" aria-hidden="true"></i></span>
+                    <span class='hider'><%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i></span>
+                  </a>
+                </div>
+              </div>
+
+            <% if has_holding_notes %>
+              <div class="col-sm-12 holding-note">
+                <dl class="dl-horizontal">
+                  <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
+                  <dd><span class='notes'><%= [*item_data['notes']].join("; "); %></span></dd>
+                </dl>
+              </div>
+            <% end %>
+
+            </div>
+
+          </div>
+
+        <% end %>
+
+
+        <div class="row item-group<%= has_summary ? '' : '-display' %>" id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
+
+          <% items_have_notes = items_have_notes?(item_data['items']) %>
+
+          <% item_data['items'].each_with_index do |item, index| %>
+
+            <div class="col-md-12 item <%= loc_n %> <%= loc_b %>">
+
+              <% # --- ITEM(s) --- %>
+
+              <div class='col-md-4 col-sm-7 call-number-wrapper'>
+                <dl class="dl-horizontal">
+                <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+                <dd><span class='call-number'><%= call_number_display(item) %></span></dd>
+                </dl>
+              </div>
+
+              <div class='col-md-4 col-sm-5 status-wrapper'>
+                <dl class="dl-horizontal">
+                  <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
+                  <dd>
+                    <% if item['status'].downcase == 'available' || item['status'].downcase == 'available - library use only' %>
+                      <span class="item-available"><%= item['status'] %></span>
+                    <% elsif item['status'].downcase == 'checked out' || item['status'].downcase.include?('lost') %>
+                      <span class="item-not-available"><%= item['status'] %> <% if item.has_key?('due_date') %> (Due <%= item['due_date'].to_time.strftime("%m/%d/%Y") %>)<% end %> </span>
+                    <% elsif item['status'].downcase == 'in-library use only' %>
+                      <span class="item-library-only"><%= item['status'] %></span>
+                    <% else %>
+                      <%= item['status'] %>
+                    <% end %>
+                  </dd>
+                </dl>
+              </div>
+
+            <% if item_notes_display(item).present? %>
+
+              <% if item_notes_display(item).length > 120 %>
+                <div class="col-md-12 item-note-wrapper">
+              <% else %>
+                <div class="col-md-4 col-sm-12 item-note-wrapper">
+              <% end %>
+                  <dl class="dl-horizontal">
+                    <dt><span class='item-note-label label label-info'><%= t('trln_argon.show.label.item_note') %></span></dt>
+                    <dd><%= item_notes_display(item) %></dd>
+                  </dl>
+              </div>
+            <% end %>
+
+            </div>
+
+          <% end %>
+
+        </div>
+
+
+          <% if item_data['items'].length > 10 %>
+
+            <div class="summary-toggle-bottom text-center">
+              <a class="expander btn" data-toggle='collapse' href='<%= "#item-container-#{loc_b}-#{loc_n}" %>' aria-expanded='false' aria-controls='this'>
+                <span class='hider'><%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i></span>
+              </a>
+            </div>
+
+          <% end %>
+
+      <% end %>
+
+    <% end %>
+
+  </div>
+
+</div>

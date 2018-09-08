@@ -1,5 +1,5 @@
 <!-- TODO: Use a different partial for serials? -->
 <!--       Skip display if holdings are only ONLINE; this is an NCSU-specific hack atm; we might also skip showing print summaries for journals -->
 <% unless ['ONLINE'] == document.holdings.keys %>
-  <%= render partial: "items_table", locals: { document: document, context: 'index' } %>
+  <%= render partial: "items_section", locals: { document: document, context: 'index' } %>
 <% end %>

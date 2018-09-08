@@ -224,7 +224,9 @@ describe TrlnArgonHelper, type: :helper do
       it 'creates a link using the supplied text' do
         expect(helper.link_to_primary_url(url_hash)).to(
           eq('<a class="link-type-fulltext" '\
+             'target="_blank" '\
              'href="http://www.law.duke.edu/journals/lcp/">'\
+             '<i class="fa fa-external-link" aria-hidden="true"></i>'\
              'Law and contemporary problems, v. 63, no. 1-2</a>')
         )
       end
@@ -240,7 +242,9 @@ describe TrlnArgonHelper, type: :helper do
       it 'creates a link using the default translation' do
         expect(helper.link_to_primary_url(url_hash)).to(
           eq('<a class="link-type-fulltext" '\
+             'target="_blank" '\
              'href="http://www.law.duke.edu/journals/lcp/">'\
+             '<i class="fa fa-external-link" aria-hidden="true"></i>'\
              'Online Access</a>')
         )
       end

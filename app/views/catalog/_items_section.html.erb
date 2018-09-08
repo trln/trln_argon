@@ -1,0 +1,43 @@
+<div class="items well">
+
+  <div class="row">
+
+    <% if document.findingaid_urls.any? %>
+        <div class="fulltext-url col-md-7">
+          <ul>
+          <% document.findingaid_urls.each do |url| %>
+            <li><%= link_to_primary_url(url) %></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <% if document.fulltext_urls.any? %>
+        <div class="fulltext-url col-md-7">
+          <ul>
+          <% document.fulltext_urls.each do |url| %>
+            <li><%= link_to_primary_url(url) %></li>
+          <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <!-- List all the holdings keys and remove empty/nil and online keys. -->
+    <!-- If there are any keys left then go ahead and show the items. -->
+    <!-- Otherwise don't display the items. -->
+    <% unless (document.holdings.keys - ['ONLINE', 'DUKIR', '', nil]).empty? %>
+      <% if context == 'index' %>
+        <%= render partial: "items_section_index", locals: { document: document} %>
+      <% else %>
+        <%= render partial: "items_section_show", locals: { document: document } %>
+      <% end %>
+    <% end %>
+
+
+    <!-- add related links someplace! -->
+
+
+
+  </div>
+
+</div>
