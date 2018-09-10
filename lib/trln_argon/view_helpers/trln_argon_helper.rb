@@ -112,7 +112,7 @@ module TrlnArgon
       end
 
       def link_to_primary_url(url_hash)
-        if (url_hash[:type] == 'findingaid')
+        if url_hash[:type] == 'findingaid'
           link_to(url_hash[:href], class: "link-type-#{url_hash[:type]}", target: '_blank') do
             '<i class="fa fa-archive" aria-hidden="true"></i>'.html_safe + primary_url_text(url_hash)
           end

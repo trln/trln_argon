@@ -29,7 +29,7 @@
             <% # --- display narrow location --- %>
             <% if loc_n.present? %>
               <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
-              <% if narrow_loc == nil %>
+              <% if narrow_loc.nil? %>
                 <% narrow_loc = loc_n %>
               <% end %>
               <% # is loc_n different and not empty? %>
