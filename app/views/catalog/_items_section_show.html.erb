@@ -14,7 +14,6 @@
 
         <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
         <% has_summary = !item_data.fetch('summary', '').blank? %>
-        <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
 
 
         <div class="location-header col-md-12">
@@ -29,8 +28,12 @@
 
             <% # --- display narrow location --- %>
             <% if loc_n.present? %>
-              <% # is loc_n different? %>
-              <% if narrow_loc != broad_location_display %>
+              <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
+              <% if narrow_loc == nil %>
+                <% narrow_loc = loc_n %>
+              <% end %>
+              <% # is loc_n different and not empty? %>
+              <% if narrow_loc != broad_location_display && narrow_loc != '' %>
                 <span class='location loc-narrow loc_n__<%= loc_n %>'> &mdash; <%= narrow_loc %></span>
               <% end %>
             <% end %>
