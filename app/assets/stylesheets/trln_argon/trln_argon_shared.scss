@@ -328,7 +328,8 @@ body {
 
   }
 
-  .link-type-fulltext {
+  .link-type-fulltext,
+  .link-type-findingaid {
     /*border-radius: 4px;*/
     color: #fff;
     display: block;
@@ -339,16 +340,25 @@ body {
     text-align: left;
     }
 
-    .link-type-fulltext:hover {
-      background: $primary-color;
+    .link-type-fulltext:hover,
+    .link-type-fulltext:focus,
+    .link-type-findingaid:hover,
+    .link-type-findingaid:focus {
+      background: darken($primary-color, 10%);
       text-decoration: none;
     }
+
 
   .fa {
     display: block;
     float: left;
     margin-left: -1.3em;
     margin-top: .15em;
+
+    &.fa-archive {
+      margin-top: 0;
+    }
+
   }
 
   ul li:first-child:nth-last-child(1) a {
@@ -1150,16 +1160,16 @@ h1, h2, h3, h4, h5 {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 5.75em;
+      width: 6em;
     }
 
-    dd { margin-left: 6.25em; }
+    dd { margin-left: 6.5em; }
 
   }
 
   #documents .items .institution-availability {
-    dt { width: 3.75em; }
-    dd { margin-left: 4.25em; }
+    dt { width: 4em; }
+    dd { margin-left: 4.5em; }
   }
 
 }
