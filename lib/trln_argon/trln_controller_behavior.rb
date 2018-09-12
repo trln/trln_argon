@@ -20,11 +20,17 @@ module TrlnArgon
 
       configure_blacklight do |config|
         config.search_builder_class = DefaultTrlnSearchBuilder
-      end
 
-      def index
-        super
-        expanded_documents_hash
+        # These params are added to the Solr document request to fetch any
+        # associated rolled up documents so that holdings, items,
+        # and links can be shown for all associated records in the
+        # expanded TRLN context.
+        config.default_document_solr_params = {
+          :expand => 'true',
+          'expand.field' => TrlnArgon::Fields::ROLLUP_ID,
+          'expand.q' => '*:*',
+          'expand.rows' => 50
+        }
       end
 
       private

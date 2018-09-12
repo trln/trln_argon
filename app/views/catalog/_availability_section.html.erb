@@ -2,10 +2,10 @@
 
   <div class="availability institution-availability row">
 
-  <% expanded_availability.each do |institution, doc| %>
+  <% docs_with_holdings_merged_from_expanded_docs.each do |doc| %>
 
     <div class="institution location-header col-md-12">
-      <h4><%= t("trln_argon.institution.#{institution}.long_name") %></h4>
+      <h4><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h4>
     </div>
 
     <div class="item col-md-12">

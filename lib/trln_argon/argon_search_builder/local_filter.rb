@@ -9,6 +9,9 @@ module TrlnArgon
       def rollup_duplicate_records(solr_parameters)
         solr_parameters[:fq] ||= []
         solr_parameters[:fq] << record_rollup_query
+        solr_parameters[:expand] = 'true'
+        solr_parameters['expand.rows'] = 50
+        solr_parameters['expand.q'] = '*:*'
       end
 
       private

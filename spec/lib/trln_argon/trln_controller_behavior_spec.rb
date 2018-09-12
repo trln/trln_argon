@@ -11,6 +11,17 @@ describe TrlnArgon::TrlnControllerBehavior do
     end
   end
 
+  describe 'default_document_solr_params' do
+    it 'sets the default parameters for document requests' do
+      expect(override_config.default_document_solr_params).to eq(
+        :expand => 'true',
+        'expand.field' => TrlnArgon::Fields::ROLLUP_ID,
+        'expand.q' => '*:*',
+        'expand.rows' => 50
+      )
+    end
+  end
+
   describe '#filter_scope_name' do
     it 'sets the name to TRLN' do
       expect(mock_controller.helpers.filter_scope_name).to eq('TRLN')

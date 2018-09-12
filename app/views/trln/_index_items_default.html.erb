@@ -1,1 +1,2 @@
-<%= render partial: "availability_section", locals: { expanded_availability: @expanded_documents_hash[document.id] } %>
+<%= render partial: "availability_section",
+    locals: { docs_with_holdings_merged_from_expanded_docs: document.docs_with_holdings_merged_from_expanded_docs } %>
