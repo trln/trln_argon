@@ -51,6 +51,14 @@ module TrlnArgon
         config.document_solr_path = :document
         config.document_solr_request_handler = nil
 
+        # Configuration for autocomplete suggester
+        config.autocomplete_enabled = true
+        config.autocomplete_solr_component = 'suggest'
+        config.autocomplete_path = 'suggest'
+        config.autocomplete_path_title = 'suggest_title'
+        config.autocomplete_path_author = 'suggest_author'
+        config.autocomplete_path_subject = 'suggest_subject'
+
         config.show.heading_partials = %i[show_header show_thumbnail show_sub_header]
         config.show.partials = %i[show_items
                                   show_authors

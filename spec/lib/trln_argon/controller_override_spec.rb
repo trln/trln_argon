@@ -42,6 +42,32 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  describe 'autosuggest configuration' do
+    it 'turns on autosuggest' do
+      expect(override_config.autocomplete_enabled).to be true
+    end
+
+    it 'sets the name of the Solr suggest component' do
+      expect(override_config.autocomplete_solr_component).to eq('suggest')
+    end
+
+    it 'sets the request handler for all_fields suggestions' do
+      expect(override_config.autocomplete_path).to eq('suggest')
+    end
+
+    it 'sets the request handler for title suggestions' do
+      expect(override_config.autocomplete_path_title).to eq('suggest_title')
+    end
+
+    it 'sets the request handler for author suggestions' do
+      expect(override_config.autocomplete_path_author).to eq('suggest_author')
+    end
+
+    it 'sets the requst handler for subject suggestions' do
+      expect(override_config.autocomplete_path_subject).to eq('suggest_subject')
+    end
+  end
+
   describe 'show document actions' do
     it 'sets the RIS show document action' do
       expect(override_config.show.document_actions).to include(:ris)

@@ -1391,7 +1391,24 @@ h2.local-filter-heading  {
     color: #fff;
     background-color: $secondary-link-color;
   }
+}
 
+/* Typeahead/Autosuggest */
+
+.twitter-typeahead {
+  .tt-menu {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  .tt-suggestion {
+    .tt-category {
+      float: right;
+      font-weight: 600;
+      padding-right: 10px;
+      color: $secondary-color;
+    }
+  }
 }
 
 .syndetics-copyright {
