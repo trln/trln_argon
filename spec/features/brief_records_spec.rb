@@ -13,13 +13,11 @@ describe 'brief records' do
       expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
     end
 
-    # Skip for now. Should start to pass once more records get reindexed.
-    xit 'displays the imprint main field value' do
+    it 'displays the imprint main field value' do
       expect(brief_records).to have_css('li.imprint_main_a', text: /.+/)
     end
 
-    # Skip for now. Should start to pass once data is refreshed.
-    xit 'displays the resource_type field value' do
+    it 'displays the resource_type field value' do
       expect(brief_records).to have_css('li.resource_type_a', text: /.+/)
     end
   end

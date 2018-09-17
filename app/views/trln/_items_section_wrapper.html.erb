@@ -1,4 +1,4 @@
-<% document.docs_with_merged_holdings.each do |doc| %>
+<% document.docs_with_holdings_merged_from_expanded_docs.each do |doc| %>
   <h3 class="institution-name <%= t("trln_argon.institution.#{doc.record_association}.short_name").downcase %>"><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h3>
   <%= render partial: "items_section", locals: { document: doc, context: 'show' } %>
 <% end %>

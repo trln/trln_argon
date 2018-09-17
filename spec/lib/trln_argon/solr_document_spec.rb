@@ -368,4 +368,54 @@ describe TrlnArgon::SolrDocument do
       expect(owned_document.record_owner).to eq('unc')
     end
   end
+
+  describe 'ExpandDocument' do
+    let(:rollup_id) { 'OCLC5555' }
+    let(:expanded_solr_doc) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE123456789',
+        rollup_id: rollup_id,
+        owner_a: ['duke'],
+        items: 'a duke item'
+      )
+    end
+
+    let(:rolled_up_doc) do
+      { id: 'UNC123456789', rollup_id: rollup_id, owner_a: ['unc'], items_a: 'a unc item' }
+    end
+
+    let(:another_rolled_up_doc) do
+      { id: 'UNC123456790', rollup_id: rollup_id, owner_a: ['unc'], items_a: 'another unc item' }
+    end
+
+    let(:response) do
+      { 'expanded' => { rollup_id => { 'docs' => [rolled_up_doc, another_rolled_up_doc] } } }
+    end
+
+    before do
+      allow(expanded_solr_doc).to receive(:response).and_return(response)
+    end
+
+    it 'combines the expanded doc with the rolled up doc' do
+      expect(expanded_solr_doc.expanded_docs.count).to eq(3)
+    end
+
+    it 'groups documents by record association and includes unc' do
+      expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
+        have_key('unc')
+      )
+    end
+
+    it 'groups documents by record association and includes duke' do
+      expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
+        have_key('duke')
+      )
+    end
+
+    it 'combines the unc records into single pseudo record with combined items' do
+      expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs.first['items_a']).to(
+        eq(['a unc item', 'another unc item'])
+      )
+    end
+  end
 end

@@ -1,4 +1,3 @@
-require 'trln_argon/controller_override/expand_document_results'
 require 'trln_argon/controller_override/local_filter'
 
 module TrlnArgon
@@ -10,7 +9,6 @@ module TrlnArgon
     extend ActiveSupport::Concern
 
     included do
-      send(:include, ExpandDocumentResults)
       send(:include, LocalFilter)
       send(:include, BlacklightAdvancedSearch::Controller)
 
