@@ -1,4 +1,5 @@
 require 'trln_argon/view_helpers/document_export_helper'
+require 'trln_argon/view_helpers/facets_helper'
 require 'trln_argon/view_helpers/imprint_helper'
 require 'trln_argon/view_helpers/names_helper'
 require 'trln_argon/view_helpers/search_scope_toggle_helper'
@@ -13,6 +14,7 @@ module TrlnArgon
     # in app/helpers/trln_argon_helper.rb
     module TrlnArgonHelper
       include DocumentExportHelper
+      include FacetsHelper
       include ImprintHelper
       include NamesHelper
       include SearchScopeToggleHelper
