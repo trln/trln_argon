@@ -239,6 +239,12 @@ body {
   margin-right: 1em;
 }
 
+.catalog_startOverLink .fa-repeat {
+  font-size: 1.125em;
+  margin-right: .125em;
+  transform: scaleX(-1);
+}
+
 
 
 @media screen and (max-width: $screen-xs) {
@@ -587,15 +593,27 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   @media screen and (min-width: $screen-sm) and (max-width: $screen-lg) { // account for 'twiddles' weird behavior
 
+    #facets ul.facet-hierarchy li.h-node:hover {
+      cursor: pointer;
+    }
+
     #facets ul.facet-hierarchy .twiddle > .facet_select {
       display: inline-block;
-      width: 120.5px;
+      width: 110px;
       margin-right: 7px;
       float: left;
       text-overflow: ellipsis;
       overflow: hidden;
-      height: 1.2em;
+      /*height: 1.2em;*/
+      height: 15px;
+      padding-bottom: 0;
       white-space: nowrap;
+
+      &:hover {
+        overflow: visible;
+        white-space: nowrap;
+      }
+
     }
 
     #facets ul.facet-hierarchy ul .twiddle > .facet_select {
@@ -609,17 +627,67 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       display: block;
       text-overflow: ellipsis;
       overflow: hidden;
+
+      &:hover {
+        overflow: visible;
+        white-space: nowrap;
+        float: left;
+        cursor: pointer;
+      }
+
+    }
+
+    #facets ul.facet-hierarchy .twiddle-open > .facet-count:hover {
+      float: right;
+      cursor: pointer;
     }
 
     #facets ul.facet-hierarchy .twiddle-open > .facet_select {
       display: auto;
-      width: 120.5px;
+      width: 110px;
       margin-right: 7px;
       float: none;
     }
 
   }
 
+  @media screen and (min-width: $screen-lg) {
+
+    #facets ul.facet-hierarchy li.h-node:hover {
+      cursor: pointer;
+    }
+
+    #facets ul.facet-hierarchy .twiddle > .facet_select {
+      display: inline-block;
+      width: 150px;
+      margin-right: 7px;
+      float: left;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      /*height: 1.2em;*/
+      height: 15px;
+      padding-bottom: 0;
+      white-space: nowrap;
+
+      &:hover {
+        overflow: visible;
+        white-space: nowrap;
+      }
+
+    }
+
+    #facets ul.facet-hierarchy .twiddle-open > .facet_select {
+      display: auto;
+      width: 150px;
+      margin-right: 7px;
+      float: none;
+    }
+
+    #facets ul.facet-hierarchy ul .twiddle > .facet_select {
+      width: 135px;
+    }
+
+  }
 
   @media screen and (min-width: $screen-xs) and (max-width: $screen-sm) { // have to manually set widths on children at different breakpoints
     #facets ul.facet-hierarchy li.h-leaf a { max-width: 300px; }
@@ -635,14 +703,14 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
       width: 155px;
-      a { width: 100px; }
+      a { width: 90px; }
     }
   }
 
   @media screen and (min-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
       width: 205px;
-      a { width: 150px; }
+      a { width: 135px; }
     }
   }
 
@@ -1006,7 +1074,6 @@ h1, h2, h3, h4, h5 {
     margin: .25em 0 .25em 0;
     /*padding-bottom: 1em;*/
     overflow: hidden;
-
   }
 
   .item:nth-child(n+1):before,
@@ -1112,9 +1179,16 @@ h1, h2, h3, h4, h5 {
 
 }
 
+
 #documents .items {
   overflow: visible;
   .item { overflow: visible;}
+}
+
+@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+  #documents .items .item {
+    overflow: hidden;
+  }
 }
 
 @media screen and (min-width: $screen-md) {
