@@ -54,6 +54,7 @@ describe 'search results' do
   describe 'date facet filters' do
     before do
       visit search_catalog_path(local_filter: false)
+      click_button 'search'
       click_link 'Publication Year'
     end
 
