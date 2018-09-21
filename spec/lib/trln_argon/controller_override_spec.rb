@@ -148,6 +148,28 @@ describe TrlnArgon::ControllerOverride do
     end
   end
 
+  describe 'home facet fields' do
+    it 'sets the resource type facet' do
+      expect(override_config.home_facet_fields).to have_key('resource_type_f')
+    end
+
+    it 'sets the language facet' do
+      expect(override_config.home_facet_fields).to have_key('language_f')
+    end
+
+    it 'sets the call number facet' do
+      expect(override_config.home_facet_fields).to have_key('lcc_callnum_classification_f')
+    end
+
+    it 'sets the location hierarchy facet' do
+      expect(override_config.home_facet_fields).to have_key('location_hierarchy_f')
+    end
+
+    it 'sets the availability facet' do
+      expect(override_config.home_facet_fields).to have_key('available_f')
+    end
+  end
+
   describe 'index fields' do
     it 'sets the imprint main field' do
       expect(override_config.index_fields).to have_key('imprint_main_a')

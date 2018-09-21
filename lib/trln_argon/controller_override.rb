@@ -95,9 +95,44 @@ module TrlnArgon
         }
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
-
         config.index.display_type_field = TrlnArgon::Fields::RESOURCE_TYPE.to_s
 
+        # Facets to be populated on landing page
+        config.add_home_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                                    label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
+                                    collapse: false
+        config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                                    label: TrlnArgon::Fields::AVAILABLE_FACET.label,
+                                    limit: true,
+                                    collapse: false
+        config.add_home_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
+                                    label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
+                                    helper_method: :location_filter_display,
+                                    partial: 'blacklight/hierarchy/facet_hierarchy',
+                                    collapse: false
+        config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                                    label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
+                                    limit: true,
+                                    collapse: false
+        config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                                    label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+                                    partial: 'blacklight/hierarchy/facet_hierarchy'
+        config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
+                                    label: TrlnArgon::Fields::LANGUAGE_FACET.label,
+                                    limit: true
+        config.add_home_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
+                                    query: {
+                                      'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
+                                                       fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-7DAY/DAY TO NOW]" },
+                                      'last_month' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
+                                                        fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-1MONTH/DAY TO NOW]" },
+                                      'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
+                                                               fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" }
+                                    },
+                                    label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
+                                    limit: true
+
+        # Facets to be populated when search performed
         config.add_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                collapse: false
@@ -133,14 +168,14 @@ module TrlnArgon
                                         { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
                                           fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[2000 TO *]" },
                                         '1900_to_1999' =>
-                                        { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
-                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1900 TO 1999]" },
+                                          { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
+                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1900 TO 1999]" },
                                         '1800_to_1899' =>
-                                        { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
-                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1800 TO 1899]" },
+                                          { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
+                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1800 TO 1899]" },
                                         'before_1800' =>
-                                        { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
-                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[* TO 1799]" } },
+                                          { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
+                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[* TO 1799]" } },
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
@@ -156,14 +191,12 @@ module TrlnArgon
                                label: TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
-                               query: {
-                                 'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
-                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-7DAY/DAY TO NOW]" },
-                                 'last_month' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
-                                                   fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-1MONTH/DAY TO NOW]" },
-                                 'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
-                                                          fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" }
-                               },
+                               query: { 'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
+                                                         fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-7DAY/DAY TO NOW]" },
+                                        'last_month' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_month'),
+                                                          fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-1MONTH/DAY TO NOW]" },
+                                        'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
+                                                                 fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::GENRE_HEADINGS_FACET.to_s,
@@ -176,7 +209,6 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.label,
                                show: false
-
         # hierarchical facet configuration
         config.facet_display ||= {}
         cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
