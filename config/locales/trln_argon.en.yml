@@ -15,7 +15,7 @@ en:
               title: 'Limit your search'
               inverse-title: 'Expand your search'
 
-            start_over_html: '<i class="fa fa-refresh" aria-hidden="true"></i> Start over'
+            start_over_html: '<i class="fa fa-repeat" aria-hidden="true"></i> Start over'
             edit_search: Edit Search
 
         entry_name:

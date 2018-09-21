@@ -1,4 +1,6 @@
-<div class="holdings">
-  <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
-  <%= render partial: "items_section_wrapper", locals: { document: document, context: 'show' } %>
-</div>
+<% if document.findingaid_urls.any? || document.fulltext_urls.any? || document.holdings.keys.any? %>
+  <div class="holdings">
+    <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
+    <%= render partial: "items_section_wrapper", locals: { document: document, context: 'show' } %>
+  </div>
+<% end %>
