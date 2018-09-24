@@ -70,8 +70,8 @@ module TrlnArgon
     end
 
     def statement_of_responsibility
-      [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY]].concat(
-        [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY_VERN]]
+      [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY_VERN]].concat(
+        [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY]]
       ).join(' / ')
     end
 
