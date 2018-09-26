@@ -51,30 +51,6 @@ describe 'search results' do
     end
   end
 
-  describe 'date facet filters' do
-    before do
-      visit search_catalog_path(local_filter: false)
-      click_button 'search'
-      click_link 'Publication Year'
-    end
-
-    it 'provides "2000 to present" date range facet' do
-      expect(page).to have_css('#facet-publication_year_isort_stored_single .facet_select', text: '2000 to present')
-    end
-
-    it 'provides "1900 to 1999" date range facet' do
-      expect(page).to have_css('#facet-publication_year_isort_stored_single .facet_select', text: '1900 to 1999')
-    end
-
-    it 'provides "1800 to 1899" date range facet' do
-      expect(page).to have_css('#facet-publication_year_isort_stored_single .facet_select', text: '1800 to 1899')
-    end
-
-    it 'provides "Before 1800" date range facet' do
-      expect(page).to have_css('#facet-publication_year_isort_stored_single .facet_select', text: 'Before 1800')
-    end
-  end
-
   describe 'more facet links contain correct local_filter parameter' do
     it 'retains local_filter=true when set' do
       visit search_catalog_path(local_filter: true)

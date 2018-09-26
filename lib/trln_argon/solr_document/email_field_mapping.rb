@@ -20,7 +20,7 @@ module TrlnArgon
           location: proc { holdings_to_text },
           publisher: proc { imprint_main_to_text },
           edition: TrlnArgon::Fields::EDITION,
-          date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
+          date: TrlnArgon::Fields::PUBLICATION_YEAR,
           format: TrlnArgon::Fields::RESOURCE_TYPE,
           # series:
           # description:

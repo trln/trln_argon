@@ -18,7 +18,7 @@ module TrlnArgon
           metadata: {
             au: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
             btitle: TrlnArgon::Fields::TITLE_MAIN,
-            date: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
+            date: TrlnArgon::Fields::PUBLICATION_YEAR,
             edition: TrlnArgon::Fields::EDITION,
             # genre: , TODO
             isbn: TrlnArgon::Fields::ISBN_NUMBER,

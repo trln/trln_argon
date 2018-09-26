@@ -13,6 +13,7 @@ module TrlnArgon
 
     def run_dependency_generators
       generate 'blacklight_hierarchy:install'
+      generate 'blacklight_range_limit:install'
     end
 
     def install_gems
@@ -183,6 +184,7 @@ module TrlnArgon
       insert_into_file 'config/routes.rb', after: 'concern :searchable, Blacklight::Routes::Searchable.new' do
         "\n  resource :trln, only: [:index], as: 'trln', path: '/trln', controller: 'trln' do"\
         "\n    concerns :searchable"\
+        "\n    concerns :range_searchable"\
         "\n  end\n"\
       end
     end
