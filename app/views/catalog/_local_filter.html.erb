@@ -14,7 +14,10 @@
     <span class="sr-only">icon</span><span class="icon-wrapper"></span>
   <% end %>
 
-  <%= label_tag( "toggle-local-btn", t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name), class: "#{local_search_button_label_class}" ) %>
+  <%= label_tag( "toggle-local-btn",
+                 t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name),
+                 class: "#{local_search_button_label_class}",
+                 data: { count_only_path: catalog_count_only_path(query_state) }) %>
 
 </div>
 
@@ -30,6 +33,9 @@
     <span class="sr-only">icon</span><span class="icon-wrapper"></span>
   <% end %>
 
-  <%= label_tag( "toggle-trln-btn", t("trln_argon.local_filter.searching_trln"), class: "#{trln_search_button_label_class}" ) %>
+  <%= label_tag( "toggle-trln-btn",
+                 "#{t("trln_argon.local_filter.searching_trln")}",
+                 class: "#{trln_search_button_label_class}",
+                 data: { count_only_path: trln_count_only_path(query_state) }) %>
 
 </div>
