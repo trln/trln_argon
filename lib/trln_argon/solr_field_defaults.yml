@@ -334,8 +334,12 @@ PHYSICAL_MEDIA_FACET:
   solr_field: physical_media_f
   label:
     en: Physical Media
+PUBLICATION_YEAR:
+  solr_field: :publication_year_sort
+  label:
+    en: Publication Year
 PUBLICATION_YEAR_SORT:
-  solr_field: :publication_year_isort_stored_single
+  solr_field: :publication_year_isort
   label:
     en: Publication Year
 RELATED_WORK:

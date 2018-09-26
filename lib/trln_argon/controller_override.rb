@@ -164,20 +164,12 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
-                               query: { '2000_to_present' =>
-                                        { label: I18n.t('trln_argon.publication_year_ranges.2000_to_present'),
-                                          fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[2000 TO *]" },
-                                        '1900_to_1999' =>
-                                          { label: I18n.t('trln_argon.publication_year_ranges.1900_to_1999'),
-                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1900 TO 1999]" },
-                                        '1800_to_1899' =>
-                                          { label: I18n.t('trln_argon.publication_year_ranges.1800_to_1899'),
-                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[1800 TO 1899]" },
-                                        'before_1800' =>
-                                          { label: I18n.t('trln_argon.publication_year_ranges.before_1800'),
-                                            fq: "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT}:[* TO 1799]" } },
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
-                               limit: true
+                               single: true,
+                               range: {
+                                 assumed_boundaries: [1100, Time.now.year + 1],
+                                 segments: false
+                               }
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true
@@ -443,6 +435,16 @@ module TrlnArgon
           field.solr_local_parameters = {
             qf: '$subject_qf',
             pf: '$subject_pf'
+          }
+        end
+
+        config.add_search_field('publisher') do |field|
+          field.include_in_simple_select = false
+          field.label = I18n.t('trln_argon.search_fields.publisher')
+          field.def_type = 'edismax'
+          field.solr_parameters = {
+            qf: '$publisher_qf',
+            pf: '$publisher_pf'
           }
         end
 

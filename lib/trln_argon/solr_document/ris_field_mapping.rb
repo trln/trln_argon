@@ -38,7 +38,7 @@ module TrlnArgon
           # Publisher (Note: Combined with Place Published in Argon imprint_main)
           PB:  proc { imprint_main_to_text },
           # Publication year (YYYY/MM/DD)
-          PY: TrlnArgon::Fields::PUBLICATION_YEAR_SORT,
+          PY: TrlnArgon::Fields::PUBLICATION_YEAR,
           # ISBN/ISSN
           # SN: ,
           # Primary Title

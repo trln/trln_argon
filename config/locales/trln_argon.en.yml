@@ -41,6 +41,9 @@ en:
           form:
             title: 'Text This'
 
+        range_limit:
+            submit_limit: 'Apply'
+
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
@@ -106,6 +109,7 @@ en:
             title: "Title"
             subject: "Subject"
             isbn_issn: "ISBN/ISSN/barcode"
+            publisher: "Publisher"
 
         sort_options:
             relevance: "Relevance"

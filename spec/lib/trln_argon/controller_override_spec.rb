@@ -128,7 +128,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     it 'sets the publication year facet' do
-      expect(override_config.facet_fields).to have_key('publication_year_isort_stored_single')
+      expect(override_config.facet_fields).to have_key('publication_year_isort')
     end
 
     it 'sets the language facet' do
@@ -471,11 +471,21 @@ describe TrlnArgon::ControllerOverride do
         expect(override_config.search_fields['subject'].label).to eq('Subject')
       end
     end
+
+    describe 'publisher field' do
+      it 'sets the publisher field' do
+        expect(override_config.search_fields).to have_key('publisher')
+      end
+
+      it 'has a label' do
+        expect(override_config.search_fields['publisher'].label).to eq('Publisher')
+      end
+    end
   end
 
   describe 'sort fields' do
     describe 'Relevance' do
-      let(:fields) { 'score desc, publication_year_isort_stored_single desc, title_sort_ssort_single asc' }
+      let(:fields) { 'score desc, publication_year_isort desc, title_sort_ssort_single asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)
@@ -487,7 +497,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     describe 'Year: New to Old' do
-      let(:fields) { 'publication_year_isort_stored_single desc, title_sort_ssort_single asc' }
+      let(:fields) { 'publication_year_isort desc, title_sort_ssort_single asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)
@@ -499,7 +509,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     describe 'Year: Old to New' do
-      let(:fields) { 'publication_year_isort_stored_single asc, title_sort_ssort_single asc' }
+      let(:fields) { 'publication_year_isort asc, title_sort_ssort_single asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)
@@ -511,7 +521,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     describe 'Title: A to Z' do
-      let(:fields) { 'title_sort_ssort_single asc, publication_year_isort_stored_single asc' }
+      let(:fields) { 'title_sort_ssort_single asc, publication_year_isort asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)

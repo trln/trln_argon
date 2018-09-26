@@ -28,6 +28,24 @@
           <% else %>
             <%= render 'advanced_search_facets' %>
           <% end %>
+
+          <!-- Fetch and display publication year range input if configured. -->
+          <% pub_date = blacklight_config.facet_fields[TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s] %>
+          <% if pub_date.present? %>
+            <div class="form-group advanced-search-facet row">
+              <%= label_tag pub_date.field.parameterize, :class => "col-sm-3 control-label" do %>
+                  <%= pub_date.label %>
+              <% end %>
+              <div class="col-sm-9 range_limit">
+                <label for="range_pub_date_start_sort_begin" class="sr-only">Publication date range (starting year)</label>
+                <%= render_range_input(pub_date.field, :begin) %> – 
+                <label for="range_pub_date_start_sort_end" class="sr-only">Publication date range (ending year)</label>
+                <%= render_range_input(pub_date.field, :end) %>
+              </div>
+            </div>
+          <% end %>
+
+
         </div>
       </div>
   </div>
