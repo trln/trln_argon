@@ -7,6 +7,27 @@ module TrlnArgon
         helper_method :filtered_results_total
       end
 
+      # controller action that returns a Solr query response
+      # with no documents listed. Primarily used to fetch counts
+      # client side for the TRLN/local toggle.
+      def count_only
+        builder = search_builder.with(params)
+        builder.rows = '0'
+
+        builder.processor_chain.delete(:add_facetting_to_solr)
+        builder.processor_chain.delete(:only_home_facets)
+        builder.processor_chain.delete(:add_facet_paging_to_solr)
+        builder.processor_chain.delete(:add_sorting_to_solr)
+        builder.processor_chain.append(:remove_params_for_count_only_query)
+
+        response = repository.search(builder)
+        render json: response
+      end
+
+      # helper method that fetches local or trln results server side
+      # for use on the no results page.
+      # TODO: May be worth removing this and relying on a client side
+      # request like the one above.
       def filtered_results_total
         @filtered_results_total ||=
           filtered_results_query_response['response']['numFound']

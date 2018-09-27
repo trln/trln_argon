@@ -6,4 +6,11 @@ describe CatalogController do
       expect(described_class.blacklight_config.search_builder_class).to eq(DefaultLocalSearchBuilder)
     end
   end
+
+  describe 'count only endpoint' do
+    it 'returns a Solr JSON response' do
+      get :count_only
+      expect(JSON.parse(response.body)).to include('response')
+    end
+  end
 end

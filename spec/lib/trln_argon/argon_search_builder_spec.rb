@@ -50,4 +50,27 @@ describe TrlnArgon::ArgonSearchBuilder do
       )
     end
   end
+
+  describe 'remove_params_for_count_only_query' do
+    before { search_builder.remove_params_for_count_only_query(solr_parameters) }
+    it 'removes the stats solr parameters' do
+      expect(solr_parameters).not_to include('stats')
+    end
+
+    it 'removes the stats.field solr parameters' do
+      expect(solr_parameters).not_to include('stats.field')
+    end
+
+    it 'removes the expand solr parameters' do
+      expect(solr_parameters).not_to include('expand')
+    end
+
+    it 'removes the expand.rows parameters' do
+      expect(solr_parameters).not_to include('expand.rows')
+    end
+
+    it 'removes the expand.q parameters' do
+      expect(solr_parameters).not_to include('expand.q')
+    end
+  end
 end

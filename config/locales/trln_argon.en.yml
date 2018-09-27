@@ -78,7 +78,7 @@ en:
             no_results: 'Go back to %{local_institution_name} Catalog'
             search_verb: 'Search'
             searching_local: '%{local_institution_name}'
-            searching_trln: 'All Triangle Research Libraries'
+            searching_trln: 'UNC, Duke, NCSU, NCCU Libraries'
             showing_results: 'Searching:'
 
         scope_name:

@@ -1,5 +1,6 @@
 require 'trln_argon/argon_search_builder/add_query_to_solr'
 require 'trln_argon/argon_search_builder/begins_with'
+require 'trln_argon/argon_search_builder/count_only'
 require 'trln_argon/argon_search_builder/home_facets'
 require 'trln_argon/argon_search_builder/local_filter'
 
@@ -9,6 +10,7 @@ module TrlnArgon
   module ArgonSearchBuilder
     include AddQueryToSolr
     include BeginsWith
+    include CountOnly
     include HomeFacets
     include LocalFilter
   end
