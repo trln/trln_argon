@@ -8,6 +8,8 @@ Blacklight.onLoad(function() {
         var argonHSL = $('#location-data').data('argon-hsl');
         var argonLAW = $('#location-data').data('argon-law');
         var argonInstitution = $('#location-data').data('argon-institution');
+        var locationFacetLimit = $('#location-data').data('location-facet-limit');
+
 
         // hide first two facets
         $('.facet_select:contains("' + argonHSL + '")').parent().addClass("hidden");
@@ -18,10 +20,10 @@ Blacklight.onLoad(function() {
         $('.facet_select:contains("' + argonInstitution + '")').parent().children("ul").css("display", "block");
 
         // if there are more than 10 results
-        if ( $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).length > 10 ) {
+        if ( $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).length > parseInt(locationFacetLimit) ) {
 
           // hide results after 10
-          $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).slice( 10 ).hide();
+          $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).slice( parseInt(locationFacetLimit) ).hide();
 
           // add 'more' and 'less' button at end
           $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
@@ -29,14 +31,14 @@ Blacklight.onLoad(function() {
 
           // click 'more' to show all
           $('.more_locations_link').click(function() {
-              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( 10 ).show();
+              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( parseInt(locationFacetLimit) ).show();
               $('.more_locations_link').hide();
               $('.less_locations_link').show();
           });
 
           // click 'less' to hide
           $('.less_locations_link').click(function() {
-              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( 10 ).hide();
+              $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( parseInt(locationFacetLimit) ).hide();
               $('.more_locations_link').show();
               $('.less_locations_link').hide();
           });

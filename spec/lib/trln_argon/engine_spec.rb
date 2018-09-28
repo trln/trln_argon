@@ -34,6 +34,10 @@ describe TrlnArgon::Engine do
     it 'sets sort order in holding_list' do
       expect(config.sort_order_in_holding_list).to eq('unc, duke, ncsu, nccu, trln')
     end
+
+    it 'sets number of location facets' do
+      expect(config.number_of_location_facets).to eq('10')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -80,6 +84,10 @@ describe TrlnArgon::Engine do
 
     it 'sets the sort order in holding list' do
       expect(config.sort_order_in_holding_list).to eq('unc, duke, ncsu, nccu, trln')
+    end
+
+    it 'sets number of location facets' do
+      expect(config.number_of_location_facets).to eq('10')
     end
   end
 end
