@@ -12,6 +12,7 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'contact_url')
   apply_local_configuration(config, 'feedback_url')
   apply_local_configuration(config, 'sort_order_in_holding_list')
+  apply_local_configuration(config, 'number_of_location_facets')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',

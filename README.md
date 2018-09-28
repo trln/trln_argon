@@ -81,7 +81,7 @@ e.g. in Apache
 </VirtualHost>
 ```
 
-Alternately, if you don't want to fiddle with Apache or NGINX, 
+Alternately, if you don't want to fiddle with Apache or NGINX,
 [Caddy](https://caddyserver.com/) is a standalone web server that is available for a number of platforms; this project contains a `Caddyfile` that listens on port 8080 and do pretty much the above, i.e. serve assets out of `public/assets` and proxy everything else back to Rails.  If `caddy` is installed, you can just run it in the application directory, like so:
 
         $ caddy
@@ -114,6 +114,7 @@ CONTACT_URL: 'https://library.unc.edu/ask/'
 FEEDBACK_URL: ''
 #Define the order of institutions in holding list. Your institution should go first.
 SORT_ORDER_IN_HOLDING_LIST: 'unc, duke, ncsu, nccu, trln'
+NUMBER_OF_LOCATION_FACETS: '10'
 ```
 
 ### Changing Styles

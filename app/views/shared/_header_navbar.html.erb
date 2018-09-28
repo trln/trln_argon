@@ -9,8 +9,9 @@
     </button>
 
     <% inst = TrlnArgon::Engine.configuration.local_institution_code %>
+    <% inst_long = t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name") %>
 
-    <%= link_to content_tag(:span, filter_scope_name, class: "sr-only"), root_path, class: "navbar-brand" %>
+    <%= link_to content_tag(:span, inst_long, class: "sr-only"), root_path, class: "navbar-brand" %>
 
     </div>
 
