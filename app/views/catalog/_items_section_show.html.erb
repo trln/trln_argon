@@ -95,7 +95,6 @@
 
         <% end %>
 
-
         <div class="row item-group<%= has_summary ? '' : '-display' %>" id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
 
           <% items_have_notes = items_have_notes?(item_data['items']) %>
@@ -110,8 +109,8 @@
 
               <div class='col-md-4 col-sm-7 call-number-wrapper'>
                 <dl class="dl-horizontal">
-                <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
-                <dd><span class='call-number'><%= call_number_display(item) %></span></dd>
+                  <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+                  <dd><span class='call-number'><%= call_number_display(item) %></span> <%= render partial: "location_link", locals: {document: document, loc_b: loc_b, loc_n: loc_n, item: item}%>
                 </dl>
               </div>
 
