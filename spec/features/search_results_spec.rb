@@ -71,6 +71,13 @@ describe 'search results' do
     end
   end
 
+  context 'when checkbox facet is configured' do
+    it 'renders a checkbox field in the facet' do
+      visit search_catalog_path
+      expect(page).to have_selector(:css, '#checkbox_access_type_f')
+    end
+  end
+
   # removed for brittleness, leaving in as an example of
   # how to select a search field.
   # describe 'when showing results' do

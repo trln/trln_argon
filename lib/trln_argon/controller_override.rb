@@ -100,11 +100,15 @@ module TrlnArgon
         # Facets to be populated on landing page
         config.add_home_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
-                                    collapse: false
+                                    collapse: false,
+                                    show: true,
+                                    partial: 'catalog/facet_checkbox',
+                                    locals: { checkbox_field: 'Online', checkbox_field_label: 'Available Online' }
         config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                     label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                     limit: true,
-                                    collapse: false
+                                    collapse: false,
+                                    show: true
         config.add_home_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                     helper_method: :location_filter_display,
@@ -135,11 +139,15 @@ module TrlnArgon
         # Facets to be populated when search performed
         config.add_facet_field TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
-                               collapse: false
+                               collapse: false,
+                               show: true,
+                               partial: 'catalog/facet_checkbox',
+                               locals: { checkbox_field: 'Online', checkbox_field_label: 'Available Online' }
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,
-                               collapse: false
+                               collapse: false,
+                               show: true
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                helper_method: :location_filter_display,
