@@ -12,6 +12,8 @@
 
           <% loc_narrow_map.each do |loc_n, item_data|  %>
 
+            <% next if item_data.fetch('items', []).empty? %>
+
             <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
             <% has_summary = !item_data.fetch('summary', '').blank? %>
             <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
