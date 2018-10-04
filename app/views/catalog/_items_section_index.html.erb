@@ -131,7 +131,7 @@
                     <dl class="dl-horizontal">
                       <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
                       <dd>
-                       <% available_class= item_availability_display(item)  + '-boop' %>
+                       <% available_class= item_availability_display(item) %>
                        <% due_date = item_due_date(item) %>
                        <span class="<%= available_class %>">
                            <%= item['status'] %>
