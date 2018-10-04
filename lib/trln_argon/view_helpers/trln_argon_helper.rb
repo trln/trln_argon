@@ -65,9 +65,9 @@ module TrlnArgon
         case item['status']
         when /^available/i
           'item-available'
-        when /^checked out/i, /lost/i, /^missing/i
+        when /^checked out/i, /\blost\b/i, /^missing/i
           'item-not-available'
-        when /^in-library use only$/i
+        when /(?:in-)?library use only/i
           'item-library-only'
         else
           'item-availability-misc'
@@ -75,7 +75,7 @@ module TrlnArgon
       end
 
       def item_due_date(item)
-        return '' unless item.has_key?('due_date')
+        return '' unless item.key?('due_date')
         dfmt = item['due_date'].to_date.strftime('%m/%d/%Y')
         "(Due #{dfmt})"
       rescue StandardError
