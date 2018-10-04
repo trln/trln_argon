@@ -112,7 +112,11 @@
                 <% items_have_notes = items_have_notes?(item_data['items']) %>
                 <% item_data['items'].each do |item| %>
 
-                <div class="col-md-12 item <%= loc_n %> <%= loc_b %>">
+                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>"
+                        <% if item.has_key?('item_id') %>
+                         data-item-barcode="<%= item['item_id'] %>"
+                     <% end %>
+                         >
 
                   <% # --- ITEM(s) --- %>
 
@@ -127,15 +131,14 @@
                     <dl class="dl-horizontal">
                       <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
                       <dd>
-                        <% if item['status'].downcase == 'available' || item['status'].downcase == 'available - library use only' %>
-                          <span class="item-available"><%= item['status'] %></span>
-                        <% elsif item['status'].downcase == 'checked out' || item['status'].include?('lost') %>
-                          <span class="item-not-available"><%= item['status'] %> <% if item.has_key?('due_date') %> (Due <%= item['due_date'].to_time.strftime("%m/%d/%Y") %>)<% end %> </span>
-                        <% elsif item['status'].downcase == 'in-library use only' %>
-                          <span class="item-library-only"><%= item['status'] %></span>
-                        <% else %>
-                          <%= item['status'] %>
-                        <% end %>
+                       <% available_class= item_availability_display(item) %>
+                       <% due_date = item_due_date(item) %>
+                       <span class="<%= available_class %>">
+                           <%= item['status'] %>
+                           <% if !due_date.empty? %>
+                               <span class='due-date'><%= due_date %></span>
+                           <% end %>
+                       </span>
                       </dd>
                     </dl>
                   </div>
