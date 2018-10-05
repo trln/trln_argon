@@ -12,9 +12,10 @@
 
       <% loc_narrow_map.each do |loc_n, item_data|  %>
 
+        <% next if item_data.fetch('items', []).empty? %>
+
         <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
         <% has_summary = !item_data.fetch('summary', '').blank? %>
-
 
         <div class="location-header col-md-12">
           <h3>
