@@ -8,6 +8,7 @@ describe CatalogController do
   end
 
   describe 'count only endpoint' do
+    routes { TrlnArgon::Engine.routes }
     it 'returns a Solr JSON response' do
       get :count_only
       expect(JSON.parse(response.body)).to include('response')

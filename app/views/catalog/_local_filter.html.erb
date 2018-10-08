@@ -17,7 +17,7 @@
   <%= label_tag( "toggle-local-btn",
                  t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name),
                  class: "#{local_search_button_label_class}",
-                 data: { count_only_path: catalog_count_only_path(query_state) }) %>
+                 data: { count_only_path: trln_argon.catalog_count_only_path(query_state) }) %>
 
 </div>
 
@@ -36,6 +36,6 @@
   <%= label_tag( "toggle-trln-btn",
                  "#{t("trln_argon.local_filter.searching_trln")}",
                  class: "#{trln_search_button_label_class}",
-                 data: { count_only_path: trln_count_only_path(query_state) }) %>
+                 data: { count_only_path: trln_argon.trln_count_only_path(query_state) }) %>
 
 </div>
