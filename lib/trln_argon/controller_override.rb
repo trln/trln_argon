@@ -103,7 +103,7 @@ module TrlnArgon
                                     collapse: false,
                                     show: true,
                                     partial: 'catalog/facet_checkbox',
-                                    locals: { checkbox_field: 'Online', checkbox_field_label: 'Available Online' }
+                                    locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') }
         config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                     label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                     limit: true,
@@ -142,7 +142,7 @@ module TrlnArgon
                                collapse: false,
                                show: true,
                                partial: 'catalog/facet_checkbox',
-                               locals: { checkbox_field: 'Online', checkbox_field_label: 'Available Online' }
+                               locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') }
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,

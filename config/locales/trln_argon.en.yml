@@ -125,6 +125,9 @@ en:
             begins_with: "begins with"
             location_separator: ", "
 
+        checkbox_facets:
+            online: "Available Online"
+
         search:
             zero_results:
                 title: 'No results available at %{local_institution_name}'
