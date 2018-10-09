@@ -737,6 +737,61 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     font-weight: normal;
   }
 
+  .facet-checkbox-wrapper {
+
+    .facet-label {
+      color: $primary-link-color;
+      input, label {
+        cursor: pointer;
+        font-weight: normal;
+      }
+      input {
+        font-size: 1.2em;
+      }
+      label:hover {
+        text-decoration: underline;
+      }
+    }
+    .facet-count {
+      float: right;
+    }
+
+  }
+
+  .facet-content .panel-body {
+    border-top: 0 !important;
+  }
+
+  .checkbox-facet {
+    .facet-content .panel-body {
+      border-top: 0 !important;
+    }
+  }
+
+  .facet-checkbox-wrapper {
+
+    .facet-label label,
+    .facet-count {
+      margin-bottom: 0;
+    }
+
+    .facet-label input {
+      margin-right: .15em;
+    }
+
+  }
+
+  .checkbox-facet-checked {
+    background: $primary-link-color;
+    border: $secondary-color;
+
+    .facet-label label,
+    .facet-count {
+      color: #fff;
+    }
+
+  }
+
   /* END Facets */
 
 
