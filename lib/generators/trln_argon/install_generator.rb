@@ -179,6 +179,13 @@ module TrlnArgon
         'data-turbolinks-track': 'reload' %>", '')
     end
 
+    def mount_argon_routes
+      return if IO.read('config/routes.rb').include?('mount TrlnArgon::Engine')
+      insert_into_file 'config/routes.rb', after: "mount Blacklight::Engine => '/'" do
+        "\n  mount TrlnArgon::Engine => '/'\n"
+      end
+    end
+
     def add_trln_routes
       return if IO.read('config/routes.rb').include?('resource :trln')
       insert_into_file 'config/routes.rb', after: 'concern :searchable, Blacklight::Routes::Searchable.new' do

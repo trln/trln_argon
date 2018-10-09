@@ -12,6 +12,8 @@ require 'rsolr'
 
 module TrlnArgon
   class Engine < ::Rails::Engine
+    engine_name 'trln_argon'
+
     attr_writer :configuration
 
     def self.configuration

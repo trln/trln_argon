@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+TrlnArgon::Engine.routes.draw do
   scope module: 'trln_argon' do
     resources :healthchecks, path: '/health', action: :index
   end
