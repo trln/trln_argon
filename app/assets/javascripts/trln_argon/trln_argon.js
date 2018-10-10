@@ -12,3 +12,4 @@
 //= require trln_argon/advanced_search_select.js
 //= require trln_argon/results_count_for_toggle.js
 //= require trln_argon/google_books_preview.js.erb
+//= require trln_argon/hathitrust_links

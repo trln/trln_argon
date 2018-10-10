@@ -8,6 +8,7 @@ module TrlnArgon
   autoload :DocumentExtensions, 'trln_argon/document_extensions'
   autoload :Field, 'trln_argon/field'
   autoload :Fields, 'trln_argon/fields'
+  autoload :HathitrustControllerBehavior, 'trln_argon/hathitrust_controller_behavior'
   autoload :ItemDeserializer, 'trln_argon/item_deserializer'
   autoload :LookupManager, 'trln_argon/mappings'
   autoload :Lookups, 'trln_argon/mappings'

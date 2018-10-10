@@ -13,7 +13,6 @@ Blacklight.onLoad(function() {
     var contractedHeight = lineHeight(this) * 3 + 2;
 
     if ( origHeight <= contractedHeight ) {
-      console.log(origHeight, contractedHeight);
       return;
     }
 

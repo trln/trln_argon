@@ -20,6 +20,8 @@
           <% end %>
           </ul>
         </div>
+    <% else %>
+      <%= render partial: 'hathitrust_link', locals: { document: document } %>
     <% end %>
 
     <!-- List all the holdings keys and remove empty/nil and online keys. -->
