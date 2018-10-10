@@ -1,0 +1,55 @@
+<% # --- SUMMARY --- %>
+
+<div class="row">
+
+  <div class='location-narrow-group col-md-12'>
+
+  <% if item_data['call_no'].present? %>
+    <div class='col-md-4 call-number-wrapper'>
+      <dl class="dl-horizontal">
+        <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+        <dd><span class='call-number'><%= item_data['call_no'] %></span></dd>
+      </dl>
+    </div>
+  <% end %>
+
+  <% if item_data['summary'].present? %>
+
+      <div class='col-sm-8 summary-wrapper'>
+        <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
+          <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
+          <dd>
+
+            <div class="summary-text-wrapper expandable-content">
+              <span class="summary-text"><%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %></span>
+            </div>
+
+            <div class="expandable-content-controls">
+              <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+              <span class='show-control less'><a href="#item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+            </div>
+
+          </dd>
+
+        </dl>
+
+      </div>
+
+  <% end %>
+
+  <% if has_holding_notes %>
+
+    <div class='holding-note col-md-12'>
+
+      <dl class="dl-horizontal">
+        <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
+        <dd><%= [*item_data['notes']].join("; "); %></dd>
+      </dl>
+
+    </div>
+
+  <% end %>
+
+  </div>
+
+</div>

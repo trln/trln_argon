@@ -38,6 +38,14 @@ describe TrlnArgon::Engine do
     it 'sets number of location facets' do
       expect(config.number_of_location_facets).to eq('10')
     end
+
+    it 'sets number of items in index view' do
+      expect(config.number_of_items_index_view).to eq('3')
+    end
+
+    it 'sets number of items in show view' do
+      expect(config.number_of_items_show_view).to eq('6')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -88,6 +96,14 @@ describe TrlnArgon::Engine do
 
     it 'sets number of location facets' do
       expect(config.number_of_location_facets).to eq('10')
+    end
+
+    it 'sets number of items in index view' do
+      expect(config.number_of_items_index_view).to eq('3')
+    end
+
+    it 'sets number of items in show view' do
+      expect(config.number_of_items_show_view).to eq('6')
     end
   end
 end

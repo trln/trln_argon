@@ -2,11 +2,13 @@
   <div class="items-spacer col-md-12"></div>
 <% end %>
 
+<% num_display_items = TrlnArgon::Engine.configuration.number_of_items_index_view.to_f %>
+
 <div class="items-wrapper items-section-index col-md-12">
 
   <div class="row">
 
-        <% document.holdings.each do |loc_b, loc_narrow_map| %>
+        <% document.holdings.each_with_index do |(loc_b, loc_narrow_map), document_index| %>
 
           <% next if (loc_b == 'ONLINE' || loc_b == 'DUKIR' || loc_b.blank?) %>
 
@@ -14,8 +16,6 @@
 
             <% next if item_data.fetch('items', []).empty? %>
 
-            <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
-            <% has_summary = !item_data.fetch('summary', '').blank? %>
             <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
 
 
@@ -44,123 +44,75 @@
               </h4>
             </div>
 
-
             <% # --- SUMMARY --- %>
-            <% if has_summary %>
 
-              <div class="row">
+            <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
+            <% has_summary = !item_data.fetch('summary', '').blank? %>
+            <% has_call_no = !item_data.fetch('call_no', '').blank? %>
 
-                <div class='location-narrow-group col-md-12'>
+            <% if has_summary || has_holding_notes || has_call_no %>
 
-                  <div class='col-md-4 call-number-wrapper'>
-                    <dl class="dl-horizontal">
-                      <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
-                      <dd><span class='call-number'><%= item_data['call_no'] %></span></dd>
-                    </dl>
-                  </div>
+              <% item_with_summary = true %>
 
-                  <div class='col-md-8 summary-wrapper'>
+              <%= render partial: "items_section_summary", locals: { document: document, loc_b: loc_b, loc_n: loc_n, item_data: item_data, has_holding_notes: has_holding_notes } %>
 
-                    <dl class="dl-horizontal">
-                      <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
-                      <dd>
-                        <div class='summary-holdings'>
+            <% end %>
 
-                          <div class='summary-text-wrapper expandable-content'>
-                            <%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %>
-                          </div>
+            <% # ---ITEMS WRAPPER --- %>
 
-                        <% if item_data['summary'].length > 200 %>
-                          <div class="expandable-content-controls">
-                            <div class='item-summary-link'>
-                              <%= link_to ("read more <i class='fa fa-chevron-circle-right' aria-hidden='true'></i>").html_safe, controller: "catalog", action: 'show', id: document.id, anchor: "item-summary-#{loc_b}-#{loc_n}" %>
-                            </div>
-                          </div>
-                        <% end %>
+              <div class="item-group-display <%= item_with_summary ? 'has-summary' : '' %>" id="<%= document.id %>-<%= document_index %>-preview">
 
-                          <div class='item-details-link'><%= link_to t('trln_argon.show.controls.details'), controller: "catalog", action: 'show', id: document.id, anchor: "item-container-#{loc_b}-#{loc_n}" %></div>
-                        </div>
-                      </dd>
+                <% items_have_notes = items_have_notes?(item_data['items']) %>
 
-                    </dl>
+                <% item_data['items'].first(num_display_items).each do |item| %>
 
-                  </div>
+                  <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= item.has_key?('item_id') ? item['item_id'] : '' %>">
 
-                <% if has_holding_notes %>
-
-                  <div class='holding-note col-md-12'>
-
-                    <dl class="dl-horizontal">
-                      <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
-                      <dd><%= [*item_data['notes']].join("; "); %></dd>
-                    </dl>
+                    <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n, source: 'index' } %>
 
                   </div>
 
                 <% end %>
+
+              </div>
+
+              <% if item_data['items'].size > num_display_items %>
+
+                <div class='item-group-display collapse' id="item-container-<%=document.id %>-<%= document_index %>">
+
+                  <% item_data['items'].each_with_index do |item, i| %>
+
+                    <% next if i < num_display_items %>
+
+                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>">
+
+                      <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n, source: 'index' } %>
+
+                    </div>
+
+                  <% end %>
 
                 </div>
 
-              </div>
+                <div class="col-md-12">
+                  <div class="items-toggle">
 
-            <% end %>
+                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                      <%= t('trln_argon.show.controls.show') %> <%= t('trln_argon.show.controls.all') %> <%= item_data['items'].length %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    </a>
 
+                    <a href="#<%= document.id %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                      <%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i>
+                    </a>
 
-
-            <% # --- NO SUMMARY --- %>
-            <% unless has_summary %>
-
-              <div class='item-group-display row' id="<%= "item-container-#{loc_b}-#{loc_n}" %>">
-                <% items_have_notes = items_have_notes?(item_data['items']) %>
-                <% item_data['items'].each do |item| %>
-
-                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>"
-                        <% if item.has_key?('item_id') %>
-                         data-item-barcode="<%= item['item_id'] %>"
-                     <% end %>
-                         >
-
-                  <% # --- ITEM(s) --- %>
-
-                  <div class='col-md-5 col-sm-5 call-number-wrapper'>
-                    <dl class="dl-horizontal">
-                    <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
-                    <dd><span class='call-number'><%= call_number_display(item) %></span> <%= render partial: 'location_link', locals: { document: document, loc_b: loc_b, loc_n: loc_n, item: item } %></dd>
-                    </dl>
                   </div>
-
-                  <div class='col-md-7 col-sm-7 status-wrapper'>
-                    <dl class="dl-horizontal">
-                      <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
-                      <dd>
-                       <% available_class= item_availability_display(item) %>
-                       <% due_date = item_due_date(item) %>
-                       <span class="<%= available_class %>">
-                           <%= item['status'] %>
-                           <% if !due_date.empty? %>
-                               <span class='due-date'><%= due_date %></span>
-                           <% end %>
-                       </span>
-                      </dd>
-                    </dl>
-                  </div>
-
-                <% if item_notes_display(item).present? %>
-                  <div class="col-md-12 item-note-wrapper">
-                    <dl class="dl-horizontal">
-                      <dt><span class='item-note-label label label-info'><%= t('trln_argon.show.label.item_note') %></span></dt>
-                      <dd><%= item_notes_display(item) %></dd>
-                    </dl>
-                  </div>
-                <% end %>
-
-              </div>
+                </div>
 
               <% end %>
 
-            </div>
+          <% # -- END items wrapper -- %>
 
-            <% end %>
+
 
       <% end %>
 

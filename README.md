@@ -115,6 +115,8 @@ FEEDBACK_URL: ''
 #Define the order of institutions in holding list. Your institution should go first.
 SORT_ORDER_IN_HOLDING_LIST: 'unc, duke, ncsu, nccu, trln'
 NUMBER_OF_LOCATION_FACETS: '10'
+NUMBER_OF_ITEMS_INDEX_VIEW: '3'
+NUMBER_OF_ITEMS_SHOW_VIEW: '6'
 ```
 
 ### Changing Styles
