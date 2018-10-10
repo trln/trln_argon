@@ -373,6 +373,101 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe 'Imprint' do
+    let(:imprint_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNCb1225829',
+        imprint_main_a: ['{"type":"imprint",'\
+                         '"label":"Fall/Winter 2002-",'\
+                         '"value":"Savannah, GA : Dept. of Languages, Literature & Philosophy, '\
+                         'Armstrong Atlantic State University"}'],
+        imprint_multiple_a: ['{"type":"imprint",'\
+                             '"value":"Raleigh, N.C. : Published by the editors in cooperation with '\
+                             'the School of Liberal Arts at North Carolina State of the '\
+                             'University of North Carolina, [1964-"}',
+                             '{"type":"imprint",'\
+                             '"label":"Spring 1978-winter 1995","value":"Charlotte, N.C. : English Dept., UNCC"}',
+                             '{"type":"imprint","label":"Summer 1996-winter 1999",'\
+                             '"value":"Charlotte, N.C. : Advancment Studies, CPCC"}',
+                             '{"type":"imprint",'\
+                             '"label":"Summer 2000-summer 2001",'\
+                             '"value":"Charlotte, N.C. : English Dept., CPCC"}',
+                             '{"type":"imprint",'\
+                             '"label":"Fall/Winter 2002-",'\
+                             '"value":"Savannah, GA : Dept. of Languages, Literature & Philosophy, '\
+                             'Armstrong Atlantic State University"}']
+      )
+    end
+
+    describe '#imprint_main_for_header_display' do
+      it 'assembles the imprint main field values for header display' do
+        expect(imprint_document.imprint_main_for_header_display).to(
+          eq('Fall/Winter 2002-: Savannah, GA : Dept. of Languages, '\
+             'Literature & Philosophy, Armstrong Atlantic State University')
+        )
+      end
+    end
+
+    describe '#imprint_multiple_for_display' do
+      it 'assembles imprint_main and imprint_multiple for display' do
+        expect(imprint_document.imprint_multiple_for_display).to(
+          eq('Raleigh, N.C. : Published by the editors in cooperation with the School of Liberal Arts at '\
+          'North Carolina State of the University of North Carolina, [1964-<br />'\
+          'Spring 1978-winter 1995: Charlotte, N.C. : English Dept., '\
+          'UNCC<br />Summer 1996-winter 1999'\
+          ': Charlotte, N.C. : Advancment Studies, CPCC<br />'\
+          'Summer 2000-summer 2001: Charlotte, N.C. : English Dept., CPCC<br />'\
+          'Fall/Winter 2002-: Savannah, GA : Dept. of Languages, '\
+          'Literature & Philosophy, Armstrong Atlantic State University')
+        )
+      end
+    end
+
+    describe '#imprint_main_to_text' do
+      it 'assembles imprint main for exporting to text formats' do
+        expect(imprint_document.imprint_main_to_text).to(
+          eq(['Fall/Winter 2002-: Savannah, GA : Dept. of Languages, Literature & Philosophy, '\
+              'Armstrong Atlantic State University'])
+        )
+      end
+    end
+
+    describe '#imprint_main' do
+      it 'deserializes the imprint_main values' do
+        expect(imprint_document.imprint_main).to(
+          eq([{ type: 'imprint',
+                label: 'Fall/Winter 2002-',
+                value: 'Savannah, GA : Dept. of Languages, Literature & Philosophy, '\
+                       'Armstrong Atlantic State University' }])
+        )
+      end
+    end
+
+    describe '#imprint_multiple' do
+      it 'deserializes the imprint_multiple values' do
+        expect(imprint_document.imprint_multiple).to(
+          eq([{ type: 'imprint',
+                label: '',
+                value: 'Raleigh, N.C. : Published by the editors in cooperation with the School of Liberal Arts '\
+                       'at North Carolina State of the University of North Carolina, [1964-' },
+              { type: 'imprint',
+                label: 'Spring 1978-winter 1995',
+                value: 'Charlotte, N.C. : English Dept., UNCC' },
+              { type: 'imprint',
+                label: 'Summer 1996-winter 1999',
+                value: 'Charlotte, N.C. : Advancment Studies, CPCC' },
+              { type: 'imprint',
+                label: 'Summer 2000-summer 2001',
+                value: 'Charlotte, N.C. : English Dept., CPCC' },
+              { type: 'imprint',
+                label: 'Fall/Winter 2002-',
+                value: 'Savannah, GA : Dept. of Languages, Literature & Philosophy, '\
+                       'Armstrong Atlantic State University' }])
+        )
+      end
+    end
+  end
+
   describe 'ExpandDocument' do
     let(:rollup_id) { 'OCLC5555' }
     let(:expanded_solr_doc) do

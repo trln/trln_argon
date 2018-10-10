@@ -1,3 +1,7 @@
+ACCESS_TYPE:
+  solr_field: :access_type_a
+  label:
+    en: Access Type
 ACCESS_TYPE_FACET:
   solr_field: :access_type_f
   label:
