@@ -1,6 +1,5 @@
 require 'trln_argon/view_helpers/document_export_helper'
 require 'trln_argon/view_helpers/facets_helper'
-require 'trln_argon/view_helpers/imprint_helper'
 require 'trln_argon/view_helpers/names_helper'
 require 'trln_argon/view_helpers/search_scope_toggle_helper'
 require 'trln_argon/view_helpers/subjects_helper'
@@ -15,7 +14,6 @@ module TrlnArgon
     module TrlnArgonHelper
       include DocumentExportHelper
       include FacetsHelper
-      include ImprintHelper
       include NamesHelper
       include SearchScopeToggleHelper
       include SubjectsHelper
