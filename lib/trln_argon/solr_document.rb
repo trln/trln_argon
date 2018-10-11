@@ -75,6 +75,10 @@ module TrlnArgon
       ).join(' / ')
     end
 
+    def isbn_number
+      fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
+    end
+
     private
 
     # utility for formatting multi-valued fields
