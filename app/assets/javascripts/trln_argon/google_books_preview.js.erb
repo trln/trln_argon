@@ -1,0 +1,23 @@
+Blacklight.onLoad(function() {
+  $(window).load(function() {
+      var isbn = $('#google-books').data('isbn');
+      if (isbn.length > 0) {
+          for (i = 0; i < isbn.length; i++) {
+              $.ajax({
+                  url:'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn[i],
+                  success: function(data){
+                      if (data.totalItems > 0) {
+                          $('#google-books-preview-image').each(function () {
+                              if (this.src.length == 0) {
+                                  $('#google-books-preview-image').attr({ src: "<%= asset_path('trln_argon/google_books_preview.png') %>" });
+                                  $("#google-books-preview-image").after('<a href=' + data.items[0].volumeInfo.previewLink +
+                                      ' target="_blank"> Preview this title via Google Book Search </a>');
+                              }
+                          });
+                      }
+                  }
+              });
+          }
+      }
+  });
+});
