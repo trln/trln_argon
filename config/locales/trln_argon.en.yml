@@ -119,7 +119,9 @@ en:
             year_desc: "Year (new to old)"
             author_asc: "Author (A-Z)"
 
-        online_access: "Online Access"
+        links:
+            online_access: "Online Access"
+            hathitrust: "Full text available via HathiTrust"
 
         search_constraints:
             begins_with: "begins with"

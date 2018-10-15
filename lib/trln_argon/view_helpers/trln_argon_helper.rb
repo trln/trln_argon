@@ -134,6 +134,7 @@ module TrlnArgon
       end
 
       def link_to_primary_url(url_hash)
+        return if url_hash[:href].blank?
         if url_hash[:type] == 'findingaid'
           link_to(url_hash[:href], class: "link-type-#{url_hash[:type]}", target: '_blank') do
             '<i class="fa fa-archive" aria-hidden="true"></i>'.html_safe + primary_url_text(url_hash)
@@ -172,14 +173,14 @@ module TrlnArgon
 
       def primary_url_text(url_hash)
         return url_hash[:text] if url_hash[:text].present?
-        I18n.t('trln_argon.online_access')
+        I18n.t('trln_argon.links.online_access')
       end
 
       def online_access_link_text(url_hrefs, url_text)
         if url_text && url_text.count == url_hrefs.count
           url_text
         else
-          [t('trln_argon.online_access')] * url_hrefs.count
+          [t('trln_argon.links.online_access')] * url_hrefs.count
         end
       end
 

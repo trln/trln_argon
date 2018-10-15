@@ -79,6 +79,10 @@ module TrlnArgon
       fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
     end
 
+    def oclc_number
+      fetch(TrlnArgon::Fields::OCLC_NUMBER, '')
+    end
+
     private
 
     # utility for formatting multi-valued fields

@@ -23,6 +23,7 @@ Metrics/AbcSize:
 
 Metrics/BlockLength:
   Exclude:
+    - 'lib/trln_argon/hathitrust_controller_behavior.rb'
     - 'lib/trln_argon/trln_controller_behavior.rb'
     - 'lib/trln_argon/bookmarks_controller_behavior.rb'
     - 'lib/trln_argon/controller_override.rb'

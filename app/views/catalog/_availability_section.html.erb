@@ -31,6 +31,8 @@
 
         </div>
 
+      <% else %>
+        <%= render partial: 'hathitrust_link', locals: { document: doc } %>
       <% end %>
 
         <div class="available col-md-5">

@@ -494,11 +494,14 @@ module TrlnArgon
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
       end
 
-      def has_search_parameters? # rubocop:disable Style/PredicateName
+      # rubocop:disable AbcSize
+      # rubocop:disable Style/PredicateName
+      def has_search_parameters?
         !params[:q].blank? ||
           !params[:f].blank? ||
           !params[:search_field].blank? ||
-          !params[:begins_with].blank?
+          !params[:begins_with].blank? ||
+          !params[:range].blank?
       end
 
       def query_has_constraints?(localized_params = params)
@@ -508,7 +511,8 @@ module TrlnArgon
           !(localized_params[:q].blank? &&
             localized_params[:f].blank? &&
             localized_params[:f_inclusive].blank? &&
-            localized_params[:begins_with].blank?)
+            localized_params[:begins_with].blank? &&
+            localized_params[:range].blank?)
         end
       end
 

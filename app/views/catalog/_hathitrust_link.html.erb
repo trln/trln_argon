@@ -1,0 +1,8 @@
+<!-- NOTE: To turn off HathiTrust links, override this partial in your -->
+<!--       local application and leave the partial empty. -->
+
+<% unless document.oclc_number.empty? %>
+  <div class="hathi-trust-link oclc<%= document.oclc_number %>"
+       data-oclc-number="<%= document.oclc_number %>">
+  </div>
+<% end %>

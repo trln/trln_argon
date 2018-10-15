@@ -1,0 +1,26 @@
+---
+oclc:43389552:
+  records: []
+  items: []
+oclc:10089569:
+  records:
+    '100502996':
+      recordURL: https://catalog.hathitrust.org/Record/100502996
+      titles:
+      - '"Tommy" rhymes /'
+      isbns: []
+      issns: []
+      oclcs:
+      - '10089569'
+      lccns: []
+      publishDates:
+      - '1921'
+  items:
+  - orig: Harvard University
+    fromRecord: '100502996'
+    htid: hvd.hnn6nc
+    itemURL: https://hdl.handle.net/2027/hvd.hnn6nc
+    rightsCode: pd
+    lastUpdate: '20181001'
+    enumcron: false
+    usRightsString: Full view
