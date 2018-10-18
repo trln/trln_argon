@@ -9,7 +9,6 @@ module TrlnArgon
 
       def export_as_openurl_ctx_kev
         ctx_object
-        ctx_referent
         ctx_referent_format
         ctx_referent_identifiers
         ctx_referent_metadata
@@ -21,10 +20,6 @@ module TrlnArgon
 
       def ctx_object
         @ctx_object ||= OpenURL::ContextObject.new
-      end
-
-      def ctx_referent
-        ctx_object.referent = OpenURL::Book.new
       end
 
       def ctx_referent_format
@@ -41,14 +36,7 @@ module TrlnArgon
 
       def ctx_referent_metadata
         openurl_ctx_kev_field_mapping[:metadata].each do |key, value|
-          metadata_value = [*call_or_fetch_value(value)]
-
-          # Author fields are left multivalued; other values joined.
-          unless %i[aulast aufirst auinit auinit1 auinitm ausuffix au aucorp].include?(key)
-            metadata_value = metadata_value.join(' ')
-          end
-
-          ctx_object.referent.set_metadata(key.to_s, metadata_value)
+          ctx_object.referent.set_metadata(key.to_s, [*call_or_fetch_value(value)].join(' '))
         end
       end
     end

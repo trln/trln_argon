@@ -159,7 +159,7 @@ describe TrlnArgon::SolrDocument do
     end
 
     it 'contains an rft_id' do
-      expect(ctx_kev).to match('rft_id=info%3Asid%2Fdiscovery.trln.org%2Fcatalog')
+      expect(ctx_kev).to match('rft_id=https%3A%2F%2Fdiscovery.trln.org%2Fcatalog%2FDUKE002952265')
     end
   end
 
