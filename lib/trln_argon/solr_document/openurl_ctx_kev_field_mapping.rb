@@ -13,22 +13,34 @@ module TrlnArgon
           # TODO: Do something sensible when format is more settled
           format: proc { 'book' },
           identifiers: [
-            proc { 'info:sid/discovery.trln.org/catalog' }
+            proc do
+              TrlnArgon::Engine.configuration.root_url.chomp('/') +
+                Rails.application.routes.url_helpers.solr_document_path(self)
+            end
           ],
           metadata: {
             au: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
             btitle: TrlnArgon::Fields::TITLE_MAIN,
             date: TrlnArgon::Fields::PUBLICATION_YEAR,
             edition: TrlnArgon::Fields::EDITION,
-            # genre: , TODO
+            genre: proc { zotero_genre([*self[TrlnArgon::Fields::RESOURCE_TYPE]].first.to_s) },
             isbn: TrlnArgon::Fields::ISBN_NUMBER,
-            # issn: , TODO
             # place: , TODO
-            # pub: , TODO
-            # series: , TODO
+            issn: TrlnArgon::Fields::ISSN_LINKING,
+            pub: proc { imprint_main_to_text },
+            series: TrlnArgon::Fields::SERIES_STATEMENT,
             title: TrlnArgon::Fields::TITLE_MAIN
           }
         }
+      end
+
+      def zotero_genre(genre)
+        case genre
+        when 'Journal, Magazine, or Periodical'
+          'journal'
+        else
+          'book'
+        end
       end
     end
   end
