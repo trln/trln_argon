@@ -33,6 +33,12 @@ module TrlnArgon
       [*self[TrlnArgon::Fields::EDITION]].reverse.join(' / ')
     end
 
+    def genre_headings
+      [*self[TrlnArgon::Fields::GENRE_HEADINGS]].concat(
+        [*self[TrlnArgon::Fields::GENRE_HEADINGS_VERN]]
+      )
+    end
+
     def isbn_number
       fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
     end
@@ -85,6 +91,12 @@ module TrlnArgon
       [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY_VERN]].concat(
         [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY]]
       ).join(' / ')
+    end
+
+    def subject_headings
+      [*self[TrlnArgon::Fields::SUBJECT_HEADINGS]].concat(
+        [*self[TrlnArgon::Fields::SUBJECT_HEADINGS_VERN]]
+      )
     end
 
     private

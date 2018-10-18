@@ -1,3 +1,0 @@
-module SearchHistoryConstraintsHelper
-  include TrlnArgon::ViewHelpers::SearchHistoryConstraintsHelperBehavior
-end

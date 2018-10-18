@@ -22,11 +22,11 @@ module TrlnArgon
         segments = segments_string.split(delimiter)
         subject_hierarchy = array_to_hierarchy(segments, delimiter)
         zipped_segments = segments.zip(subject_hierarchy)
-        linked_segments = zipped_segments.map { |segment| segment_begins_with_link(segment, delimiter) }.join
+        linked_segments = zipped_segments.map { |segment| segment_search_link(segment, delimiter) }.join
         linked_segments
       end
 
-      def segment_begins_with_link(segment_hierarchy_pair, delimiter = ' -- ')
+      def segment_search_link(segment_hierarchy_pair, delimiter = ' -- ')
         params = { search_field: 'subject', q: "\"#{segment_hierarchy_pair.last}\"" }
         link_to(search_action_url(params),
                 class: 'progressive-link') do
