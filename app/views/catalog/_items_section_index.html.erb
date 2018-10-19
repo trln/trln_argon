@@ -48,9 +48,8 @@
 
             <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
             <% has_summary = !item_data.fetch('summary', '').blank? %>
-            <% has_call_no = !item_data.fetch('call_no', '').blank? %>
 
-            <% if has_summary || has_holding_notes || has_call_no %>
+            <% if has_summary || has_holding_notes %>
 
               <% item_with_summary = true %>
 
