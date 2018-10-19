@@ -3,6 +3,7 @@ require 'trln_argon/argon_search_builder/begins_with'
 require 'trln_argon/argon_search_builder/count_only'
 require 'trln_argon/argon_search_builder/home_facets'
 require 'trln_argon/argon_search_builder/local_filter'
+require 'trln_argon/argon_search_builder/min_match'
 
 module TrlnArgon
   # Shared SearchBuilder behaviors concerning record rollup,
@@ -13,5 +14,6 @@ module TrlnArgon
     include CountOnly
     include HomeFacets
     include LocalFilter
+    include MinMatch
   end
 end
