@@ -468,6 +468,19 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe '#edition' do
+    let(:edition_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        edition_a: ['︠I︡Ubileĭnoe izd.', 'Юбилейное изд.']
+      )
+    end
+
+    it 'returns the imprint with vernacular for display' do
+      expect(edition_doc.edition).to eq('Юбилейное изд. / ︠I︡Ubileĭnoe izd.')
+    end
+  end
+
   describe 'ExpandDocument' do
     let(:rollup_id) { 'OCLC5555' }
     let(:expanded_solr_doc) do

@@ -226,7 +226,8 @@ module TrlnArgon
                                accessor: :statement_of_responsibility
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                accessor: :imprint_main_for_header_display
-        config.add_index_field TrlnArgon::Fields::EDITION.to_s
+        config.add_index_field TrlnArgon::Fields::EDITION.to_s,
+                               accessor: :edition
         config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
                                helper_method: :join_with_commas
         config.add_index_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
@@ -330,7 +331,8 @@ module TrlnArgon
                                          accessor: :statement_of_responsibility
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          accessor: :imprint_main_for_header_display
-        config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s
+        config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s,
+                                         accessor: :edition
         config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
                                          helper_method: :join_with_commas
         config.add_show_sub_header_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,

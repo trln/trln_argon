@@ -29,6 +29,37 @@ module TrlnArgon
       end
     end
 
+    def edition
+      [*self[TrlnArgon::Fields::EDITION]].reverse.join(' / ')
+    end
+
+    def isbn_number
+      fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
+    end
+
+    def isbn_with_qualifying_info
+      @isbn_with_qualifying_info ||=
+        [*self[TrlnArgon::Fields::ISBN_NUMBER]].zip(
+          [*self[TrlnArgon::Fields::ISBN_QUALIFYING_INFO]]
+        ).map { |isbn_info_pairs| isbn_info_pairs.join(' ') }
+    end
+
+    def marc_summary
+      format_for_display(self[TrlnArgon::Fields::NOTE_SUMMARY])
+    end
+
+    def marc_toc
+      format_for_display(self[TrlnArgon::Fields::NOTE_TOC])
+    end
+
+    def names
+      @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES, name: '', rel: '')
+    end
+
+    def oclc_number
+      fetch(TrlnArgon::Fields::OCLC_NUMBER, '')
+    end
+
     # Organizational association for the record.
     # Expected to be one of: duke, unc, ncsu, nccu, trln
     # Used to group records for display purposes, especially
@@ -50,37 +81,10 @@ module TrlnArgon
       fetch(TrlnArgon::Fields::OWNER, []).first.to_s.downcase
     end
 
-    def isbn_with_qualifying_info
-      @isbn_with_qualifying_info ||=
-        [*self[TrlnArgon::Fields::ISBN_NUMBER]].zip(
-          [*self[TrlnArgon::Fields::ISBN_QUALIFYING_INFO]]
-        ).map { |isbn_info_pairs| isbn_info_pairs.join(' ') }
-    end
-
-    def names
-      @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES, name: '', rel: '')
-    end
-
-    def marc_summary
-      format_for_display(self[TrlnArgon::Fields::NOTE_SUMMARY])
-    end
-
-    def marc_toc
-      format_for_display(self[TrlnArgon::Fields::NOTE_TOC])
-    end
-
     def statement_of_responsibility
       [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY_VERN]].concat(
         [*self[TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY]]
       ).join(' / ')
-    end
-
-    def isbn_number
-      fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
-    end
-
-    def oclc_number
-      fetch(TrlnArgon::Fields::OCLC_NUMBER, '')
     end
 
     private
