@@ -73,4 +73,52 @@ describe TrlnArgon::ArgonSearchBuilder do
       expect(solr_parameters).not_to include('expand.q')
     end
   end
+
+  describe 'min_match_for_boolean' do
+    before { builder_with_params.min_match_for_boolean(solr_parameters) }
+
+    context 'query contains a boolean operator' do
+      let(:builder_with_params) { search_builder.with(q: 'deforestation AND (columbia OR ecuador)') }
+
+      it 'applies the min match setting for boolean searches' do
+        expect(solr_parameters[:mm]).to eq('1')
+      end
+    end
+
+    context 'query does not contain any boolean operators' do
+      let(:builder_with_params) { search_builder.with(q: 'deforestation columbia ecuador)') }
+
+      it 'applies the min match setting for boolean searches' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+  end
+
+  describe 'min_match_for_cjk' do
+    before { builder_with_params.min_match_for_cjk(solr_parameters) }
+
+    context 'query contains only cjk characters' do
+      let(:builder_with_params) { search_builder.with(q: '阎连科') }
+
+      it 'uses the base cjk mm value' do
+        expect(solr_parameters[:mm]).to eq('3<86%')
+      end
+    end
+
+    context 'query contains both cjk and non-cjk characters' do
+      let(:builder_with_params) { search_builder.with(q: '毛沢東 dai') }
+
+      it 'requires all non-cjk tokens' do
+        expect(solr_parameters[:mm]).to eq('4<86%')
+      end
+    end
+
+    context 'query does not contain cjk characters' do
+      let(:builder_with_params) { search_builder.with(q: "je vais à l'école en bus") }
+
+      it 'does not set the mm value' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+  end
 end
