@@ -35,7 +35,9 @@ module TrlnArgon
                     :contact_url,
                     :feedback_url,
                     :sort_order_in_holding_list,
-                    :number_of_location_facets
+                    :number_of_location_facets,
+                    :number_of_items_index_view,
+                    :number_of_items_show_view
 
       # rubocop:disable MethodLength
       def initialize
@@ -55,6 +57,8 @@ module TrlnArgon
         @feedback_url = ''
         @sort_order_in_holding_list = 'unc, duke, ncsu, nccu, trln'
         @number_of_location_facets = '10'
+        @number_of_items_index_view = '3'
+        @number_of_items_show_view = '6'
       end
 
       private

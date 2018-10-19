@@ -173,6 +173,7 @@ en:
 
             controls:
                 show: "show"
+                all: "all"
                 hide: "hide"
                 items: "items"
                 show_more: "show more"

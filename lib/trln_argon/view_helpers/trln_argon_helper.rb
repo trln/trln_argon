@@ -86,16 +86,11 @@ module TrlnArgon
       end
 
       def call_number_display(item)
-        r = call_number_fetch(item)
-        return '' if r == ''
+        return '' if item.nil? || item.empty? || !item.respond_to?(:fetch)
+        r = item.fetch('call_no', '')
         r << " #{item['vol']}" if item.key?('vol')
         r << " #{item['copy_no']}" if item.key?('copy_no')
         r
-      end
-
-      def call_number_fetch(item)
-        return '' if item.nil? || item.empty? || !item.respond_to?(:fetch)
-        item.fetch('call_no', '')
       end
 
       def item_notes_display(item)
