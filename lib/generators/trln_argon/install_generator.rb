@@ -28,8 +28,9 @@ module TrlnArgon
 
     def load_helpers_in_host_application
       insert_into_file 'app/controllers/application_controller.rb',
-                       after: 'protect_from_forgery with: :exception' do
-        "\n  helper TrlnArgon::Engine.helpers"
+                       after: 'layout \'blacklight\'' do
+        "\n  helper TrlnArgon::Engine.helpers" \
+        "\n  skip_after_action :discard_flash_if_xhr"
       end
     end
 

@@ -111,6 +111,7 @@ module TrlnArgon
                                     show: true
         config.add_home_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
+                                    limit: 200,
                                     helper_method: :location_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false
@@ -118,9 +119,12 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
                                     collapse: false
-        config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-                                    label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
-                                    partial: 'blacklight/hierarchy/facet_hierarchy'
+        # NOTE: Temporarily disabled due to need to regenerate/reindex all
+        #       hierarchies in MTA using a pipe as the delimiter.
+        # config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+        #                             label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+        #                             limit: 4000,
+        #                             partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                     limit: true
@@ -150,6 +154,7 @@ module TrlnArgon
                                show: true
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
+                               limit: 200,
                                helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false
@@ -165,9 +170,12 @@ module TrlnArgon
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false
-        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
-                               partial: 'blacklight/hierarchy/facet_hierarchy'
+        # NOTE: Temporarily disabled due to need to regenerate/reindex all
+        #       hierarchies in MTA using a pipe as the delimiter.
+        # config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+        #                        label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+        #                        limit: 4000,
+        #                        partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
@@ -216,7 +224,7 @@ module TrlnArgon
         config.facet_display[:hierarchy] = {
           # blacklight-hierarchy requires this mapping;
           # prefix + final component (separated by _)
-          cnf_components[0..-2].join('_') => [[cnf_components[-1]], ':'],
+          cnf_components[0..-2].join('_') => [[cnf_components[-1]], '|'],
           lf_components[0..-2].join('_') => [[lf_components[-1]], ':']
         }
 

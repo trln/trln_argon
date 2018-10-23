@@ -28,7 +28,7 @@ This is what you want to do if you are intending to customize an application usi
 Add the folliwing lines to your Gemfile:
 
 ```
-gem 'blacklight', "~> 6.7"
+gem 'blacklight', "~> 6.16"
 gem 'trln_argon', git: 'https://github.com/trln/trln_argon'
 ```
 
