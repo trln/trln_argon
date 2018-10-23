@@ -1,6 +1,7 @@
 describe 'brief records' do
   before do
     visit search_catalog_path
+    fill_in('q', with: 'how milton works stanley fish')
     click_button 'search'
   end
 
