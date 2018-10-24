@@ -27,7 +27,7 @@ module TrlnArgon
       end
 
       def segment_begins_with_link(segment_hierarchy_pair, delimiter = ' -- ')
-        params = { begins_with: { TrlnArgon::Fields::SUBJECT_HEADINGS_FACET => Array(segment_hierarchy_pair.last) } }
+        params = { search_field: 'subject', q: "\"#{segment_hierarchy_pair.last}\"" }
         link_to(search_action_url(params),
                 class: 'progressive-link') do
           segment_link_content(segment_hierarchy_pair, delimiter).html_safe
