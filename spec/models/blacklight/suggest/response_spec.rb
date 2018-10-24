@@ -30,7 +30,7 @@ describe Blacklight::Suggest::Response do
     end
 
     it 'returns a suggested term' do
-      expect(full_response.suggestions['title'].first['term']).to eq 'new jersey'
+      expect(full_response.suggestions['title'].first['term']).to eq '"new jersey"'
     end
   end
 end

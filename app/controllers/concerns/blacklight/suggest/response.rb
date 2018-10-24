@@ -45,6 +45,7 @@ module Blacklight
                                          .try(:[], request_params[:q])
                                          .try(:[], 'suggestions') || [])
                                 .uniq { |h| h['term'] }
+                                .each { |h| h['term'] = "\"#{h['term']}\"" }
                                 .each { |h| h['category'] = category }
         suggestions
       end
