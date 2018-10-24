@@ -112,6 +112,7 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                     limit: 200,
+                                    sort: 'count',
                                     helper_method: :location_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false
@@ -155,6 +156,7 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                limit: 200,
+                               sort: 'count',
                                helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false

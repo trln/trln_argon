@@ -10,7 +10,7 @@ describe 'search results' do
 
   context 'when facets applied to search' do
     before do
-      visit search_catalog_path(local_filter: 'false')
+      visit search_catalog_path
       click_button 'search'
       click_link 'Music recording'
     end
@@ -26,7 +26,7 @@ describe 'search results' do
 
   context 'when location facet applied to search' do
     before do
-      visit search_catalog_path(local_filter: 'false')
+      visit search_catalog_path
       click_button 'search'
       click_link 'Law Libraries'
     end
@@ -38,7 +38,7 @@ describe 'search results' do
 
   describe 'paging controls' do
     before do
-      visit search_catalog_path(local_filter: 'false')
+      visit search_catalog_path
       click_button 'search'
     end
 
@@ -51,30 +51,22 @@ describe 'search results' do
     end
   end
 
-  describe 'more facet links contain correct local_filter parameter' do
-    it 'retains local_filter=true when set' do
-      visit search_catalog_path(local_filter: true)
-      click_button 'search'
-      expect(page).to have_selector(:css,
-                                    '#facet-resource_type_f '\
-                                    'a.more_facets_link[href="/catalog/facet/resource_type_f?'\
-                                    'local_filter=true&q=&search_field=all_fields&utf8=%E2%9C%93"]')
-    end
-
-    it 'retains local_filter=false when set' do
-      visit search_catalog_path(local_filter: false)
-      click_button 'search'
-      expect(page).to have_selector(:css,
-                                    '#facet-resource_type_f '\
-                                    'a.more_facets_link[href="/catalog/facet/resource_type_f?'\
-                                    'local_filter=false&q=&search_field=all_fields&utf8=%E2%9C%93"]')
-    end
-  end
-
   context 'when checkbox facet is configured' do
     it 'renders a checkbox field in the facet' do
       visit search_catalog_path
       expect(page).to have_selector(:css, '#checkbox_access_type_f')
+    end
+  end
+
+  describe 'sorting of location hierachy facet' do
+    it 'sorts the values by hits, descending' do
+      visit search_catalog_path
+      click_button 'search'
+      expect(page).to have_selector(
+        :css,
+        '#facet-location_hierarchy_f .facet-hierarchy .h-node .h-node:first-child',
+        text: 'Davis Library'
+      )
     end
   end
 
