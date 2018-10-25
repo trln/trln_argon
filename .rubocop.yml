@@ -20,6 +20,7 @@ Metrics/AbcSize:
   Max: 20
   Exclude:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
+    - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
 
 Metrics/BlockLength:
   Exclude:
@@ -49,6 +50,7 @@ Metrics/MethodLength:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
     - 'lib/trln_argon/mappings.rb'
     - 'lib/trln_argon/solr_document/expand_document.rb'
+    - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
 
 Metrics/ModuleLength:
   Exclude:
