@@ -70,6 +70,10 @@ GENRE_HEADINGS_FACET:
   solr_field: genre_headings_f
   label:
     en: Genre or Form
+GENRE_HEADINGS_VERN:
+  solr_field: genre_headings_vern
+  label:
+    en: Genre or Form
 HAS_SUPPLEMENT_WORK:
   solr_field: :has_supplement_work_a
   label:
@@ -420,6 +424,10 @@ SUBJECT_HEADINGS:
     en: Subjects
 SUBJECT_HEADINGS_FACET:
   solr_field: :subject_headings_f
+  label:
+    en: Subjects
+SUBJECT_HEADINGS_VERN:
+  solr_field: :subject_headings_vern
   label:
     en: Subjects
 SUBSERIES_WORK:

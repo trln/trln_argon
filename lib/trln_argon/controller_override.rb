@@ -209,16 +209,7 @@ module TrlnArgon
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true
-        config.add_facet_field TrlnArgon::Fields::GENRE_HEADINGS_FACET.to_s,
-                               label: TrlnArgon::Fields::GENRE_HEADINGS_FACET.label,
-                               show: false
 
-        # Subject is configured as a facet and set not to display so that the field
-        # label will be accessible for the begins_with filter. Set other fields that will
-        # be used for begins with searches in the same way.
-        config.add_facet_field TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.to_s,
-                               label: TrlnArgon::Fields::SUBJECT_HEADINGS_FACET.label,
-                               show: false
         # hierarchical facet configuration
         config.facet_display ||= {}
         cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
@@ -324,7 +315,9 @@ module TrlnArgon
                               label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.label
         config.add_show_field TrlnArgon::Fields::GENRE_HEADINGS.to_s,
                               label: TrlnArgon::Fields::GENRE_HEADINGS.label,
-                              link_to_search: TrlnArgon::Fields::GENRE_HEADINGS_FACET
+                              accessor: :genre_headings,
+                              helper_method: :link_to_fielded_keyword_search,
+                              search_field: :genre_headings
         config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
                               label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
                               accessor: :isbn_with_qualifying_info
@@ -408,6 +401,7 @@ module TrlnArgon
                                             helper_method: :work_entry_display
 
         config.add_show_subjects_field TrlnArgon::Fields::SUBJECT_HEADINGS.to_s,
+                                       accessor: :subject_headings,
                                        helper_method: :list_of_linked_subjects_segments
 
         # "fielded" search configuration. Used by pulldown among other places.
@@ -476,6 +470,15 @@ module TrlnArgon
           }
         end
 
+        config.add_search_field('genre_headings') do |field|
+          field.label = 'Genre'
+          field.def_type = 'edismax'
+          field.solr_local_parameters = {
+            qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v'
+          }
+          field.if = false
+        end
+
         # "sort results by" select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
@@ -506,13 +509,11 @@ module TrlnArgon
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
       end
 
-      # rubocop:disable AbcSize
       # rubocop:disable Style/PredicateName
       def has_search_parameters?
         !params[:q].blank? ||
           !params[:f].blank? ||
           !params[:search_field].blank? ||
-          !params[:begins_with].blank? ||
           !params[:range].blank?
       end
 
@@ -523,7 +524,6 @@ module TrlnArgon
           !(localized_params[:q].blank? &&
             localized_params[:f].blank? &&
             localized_params[:f_inclusive].blank? &&
-            localized_params[:begins_with].blank? &&
             localized_params[:range].blank?)
         end
       end

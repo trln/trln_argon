@@ -40,17 +40,6 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
-  describe 'begins_with_filter' do
-    let(:builder_with_params) { search_builder.with(begins_with: { subject_f: ['Technology -- History'] }) }
-
-    before { builder_with_params.begins_with_filter(solr_parameters) }
-    it 'applies the local holdings query' do
-      expect(solr_parameters[:fq]).to(
-        eq(['_query_:"{!q.op=AND df=subject_f}/Technology \\\\-\\\\- History.*/"'])
-      )
-    end
-  end
-
   describe 'remove_params_for_count_only_query' do
     before { search_builder.remove_params_for_count_only_query(solr_parameters) }
     it 'removes the stats solr parameters' do

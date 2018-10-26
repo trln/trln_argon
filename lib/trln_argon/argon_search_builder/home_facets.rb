@@ -10,7 +10,6 @@ module TrlnArgon
       def search_parameters?
         blacklight_params[:q].present? ||
           blacklight_params[:f].present? ||
-          blacklight_params[:begins_with].present? ||
           blacklight_params[:search_field].present?
       end
     end

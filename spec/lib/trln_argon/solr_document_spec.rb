@@ -481,6 +481,34 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe '#genre_headings' do
+    let(:headings_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        genre_headings_a: ['Something'],
+        genre_headings_vern: ['دمنتري فلمس']
+      )
+    end
+
+    it 'returns the genre_headings with vernacular for display' do
+      expect(headings_doc.genre_headings).to eq(['Something', 'دمنتري فلمس'])
+    end
+  end
+
+  describe '#subject_headings' do
+    let(:headings_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        subject_headings_a: ['Something'],
+        subject_headings_vern: ['دمنتري فلمس']
+      )
+    end
+
+    it 'returns the subject_headings with vernacular for display' do
+      expect(headings_doc.subject_headings).to eq(['Something', 'دمنتري فلمس'])
+    end
+  end
+
   describe 'ExpandDocument' do
     let(:rollup_id) { 'OCLC5555' }
     let(:expanded_solr_doc) do
