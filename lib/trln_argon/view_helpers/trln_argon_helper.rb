@@ -113,6 +113,10 @@ module TrlnArgon
         end.join(I18n.t('trln_argon.search_constraints.location_separator'))
       end
 
+      def call_number_filter_display(value = '')
+        value.gsub('|', I18n.t('trln_argon.search_constraints.call_number_separator'))
+      end
+
       def show_configured_fields_and_values(config, document)
         config.map do |field_name, field|
           next unless document_has_value?(document, field)
