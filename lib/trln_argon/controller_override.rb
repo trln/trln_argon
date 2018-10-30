@@ -125,6 +125,7 @@ module TrlnArgon
         # config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
         #                             label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
         #                             limit: 4000,
+        #                             helper_method: :call_number_filter_display,
         #                             partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
@@ -177,6 +178,7 @@ module TrlnArgon
         # config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
         #                        label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
         #                        limit: 4000,
+        #                        helper_method: :call_number_filter_display,
         #                        partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,

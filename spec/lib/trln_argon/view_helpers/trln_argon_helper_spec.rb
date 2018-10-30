@@ -92,7 +92,7 @@ describe TrlnArgonHelper, type: :helper do
 
       it 'translates the coded hierarchy to a human readable string' do
         expect(helper.location_filter_display(hierarchy_value)).to(
-          eq('Duke, Divinity, Reserves')
+          eq('Duke > Divinity > Reserves')
         )
       end
     end
@@ -102,9 +102,27 @@ describe TrlnArgonHelper, type: :helper do
 
       it 'has codes in place of unmappable values' do
         expect(helper.location_filter_display(hierarchy_value)).to(
-          eq('Duke, duke.facet.blah, duke.facet.foo')
+          eq('Duke > duke.facet.blah > duke.facet.foo')
         )
       end
+    end
+  end
+
+  describe '#call_number_filter_display' do
+    let(:hierarchy_value) do
+      'L - Education|'\
+      'LB5 - LB3640 Theory and practice of education|'\
+      'LB2300 - LB2430 Higher education|'\
+      'LB2326.4 - LB2330 Institutions of higher education'
+    end
+
+    it 'translates the hierarchy delimiter into a string for display' do
+      expect(helper.call_number_filter_display(hierarchy_value)).to(
+        eq('L - Education > '\
+      'LB5 - LB3640 Theory and practice of education > '\
+      'LB2300 - LB2430 Higher education > '\
+      'LB2326.4 - LB2330 Institutions of higher education')
+      )
     end
   end
 

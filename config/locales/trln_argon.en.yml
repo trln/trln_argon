@@ -124,7 +124,8 @@ en:
             hathitrust: "Full text available via HathiTrust"
 
         search_constraints:
-            location_separator: ", "
+            location_separator: " > "
+            call_number_separator: " > "
 
         checkbox_facets:
             online: "Available Online"

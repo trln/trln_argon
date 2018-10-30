@@ -33,6 +33,9 @@ Blacklight.onLoad(function() {
             $("#checkbox_" + facet_field).click( function() {
 
               var theOGURL = window.location.href.toString();
+              // Remove page parameter if present to return to the
+              // first page of results when selecting the facet.
+              theOGURL = theOGURL.replace(/&?page=\d+/gi, '');
 
               if (facetChecked == true) { // already checked
 
