@@ -1,0 +1,137 @@
+@media print {
+
+  head,
+  title {
+    display: block !important;
+    font: 13pt Georgia, "Times New Roman", Times, serif;
+    line-height: 1.3;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 10px;
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  body.blacklight-catalog-show {
+    head & {
+      display: none !important;
+    }
+  }
+
+  #content,
+  #documents {
+    width: 100% !important;
+  }
+
+  #documents {
+    margin-top: 20px;
+  }
+
+  #document {
+    width: 100% !important;
+    display: block !important;
+  }
+
+  #document > div:first-of-type {
+    overflow: visible !important;
+  }
+
+  /* hide stuff */
+  #trln-toggle,
+  #facets,
+  #appliedParams,
+  #startOverLink,
+  #editSearchLink,
+  .appliedFilter a,
+  #sortAndPerPage,
+  .bookmark_toggle,
+  .pagination,
+  #previousNextDocument,
+  #document-tools,
+  .expandable-content-controls,
+  #footer {
+    display: none !important;
+  }
+
+  .expandable-content.contracted {
+    height: auto !important;
+  }
+
+  h1 {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  .location-narrow-group {
+    overflow: hidden;
+    border: none;
+  }
+  .call-number-wrapper,
+  .status-wrapper {
+    width: 50% !important;
+    float: left !important;
+  }
+  .item {
+    overflow: hidden;
+    clear: both;
+  }
+  #documents .items .item:nth-child(n+1):before,
+  #documents .items .loc-narrow-banner:before,
+  #document .holdings .items .item:nth-child(n+1):before,
+  #document .holdings .items .loc-narrow-banner:before {
+    display: none;
+    border-top: none !important;
+}
+
+  /* format labels */
+  #document .items dt, #documents .items dt {
+    float: left;
+    clear: left;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 7em;
+  }
+
+  #document .items dd, #documents .items dd {
+    margin-left: 7.5em;
+  }
+
+  /* fix links */
+  a[href]:after {
+    content: none;
+  }
+  a[href^="http://"]:after,
+  a[href^="https://"]:after {
+    content: " (" attr(href) ")";
+    font-style: italic;
+    word-wrap: break-word;
+    font-size: 90%;
+  }
+
+  a.progressive-link:after {
+    content: none;
+  }
+
+  header:after {
+    content: "www.smashing-winery.com";
+  }
+
+  /* use serrif fonts */
+
+  body {
+    font: 11pt Georgia, "Times New Roman", Times, serif;
+    line-height: 1.3;
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+    margin-top: 26px;
+  }
+
+}
