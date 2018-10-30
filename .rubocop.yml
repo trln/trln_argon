@@ -21,6 +21,7 @@ Metrics/AbcSize:
   Exclude:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
     - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
+    - 'lib/trln_argon/mappings.rb'
 
 Metrics/BlockLength:
   Exclude:

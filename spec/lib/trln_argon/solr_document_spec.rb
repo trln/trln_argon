@@ -42,13 +42,14 @@ describe TrlnArgon::SolrDocument do
                   '{"href":"http://www.law.duke.edu/journals/lcp/",'\
                   '"type":"other",'\
                   '"text":"Law and contemporary problems, v. 63, no. 1-2"}',
-                  '{"href":"http://www.law.duke.edu/journals/lcp/",'\
+                  '{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
                   '"type":"other",'\
                   '"text":"Law and contemporary problems, v. 63, no. 1-2"}']
         )
       end
 
-      it 'deserializes each of the url entries' do
+      it 'deserializes each of the url entries and maps any templated URL segments' do
+        allow(solr_document).to receive(:url_template_mapper).and_return('http://libproxy.lib.unc.edu/login?url=')
         expect(solr_document.urls).to(
           eq([{ href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
@@ -56,7 +57,7 @@ describe TrlnArgon::SolrDocument do
               { href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
                 text: 'Law and contemporary problems, v. 63, no. 1-2' },
-              { href: 'http://www.law.duke.edu/journals/lcp/',
+              { href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
                 text: 'Law and contemporary problems, v. 63, no. 1-2' }])
         )
