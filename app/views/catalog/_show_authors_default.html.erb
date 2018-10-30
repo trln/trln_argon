@@ -1,5 +1,5 @@
 <% display_values = show_configured_fields_and_values(blacklight_config.show_authors_fields, document) %>
-<div class="show-authors">
+<div class="<%= show_authors_class %>">
   <% if display_values.any? %>
     <h2><%= t('trln_argon.show.heading.authors') %></h2>
     <ul>

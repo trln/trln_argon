@@ -77,7 +77,8 @@ module TrlnArgon
 
     FILENAMES = {
       location_holdings: 'location_item_holdings.json',
-      location_facet: 'location_facet.json'
+      location_facet: 'location_facet.json',
+      url_template: 'url_template.json'
     }.freeze
 
     def initialize(base = '.')
@@ -119,10 +120,13 @@ module TrlnArgon
         parse_holdings!(lhf, inst_mappings)
         lff = File.join(path, FILENAMES[:location_facet])
         facets = read_json(lff)
+        urlt = File.join(path, FILENAMES[:url_template])
+        url_templates = read_json(urlt)
         inst_mappings['loc_b'].each do |k, v|
           facets[k] ||= v
         end
         inst_mappings['facet'] = facets
+        inst_mappings['url_template'] = url_templates
       end
       mappings
     end

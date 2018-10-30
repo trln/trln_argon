@@ -1,11 +1,11 @@
-<div class="enhanced-data">
+<div class="<%= show_enhanced_data_class %>">
   <% s = enhanced_data(@document) %>
   <% summary = ( (s && s.summary? && s.summary) || @document.marc_summary ) %>
   <% toc = ( (s && s.toc? && s.toc ) || @document.marc_toc ) %>
   <% samplechapter = ( s && s.samplechapter? && s.samplechapter ) || nil %>
 
   <% unless summary.nil? || summary.empty? %>
-    <section class="summary">
+    <section class="<%= show_enhanced_data_summary_class %>">
 
       <h2 id="summary">Summary</h2>
 
@@ -24,7 +24,7 @@
   <%= render 'show_google_book_preview' %>
 
   <% unless toc.nil? || toc.empty? %>
-    <section class="table-of-contents">
+    <section class="<%= show_enhanced_data_toc_class %>">
       <h2 id="contents">Contents</h2>
 
       <div class="content expandable-content">
@@ -40,7 +40,7 @@
   <% end %>
 
   <% unless samplechapter.nil? || samplechapter.empty? %>
-  <section class="sample-chapter">
+  <section class="<%= show_enhanced_data_sample_chapter_class %>">
     <h2>Sample Chapter</h2>
 
     <div class='content expandable-content'>

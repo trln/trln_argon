@@ -120,8 +120,11 @@ en:
             author_asc: "Author (A-Z)"
 
         links:
-            online_access: "Online Access"
+            finding_aid: "Finding Aid"
             hathitrust: "Full text available via HathiTrust"
+            online_access: "Online Access"
+            online_access_restricted: "Online Access (%{institution} Only)"
+            open_access: "Open Access"
 
         search_constraints:
             location_separator: " > "
@@ -163,6 +166,7 @@ en:
                 related_works: Related items
                 subjects: "This item is about"
                 metadata: "Other details"
+                expanded_links: "Online"
 
             label:
                 summary: "Summary"

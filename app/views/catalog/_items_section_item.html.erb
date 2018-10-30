@@ -1,25 +1,17 @@
 <% # --- ITEM --- %>
 
-<% if source == 'show' %>
-  <div class='col-md-4 col-sm-7 call-number-wrapper'>
-<% else %>
-  <div class='col-md-5 col-sm-5 call-number-wrapper'>
-<% end %>
+  <div class="<%= call_number_wrapper_class(action: action_name) %>">
     <dl class="dl-horizontal">
     <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
     <dd><span class='call-number'><%= call_number_display(item) %></span> <%= render partial: 'location_link', locals: { document: document, loc_b: loc_b, loc_n: loc_n, item: item } %></dd>
     </dl>
   </div>
 
-<% if source == 'show' %>
-  <div class='col-md-4 col-sm-5 status-wrapper'>
-<% else %>
-  <div class='col-md-7 col-sm-7 status-wrapper'>
-<% end %>
+  <div class="<%= status_wrapper_class(action: action_name) %> status-wrapper">
     <dl class="dl-horizontal">
       <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
       <dd>
-       <% available_class= item_availability_display(item) %>
+       <% available_class = item_availability_display(item) %>
        <% due_date = item_due_date(item) %>
        <span class="<%= available_class %>">
            <%= item['status'] %>
@@ -29,33 +21,15 @@
        </span>
       </dd>
     </dl>
-
   </div>
 
 <% if item_notes_display(item).present? %>
 
-  <% if source == 'show' %>
-
-    <% if item_notes_display(item).length > 120 %>
-  <div class="col-md-12 item-note-wrapper">
-    <% else %>
-  <div class="col-md-4 col-sm-12 item-note-wrapper">
-    <% end %>
-      <dl class="dl-horizontal">
-        <dt><span class='item-note-label label label-info'><%= t('trln_argon.show.label.item_note') %></span></dt>
-        <dd><%= item_notes_display(item) %></dd>
-      </dl>
-  </div>
-
-  <% else %>
-
-  <div class="col-md-12 item-note-wrapper">
+  <div class="<%= item_note_wrapper_class({ action: action_name, item_length: item_notes_display(item).length }) %> item-note-wrapper">
     <dl class="dl-horizontal">
       <dt><span class='item-note-label label label-info'><%= t('trln_argon.show.label.item_note') %></span></dt>
       <dd><%= item_notes_display(item) %></dd>
     </dl>
   </div>
-
-  <% end %>
 
 <% end %>

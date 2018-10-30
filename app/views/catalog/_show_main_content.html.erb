@@ -1,7 +1,7 @@
 <%= render 'previous_next_doc' %>
 
 <div class="row">
-  <div class="col-md-12">
+  <div class="<%= show_tools_class %>">
     <%= render :partial => 'show_tools' %>
   </div>
 </div>
@@ -14,10 +14,10 @@
 
     <div class="row">
 
-      <div class="col-md-12 title-and-thumbnail">
+      <div class="<%= show_main_content_heading_partials_class %>">
         <%= render_document_partials @document, blacklight_config.view_config(:show).heading_partials %>
       </div>
-      <div class="col-md-10">
+      <div class="<%= show_main_content_partials_class %>">
         <%= render_document_partials @document, blacklight_config.view_config(:show).partials %>
         <div class="librarian-tools">
           <!-- TODO: Placeholder based on wireframes. Not functional yet.

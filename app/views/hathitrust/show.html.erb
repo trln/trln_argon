@@ -1,7 +1,7 @@
 <% unless hathistrust_argon_url_hash.fetch(:href, nil).blank? %>
-  <div class="fulltext-url col-md-7">
+  <div class="<%= primary_link_class %>">
     <ul>
-      <li><%= link_to_primary_url(hathistrust_argon_url_hash) %></li>
+      <li><%= link_to_open_access(hathistrust_argon_url_hash) %></li>
     </ul>
   </div>
 <% end %>

@@ -1,7 +1,7 @@
 ---
 oclc10089569: |2
-    <div class="fulltext-url col-md-7">
+    <div class="col-md-7 primary-url">
       <ul>
-        <li><a class="link-type-fulltext" target="_blank" href="https://hdl.handle.net/2027/hvd.hnn6nc"><i class="fa fa-external-link" aria-hidden="true"></i>Full text available via HathiTrust</a></li>
+        <li><a class="link-type-fulltext link-open-access" target="_blank" href="https://hdl.handle.net/2027/hvd.hnn6nc"><i class="fa fa-external-link" aria-hidden="true"></i>Full text available via HathiTrust</a></li>
       </ul>
     </div>

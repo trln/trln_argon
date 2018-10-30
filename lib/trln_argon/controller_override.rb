@@ -479,6 +479,7 @@ module TrlnArgon
             qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v'
           }
           field.if = false
+          field.include_in_advanced_search = false
         end
 
         # "sort results by" select (pulldown)

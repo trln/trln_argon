@@ -1,0 +1,46 @@
+<div class="<%= show_items_class %>">
+
+  <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
+
+  <% if document.all_shared_and_local_fulltext_urls_by_inst.any? %>
+
+    <h3 class="institution-name shared-links"><%= t('trln_argon.show.heading.expanded_links') %></h3>
+
+    <div class="items well">
+      <div class="row">
+        <%= render partial: 'expanded_fulltext_links', locals: { document: document } %>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="row">
+      <% unless document.all_shared_and_local_fulltext_urls_by_inst.any? %>
+        <%= render partial: 'hathitrust_link', locals: { document: document } %>
+      <% end %>
+    </div>
+
+  <% end %>
+
+  <% document.docs_with_holdings_merged_from_expanded_docs.each do |doc| %>
+
+    <% if display_items?(document: doc) %>
+
+      <h3 class="institution-name <%= t("trln_argon.institution.#{doc.record_association}.short_name").downcase %>"><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h3>
+
+      <div class="items well">
+        <div class="row">
+          <%= render partial: 'finding_aid_links', locals: { document: document } %>
+          <%= render partial: 'items_section',
+                     locals: { document: doc,
+                               num_display_items: TrlnArgon::Engine.configuration.number_of_items_index_view.to_f,
+                               loc_b_header_level: :h4 } %>
+        </div>
+      </div>
+
+    <% end %>
+
+  <% end %>
+
+</div>
+

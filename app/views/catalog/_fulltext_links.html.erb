@@ -1,0 +1,19 @@
+<% if document.fulltext_urls.any? %>
+  <div class="<%= primary_link_class %>">
+    <ul>
+    <% document.fulltext_urls.each do |url| %>
+      <li><%= link_to_fulltext_url(url) %></li>
+    <% end %>
+    </ul>
+  </div>
+<% elsif document.shared_fulltext_urls.any? %>
+  <div class="primary-url <%= primary_link_class %>">
+    <ul>
+    <% document.shared_fulltext_urls.each do |url| %>
+      <li><%= link_to_fulltext_url(url) %></li>
+    <% end %>
+    </ul>
+  </div>
+<% else %>
+  <%= render partial: 'hathitrust_link', locals: { document: document } %>
+<% end %>

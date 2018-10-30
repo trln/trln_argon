@@ -1,6 +1,27 @@
-<% if document.findingaid_urls.any? || document.fulltext_urls.any? || document.holdings.keys.any? %>
-  <div class="holdings">
+<% if display_holdings_well?(document: document) %>
+
+  <div class="<%= show_items_class %>">
+
     <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
-    <%= render partial: "items_section_wrapper", locals: { document: document, context: 'show' } %>
+
+    <div class="items well">
+
+      <div class="row">
+
+        <%= render partial: 'finding_aid_links', locals: { document: document } %>
+        <%= render partial: 'fulltext_links', locals: { document: document } %>
+
+        <% if display_items?(document: document) %>
+          <%= render partial: 'items_section',
+                     locals: { document: document,
+                               num_display_items: TrlnArgon::Engine.configuration.number_of_items_show_view.to_f,
+                               loc_b_header_level: :h4 } %>
+        <% end %>
+
+      </div>
+
+    </div>
+
   </div>
+
 <% end %>

@@ -1,7 +1,7 @@
 <%# default partial to display solr document fields in catalog show view -%>
 <% display_values = show_configured_fields_and_values(blacklight_config.show_fields, document) %>
 <% if display_values.any? %>
-  <div class="other-details">
+  <div class="<%= show_other_details_class %>">
     <h2><%= t('trln_argon.show.heading.metadata') %></h2>
     <dl class="dl-invert">
       <% document_show_fields(document).each do |field_name, field| -%>
