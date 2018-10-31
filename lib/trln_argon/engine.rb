@@ -27,6 +27,7 @@ module TrlnArgon
     class Configuration
       attr_accessor :local_institution_code,
                     :application_name,
+                    :argon_code_mappings_dir,
                     :solr_fields,
                     :code_mappings,
                     :refworks_url,
@@ -43,6 +44,7 @@ module TrlnArgon
       def initialize
         @local_institution_code        = 'unc'
         @application_name              = 'TRLN Argon'
+        @argon_code_mappings_dir       = Rails.root.join('config', 'mappings')
         @solr_fields =
           field_constants(default_fields.merge(override_fields).deep_symbolize_keys)
         @refworks_url =
@@ -60,6 +62,7 @@ module TrlnArgon
         @number_of_items_index_view = '3'
         @number_of_items_show_view = '6'
       end
+      # rubocop:enable MethodLength
 
       private
 

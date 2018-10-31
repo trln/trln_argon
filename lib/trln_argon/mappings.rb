@@ -2,7 +2,15 @@ require 'git'
 require 'singleton'
 
 module TrlnArgon
+  module Loggable
+    def logger
+      @logger ||= Rails.logger
+    end
+  end
+
   class MappingsGitFetcher
+    include Loggable
+
     attr_reader :repo_dir
 
     GIT_URL = 'https://github.com/trln/argon_code_mappings'.freeze
@@ -10,28 +18,45 @@ module TrlnArgon
     REPO_NAME = 'argon_mappings'.freeze
 
     def initialize(options = {})
-      @repo_base = options[:repo_base] || 'config/mappings'
+      @repo_base = options.fetch(:repo_base, 'config/mappings')
       @repo_dir = File.join(@repo_base, REPO_NAME)
       @branch = options[:branch] || 'master'
       begin
         @url = options[:git_url] || ::Rails.configuration.code_mappings[:git_url]
       rescue NoMethodError
         @url = GIT_URL
-        Rails.logger.error('Unable to find configuration key `mappings_git_url`')
-        Rails.logger.error('You need to specify this in the configuration file')
-        Rails.logger.error("for your environment e.g. config/#{::Rails.env}.rb")
-        Rails.logger.error("e.g. `config.mappings_git_url = 'https://github.com/myorg/mappings.git'`")
+        logger.error('Unable to find configuration key `mappings_git_url`')
+        logger.error('You need to specify this in the configuration file')
+        logger.error("for your environment e.g. config/#{::Rails.env}.rb")
+        logger.error("e.g. `config.mappings_git_url = 'https://github.com/myorg/mappings.git'`")
       end
     end
 
     def clone
+      logger.info("Initial clone of code mappings from #{@url} to #{@repo_base}")
       @git = Git.clone(@url, REPO_NAME, path: @repo_base)
     end
 
     def refresh
       if File.directory?(File.join(@repo_dir, '.git'))
         @git ||= Git.init(@repo_dir)
-        @git.pull('origin', @branch)
+        do_pull = false
+        logger.info("Repository #{@url} has already been cloned")
+
+        head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
+
+        if File.exist?(head_fetch_file)
+          # this method might get called in a loop when, e.g. creating
+          # an engine_cart instance, so we need a very short term cache.
+          do_pull = File.stat(head_fetch_file).mtime > (Time.now = 2.minutes)
+        end
+
+        if do_pull
+          logger.info("Pulling changes from #{@url}")
+          @git.pull('origin', @branch)
+        else
+          logger.warn("Not pulling changes from #{@url} because it was updated in the last 2 minutes")
+        end
       else
         clone
       end
@@ -39,6 +64,8 @@ module TrlnArgon
   end
 
   class Lookups
+    include Loggable
+
     attr_reader :directory
 
     KEYS = {
@@ -77,6 +104,7 @@ module TrlnArgon
     end
 
     def reload!
+      logger.info("Reloading code mappings from #{@directory}")
       @mappings = load
     end
 
@@ -85,6 +113,7 @@ module TrlnArgon
       Dir.foreach(@directory) do |dir_entry|
         path = File.expand_path(File.join(@directory, dir_entry))
         next unless File.directory?(path) && dir_entry =~ /^[a-z]/
+
         inst_mappings = mappings[File.basename(path)] = {}
         lhf = File.join(path, FILENAMES[:location_holdings])
         parse_holdings!(lhf, inst_mappings)
@@ -119,9 +148,13 @@ module TrlnArgon
 
   # Mappings for loc_b/loc_n names, statuses, etc.
   class LookupManager
+    include Loggable
     include Singleton
 
-    CACHE_KEY = 'TrlrArgon::LookupManager::Lookups'.freeze
+    # key under which the 'canary' value will be stored
+    # in the cache; if we stored the lookups in the
+    # cache directly, they would need to be deserialized on each access
+    CACHE_KEY = 'TrlrArgon::LookupManager::Lookups::Canary'.freeze
 
     class << self
       attr_writer :fetcher
@@ -131,20 +164,34 @@ module TrlnArgon
       end
     end
 
+    def initialize
+      reload
+    end
+
+    # Refreshes mappings from git and reloads
+    # cached lookups.
+    # @see CACHE_KEY
     def reload
       self.class.fetcher.refresh
       Rails.cache.delete(CACHE_KEY)
+      lookups
     end
 
     def map(path)
       lookups.lookup(path)
     end
 
-    def lookups
-      Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do
-        self.class.fetcher.refresh
-        @lookups ||= Lookups.new(self.class.fetcher.repo_dir)
+    def check_cache
+      Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do |_|
+        logger.info('Standard cache period for code mappings expired')
+        @lookups.reload! if @lookups
+        Time.now.to_s
       end
+    end
+
+    def lookups
+      check_cache
+      @lookups ||= Lookups.new(self.class.fetcher.repo_dir)
     end
   end
 end
