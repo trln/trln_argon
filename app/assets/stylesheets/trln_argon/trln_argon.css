@@ -8,3 +8,4 @@
 
 /* additional trln_argon stylesheets */
 @import 'trln_argon/trln_argon_shared';
+@import 'trln_argon/trln_argon_print'; /* print styles need to come last */
