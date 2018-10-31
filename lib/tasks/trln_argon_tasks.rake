@@ -5,6 +5,14 @@ task :ci do
 end
 
 namespace :trln_argon do
+  desc 'Refreshes code mappings from github and reloads the cache'
+  task(reload_code_mappings: :environment) do
+    require 'trln_argon/mappings'
+    puts 'Expiring cached lookups'
+    TrlnArgon::LookupManager.instance.reload
+    puts 'Reloaded mappings from github'
+  end
+
   namespace :solr do
     require 'trln_argon/field.rb'
     require 'trln_argon/fields.rb'
@@ -35,6 +43,7 @@ namespace :trln_argon do
       puts @defined_fields
     end
 
+    desc 'reload mapping codes (locations)'
     desc 'get all fields defined in TRLN Argon'
     task defined_fields: :environment do
       include TrlnArgon::Fields

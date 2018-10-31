@@ -15,13 +15,18 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'number_of_location_facets')
   apply_local_configuration(config, 'number_of_items_index_view')
   apply_local_configuration(config, 'number_of_items_show_view')
+  apply_local_configuration(config, 'argon_code_mappings_dir')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',
     git_branch: 'master'
   }
-  git_fetcher = TrlnArgon::MappingsGitFetcher.new(git_url: config.code_mappings[:git_url])
-  TrlnArgon::LookupManager.fetcher = git_fetcher
 
+  git_fetcher = TrlnArgon::MappingsGitFetcher.new(
+    git_url: config.code_mappings[:git_url],
+    repo_base: config.argon_code_mappings_dir
+  )
+  TrlnArgon::LookupManager.fetcher = git_fetcher
+  # do a lookup so the mappings are initialized.
   TrlnArgon::LookupManager.instance.map('ncsu.library.DHHILL')
 end

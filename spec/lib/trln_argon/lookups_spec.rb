@@ -15,10 +15,6 @@ describe TrlnArgon::Lookups do
     expect(lookups.lookup(pathspec)).to eq('')
   end
 
-  it 'can be safely marshaled' do
-    expect(Marshal.dump(lookups)).not_to be_nil
-  end
-
   it 'correctly masks faceted locations' do
     lib1_facet = lookups.lookup('test1.facet.lib1')
     expect(lib1_facet).to eq('Facet lib1')
@@ -27,5 +23,11 @@ describe TrlnArgon::Lookups do
   it 'correctly falls back when no facet value mapped' do
     lib2_facet = lookups.lookup('test2.facet.lib2')
     expect(lib2_facet).to eq(lookups.lookup('test2.loc_b.lib2'))
+  end
+
+  context '#mappings' do
+    it 'can be safely marshaled' do
+      expect(Marshal.dump(lookups.mappings)).not_to be_nil
+    end
   end
 end
