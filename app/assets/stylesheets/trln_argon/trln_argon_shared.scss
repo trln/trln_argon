@@ -839,31 +839,43 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     display: block;
   }
 
-  #toggle-trln-btn,
-  #toggle-local-btn {
+  #toggle-trln-btn-top,
+  #toggle-local-btn-top,
+  #toggle-trln-btn-bottom,
+  #toggle-local-btn-bottom {
     padding-left: 24px;
     padding-right: 24px;
   }
 
-  #toggle-trln-btn { border-top-left-radius: 0; border-bottom-left-radius: 0; }
+  #toggle-trln-btn-top,
+  #toggle-trln-btn-bottom  {
+    border-top-left-radius: 0; border-bottom-left-radius: 0;
+  }
 
-  #toggle-local-btn { border-top-right-radius: 0; border-bottom-right-radius: 0; }
+  #toggle-local-btn-top,
+  #toggle-local-btn-bottom {
+    border-top-right-radius: 0; border-bottom-right-radius: 0;
+  }
 
-  #toggle-trln-btn .icon-wrapper {
+  #toggle-trln-btn-top .icon-wrapper,
+  #toggle-trln-btn-bottom .icon-wrapper {
     background: transparent image_url($trln-icon-inverted) no-repeat left;
   }
 
-  #toggle-local-btn .icon-wrapper {
+  #toggle-local-btn-top .icon-wrapper,
+  #toggle-local-btn-bottom .icon-wrapper {
     background: transparent image_url($institution-icon) no-repeat left;
   }
 
   body.blacklight-catalog & {
 
-    #toggle-trln-btn .icon-wrapper {
+    #toggle-trln-btn-top .icon-wrapper,
+    #toggle-trln-btn-bottom .icon-wrapper {
       background: transparent image_url($trln-icon) no-repeat left;
     }
 
-    #toggle-local-btn .icon-wrapper {
+    #toggle-local-btn-top .icon-wrapper,
+    #toggle-local-btn-bottom .icon-wrapper {
       background: transparent image_url($institution-icon-inverted) no-repeat left;
     }
 
@@ -894,16 +906,24 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
       .btn { margin-right: 7px; }
 
-      #toggle-trln-btn,
-      #toggle-local-btn {
+      #toggle-trln-btn-top,
+      #toggle-local-btn-top,
+      #toggle-trln-btn-bottom,
+      #toggle-local-btn-bottom {
         padding-left: 12px;
         padding-right: 12px;
         display: inline-block;
       }
 
-      #toggle-trln-btn { border-bottom-left-radius: 4px; border-top-left-radius: 0; border-top-right-radius: 0; }
+      #toggle-trln-btn-top,
+      #toggle-trln-btn-bottom {
+        border-bottom-left-radius: 4px; border-top-left-radius: 0; border-top-right-radius: 0;
+      }
 
-      #toggle-local-btn { border-top-right-radius: 4px; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+      #toggle-local-btn-top,
+      #toggle-local-btn-bottom {
+        border-top-right-radius: 4px; border-bottom-left-radius: 0; border-bottom-right-radius: 0;
+      }
 
       label {
        max-width: calc(100% - 65px);
