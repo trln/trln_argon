@@ -83,7 +83,7 @@
 
                     <% next if i < num_display_items %>
 
-                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>">
+                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= item.has_key?('item_id') ? item['item_id'] : '' %>">
 
                       <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n, source: 'index' } %>
 
