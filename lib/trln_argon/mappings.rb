@@ -48,7 +48,7 @@ module TrlnArgon
         if File.exist?(head_fetch_file)
           # this method might get called in a loop when, e.g. creating
           # an engine_cart instance, so we need a very short term cache.
-          do_pull = File.stat(head_fetch_file).mtime > (Time.now = 2.minutes)
+          do_pull = File.stat(head_fetch_file).mtime > (Time.now - 2.minutes)
         end
 
         if do_pull
