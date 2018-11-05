@@ -742,6 +742,19 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     font-weight: normal;
   }
 
+
+  /* more / less */
+  #facets ul.facet-hierarchy ul li.location-more-toggle-wrapper {
+    margin-left: 0 !important;
+    list-style-image: none !important;
+    list-style: none !important;
+  }
+
+  .more_locations_link,
+  .less_locations_link {
+    cursor: pointer;
+  }
+
   .facet-checkbox-wrapper {
 
     .facet-label {
@@ -1365,7 +1378,7 @@ h1, h2, h3, h4, h5 {
 
 #document .hathi-trust-link .fulltext-url,
 #documents .hathi-trust-link .fulltext-url {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.5em !important;
 }
 
 

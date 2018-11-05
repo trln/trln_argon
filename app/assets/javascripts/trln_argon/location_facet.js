@@ -26,8 +26,7 @@ Blacklight.onLoad(function() {
           $( 'ul.facet-hierarchy > .twiddle-open > ul > li' ).slice( parseInt(locationFacetLimit) ).hide();
 
           // add 'more' and 'less' button at end
-          $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a></div>" );
-          $('ul.facet-hierarchy > .twiddle-open > ul').append( "<div><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></div>" );
+          $('ul.facet-hierarchy > .twiddle-open > ul').append( "<li class='location-more-toggle-wrapper'><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></li>" );
 
           // click 'more' to show all
           $('.more_locations_link').click(function() {
@@ -39,6 +38,7 @@ Blacklight.onLoad(function() {
           // click 'less' to hide
           $('.less_locations_link').click(function() {
               $( 'ul.facet-hierarchy .twiddle-open > ul > li' ).slice( parseInt(locationFacetLimit) ).hide();
+              $( 'ul.facet-hierarchy .twiddle-open > ul > li.location-more-toggle-wrapper' ).show();
               $('.more_locations_link').show();
               $('.less_locations_link').hide();
           });
