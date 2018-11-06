@@ -6,7 +6,7 @@ suggest:
     new:
       numFound: 3
       suggestions:
-      - term: new jersey
+      - term: this is a very long title and it should be truncated so that people are not confused
         weight: 3
         payload: ''
       - term: new jersey bridgeton biography
