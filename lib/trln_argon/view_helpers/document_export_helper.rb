@@ -1,8 +1,12 @@
 module TrlnArgon
   module ViewHelpers
     module DocumentExportHelper
+      # Refworks is broken and will not accept an HTTPS callback URL,
+      # so we convert the RIS URL to HTTP for now.
       def refworks_path(options = {})
-        "#{TrlnArgon::Engine.configuration.refworks_url}#{ris_url(options)}"
+        ris_uri = URI.parse(ris_url(options))
+        ris_uri.scheme = 'http'
+        "#{TrlnArgon::Engine.configuration.refworks_url}#{ris_uri}"
       end
 
       def ris_path(options = {})

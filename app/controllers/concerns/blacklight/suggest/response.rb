@@ -44,10 +44,14 @@ module Blacklight
                                          .try(:[], "#{category}Suggester")
                                          .try(:[], request_params[:q])
                                          .try(:[], 'suggestions') || [])
+                                .each { |h| h['term'] = truncate_and_quote_term(h['term']) }
                                 .uniq { |h| h['term'] }
-                                .each { |h| h['term'] = "\"#{h['term']}\"" }
                                 .each { |h| h['category'] = category }
         suggestions
+      end
+
+      def truncate_and_quote_term(term)
+        "\"#{term.chomp('.').truncate(60, separator: ' ')}\""
       end
     end
   end

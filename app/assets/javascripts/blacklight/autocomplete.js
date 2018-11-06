@@ -84,7 +84,7 @@ Blacklight.onLoad(function() {
     var options = {
       hint: true,
       highlight: true,
-      minLength: 2
+      minLength: 3
     };
 
     // Shared suggestion template
