@@ -180,6 +180,19 @@ module TrlnArgon
         end.join('<br/>').html_safe
       end
 
+      def add_thumbnail(document, size: :small)
+        if document.thumbnail_urls.any?
+          image_tag(
+            document.thumbnail_urls.first.fetch(:href, ''),
+            class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image'
+          )
+        else
+          cover_image(document, size: size) do |url|
+            image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image')
+          end
+        end
+      end
+
       private
 
       def primary_url_text(url_hash)
