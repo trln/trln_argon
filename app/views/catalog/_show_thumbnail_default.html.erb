@@ -1,5 +1,3 @@
 <div class="blacklight thumbnail">
-  <% cover_image(@document, size: :medium) do |url| %>
-  	<img src="<%= url %>" class="coverImage" onerror="this.style.display = 'none';" alt="cover image">
-  <% end %>
+	<%= add_thumbnail(document, size: :medium) %>
 </div>
