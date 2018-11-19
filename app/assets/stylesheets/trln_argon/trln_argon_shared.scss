@@ -356,10 +356,7 @@ body {
     display: inline-block;
   }
 
-
 }
-
-
 
 .expander[aria-expanded=false].hider {
     display: none;
@@ -580,72 +577,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   }
 
-
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-lg) { // account for 'twiddles' weird behavior
-
-    #facets ul.facet-hierarchy li.h-node:hover {
-      cursor: pointer;
-    }
-
-    #facets ul.facet-hierarchy .twiddle > .facet_select {
-      display: inline-block;
-      width: 110px;
-      margin-right: 7px;
-      float: left;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      /*height: 1.2em;*/
-      height: 18px;
-      padding-bottom: 0;
-      white-space: nowrap;
-
-      &:hover {
-        /*overflow: visible;
-        white-space: nowrap;*/
-      }
-
-    }
-
-    #facets ul.facet-hierarchy ul .twiddle > .facet_select {
-      width: 105px;
-    }
-
-    #facets ul.facet-hierarchy .twiddle > .facet-count {
-      width: 43px;
-      float: left;
-      text-align: right;
-      display: block;
-      text-overflow: ellipsis;
-      overflow: hidden;
-
-      &:hover {
-        overflow: visible;
-        white-space: nowrap;
-        float: left;
-        cursor: pointer;
-      }
-
-    }
-
-    #facets ul.facet-hierarchy .twiddle-open > .facet-count:hover {
-      float: right;
-      cursor: pointer;
-    }
-
-    #facets ul.facet-hierarchy .twiddle-open > .facet_select {
-      display: auto;
-      width: 110px;
-      margin-right: 7px;
-      float: none;
-    }
-
-  }
-
   @media screen and (min-width: $screen-lg) {
-
-    #facets ul.facet-hierarchy li.h-node:hover {
-      cursor: pointer;
-    }
 
     #facets ul.facet-hierarchy .twiddle > .facet_select {
       display: inline-block;
@@ -654,16 +586,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       float: left;
       text-overflow: ellipsis;
       overflow: hidden;
-      /*height: 1.2em;*/
-      height: 18px;
+      height: 18px !important;
       padding-bottom: 0;
       white-space: nowrap;
-
-      &:hover {
-        /*overflow: visible;
-        white-space: nowrap;*/
-      }
-
     }
 
     #facets ul.facet-hierarchy .twiddle-open > .facet_select {
@@ -685,15 +610,13 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
     #facets ul.facet-hierarchy li.h-leaf {
-      width: 163px;
-      a { width: 117px; }
+      a { width: 150px; }
     }
   }
 
   @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
-      width: 155px;
-      a { width: 90px; }
+      a { width: 145px; }
     }
   }
 
@@ -740,6 +663,20 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   #facets ul.facet-hierarchy li.h-node.twiddle-open > a ~ a {
     font-weight: normal;
+  }
+
+  // replaces default arrows with larger ones
+  #facets ul.facet-hierarchy li.h-node {
+    list-style-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0E5RDdCNzlFNDVFMTFFOEI2RkNEM0E4Rjc5NkYxQzMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0E5RDdCN0FFNDVFMTFFOEI2RkNEM0E4Rjc5NkYxQzMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3QTlEN0I3N0U0NUUxMUU4QjZGQ0QzQThGNzk2RjFDMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3QTlEN0I3OEU0NUUxMUU4QjZGQ0QzQThGNzk2RjFDMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PiBoruYAAADXSURBVHjajJG9CoMwEMeTmE1QJH2BdHRKn8AOdrCDBfukdW0foU4Vx/gIouDiB/YPocEWCt5w5O5+9xm6LAshZJqmqqp0XbdtC9P3/b2UYRhyzmFSQF3X3R8PaPItnued4hiaoYYhgiBwXXcNmWQADF1MjZ0Q1yw7KOU4zpoDwDCHdSGslAIqpbROAMxMuhY0PUbROUmEEDABMPJHKKX2zbFt0zTrcN/3z6LQWhsTAMc9ig80z/MLUpbYyOYAoOM43vLcnGAYBpT5OdUlTTcdk275lrcAAwClTInmTGtnogAAAABJRU5ErkJggg==');
+  }
+
+  #facets ul.facet-hierarchy li.h-node.twiddle-open {
+    list-style-image:
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6N0E5RDdCN0RFNDVFMTFFOEI2RkNEM0E4Rjc5NkYxQzMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6N0E5RDdCN0VFNDVFMTFFOEI2RkNEM0E4Rjc5NkYxQzMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3QTlEN0I3QkU0NUUxMUU4QjZGQ0QzQThGNzk2RjFDMyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3QTlEN0I3Q0U0NUUxMUU4QjZGQ0QzQThGNzk2RjFDMyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PtTrvN4AAADUSURBVHjajJExCoNAEEXXdWtFzAVM6Q3s9bjxAvEAkWgTxSayWysRUbARxXwyYIykcIrl/+HN7vjVlmVhjE3TVBSFVKrrOljTNM+O47quEAJWA9T3/TWKcLLfMgwj8H2cHHf8JVA0DEDgFRjLsk62vYNeTdO2LQCBPeDHcfQ8T9f1lZjn+RKGEAA4bToMQ5Zl22tg0YQAwL/dPKcuzTw2MxxfSwoLJmlK+p4keI40AI481gkpZV3XVVWpz6JUAAQSe5blGsEtjndRATgUpnbkt7wFGADQepwzUkDsDwAAAABJRU5ErkJggg==');
+  }
+
+  #facets ul.facet-hierarchy li.h-node:hover {
+    //cursor: pointer;
   }
 
 
