@@ -298,11 +298,11 @@ body {
 }
 
 
-.institution-availability .fulltext-url {
+.institution-availability .primary-url {
   margin-top: 1em;
 }
 
-.fulltext-url {
+.primary-url {
   display: block;
   margin-bottom: 0;
 
@@ -1129,6 +1129,10 @@ h1, h2, h3, h4, h5 {
     background: $unc-blue;
   }
 
+  &.shared-links {
+    background: $shared-links-color;
+  }
+
 }
 
 /* ITEMS */
@@ -1301,12 +1305,12 @@ h1, h2, h3, h4, h5 {
 
 @media screen and (min-width: $screen-md) {
   #document .holdings .items {
-    .fulltext-url { margin-bottom: 0;}
+    .primary-url { margin-bottom: 0;}
     /*.item { padding-bottom: 0; }*/
     .location-header ~ .location-header { margin-top: 2.5em; }
   }
 
-  .institution-availability .fulltext-url {
+  .institution-availability .primary-url {
     margin-top: 0;
   }
 
@@ -1376,8 +1380,8 @@ h1, h2, h3, h4, h5 {
   padding: 0;
 }
 
-#document .hathi-trust-link .fulltext-url,
-#documents .hathi-trust-link .fulltext-url {
+#document .hathi-trust-link .primary-url,
+#documents .hathi-trust-link .primary-url {
   margin-bottom: 1.5em !important;
 }
 
@@ -1431,7 +1435,8 @@ div.marc-record {
   text-decoration: underline
 }
 
-.show-included-works .progressive-link-wrapper {
+.show-included-works .progressive-link-wrapper,
+.show-related-works .progressive-link-wrapper {
   padding: 2px 0 2px 0;
 }
 
@@ -1446,7 +1451,8 @@ div.marc-record {
 
 
 .show-subjects .progressive-link-wrapper:hover,
-.show-included-works .progressive-link-wrapper:hover {
+.show-included-works .progressive-link-wrapper:hover,
+.show-related-works .progressive-link-wrapper:hover {
   background-color: lighten( $primary-link-color, 50% );
 }
 

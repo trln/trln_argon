@@ -28,11 +28,11 @@ describe 'search results' do
     before do
       visit search_catalog_path
       click_button 'search'
-      click_link 'Law Libraries'
+      click_link 'Law Library'
     end
 
     it 'displays the full location name in the page title' do
-      expect(page.title).to have_content(/Location: Law Libraries.*/)
+      expect(page.title).to have_content(/.*Law Library.*/)
     end
   end
 

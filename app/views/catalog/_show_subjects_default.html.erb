@@ -1,5 +1,5 @@
 <% display_values = show_configured_fields_and_values(blacklight_config.show_subjects_fields, document) %>
-<div class="show-subjects">
+<div class="<%= show_subjects_class %>">
   <% if display_values.any? %>
     <h2><%= t('trln_argon.show.heading.subjects') %></h2>
     <ul>

@@ -2,10 +2,10 @@
 
 <div class="row">
 
-  <div class='location-narrow-group col-md-12'>
+  <div class="<%= location_narrow_group_class %>">
 
   <% if item_data['call_no'].present? %>
-    <div class='col-md-4 call-number-wrapper'>
+    <div class="<%= call_number_wrapper_class %>">
       <dl class="dl-horizontal">
         <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
         <dd><span class='call-number'><%= item_data['call_no'] %></span></dd>
@@ -15,7 +15,7 @@
 
   <% if item_data['summary'].present? %>
 
-      <div class='col-sm-8 summary-wrapper'>
+      <div class="<%= holdings_summary_wrapper_class %>">
         <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
           <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
           <dd>
@@ -39,7 +39,7 @@
 
   <% if has_holding_notes %>
 
-    <div class='holding-note col-md-12'>
+    <div class="<%= holdings_note_class %>">
 
       <dl class="dl-horizontal">
         <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>

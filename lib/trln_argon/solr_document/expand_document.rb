@@ -20,6 +20,20 @@ module TrlnArgon
           end
       end
 
+      # NOTE: This is used by the TRLN view to show ALL restricted fulltext URLs
+      #       Both shared and local urls get combined and grouped by each inst.
+      def all_shared_and_local_fulltext_urls_by_inst
+        configured_association_sort_order.map do |inst|
+          non_shared_docs_for_inst_with_urls = non_shared_docs_for_inst_with_urls(inst)
+          shared_docs_for_inst_with_urls = shared_docs_for_inst_with_urls(inst)
+          if non_shared_docs_for_inst_with_urls.any?
+            [inst, non_shared_docs_for_inst_with_urls.first.fulltext_urls]
+          elsif shared_docs_for_inst_with_urls.any?
+            [inst, shared_docs_for_inst_with_urls.first.expanded_shared_fulltext_urls[inst]]
+          end
+        end.compact.to_h
+      end
+
       def expanded_docs_grouped_by_association
         @expanded_docs_grouped_by_association ||=
           sort_by_configured_record_association_order(
@@ -35,6 +49,21 @@ module TrlnArgon
       end
 
       private
+
+      def shared_docs_for_inst_with_urls(inst)
+        @shared_docs_for_inst_with_urls ||=
+          docs_with_holdings_merged_from_expanded_docs.select { |doc| doc.record_association == 'trln' }
+                                                      .select { |doc| local_expanded_urls?(doc, inst) }
+      end
+
+      def non_shared_docs_for_inst_with_urls(inst)
+        docs_with_holdings_merged_from_expanded_docs.select { |doc| doc.record_association == inst }
+                                                    .select { |doc| doc.fulltext_urls.any? }
+      end
+
+      def local_expanded_urls?(doc, inst)
+        doc.expanded_shared_fulltext_urls.keys.include?(inst)
+      end
 
       def sort_by_configured_record_association_order(docs_grouped_by_association)
         docs_grouped_by_association.sort_by do |key, _|

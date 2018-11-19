@@ -1,7 +1,11 @@
+require 'trln_argon/view_helpers/advanced_search_helper'
 require 'trln_argon/view_helpers/document_export_helper'
 require 'trln_argon/view_helpers/facets_helper'
+require 'trln_argon/view_helpers/items_section_helper'
+require 'trln_argon/view_helpers/link_helper'
 require 'trln_argon/view_helpers/names_helper'
 require 'trln_argon/view_helpers/search_scope_toggle_helper'
+require 'trln_argon/view_helpers/show_view_helper'
 require 'trln_argon/view_helpers/subjects_helper'
 require 'trln_argon/view_helpers/syndetics_helper'
 require 'trln_argon/view_helpers/work_entry_helper'
@@ -12,10 +16,14 @@ module TrlnArgon
     # Methods can be overridden in the local application
     # in app/helpers/trln_argon_helper.rb
     module TrlnArgonHelper
+      include AdvancedSearchHelper
       include DocumentExportHelper
       include FacetsHelper
+      include ItemsSectionHelper
+      include LinkHelper
       include NamesHelper
       include SearchScopeToggleHelper
+      include ShowViewHelper
       include SubjectsHelper
       include SyndeticsHelper
       include WorkEntryHelper
@@ -57,19 +65,6 @@ module TrlnArgon
 
       def consortium_long_name
         t('trln_argon.consortium.long_name')
-      end
-
-      def item_availability_display(item)
-        case item['status']
-        when /^available/i
-          'item-available'
-        when /^checked out/i, /\blost\b/i, /^missing/i
-          'item-not-available'
-        when /(?:in-)?library use only/i
-          'item-library-only'
-        else
-          'item-availability-misc'
-        end
       end
 
       def item_due_date(item)
@@ -126,30 +121,6 @@ module TrlnArgon
         end.compact
       end
 
-      def link_to_secondary_urls(options = {})
-        options[:value].map do |url|
-          link_text = if url[:text].present?
-                        url[:text]
-                      else
-                        url[:href]
-                      end
-          link_to link_text, url[:href]
-        end.join('<br />').html_safe
-      end
-
-      def link_to_primary_url(url_hash)
-        return if url_hash[:href].blank?
-        if url_hash[:type] == 'findingaid'
-          link_to(url_hash[:href], class: "link-type-#{url_hash[:type]}", target: '_blank') do
-            '<i class="fa fa-archive" aria-hidden="true"></i>'.html_safe + primary_url_text(url_hash)
-          end
-        else
-          link_to(url_hash[:href], class: "link-type-#{url_hash[:type]}", target: '_blank') do
-            '<i class="fa fa-external-link" aria-hidden="true"></i>'.html_safe + primary_url_text(url_hash)
-          end
-        end
-      end
-
       def add_icon_to_action_label(document_action_config)
         if document_action_config.key?(:icon)
           content_tag(:i, '', class: "glyphicon #{document_action_config[:icon]}", 'aria-hidden' => 'true') + ' ' +
@@ -194,19 +165,6 @@ module TrlnArgon
       end
 
       private
-
-      def primary_url_text(url_hash)
-        return url_hash[:text] if url_hash[:text].present?
-        I18n.t('trln_argon.links.online_access')
-      end
-
-      def online_access_link_text(url_hrefs, url_text)
-        if url_text && url_text.count == url_hrefs.count
-          url_text
-        else
-          [t('trln_argon.links.online_access')] * url_hrefs.count
-        end
-      end
 
       def holdings_have_notes?(holdings)
         return false if holdings.nil? || holdings.empty? || !holdings.respond_to?(:fetch)

@@ -1,0 +1,9 @@
+<% if document.findingaid_urls.any? %>
+  <div class="<%= primary_link_class %>">
+    <ul>
+    <% document.findingaid_urls.each do |url| %>
+      <li><%= link_to_finding_aid(url) %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

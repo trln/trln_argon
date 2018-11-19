@@ -1,0 +1,17 @@
+module TrlnArgon
+  module ViewHelpers
+    module AdvancedSearchHelper
+      def advanced_search_page_class
+        'advanced-search-form col-sm-12'
+      end
+
+      def advanced_search_form_class
+        'col-md-8'
+      end
+
+      def advanced_search_help_class
+        'col-md-4'
+      end
+    end
+  end
+end

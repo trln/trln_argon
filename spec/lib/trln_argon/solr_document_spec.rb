@@ -42,13 +42,13 @@ describe TrlnArgon::SolrDocument do
                   '{"href":"http://www.law.duke.edu/journals/lcp/",'\
                   '"type":"other",'\
                   '"text":"Law and contemporary problems, v. 63, no. 1-2"}',
-                  '{"href":"http://www.law.duke.edu/journals/lcp/",'\
+                  '{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
                   '"type":"other",'\
                   '"text":"Law and contemporary problems, v. 63, no. 1-2"}']
         )
       end
 
-      it 'deserializes each of the url entries' do
+      it 'deserializes each of the url entries and maps any templated URL segments' do
         expect(solr_document.urls).to(
           eq([{ href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
@@ -56,7 +56,7 @@ describe TrlnArgon::SolrDocument do
               { href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
                 text: 'Law and contemporary problems, v. 63, no. 1-2' },
-              { href: 'http://www.law.duke.edu/journals/lcp/',
+              { href: '{proxyPrefix}http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
                 text: 'Law and contemporary problems, v. 63, no. 1-2' }])
         )
@@ -91,6 +91,49 @@ describe TrlnArgon::SolrDocument do
           eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '' }])
         )
       end
+    end
+  end
+
+  describe 'shared_fulltext_urls' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345',
+        url_a: ['{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
+                '"type":"fulltext",'\
+                '"text":"Law and contemporary problems, v. 63, no. 1-2"}'],
+        institution_a: %w[duke unc]
+      )
+    end
+
+    it 'returns the proxied link for the the local institution' do
+      expect(solr_document.shared_fulltext_urls).to(
+        eq([{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+              type: 'fulltext',
+              text: 'Law and contemporary problems, v. 63, no. 1-2' }])
+      )
+    end
+  end
+
+  describe 'expanded_shared_fulltext_urls' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345',
+        url_a: ['{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
+                '"type":"fulltext",'\
+                '"text":"Law and contemporary problems, v. 63, no. 1-2"}'],
+        institution_a: %w[duke unc]
+      )
+    end
+
+    it 'returns the proxied links for each institution that has access' do
+      expect(solr_document.expanded_shared_fulltext_urls).to(
+        eq('duke' => [{ href: 'http://proxy.lib.duke.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+                        type: 'fulltext',
+                        text: 'Law and contemporary problems, v. 63, no. 1-2' }],
+           'unc' => [{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+                       type: 'fulltext',
+                       text: 'Law and contemporary problems, v. 63, no. 1-2' }])
+      )
     end
   end
 
@@ -521,11 +564,20 @@ describe TrlnArgon::SolrDocument do
     end
 
     let(:rolled_up_doc) do
-      { id: 'UNC123456789', rollup_id: rollup_id, owner_a: ['unc'], items_a: 'a unc item' }
+      { id: 'UNC123456789',
+        rollup_id: rollup_id,
+        owner_a: ['unc'],
+        items_a: 'a unc item',
+        url_a: ['{"href":"https://proxy.lib.unc.edu/login?url='\
+                'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389",'\
+                '"type":"fulltext","text":"Episode 1"}'] }
     end
 
     let(:another_rolled_up_doc) do
-      { id: 'UNC123456790', rollup_id: rollup_id, owner_a: ['unc'], items_a: 'another unc item' }
+      { id: 'UNC123456790',
+        rollup_id: rollup_id,
+        owner_a: ['unc'],
+        items_a: 'another unc item' }
     end
 
     let(:response) do
@@ -555,6 +607,15 @@ describe TrlnArgon::SolrDocument do
     it 'combines the unc records into single pseudo record with combined items' do
       expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs.first['items_a']).to(
         eq(['a unc item', 'another unc item'])
+      )
+    end
+
+    it 'groups the urls by institution' do
+      expect(expanded_solr_doc.all_shared_and_local_fulltext_urls_by_inst).to(
+        eq('unc' => [{ href: 'https://proxy.lib.unc.edu/login?url='\
+                             'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389',
+                       type: 'fulltext',
+                       text: 'Episode 1' }])
       )
     end
   end
