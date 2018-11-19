@@ -356,10 +356,7 @@ body {
     display: inline-block;
   }
 
-
 }
-
-
 
 .expander[aria-expanded=false].hider {
     display: none;
@@ -580,72 +577,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   }
 
-
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-lg) { // account for 'twiddles' weird behavior
-
-    #facets ul.facet-hierarchy li.h-node:hover {
-      cursor: pointer;
-    }
-
-    #facets ul.facet-hierarchy .twiddle > .facet_select {
-      display: inline-block;
-      width: 110px;
-      margin-right: 7px;
-      float: left;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      /*height: 1.2em;*/
-      height: 18px;
-      padding-bottom: 0;
-      white-space: nowrap;
-
-      &:hover {
-        /*overflow: visible;
-        white-space: nowrap;*/
-      }
-
-    }
-
-    #facets ul.facet-hierarchy ul .twiddle > .facet_select {
-      width: 105px;
-    }
-
-    #facets ul.facet-hierarchy .twiddle > .facet-count {
-      width: 43px;
-      float: left;
-      text-align: right;
-      display: block;
-      text-overflow: ellipsis;
-      overflow: hidden;
-
-      &:hover {
-        overflow: visible;
-        white-space: nowrap;
-        float: left;
-        cursor: pointer;
-      }
-
-    }
-
-    #facets ul.facet-hierarchy .twiddle-open > .facet-count:hover {
-      float: right;
-      cursor: pointer;
-    }
-
-    #facets ul.facet-hierarchy .twiddle-open > .facet_select {
-      display: auto;
-      width: 110px;
-      margin-right: 7px;
-      float: none;
-    }
-
-  }
-
   @media screen and (min-width: $screen-lg) {
-
-    #facets ul.facet-hierarchy li.h-node:hover {
-      cursor: pointer;
-    }
 
     #facets ul.facet-hierarchy .twiddle > .facet_select {
       display: inline-block;
@@ -654,16 +586,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       float: left;
       text-overflow: ellipsis;
       overflow: hidden;
-      /*height: 1.2em;*/
-      height: 18px;
+      height: 18px !important;
       padding-bottom: 0;
       white-space: nowrap;
-
-      &:hover {
-        /*overflow: visible;
-        white-space: nowrap;*/
-      }
-
     }
 
     #facets ul.facet-hierarchy .twiddle-open > .facet_select {
@@ -685,15 +610,13 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
     #facets ul.facet-hierarchy li.h-leaf {
-      width: 163px;
-      a { width: 117px; }
+      a { width: 150px; }
     }
   }
 
   @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
     #facets ul.facet-hierarchy li.h-leaf {
-      width: 155px;
-      a { width: 90px; }
+      a { width: 145px; }
     }
   }
 
@@ -740,6 +663,20 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
   #facets ul.facet-hierarchy li.h-node.twiddle-open > a ~ a {
     font-weight: normal;
+  }
+
+  // replaces default arrows with larger ones
+  #facets ul.facet-hierarchy li.h-node {
+    list-style-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDM3NDFFRkRFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDM3NDFFRkVFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzc0MUVGQkU1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzc0MUVGQ0U1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pvuoa0QAAACdSURBVHjarJC9CgMhEITPn0KU4zjsLE4slHv/l7j+3kBL0UqQ68ymSELCQlJkimWRj5lZyRhj+iY6/aAXdBxHrRU15s/tPM+c877vxph5nnHouq4YY+89pWSt3bZNCPEJEUIgq5TSWoMJLyEEBLp3pFRKCTbruiJxAHHOvfeQBbWUUgiktQZ/59yyLIyxt/PGQ9Aaug9M5G8/fhNgAPOLUrlCzIhLAAAAAElFTkSuQmCC');
+  }
+
+  #facets ul.facet-hierarchy li.h-node.twiddle-open {
+    list-style-image:
+    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDM3NDFFRjlFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDM3NDFFRkFFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzc0MUVGN0U1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzc0MUVGOEU1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pg8reXwAAACOSURBVHjazI6xCsMgFEVjLAoiiOCmk4MgCBn1///A3V/QVcwQKwm1HULp2DNdvOf5Hui9LycxxpzzCMdxAAAopd77q3osLzDGKaXW2hiDEIYQZrXOpLU2xow/hqGUstbeSAihbduEEFcghMzqvW7AOXfOlVKklJ/vYB5+UWvd950x9k26ZV1+4B+lpwADAP/aKHC2VcFUAAAAAElFTkSuQmCC');
+  }
+
+  #facets ul.facet-hierarchy li.h-node:hover {
+    //cursor: pointer;
   }
 
 
