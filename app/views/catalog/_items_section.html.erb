@@ -51,7 +51,7 @@
 
             <% # ---ITEMS WRAPPER --- %>
 
-              <div class="item-group-display <%= item_with_summary ? 'has-summary' : '' %>" id="<%= document.id %>-<%= document_index %>-preview">
+              <div class="item-group-display <%= item_with_summary ? 'has-summary' : '' %>" id="<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview">
 
                 <% items_have_notes = items_have_notes?(item_data['items']) %>
 
@@ -69,7 +69,7 @@
 
               <% if item_data['items'].size > num_display_items %>
 
-                <div class='item-group-display collapse' id="item-container-<%=document.id %>-<%= document_index %>">
+                <div class='item-group-display collapse' id="item-container-<%=document.id %>-<%= loc_n %>-<%= document_index %>">
 
                   <% item_data['items'].each_with_index do |item, i| %>
 
@@ -88,11 +88,11 @@
                 <div class="col-md-12">
                   <div class="items-toggle">
 
-                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
                       <%= t('trln_argon.show.controls.show') %> <%= t('trln_argon.show.controls.all') %> <%= item_data['items'].length %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     </a>
 
-                    <a href="#<%= document.id %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                    <a href="#<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
                       <%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </a>
 
