@@ -441,7 +441,7 @@ SUPPLEMENT_TO_WORK:
 THIS_WORK:
   solr_field: :this_work_a
   label:
-    en: This Title
+    en: Other Versions
 TITLE_FORMER:
   solr_field: :title_former_a
   label:
