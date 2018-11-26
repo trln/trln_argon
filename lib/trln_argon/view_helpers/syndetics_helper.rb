@@ -32,6 +32,10 @@ module TrlnArgon
           oclc: doc.fetch(TrlnArgon::Fields::OCLC_NUMBER, []).dup
           # placeholder for UPC and EAN when they are added
         }
+        # add upc if available
+        if doc.fetch(TrlnArgon::Fields::UPC, []).present?
+          params[:upc] = doc.fetch(TrlnArgon::Fields::UPC, []).first.to_s.gsub('UPC: ', '')
+        end
         %i[isbn oclc upc ean].each do |k|
           if params.fetch(k, []).empty?
             params.delete(k)
