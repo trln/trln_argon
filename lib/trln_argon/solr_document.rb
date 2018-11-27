@@ -99,6 +99,12 @@ module TrlnArgon
       )
     end
 
+    def upc
+      fetch(TrlnArgon::Fields::UPC, []).map do |upc|
+        upc.to_s.gsub(/\D/, '')
+      end.reject(&:empty?)
+    end
+
     private
 
     # utility for formatting multi-valued fields
