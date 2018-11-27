@@ -619,4 +619,44 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  describe 'get the UPC' do
+    context 'when there is a single value' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          upc_a: ['UPC: 123456789098']
+        )
+      end
+
+      it 'returns the UPC' do
+        expect(solr_document.upc).to eq(['123456789098'])
+      end
+    end
+
+    context 'when there are multiple values' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          upc_a: ['UPC: 123456789098', 'UPC: 987654321012']
+        )
+      end
+
+      it 'returns the all UPCs' do
+        expect(solr_document.upc).to eq(%w[123456789098 987654321012])
+      end
+    end
+  end
+
+  context 'when there are no values' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345'
+      )
+    end
+
+    it 'returns empty array' do
+      expect(solr_document.upc).to eq([])
+    end
+  end
 end

@@ -29,8 +29,9 @@ module TrlnArgon
       def get_params(doc, client = 'trlnet', format_spec = 'XML.XML')
         params = {
           isbn: [doc.fetch(TrlnArgon::Fields::ISBN_NUMBER, []).first],
-          oclc: doc.fetch(TrlnArgon::Fields::OCLC_NUMBER, []).dup
-          # placeholder for UPC and EAN when they are added
+          oclc: doc.fetch(TrlnArgon::Fields::OCLC_NUMBER, []).dup,
+          upc: [doc.upc.first].compact
+          # placeholder for EAN when added
         }
         %i[isbn oclc upc ean].each do |k|
           if params.fetch(k, []).empty?
