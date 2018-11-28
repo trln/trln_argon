@@ -324,7 +324,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
                               accessor: :isbn_with_qualifying_info
         config.add_show_field TrlnArgon::Fields::ISSN_LINKING.to_s,
-                              label: TrlnArgon::Fields::ISSN_LINKING.label
+                              label: TrlnArgon::Fields::ISSN_LINKING.label,
+                              accessor: :issn
         config.add_show_field TrlnArgon::Fields::OCLC_NUMBER.to_s,
                               label: TrlnArgon::Fields::OCLC_NUMBER.label
         config.add_show_field TrlnArgon::Fields::MISC_ID.to_s,
