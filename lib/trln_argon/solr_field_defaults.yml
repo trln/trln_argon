@@ -134,6 +134,10 @@ ISSN_LINKING_NUM:
   solr_field: :issn_linking_num
   label:
     en: ISSN Linking Num
+ISSN_PRIMARY:
+  solr_field: :issn_primary_a
+  label:
+    en: ISSN
 ISSN_SERIES:
   solr_field: :issn_series_a
   label:

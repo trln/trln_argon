@@ -659,4 +659,45 @@ describe TrlnArgon::SolrDocument do
       expect(solr_document.upc).to eq([])
     end
   end
+
+  describe 'issn' do
+    context 'when there is a single ISSN' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          issn_linking_a: ['1111-2222']
+        )
+      end
+
+      it 'returns the ISSN' do
+        expect(solr_document.issn).to eq(['1111-2222'])
+      end
+    end
+
+    context 'when there are multiple ISSNs and some duplicates' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          issn_linking_a: ['1111-2222'],
+          issn_primary_a: ['3333-4444', '1111-2222']
+        )
+      end
+
+      it 'returns the ISSNs without duplicates' do
+        expect(solr_document.issn).to eq(['3333-4444', '1111-2222'])
+      end
+    end
+
+    context 'when there are no ISSNs' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345'
+        )
+      end
+
+      it 'returns an empty array' do
+        expect(solr_document.issn).to eq([])
+      end
+    end
+  end
 end

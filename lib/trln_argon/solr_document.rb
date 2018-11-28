@@ -105,6 +105,12 @@ module TrlnArgon
       end.reject(&:empty?)
     end
 
+    def issn
+      [fetch(TrlnArgon::Fields::ISSN_PRIMARY, []),
+       fetch(TrlnArgon::Fields::ISSN_LINKING, []),
+       fetch(TrlnArgon::Fields::ISSN_SERIES, [])].flatten.uniq
+    end
+
     private
 
     # utility for formatting multi-valued fields
