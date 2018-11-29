@@ -109,6 +109,14 @@ module TrlnArgon
           loc_b.blank? ||
           item_data.fetch('items', []).empty?
       end
+
+      def get_item_id(item)
+        item.key?('item_id') ? item['item_id'] : ''
+      end
+
+      def assign_item_id_as_id(item)
+        item.key?('item_id') ? ('id="item-' + item['item_id'] + '"').html_safe : ''
+      end
     end
   end
 end
