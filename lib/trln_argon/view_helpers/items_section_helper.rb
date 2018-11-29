@@ -115,7 +115,7 @@ module TrlnArgon
       end
 
       def assign_item_id_as_id(item)
-        item.key?('item_id') ? ('id="item-' + item['item_id'] + '"').html_safe : ''
+        item.key?('item_id') ? "id=\"item-#{CGI.escapeHTML(item['item_id'])}\"".html_safe : ''
       end
     end
   end
