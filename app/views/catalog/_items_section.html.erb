@@ -57,7 +57,7 @@
 
                 <% item_data['items'].first(num_display_items).each do |item| %>
 
-                  <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= item.has_key?('item_id') ? item['item_id'] : '' %>">
+                  <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
 
                     <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n } %>
 
@@ -75,7 +75,7 @@
 
                     <% next if i < num_display_items %>
 
-                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= item.has_key?('item_id') ? item['item_id'] : '' %>">
+                    <div class="col-md-12 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
 
                       <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n } %>
 

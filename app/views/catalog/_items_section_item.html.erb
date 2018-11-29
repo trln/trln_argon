@@ -7,7 +7,7 @@
     </dl>
   </div>
 
-  <div class="<%= status_wrapper_class(action: action_name) %> status-wrapper">
+  <div class="<%= status_wrapper_class(action: action_name) %> status-wrapper" <%= assign_item_id_as_id(item) %>>
     <dl class="dl-horizontal">
       <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
       <dd>
