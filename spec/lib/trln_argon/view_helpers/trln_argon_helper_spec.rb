@@ -884,6 +884,31 @@ describe TrlnArgonHelper, type: :helper do
     # rubocop:disable ExampleLength
     it 'creates a display value with links from the supplied work entry data' do
       expect(context.helpers.work_entry_display(options)).to eq(
+        '<dd>'\
+        '<span class="progressive-link-wrapper">'\
+        '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
+        '<a class="progressive-link" href="/catalog?search=something">'\
+        '<span class="sr-only">Author One</span> One'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?search=something">'\
+        '<span class="sr-only">Author One Two</span> Two'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?search=something">'\
+        '<span class="sr-only">Author One Two Three</span> Three'\
+        '</a>'\
+        '<a class="progressive-link" '\
+        'href="/catalog?search=something">'\
+        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '</a>'\
+        '</span>'\
+        '</dd>'
+      )
+    end
+
+    it 'creates a display value with links from the supplied work entry data that are formatted as an unordered list' do
+      expect(context.helpers.included_works_display(options)).to eq(
         '<li>'\
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
