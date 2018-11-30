@@ -352,7 +352,7 @@ module TrlnArgon
         config.add_show_included_works_field TrlnArgon::Fields::INCLUDED_WORK.to_s,
                                              label: TrlnArgon::Fields::INCLUDED_WORK.label,
                                              accessor: :included_work,
-                                             helper_method: :work_entry_display
+                                             helper_method: :included_works_display
 
         config.add_show_related_works_field TrlnArgon::Fields::RELATED_WORK.to_s,
                                             label: TrlnArgon::Fields::RELATED_WORK.label,

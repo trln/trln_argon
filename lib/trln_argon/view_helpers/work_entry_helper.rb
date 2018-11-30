@@ -1,9 +1,14 @@
 module TrlnArgon
   module ViewHelpers
     module WorkEntryHelper
+      def included_works_display(options = {})
+        work_entry_display(options.merge(wrapper_tag: :li))
+      end
+
       def work_entry_display(options = {})
+        tag = options.fetch(:wrapper_tag, :dd)
         assemble_work_entry_list_value(options[:value]).map do |work|
-          content_tag :dd, class: options[:field] do
+          content_tag tag, class: options[:field] do
             content_tag :span, work.html_safe, class: 'progressive-link-wrapper'
           end
         end.join('').html_safe

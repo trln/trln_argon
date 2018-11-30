@@ -443,7 +443,8 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
         margin-bottom: 4px;
     }
 
-    .show-subjects ul {
+    .show-subjects ul,
+    .show-included-works ul {
       list-style-type: square;
       padding-left: 2em;
       color: #999;
@@ -455,7 +456,8 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 }
 
 @media screen and (min-width: $screen-sm) {
-  .show-document .show-subjects ul {
+  .show-document .show-subjects ul,
+  .show-document .show-included-works ul {
     /*list-style-type: none;*/
     list-style-type: square;
     column-width: 20em;
@@ -463,13 +465,15 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     column-fill: balance;
     padding-left: 0;
   }
-  .show-document .show-subjects ul li {
+  .show-document .show-subjects ul li,
+  .show-document .show-included-works ul li,{
     margin-bottom: 6px;
     display: inline-block;
     margin-left: 1em;
     width: 100%;
   }
-  .show-document .show-subjects ul li::before {
+  .show-document .show-subjects ul li::before,
+  .show-document .show-included-works ul li::before {
     content: '■';
     margin-left: -1.5em;
     display: block;
@@ -1382,11 +1386,13 @@ div.marc-record {
   padding: 2px 0 2px 0;
 }
 
-.show-subjects li {
+.show-subjects li,
+.show-included-works li {
   padding: 2px;
 }
 
-.show-subjects .progressive-link-wrapper {
+.show-subjects .progressive-link-wrapper,
+.show-included-works .progressive-link-wrapper {
   padding: 2px 0 2px 0;
   margin-left: -2px;
 }
@@ -1398,7 +1404,8 @@ div.marc-record {
 
 }
 
-.show-subjects .subject-separator {
+.show-subjects .subject-separator,
+.show-included-works .subject-separator {
   text-decoration: none !important;
   display: inline-block;
   margin-left: 5px;
@@ -1408,7 +1415,8 @@ div.marc-record {
   color: #737373;
 }
 
-.show-subjects .progressive-link-hover .subject-separator {
+.show-subjects .progressive-link-hover .subject-separator,
+.show-included-works .progressive-link-hover .subject-separator {
   color: $primary-link-color;
 }
 
