@@ -1,16 +1,12 @@
-<div class="<%= show_enhanced_data_class %>">
-  <% s = enhanced_data(@document) %>
-  <% summary = ( (s && s.summary? && s.summary) || @document.marc_summary ) %>
-  <% toc = ( (s && s.toc? && s.toc ) || @document.marc_toc ) %>
-  <% samplechapter = ( s && s.samplechapter? && s.samplechapter ) || nil %>
+<div id="enhanced-data" class="<%= show_enhanced_data_class %>">
 
-  <% unless summary.nil? || summary.empty? %>
-    <section class="<%= show_enhanced_data_summary_class %>">
+  <% if display_summary?(document: @document) %>
+    <section id="summary" class="<%= show_enhanced_data_summary_class %>">
 
-      <h2 id="summary">Summary</h2>
+      <h2><%= t('trln_argon.show.heading.summary') %></h2>
 
       <div class="content expandable-content">
-        <%= summary.html_safe %>
+        <%= @document.syndetics_or_marc_summary.html_safe %>
       </div>
 
       <div class="expandable-content-controls">
@@ -23,12 +19,12 @@
 
   <%= render 'show_google_book_preview' %>
 
-  <% unless toc.nil? || toc.empty? %>
-    <section class="<%= show_enhanced_data_toc_class %>">
-      <h2 id="contents">Contents</h2>
+  <% if display_toc?(document: @document) %>
+    <section id="contents" class="<%= show_enhanced_data_toc_class %>">
+      <h2><%= t('trln_argon.show.heading.contents') %></h2>
 
       <div class="content expandable-content">
-        <%= toc.html_safe %>
+        <%= @document.syndetics_or_marc_toc.html_safe %>
       </div>
 
       <div class="expandable-content-controls">
@@ -39,12 +35,12 @@
     </section>
   <% end %>
 
-  <% unless samplechapter.nil? || samplechapter.empty? %>
-  <section class="<%= show_enhanced_data_sample_chapter_class %>">
-    <h2>Sample Chapter</h2>
+  <% if display_sample_chapter?(document: @document) %>
+  <section id="sample-chapter" class="<%= show_enhanced_data_sample_chapter_class %>">
+    <h2><%= t('trln_argon.show.heading.sample_chapter') %></h2>
 
     <div class='content expandable-content'>
-      <%= samplechapter.html_safe %>
+      <%= @document.syndetics_or_marc_sample_chapter.html_safe %>
     </div>
 
     <div class="expandable-content-controls">

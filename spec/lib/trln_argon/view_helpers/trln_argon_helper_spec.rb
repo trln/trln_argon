@@ -700,7 +700,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_main_content_heading_partials_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_main_content_heading_partials_class).to(
-        eq('col-md-12 title-and-thumbnail')
+        eq('col-md-12')
       )
     end
   end
@@ -738,7 +738,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_other_details_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_other_details_class).to(
-        eq('other-details')
+        eq('full-record-section')
       )
     end
   end
@@ -746,7 +746,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_authors_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_authors_class).to(
-        eq('show-authors')
+        eq('full-record-section')
       )
     end
   end
@@ -754,23 +754,21 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_items_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_items_class).to(
-        eq('holdings')
+        eq('full-record-section')
       )
     end
   end
 
   describe '#show_enhanced_data_class' do
     it 'returns the HTML class attribute values' do
-      expect(helper.show_enhanced_data_class).to(
-        eq('enhanced-data')
-      )
+      expect(helper.show_enhanced_data_class).to(be_nil)
     end
   end
 
   describe '#show_enhanced_data_summary_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_enhanced_data_summary_class).to(
-        eq('summary')
+        eq('full-record-section')
       )
     end
   end
@@ -778,7 +776,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_enhanced_data_toc_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_enhanced_data_toc_class).to(
-        eq('table-of-contents')
+        eq('full-record-section')
       )
     end
   end
@@ -786,7 +784,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_enhanced_data_sample_chapter_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_enhanced_data_sample_chapter_class).to(
-        eq('sample-chapter')
+        eq('full-record-section')
       )
     end
   end
@@ -794,7 +792,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_included_works_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_included_works_class).to(
-        eq('show-included-works')
+        eq('full-record-section')
       )
     end
   end
@@ -802,7 +800,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_subjects_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_subjects_class).to(
-        eq('show-subjects')
+        eq('full-record-section')
       )
     end
   end
@@ -810,7 +808,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_related_works_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_related_works_class).to(
-        eq('show-related-works')
+        eq('full-record-section')
       )
     end
   end

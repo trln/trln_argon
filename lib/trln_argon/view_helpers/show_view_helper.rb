@@ -21,7 +21,7 @@ module TrlnArgon
       end
 
       def show_main_content_heading_partials_class
-        'col-md-12 title-and-thumbnail'
+        'col-md-12'
       end
 
       def show_main_content_partials_class
@@ -39,43 +39,85 @@ module TrlnArgon
       end
 
       def show_other_details_class
-        'other-details'
+        'full-record-section'
       end
 
       def show_authors_class
-        'show-authors'
+        'full-record-section'
       end
 
       def show_items_class
-        'holdings'
+        'full-record-section'
       end
 
-      def show_enhanced_data_class
-        'enhanced-data'
-      end
+      def show_enhanced_data_class; end
 
       def show_enhanced_data_summary_class
-        'summary'
+        'full-record-section'
       end
 
       def show_enhanced_data_toc_class
-        'table-of-contents'
+        'full-record-section'
       end
 
       def show_enhanced_data_sample_chapter_class
-        'sample-chapter'
+        'full-record-section'
       end
 
       def show_included_works_class
-        'show-included-works'
+        'full-record-section'
       end
 
       def show_subjects_class
-        'show-subjects'
+        'full-record-section'
       end
 
       def show_related_works_class
-        'show-related-works'
+        'full-record-section'
+      end
+
+      def display_summary?(options = {})
+        display_enhanced_data?(options, :syndetics_or_marc_summary)
+      end
+
+      def display_toc?(options = {})
+        display_enhanced_data?(options, :syndetics_or_marc_toc)
+      end
+
+      def display_sample_chapter?(options = {})
+        display_enhanced_data?(options, :syndetics_or_marc_sample_chapter)
+      end
+
+      def display_other_details?(options = {})
+        display_configured_fields?(options, :show_fields)
+      end
+
+      def display_authors?(options = {})
+        display_configured_fields?(options, :show_authors_fields)
+      end
+
+      def display_subjects?(options = {})
+        display_configured_fields?(options, :show_subjects_fields)
+      end
+
+      def display_related_works?(options = {})
+        display_configured_fields?(options, :show_related_works_fields)
+      end
+
+      def display_included_works?(options = {})
+        display_configured_fields?(options, :show_included_works_fields)
+      end
+
+      private
+
+      def display_configured_fields?(options, field_config)
+        doc = options.fetch(:document, false)
+        doc && show_configured_fields_and_values(blacklight_config.send(field_config), doc).any?
+      end
+
+      def display_enhanced_data?(options, accessor)
+        doc = options.fetch(:document, false)
+        doc && doc.send(accessor).present?
       end
     end
   end

@@ -77,8 +77,8 @@
   }
   #documents .items .item:nth-child(n+1):before,
   #documents .items .loc-narrow-banner:before,
-  #document .holdings .items .item:nth-child(n+1):before,
-  #document .holdings .items .loc-narrow-banner:before {
+  #document #holdings .items .item:nth-child(n+1):before,
+  #document #holdings .items .loc-narrow-banner:before {
     display: none;
     border-top: none !important;
 }

@@ -7,7 +7,6 @@ require 'trln_argon/view_helpers/names_helper'
 require 'trln_argon/view_helpers/search_scope_toggle_helper'
 require 'trln_argon/view_helpers/show_view_helper'
 require 'trln_argon/view_helpers/subjects_helper'
-require 'trln_argon/view_helpers/syndetics_helper'
 require 'trln_argon/view_helpers/work_entry_helper'
 
 module TrlnArgon
@@ -25,7 +24,6 @@ module TrlnArgon
       include SearchScopeToggleHelper
       include ShowViewHelper
       include SubjectsHelper
-      include SyndeticsHelper
       include WorkEntryHelper
 
       def filter_scope_name
@@ -152,19 +150,24 @@ module TrlnArgon
       end
 
       def add_thumbnail(document, size: :small)
-        if document.thumbnail_urls.any?
-          image_tag(
-            document.thumbnail_urls.first.fetch(:href, ''),
-            class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image'
-          )
-        else
-          cover_image(document, size: size) do |url|
-            image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image')
-          end
-        end
+        return marc_thumbnail_tag(document) if document.thumbnail_urls.any?
+        syndetics_thumbnail_tag(document, size)
       end
 
       private
+
+      def marc_thumbnail_tag(document)
+        image_tag(
+          document.thumbnail_urls.first.fetch(:href, ''),
+          class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image'
+        )
+      end
+
+      def syndetics_thumbnail_tag(document, size)
+        document.cover_image(size: size) do |url|
+          image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image')
+        end
+      end
 
       def holdings_have_notes?(holdings)
         return false if holdings.nil? || holdings.empty? || !holdings.respond_to?(:fetch)

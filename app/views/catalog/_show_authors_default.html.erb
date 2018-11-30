@@ -1,9 +1,8 @@
-<% display_values = show_configured_fields_and_values(blacklight_config.show_authors_fields, document) %>
-<div class="<%= show_authors_class %>">
-  <% if display_values.any? %>
+<div id="authors" class="<%= show_authors_class %>">
+  <% if display_authors?(document: document) %>
     <h2><%= t('trln_argon.show.heading.authors') %></h2>
     <ul>
-      <% display_values.each do |value| %>
+      <% show_configured_fields_and_values(blacklight_config.show_authors_fields, document).each do |value| %>
           <%= value[:value] %>
       <% end %>
     </ul>

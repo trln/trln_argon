@@ -2,7 +2,7 @@
 
   <div class="availability institution-availability row">
 
-    <% if document.all_shared_and_local_fulltext_urls_by_inst.any? %>
+    <% if display_all_shared_and_local_fulltext_urls?(document: document) %>
       <%= render partial: 'expanded_fulltext_links', locals: { document: document } %>
     <% else %>
       <%= render partial: 'hathitrust_link', locals: { document: document } %>

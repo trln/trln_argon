@@ -154,7 +154,7 @@ body {
 
     }
 
-    .title-and-thumbnail:after {
+    #title-and-thumbnail:after {
       content: "";
       display: table;
       clear: both;
@@ -392,7 +392,7 @@ body {
     /*text-overflow: ellipsis;*/
 }
 
-.enhanced-data .content p {
+#enhanced-data .content p {
   margin-bottom: .5em;
 }
 
@@ -443,8 +443,8 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
         margin-bottom: 4px;
     }
 
-    .show-subjects ul,
-    .show-included-works ul {
+    #subjects ul,
+    #included-works ul {
       list-style-type: square;
       padding-left: 2em;
       color: #999;
@@ -456,8 +456,8 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 }
 
 @media screen and (min-width: $screen-sm) {
-  .show-document .show-subjects ul,
-  .show-document .show-included-works ul {
+  .show-document #subjects ul,
+  .show-document #included-works ul {
     /*list-style-type: none;*/
     list-style-type: square;
     column-width: 20em;
@@ -465,15 +465,15 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     column-fill: balance;
     padding-left: 0;
   }
-  .show-document .show-subjects ul li,
-  .show-document .show-included-works ul li,{
+  .show-document #subjects ul li,
+  .show-document #included-works ul li,{
     margin-bottom: 6px;
     display: inline-block;
     margin-left: 1em;
     width: 100%;
   }
-  .show-document .show-subjects ul li::before,
-  .show-document .show-included-works ul li::before {
+  .show-document #subjects ul li::before,
+  .show-document #included-works ul li::before {
     content: '■';
     margin-left: -1.5em;
     display: block;
@@ -1004,7 +1004,7 @@ h1, h2, h3, h4, h5 {
   }
 
   @media screen and (min-width: $screen-sm) {
-    .holdings h2 {
+    #holdings h2 {
       margin-top: 0;
     }
 
@@ -1079,7 +1079,7 @@ h1, h2, h3, h4, h5 {
 /* ITEMS */
 
 #documents .items,
-#document .holdings .items {
+#document #holdings .items {
   background: #f5f5f5;
   margin-bottom: 2em;
   overflow: hidden;
@@ -1245,7 +1245,7 @@ h1, h2, h3, h4, h5 {
 }
 
 @media screen and (min-width: $screen-md) {
-  #document .holdings .items {
+  #document #holdings .items {
     .primary-url { margin-bottom: 0;}
     /*.item { padding-bottom: 0; }*/
     .location-header ~ .location-header { margin-top: 2.5em; }
@@ -1259,7 +1259,7 @@ h1, h2, h3, h4, h5 {
 
 
 @media screen and (min-width: $screen-sm) {
-  #document .holdings .items {
+  #document #holdings .items {
     .loc-narrow-banner a.expander,
     .item-details-link a {
       min-width: 70%;
@@ -1381,31 +1381,31 @@ div.marc-record {
   color: darken( $primary-link-color, 40% );
 }
 
-.show-included-works .progressive-link-wrapper,
-.show-related-works .progressive-link-wrapper {
+#included-works .progressive-link-wrapper,
+#related-works .progressive-link-wrapper {
   padding: 2px 0 2px 0;
 }
 
-.show-subjects li,
-.show-included-works li {
+#subjects li,
+#included-works li {
   padding: 2px;
 }
 
-.show-subjects .progressive-link-wrapper,
-.show-included-works .progressive-link-wrapper {
+#subjects .progressive-link-wrapper,
+#included-works .progressive-link-wrapper {
   padding: 2px 0 2px 0;
   margin-left: -2px;
 }
 
 
-.show-subjects .progressive-link-wrapper:hover,
-.show-included-works .progressive-link-wrapper:hover,
-.show-related-works .progressive-link-wrapper:hover {
+#subjects .progressive-link-wrapper:hover,
+#included-works .progressive-link-wrapper:hover,
+#related-works .progressive-link-wrapper:hover {
 
 }
 
-.show-subjects .subject-separator,
-.show-included-works .subject-separator {
+#subjects .subject-separator,
+#included-works .subject-separator {
   text-decoration: none !important;
   display: inline-block;
   margin-left: 5px;
@@ -1415,8 +1415,8 @@ div.marc-record {
   color: #737373;
 }
 
-.show-subjects .progressive-link-hover .subject-separator,
-.show-included-works .progressive-link-hover .subject-separator {
+#subjects .progressive-link-hover .subject-separator,
+#included-works .progressive-link-hover .subject-separator {
   color: $primary-link-color;
 }
 
