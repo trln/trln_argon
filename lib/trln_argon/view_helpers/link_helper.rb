@@ -71,6 +71,11 @@ module TrlnArgon
         return url_hash[:text] if url_hash[:text].present?
         I18n.t('trln_argon.links.open_access')
       end
+
+      def display_all_shared_and_local_fulltext_urls?(options = {})
+        doc = options.fetch(:document, false)
+        doc && doc.all_shared_and_local_fulltext_urls_by_inst.reject { |_, v| v.blank? }.any?
+      end
     end
   end
 end

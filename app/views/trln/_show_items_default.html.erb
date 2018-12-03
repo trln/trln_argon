@@ -1,8 +1,8 @@
-<div class="<%= show_items_class %>">
+<div id="holdings" class="<%= show_items_class %>">
 
   <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
 
-  <% if document.all_shared_and_local_fulltext_urls_by_inst.any? %>
+  <% if display_all_shared_and_local_fulltext_urls?(document: document) %>
 
     <h3 class="institution-name shared-links"><%= t('trln_argon.show.heading.expanded_links') %></h3>
 
@@ -15,7 +15,7 @@
   <% else %>
 
     <div class="row">
-      <% unless document.all_shared_and_local_fulltext_urls_by_inst.any? %>
+      <% unless display_all_shared_and_local_fulltext_urls?(document: document) %>
         <%= render partial: 'hathitrust_link', locals: { document: document } %>
       <% end %>
     </div>

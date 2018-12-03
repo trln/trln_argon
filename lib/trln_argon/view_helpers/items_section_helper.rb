@@ -91,7 +91,7 @@ module TrlnArgon
         doc &&
           (doc.findingaid_urls.any? ||
            doc.fulltext_urls.any? ||
-           doc.holdings.keys.any? ||
+           display_items?(document: doc) ||
            doc.shared_fulltext_urls.any?)
       end
 

@@ -700,4 +700,55 @@ describe TrlnArgon::SolrDocument do
       end
     end
   end
+
+  describe '#cover_image' do
+    context 'when we link to a Syndetics cover image with various options' do
+      let(:oclc) do
+        '123098080985'
+      end
+
+      let(:isbn) do
+        '123456789012X'
+      end
+
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          isbn_number_a: ['123456789012X']
+        )
+      end
+
+      let(:oclc_document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          isbn_number_a: ['123456789012X'],
+          oclc_number: '123098080985'
+        )
+      end
+
+      let(:url_template) do
+        'http://www.syndetics.com/index.aspc?isbn=%s/%s&client=trlnet'
+      end
+
+      it 'generates a link to a small cover image with defaults' do
+        expected = URI(format(url_template, isbn, 'SC.GIF'))
+        actual = document.cover_image { |x| URI(x) }
+        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
+      end
+
+      it 'generates a link to a small cover image with custom options' do
+        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), isbn, 'SC.GIF'))
+        actual = document.cover_image(size: 'small', client: 'ncstateu') do |x|
+          URI(x)
+        end
+        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
+      end
+
+      it 'generates a link to a medium cover image with an OCLC number' do
+        expected = URI(format(url_template + '&oclc=' + oclc, isbn, 'MC.GIF'))
+        actual = oclc_document.cover_image(size: :medium) { |x| URI(x) }
+        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
+      end
+    end
+  end
 end
