@@ -30,8 +30,17 @@ Blacklight.onLoad(function() {
 
     contract(); // if we got this far, we want to shrink
 
-    parent.find('.more').on('click', expand);
-    parent.find('.less').on('click', contract);
+    //parent.find('.more').on('click', expand);
+    //parent.find('.less').on('click', contract);
+
+    parent.find('.more').click(function() {
+      expand();
+    });
+
+
+    parent.find('.less').click(function() {
+      contract();
+    });
 
   });
 
