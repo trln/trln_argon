@@ -474,7 +474,7 @@ module TrlnArgon
         end
 
         config.add_search_field('genre_headings') do |field|
-          field.label = 'Genre'
+          field.label = I18n.t('trln_argon.search_fields.genre_headings')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
             qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v'
@@ -484,7 +484,7 @@ module TrlnArgon
         end
 
         config.add_search_field('work_entry') do |field|
-          field.label = 'Work'
+          field.label = I18n.t('trln_argon.search_fields.work_entry')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
             qf: '$work_entry_qf',

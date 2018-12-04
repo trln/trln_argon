@@ -1,0 +1,12 @@
+<% if document.all_open_access_urls_by_inst.fetch(inst, []).to_a.any? %>
+  <div class="<%= primary_link_class %>">
+    <ul>
+      <% document.all_open_access_urls_by_inst.fetch(inst, []).to_a.each do |url| %>
+        <% next unless url.present? %>
+          <li>
+            <%= expanded_link_to_open_access(url) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

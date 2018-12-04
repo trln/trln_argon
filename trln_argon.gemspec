@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'bootstrap-select-rails', '~> 1.12'
   s.add_dependency 'chosen-rails', '~> 1.8'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
+  s.add_dependency 'addressable', '~> 2.5'
 
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rspec-rails', '~> 3.5'

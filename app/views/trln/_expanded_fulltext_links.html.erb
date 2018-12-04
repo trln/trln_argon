@@ -1,13 +1,11 @@
-<% if display_all_shared_and_local_fulltext_urls?(document: document) %>
+<% if document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.any? %>
   <div class="<%= primary_link_class %>">
     <ul>
-      <% document.all_shared_and_local_fulltext_urls_by_inst.each do |inst, urls| %>
-        <% next unless urls.present? %>
-        <% urls.each do |url| %>
+      <% document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.each do |url| %>
+        <% next unless url.present? %>
           <li>
             <%= link_to_expanded_fulltext_url(url, inst) %>
           </li>
-        <% end %>
       <% end %>
     </ul>
   </div>

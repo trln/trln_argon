@@ -163,9 +163,9 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
-  ########################
-  # AdvancedSearchHelper
-  ########################
+  # ########################
+  # # AdvancedSearchHelper
+  # ########################
 
   describe 'advanced_search_page_class' do
     it 'returns the advanced search page HTML class attribute values' do
@@ -658,6 +658,21 @@ describe TrlnArgonHelper, type: :helper do
              'Open Access</a>')
         )
       end
+    end
+  end
+
+  describe '#expanded_link_to_open_access' do
+    let(:url_hash) do
+      { href: 'https://an/open/access/link', type: 'fulltext' }
+    end
+
+    it 'creates a link using the default translation' do
+      expect(helper.expanded_link_to_open_access(url_hash)).to(
+        eq('<a class="link-type-fulltext link-open-access" '\
+          'target="_blank" href="https://an/open/access/link">'\
+          '<i class="fa fa-external-link" aria-hidden="true"></i>'\
+          'Open Access</a>')
+      )
     end
   end
 

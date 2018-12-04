@@ -8,7 +8,7 @@ module TrlnArgon
       #       rolled up records into a single psuedo-document per institution.
       def docs_with_holdings_merged_from_expanded_docs
         @docs_with_holdings_merged_from_expanded_docs ||=
-          expanded_docs_grouped_by_association.map do |_, docs|
+          expanded_docs_grouped_by_association.map do |inst, docs|
             rec = docs.first.dup.to_h
             flat_map_field_values(rec, docs, TrlnArgon::Fields::ITEMS)
             flat_map_field_values(rec, docs, TrlnArgon::Fields::HOLDINGS)
@@ -16,21 +16,28 @@ module TrlnArgon
             if docs.map { |d| d[TrlnArgon::Fields::AVAILABLE] }.include?('Available')
               rec[TrlnArgon::Fields::AVAILABLE] = 'Available'
             end
-            ::SolrDocument.new(rec)
-          end
+            [inst, ::SolrDocument.new(rec)]
+          end.to_h
       end
 
       # NOTE: This is used by the TRLN view to show ALL restricted fulltext URLs
       #       Both shared and local urls get combined and grouped by each inst.
       def all_shared_and_local_fulltext_urls_by_inst
-        configured_association_sort_order.map do |inst|
-          non_shared_docs_for_inst_with_urls = non_shared_docs_for_inst_with_urls(inst)
-          shared_docs_for_inst_with_urls = shared_docs_for_inst_with_urls(inst)
-          if non_shared_docs_for_inst_with_urls.any?
-            [inst, non_shared_docs_for_inst_with_urls.first.fulltext_urls]
-          elsif shared_docs_for_inst_with_urls.any?
-            [inst, shared_docs_for_inst_with_urls.first.expanded_shared_fulltext_urls[inst]]
+        (configured_association_sort_order - ['trln']).map do |inst|
+          non_shared_doc_for_inst_with_urls = non_shared_doc_for_inst_with_urls(inst)
+          shared_doc_for_inst_with_urls = shared_doc_for_inst_with_urls(inst)
+          if non_shared_doc_for_inst_with_urls.present?
+            [inst, non_shared_doc_for_inst_with_urls.fulltext_urls]
+          elsif shared_doc_for_inst_with_urls.present?
+            [inst, shared_doc_for_inst_with_urls.expanded_shared_fulltext_urls[inst]]
           end
+        end.compact.to_h
+      end
+
+      def all_open_access_urls_by_inst
+        (configured_association_sort_order - ['trln']).map do |inst|
+          doc = non_shared_doc_for_inst_with_open_access_urls(inst)
+          [inst, doc.open_access_urls] if doc.present?
         end.compact.to_h
       end
 
@@ -50,19 +57,19 @@ module TrlnArgon
 
       private
 
-      def shared_docs_for_inst_with_urls(inst)
-        @shared_docs_for_inst_with_urls ||=
-          docs_with_holdings_merged_from_expanded_docs.select { |doc| doc.record_association == 'trln' }
-                                                      .select { |doc| local_expanded_urls?(doc, inst) }
+      def non_shared_doc_for_inst_with_open_access_urls(inst)
+        doc = docs_with_holdings_merged_from_expanded_docs.fetch(inst, [])
+        doc if doc.present? && doc.open_access_urls.any?
       end
 
-      def non_shared_docs_for_inst_with_urls(inst)
-        docs_with_holdings_merged_from_expanded_docs.select { |doc| doc.record_association == inst }
-                                                    .select { |doc| doc.fulltext_urls.any? }
+      def non_shared_doc_for_inst_with_urls(inst)
+        doc = docs_with_holdings_merged_from_expanded_docs.fetch(inst, [])
+        doc if doc.present? && doc.fulltext_urls.any?
       end
 
-      def local_expanded_urls?(doc, inst)
-        doc.expanded_shared_fulltext_urls.keys.include?(inst)
+      def shared_doc_for_inst_with_urls(inst)
+        doc = docs_with_holdings_merged_from_expanded_docs.fetch('trln', [])
+        doc if doc.present? && doc.expanded_shared_fulltext_urls.keys.include?(inst)
       end
 
       def sort_by_configured_record_association_order(docs_grouped_by_association)

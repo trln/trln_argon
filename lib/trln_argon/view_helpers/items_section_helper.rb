@@ -57,7 +57,7 @@ module TrlnArgon
         elsif doc && doc.availability == 'Not Available'
           'item-not-available'
         else
-          ''
+          'item-available'
         end
       end
 
@@ -87,10 +87,11 @@ module TrlnArgon
       end
 
       def display_holdings_well?(options = {})
-        doc = options.fetch(:document, false)
+        doc = options.fetch(:document, nil)
         doc &&
           (doc.findingaid_urls.any? ||
            doc.fulltext_urls.any? ||
+           doc.open_access_urls.any? ||
            display_items?(document: doc) ||
            doc.shared_fulltext_urls.any?)
       end
@@ -108,6 +109,15 @@ module TrlnArgon
           loc_b == 'DUKIR' ||
           loc_b.blank? ||
           item_data.fetch('items', []).empty?
+      end
+
+      def add_spacer_above_items_section?(options = {})
+        doc = options.fetch(:document, nil)
+        doc &&
+          (doc.findingaid_urls.any? ||
+           doc.fulltext_urls.any? ||
+           doc.shared_fulltext_urls.any? ||
+           doc.open_access_urls.any?)
       end
 
       def get_item_id(item)

@@ -72,9 +72,33 @@ module TrlnArgon
         I18n.t('trln_argon.links.open_access')
       end
 
-      def display_all_shared_and_local_fulltext_urls?(options = {})
-        doc = options.fetch(:document, false)
-        doc && doc.all_shared_and_local_fulltext_urls_by_inst.reject { |_, v| v.blank? }.any?
+      # Expanded View Open Access Links
+      def expanded_link_to_open_access(url_hash)
+        link_to(url_hash[:href], class: "link-type-#{url_hash[:type]} link-open-access", target: '_blank') do
+          '<i class="fa fa-external-link" aria-hidden="true"></i>'.html_safe + expanded_open_access_link_text
+        end
+      end
+
+      def expanded_open_access_link_text
+        I18n.t('trln_argon.links.open_access')
+      end
+
+      # Boolean methods to control link display behavior
+      def add_spacer_to_expanded_index_view?(document, inst)
+        document.findingaid_urls.any? ||
+          document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.any? ||
+          document.all_open_access_urls_by_inst.fetch(inst, []).to_a.any?
+      end
+
+      def display_expanded_holdings_and_links?(document, local_doc, inst)
+        document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.any? ||
+          document.all_open_access_urls_by_inst.fetch(inst, []).to_a.any? ||
+          (local_doc.present? && local_doc.holdings.any?)
+      end
+
+      def display_expanded_links?(document, inst)
+        document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.any? ||
+          document.all_open_access_urls_by_inst.fetch(inst, []).to_a.any?
       end
     end
   end

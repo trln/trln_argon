@@ -4,6 +4,7 @@ module TrlnArgon
       def min_match_for_boolean(solr_parameters)
         return unless blacklight_params &&
                       blacklight_params[:q].present? &&
+                      blacklight_params[:q].respond_to?(:match) &&
                       blacklight_params[:q].match(/\s(AND|OR|NOT)\s/)
         solr_parameters[:mm] = '1'
       end
@@ -27,11 +28,16 @@ module TrlnArgon
       end
 
       def num_non_cjk_tokens(q_param)
-        q_param.scan(/[[:alnum]]+/).size
+        if q_param && q_param.respond_to?(:scan)
+          q_param.gsub(/\p{Han}|\p{Katakana}|\p{Hiragana}|\p{Hangul}/, '')
+                 .scan(/[[:alnum:]]+/).size
+        else
+          0
+        end
       end
 
       def cjk_unigrams_size(q_param)
-        if q_param && q_param.is_a?(String)
+        if q_param && q_param.respond_to?(:scan)
           q_param.scan(/\p{Han}|\p{Katakana}|\p{Hiragana}|\p{Hangul}/).size
         else
           0

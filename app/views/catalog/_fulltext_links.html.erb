@@ -1,19 +1,22 @@
-<% if document.fulltext_urls.any? %>
-  <div class="<%= primary_link_class %>">
-    <ul>
-    <% document.fulltext_urls.each do |url| %>
-      <li><%= link_to_fulltext_url(url) %></li>
-    <% end %>
-    </ul>
-  </div>
-<% elsif document.shared_fulltext_urls.any? %>
-  <div class="primary-url <%= primary_link_class %>">
-    <ul>
-    <% document.shared_fulltext_urls.each do |url| %>
-      <li><%= link_to_fulltext_url(url) %></li>
-    <% end %>
-    </ul>
-  </div>
+<% if document.fulltext_urls.any? || document.shared_fulltext_urls.any? || document.open_access_urls.any? %>
+  <% if document.fulltext_urls.any? %>
+    <div class="<%= primary_link_class %>">
+      <ul>
+      <% document.fulltext_urls.each do |url| %>
+        <li><%= link_to_fulltext_url(url) %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% elsif document.shared_fulltext_urls.any? %>
+    <div class="primary-url <%= primary_link_class %>">
+      <ul>
+      <% document.shared_fulltext_urls.each do |url| %>
+        <li><%= link_to_fulltext_url(url) %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render partial: 'open_access_links', locals: { document: document } %>
 <% else %>
   <%= render partial: 'hathitrust_link', locals: { document: document } %>
 <% end %>

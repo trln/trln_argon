@@ -6,9 +6,21 @@ module TrlnArgon
         @urls ||= deserialized_urls
       end
 
-      # All the local fulltext URLs. (Excludes Shared URLs that require param substitution)
+      # All the restricted and local fulltext URLs.
+      # Excludes Shared URLs that require param substitution
+      # Excludes URLs that are set to restricted: false
       def fulltext_urls
-        @fulltext_urls ||= select_urls('fulltext').reject { |url| url[:href].match(/\{[A-Za-z0-9]*\}/) }
+        @fulltext_urls ||= select_urls('fulltext').reject do |url|
+          Addressable::Template.new(url[:href]).variables.any? ||
+            url.fetch(:restricted, 'true') == 'false'
+        end
+      end
+
+      # Fulltext URLs that are marked as restricted: false
+      def open_access_urls
+        @open_access_urls ||= select_urls('fulltext').select do |url|
+          url.fetch(:restricted, 'true') == 'false'
+        end
       end
 
       # Shared fulltext URLs with params substituted for the local institution only.
@@ -65,22 +77,19 @@ module TrlnArgon
       end
 
       def templated_fulltext_shared_urls
-        deserialized_urls.select { |url| url[:href].match(/\{[A-Za-z0-9]*\}/) && url[:type] == 'fulltext' }
+        deserialized_urls.select do |url|
+          Addressable::Template.new(url[:href]).variables.any? && url[:type] == 'fulltext'
+        end
       end
 
       def url_template_subst(href, inst)
-        href.scan(/\{[A-Za-z0-9]*\}/)
-            .map { |template_code| [template_code, config_lookup(template_code, inst)] }
-            .to_h
-            .each { |template_code, config_value| href.gsub!(template_code, config_value) }
-        href
+        template_values = config_lookup(inst)
+        uri_template = Addressable::Template.new(href)
+        uri_template.expand(template_values).to_s
       end
 
-      def config_lookup(template_code, inst)
-        lookup_path = [inst,
-                       'url_template',
-                       template_code[1...-1]].join('.')
-        TrlnArgon::LookupManager.instance.map(lookup_path)
+      def config_lookup(inst)
+        TrlnArgon::LookupManager.instance.map([inst, 'url_template'].join('.'))
       end
     end
   end
