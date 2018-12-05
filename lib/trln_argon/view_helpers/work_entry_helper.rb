@@ -35,7 +35,7 @@ module TrlnArgon
 
       def work_entry_author(work)
         return if work[:author].empty?
-        search_params = { search_field: 'author', q: work[:author] }
+        search_params = { search_field: 'author', q: "\"#{work[:author]}\"" }
         link_to(work[:author],
                 search_action_url(search_params),
                 class: 'progressive-link')
@@ -84,7 +84,12 @@ module TrlnArgon
       end
 
       def work_entry_link_url(params_segments)
-        search_action_url(params_segments.merge(op: 'AND', search_field: 'advanced'))
+        query_values = []
+        query_values << params_segments[:author]
+        query_values << params_segments[:title]
+        query_values = query_values.compact
+        search_action_url({ search_field: 'work_entry', q: "\"#{query_values.join(' ')}\"" })
+        #search_action_url(params_segments.merge(op: 'AND', search_field: 'advanced'))
       end
     end
   end
