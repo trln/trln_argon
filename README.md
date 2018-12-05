@@ -8,10 +8,11 @@ bootstrap a Blacklight catalog for the TRLN shared catalog index.
 
 We use [Engine Cart](https://github.com/cbeer/engine_cart) to run a development instance.  To run with `engine_cart`, clone this repository and change into the directory, then run:
 
-       $ bundle exec rake engine_cart:prepare
+       $ bundle install
+	   $ bundle exec rake engine_cart:prepare
        $ bundle exec rake engine_cart:server
        $ # if you already have something on port 3000 and want to use a different port
-    $ bundle exec rake engine_cart:server['-p 3001']
+       $ bundle exec rake engine_cart:server['-p 3001']
 
 The TRLN Argon Blacklight catalog should now be available at [http://localhost:3000](http://localhost:3000) (or a different port if you used the second form).
 

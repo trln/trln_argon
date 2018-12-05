@@ -483,6 +483,17 @@ module TrlnArgon
           field.include_in_advanced_search = false
         end
 
+        config.add_search_field('work_entry') do |field|
+          field.label = 'Work'
+          field.def_type = 'edismax'
+          field.solr_local_parameters = {
+            qf: '$work_entry_qf',
+            pf: '$work_entry_pf'
+          }
+          field.if = false
+          field.include_in_advanced_search = false
+        end
+
         # "sort results by" select (pulldown)
         # label in pulldown is followed by the name of the SOLR field to sort by and
         # whether the sort is ascending or descending (it must be asc or desc
