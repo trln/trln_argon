@@ -88,7 +88,7 @@ module TrlnArgon
         query_values << params_segments[:author]
         query_values << params_segments[:title]
         query_values = query_values.compact
-        search_action_url(search_field: 'work_entry', q: "\"#{query_values.join(' ')}\"" )
+        search_action_url(search_field: 'work_entry', q: "\"#{query_values.join(' ')}\"")
       end
     end
   end
