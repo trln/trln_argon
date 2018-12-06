@@ -14,3 +14,4 @@
 //= require trln_argon/google_books_preview.js.erb
 //= require trln_argon/hathitrust_links
 //= require trln_argon/skiplink.js
+//= require trln_argon/force_bootstrap-select_render.js
