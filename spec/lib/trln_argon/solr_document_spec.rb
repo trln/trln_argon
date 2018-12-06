@@ -702,70 +702,92 @@ describe TrlnArgon::SolrDocument do
   ########################
 
   describe 'ExpandDocument' do
-    let(:rollup_id) { 'OCLC5555' }
-    let(:expanded_solr_doc) do
-      SolrDocumentTestClass.new(
-        id: 'DUKE123456789',
-        rollup_id: rollup_id,
-        owner_a: ['duke'],
-        items: 'a duke item'
-      )
+    context 'rolled up record' do
+      let(:rollup_id) { 'OCLC5555' }
+      let(:expanded_solr_doc) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE123456789',
+          rollup_id: rollup_id,
+          owner_a: ['duke'],
+          items: 'a duke item'
+        )
+      end
+
+      let(:rolled_up_doc) do
+        { id: 'UNC123456789',
+          rollup_id: rollup_id,
+          owner_a: ['unc'],
+          items_a: 'a unc item',
+          url_a: ['{"href":"https://proxy.lib.unc.edu/login?url='\
+                  'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389",'\
+                  '"type":"fulltext","text":"Episode 1"}'] }
+      end
+
+      let(:another_rolled_up_doc) do
+        { id: 'UNC123456790',
+          rollup_id: rollup_id,
+          owner_a: ['unc'],
+          items_a: 'another unc item' }
+      end
+
+      let(:response) do
+        { 'expanded' => { rollup_id => { 'docs' => [rolled_up_doc, another_rolled_up_doc] } } }
+      end
+
+      before do
+        allow(expanded_solr_doc).to receive(:response).and_return(response)
+      end
+
+      it 'combines the expanded doc with the rolled up doc' do
+        expect(expanded_solr_doc.expanded_docs.count).to eq(3)
+      end
+
+      it 'groups documents by record association and includes unc' do
+        expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
+          have_key('unc')
+        )
+      end
+
+      it 'groups documents by record association and includes duke' do
+        expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
+          have_key('duke')
+        )
+      end
+
+      it 'combines the unc records into single pseudo record with combined items' do
+        expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs['unc']['items_a']).to(
+          eq(['a unc item', 'another unc item'])
+        )
+      end
+
+      it 'groups the urls by institution' do
+        expect(expanded_solr_doc.all_shared_and_local_fulltext_urls_by_inst).to(
+          eq('unc' => [{ href: 'https://proxy.lib.unc.edu/login?url='\
+                               'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389',
+                         type: 'fulltext',
+                         text: 'Episode 1' }])
+        )
+      end
     end
 
-    let(:rolled_up_doc) do
-      { id: 'UNC123456789',
-        rollup_id: rollup_id,
-        owner_a: ['unc'],
-        items_a: 'a unc item',
-        url_a: ['{"href":"https://proxy.lib.unc.edu/login?url='\
-                'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389",'\
-                '"type":"fulltext","text":"Episode 1"}'] }
-    end
+    context 'shared open access resource' do
+      let(:shared_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE123456789',
+          owner_a: ['unc'],
+          institution_a: %w[unc duke ncsu nccu],
+          url_a: ['{"href":"http://purl.access.gpo.gov/GPO/LPS111292","type":"fulltext","restricted":"false"}']
+        )
+      end
 
-    let(:another_rolled_up_doc) do
-      { id: 'UNC123456790',
-        rollup_id: rollup_id,
-        owner_a: ['unc'],
-        items_a: 'another unc item' }
-    end
-
-    let(:response) do
-      { 'expanded' => { rollup_id => { 'docs' => [rolled_up_doc, another_rolled_up_doc] } } }
-    end
-
-    before do
-      allow(expanded_solr_doc).to receive(:response).and_return(response)
-    end
-
-    it 'combines the expanded doc with the rolled up doc' do
-      expect(expanded_solr_doc.expanded_docs.count).to eq(3)
-    end
-
-    it 'groups documents by record association and includes unc' do
-      expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
-        have_key('unc')
-      )
-    end
-
-    it 'groups documents by record association and includes duke' do
-      expect(expanded_solr_doc.expanded_docs_grouped_by_association).to(
-        have_key('duke')
-      )
-    end
-
-    it 'combines the unc records into single pseudo record with combined items' do
-      expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs['unc']['items_a']).to(
-        eq(['a unc item', 'another unc item'])
-      )
-    end
-
-    it 'groups the urls by institution' do
-      expect(expanded_solr_doc.all_shared_and_local_fulltext_urls_by_inst).to(
-        eq('unc' => [{ href: 'https://proxy.lib.unc.edu/login?url='\
-                             'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389',
-                       type: 'fulltext',
-                       text: 'Episode 1' }])
-      )
+      it 'returns open access urls as part of the trln group' do
+        expect(shared_document.all_open_access_urls_by_inst).to(
+          eq('trln' => [{ href: 'http://purl.access.gpo.gov/GPO/LPS111292',
+                          type: 'fulltext',
+                          text: '',
+                          restricted: 'false' }])
+        )
+      end
     end
   end
 

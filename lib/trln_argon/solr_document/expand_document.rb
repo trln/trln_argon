@@ -35,7 +35,7 @@ module TrlnArgon
       end
 
       def all_open_access_urls_by_inst
-        (configured_association_sort_order - ['trln']).map do |inst|
+        configured_association_sort_order.map do |inst|
           doc = non_shared_doc_for_inst_with_open_access_urls(inst)
           [inst, doc.open_access_urls] if doc.present?
         end.compact.to_h
