@@ -1,0 +1,8 @@
+<%= render partial: 'finding_aid_links', locals: { document: document } %>
+
+<% if display_expanded_links?(document, inst) %>
+  <%= render partial: 'expanded_fulltext_links', locals: { document: document, inst: inst } %>
+  <%= render partial: 'open_access_links', locals: { document: document, inst: inst } %>
+<% else %>
+  <%= render partial: 'hathitrust_link', locals: { document: document } %>
+<% end %>

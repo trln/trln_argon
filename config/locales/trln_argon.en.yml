@@ -110,6 +110,8 @@ en:
             subject: "Subject"
             isbn_issn: "ISBN/ISSN/barcode"
             publisher: "Publisher"
+            genre_headings: "Genre"
+            work_entry: "Work"
 
         sort_options:
             relevance: "Relevance"

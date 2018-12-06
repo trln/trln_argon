@@ -4,6 +4,10 @@ describe TrlnArgon::SolrDocument do
     include TrlnArgon::SolrDocument
   end
 
+  ########################
+  # SolrDocument
+  ########################
+
   describe 'availability' do
     context 'when availability is set on the document' do
       let(:solr_document) do
@@ -30,6 +34,208 @@ describe TrlnArgon::SolrDocument do
       end
     end
   end
+
+  describe 'isbn_with_qualifying_info' do
+    let(:isbn_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNCb6060605',
+        isbn_number_a: %w[9780891125303 0891125302 9780891125310 0891125310],
+        isbn_qualifying_info_a: ['(cloth)', '(cloth)', '(pbk.)', '(pbk.)']
+      )
+    end
+
+    it 'combines isbn and qualifying info field arrays into a single array of joined values' do
+      expect(isbn_document.isbn_with_qualifying_info).to eq(
+        ['9780891125303 (cloth)', '0891125302 (cloth)', '9780891125310 (pbk.)', '0891125310 (pbk.)']
+      )
+    end
+  end
+
+  describe 'names' do
+    let(:names_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE000007907',
+        names_a: ['{"name":"Nabokov, Vladimir Vladimirovich, 1899-1977", "rel":"author"}',
+                  '{"name":"Appel, Alfred"}']
+      )
+    end
+
+    it 'deserializes the names string' do
+      expect(names_document.names).to eq(
+        [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author' },
+         { name: 'Appel, Alfred', rel: '' }]
+      )
+    end
+  end
+
+  describe '#record_association' do
+    context 'it is a local record' do
+      let(:local_document) do
+        SolrDocumentTestClass.new(
+          id: 'UNC002981535',
+          owner_a: ['unc'],
+          institution_a: ['unc']
+        )
+      end
+
+      it 'returns the association code for the record' do
+        expect(local_document.record_association).to eq('unc')
+      end
+    end
+
+    context 'it is a shared record' do
+      let(:local_document) do
+        SolrDocumentTestClass.new(
+          id: 'UNC002981535',
+          owner_a: ['unc'],
+          institution_a: %w[unc duke nccu ncsu']
+        )
+      end
+
+      it 'returns the association code for the record' do
+        expect(local_document.record_association).to eq('trln')
+      end
+    end
+  end
+
+  describe '#record_owner' do
+    let(:owned_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        owner_a: ['unc']
+      )
+    end
+
+    it 'returns the code for the owner of the record' do
+      expect(owned_document.record_owner).to eq('unc')
+    end
+  end
+
+  describe 'issn' do
+    context 'when there is a single ISSN' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          issn_linking_a: ['1111-2222']
+        )
+      end
+
+      it 'returns the ISSN' do
+        expect(solr_document.issn).to eq(['1111-2222'])
+      end
+    end
+
+    context 'when there are multiple ISSNs and some duplicates' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          issn_linking_a: ['1111-2222'],
+          issn_primary_a: ['3333-4444', '1111-2222']
+        )
+      end
+
+      it 'returns the ISSNs without duplicates' do
+        expect(solr_document.issn).to eq(['3333-4444', '1111-2222'])
+      end
+    end
+
+    context 'when there are no ISSNs' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345'
+        )
+      end
+
+      it 'returns an empty array' do
+        expect(solr_document.issn).to eq([])
+      end
+    end
+  end
+
+  describe 'get the UPC' do
+    context 'when there is a single value' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          upc_a: ['UPC: 123456789098']
+        )
+      end
+
+      it 'returns the UPC' do
+        expect(solr_document.upc).to eq(['123456789098'])
+      end
+    end
+
+    context 'when there are multiple values' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'DUKE12345',
+          upc_a: ['UPC: 123456789098', 'UPC: 987654321012']
+        )
+      end
+
+      it 'returns the all UPCs' do
+        expect(solr_document.upc).to eq(%w[123456789098 987654321012])
+      end
+    end
+  end
+
+  context 'when there are no values' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345'
+      )
+    end
+
+    it 'returns empty array' do
+      expect(solr_document.upc).to eq([])
+    end
+  end
+
+  describe '#edition' do
+    let(:edition_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        edition_a: ['︠I︡Ubileĭnoe izd.', 'Юбилейное изд.']
+      )
+    end
+
+    it 'returns the imprint with vernacular for display' do
+      expect(edition_doc.edition).to eq('Юбилейное изд. / ︠I︡Ubileĭnoe izd.')
+    end
+  end
+
+  describe '#genre_headings' do
+    let(:headings_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        genre_headings_a: ['Something'],
+        genre_headings_vern: ['دمنتري فلمس']
+      )
+    end
+
+    it 'returns the genre_headings with vernacular for display' do
+      expect(headings_doc.genre_headings).to eq(['Something', 'دمنتري فلمس'])
+    end
+  end
+
+  describe '#subject_headings' do
+    let(:headings_doc) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        subject_headings_a: ['Something'],
+        subject_headings_vern: ['دمنتري فلمس']
+      )
+    end
+
+    it 'returns the subject_headings with vernacular for display' do
+      expect(headings_doc.subject_headings).to eq(['Something', 'دمنتري فلمس'])
+    end
+  end
+
+  ########################
+  # URL
+  ########################
 
   describe 'url' do
     context 'field contains multiple complete url data' do
@@ -94,11 +300,43 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe 'fulltext_urls' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345',
+        url_a: ['{"href":"http://purl.access.gpo.gov/GPO/LPS606","type":"fulltext"}',
+                '{"href":"http://some/open/access/thinkg","type":"fulltext", "restricted":"false"}']
+      )
+    end
+
+    it 'deserializes and selects the restricted fulltext URLs' do
+      expect(solr_document.fulltext_urls).to(
+        eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '' }])
+      )
+    end
+  end
+
+  describe 'open_access_urls' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'DUKE12345',
+        url_a: ['{"href":"http://purl.access.gpo.gov/GPO/LPS606","type":"fulltext"}',
+                '{"href":"http://some/open/access/thing","type":"fulltext", "restricted":"false"}']
+      )
+    end
+
+    it 'deserializes and selects the restricted fulltext URLs' do
+      expect(solr_document.open_access_urls).to(
+        eq([{ href: 'http://some/open/access/thing', type: 'fulltext', text: '', restricted: 'false' }])
+      )
+    end
+  end
+
   describe 'shared_fulltext_urls' do
     let(:solr_document) do
       SolrDocumentTestClass.new(
         id: 'DUKE12345',
-        url_a: ['{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
+        url_a: ['{"href":"{+proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
                 '"type":"fulltext",'\
                 '"text":"Law and contemporary problems, v. 63, no. 1-2"}'],
         institution_a: %w[duke unc]
@@ -118,7 +356,7 @@ describe TrlnArgon::SolrDocument do
     let(:solr_document) do
       SolrDocumentTestClass.new(
         id: 'DUKE12345',
-        url_a: ['{"href":"{proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
+        url_a: ['{"href":"{+proxyPrefix}http://www.law.duke.edu/journals/lcp/",'\
                 '"type":"fulltext",'\
                 '"text":"Law and contemporary problems, v. 63, no. 1-2"}'],
         institution_a: %w[duke unc]
@@ -136,6 +374,10 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  ########################
+  # RIS Field Mapping
+  ########################
 
   describe 'export as ris' do
     let(:test_document) do
@@ -162,6 +404,10 @@ describe TrlnArgon::SolrDocument do
       )
     end
   end
+
+  ########################
+  # Open CTX KEV Field
+  ########################
 
   describe 'export as openurl_ctx_kev' do
     subject(:ctx_kev) do
@@ -206,6 +452,10 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  ########################
+  # Email Field Mapping
+  ########################
+
   describe 'export to email' do
     let(:test_document) do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
@@ -241,6 +491,10 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  ########################
+  # SMS Field Mapping
+  ########################
+
   describe 'export to sms' do
     let(:test_document) do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
@@ -275,38 +529,9 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
-  describe 'isbn_with_qualifying_info' do
-    let(:isbn_document) do
-      SolrDocumentTestClass.new(
-        id: 'UNCb6060605',
-        isbn_number_a: %w[9780891125303 0891125302 9780891125310 0891125310],
-        isbn_qualifying_info_a: ['(cloth)', '(cloth)', '(pbk.)', '(pbk.)']
-      )
-    end
-
-    it 'combines isbn and qualifying info field arrays into a single array of joined values' do
-      expect(isbn_document.isbn_with_qualifying_info).to eq(
-        ['9780891125303 (cloth)', '0891125302 (cloth)', '9780891125310 (pbk.)', '0891125310 (pbk.)']
-      )
-    end
-  end
-
-  describe 'names' do
-    let(:names_document) do
-      SolrDocumentTestClass.new(
-        id: 'DUKE000007907',
-        names_a: ['{"name":"Nabokov, Vladimir Vladimirovich, 1899-1977", "rel":"author"}',
-                  '{"name":"Appel, Alfred"}']
-      )
-    end
-
-    it 'deserializes the names string' do
-      expect(names_document.names).to eq(
-        [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author' },
-         { name: 'Appel, Alfred', rel: '' }]
-      )
-    end
-  end
+  ########################
+  # Work Entry
+  ########################
 
   describe 'included_work' do
     let(:included_work_document) do
@@ -373,48 +598,9 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
-  describe '#record_association' do
-    context 'it is a local record' do
-      let(:local_document) do
-        SolrDocumentTestClass.new(
-          id: 'UNC002981535',
-          owner_a: ['unc'],
-          institution_a: ['unc']
-        )
-      end
-
-      it 'returns the association code for the record' do
-        expect(local_document.record_association).to eq('unc')
-      end
-    end
-
-    context 'it is a shared record' do
-      let(:local_document) do
-        SolrDocumentTestClass.new(
-          id: 'UNC002981535',
-          owner_a: ['unc'],
-          institution_a: %w[unc duke nccu ncsu']
-        )
-      end
-
-      it 'returns the association code for the record' do
-        expect(local_document.record_association).to eq('trln')
-      end
-    end
-  end
-
-  describe '#record_owner' do
-    let(:owned_document) do
-      SolrDocumentTestClass.new(
-        id: 'UNC002981535',
-        owner_a: ['unc']
-      )
-    end
-
-    it 'returns the code for the owner of the record' do
-      expect(owned_document.record_owner).to eq('unc')
-    end
-  end
+  ########################
+  # Imprint
+  ########################
 
   describe 'Imprint' do
     let(:imprint_document) do
@@ -511,46 +697,9 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
-  describe '#edition' do
-    let(:edition_doc) do
-      SolrDocumentTestClass.new(
-        id: 'UNC002981535',
-        edition_a: ['︠I︡Ubileĭnoe izd.', 'Юбилейное изд.']
-      )
-    end
-
-    it 'returns the imprint with vernacular for display' do
-      expect(edition_doc.edition).to eq('Юбилейное изд. / ︠I︡Ubileĭnoe izd.')
-    end
-  end
-
-  describe '#genre_headings' do
-    let(:headings_doc) do
-      SolrDocumentTestClass.new(
-        id: 'UNC002981535',
-        genre_headings_a: ['Something'],
-        genre_headings_vern: ['دمنتري فلمس']
-      )
-    end
-
-    it 'returns the genre_headings with vernacular for display' do
-      expect(headings_doc.genre_headings).to eq(['Something', 'دمنتري فلمس'])
-    end
-  end
-
-  describe '#subject_headings' do
-    let(:headings_doc) do
-      SolrDocumentTestClass.new(
-        id: 'UNC002981535',
-        subject_headings_a: ['Something'],
-        subject_headings_vern: ['دمنتري فلمس']
-      )
-    end
-
-    it 'returns the subject_headings with vernacular for display' do
-      expect(headings_doc.subject_headings).to eq(['Something', 'دمنتري فلمس'])
-    end
-  end
+  ########################
+  # Expand Document
+  ########################
 
   describe 'ExpandDocument' do
     let(:rollup_id) { 'OCLC5555' }
@@ -605,7 +754,7 @@ describe TrlnArgon::SolrDocument do
     end
 
     it 'combines the unc records into single pseudo record with combined items' do
-      expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs.first['items_a']).to(
+      expect(expanded_solr_doc.docs_with_holdings_merged_from_expanded_docs['unc']['items_a']).to(
         eq(['a unc item', 'another unc item'])
       )
     end
@@ -620,86 +769,9 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
-  describe 'get the UPC' do
-    context 'when there is a single value' do
-      let(:solr_document) do
-        SolrDocumentTestClass.new(
-          id: 'DUKE12345',
-          upc_a: ['UPC: 123456789098']
-        )
-      end
-
-      it 'returns the UPC' do
-        expect(solr_document.upc).to eq(['123456789098'])
-      end
-    end
-
-    context 'when there are multiple values' do
-      let(:solr_document) do
-        SolrDocumentTestClass.new(
-          id: 'DUKE12345',
-          upc_a: ['UPC: 123456789098', 'UPC: 987654321012']
-        )
-      end
-
-      it 'returns the all UPCs' do
-        expect(solr_document.upc).to eq(%w[123456789098 987654321012])
-      end
-    end
-  end
-
-  context 'when there are no values' do
-    let(:solr_document) do
-      SolrDocumentTestClass.new(
-        id: 'DUKE12345'
-      )
-    end
-
-    it 'returns empty array' do
-      expect(solr_document.upc).to eq([])
-    end
-  end
-
-  describe 'issn' do
-    context 'when there is a single ISSN' do
-      let(:solr_document) do
-        SolrDocumentTestClass.new(
-          id: 'DUKE12345',
-          issn_linking_a: ['1111-2222']
-        )
-      end
-
-      it 'returns the ISSN' do
-        expect(solr_document.issn).to eq(['1111-2222'])
-      end
-    end
-
-    context 'when there are multiple ISSNs and some duplicates' do
-      let(:solr_document) do
-        SolrDocumentTestClass.new(
-          id: 'DUKE12345',
-          issn_linking_a: ['1111-2222'],
-          issn_primary_a: ['3333-4444', '1111-2222']
-        )
-      end
-
-      it 'returns the ISSNs without duplicates' do
-        expect(solr_document.issn).to eq(['3333-4444', '1111-2222'])
-      end
-    end
-
-    context 'when there are no ISSNs' do
-      let(:solr_document) do
-        SolrDocumentTestClass.new(
-          id: 'DUKE12345'
-        )
-      end
-
-      it 'returns an empty array' do
-        expect(solr_document.issn).to eq([])
-      end
-    end
-  end
+  ########################
+  # Syndetics Data
+  ########################
 
   describe '#cover_image' do
     context 'when we link to a Syndetics cover image with various options' do

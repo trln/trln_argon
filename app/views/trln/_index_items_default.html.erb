@@ -2,37 +2,31 @@
 
   <div class="availability institution-availability row">
 
-    <% if display_all_shared_and_local_fulltext_urls?(document: document) %>
-      <%= render partial: 'expanded_fulltext_links', locals: { document: document } %>
-    <% else %>
-      <%= render partial: 'hathitrust_link', locals: { document: document } %>
-    <% end %>
+    <% TrlnArgon::Engine.configuration.sort_order_in_holding_list.split(', ').each do |inst| %>
 
-    <% document.docs_with_holdings_merged_from_expanded_docs.each do |doc| %>
+      <% local_doc = document.docs_with_holdings_merged_from_expanded_docs.fetch(inst, nil) %>
 
-      <% if display_items?(document: doc) %>
+      <% if display_expanded_holdings_and_links?(document, local_doc, inst) %>
 
         <div class="<%= institution_location_header_class %>">
-          <h4><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h4>
+          <h4><%= t("trln_argon.institution.#{inst}.long_name") %></h4>
         </div>
 
         <div class="<%= item_class %>">
 
+          <%= render partial: 'fulltext_links', locals: { document: document, inst: inst} %>
+
           <div class="row">
 
-            <%= render partial: 'finding_aid_links', locals: { document: document } %>
-
             <div class="<%= availability_class %>">
-
               <dl class="dl-horizontal">
                 <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
                 <dd>
-                  <span class="<%= binary_availability_span_class(document: doc) %>">
-                    <%= doc.availability %>
+                  <span class="<%= binary_availability_span_class(document: local_doc) %>">
+                    <%= local_doc.present? ? local_doc.availability : 'Available' %>
                   </span>
                 </dd>
               </dl>
-
             </div>
 
           </div>

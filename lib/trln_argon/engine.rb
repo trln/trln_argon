@@ -9,6 +9,7 @@ require 'font-awesome-rails'
 require 'bootstrap-select-rails'
 require 'chosen-rails'
 require 'rsolr'
+require 'addressable'
 
 module TrlnArgon
   class Engine < ::Rails::Engine

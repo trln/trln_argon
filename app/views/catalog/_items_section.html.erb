@@ -1,4 +1,4 @@
-<% if document.findingaid_urls.any? || document.fulltext_urls.any? || document.shared_fulltext_urls.any? %>
+<% if add_spacer_above_items_section?(document: document) %>
   <div class="<%= items_spacer_class %>"></div>
 <% end %>
 
@@ -45,7 +45,12 @@
 
               <% item_with_summary = true %>
 
-              <%= render partial: "items_section_summary", locals: { document: document, loc_b: loc_b, loc_n: loc_n, item_data: item_data, has_holding_notes: has_holding_notes } %>
+              <%= render partial: "items_section_summary",
+                         locals: { document: document,
+                                   loc_b: loc_b,
+                                   loc_n: loc_n,
+                                   item_data: item_data,
+                                   has_holding_notes: has_holding_notes } %>
 
             <% end %>
 

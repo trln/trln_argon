@@ -1,0 +1,12 @@
+<% if document.open_access_urls.any? %>
+  <div class="<%= primary_link_class %>">
+    <ul>
+      <% document.open_access_urls.each do |urls| %>
+        <% next unless urls.present? %>
+          <li>
+            <%= link_to_open_access(urls) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

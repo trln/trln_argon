@@ -2,41 +2,30 @@
 
   <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
 
-  <% if display_all_shared_and_local_fulltext_urls?(document: document) %>
+  <% TrlnArgon::Engine.configuration.sort_order_in_holding_list.split(', ').each do |inst| %>
 
-    <h3 class="institution-name shared-links"><%= t('trln_argon.show.heading.expanded_links') %></h3>
+    <% local_doc = document.docs_with_holdings_merged_from_expanded_docs.fetch(inst, nil) %>
 
-    <div class="items well">
-      <div class="row">
-        <%= render partial: 'expanded_fulltext_links', locals: { document: document } %>
-      </div>
-    </div>
+    <% if display_expanded_holdings_and_links?(document, local_doc, inst) %>
 
-  <% else %>
-
-    <div class="row">
-      <% unless display_all_shared_and_local_fulltext_urls?(document: document) %>
-        <%= render partial: 'hathitrust_link', locals: { document: document } %>
-      <% end %>
-    </div>
-
-  <% end %>
-
-  <% document.docs_with_holdings_merged_from_expanded_docs.each do |doc| %>
-
-    <% if display_items?(document: doc) %>
-
-      <h3 class="institution-name <%= t("trln_argon.institution.#{doc.record_association}.short_name").downcase %>"><%= t("trln_argon.institution.#{doc.record_association}.long_name") %></h3>
+      <h3 class="institution-name <%= t("trln_argon.institution.#{inst}.short_name").downcase %>">
+        <%= t("trln_argon.institution.#{inst}.long_name") %>
+      </h3>
 
       <div class="items well">
         <div class="row">
-          <%= render partial: 'finding_aid_links', locals: { document: document } %>
-          <%= render partial: 'items_section',
-                     locals: { document: doc,
-                               num_display_items: TrlnArgon::Engine.configuration.number_of_items_index_view.to_f,
-                               loc_b_header_level: :h4 } %>
+
+          <%= render partial: 'fulltext_links', locals: { document: document, inst: inst} %>
+
+          <% if local_doc.present? && local_doc.holdings.any? %>
+            <%= render partial: 'items_section',
+                       locals: { document: local_doc,
+                                 num_display_items: TrlnArgon::Engine.configuration.number_of_items_index_view.to_f,
+                                 loc_b_header_level: :h4 } %>
+          <% end %>
+
+          </div>
         </div>
-      </div>
 
     <% end %>
 
