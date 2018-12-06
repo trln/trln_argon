@@ -13,7 +13,7 @@
 
 <div id="trln-toggle" class="sidenav facets top-panel-heading">
 
-    <div id="viewAllResults" class="clearfix">
+    <div id="viewAllResults" class="clearfix" role="navigation" aria-label="Searching (context)">
       <%= render :partial => "local_filter", locals: { local_button_id: 'toggle-local-btn-top', trln_button_id: 'toggle-trln-btn-top' } %>
     </div>
 
@@ -22,7 +22,7 @@
 
 <% if has_facet_values?  %>
 
-  <div id="facets" class="facets sidenav">
+  <div id="facets" class="facets sidenav" role="navigation" aria-labelledby="facetsLabel">
 
     <div class="top-panel-heading panel-heading">
       <button type="button" class="facets-toggle" data-toggle="collapse" data-target="#facet-panel-collapse">
@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <h2 class='facets-heading'>
+      <h2 class='facets-heading' id="facetsLabel">
         <%= t('blacklight.search.facets.title') %>
       </h2>
     </div>

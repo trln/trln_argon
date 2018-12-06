@@ -1,5 +1,5 @@
 <% if query_has_constraints? %>
-  <div id="appliedParams" class="clearfix constraints-container">
+  <div id="appliedParams" class="clearfix constraints-container" role="navigation" aria-label="Search Constraints">
     <div class="pull-left">
       <%= link_to t('blacklight.search.start_over_html'), start_over_path, :class => "catalog_startOverLink btn btn-primary btn-sm", :id=>"startOverLink" %>
     </div>

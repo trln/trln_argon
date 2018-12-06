@@ -1,9 +1,9 @@
 <div id="enhanced-data" class="<%= show_enhanced_data_class %>">
 
   <% if display_summary?(document: @document) %>
-    <section id="summary" class="<%= show_enhanced_data_summary_class %>">
+    <section id="summary" class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
 
-      <h2><%= t('trln_argon.show.heading.summary') %></h2>
+      <h2 id="summaryLabel"><%= t('trln_argon.show.heading.summary') %></h2>
 
       <div class="content expandable-content">
         <%= @document.syndetics_or_marc_summary.html_safe %>
@@ -20,8 +20,8 @@
   <%= render 'show_google_book_preview' %>
 
   <% if display_toc?(document: @document) %>
-    <section id="contents" class="<%= show_enhanced_data_toc_class %>">
-      <h2><%= t('trln_argon.show.heading.contents') %></h2>
+    <section id="contents" class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
+      <h2 id="contentsLabel"><%= t('trln_argon.show.heading.contents') %></h2>
 
       <div class="content expandable-content">
         <%= @document.syndetics_or_marc_toc.html_safe %>
