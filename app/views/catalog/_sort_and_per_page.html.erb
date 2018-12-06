@@ -1,4 +1,4 @@
-<div id="sortAndPerPage" class="clearfix">
+<div id="sortAndPerPage" class="clearfix" role="navigation" aria-label="sort and result pages">
   <% unless @response.empty? %>
     <%= render :partial => "paginate_compact", :object => @response if show_pagination? %>
   <% end %>

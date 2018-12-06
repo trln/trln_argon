@@ -1,8 +1,8 @@
 <% if display_holdings_well?(document: document) %>
 
-  <div id="holdings" class="<%= show_items_class %>">
+  <div id="holdings" class="<%= show_items_class %>" role="complementary" aria-labelledby="holdingsLabel">
 
-    <h2 class="holdings-header"><%= t('trln_argon.show.heading.holdings') %></h2>
+    <h2 class="holdings-header" id="holdingsLabel"><%= t('trln_argon.show.heading.holdings') %></h2>
 
     <div class="items well">
 
