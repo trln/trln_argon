@@ -66,7 +66,7 @@ module TrlnArgon
       end
 
       def item_due_date(item)
-        return '' unless item.fetch('due_date', '').blank?
+        return '' if item.fetch('due_date', '').blank?
 
         dfmt = item['due_date'].to_date.strftime('%m/%d/%Y')
         "(Due #{dfmt})"
