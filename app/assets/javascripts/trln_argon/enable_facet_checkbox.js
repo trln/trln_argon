@@ -2,11 +2,13 @@ Blacklight.onLoad(function() {
 
   $(window).load(function(){
 
-    var numCheckboxes = $('.facet-checkbox-wrapper').length;
+    var facetPanel = $('#facet-panel-collapse');
+
+    var numCheckboxes = facetPanel.find('.facet-checkbox-wrapper').length;
 
     if (numCheckboxes) {
 
-      $( '.facet-checkbox-wrapper' ).each( function( index, element ) {
+      facetPanel.find('.facet-checkbox-wrapper').each( function( index, element ) {
 
           facet_field = $( this ).data("facet-field");
           checkbox_field = $( this ).data("checkbox-field");

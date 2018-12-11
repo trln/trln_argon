@@ -9,6 +9,8 @@ Blacklight.onLoad(function() {
         var $parentdiv = $(this).closest('div');
         if (width < 2) {
           $parentdiv.addClass('hidden');
+        } else {
+          $parentdiv.addClass('valid-thumbnail');
         }
   		});
 
@@ -17,6 +19,8 @@ Blacklight.onLoad(function() {
         var $parentdiv = $(this).closest('div');
         if (width < 2) {
           $parentdiv.addClass('hidden');
+        } else {
+          $parentdiv.addClass('valid-thumbnail');
         }
   		});
 

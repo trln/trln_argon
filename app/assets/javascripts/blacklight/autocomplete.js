@@ -3,7 +3,7 @@
 Blacklight.onLoad(function() {
   'use strict';
 
-  $('[data-autocomplete-enabled="true"]').each(function() {
+  $('#search-navbar [data-autocomplete-enabled="true"]').each(function() {
     var $el = $(this);
 
     // Fetch the configured autocomplete path.
