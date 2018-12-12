@@ -177,6 +177,7 @@ en:
                 status: "Status"
                 item_note: "Note"
                 holding_note: "Note"
+                url_note: "Note"
 
             controls:
                 show: "show"

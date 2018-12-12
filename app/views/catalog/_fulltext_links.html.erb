@@ -3,7 +3,10 @@
     <div class="<%= primary_link_class %>">
       <ul>
       <% document.fulltext_urls.each do |url| %>
-        <li><%= link_to_fulltext_url(url) %></li>
+        <li>
+          <%= link_to_fulltext_url(url) %>
+          <%= render partial: "url_note", locals: { url_hash: url } %>
+        </li>
       <% end %>
       </ul>
     </div>
@@ -11,7 +14,10 @@
     <div class="primary-url <%= primary_link_class %>">
       <ul>
       <% document.shared_fulltext_urls.each do |url| %>
-        <li><%= link_to_fulltext_url(url) %></li>
+        <li>
+          <%= link_to_fulltext_url(url) %>
+          <%= render partial: "url_note", locals: { url_hash: url } %>
+        </li>
       <% end %>
       </ul>
     </div>
