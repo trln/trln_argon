@@ -8,6 +8,8 @@ module Blacklight
       include Blacklight::Configurable
       include Blacklight::SearchHelper
 
+      before_action :default_request_format
+
       copy_blacklight_config_from(CatalogController)
     end
 
@@ -42,6 +44,12 @@ module Blacklight
 
     def suggestions_service(category = nil)
       Blacklight::SuggestSearch.new(params, category, repository).suggestions
+    end
+
+    private
+
+    def default_request_format
+      request.format = :json
     end
   end
 end
