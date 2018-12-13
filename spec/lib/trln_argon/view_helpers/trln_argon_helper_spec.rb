@@ -266,7 +266,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#url_note_wrapper_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.url_note_wrapper_class).to(
-        eq('col-sm-12 url-note-wrapper')
+        eq('url-note-wrapper')
       )
     end
   end

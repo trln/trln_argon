@@ -38,7 +38,7 @@ module TrlnArgon
       end
 
       def url_note_wrapper_class
-        'col-sm-12 url-note-wrapper'
+        'url-note-wrapper'
       end
 
       def item_availability_display(item)
