@@ -284,6 +284,23 @@ describe TrlnArgon::SolrDocument do
       end
     end
 
+    context 'field contains url note' do
+      let(:solr_document) do
+        SolrDocumentTestClass.new(
+          id: 'NCSU1234567',
+          url_a: ['{"href":"http://purl.access.gpo.gov/GPO/LPS606","type":"fulltext",'\
+                  '"note":"This is an 856$3 note."}']
+        )
+      end
+
+      it 'deserializes the url entry and includes the note.' do
+        expect(solr_document.urls).to(
+          eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext',
+                text: '', note: 'This is an 856$3 note.' }])
+        )
+      end
+    end
+
     context 'field contains some values not parsable as JSON' do
       let(:solr_document) do
         SolrDocumentTestClass.new(

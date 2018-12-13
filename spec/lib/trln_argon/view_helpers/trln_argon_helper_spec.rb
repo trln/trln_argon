@@ -263,6 +263,14 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe '#url_note_wrapper_class' do
+    it 'returns the HTML class attribute values' do
+      expect(helper.url_note_wrapper_class).to(
+        eq('url-note-wrapper')
+      )
+    end
+  end
+
   describe '#item_availability_display' do
     context 'item is available' do
       let(:item) { { 'status' => 'Available' } }

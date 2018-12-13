@@ -5,6 +5,7 @@
         <% next unless urls.present? %>
           <li>
             <%= link_to_open_access(urls) %>
+            <%= render partial: "url_note", locals: { url_hash: urls } %>
           </li>
       <% end %>
     </ul>

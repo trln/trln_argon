@@ -37,6 +37,10 @@ module TrlnArgon
         'holding-note col-md-12'
       end
 
+      def url_note_wrapper_class
+        'url-note-wrapper'
+      end
+
       def item_availability_display(item)
         case item['status']
         when /^available/i

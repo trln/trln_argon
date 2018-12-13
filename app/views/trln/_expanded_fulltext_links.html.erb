@@ -3,9 +3,10 @@
     <ul>
       <% document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.each do |url| %>
         <% next unless url.present? %>
-          <li>
-            <%= link_to_expanded_fulltext_url(url, inst) %>
-          </li>
+        <li>
+          <%= link_to_expanded_fulltext_url(url, inst) %>
+          <%= render partial: "url_note", locals: { url_hash: url } %>
+        </li>
       <% end %>
     </ul>
   </div>

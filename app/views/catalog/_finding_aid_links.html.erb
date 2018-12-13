@@ -2,7 +2,10 @@
   <div class="<%= primary_link_class %>">
     <ul>
     <% document.findingaid_urls.each do |url| %>
-      <li><%= link_to_finding_aid(url) %></li>
+      <li>
+        <%= link_to_finding_aid(url) %>
+        <%= render partial: "url_note", locals: { url_hash: url } %>
+      </li>
     <% end %>
     </ul>
   </div>
