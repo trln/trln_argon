@@ -1373,6 +1373,59 @@ div.marc-record {
   text-align: right;
 }
 
+/* Table of Contents from Syndetics */
+
+#contents {
+  ul.toc {
+    margin-left: 0;
+    li {
+      &.toc-nest-level-1 {
+        margin-left: 0;
+        margin-top: 0.8em;
+        .toc-element-number ~ .toc-element-title {
+          font-weight: bold;
+        }
+        + .toc-nest-level-1 {
+          margin-top: 0.5em;
+        }
+      }
+      &.toc-nest-level-2 {
+        margin-left: 2.5em;
+        font-size: 95%;
+      }
+      &.toc-nest-level-3 {
+        margin-left: 5em;
+        font-size: 90%;
+      }
+      &.toc-nest-level-4 {
+        margin-left: 7.5em;
+        font-size: 85%;
+      }
+      &.toc-nest-level-5 {
+        margin-left: 10em;
+        font-size: 80%;
+      }
+      &.toc-nest-level-6 {
+        margin-left: 12.5em;
+        font-size: 80%;
+      }
+      &.toc-nest-level-7 {
+        margin-left: 15em;
+        font-size: 80%;
+      }
+    }
+    .toc-element-number {
+      font-weight: bold;
+      margin-right: 0.5em;
+    }
+    .toc-element-pagerange {
+      font-size: 90%;
+      margin-left: 0.5em;
+      color: #aaa;
+    }
+  }
+}
+
 
 /* progressive links */
 
