@@ -12,6 +12,7 @@ module TrlnArgon
         solr_parameters[:expand] = 'true'
         solr_parameters['expand.rows'] = 50
         solr_parameters['expand.q'] = '*:*'
+        solr_parameters['expand.fq'] = '*:*'
       end
 
       private
