@@ -17,10 +17,17 @@
 
     <xsl:template match="text()|@*"/>
     <xsl:template match='SSIFlds'>
+
    <ul class='toc'>
      <xsl:for-each select='Fld970'>
        <li>
-           <xsl:apply-templates select="l|t|p"/>
+         <xsl:attribute name="class">
+           <xsl:call-template name="toc-item-class">
+             <xsl:with-param name="indexed" select="@I1" />
+             <xsl:with-param name="nest-level" select="@I2" />
+           </xsl:call-template>
+         </xsl:attribute>
+         <xsl:apply-templates select="l|t|p"/>
        </li>
     </xsl:for-each>
    </ul>
@@ -44,4 +51,20 @@
        <xsl:value-of select='.'/>
      </span>
   </xsl:template>
+
+  <xsl:template name="toc-item-class">
+    <xsl:param name="indexed" />
+    <xsl:param name="nest-level" />
+
+    <xsl:if test="string-length($nest-level)>0">
+      <xsl:text>toc-nest-level-</xsl:text>
+      <xsl:value-of select="$nest-level" />
+    </xsl:if>
+
+    <xsl:if test="$indexed != '1'">
+      <xsl:text> toc-nonindexed</xsl:text>
+    </xsl:if>
+
+  </xsl:template>
+
 </xsl:stylesheet>
