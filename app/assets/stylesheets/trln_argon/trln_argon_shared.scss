@@ -386,20 +386,6 @@ body {
 /**
  * Hide/Show large blocks of content, .e.g. Syndetics chapters
  */
-.expandable-content,
-.expandable-content-controls {
-    overflow: hidden;
-    /*text-overflow: ellipsis;*/
-}
-
-#enhanced-data .content p {
-  margin-bottom: .5em;
-}
-
-.expandable-content-controls .show-control {
-  display: none;
-  float: right;
-}
 
 section[aria-expanded=false] .expandable-content-controls .show-control.more,
 dd[aria-expanded=false] .expandable-content-controls .show-control.more {
@@ -411,9 +397,27 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   display: inline;
 }
 
-.contracted {
+#enhanced-data .content p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 20px;
+}
+
+.expandable-content-controls .show-control {
+  display: none;
+  float: right;
+}
+
+.contracted,
+.contracted-ul {
   position: relative;
-  height: 6em !important;
+  overflow: hidden;
+  margin-bottom: 20px;
+  max-height: 80px;
+}
+
+.contracted-ul {
+  max-height: 90px;
 }
 
 .contracted:after {
@@ -1171,7 +1175,7 @@ h1, h2, h3, h4, h5 {
   .url-note-wrapper {
     margin-top:10px;
   }
-  
+
   .call-number-label,
   .status-label,
   .summary-label,

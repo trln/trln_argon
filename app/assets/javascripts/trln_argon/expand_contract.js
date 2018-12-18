@@ -1,4 +1,29 @@
+// test if an element is in the viewport
+$.fn.isInViewport = function() {
+  var elementTop = $(this).offset().top;
+  var elementBottom = elementTop + $(this).outerHeight();
+  var viewportTop = $(window).scrollTop();
+  var viewportBottom = viewportTop + $(window).height();
+  return elementBottom > viewportTop && elementTop < viewportBottom;
+};
+
 Blacklight.onLoad(function() {
+
+  $("#documents .hider, #holdings .hider").click(function(evt) {
+    evt.preventDefault();
+    var theAnchorID = $(this).attr('href');
+    if (!$(theAnchorID).isInViewport()) {
+      $('html,body').animate({scrollTop: $(theAnchorID).offset().top - 150}, 'fast');
+    }
+  });
+
+  $("#document .less").click(function(evt) {
+    evt.preventDefault();
+    var theAnchorID = $(this).find(".btn").attr('href');
+    if (!$(theAnchorID).isInViewport()) {
+      $('html,body').animate({scrollTop: $(theAnchorID).offset().top - 50}, 'fast');
+    }
+  });
 
   var lineHeight = function(element) {
     var pxHeight = window.getComputedStyle(element, null).getPropertyValue("line-height");
@@ -18,20 +43,19 @@ Blacklight.onLoad(function() {
 
     var contract = function(evt) {
       me.addClass('contracted');
+      if ( me.children(":first").is("ul") ) {
+        me.addClass('contracted-ul');
+      }
       parent.attr('aria-expanded', 'false');
-      me.height(contractedHeight);
     }
 
     var expand = function(evt) {
       me.removeClass('contracted');
+      me.removeClass('contracted-ul');
       parent.attr('aria-expanded', 'true');
-      me.height(origHeight);
     };
 
     contract(); // if we got this far, we want to shrink
-
-    //parent.find('.more').on('click', expand);
-    //parent.find('.less').on('click', contract);
 
     parent.find('.more').click(function() {
       expand();

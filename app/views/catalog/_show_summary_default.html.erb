@@ -1,7 +1,8 @@
 <div id="enhanced-data" class="<%= show_enhanced_data_class %>">
 
   <% if display_summary?(document: @document) %>
-    <section id="summary" class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
+    <span id="summary"></span>
+    <section class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
 
       <h2 id="summaryLabel"><%= t('trln_argon.show.heading.summary') %></h2>
 
@@ -20,7 +21,8 @@
   <%= render 'show_google_book_preview' %>
 
   <% if display_toc?(document: @document) %>
-    <section id="contents" class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
+    <span id="contents"></span>
+    <section class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
       <h2 id="contentsLabel"><%= t('trln_argon.show.heading.contents') %></h2>
 
       <div class="content expandable-content">
@@ -36,8 +38,9 @@
   <% end %>
 
   <% if display_sample_chapter?(document: @document) %>
-  <section id="sample-chapter" class="<%= show_enhanced_data_sample_chapter_class %>">
-    <h2><%= t('trln_argon.show.heading.sample_chapter') %></h2>
+  <span id="sample-chapter"></span>
+  <section class="<%= show_enhanced_data_sample_chapter_class %>" role="complementary" aria-labelledby="sampleChapterLabel">
+    <h2 id="sampleChapterLabel"><%= t('trln_argon.show.heading.sample_chapter') %></h2>
 
     <div class='content expandable-content'>
       <%= @document.syndetics_or_marc_sample_chapter.html_safe %>
