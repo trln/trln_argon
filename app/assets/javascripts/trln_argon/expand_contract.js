@@ -9,16 +9,16 @@ $.fn.isInViewport = function() {
 
 Blacklight.onLoad(function() {
 
-  $("#documents .hider, #holdings .hider").click(function() {
-    event.preventDefault();
+  $("#documents .hider, #holdings .hider").click(function(evt) {
+    evt.preventDefault();
     var theAnchorID = $(this).attr('href');
     if (!$(theAnchorID).isInViewport()) {
       $('html,body').animate({scrollTop: $(theAnchorID).offset().top - 150}, 'fast');
     }
   });
 
-  $("#document .less").click(function() {
-    event.preventDefault();
+  $("#document .less").click(function(evt) {
+    evt.preventDefault();
     var theAnchorID = $(this).find(".btn").attr('href');
     if (!$(theAnchorID).isInViewport()) {
       $('html,body').animate({scrollTop: $(theAnchorID).offset().top - 50}, 'fast');
