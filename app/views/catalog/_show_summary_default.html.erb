@@ -1,8 +1,8 @@
 <div id="enhanced-data" class="<%= show_enhanced_data_class %>">
 
   <% if display_summary?(document: @document) %>
-    <span id="summary"></span>
-    <section class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
+    <span id="summary-top"></span>
+    <section id="summary" class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
 
       <h2 id="summaryLabel"><%= t('trln_argon.show.heading.summary') %></h2>
 
@@ -12,7 +12,7 @@
 
       <div class="expandable-content-controls">
         <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-        <span class='show-control less'><a href="#summary" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+        <span class='show-control less'><a href="#summary-top" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
       </div>
 
     </section>
@@ -21,8 +21,8 @@
   <%= render 'show_google_book_preview' %>
 
   <% if display_toc?(document: @document) %>
-    <span id="contents"></span>
-    <section class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
+    <span id="contents-top"></span>
+    <section id="contents" class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
       <h2 id="contentsLabel"><%= t('trln_argon.show.heading.contents') %></h2>
 
       <div class="content expandable-content">
@@ -31,15 +31,15 @@
 
       <div class="expandable-content-controls">
         <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-        <span class='show-control less'><a href="#contents" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+        <span class='show-control less'><a href="#contents-top" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
       </div>
 
     </section>
   <% end %>
 
   <% if display_sample_chapter?(document: @document) %>
-  <span id="sample-chapter"></span>
-  <section class="<%= show_enhanced_data_sample_chapter_class %>" role="complementary" aria-labelledby="sampleChapterLabel">
+  <span id="sample-chapter-top"></span>
+  <section id="sample-chapter" class="<%= show_enhanced_data_sample_chapter_class %>" role="complementary" aria-labelledby="sampleChapterLabel">
     <h2 id="sampleChapterLabel"><%= t('trln_argon.show.heading.sample_chapter') %></h2>
 
     <div class='content expandable-content'>
@@ -48,7 +48,7 @@
 
     <div class="expandable-content-controls">
       <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-      <span class='show-control less'><a href="#sample-chapter" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
+      <span class='show-control less'><a href="#sample-chapter-top" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
     </div>
 
   </section>
