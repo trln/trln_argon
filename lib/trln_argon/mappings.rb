@@ -48,7 +48,7 @@ module TrlnArgon
         if File.exist?(head_fetch_file)
           # this method might get called in a loop when, e.g. creating
           # an engine_cart instance, so we need a very short term cache.
-          do_pull = File.stat(head_fetch_file).mtime > (Time.now - 2.minutes)
+          do_pull = File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
         end
 
         if do_pull
@@ -160,6 +160,8 @@ module TrlnArgon
     # cache directly, they would need to be deserialized on each access
     CACHE_KEY = 'TrlrArgon::LookupManager::Lookups::Canary'.freeze
 
+    attr_reader :dev_reload_file
+
     class << self
       attr_writer :fetcher
 
@@ -169,6 +171,11 @@ module TrlnArgon
     end
 
     def initialize
+      if Rails.env == 'development'
+        @dev_reload_file = File.join(Rails.root, 'tmp', 'reload-code-mappings')
+        logger.info("Running in development mode, argon code mappings will only be reloaded at startup or when #{@dev_reload_file} is seen.  If that file is present, mappings will be reloaded and the file deleted.  'touch #{@dev_reload_file}' again to reload mappings")
+       end
+
       reload
     end
 
@@ -186,6 +193,18 @@ module TrlnArgon
     end
 
     def check_cache
+      if Rails.env == 'development'
+        if File.exist?(@dev_reload_file)
+          logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
+          if @lookups
+            File.unlink(@dev_reload_file)
+            logger.info("Removed #{@dev_reload_file}, use 'touch #{@dev_reload_file}' if you want to reload mappings again")
+            @lookups.reload!
+          end
+        end
+        return true
+      end
+
       Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do |_|
         logger.info('Standard cache period for code mappings expired')
         @lookups.reload! if @lookups
