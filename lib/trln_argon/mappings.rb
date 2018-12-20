@@ -173,8 +173,9 @@ module TrlnArgon
     def initialize
       if Rails.env == 'development'
         @dev_reload_file = File.join(Rails.root, 'tmp', 'reload-code-mappings')
-        logger.info("Running in development mode, argon code mappings will only be reloaded at startup or when #{@dev_reload_file} is seen.  If that file is present, mappings will be reloaded and the file deleted.  'touch #{@dev_reload_file}' again to reload mappings")
-       end
+        logger.info(%q(development mode -- argon code mappings loaded at
+startup and when #{@dev_reload_file} is seen.))
+      end
 
       reload
     end
@@ -198,7 +199,9 @@ module TrlnArgon
           logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
           if @lookups
             File.unlink(@dev_reload_file)
-            logger.info("Removed #{@dev_reload_file}, use 'touch #{@dev_reload_file}' if you want to reload mappings again")
+            logger.info(%q(Removed #{@dev_reload_file}, use
+'bundle exec rake trln_argon:reload_code_mappings if you want to
+reload mappings again))
             @lookups.reload!
           end
         end
