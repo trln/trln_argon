@@ -110,6 +110,7 @@ module TrlnArgon
     end
 
     def load
+      logger.info('load() called on mappings')
       mappings = {}
       Dir.foreach(@directory) do |dir_entry|
         path = File.expand_path(File.join(@directory, dir_entry))
@@ -178,6 +179,7 @@ startup and when #{@dev_reload_file} is seen.))
       end
 
       reload
+      lookups
     end
 
     # Refreshes mappings from git and reloads
@@ -186,7 +188,6 @@ startup and when #{@dev_reload_file} is seen.))
     def reload
       self.class.fetcher.refresh
       Rails.cache.delete(CACHE_KEY)
-      lookups
     end
 
     def map(path)
@@ -197,20 +198,18 @@ startup and when #{@dev_reload_file} is seen.))
       if Rails.env == 'development'
         if File.exist?(@dev_reload_file)
           logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
-          if @lookups
-            File.unlink(@dev_reload_file)
-            logger.info(%q(Removed #{@dev_reload_file}, use
+          @lookups = nil
+          File.unlink(@dev_reload_file)
+          logger.info(%q(Removed #{@dev_reload_file}, use
 'bundle exec rake trln_argon:reload_code_mappings if you want to
 reload mappings again))
-            @lookups.reload!
-          end
         end
         return true
       end
 
       Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do |_|
         logger.info('Standard cache period for code mappings expired')
-        @lookups.reload! if @lookups
+        @lookups = nil # .reload! if @lookups
         Time.now.to_s
       end
     end
