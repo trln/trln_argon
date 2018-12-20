@@ -9,6 +9,11 @@ namespace :trln_argon do
   task(reload_code_mappings: :environment) do
     require 'trln_argon/mappings'
     puts 'Expiring cached lookups'
+    if Rails.env == 'development'
+      puts 'Development environment, creating mappings reload trigger file'
+      reload_file = TrlnArgon::LookupManager.instance.dev_reload_file
+      FileUtils.touch(reload_file)
+    end
     TrlnArgon::LookupManager.instance.reload
     puts 'Reloaded mappings from github'
   end

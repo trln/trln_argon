@@ -48,7 +48,7 @@ module TrlnArgon
         if File.exist?(head_fetch_file)
           # this method might get called in a loop when, e.g. creating
           # an engine_cart instance, so we need a very short term cache.
-          do_pull = File.stat(head_fetch_file).mtime > (Time.now - 2.minutes)
+          do_pull = File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
         end
 
         if do_pull
@@ -110,6 +110,7 @@ module TrlnArgon
     end
 
     def load
+      logger.info('load() called on mappings')
       mappings = {}
       Dir.foreach(@directory) do |dir_entry|
         path = File.expand_path(File.join(@directory, dir_entry))
@@ -160,6 +161,8 @@ module TrlnArgon
     # cache directly, they would need to be deserialized on each access
     CACHE_KEY = 'TrlrArgon::LookupManager::Lookups::Canary'.freeze
 
+    attr_reader :dev_reload_file
+
     class << self
       attr_writer :fetcher
 
@@ -169,7 +172,14 @@ module TrlnArgon
     end
 
     def initialize
+      if Rails.env == 'development'
+        @dev_reload_file = File.join(Rails.root, 'tmp', 'reload-code-mappings')
+        logger.info(%q(development mode -- argon code mappings loaded at
+startup and when #{@dev_reload_file} is seen.))
+      end
+
       reload
+      lookups
     end
 
     # Refreshes mappings from git and reloads
@@ -178,7 +188,6 @@ module TrlnArgon
     def reload
       self.class.fetcher.refresh
       Rails.cache.delete(CACHE_KEY)
-      lookups
     end
 
     def map(path)
@@ -186,9 +195,21 @@ module TrlnArgon
     end
 
     def check_cache
+      if Rails.env == 'development'
+        if File.exist?(@dev_reload_file)
+          logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
+          @lookups = nil
+          File.unlink(@dev_reload_file)
+          logger.info(%q(Removed #{@dev_reload_file}, use
+'bundle exec rake trln_argon:reload_code_mappings if you want to
+reload mappings again))
+        end
+        return true
+      end
+
       Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do |_|
         logger.info('Standard cache period for code mappings expired')
-        @lookups.reload! if @lookups
+        @lookups = nil # .reload! if @lookups
         Time.now.to_s
       end
     end

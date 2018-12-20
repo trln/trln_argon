@@ -97,17 +97,31 @@ repository.  By default, the repository will be checked out to the directory
 `argon_mappings` under `config/mappings/` under the Rails root (.e.g.
 `config/mappings/argon_mappings`).  If you don't like the idea of having
 another git repository inside what might be the git repository containing your
-application, you can set
-`ARGON_CODE_MAPPINGS_DIR` (in `local_env.yml`, see below) to an appropriate value.
+application, you can set `ARGON_CODE_MAPPINGS_DIR` (in `local_env.yml`, see
+below) to an appropriate value.
 
-The lookups generated from these files are loaded at application startup and reloaded every 24 hours (which allows your application to pick up changes coming in from other institutions without you having to intervene), but if you have made a locally important change and you want to reload the mappings immediately, you can execute the rake task `trln_argon:reload_code_mappings`.  This will sync your local copy with the upstream repository, and un-cache the lookups generated from the files in the repository, meaning your changes will be visible immediately in the running application.
+When running in production, the lookups generated from these files are loaded at application startup and
+reloaded every 24 hours (which allows your application to pick up changes
+coming in from other institutions without you having to intervene), but if you
+have made a locally important change and you want to reload the mappings
+immediately, you can execute the rake task `trln_argon:reload_code_mappings`.
+
+This will sync your local copy with the upstream repository, and un-cache the
+lookups generated from the files in the repository, meaning your changes will
+be visible immediately in the running application.
 
     $ RAILS_ENV=production bundle exec rake trln_argon:reload_code_mappings
 
-Note: when running in 'development' environment, Rails caching is a no-op, so
-any changes you make to the local copy of your repository (by editing the files
-in the working tree or by pulling changes from github) should be viewable
-immediately in this environment.
+(this will fail unless you also have SECRET_KEY_BASE defined in your
+environment; it doesn't need to be the actual value in use by the web
+application for this purpose, however.)
+
+When running in 'development' environment, the code mappings are loaded *once*
+at startup, because Rails doesn't cache in this mode and otherwise would be
+trying to pull changes down from github too often.  So, in this case, you'll
+need to restart your application or run the above rake task with the
+`development` environment if you want to have changes take effect.
+
 
 ## About the `trln_argon:install` generator task
 
