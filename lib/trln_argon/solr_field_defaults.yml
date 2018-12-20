@@ -35,7 +35,7 @@ DATA_SOURCE_WORK:
   label:
     en: Data Source
 DATE_CATALOGED:
-  solr_field: :date_cataloged_a
+  solr_field: :date_cataloged
   label:
     en: Date Cataloged
 DATE_CATALOGED_FACET:
