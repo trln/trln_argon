@@ -120,13 +120,11 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
                                     collapse: false
-        # NOTE: Temporarily disabled due to need to regenerate/reindex all
-        #       hierarchies in MTA using a pipe as the delimiter.
-        # config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-        #                             label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
-        #                             limit: 4000,
-        #                             helper_method: :call_number_filter_display,
-        #                             partial: 'blacklight/hierarchy/facet_hierarchy'
+        config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                                    label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+                                    limit: 4500,
+                                    helper_method: :call_number_filter_display,
+                                    partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                     limit: true
@@ -173,13 +171,11 @@ module TrlnArgon
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false
-        # NOTE: Temporarily disabled due to need to regenerate/reindex all
-        #       hierarchies in MTA using a pipe as the delimiter.
-        # config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
-        #                        label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
-        #                        limit: 4000,
-        #                        helper_method: :call_number_filter_display,
-        #                        partial: 'blacklight/hierarchy/facet_hierarchy'
+        config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
+                               label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
+                               limit: 4500,
+                               helper_method: :call_number_filter_display,
+                               partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true

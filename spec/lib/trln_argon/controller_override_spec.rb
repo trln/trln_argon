@@ -135,8 +135,7 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('language_f')
     end
 
-    # Disable temporarily until everything is reindexed with pipe delimiter
-    xit 'sets the call number facet' do
+    it 'sets the call number facet' do
       expect(override_config.facet_fields).to have_key('lcc_callnum_classification_f')
     end
 
@@ -158,8 +157,7 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.home_facet_fields).to have_key('language_f')
     end
 
-    # Disable temporarily until everything is reindexed with pipe delimiter
-    xit 'sets the call number facet' do
+    it 'sets the call number facet' do
       expect(override_config.home_facet_fields).to have_key('lcc_callnum_classification_f')
     end
 
