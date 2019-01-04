@@ -1,3 +1,3 @@
 module TrlnArgon
-  VERSION = '0.8.20'.freeze
+  VERSION = '0.8.21'.freeze
 end
