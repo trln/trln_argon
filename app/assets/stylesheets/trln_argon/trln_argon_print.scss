@@ -37,6 +37,7 @@
   }
 
   /* hide stuff */
+  div.alert,
   #trln-toggle,
   #facets,
   #appliedParams,
@@ -49,12 +50,13 @@
   #previousNextDocument,
   #document-tools,
   .expandable-content-controls,
-  #footer {
+  #footer,
+  #show-sidebar {
     display: none !important;
   }
 
   .expandable-content.contracted {
-    height: auto !important;
+    max-height: none !important;
   }
 
   h1 {
@@ -112,10 +114,6 @@
 
   a.progressive-link:after {
     content: none;
-  }
-
-  header:after {
-    content: "www.smashing-winery.com";
   }
 
   /* use serrif fonts */
