@@ -30,7 +30,7 @@ module TrlnArgon
       end
 
       def holdings_summary_wrapper_class
-        'col-sm-8 summary-wrapper'
+        'col-sm-12 summary-wrapper'
       end
 
       def holdings_note_class
@@ -65,29 +65,16 @@ module TrlnArgon
         end
       end
 
-      def call_number_wrapper_class(options = {})
-        if options.fetch(:action, false) == 'show'
-          'col-md-4 col-sm-7 call-number-wrapper'
-        else
-          'col-md-5 col-sm-5 call-number-wrapper'
-        end
+      def call_number_wrapper_class(_options = {})
+        'col-md-5 col-sm-12 call-number-wrapper'
       end
 
-      def status_wrapper_class(options = {})
-        if options.fetch(:action, false) == 'show'
-          'col-md-4 col-sm-5'
-        else
-          'col-md-7 col-sm-7'
-        end
+      def status_wrapper_class(_options = {})
+        'col-md-7 col-sm-12'
       end
 
-      def item_note_wrapper_class(options = {})
-        if options.fetch(:action, false) == 'show' &&
-           options.fetch(:item_length, 0) < 120
-          'col-md-4 col-sm-12'
-        else
-          'col-md-12'
-        end
+      def item_note_wrapper_class(_options = {})
+        'col-md-12'
       end
 
       def display_holdings_well?(options = {})
