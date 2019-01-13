@@ -11,7 +11,7 @@ module TrlnArgon
       # Excludes URLs that are set to restricted: false
       def fulltext_urls
         @fulltext_urls ||= select_urls('fulltext').reject do |url|
-          Addressable::Template.new(url[:href]).variables.any? ||
+          url_has_variables?(url[:href]) ||
             url.fetch(:restricted, 'true') == 'false'
         end
       end
@@ -78,8 +78,15 @@ module TrlnArgon
 
       def templated_fulltext_shared_urls
         deserialized_urls.select do |url|
-          Addressable::Template.new(url[:href]).variables.any? && url[:type] == 'fulltext'
+          url_has_variables?(url[:href]) && url[:type] == 'fulltext'
         end
+      end
+
+      def url_has_variables?(url)
+        Addressable::Template.new(url).variables.any?
+      rescue RegexpError => e
+        Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+        false
       end
 
       def url_template_subst(href, inst)
