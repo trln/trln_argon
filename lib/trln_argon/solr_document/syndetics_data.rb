@@ -45,6 +45,7 @@ module TrlnArgon
 
       # fetches enhanced data (SyndeticsData object) and yields it to a block,
       # if it's available.
+      # rubocop:disable MethodLength
       def enhanced_data(client = 'trlnet')
         params = get_params(client, 'XML.XML')
         return nil unless params
@@ -52,7 +53,9 @@ module TrlnArgon
           doc_xml = Faraday.get(build_syndetics_query(params)).body
           data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
         rescue StandardError => e
-          Rails.logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{params}: #{e}")
+          Rails.logger.warn('unable to fetch syndetics data for '\
+                            "#{fetch('id', 'unknown document')} "\
+                            "-- #{params}: #{e}")
         end
         yield data if block_given? && !data.nil?
         data
@@ -64,7 +67,6 @@ module TrlnArgon
                          query: params.to_query.gsub(/%5B%5D/, ''))
       end
 
-      # rubocop:disable MethodLength
       def get_params(client = 'trlnet', format_spec = 'XML.XML')
         params = {
           isbn: [fetch(TrlnArgon::Fields::ISBN_NUMBER, []).first],
