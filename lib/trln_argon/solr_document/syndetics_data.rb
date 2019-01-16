@@ -52,7 +52,7 @@ module TrlnArgon
           doc_xml = Faraday.get(build_syndetics_query(params)).body
           data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
         rescue StandardError => e
-          logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{params}: #{e}")
+          Rails.logger.warn("unable to fetch syndetics data for #{doc['id']} -- #{params}: #{e}")
         end
         yield data if block_given? && !data.nil?
         data
