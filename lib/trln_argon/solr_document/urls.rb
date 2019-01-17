@@ -85,7 +85,8 @@ module TrlnArgon
       def url_has_variables?(url)
         Addressable::Template.new(url).variables.any?
       rescue RegexpError => e
-        Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+        Rails.logger.warn('unable to parse URL template for '\
+                          "#{fetch('id', 'unknown document')}: #{e}")
         false
       end
 
