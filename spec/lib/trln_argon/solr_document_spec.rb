@@ -111,6 +111,20 @@ describe TrlnArgon::SolrDocument do
     end
   end
 
+  describe '#title_and_responsibility' do
+    let(:solr_document) do
+      SolrDocumentTestClass.new(
+        id: 'UNC002981535',
+        title_main: 'Basic child psychiatry',
+        statement_of_responsibility_a: ['Philip Barker.']
+      )
+    end
+
+    it 'returns a title with the statement of responsibility' do
+      expect(solr_document.title_and_responsibility).to eq('Basic child psychiatry / Philip Barker.')
+    end
+  end
+
   describe 'issn' do
     context 'when there is a single ISSN' do
       let(:solr_document) do
