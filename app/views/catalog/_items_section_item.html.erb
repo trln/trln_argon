@@ -14,7 +14,7 @@
        <% available_class = item_availability_display(item) %>
        <% due_date = item_due_date(item) %>
        <span class="<%= available_class %>">
-           <%= item['status'] %>
+           <%= render partial: 'items_section_item_status', locals: { document: document, loc_b: loc_b, loc_n: loc_n, item: item } %>
            <% if !due_date.empty? %>
                <span class='due-date'><%= due_date %></span>
            <% end %>
