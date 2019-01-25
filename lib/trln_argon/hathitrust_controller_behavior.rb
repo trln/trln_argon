@@ -11,33 +11,33 @@ module TrlnArgon
 
       def hathi_links_grouped_by_oclc_number
         hathitrust_response_hash.map do |key, value|
-          full_text_url = hathistrust_fulltext_url(value)
-          next if full_text_url.empty?
+          full_text_url = hathitrust_fulltext_url(value)
+          next unless hathitrust_fulltext_item?(value)
           [key.delete(':'), render_hathitrust_partial_to_string(full_text_url)]
         end.compact.to_h.to_json
       end
 
       def render_hathitrust_partial_to_string(full_text_url)
         render_to_string('hathitrust/show',
-                         locals: { hathistrust_argon_url_hash:
-                                     hathistrust_argon_url_hash(full_text_url) },
+                         locals: { hathitrust_argon_url_hash:
+                                     hathitrust_argon_url_hash(full_text_url) },
                          layout: false)
       end
 
-      def hathistrust_argon_url_hash(full_text_url)
+      def hathitrust_argon_url_hash(full_text_url)
         { href: full_text_url,
           type: 'fulltext',
           text: I18n.t('trln_argon.links.hathitrust') }
       end
 
-      def hathistrust_fulltext_url(value)
-        hathistrust_fulltext_item(value).fetch('itemURL', '')
+      def hathitrust_fulltext_url(value)
+        value.fetch('records', {}).map { |_k, v| v.fetch('recordURL', '') }.first
       end
 
-      def hathistrust_fulltext_item(value)
+      def hathitrust_fulltext_item?(value)
         value.fetch('items', [])
              .select { |i| i.fetch('usRightsString') == 'Full view' }
-             .first || {}
+             .any?
       end
 
       def hathitrust_response_hash

@@ -95,6 +95,12 @@ module TrlnArgon
       ).join(' / ')
     end
 
+    # For RSS feed.
+    def title_and_responsibility
+      [fetch(TrlnArgon::Fields::TITLE_MAIN, 'Title Unknown'),
+       statement_of_responsibility].reject(&:empty?).join(' / ')
+    end
+
     def subject_headings
       [*self[TrlnArgon::Fields::SUBJECT_HEADINGS]].concat(
         [*self[TrlnArgon::Fields::SUBJECT_HEADINGS_VERN]]
