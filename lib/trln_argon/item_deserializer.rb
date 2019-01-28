@@ -50,7 +50,7 @@ module TrlnArgon
         loc_n_map.map do |_loc_n, items|
           I18n.t('trln_argon.item_location',
                  loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"),
-                 call_number: items['call_no'].strip)
+                 call_number: items.fetch('call_no', '').strip)
         end
       end
     end
