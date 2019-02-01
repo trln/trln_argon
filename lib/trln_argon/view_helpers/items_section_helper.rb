@@ -77,6 +77,10 @@ module TrlnArgon
         'col-md-12'
       end
 
+      def latest_received_wrapper_class(_opts = {})
+        'col-md5 col-sm-12 latest-received-wrapper'
+      end
+
       def display_holdings_well?(options = {})
         doc = options.fetch(:document, nil)
         doc &&
@@ -89,6 +93,7 @@ module TrlnArgon
 
       def display_items?(options = {})
         return unless options.fetch(:document, nil)
+
         !(options[:document].holdings.keys - ['ONLINE', 'DUKIR', '', nil]).empty?
       end
 
@@ -117,6 +122,18 @@ module TrlnArgon
 
       def assign_item_id_as_id(item)
         item.key?('item_id') ? "id=\"item-#{CGI.escapeHTML(item['item_id'])}\"".html_safe : ''
+      end
+
+      def latest_received(doc, item_data)
+        url = if doc.record_owner == 'unc' && item_data['holdings_id']
+                format(
+                  TrlnArgon::Engine.configuration.unc_latest_received_url,
+                  local_id: doc['local_id'],
+                  holdings_id: item_data['holdings_id'].upcase
+                )
+              end
+        lr_text = url ? 'Latest Received' : item_data['latest_received_text']
+        [lr_text, url]
       end
     end
   end

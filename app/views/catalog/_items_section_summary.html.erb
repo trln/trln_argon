@@ -21,7 +21,7 @@
           <dd>
 
             <div class="summary-text-wrapper expandable-content">
-              <span class="summary-text"><%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %></span>
+                <span class="summary-text"><%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %></span>
             </div>
 
             <div class="expandable-content-controls">
@@ -31,9 +31,10 @@
 
           </dd>
 
-        </dl>
 
+        </dl>
       </div>
+      <%= render partial: 'catalog/index_items_latest_received', locals: { document: @document, item_data: item_data } %>
 
   <% end %>
 

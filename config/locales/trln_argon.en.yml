@@ -178,6 +178,10 @@ en:
                 item_note: "Note"
                 holding_note: "Note"
                 url_note: "Note"
+                latest_received: 'Latest Received'
+
+            a11y_text:
+                latest_received: View latest received issues (opens new window)
 
             controls:
                 show: "show"

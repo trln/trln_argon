@@ -39,7 +39,8 @@ module TrlnArgon
                     :sort_order_in_holding_list,
                     :number_of_location_facets,
                     :number_of_items_index_view,
-                    :number_of_items_show_view
+                    :number_of_items_show_view,
+                    :unc_latest_received_url
 
       # rubocop:disable MethodLength
       def initialize
@@ -62,6 +63,7 @@ module TrlnArgon
         @number_of_location_facets = '10'
         @number_of_items_index_view = '3'
         @number_of_items_show_view = '6'
+        @unc_latest_received_url = 'https://webcat.lib.unc.edu/search/.%<local_id>s/.%<local_id>s/,,,/cr%<holdings_id>s'
       end
       # rubocop:enable MethodLength
 

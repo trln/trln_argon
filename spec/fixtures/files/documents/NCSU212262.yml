@@ -1,0 +1,231 @@
+---
+- id: NCSU212262
+  url_a:
+    - '{"type":"other","href":"https://www.lib.ncsu.edu/journals/search.php?type=keywords\u0026search=Social%20theory%20and%20practice","text":"Search
+      for online access"}'
+  issn_linking_a:
+    - 0037-802X
+  issn_primary_a:
+    - 0037-802X
+  items_a:
+    - '{"call_no":"H1 .S68 v.2 1972/1973","cn_scheme":"LC","item_id":"S00962965.","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.4 1976/1977","cn_scheme":"LC","item_id":"S00962966","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.5 1978/1980","cn_scheme":"LC","item_id":"S00962967$","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.6 1980","cn_scheme":"LC","item_id":"S00962979%","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.7 1981","cn_scheme":"LC","item_id":"S00962980Y","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.8 1982","cn_scheme":"LC","item_id":"S00962981Z","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.9 1983","cn_scheme":"LC","item_id":"S00962968/","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.10 1984","cn_scheme":"LC","item_id":"S00962986/","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.11 1985","cn_scheme":"LC","item_id":"S00962975","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.12 1986","cn_scheme":"LC","item_id":"S00962969+","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.13 1987","cn_scheme":"LC","item_id":"S00962970X","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.14 1988","cn_scheme":"LC","item_id":"S00962974.","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.15 1989","cn_scheme":"LC","item_id":"S00962973-","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.16 1990","cn_scheme":"LC","item_id":"S00962972Z","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.17 1991","cn_scheme":"LC","item_id":"S00962971Y","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.18 1992","cn_scheme":"LC","item_id":"S00962985$","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.19 1993","cn_scheme":"LC","item_id":"S00962984","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.20 1994","cn_scheme":"LC","item_id":"S00962983.","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.21 1995","cn_scheme":"LC","item_id":"S00962982-","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.22 1996","cn_scheme":"LC","item_id":"S00968605Y","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.23 1997","cn_scheme":"LC","item_id":"S01221539N","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.24 1998","cn_scheme":"LC","item_id":"S01776617Z","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.25 1999","cn_scheme":"LC","item_id":"S01961025O","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.26 2000","cn_scheme":"LC","item_id":"S01646515S","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.27 no.1-2 2001","cn_scheme":"LC","item_id":"S02108447Q","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.27 no.3-4 2001","cn_scheme":"LC","item_id":"S02098919","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.28 no.1-2 2002","cn_scheme":"LC","item_id":"S02224721K","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.28 no.3-4 2002","cn_scheme":"LC","item_id":"S02224720J","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.29 no.1-2 2003","cn_scheme":"LC","item_id":"S02234195Q","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.29 no.3-4 2003","cn_scheme":"LC","item_id":"S02234196R","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.30 2004","cn_scheme":"LC","item_id":"S02842113L","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.31 2005","cn_scheme":"LC","item_id":"S02847120O","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.32 NO.1-2 2006","cn_scheme":"LC","item_id":"S02873488/","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 v.32 NO.3-4 2006","cn_scheme":"LC","item_id":"S02873487$","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.33 NO.1-2 2007","cn_scheme":"LC","item_id":"S028659995","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.33 NO.3-4 2007","cn_scheme":"LC","item_id":"S02866000M","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.34 NO.1-2 2008","cn_scheme":"LC","item_id":"S02936607X","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.34 NO.3-4 2008","cn_scheme":"LC","item_id":"S02936608Y","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.35 NO.1-2 2009","cn_scheme":"LC","item_id":"S02908508W","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.35 NO.3-4 2009","cn_scheme":"LC","item_id":"S02908509X","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.36 NO.1-2 2010","cn_scheme":"LC","item_id":"S02914645V","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.36 NO.3-4 2010","cn_scheme":"LC","item_id":"S02914646W","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.37 NO.1-2 2011","cn_scheme":"LC","item_id":"S02907037S","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.37 NO.3-4 2011","cn_scheme":"LC","item_id":"S02892739/","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.38 NO.1-2 2012","cn_scheme":"LC","item_id":"S02890573Y","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.38 NO.3-4 2012","cn_scheme":"LC","item_id":"S028893782","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.39 NO.1-2 2013","cn_scheme":"LC","item_id":"S034229111","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.39 NO.3-4 2013","cn_scheme":"LC","item_id":"S034187111","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.40 NO.1-2 2014","cn_scheme":"LC","item_id":"S034132509","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+    - '{"call_no":"H1 .S68 V.40 NO.3-4 2014","cn_scheme":"LC","item_id":"S034145817","loc_n":"STACKS","loc_b":"DHHILL","type":"SERIAL","copy_no":"","status":"Available
+      (Library use only)"}'
+  author_suggest:
+    - Florida State University. Department of Philosophy
+  names_a:
+    - '{"name":"Florida State University. Department of Philosophy"}'
+  owner_a:
+    - ncsu
+  misc_id_a:
+    - 'LCCN: 70617090 //r86'
+  barcodes_a:
+    - S00962965.
+    - S00962966
+    - S00962967$
+    - S00962979%
+    - S00962980Y
+    - S00962981Z
+    - S00962968/
+    - S00962986/
+    - S00962975
+    - S00962969+
+    - S00962970X
+    - S00962974.
+    - S00962973-
+    - S00962972Z
+    - S00962971Y
+    - S00962985$
+    - S00962984
+    - S00962983.
+    - S00962982-
+    - S00968605Y
+    - S01221539N
+    - S01776617Z
+    - S01961025O
+    - S01646515S
+    - S02108447Q
+    - S02098919
+    - S02224721K
+    - S02224720J
+    - S02234195Q
+    - S02234196R
+    - S02842113L
+    - S02847120O
+    - S02873488/
+    - S02873487$
+    - S028659995
+    - S02866000M
+    - S02936607X
+    - S02936608Y
+    - S02908508W
+    - S02908509X
+    - S02914645V
+    - S02914646W
+    - S02907037S
+    - S02892739/
+    - S02890573Y
+    - S028893782
+    - S034229111
+    - S034187111
+    - S034132509
+    - S034145817
+  holdings_a:
+    - '{"loc_n":"STACKS","loc_b":"DHHILL","call_no":"H1 .S68","summary":"Issues from 1972-2014","latest_received_text":"V 31 N 4 OCT 2005"}'
+  language_a:
+    - English
+  local_id: '212262'
+  shelfkey: lc:H..0001.S68--V000219721973
+  available_a:
+    - Available
+  frequency_former_a:
+    - 3 times a year
+    - Semiannual
+  frequency_current_a:
+    - Quarterly
+  lang_code_a:
+    - eng
+  rollup_id: OCLC830969
+  title_suggest:
+    - Social theory and practice
+  title_main: Social theory and practice
+  title_sort_ssort_single: social theory and practice
+  access_type_a:
+    - At the Library
+  institution_a:
+    - ncsu
+  oclc_number: '830969'
+  imprint_main_a:
+    - '{"type":"imprint","value":"Tallahassee, Fla., Dept. of Philosophy, Florida State
+    University."}'
+  note_general_a:
+    - Vol. 1, no. 1 published by the University's Center for Social Philosophy; v. 1,
+      no. 2- by the University's Dept. of Philosophy.
+  resource_type_a:
+    - Journal, Magazine, or Periodical
+  subject_genre_a:
+    - Periodicals
+  genre_headings_a:
+    - Periodicals
+  subject_suggest:
+    - Periodicals
+    - Social sciences -- Periodicals
+  physical_media_a:
+    - Print
+  subject_topical_a:
+    - Social sciences
+  publication_year_sort: '9999'
+  reverse_shelfkey: lc:I}}ZZZY}7TR~~4ZZZXYQSXYQSW
+  subject_headings_a:
+    - Social sciences -- Periodicals
+  note_serial_dates_a:
+    - v. 1- spring 1970-
+  location_hierarchy_a:
+    - ncsu
+    - ncsu:DHHILL
+  record_data_source_a:
+    - ILSMARC
+  call_number_schemes_a:
+    - LC
+  physical_description_a:
+    - v. ill. 24 cm.
+  lcc_callnum_classification_a:
+    - H - Social sciences
+    - H - Social sciences|H1 - H99 Social sciences (General)
