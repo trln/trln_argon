@@ -125,6 +125,8 @@ module TrlnArgon
       end
 
       def latest_received(doc, item_data)
+        return [nil, nil] unless doc && item_data
+
         url = if doc.record_owner == 'unc' && item_data['holdings_id']
                 format(
                   TrlnArgon::Engine.configuration.unc_latest_received_url,
