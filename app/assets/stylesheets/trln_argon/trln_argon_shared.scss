@@ -435,7 +435,6 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   background: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(237, 237, 237, 1) 50%);
 }
 
-
 .show-document,
 .index-document-metadata {
     ul {
@@ -1169,6 +1168,36 @@ h1, h2, h3, h4, h5 {
     margin-bottom: 0;
   }
 
+  /* links that open in new windows; hide text in spans,
+     show it on hover for a11y  */
+
+  a.new-window-link span {
+    height: 1px;
+    left: -999px;
+    overflow: hidden;
+    position: absolute;
+    top: auto;
+    width: 1px;
+  }
+
+  a.new-window-link {
+    &:hover, &:focus, &:active {
+      span {
+        background-color: #FFFFFF;
+        border: 1px solid #999999;
+        display: inline;
+        height: inherit;
+        left: inherit;
+        margin-left: 0.5em;
+        padding: 0.2em 0.2em 0.1em;
+        position: absolute;
+        top: inherit;
+        width: inherit;
+      }
+    }
+  }
+
+
 
   .call-number-wrapper {
     /*display: inline-block;
@@ -1183,6 +1212,7 @@ h1, h2, h3, h4, h5 {
   .call-number-label,
   .status-label,
   .summary-label,
+  .latest-received-label,
   .item-note-label,
   .holding-note-label,
   .url-note-label {
@@ -1203,6 +1233,7 @@ h1, h2, h3, h4, h5 {
   }
 
   .summary-text,
+  .latest_ree
   .summary-holdings {
     word-wrap:break-word;
   }
@@ -1281,7 +1312,6 @@ h1, h2, h3, h4, h5 {
 }
 
 
-
 @media screen and (min-width: $screen-xs) {
 
   #documents .items {
@@ -1299,7 +1329,7 @@ h1, h2, h3, h4, h5 {
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      width: 6em;
+      width: 7em;
     }
 
     dd { margin-left: 6.5em; }

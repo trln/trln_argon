@@ -1,0 +1,509 @@
+---
+- id: UNCb1699212
+  issn_linking_a: &1
+  - 0022-362X
+  issn_primary_a: &2
+  - 0022-362X
+  items_a: &3
+  - '{"item_id":"i2433801","loc_b":"ddz","loc_n":"ddz","status":"Withdrawn","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.77:no.1-6(1980)"}'
+  - '{"item_id":"i7584902","loc_b":"ddz","loc_n":"ddz","status":"Withdrawn","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.77:no.7-9,11-12(1980)"}'
+  - '{"item_id":"i2433800","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.18(1921)"}'
+  - '{"item_id":"i7584834","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.19(1922)"}'
+  - '{"item_id":"i7584835","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.20(1923)"}'
+  - '{"item_id":"i7584836","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.21(1924)"}'
+  - '{"item_id":"i7584837","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.22(1925)"}'
+  - '{"item_id":"i7584838","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.23(1926)"}'
+  - '{"item_id":"i7584839","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.24(1927)"}'
+  - '{"item_id":"i7584840","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.25(1928)"}'
+  - '{"item_id":"i7584841","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.26(1929)"}'
+  - '{"item_id":"i7584842","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.27(1930)"}'
+  - '{"item_id":"i7584843","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.28(1931)"}'
+  - '{"item_id":"i7584844","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.29(1932)"}'
+  - '{"item_id":"i7584845","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.30(1933)"}'
+  - '{"item_id":"i7584846","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.31(1934)"}'
+  - '{"item_id":"i7584847","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.32(1935)"}'
+  - '{"item_id":"i7584848","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.33(1936)"}'
+  - '{"item_id":"i7584849","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.34(1937)"}'
+  - '{"item_id":"i7584850","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.35(1938)"}'
+  - '{"item_id":"i7584851","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.36(1939)"}'
+  - '{"item_id":"i7584852","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.37(1940)"}'
+  - '{"item_id":"i7584853","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.38(1941)"}'
+  - '{"item_id":"i7584854","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.39(1942)"}'
+  - '{"item_id":"i7584855","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.40(1943)"}'
+  - '{"item_id":"i7584856","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.41(1944)"}'
+  - '{"item_id":"i7584857","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.42(1945)"}'
+  - '{"item_id":"i7584858","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.43(1946)"}'
+  - '{"item_id":"i7584859","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.44(1947)"}'
+  - '{"item_id":"i7584860","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.45(1948)"}'
+  - '{"item_id":"i7584861","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.46(1949)"}'
+  - '{"item_id":"i7584862","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.47(1950)"}'
+  - '{"item_id":"i7584863","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.48(1951)"}'
+  - '{"item_id":"i7584864","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.49(1952)"}'
+  - '{"item_id":"i7584865","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.50(1953)"}'
+  - '{"item_id":"i2433803","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"Index: v.1/50(1904/1953)"}'
+  - '{"item_id":"i7584866","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.51(1954)"}'
+  - '{"item_id":"i7584867","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.52(1955)"}'
+  - '{"item_id":"i7584868","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.53(1956)"}'
+  - '{"item_id":"i7584869","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.54(1957)"}'
+  - '{"item_id":"i7584870","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.55(1958)"}'
+  - '{"item_id":"i7584871","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.56(1959)"}'
+  - '{"item_id":"i7584872","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.57(1960)"}'
+  - '{"item_id":"i7584873","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.58(1961)"}'
+  - '{"item_id":"i7584874","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.59(1962)"}'
+  - '{"item_id":"i7584875","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.60(1963)"}'
+  - '{"item_id":"i10025694","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"Index: v.51/60(1954/1963)"}'
+  - '{"item_id":"i7584876","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.61(1964)"}'
+  - '{"item_id":"i7584877","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.62(1965)"}'
+  - '{"item_id":"i7584878","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.63(1966)"}'
+  - '{"item_id":"i7584879","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.64(1967)"}'
+  - '{"item_id":"i7584880","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.65(1968)"}'
+  - '{"item_id":"i7584881","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.66(1969)"}'
+  - '{"item_id":"i7584882","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.67(1970)"}'
+  - '{"item_id":"i7584883","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.68(1971)"}'
+  - '{"item_id":"i7584886","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.69:no.1-12(1972)"}'
+  - '{"item_id":"i7584894","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.69:no.13-23(1972)"}'
+  - '{"item_id":"i7584887","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.70:no.1-12(1973)"}'
+  - '{"item_id":"i7584895","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.70:no.13-22(1973)"}'
+  - '{"item_id":"i7584888","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.71:no.1-12(1974)"}'
+  - '{"item_id":"i7584896","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.71:no.13-22(1974)"}'
+  - '{"item_id":"i7584889","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.72:no.1-12(1975)"}'
+  - '{"item_id":"i7584897","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.72:no.13-22(1975)"}'
+  - '{"item_id":"i7584890","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.73:no.1-12(1976)"}'
+  - '{"item_id":"i7584898","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.73:no.13-22(1976)"}'
+  - '{"item_id":"i7584891","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.74:no.1-6(1977)"}'
+  - '{"item_id":"i7584899","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.74:no.7-12(1977)"}'
+  - '{"item_id":"i7584892","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.75:no.1-6(1978)"}'
+  - '{"item_id":"i7584900","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.75:no.7-12(1978)"}'
+  - '{"item_id":"i7584893","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.76:no.1-6(1979)"}'
+  - '{"item_id":"i7584901","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.76:no.7-12(1979)"}'
+  - '{"item_id":"i6804518","loc_b":"trln","loc_n":"trln","status":"Available","copy_no":"c.
+    2","cn_scheme":"LC","call_no":"B1 .J6","vol":"v.77(1980)"}'
+  - '{"item_id":"i2433802","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.78:no.1-6(1981)"}'
+  - '{"item_id":"i7584906","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.78:no.7-12(1981)"}'
+  - '{"item_id":"i7584912","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.79:no.1-6(1982)"}'
+  - '{"item_id":"i7584933","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.79:no.7-12(1982)"}'
+  - '{"item_id":"i7584913","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.80:no.1-6(1983)"}'
+  - '{"item_id":"i7584934","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.80:no.7-12(1983)"}'
+  - '{"item_id":"i7584914","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.81:no.1-6(1984)"}'
+  - '{"item_id":"i7584935","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.81:no.7-12(1984)"}'
+  - '{"item_id":"i7584915","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.82:no.1-6(1985)"}'
+  - '{"item_id":"i7584936","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.82:no.7-12(1985)"}'
+  - '{"item_id":"i7584916","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.83:no.1-6(1986)"}'
+  - '{"item_id":"i7584937","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.83:no.7-12(1986)"}'
+  - '{"item_id":"i7584917","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.84:no.1-6(1987)"}'
+  - '{"item_id":"i7584938","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.84:no.7-12(1987)"}'
+  - '{"item_id":"i7584918","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.85:no.1-6(1988)"}'
+  - '{"item_id":"i7584939","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.85:no.7-12(1988)"}'
+  - '{"item_id":"i2433804","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"Index: v.61/85(1964/1988)"}'
+  - '{"item_id":"i7584919","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.86:no.1-6(1989)"}'
+  - '{"item_id":"i7584940","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.86:no.7-12(1989)"}'
+  - '{"item_id":"i7584920","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.87:no.1-6(1990)"}'
+  - '{"item_id":"i7584941","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.87:no.7-12(1990)"}'
+  - '{"item_id":"i7584921","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.88:no.1-6(1991)"}'
+  - '{"item_id":"i7584942","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.88:no.7-12(1991)"}'
+  - '{"item_id":"i7584922","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.89:no.1-6(1992)"}'
+  - '{"item_id":"i7584943","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.89:no.7-12(1992)"}'
+  - '{"item_id":"i7584923","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.90:no.1-6(1993)"}'
+  - '{"item_id":"i7584944","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.90:no.7-12(1993)"}'
+  - '{"item_id":"i7584924","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.91:no.1-6(1994)"}'
+  - '{"item_id":"i7584945","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.91:no.7-12(1994)"}'
+  - '{"item_id":"i7584925","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.92:no.1-6(1995)"}'
+  - '{"item_id":"i7584946","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.92:no.7-12(1995)"}'
+  - '{"item_id":"i7584926","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.93:no.1-6(1996)"}'
+  - '{"item_id":"i7584947","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.93:no.7-12(1996)"}'
+  - '{"item_id":"i7584927","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.94:no.1-6(1997)"}'
+  - '{"item_id":"i7584948","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.94:no.7-12(1997)"}'
+  - '{"item_id":"i7584928","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.95:no.1-6(1998)"}'
+  - '{"item_id":"i7584949","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.95:no.7-12(1998)"}'
+  - '{"item_id":"i7584929","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.96:no.1-6(1999)"}'
+  - '{"item_id":"i7584950","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.96:no.7-12(1999)"}'
+  - '{"item_id":"i7584930","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.97:no.1-6(2000)"}'
+  - '{"item_id":"i7584951","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.97:no.7-12(2000)"}'
+  - '{"item_id":"i7584931","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.98:no.1-6(2001)"}'
+  - '{"item_id":"i7584952","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.98:no.7-12(2001)"}'
+  - '{"item_id":"i7584932","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.99:no.1-6(2002)"}'
+  - '{"item_id":"i7584953","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.99:no.7-12(2002)"}'
+  - '{"item_id":"i7584954","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.100:no.1-6(2003)"}'
+  - '{"item_id":"i7584957","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.100:no.7-12(2003)"}'
+  - '{"item_id":"i7584955","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.101:no.1-6(2004)"}'
+  - '{"item_id":"i7584958","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.101:no.7-12(2004)"}'
+  - '{"item_id":"i7584956","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.102:no.1-6(2005)"}'
+  - '{"item_id":"i7584959","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.102:no.7-12(2005)"}'
+  - '{"item_id":"i6860898","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.103:no.1(2006)"}'
+  - '{"item_id":"i6860491","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.103:no.3-6(2006)"}'
+  - '{"item_id":"i6837589","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.103:no.7-12(2006)"}'
+  - '{"item_id":"i6982989","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.104:no.1-6(2007)"}'
+  - '{"item_id":"i7367229","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.104:no.7-12(2007)"}'
+  - '{"item_id":"i7881568","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.105:no.1,3-5,7-12(2008)"}'
+  - '{"item_id":"i8215707","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.106(2009)"}'
+  - '{"item_id":"i9058921","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.107(2010)"}'
+  - '{"item_id":"i9733910","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.108(2011)"}'
+  - '{"item_id":"i10015731","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.109(2012)"}'
+  - '{"item_id":"i10367957","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.110:no.1-6,8-12(2013)"}'
+  - '{"item_id":"i10898154","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.111(2014)"}'
+  - '{"item_id":"i11313743","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.112:no.1(2015)"}'
+  - '{"item_id":"i11313744","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.112:no.4-12(2015)"}'
+  - '{"item_id":"i11467855","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.113(2016)"}'
+  - '{"item_id":"i11622954","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"B1
+    .J6","vol":"v.114(2017)"}'
+  owner_a: &4
+  - unc
+  misc_id_a: &5
+  - 'LCCN: 06000973'
+  - 'LCCN (canceled or invalid): sn 84001369'
+  barcodes_a: &6
+  - HAIV-0968-00002
+  - '00046774409'
+  - '00046774392'
+  - '00046774383'
+  - '00046774374'
+  - '00046774365'
+  - '00046774356'
+  - '00046774347'
+  - '00046774338'
+  - '00046774454'
+  - '00046774463'
+  - '00046774472'
+  - '00046774481'
+  - '00046774490'
+  - '00046774506'
+  - '00046774515'
+  - '00046774524'
+  - '00046774533'
+  - '00046774542'
+  - '00046774551'
+  - '00046774560'
+  - '00046774686'
+  - '00046774677'
+  - '00046774668'
+  - '00046774659'
+  - '00046774640'
+  - '00046774631'
+  - '00046774622'
+  - '00046774613'
+  - '00046774604'
+  - '00046774597'
+  - '00046774588'
+  - '00046774579'
+  - '00046774695'
+  - '00046775453'
+  - '00046774702'
+  - '00046774711'
+  - '00046774720'
+  - '00046774739'
+  - '00046774748'
+  - '00046774757'
+  - '00046774766'
+  - '00046774775'
+  - '00046774784'
+  - '00046774793'
+  - '00046775471'
+  - '00046774800'
+  - '00046774819'
+  - '00046774828'
+  - '00046774837'
+  - '00046774846'
+  - '00046774855'
+  - '00046774864'
+  - '00046774873'
+  - '00046774123'
+  - '00046774132'
+  - '00046774141'
+  - '00046774150'
+  - '00046774169'
+  - '00046774178'
+  - '00046774187'
+  - '00046774196'
+  - '00046774203'
+  - '00046774882'
+  - '00046774891'
+  - '00046774908'
+  - '00046774917'
+  - '00046774926'
+  - '00046775042'
+  - '00046775033'
+  - '00028671125'
+  - '00046775024'
+  - '00046775015'
+  - '00046775006'
+  - '00046774999'
+  - '00046774980'
+  - '00046774971'
+  - '00046774962'
+  - '00046774953'
+  - '00046774944'
+  - '00046774935'
+  - '00046775051'
+  - '00046775060'
+  - '00046775079'
+  - '00046775088'
+  - '00046775097'
+  - '00046775104'
+  - '00046775462'
+  - '00046775113'
+  - '00046775122'
+  - '00046775131'
+  - '00046775140'
+  - '00046775159'
+  - '00046775168'
+  - '00046775284'
+  - '00046775275'
+  - '00046775266'
+  - '00046775257'
+  - '00046775248'
+  - '00046775239'
+  - '00046775220'
+  - '00046775211'
+  - '00046775202'
+  - '00046775195'
+  - '00046775186'
+  - '00046775177'
+  - '00046775293'
+  - '00046775300'
+  - '00046775319'
+  - '00046775328'
+  - '00046775337'
+  - '00046775346'
+  - '00046775355'
+  - '00046775364'
+  - '00046775373'
+  - '00046775382'
+  - '00046775391'
+  - '00046775408'
+  - '00046775417'
+  - '00046775426'
+  - '00046775435'
+  - '00046775444'
+  - '00028805990'
+  - '00028805357'
+  - '00028799998'
+  - '00028796857'
+  - '00031155259'
+  - '00034086131'
+  - '00036782455'
+  - '00041053171'
+  - '00044434601'
+  - '00046514495'
+  - '00048112344'
+  - '00049387484'
+  - '00051558241'
+  - '00051558731'
+  - '00051581073'
+  - '00052912133'
+  holdings_a: &7
+  - '{"holdings_id":"c2787781","loc_b":"trln","loc_n":"trln","call_no":"B1 .J6","notes":["Current
+    unbound issues shelved in Davis Library Reference (1st floor); bound volumes in
+    storage."],"summary":"v.18:no.1(1921)-v.103:no.1(2006), v.103:no.3(2006)-v.105:no.1(2008),
+    v.105:no.3(2008)-v.105:no.5(2008), v.105:no.7(2008)-v.110:no.1(2013)-v.110:no.6(2013),
+    v.110:no.8(2013)-v.112:no.1(2015), v.112:no.4(2015)- TO DATE; Indexes: v.1/50(1904/1953),
+    v.51/60(1954/1963), v.61/85(1964/1988)"}'
+  language_a: &8
+  - English
+  local_id: b1699212
+  shelfkey: lc:B..0001.J6
+  available_a: &9
+  - Available
+  frequency_former_a: &10
+  - Biweekly, 1921-1976
+  frequency_current_a: &11
+  - Monthly, 1977-
+  lang_code_a: &12
+  - eng
+  rollup_id: OCLC6415579
+  title_suggest: &13
+  - The journal of philosophy.
+  title_main: The journal of philosophy.
+  title_sort_ssort_single: journal of philosophy
+  access_type_a: &14
+  - At the Library
+  institution_a: &15
+  - unc
+  oclc_number: '6415579'
+  imprint_main_a: &16
+  - '{"type":"imprint","value":"New York City : F.J.E. Woodbridge : W.T. Bush, [1921-"}'
+  note_general_a: &17
+  - Title from cover.
+  - 'Published: Journal of Philosophy, Inc., July 1923-'
+  - Vols. 31- include "A Bibliography of philosophy," 1933-
+  - 'Latest issue consulted: Vol. 83, no. 12 (Dec. 1986).'
+  earlier_work_a: &18
+  - '{"label":"Continues","title":["Journal of philosophy, psychology and scientific
+    methods"],"issn":"0160-9335"}'
+  resource_type_a: &19
+  - Journal, Magazine, or Periodical
+  subject_genre_a: &20
+  - Periodicals
+  - Periodical
+  date_cataloged: '2011-06-24T04:00:00Z'
+  genre_headings_a: &21
+  - Periodicals
+  - Periodical
+  subject_suggest: &22
+  - Periodicals
+  - Periodical
+  - Philosophy -- Periodicals
+  - Psychology -- Periodicals
+  - Philosophy
+  subject_topical_a: &23
+  - Philosophy
+  - Psychology
+  publication_year_sort: '9999'
+  reverse_shelfkey: lc:O}}ZZZY}GT
+  subject_headings_a: &24
+  - Philosophy -- Periodicals
+  - Psychology -- Periodicals
+  - Philosophy
+  note_described_by_a: &25
+  - 'Indexes: Vol. 1 (1904)-50 (1953). 1 v. (includes index to the journal under its
+    earlier title); Vol. 51 (1954)-60 (1963). 1 v.'
+  note_serial_dates_a: &26
+  - Vol. 18, no. 1 (Jan. 6, 1921)-
+  location_hierarchy_a: &27
+  - unc
+  - unc:unclibr
+  record_data_source_a: &28
+  - ILSMARC
+  call_number_schemes_a: &29
+  - LC
+  physical_description_a: &30
+  - 'v. : ill. ; 25 cm.'
+  lcc_callnum_classification_a: &31
+  - B - Philosophy. Psychology. Religion
+  - B - Philosophy. Psychology. Religion|B1 - B5802 Philosophy (General)

@@ -1,5 +1,6 @@
 def apply_local_configuration(config, config_key)
   return unless ENV.key?(config_key.upcase)
+
   config.send("#{config_key}=".to_sym, ENV[config_key.upcase])
 end
 
@@ -16,6 +17,7 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'number_of_items_index_view')
   apply_local_configuration(config, 'number_of_items_show_view')
   apply_local_configuration(config, 'argon_code_mappings_dir')
+  apply_local_configuration(config, 'unc_latest_received_url')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',
