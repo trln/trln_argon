@@ -1,0 +1,21 @@
+<%= content_tag(loc_b_header_level) do %>
+  <% # --- display broad location --- %>
+  <% if loc_b.present? %>
+    <% broad_location_display = map_argon_code(document.record_owner, 'loc_b', loc_b) %>
+    <span class='location loc-broad loc_b__<%= loc_b %>'>
+      <%= broad_location_display %>
+    </span>
+  <% end %>
+
+  <% # --- display narrow location --- %>
+  <% if loc_n.present? %>
+    <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
+    <% if narrow_loc.nil? %>
+      <% narrow_loc = loc_n %>
+    <% end %>
+    <% # is loc_n different and not empty? %>
+    <% if narrow_loc != broad_location_display && narrow_loc != '' %>
+      <span class='location loc-narrow loc_n__<%= loc_n %>'> &mdash; <%= narrow_loc %></span>
+    <% end %>
+  <% end %>
+<% end %>
