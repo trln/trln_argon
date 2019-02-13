@@ -138,7 +138,7 @@ module TrlnArgon
         return data[:transformer].call(data_element) if data[:transformer]
         return '' if data_element.nil?
         element_data = data_element.xpath(data[:path])
-        unless element_data.nil?
+        if !element_data.nil? && !element_data.first.nil?
           result = element_data.first.text
           result = (data[:bigtext] ? post_process_bigtext(result) : result)
           return (result + COPYRIGHT).html_safe
