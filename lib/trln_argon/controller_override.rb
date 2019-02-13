@@ -465,7 +465,8 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$isbn_issn_qf'
+            qf: '$isbn_issn_qf',
+            pf: ''
           }
         end
 
@@ -473,7 +474,8 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.genre_headings')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v'
+            qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v',
+            pf: ''
           }
           field.if = false
           field.include_in_advanced_search = false
