@@ -143,6 +143,10 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.facet_fields).to have_key('location_hierarchy_f')
     end
 
+    it 'sets the location hierarchy facet counts to exclude rollup' do
+      expect(override_config.facet_fields['location_hierarchy_f'][:ex]).to eq(:rollup)
+    end
+
     it 'sets the availability facet' do
       expect(override_config.facet_fields).to have_key('available_f')
     end
@@ -163,6 +167,10 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the location hierarchy facet' do
       expect(override_config.home_facet_fields).to have_key('location_hierarchy_f')
+    end
+
+    it 'sets the location hierarchy facet counts to exclude rollup' do
+      expect(override_config.facet_fields['location_hierarchy_f'][:ex]).to eq(:rollup)
     end
 
     it 'sets the availability facet' do

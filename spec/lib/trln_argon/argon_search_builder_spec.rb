@@ -24,7 +24,7 @@ describe TrlnArgon::ArgonSearchBuilder do
     before { search_builder.rollup_duplicate_records(solr_parameters) }
     it 'adds an fq parameter to rollup duplicate records' do
       expect(solr_parameters[:fq]).to(
-        eq(['{!collapse field=rollup_id nullPolicy=expand max=termfreq(institution_f,"unc")}'])
+        eq(['{!tag=rollup}{!collapse field=rollup_id nullPolicy=expand max=termfreq(institution_f,"unc")}'])
       )
     end
 
