@@ -2,6 +2,7 @@
 
 <% query_state = query_state_from_search_state(search_state) %>
 <% query_state.delete('page') %>
+<% query_state.fetch('f', {}).delete(TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s) %>
 
 <div class="toggle toggle-local">
 
