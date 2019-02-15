@@ -68,7 +68,7 @@ module TrlnArgon
 
       def deserialized_urls
         deserialize_solr_field(TrlnArgon::Fields::URLS,
-                               { href: '', type: '', text: '' },
+                               { href: '', type: '', text: '', note: '' },
                                :href)
       end
 

@@ -502,7 +502,10 @@ describe TrlnArgonHelper, type: :helper do
                   text: 'Law and contemporary problems, v. 63, no. 1-2' },
                 { href: 'http://www.law.duke.edu/journals/lcp/',
                   type: 'other',
-                  text: '' }] }
+                  text: '' },
+                { href: 'http://link.to.toc.or.something.',
+                  type: 'related',
+                  note: 'Table of contents.' }] }
     end
 
     it 'creates links to secondary urls' do
@@ -510,7 +513,8 @@ describe TrlnArgonHelper, type: :helper do
         eq('<a href="http://www.law.duke.edu/journals/lcp/">'\
            'Law and contemporary problems, v. 63, no. 1-2</a><br />'\
            '<a href="http://www.law.duke.edu/journals/lcp/">'\
-           'http://www.law.duke.edu/journals/lcp/</a>')
+           'http://www.law.duke.edu/journals/lcp/</a><br />'\
+           '<a href="http://link.to.toc.or.something.">Table of contents.</a>')
       )
     end
   end

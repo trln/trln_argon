@@ -272,13 +272,16 @@ describe TrlnArgon::SolrDocument do
         expect(solr_document.urls).to(
           eq([{ href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
-                text: 'Law and contemporary problems, v. 63, no. 1-2' },
+                text: 'Law and contemporary problems, v. 63, no. 1-2',
+                note: '' },
               { href: 'http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
-                text: 'Law and contemporary problems, v. 63, no. 1-2' },
+                text: 'Law and contemporary problems, v. 63, no. 1-2',
+                note: '' },
               { href: '{proxyPrefix}http://www.law.duke.edu/journals/lcp/',
                 type: 'other',
-                text: 'Law and contemporary problems, v. 63, no. 1-2' }])
+                text: 'Law and contemporary problems, v. 63, no. 1-2',
+                note: '' }])
         )
       end
     end
@@ -293,7 +296,7 @@ describe TrlnArgon::SolrDocument do
 
       it 'deserializes each of the url entries and sets the missing keys' do
         expect(solr_document.urls).to(
-          eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '' }])
+          eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '', note: '' }])
         )
       end
     end
@@ -325,7 +328,7 @@ describe TrlnArgon::SolrDocument do
 
       it 'deserializes each of the parsable URL entries and rejects unparsable values' do
         expect(solr_document.urls).to(
-          eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '' }])
+          eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '', note: '' }])
         )
       end
     end
@@ -342,7 +345,7 @@ describe TrlnArgon::SolrDocument do
 
     it 'deserializes and selects the restricted fulltext URLs' do
       expect(solr_document.fulltext_urls).to(
-        eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '' }])
+        eq([{ href: 'http://purl.access.gpo.gov/GPO/LPS606', type: 'fulltext', text: '', note: '' }])
       )
     end
   end
@@ -358,7 +361,7 @@ describe TrlnArgon::SolrDocument do
 
     it 'deserializes and selects the restricted fulltext URLs' do
       expect(solr_document.open_access_urls).to(
-        eq([{ href: 'http://some/open/access/thing', type: 'fulltext', text: '', restricted: 'false' }])
+        eq([{ href: 'http://some/open/access/thing', type: 'fulltext', text: '', note: '', restricted: 'false' }])
       )
     end
   end
@@ -378,7 +381,8 @@ describe TrlnArgon::SolrDocument do
       expect(solr_document.shared_fulltext_urls).to(
         eq([{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
               type: 'fulltext',
-              text: 'Law and contemporary problems, v. 63, no. 1-2' }])
+              text: 'Law and contemporary problems, v. 63, no. 1-2',
+              note: '' }])
       )
     end
   end
@@ -398,10 +402,12 @@ describe TrlnArgon::SolrDocument do
       expect(solr_document.expanded_shared_fulltext_urls).to(
         eq('duke' => [{ href: 'http://proxy.lib.duke.edu/login?url=http://www.law.duke.edu/journals/lcp/',
                         type: 'fulltext',
-                        text: 'Law and contemporary problems, v. 63, no. 1-2' }],
+                        text: 'Law and contemporary problems, v. 63, no. 1-2',
+                        note: '' }],
            'unc' => [{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
                        type: 'fulltext',
-                       text: 'Law and contemporary problems, v. 63, no. 1-2' }])
+                       text: 'Law and contemporary problems, v. 63, no. 1-2',
+                       note: '' }])
       )
     end
   end
@@ -796,7 +802,8 @@ describe TrlnArgon::SolrDocument do
           eq('unc' => [{ href: 'https://proxy.lib.unc.edu/login?url='\
                                'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389',
                          type: 'fulltext',
-                         text: 'Episode 1' }])
+                         text: 'Episode 1',
+                         note: '' }])
         )
       end
     end
@@ -816,6 +823,7 @@ describe TrlnArgon::SolrDocument do
           eq('trln' => [{ href: 'http://purl.access.gpo.gov/GPO/LPS111292',
                           type: 'fulltext',
                           text: '',
+                          note: '',
                           restricted: 'false' }])
         )
       end

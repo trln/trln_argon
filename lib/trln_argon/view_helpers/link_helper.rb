@@ -8,12 +8,12 @@ module TrlnArgon
       # Other and related links
       def link_to_secondary_urls(options = {})
         options[:value].map do |url|
-          link_text = if url[:text].present?
-                        url[:text]
+          link_text = if url[:text].present? || url[:note].present?
+                        [url[:text], url[:note]].compact.reject(&:empty?)
                       else
-                        url[:href]
+                        [url[:href]]
                       end
-          link_to link_text, url[:href]
+          link_to link_text.join(' - '), url[:href]
         end.join('<br />').html_safe
       end
 
