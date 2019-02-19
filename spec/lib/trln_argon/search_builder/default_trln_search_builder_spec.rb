@@ -2,6 +2,10 @@ describe DefaultTrlnSearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do
+    it 'adds the wildcard_char_strip method to the processor chain' do
+      expect(obj.processor_chain).to include(:wildcard_char_strip)
+    end
+
     it 'adds the min_match_for_cjk method to the processor chain' do
       expect(obj.processor_chain).to include(:min_match_for_cjk)
     end

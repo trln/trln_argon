@@ -1332,7 +1332,7 @@ h1, h2, h3, h4, h5 {
       width: 7em;
     }
 
-    dd { margin-left: 6.5em; }
+    dd { margin-left: 7.1em; }
 
   }
 
@@ -1653,4 +1653,33 @@ h2.local-filter-heading  {
 .skiplink {
   position: absolute;
   left: -10000px;
+}
+
+
+
+
+/* Holdings */
+
+.holdings-wrapper {
+  overflow: hidden;
+}
+
+div[aria-expanded=false] .expandable-content-controls .show-control.more {
+  display: inline;
+}
+
+div[aria-expanded=true] .expandable-content-controls .show-control.less {
+  display: inline;
+}
+
+.holdings-wrapper.contracted:after {
+  background: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(237, 237, 237, 1) 50%);
+}
+
+.holdings-wrapper.contracted {
+  max-height: 90px;
+}
+
+.holdings-wrapper.contracted-ul {
+  max-height: 110px;
 }

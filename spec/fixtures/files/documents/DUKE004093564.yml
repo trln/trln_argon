@@ -1,0 +1,97 @@
+---
+id: DUKE004093564
+url_a:
+- '{"href":"http://purl.access.gpo.gov/GPO/LPS107796","type":"fulltext","restricted":"false"}'
+items_a:
+- '{"loc_b":"DOCS","loc_n":"PGS","cn_scheme":"","call_no":"Y 1.1/5:","type":"BOOK","item_id":"B930377","status":"Available"}'
+author_suggest:
+- United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs
+- United States. Congress. Senate.
+- United States. Congress. Senate.
+names_a:
+- '{"name":"United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs"}'
+owner_a:
+- duke
+misc_id_a:
+- 'LCCN: 2009230014'
+- 'GPO Item Number: 1008-C'
+- 'GPO Item Number: 1008-D (microfiche)'
+- 'GPO Item Number: 1008-C (online)'
+- 'GPO Item Number: 1008-D (online)'
+barcodes_a:
+- B930377
+holdings_a:
+- '{"loc_b":"DOCS","loc_n":"PGS","call_no":"Y 1.1/5:"}'
+language_a:
+- English
+local_id: DUKE004093564
+available_a:
+- Available
+frequency_current_a:
+- Biennial
+lang_code_a:
+- eng
+rollup_id: OCLC298561466
+title_suggest:
+- Activities of the Committee on Homeland Security and Governmental Affairs.
+- Report
+- Report.
+title_main: Activities of the Committee on Homeland Security and Governmental Affairs.
+title_sort_ssort_single: activities of the committee on homeland security and governmental
+  affairs
+access_type_a:
+- Online
+- At the Library
+institution_a:
+- duke
+oclc_number: '298561466'
+series_work_a:
+- '{"author":"United States. Congress. Senate.","title":["Report"]}'
+- '{"author":"United States. Congress. Senate.","title":["Report."]}'
+imprint_main_a:
+- '{"type":"imprint","value":"Washington : U.S. G.P.O."}'
+note_general_a:
+- 'Description based on: 109th Congress; title from cover.'
+earlier_work_a:
+- '{"label":"Continues","author":"United States. Congress. Senate. Committee on Governmental
+  Affairs.","title":["Activities of the Committee on Governmental Affairs"]}'
+resource_type_a:
+- Government publication
+- Journal, Magazine, or Periodical
+subject_genre_a:
+- Periodicals
+date_cataloged: '2009-02-15T05:00:00Z'
+genre_headings_a:
+- Periodicals
+subject_suggest:
+- Periodicals
+- United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs -- Periodicals
+- Constitutional law -- United States -- Periodicals
+physical_media_a:
+- Print
+- Online
+subject_topical_a:
+- United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs
+- Constitutional law
+publication_year_sort: '9999'
+subject_headings_a:
+- United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs -- Periodicals
+- Constitutional law -- United States -- Periodicals
+location_hierarchy_a:
+- duke
+- duke:dukeperk
+- duke:dukeperk:dukeperkpdms
+record_data_source_a:
+- ILSMARC
+subject_geographic_a:
+- United States
+physical_description_a:
+- v. ; 24 cm.
+statement_of_responsibility_a:
+- United States. Congress. Senate. Committee on Homeland Security and Governmental
+  Affairs

@@ -20,29 +20,21 @@
                                    loc_b_header_level: loc_b_header_level } %>
             </div>
 
-            <% # --- SUMMARY --- %>
+            <% # --- HOLDINGS SUMMARIES WRAPPER --- %>
 
-            <% has_holding_notes = !item_data.fetch('notes', '').blank? %>
-            <% has_summary = !item_data.fetch('summary', '').blank? %>
-
-            <% if has_summary || has_holding_notes %>
-
-              <% item_with_summary = true %>
+            <% if display_holdings_summaries?(item_data) %>
 
               <%= render partial: "items_section_summary",
                          locals: { document: document,
                                    loc_b: loc_b,
                                    loc_n: loc_n,
-                                   item_data: item_data,
-                                   has_holding_notes: has_holding_notes } %>
+                                   item_data: item_data } %>
 
             <% end %>
 
             <% # ---ITEMS WRAPPER --- %>
 
-              <div class="item-group-display <%= item_with_summary ? 'has-summary' : '' %>" id="<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview">
-
-                <% items_have_notes = items_have_notes?(item_data['items']) %>
+              <div class="item-group-display <%= display_holdings_summaries?(item_data) ? 'has-summary' : '' %>" id="<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview">
 
                 <% item_data['items'].first(num_display_items).each do |item| %>
 
@@ -95,7 +87,7 @@
       <% end %>
 
     <% end %>
-    <%= render partial: "items_section_extra" %>
+    <%= render partial: "items_section_extra", locals: { document: document } %>
   </div>
 
 </div>

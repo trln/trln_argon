@@ -1,0 +1,61 @@
+---
+id: UNCb1852218
+author_suggest:
+- North Carolina Federation of Music Clubs
+names_a:
+- '{"name":"North Carolina Federation of Music Clubs"}'
+owner_a:
+- unc
+holdings_a:
+- '{"loc_b":"wbda","loc_n":"wbda","call_no":"C780.6 N87f2","summary":"N.C. Collection
+  has bound with other material on the Federation. See entry under North Carolina
+  Federation of Music Clubs with title: Official papers, newsletters, etc."}'
+- '{"loc_b":"wbda","loc_n":"wbda","call_no":"111.222","summary":"Fighting with hornets."}'
+items_a:
+- '{"item_id":"i2698163","loc_b":"trln","loc_n":"trln","status":"Available","cn_scheme":"LC","call_no":"D819.G3
+  T7"}'
+language_a:
+- English
+local_id: b1852218
+lang_code_a:
+- eng
+rollup_id: OCLC8853062
+title_suggest:
+- Musical tempo
+title_main: Musical tempo
+title_sort_ssort_single: Musical tempo
+access_type_a:
+- At the Library
+institution_a:
+- unc
+oclc_number: '8853062'
+imprint_main_a:
+- '{"type":"imprint","value":"Charlotte, N.C. : The Federation,"}'
+note_general_a:
+- 'Description based on: Vol. 15, no. 1 (July 16, 1968).'
+resource_type_a:
+- Journal, Magazine, or Periodical
+date_cataloged: '2004-10-01T04:00:00Z'
+subject_topical_a:
+- North Carolina Federation of Music Clubs
+- Music
+- Music and state
+publication_year_sort: '9999'
+subject_headings_a:
+- North Carolina Federation of Music Clubs
+- Music -- North Carolina
+- Music and state -- North Carolina
+- North Carolina Periodicals
+subject_suggest:
+- North Carolina Federation of Music Clubs
+- Music -- North Carolina
+- Music and state -- North Carolina
+- North Carolina Periodicals
+record_data_source_a:
+- ILSMARC
+subject_geographic_a:
+- North Carolina
+physical_description_a:
+- v. ; 28 cm.
+statement_of_responsibility_a:
+- North Carolina Federation of Music Clubs.

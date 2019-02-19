@@ -421,8 +421,7 @@ describe TrlnArgon::SolrDocument do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
     end
 
-    # Skip until pub date is indexed correctly
-    xit 'exports the document as RIS' do
+    it 'exports the document as RIS' do
       expect(test_document.export_as_ris).to eq(
         "TY  - BOOK\r\n"\
         "A1  - Maureen E. Downey.\r\n"\
@@ -471,8 +470,7 @@ describe TrlnArgon::SolrDocument do
                                'of\+a\+new\+genus\+and\+family\+%2F')
     end
 
-    # Skip until pub date is indexed correctly
-    xit 'contains an rft.date' do
+    it 'contains an rft.date' do
       expect(ctx_kev).to match('rft.date=1986')
     end
 
@@ -499,8 +497,7 @@ describe TrlnArgon::SolrDocument do
     end
 
     # rubocop:disable ExampleLength
-    # Skip until pub date is indexed correctly
-    xit 'exports the document to email text' do
+    it 'exports the document to email text' do
       expect(test_document.to_email_text).to eq(
         "\n"\
         "Title:\n"\
@@ -537,8 +534,7 @@ describe TrlnArgon::SolrDocument do
       SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
     end
 
-    # Skip until pub date is indexed correctly
-    xit 'exports the document to email text' do
+    it 'exports the document to email text' do
       expect(test_document.to_email_text).to eq(
         "\n"\
         "Title:\n"\

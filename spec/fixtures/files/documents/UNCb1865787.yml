@@ -1,0 +1,83 @@
+---
+id: UNCb1865787
+isbn_number_a:
+- '0042970431'
+isbn_qualifying_info_a:
+- ''
+items_a:
+- '{"item_id":"i2698295","loc_b":"ddda","loc_n":"ddda","status":"Available","cn_scheme":"LC","call_no":"B746
+  .N47 1982"}'
+- '{"item_id":"i2698296","loc_b":"dddb","loc_n":"dddb","status":"Available","copy_no":"c.
+  2","cn_scheme":"LC","call_no":"B746 .N47 1982"}'
+author_suggest:
+- Netton, Ian Richard
+- Ikhwān al-Ṣafāʼ
+names_a:
+- '{"name":"Netton, Ian Richard"}'
+- '{"name":"Ikhwān al-Ṣafāʼ"}'
+owner_a:
+- unc
+misc_id_a:
+- 'LCCN: 83131009'
+barcodes_a:
+- '00002534207'
+- '00002534243'
+language_a:
+- English
+local_id: b1865787
+shelfkey: lc:B..0746.N47.1982
+available_a:
+- Available
+lang_code_a:
+- eng
+rollup_id: OCLC9101267
+title_suggest:
+- 'Muslim neoplatonists : an introduction to the thought of the Brethren of Purity,
+  Ikhwān al-Ṣafāʼ'
+title_main: 'Muslim neoplatonists : an introduction to the thought of the Brethren
+  of Purity, Ikhwān al-Ṣafāʼ'
+title_sort_ssort_single: 'Muslim neoplatonists : an introduction to the thought of
+  the Brethren of Purity, Ikhwān al-Ṣafāʼ'
+access_type_a:
+- At the Library
+institution_a:
+- unc
+oclc_number: '9101267'
+imprint_main_a:
+- '{"type":"imprint","value":"London ; Boston : G. Allen & Unwin, 1982."}'
+note_general_a:
+- Includes index.
+- 'Bibliography: p. [134]-142.'
+resource_type_a:
+- Book
+subject_genre_a:
+- Nonfiction
+date_cataloged: '2004-10-01T04:00:00Z'
+physical_media_a:
+- Print
+subject_topical_a:
+- Ikhwān al-Ṣafāʼ
+publication_year_sort: '1982'
+reverse_shelfkey: lc:O}}ZSVT}CVS}YQRX
+subject_headings_a:
+- Ikhwān al-Ṣafāʼ
+subject_suggest:
+- Ikhwān al-Ṣafāʼ
+location_hierarchy_a:
+- unc
+- unc:uncdavy
+record_data_source_a:
+- ILSMARC
+call_number_schemes_a:
+- LC
+physical_description_a:
+- x, 146 p. ; 23 cm.
+lcc_callnum_classification_a:
+- B - Philosophy. Psychology. Religion
+- B - Philosophy. Psychology. Religion|B1 - B5802 Philosophy (General)
+- B - Philosophy. Psychology. Religion|B1 - B5802 Philosophy (General)|B108 - B5802
+  By period
+- B - Philosophy. Psychology. Religion|B1 - B5802 Philosophy (General)|B108 - B5802
+  By period|B720 - B765 Medieval
+statement_of_responsibility_a:
+- Ian Richard Netton.

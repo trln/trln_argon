@@ -5,7 +5,7 @@ describe TrlnArgon::ViewHelpers::ItemsSectionHelper, type: :helper do
   end
 
   let(:unc_item_data) do
-    unc_serial_with_holdings_id.holdings['trln']['trln']
+    unc_serial_with_holdings_id.holdings['trln']['trln']['holdings'].first
   end
 
   let(:ncsu_serial_with_lr_text) do
@@ -14,7 +14,7 @@ describe TrlnArgon::ViewHelpers::ItemsSectionHelper, type: :helper do
   end
 
   let(:ncsu_item_data) do
-    ncsu_serial_with_lr_text.holdings['DHHILL']['STACKS']
+    ncsu_serial_with_lr_text.holdings['DHHILL']['STACKS']['holdings'].first
   end
 
   context '#latest_received' do

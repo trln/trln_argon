@@ -63,6 +63,21 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'wildcard_char_strip' do
+    before do
+      builder_with_params.add_query_to_solr(solr_parameters)
+      builder_with_params.wildcard_char_strip(solr_parameters)
+    end
+
+    context 'query contains question marks' do
+      let(:builder_with_params) { search_builder.with(q: 'What? Will? Humans? Do?') }
+
+      it 'removes question marks from the query' do
+        expect(solr_parameters[:q]).to eq('What Will Humans Do')
+      end
+    end
+  end
+
   describe 'min_match_for_boolean' do
     before { builder_with_params.min_match_for_boolean(solr_parameters) }
 

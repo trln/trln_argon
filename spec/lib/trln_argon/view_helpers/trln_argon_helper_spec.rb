@@ -430,6 +430,114 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe '#online_only_items?' do
+    context 'location codes are online' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/online_only_holdings.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns true' do
+        expect(online_only_items?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be true
+        )
+      end
+    end
+
+    context 'location codes are physical' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/items_with_holdings_no_summary.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns false' do
+        expect(online_only_items?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be false
+        )
+      end
+    end
+  end
+
+  describe '#no_items_no_holdings?' do
+    context 'location has no items and no holdings' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/no_items_no_holdings.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns true' do
+        expect(no_items_no_holdings?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be true
+        )
+      end
+    end
+
+    context 'location has items' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/items_with_holdings_no_summary.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns false' do
+        expect(no_items_no_holdings?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be false
+        )
+      end
+    end
+  end
+
+  describe 'no_items_holdings_no_summary?' do
+    context 'location has no items and holdings without summaries' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/no_items_with_holdings_no_summary.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns true' do
+        expect(no_items_holdings_no_summary?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be true
+        )
+      end
+    end
+
+    context 'location has no items but has holdings with summaries' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/no_items_with_holdings_has_summary.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns false' do
+        expect(no_items_holdings_no_summary?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be false
+        )
+      end
+    end
+  end
+
   describe '#display_items?' do
     context 'only online holdings keys' do
       let(:document) do
@@ -487,6 +595,102 @@ describe TrlnArgonHelper, type: :helper do
 
       it 'returns true' do
         expect(helper.suppress_item?(item_data: item_data, loc_b: loc_b)).to be false
+      end
+    end
+  end
+
+  describe '#display_holdings_summaries?' do
+    context 'holdings have summaries' do
+      let(:options) do
+        { 'holdings' => [{ 'summary' => '1659 to 1805' }] }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summaries?(options)).to be true
+      end
+    end
+
+    context 'holdings have notes' do
+      let(:options) do
+        { 'holdings' => [{ 'notes' => ['Shelved with other things.'] }] }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summaries?(options)).to be true
+      end
+    end
+
+    context 'holdings do not have summaries or notes' do
+      let(:options) do
+        { 'holdings' => [{ 'call_no' => 'AAA111 .B3 1999' }] }
+      end
+
+      it 'returns false' do
+        expect(helper.display_holdings_summaries?(options)).to be false
+      end
+    end
+  end
+
+  describe '#display_holdings_summary?' do
+    context 'holding has a summary' do
+      let(:options) do
+        { 'summary' => '1659 to 1805' }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summary?(options)).to be true
+      end
+    end
+
+    context 'holding has notes' do
+      let(:options) do
+        { 'notes' => ['Shelved with bees.'] }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summary?(options)).to be true
+      end
+    end
+
+    context 'holding does not have summary or notes' do
+      let(:options) do
+        { 'call_no' => 'AAA111 .B3 1999' }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summary?(options)).to be false
+      end
+    end
+  end
+
+  describe 'add_spacer_above_items_section?' do
+    context 'record has items and links' do
+      let(:document) do
+        SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE004093564.yml').read))
+      end
+
+      it 'returns true' do
+        expect(add_spacer_above_items_section?(document: document)).to be true
+      end
+    end
+
+    context 'record has items but no links' do
+      let(:document) do
+        SolrDocument.new(YAML.safe_load(file_fixture('documents/UNCb1852218.yml').read))
+      end
+
+      it 'returns false' do
+        expect(add_spacer_above_items_section?(document: document)).to be false
+      end
+    end
+
+    context 'record has links but no items' do
+      let(:document) do
+        SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE006162724.yml').read))
+      end
+
+      it 'returns false' do
+        expect(add_spacer_above_items_section?(document: document)).to be false
       end
     end
   end
