@@ -1575,29 +1575,28 @@ h2.local-filter-heading  {
 
 .feedback-link-wrapper {
   position: fixed;
-  bottom: 25%;
-  right: -46px;
-  transform: rotate(-90deg);
+  bottom: 5px;
+  right: 15px;
   z-index: 100000000;
-  margin-right: -4px;
+  margin-bottom: -4px;
 
   &:hover {
-    margin-right: 0;
+    margin-bottom: 0;
   }
 
 }
+
 
 .feedback-link {
   background-color: $primary-link-color;
   color: #fff;
   text-transform: uppercase;
-  padding: 12px 24px 18px 24px;
+  padding: 6px 12px 18px 12px;
   border-radius: 8px 8px 0 0;
   font-weight: 600;
   letter-spacing: .125em;
   font-size: .9em;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  margin-right: -2px;
 
   &:hover,
   &:focus {
@@ -1605,6 +1604,27 @@ h2.local-filter-heading  {
     color: #fff;
     background-color: $secondary-link-color;
   }
+}
+
+@media screen and (min-width: $screen-sm) {
+
+  .feedback-link-wrapper {
+    bottom: 25%;
+    right: -46px;
+    transform: rotate(-90deg);
+    margin-right: -4px;
+
+    &:hover {
+      margin-right: 0;
+    }
+
+  }
+
+  .feedback-link {
+    padding: 12px 24px 18px 24px;
+    margin-right: -2px;
+  }
+
 }
 
 /* Typeahead/Autosuggest */
