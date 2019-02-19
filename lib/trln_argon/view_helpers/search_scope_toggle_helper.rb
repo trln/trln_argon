@@ -2,7 +2,8 @@ module TrlnArgon
   module ViewHelpers
     module SearchScopeToggleHelper
       def query_state_from_search_state(search_state)
-        query_state = search_state.to_h.dup
+        return {} unless search_state.respond_to?(:params)
+        query_state = search_state.params.to_h.deep_dup
         query_state.delete('controller')
         query_state.delete('action')
         query_state
