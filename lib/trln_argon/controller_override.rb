@@ -115,7 +115,8 @@ module TrlnArgon
                                     sort: 'count',
                                     helper_method: :location_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
-                                    collapse: false
+                                    collapse: false,
+                                    ex: :rollup
         config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
@@ -158,7 +159,8 @@ module TrlnArgon
                                sort: 'count',
                                helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
-                               collapse: false
+                               collapse: false,
+                               ex: :rollup
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,

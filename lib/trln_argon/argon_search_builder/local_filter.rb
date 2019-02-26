@@ -23,7 +23,7 @@ module TrlnArgon
       end
 
       def record_rollup_query
-        "{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
+        "{!tag=rollup}{!collapse field=#{TrlnArgon::Fields::ROLLUP_ID} "\
         'nullPolicy=expand '\
         "max=termfreq(#{TrlnArgon::Fields::INSTITUTION_FACET},"\
         "\"#{TrlnArgon::Engine.configuration.local_institution_code}\")}"
