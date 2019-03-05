@@ -81,6 +81,15 @@ module TrlnArgon
         'col-md5 col-sm-12 latest-received-wrapper'
       end
 
+      def display_holdings_summaries?(options = {})
+        holdings = options.fetch('holdings', [])
+        holdings.find { |h| h.fetch('summary', '').present? || h.fetch('notes', []).any? }.present?
+      end
+
+      def display_holdings_summary?(options = {})
+        options.fetch('summary', '').present? || options.fetch('notes', []).any?
+      end
+
       def display_holdings_well?(options = {})
         doc = options.fetch(:document, nil)
         doc &&
@@ -92,24 +101,50 @@ module TrlnArgon
       end
 
       def display_items?(options = {})
-        return unless options.fetch(:document, nil)
+        doc = options.fetch(:document, nil)
+        return unless doc
 
-        !(options[:document].holdings.keys - ['ONLINE', 'DUKIR', '', nil]).empty?
+        displayable_holdings = doc.holdings.map do |loc_b, loc_n_map|
+          loc_n_map.reject do |loc_n, item_data|
+            suppress_item?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)
+          end
+        end
+        displayable_holdings.flatten.reject(&:empty?).any?
       end
 
       def suppress_item?(options = {})
         loc_b = options.fetch(:loc_b, '')
+        loc_n = options.fetch(:loc_n, '')
         item_data = options.fetch(:item_data, {})
+        loc_b.blank? ||
+          online_only_items?(loc_b: loc_b, loc_n: loc_n, item_data: item_data) ||
+          no_items_no_holdings?(loc_b: loc_b, loc_n: loc_n, item_data: item_data) ||
+          no_items_holdings_no_summary?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)
+      end
 
-        loc_b == 'ONLINE' ||
-          loc_b == 'DUKIR' ||
-          loc_b.blank? ||
-          item_data.fetch('items', []).empty?
+      def online_only_items?(options = {})
+        loc_b = options.fetch(:loc_b, '')
+        %w[ONLINE DUKIR].include?(loc_b)
+      end
+
+      def no_items_no_holdings?(options = {})
+        item_data = options.fetch(:item_data, {})
+        item_data.fetch('holdings', []).reject(&:empty?).empty? &&
+          item_data.fetch('items', []).reject(&:empty?).empty?
+      end
+
+      def no_items_holdings_no_summary?(options = {})
+        item_data = options.fetch(:item_data, {})
+        holdings = item_data.fetch('holdings', []).reject(&:empty?)
+        holdings.any? &&
+          holdings.select { |j| j.fetch('summary', '').present? || j.fetch('notes', []).any? }.none? &&
+          item_data.fetch('items').reject(&:empty?).none?
       end
 
       def add_spacer_above_items_section?(options = {})
         doc = options.fetch(:document, nil)
         doc &&
+          display_items?(document: doc) &&
           (doc.findingaid_urls.any? ||
            doc.fulltext_urls.any? ||
            doc.shared_fulltext_urls.any? ||

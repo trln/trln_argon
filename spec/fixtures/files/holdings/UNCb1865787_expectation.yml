@@ -1,0 +1,22 @@
+---
+ddda:
+  ddda:
+    items:
+    - item_id: i2698295
+      status: Available
+      cn_scheme: LC
+      call_no: B746 .N47 1982
+    holdings:
+    - summary: ''
+      call_no: B746 .N47
+dddb:
+  dddb:
+    items:
+    - item_id: i2698296
+      status: Available
+      copy_no: c. 2
+      cn_scheme: LC
+      call_no: B746 .N47 1982
+    holdings:
+    - summary: ''
+      call_no: B746 .N47

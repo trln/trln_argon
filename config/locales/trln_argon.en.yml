@@ -192,6 +192,9 @@ en:
                 show_less: "show less"
                 details: "Details"
 
+        latest_received:
+            link_text: "View"
+
         imprint_type:
             imprint: ""
             production: "Produced"

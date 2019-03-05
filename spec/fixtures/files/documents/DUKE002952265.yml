@@ -58,7 +58,7 @@
   subject_genre_a:
   - Classification
   - Nonfiction
-  publication_year_isort_stored_single: '1986'
+  publication_year_sort: '1986'
   location_hierarchy_a:
   - duke
   - duke:dukepers
