@@ -40,10 +40,12 @@
             </dl>
           </div>
 
-          <% # --- LATEST RECEIVED --- %>
+        <% end %>
 
+        <% # --- LATEST RECEIVED --- %>
+
+        <% if h.fetch('holdings_id', '').present? %>
           <%= render partial: 'catalog/index_items_latest_received', locals: { document: @document, item_data: h } %>
-
         <% end %>
 
         <% # --- HOLDING NOTES --- %>

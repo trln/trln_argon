@@ -83,11 +83,16 @@ module TrlnArgon
 
       def display_holdings_summaries?(options = {})
         holdings = options.fetch('holdings', [])
-        holdings.find { |h| h.fetch('summary', '').present? || h.fetch('notes', []).any? }.present?
+        displayable_holdings = holdings.find do |h|
+          display_holdings_summary?(h)
+        end
+        displayable_holdings.present?
       end
 
       def display_holdings_summary?(options = {})
-        options.fetch('summary', '').present? || options.fetch('notes', []).any?
+        options.fetch('summary', '').present? ||
+          options.fetch('notes', []).any? ||
+          options.fetch('holdings_id', '').present?
       end
 
       def display_holdings_well?(options = {})
@@ -137,7 +142,7 @@ module TrlnArgon
         item_data = options.fetch(:item_data, {})
         holdings = item_data.fetch('holdings', []).reject(&:empty?)
         holdings.any? &&
-          holdings.select { |j| j.fetch('summary', '').present? || j.fetch('notes', []).any? }.none? &&
+          holdings.select { |h| display_holdings_summary?(h) }.none? &&
           item_data.fetch('items').reject(&:empty?).none?
       end
 
