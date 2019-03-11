@@ -428,6 +428,18 @@ describe TrlnArgonHelper, type: :helper do
         expect(helper.display_holdings_well?(document: document)).to be true
       end
     end
+
+    context 'no items but has a holdings id' do
+      let(:document) do
+        SolrDocument.new(
+          YAML.safe_load(file_fixture('documents/UNCb3922162.yml').read)
+        )
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_well?(document: document)).to be true
+      end
+    end
   end
 
   describe '#online_only_items?' do
@@ -536,6 +548,23 @@ describe TrlnArgonHelper, type: :helper do
         )
       end
     end
+
+    context 'location has no items but has holdings with holdings_id' do
+      let(:holdings) do
+        YAML.safe_load(file_fixture('holdings/no_items_with_holdings_has_holdings_id.yml').read)
+      end
+      let(:loc_b) { holdings.keys.first }
+      let(:loc_n) { holdings[loc_b].keys.first }
+      let(:item_data) do
+        holdings[loc_b][loc_n]
+      end
+
+      it 'returns false' do
+        expect(no_items_holdings_no_summary?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)).to(
+          be false
+        )
+      end
+    end
   end
 
   describe '#display_items?' do
@@ -568,6 +597,18 @@ describe TrlnArgonHelper, type: :helper do
         expect(helper.display_items?(document: document)).to be true
       end
     end
+
+    context 'document has no items but has holdings with holdings_id' do
+      let(:document) do
+        SolrDocument.new(
+          YAML.safe_load(file_fixture('documents/UNCb3922162.yml').read)
+        )
+      end
+
+      it 'returns true' do
+        expect(helper.display_items?(document: document)).to be true
+      end
+    end
   end
 
   describe '#suppress_item?' do
@@ -589,11 +630,20 @@ describe TrlnArgonHelper, type: :helper do
       end
     end
 
+    context 'no items but has holdings_id' do
+      let(:item_data) { { 'items' => [], 'holdings' => [{ 'holdings_id' => '123456789' }] } }
+      let(:loc_b) { 'dddr' }
+
+      it 'returns false' do
+        expect(helper.suppress_item?(item_data: item_data, loc_b: loc_b)).to be false
+      end
+    end
+
     context 'displayable item' do
       let(:item_data) { { 'items' => ['an item'] } }
       let(:loc_b) { 'PERK' }
 
-      it 'returns true' do
+      it 'returns false' do
         expect(helper.suppress_item?(item_data: item_data, loc_b: loc_b)).to be false
       end
     end
@@ -613,6 +663,16 @@ describe TrlnArgonHelper, type: :helper do
     context 'holdings have notes' do
       let(:options) do
         { 'holdings' => [{ 'notes' => ['Shelved with other things.'] }] }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summaries?(options)).to be true
+      end
+    end
+
+    context 'holdings have holdings_id' do
+      let(:options) do
+        { 'holdings' => [{ 'holdings_id' => '123456789' }] }
       end
 
       it 'returns true' do
@@ -645,6 +705,16 @@ describe TrlnArgonHelper, type: :helper do
     context 'holding has notes' do
       let(:options) do
         { 'notes' => ['Shelved with bees.'] }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_summary?(options)).to be true
+      end
+    end
+
+    context 'holding has holdings_id' do
+      let(:options) do
+        { 'holdings_id' => '123456' }
       end
 
       it 'returns true' do
