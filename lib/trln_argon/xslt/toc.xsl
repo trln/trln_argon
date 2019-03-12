@@ -27,7 +27,7 @@
              <xsl:with-param name="nest-level" select="@I2" />
            </xsl:call-template>
          </xsl:attribute>
-         <xsl:apply-templates select="l|t|p"/>
+         <xsl:apply-templates select="l|t|p|c"/>
        </li>
     </xsl:for-each>
    </ul>
@@ -48,6 +48,13 @@
   <xsl:template match="p">
       <xsl:text>&#160;</xsl:text>
     <span class="toc-element-pagerange">
+       <xsl:value-of select='.'/>
+     </span>
+  </xsl:template>
+
+  <xsl:template match="c">
+      <xsl:text>&#160;</xsl:text>
+    <span class="toc-element-author">
        <xsl:value-of select='.'/>
      </span>
   </xsl:template>
