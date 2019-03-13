@@ -27,7 +27,7 @@ module BlacklightAdvancedSearch
     end
 
     def remove_quotes(query)
-      query.delete('\"', '')
+      query.delete('"')
     end
 
     def unbalanced_parentheses?(query)
