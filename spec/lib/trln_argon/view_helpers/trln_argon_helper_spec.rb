@@ -165,7 +165,7 @@ describe TrlnArgonHelper, type: :helper do
 
   describe 'join_with_commas' do
     context 'when values do not already contain commas' do
-      let(:options) { { value: ['Book', 'Video'] } }
+      let(:options) { { value: %w[Book Video] } }
 
       it 'joins values with a comma' do
         expect(helper.join_with_commas(options)).to(

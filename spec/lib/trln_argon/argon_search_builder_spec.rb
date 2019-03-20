@@ -125,4 +125,64 @@ describe TrlnArgon::ArgonSearchBuilder do
       end
     end
   end
+
+  describe 'subjects_boost' do
+    before { builder_with_params.subjects_boost(solr_parameters) }
+
+    context 'query contains a basic subject search' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'civil war history',
+          'search_field' => 'subject'
+        )
+      end
+
+      it 'adds the bq parameter to the solr query' do
+        expect(solr_parameters[:bq]).to eq(
+          ['language_f:English^10000',
+           'title_main_indexed_t:(civil war history)^500',
+           'resource_type_f:Book^100']
+        )
+      end
+
+      it 'adds the bf parameter to the solr query' do
+        current_year = Date.today.year
+        current_year_plus_two = current_year + 2
+        current_year_minus_ten = current_year - 10
+        expect(solr_parameters[:bf]).to eq(
+          ["linear(map(publication_year_isort,#{current_year_plus_two}," \
+           "10000,#{current_year_minus_ten}," \
+           'abs(publication_year_isort)),11,0)^100']
+        )
+      end
+    end
+
+    context 'query contains an advanced subject search' do
+      let(:builder_with_params) do
+        search_builder.with(
+          'subject' => 'civil war history',
+          'search_field' => 'advanced'
+        )
+      end
+
+      it 'adds the bq parameter to the solr query' do
+        expect(solr_parameters[:bq]).to eq(
+          ['language_f:English^10000',
+           'title_main_indexed_t:(civil war history)^500',
+           'resource_type_f:Book^100']
+        )
+      end
+
+      it 'adds the bf parameter to the solr query' do
+        current_year = Date.today.year
+        current_year_plus_two = current_year + 2
+        current_year_minus_ten = current_year - 10
+        expect(solr_parameters[:bf]).to eq(
+          ["linear(map(publication_year_isort,#{current_year_plus_two}," \
+           "10000,#{current_year_minus_ten}," \
+           'abs(publication_year_isort)),11,0)^100']
+        )
+      end
+    end
+  end
 end

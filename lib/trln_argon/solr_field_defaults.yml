@@ -454,6 +454,10 @@ TITLE_MAIN:
   solr_field: :title_main
   label:
     en: Title
+TITLE_MAIN_INDEXED:
+  solr_field: :title_main_indexed_t
+  label:
+    en: Title Main Indexed
 TITLE_MAIN_VERN:
   solr_field: :title_main_vern
   label:

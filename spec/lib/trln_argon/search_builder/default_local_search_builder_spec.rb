@@ -21,5 +21,9 @@ describe DefaultLocalSearchBuilder do
     it 'adds the only home facets method to the processor chain' do
       expect(obj.processor_chain).to include(:only_home_facets)
     end
+
+    it 'adds the subjects boost method to the processor chain' do
+      expect(obj.processor_chain).to include(:subjects_boost)
+    end
   end
 end
