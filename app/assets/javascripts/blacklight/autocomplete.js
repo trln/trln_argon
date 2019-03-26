@@ -12,7 +12,12 @@ Blacklight.onLoad(function() {
       if ( code == 9 ) { // tab key
           e.preventDefault();
           $(this).closest('form').find('button[type="submit"]').focus();
+
+          if (e.shiftKey) { // tab + shift
+            $('#search_field').focus();
+          }
       }
+
     });
 
     // Fetch the configured autocomplete path.
