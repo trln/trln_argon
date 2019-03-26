@@ -74,12 +74,12 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     background-color: #fff;
     border-color: $primary-color;
 
-    .navbar-nav > li > a, .navbar-inverse .navbar-nav > li > a {
+    .navbar-nav > li > a {
        color: $secondary-color;
        text-transform: uppercase;
     }
 
-    .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+    .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
         color: $tertiary-color;
     }
 }
@@ -201,6 +201,8 @@ body {
     background: #eee;
     color: #555;
     border-right: none;
+    min-width: 7.5em;
+    display: inline-block;
   }
 
   #q {
@@ -216,6 +218,7 @@ body {
 
   .bootstrap-select {
     max-width: 90px;
+    display: table-cell;
   }
 
 }
