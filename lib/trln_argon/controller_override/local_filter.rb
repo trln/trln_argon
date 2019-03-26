@@ -18,6 +18,7 @@ module TrlnArgon
         builder.processor_chain.delete(:only_home_facets)
         builder.processor_chain.delete(:add_facet_paging_to_solr)
         builder.processor_chain.delete(:add_sorting_to_solr)
+        builder.processor_chain.delete(:get_shared_bookmark_ids)
         builder.processor_chain.append(:remove_params_for_count_only_query)
 
         response = repository.search(builder)

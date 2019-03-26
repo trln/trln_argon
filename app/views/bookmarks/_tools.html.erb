@@ -1,0 +1,13 @@
+<ul class="<%= controller_name %>Tools nav nav-pills">
+  <%= render_show_doc_actions document_list, document: nil, document_list: @document_list, url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h) do |config, inner| %>
+    <li>
+      <%= inner %>
+    </li>
+  <% end %>
+
+  <li>
+    <%= link_to bookmarks_share_url, id:'shareBookmarksLink', class: 'btn btn-default', title: t('trln_argon.bookmarks.title') do %>
+      <i class="fa fa-link" aria-hidden="true"></i> <%= t('trln_argon.bookmarks.share') %>
+    <% end %>
+  </li>
+</ul>

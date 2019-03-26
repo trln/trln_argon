@@ -4,5 +4,5 @@ class DefaultLocalSearchBuilder < SearchBuilder
                                      min_match_for_boolean
                                      show_only_local_holdings
                                      only_home_facets
-                                     subjects_boost]
-end
+                                     subjects_boost
+                                     get_shared_bookmark_ids]

@@ -232,3 +232,8 @@ en:
             label:
                 title: "Title"
                 location: "Location"
+
+        bookmarks:
+            share: "Share"
+            title: "Share Bookmarks"
+            constraint_label: "Document IDs"
