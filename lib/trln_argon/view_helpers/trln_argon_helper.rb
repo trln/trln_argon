@@ -129,9 +129,8 @@ module TrlnArgon
         end
       end
 
-      # Fallback to semi-colons if commas are already present in the values.
-      def join_with_commas(options = {})
-        return options[:value].join('; ') if options[:value].join.include?(',')
+      def join_with_comma_semicolon_fallback(options = {})
+        return options[:value].join('; ') if options[:value].any? { |v| v.include?(',') }
 
         options[:value].join(', ')
       end
