@@ -163,6 +163,30 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe 'join_with_comma_semicolon_fallback' do
+    context 'when values do not already contain commas' do
+      let(:options) { { value: %w[Book Video] } }
+
+      it 'joins values with a comma' do
+        expect(helper.join_with_comma_semicolon_fallback(options)).to(
+          eq('Book, Video')
+        )
+      end
+    end
+
+    context 'when values already contain commas' do
+      let(:options) do
+        { value: ['Government document', 'Journal, Magazine, or Periodical'] }
+      end
+
+      it 'joins values with semi-colons' do
+        expect(helper.join_with_comma_semicolon_fallback(options)).to(
+          eq('Government document; Journal, Magazine, or Periodical')
+        )
+      end
+    end
+  end
+
   # ########################
   # # AdvancedSearchHelper
   # ########################

@@ -3,5 +3,6 @@ class DefaultLocalSearchBuilder < SearchBuilder
                                      min_match_for_cjk
                                      min_match_for_boolean
                                      show_only_local_holdings
-                                     only_home_facets]
+                                     only_home_facets
+                                     subjects_boost]
 end

@@ -230,9 +230,9 @@ module TrlnArgon
         config.add_index_field TrlnArgon::Fields::EDITION.to_s,
                                accessor: :edition
         config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
-                               helper_method: :join_with_commas
+                               helper_method: :join_with_comma_semicolon_fallback
         config.add_index_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
-                               helper_method: :join_with_commas
+                               helper_method: :join_with_comma_semicolon_fallback
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -340,9 +340,9 @@ module TrlnArgon
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s,
                                          accessor: :edition
         config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
-                                         helper_method: :join_with_commas
+                                         helper_method: :join_with_comma_semicolon_fallback
         config.add_show_sub_header_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
-                                         helper_method: :join_with_commas
+                                         helper_method: :join_with_comma_semicolon_fallback
 
         config.add_show_authors_field TrlnArgon::Fields::NAMES.to_s,
                                       label: TrlnArgon::Fields::NAMES.label,

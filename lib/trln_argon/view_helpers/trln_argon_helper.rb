@@ -129,7 +129,9 @@ module TrlnArgon
         end
       end
 
-      def join_with_commas(options = {})
+      def join_with_comma_semicolon_fallback(options = {})
+        return options[:value].join('; ') if options[:value].any? { |v| v.include?(',') }
+
         options[:value].join(', ')
       end
 
