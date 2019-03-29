@@ -432,8 +432,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.title')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$title_qf',
-            pf: '$title_pf'
+            qf:  '$title_qf',
+            pf:  '$title_pf',
+            pf3: '$title_pf3',
+            pf2: '$title_pf2'
           }
         end
 
@@ -441,8 +443,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.author')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$author_qf',
-            pf: '$author_pf'
+            qf:  '$author_qf',
+            pf:  '$author_pf',
+            pf3: '$author_pf3',
+            pf2: '$author_pf2'
           }
         end
 
@@ -450,8 +454,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.subject')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$subject_qf',
-            pf: '$subject_pf'
+            qf:  '$subject_qf',
+            pf:  '$subject_pf',
+            pf3: '$subject_pf3',
+            pf2: '$subject_pf2'
           }
         end
 
@@ -460,8 +466,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.publisher')
           field.def_type = 'edismax'
           field.solr_parameters = {
-            qf: '$publisher_qf',
-            pf: '$publisher_pf'
+            qf:  '$publisher_qf',
+            pf:  '$publisher_pf',
+            pf3: '',
+            pf2: ''
           }
         end
 
@@ -469,8 +477,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$isbn_issn_qf',
-            pf: ''
+            qf:  '$isbn_issn_qf',
+            pf:  '',
+            pf3: '',
+            pf2: ''
           }
         end
 
@@ -478,8 +488,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.genre_headings')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v',
-            pf: ''
+            qf:  'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v',
+            pf:  '',
+            pf3: '',
+            pf2: ''
           }
           field.if = false
           field.include_in_advanced_search = false
@@ -489,8 +501,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.work_entry')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$work_entry_qf',
-            pf: '$work_entry_pf'
+            qf:  '$work_entry_qf',
+            pf:  '$work_entry_pf',
+            pf3: '',
+            pf2: ''
           }
           field.if = false
           field.include_in_advanced_search = false
