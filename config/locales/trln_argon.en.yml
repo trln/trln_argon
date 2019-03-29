@@ -47,6 +47,7 @@ en:
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
+            show_results_from: 'Show results from:'
 
     trln_argon:
 
