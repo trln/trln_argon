@@ -152,7 +152,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^100']
+           'abs(publication_year_isort)),11,0)^50']
         )
       end
     end
@@ -180,7 +180,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^100']
+           'abs(publication_year_isort)),11,0)^50']
         )
       end
     end

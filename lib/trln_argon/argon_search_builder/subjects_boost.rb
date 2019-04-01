@@ -23,7 +23,7 @@ module TrlnArgon
         current_year_minus_ten = current_year - 10
         'linear(map(' \
         "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT},#{current_year_plus_two},10000," \
-        "#{current_year_minus_ten},abs(#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT})),11,0)^100"
+        "#{current_year_minus_ten},abs(#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT})),11,0)^50"
       end
 
       def subjects_books_boost_query
