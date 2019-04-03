@@ -8,7 +8,7 @@ describe TrlnArgonHelper, type: :helper do
       let(:options) { { value: %w[unc duke ncsu] } }
 
       it 'uses the translated value' do
-        expect(helper.institution_code_to_short_name(options)).to eq('UNC, Duke, and NCSU')
+        expect(helper.institution_code_to_short_name(options)).to eq('UNC, Duke, and NC State')
       end
     end
 
