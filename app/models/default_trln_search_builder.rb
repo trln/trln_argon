@@ -6,3 +6,4 @@ class DefaultTrlnSearchBuilder < SearchBuilder
                                      only_home_facets
                                      subjects_boost
                                      get_shared_bookmark_ids]
+end
