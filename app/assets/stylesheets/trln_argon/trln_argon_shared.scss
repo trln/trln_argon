@@ -219,6 +219,15 @@ body {
   .bootstrap-select {
     max-width: 90px;
     display: table-cell;
+
+    .filter-option-inner-inner {
+      display: block !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: calc(100% - 1.25em);
+    }
+
   }
 
 }
