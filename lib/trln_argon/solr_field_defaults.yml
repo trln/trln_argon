@@ -30,6 +30,10 @@ COLLECTION:
   solr_field: :collection_a
   label:
     en: Collection
+CREATOR_MAIN:
+  solr_field: creator_main_a
+  label:
+    en: Creator
 DATA_SOURCE_WORK:
   solr_field: :data_source_work_a
   label:

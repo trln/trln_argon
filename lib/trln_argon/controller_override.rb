@@ -225,6 +225,8 @@ module TrlnArgon
         #   The ordering of the field names is the order of the display
         config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                accessor: :statement_of_responsibility
+        config.add_index_field TrlnArgon::Fields::CREATOR_MAIN.to_s,
+                               helper_method: :join_with_comma_semicolon_fallback
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                accessor: :imprint_main_for_header_display
         config.add_index_field TrlnArgon::Fields::EDITION.to_s,
@@ -335,6 +337,8 @@ module TrlnArgon
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                          accessor: :statement_of_responsibility
+        config.add_show_sub_header_field TrlnArgon::Fields::CREATOR_MAIN.to_s,
+                                         helper_method: :join_with_comma_semicolon_fallback
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          accessor: :imprint_main_for_header_display
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s,
