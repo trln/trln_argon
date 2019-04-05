@@ -5,5 +5,5 @@ class DefaultLocalSearchBuilder < SearchBuilder
                                      show_only_local_holdings
                                      only_home_facets
                                      subjects_boost
-                                     get_shared_bookmark_ids]
+                                     add_document_ids_query]
 end

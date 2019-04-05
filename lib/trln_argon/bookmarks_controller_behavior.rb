@@ -12,7 +12,7 @@ module TrlnArgon
       helper_method :sms_path
       helper_method :sms_url
       helper_method :url_for_document
-      helper_method :bookmarks_share_url
+      helper_method :bookmarks_share_ids
 
       configure_blacklight do |config|
         config.search_builder_class = RollupOnlySearchBuilder
@@ -54,13 +54,8 @@ module TrlnArgon
         sms_bookmarks_url(options)
       end
 
-      def bookmarks_share_url
-        bookmarked_ids = ''
-        current_bookmarks.each do |bookmark|
-          bookmarked_ids = bookmarked_ids + bookmark['document_id'].to_s + '|'
-        end
-        bookmarked_ids = bookmarked_ids.gsub(/\|+$/, '') # remove trailing |
-        '/?doc_ids=' + bookmarked_ids
+      def bookmarks_share_ids
+        current_bookmarks.map { |bookmark| bookmark[:document_id] }.join('|')
       end
     end
   end

@@ -36,6 +36,12 @@ module TrlnArgon
                              new_window: true,
                              modal: false,
                              path: :refworks_path)
+      add_show_tools_partial(:share_bookmarks,
+                             icon: 'glyphicon-share',
+                             if: :render_sharebookmarks_action?,
+                             new_window: false,
+                             modal: false,
+                             path: :sharebookmarks_path)
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -574,6 +580,10 @@ module TrlnArgon
       end
 
       alias_method :render_refworks_action?, :render_ris_action?
+
+      def render_sharebookmarks_action?(_config, _options)
+        true if request.path == bookmarks_path
+      end
     end
   end
 end

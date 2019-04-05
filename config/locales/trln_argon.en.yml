@@ -30,6 +30,7 @@ en:
             clear: 'Clear'
             refworks: "Refworks"
             ris: "RIS File"
+            share_bookmarks: "Share"
 
         email:
             text:
@@ -234,6 +235,4 @@ en:
                 location: "Location"
 
         bookmarks:
-            share: "Share"
-            title: "Share Bookmarks"
             constraint_label: "Document IDs"

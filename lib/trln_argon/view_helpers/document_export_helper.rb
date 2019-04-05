@@ -36,6 +36,10 @@ module TrlnArgon
       def render_ris(documents)
         documents.map { |x| x.export_as(:ris) }.compact.join("\r\n")
       end
+
+      def sharebookmarks_path(_options)
+        search_trln_path(doc_ids: bookmarks_share_ids)
+      end
     end
   end
 end
