@@ -30,6 +30,10 @@ COLLECTION:
   solr_field: :collection_a
   label:
     en: Collection
+CREATOR_MAIN:
+  solr_field: creator_main_a
+  label:
+    en: Creator
 DATA_SOURCE_WORK:
   solr_field: :data_source_work_a
   label:
@@ -454,6 +458,10 @@ TITLE_MAIN:
   solr_field: :title_main
   label:
     en: Title
+TITLE_MAIN_INDEXED:
+  solr_field: :title_main_indexed_t
+  label:
+    en: Title Main Indexed
 TITLE_MAIN_VERN:
   solr_field: :title_main_vern
   label:

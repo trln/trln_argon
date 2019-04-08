@@ -2,6 +2,10 @@ describe DefaultTrlnSearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do
+    it 'adds the wildcard_char_strip method to the processor chain' do
+      expect(obj.processor_chain).to include(:wildcard_char_strip)
+    end
+
     it 'adds the min_match_for_cjk method to the processor chain' do
       expect(obj.processor_chain).to include(:min_match_for_cjk)
     end
@@ -16,6 +20,10 @@ describe DefaultTrlnSearchBuilder do
 
     it 'adds the only home facets method to the processor chain' do
       expect(obj.processor_chain).to include(:only_home_facets)
+    end
+
+    it 'adds the subjects boost method to the processor chain' do
+      expect(obj.processor_chain).to include(:subjects_boost)
     end
   end
 end

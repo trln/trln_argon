@@ -4,52 +4,73 @@
 
   <div class="<%= location_narrow_group_class %>">
 
-  <% if item_data['call_no'].present? %>
-    <div class="<%= call_number_wrapper_class %>">
-      <dl class="dl-horizontal">
-        <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
-        <dd><span class='call-number'><%= item_data['call_no'] %></span></dd>
-      </dl>
+    <div class="holdings-wrapper expandable-content">
+
+      <% item_data['holdings'].each do |h|  %>
+
+      <% next unless display_holdings_summary?(h) %>
+
+        <% # --- HOLDING CALL NUMBER --- %>
+
+        <% if h.fetch('call_no', '').present? %>
+
+          <div class="<%= call_number_wrapper_class %>">
+            <dl class="dl-horizontal">
+              <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+              <dd><span class='call-number'><%= h['call_no'] %></span></dd>
+            </dl>
+          </div>
+
+        <% end %>
+
+        <% # --- HOLDING SUMMARY --- %>
+
+        <% if h.fetch('summary', '').present? %>
+
+          <div class="<%= holdings_summary_wrapper_class %>">
+            <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
+              <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
+              <dd>
+
+                <div class="summary-text-wrapper">
+                    <span class="summary-text"><%= h['summary'].gsub(' ', '&nbsp;').html_safe %></span>
+                </div>
+
+              </dd>
+            </dl>
+          </div>
+
+        <% end %>
+
+        <% # --- LATEST RECEIVED --- %>
+
+        <% if h.fetch('holdings_id', '').present? %>
+          <%= render partial: 'catalog/index_items_latest_received', locals: { document: @document, item_data: h } %>
+        <% end %>
+
+        <% # --- HOLDING NOTES --- %>
+
+        <% if h.fetch('notes', []).any? %>
+
+          <div class="<%= holdings_note_class %>">
+
+            <dl class="dl-horizontal">
+              <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
+              <dd><%= [*h['notes']].join("; "); %></dd>
+            </dl>
+
+          </div>
+
+        <% end %>
+
+      <% end %>
+
     </div>
-  <% end %>
 
-  <% if item_data['summary'].present? %>
-
-      <div class="<%= holdings_summary_wrapper_class %>">
-        <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
-          <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
-          <dd>
-
-            <div class="summary-text-wrapper expandable-content">
-                <span class="summary-text"><%= item_data['summary'].gsub(' ', '&nbsp;').html_safe %></span>
-            </div>
-
-            <div class="expandable-content-controls">
-              <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
-              <span class='show-control less'><a href="#item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
-            </div>
-
-          </dd>
-
-
-        </dl>
-      </div>
-      <%= render partial: 'catalog/index_items_latest_received', locals: { document: @document, item_data: item_data } %>
-
-  <% end %>
-
-  <% if has_holding_notes %>
-
-    <div class="<%= holdings_note_class %>">
-
-      <dl class="dl-horizontal">
-        <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
-        <dd><%= [*item_data['notes']].join("; "); %></dd>
-      </dl>
-
+    <div class="expandable-content-controls">
+      <span class='show-control more'><a href="javascript:void(0);" class="btn btn-show"><%= t('trln_argon.show.controls.show_more') %> <i class="fa fa-chevron-circle-down" aria-hidden="true"></i></a></span>
+      <span class='show-control less'><a href="#item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>" class="btn btn-hide"><%= t('trln_argon.show.controls.show_less') %> <i class="fa fa-chevron-circle-up" aria-hidden="true"></i></a></span>
     </div>
-
-  <% end %>
 
   </div>
 

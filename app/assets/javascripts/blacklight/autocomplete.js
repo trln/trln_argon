@@ -6,6 +6,19 @@ Blacklight.onLoad(function() {
   $('#search-navbar [data-autocomplete-enabled="true"]').each(function() {
     var $el = $(this);
 
+    // Intercept native typeahead Tab key functionality re: https://trlnmain.atlassian.net/browse/TD-832
+    $el.on("keydown", function(e) {
+      var code = e.keyCode || e.which;
+      if ( code == 9 ) { // tab key
+          e.preventDefault();
+          $(this).closest('form').find('button[type="submit"]').focus();
+
+          if (e.shiftKey) { // tab + shift
+            $('#search_field').focus();
+          }
+      }
+    });
+
     // Fetch the configured autocomplete path.
     var suggest_root = $el.data().autocompletePath;
     var suggest_slug = '';

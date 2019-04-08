@@ -1,0 +1,115 @@
+---
+id: DUKE006162724
+url_a:
+- '{"href":"https://proxy.lib.duke.edu/login?url=https://search.ebscohost.com/login.aspx?authtype=ip,uid\u0026custid=s9002128\u0026groupid=main\u0026profile=ehost\u0026defaultdb=s3h","type":"fulltext"}'
+author_suggest:
+- EBSCO Publishing (Firm)
+- Coaching Association of Canada. Sport Information Resource Centre
+names_a:
+- '{"name":"EBSCO Publishing (Firm)"}'
+- '{"name":"Coaching Association of Canada. Sport Information Resource Centre"}'
+owner_a:
+- duke
+misc_id_a:
+- 'LCCN: 2010238303^^'
+holdings_a:
+- '{"loc_b":"DUKIR","loc_n":"MCL"}'
+items_a:
+- '{"loc_b":"DUKIR","loc_n":"MCL","cn_scheme":"","call_no":"Y 1.1/5:","type":"BOOK","item_id":"B930377","status":"Available"}'
+language_a:
+- English
+local_id: DUKE006162724
+available_a:
+- Available
+frequency_current_a:
+- Updated weekly
+lang_code_a:
+- eng
+rollup_id: OCLC69182876
+title_suggest:
+- SPORTDiscus with full text.
+title_main: SPORTDiscus with full text.
+title_sort_ssort_single: sportdiscus with full text
+access_type_a:
+- Online
+institution_a:
+- duke
+oclc_number: '69182876'
+imprint_main_a:
+- '{"type":"imprint","value":"Ipswich, MA : Ebsco Publishing"}'
+note_general_a:
+- Title from database description screen on EBSCO website (viewed March 18, 2010).
+note_summary_a:
+- Bibliographic and full-text database covering both serial and monographic literature
+  on sports, physical fitness, exercise, sports medicine, sports science, physical
+  education, kinesiology, coaching, training, sport administration, officiating, sport
+  law and legislation, disabled athletes, sports facility design and management, intramural
+  and school sports, doping, health, health education, biomechanics, movement science,
+  injury prevention, rehabilitation, physical therapy, nutrition, exercise physiology,
+  recreation, leisure studies, tourism, allied health, occupational health and therapy.
+note_issuance_a:
+- Produced by Sport Information Resource Centre and made available online by EBSCOHost.
+resource_type_a:
+- Database
+subject_genre_a:
+- Indexes
+- Databases
+- Online databases
+- Reference
+date_cataloged: '2014-10-14T04:00:00Z'
+genre_headings_a:
+- Indexes
+- Databases
+- Online databases
+subject_suggest:
+- Indexes
+- Databases
+- Online databases
+- Sports -- Indexes
+- Sports -- Databases
+- Exercise -- Indexes
+- Exercise -- Databases
+- Physical fitness -- Indexes
+- Physical fitness -- Databases
+- Sports medicine -- Indexes
+- Sports medicine -- Databases
+- Coaching (Athletics) -- Indexes
+- Coaching (Athletics) -- Databases
+- Coaching (Athletics)
+- Exercise
+- Physical fitness
+- Sports
+- Sports medicine
+physical_media_a:
+- Online
+subject_topical_a:
+- Sports
+- Exercise
+- Physical fitness
+- Sports medicine
+- Coaching (Athletics)
+publication_year_sort: '9999'
+subject_headings_a:
+- Sports -- Indexes
+- Sports -- Databases
+- Exercise -- Indexes
+- Exercise -- Databases
+- Physical fitness -- Indexes
+- Physical fitness -- Databases
+- Sports medicine -- Indexes
+- Sports medicine -- Databases
+- Coaching (Athletics) -- Indexes
+- Coaching (Athletics) -- Databases
+- Coaching (Athletics)
+- Exercise
+- Physical fitness
+- Sports
+- Sports medicine
+note_serial_dates_a:
+- Began in 2006.
+location_hierarchy_a:
+- duke
+record_data_source_a:
+- ILSMARC
+note_access_restrictions_a:
+- Access restricted to licensed users.

@@ -9,6 +9,12 @@
     <%= render_hash_as_hidden_fields(advanced_search_context) %>
     <div class="input-criteria">
 
+      <div class="query-criteria"> 
+        <h3 class="query-criteria-heading"><%= "#{t("blacklight_advanced_search.form.show_results_from")}" %></h3>
+        <%= radio_button_tag :option, "catalog" %> <%= "#{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}" %> &emsp;
+        <%= radio_button_tag  :option, "trln" %> <%= "#{t("trln_argon.local_filter.searching_trln")}" %>
+      </div>
+
       <div class="query-criteria">
         <h3 class="query-criteria-heading">
           <%= t('blacklight_advanced_search.form.query_criteria_heading_html', :select_menu =>  select_menu_for_field_operator ) %> 

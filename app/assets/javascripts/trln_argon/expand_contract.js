@@ -35,7 +35,7 @@ Blacklight.onLoad(function() {
     var me = $(this);
     var parent = me.parent();
     var origHeight = me.height();
-    var contractedHeight = lineHeight(this) * 3 + 2;
+    var contractedHeight = lineHeight(this) * 6 + 4;
 
     if ( origHeight <= contractedHeight ) {
       return;

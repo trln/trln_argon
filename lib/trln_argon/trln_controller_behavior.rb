@@ -13,6 +13,8 @@ module TrlnArgon
       helper_method :url_for_document
       helper_method :ris_path
       helper_method :ris_url
+      helper_method :show_solr_document_path
+      helper_method :show_solr_document_url
       helper_method :email_path
       helper_method :email_url
       helper_method :sms_path
@@ -20,6 +22,8 @@ module TrlnArgon
 
       configure_blacklight do |config|
         config.search_builder_class = DefaultTrlnSearchBuilder
+
+        config.show.route = { controller: :trln }
 
         # These params are added to the Solr document request to fetch any
         # associated rolled up documents so that holdings, items,
@@ -36,8 +40,17 @@ module TrlnArgon
       private
 
       def url_for_document(doc, options = {})
+        search_state.url_for_document(doc, options)
+      end
+
+      def show_solr_document_path(doc, options = {})
         return unless doc.respond_to?(:id)
-        trln_solr_document_url(doc, options)
+        trln_solr_document_path(options.merge(id: doc.id))
+      end
+
+      def show_solr_document_url(doc, options = {})
+        return unless doc.respond_to?(:id)
+        trln_solr_document_url(options.merge(id: doc.id))
       end
 
       def filter_scope_name

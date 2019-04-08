@@ -3,13 +3,31 @@
 module TrlnArgon
   module ItemDeserializer
     include ActionView::Helpers::TextHelper
-    def deserialize
-      (self[TrlnArgon::Fields::ITEMS] || ['{}']).map { |d| JSON.parse(d) }
-                                                .group_by { |rec| rec['loc_b'] }
+
+    def holdings
+      @holdings ||= deserialize_holdings
     end
 
     def read_items
-      @read_items ||= deserialize
+      @read_items ||= deserialize_items
+    end
+
+    # For RIS, Email and other record export functions
+    def holdings_to_text
+      @holdings_to_text ||= holdings.flat_map do |loc_b, loc_n_map|
+        loc_n_map.map do |_loc_n, entries|
+          I18n.t('trln_argon.item_location',
+                 loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"),
+                 call_number: entries.fetch('holdings', []).map { |e| e.fetch('call_no', '').strip }.join(', '))
+        end
+      end
+    end
+
+    private
+
+    def deserialize_items
+      (self[TrlnArgon::Fields::ITEMS] || ['{}']).map { |d| JSON.parse(d) }
+                                                .group_by { |rec| rec['loc_b'] }
     end
 
     def deserialize_holdings
@@ -22,13 +40,18 @@ module TrlnArgon
 
       h_final = Hash[items_intermediate.map do |loc_b, loc_map|
         [loc_b, Hash[loc_map.map do |loc_n, loc_items|
-          h = holdings.find { |i| i['loc_b'] == loc_b && i['loc_n'] == loc_n } ||
-              { 'summary' => '', 'call_no' => '', 'notes' => [] }
+          h = {}
+
           h['items'] = loc_items.map do |i|
             i.reject { |k, _v| %w[loc_b loc_n].include?(k) }
           end
-          h['summary'] ||= ''
-          h['call_no'] = cn_prefix(h['items'])
+
+          h['holdings'] = select_matching_holdings(holdings, loc_b, loc_n)
+
+          if h['holdings'].empty?
+            h['holdings'] << { 'summary' => '', 'call_no' => cn_prefix(h['items']) }
+          end
+
           [loc_n, h]
         end]]
       end]
@@ -39,29 +62,27 @@ module TrlnArgon
         loc_b = h['loc_b']
         loc_n = h['loc_n']
         loc_map = h_final[loc_b] ||= {}
-        loc_map[loc_n] ||= h.update('items' => [])
+        loc_map[loc_n] ||= { 'items' => [] }
+        loc_map[loc_n]['holdings'] ||= select_matching_holdings(holdings, loc_b, loc_n)
       end
+
       h_final.reject { |k, v| k.nil? }
     end
 
-    # For RIS, Email and other record export functions
-    def holdings_to_text
-      @holdings_to_text ||= holdings.flat_map do |loc_b, loc_n_map|
-        loc_n_map.map do |_loc_n, items|
-          I18n.t('trln_argon.item_location',
-                 loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"),
-                 call_number: items.fetch('call_no', '').strip)
-        end
-      end
-    end
-
-    def holdings
-      @holdings ||= deserialize_holdings
+    def select_matching_holdings(holdings, loc_b, loc_n)
+      holdings.select { |hs| hs['loc_b'] == loc_b && hs['loc_n'] == loc_n }
+              .map { |hs| hs.except('loc_b', 'loc_n') }
     end
 
     def cn_prefix(items)
-      cns = items.reject(&:nil?).map { |i| i['call_no'].to_s.gsub(/\d{4}$/, '') }
-      cns[0]
+      cns = items.reject(&:nil?).map do |i|
+        if i.fetch('cn_scheme', '') == 'LC'
+          i['call_no'].to_s.gsub(/\d{4}$/, '').strip
+        else
+          i['call_no'].to_s.strip
+        end
+      end
+      cns.first
     end
   end
 end

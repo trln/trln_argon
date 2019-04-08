@@ -225,14 +225,16 @@ module TrlnArgon
         #   The ordering of the field names is the order of the display
         config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                accessor: :statement_of_responsibility
+        config.add_index_field TrlnArgon::Fields::CREATOR_MAIN.to_s,
+                               helper_method: :join_with_comma_semicolon_fallback
         config.add_index_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                accessor: :imprint_main_for_header_display
         config.add_index_field TrlnArgon::Fields::EDITION.to_s,
                                accessor: :edition
         config.add_index_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
-                               helper_method: :join_with_commas
+                               helper_method: :join_with_comma_semicolon_fallback
         config.add_index_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
-                               helper_method: :join_with_commas
+                               helper_method: :join_with_comma_semicolon_fallback
 
         # solr fields to be displayed in the show (single result) view
         #   The ordering of the field names is the order of the display
@@ -255,6 +257,8 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                               label: TrlnArgon::Fields::IMPRINT_MULTIPLE.label,
                               accessor: :imprint_multiple_for_display
+        config.add_show_field TrlnArgon::Fields::LANGUAGE.to_s,
+                              label: TrlnArgon::Fields::LANGUAGE.label
         config.add_show_field TrlnArgon::Fields::NOTE_SERIAL_DATES.to_s,
                               label: TrlnArgon::Fields::NOTE_SERIAL_DATES.label
         config.add_show_field TrlnArgon::Fields::NOTE_ISSUANCE.to_s,
@@ -333,14 +337,16 @@ module TrlnArgon
 
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                          accessor: :statement_of_responsibility
+        config.add_show_sub_header_field TrlnArgon::Fields::CREATOR_MAIN.to_s,
+                                         helper_method: :join_with_comma_semicolon_fallback
         config.add_show_sub_header_field TrlnArgon::Fields::IMPRINT_MAIN.to_s,
                                          accessor: :imprint_main_for_header_display
         config.add_show_sub_header_field TrlnArgon::Fields::EDITION.to_s,
                                          accessor: :edition
         config.add_show_sub_header_field TrlnArgon::Fields::RESOURCE_TYPE.to_s,
-                                         helper_method: :join_with_commas
+                                         helper_method: :join_with_comma_semicolon_fallback
         config.add_show_sub_header_field TrlnArgon::Fields::PHYSICAL_MEDIA.to_s,
-                                         helper_method: :join_with_commas
+                                         helper_method: :join_with_comma_semicolon_fallback
 
         config.add_show_authors_field TrlnArgon::Fields::NAMES.to_s,
                                       label: TrlnArgon::Fields::NAMES.label,
@@ -430,8 +436,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.title')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$title_qf',
-            pf: '$title_pf'
+            qf:  '$title_qf',
+            pf:  '$title_pf',
+            pf3: '$title_pf3',
+            pf2: '$title_pf2'
           }
         end
 
@@ -439,8 +447,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.author')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$author_qf',
-            pf: '$author_pf'
+            qf:  '$author_qf',
+            pf:  '$author_pf',
+            pf3: '$author_pf3',
+            pf2: '$author_pf2'
           }
         end
 
@@ -448,8 +458,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.subject')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$subject_qf',
-            pf: '$subject_pf'
+            qf:  '$subject_qf',
+            pf:  '$subject_pf',
+            pf3: '$subject_pf3',
+            pf2: '$subject_pf2'
           }
         end
 
@@ -458,8 +470,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.publisher')
           field.def_type = 'edismax'
           field.solr_parameters = {
-            qf: '$publisher_qf',
-            pf: '$publisher_pf'
+            qf:  '$publisher_qf',
+            pf:  '$publisher_pf',
+            pf3: '',
+            pf2: ''
           }
         end
 
@@ -467,8 +481,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$isbn_issn_qf',
-            pf: ''
+            qf:  '$isbn_issn_qf',
+            pf:  '',
+            pf3: '',
+            pf2: ''
           }
         end
 
@@ -476,8 +492,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.genre_headings')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: 'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v',
-            pf: ''
+            qf:  'genre_headings_t genre_headings_ara_v genre_headings_cjk_v genre_headings_rus_v',
+            pf:  '',
+            pf3: '',
+            pf2: ''
           }
           field.if = false
           field.include_in_advanced_search = false
@@ -487,8 +505,10 @@ module TrlnArgon
           field.label = I18n.t('trln_argon.search_fields.work_entry')
           field.def_type = 'edismax'
           field.solr_local_parameters = {
-            qf: '$work_entry_qf',
-            pf: '$work_entry_pf'
+            qf:  '$work_entry_qf',
+            pf:  '$work_entry_pf',
+            pf3: '',
+            pf2: ''
           }
           field.if = false
           field.include_in_advanced_search = false

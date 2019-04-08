@@ -1,0 +1,15 @@
+---
+PERKN:
+  PKW:
+    items:
+    - cn_scheme: LC
+      call_no: PS3551.C44 G743 2018
+      type: BOOK
+      item_id: D05261611M
+      status: Available
+    holdings:
+    - call_no: PS3551.C44 G743 2018
+  PK:
+    items: []
+    holdings:
+    - call_no: PS3551.C44 G743 2018

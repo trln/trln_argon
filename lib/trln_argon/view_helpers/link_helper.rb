@@ -93,7 +93,7 @@ module TrlnArgon
       def display_expanded_holdings_and_links?(document, local_doc, inst)
         document.all_shared_and_local_fulltext_urls_by_inst.fetch(inst, []).to_a.any? ||
           document.all_open_access_urls_by_inst.fetch(inst, []).to_a.any? ||
-          (local_doc.present? && !(local_doc.holdings.keys - ['ONLINE', 'DUKIR', '', nil]).empty?)
+          display_items?(document: local_doc)
       end
 
       def display_expanded_links?(document, inst)

@@ -1,0 +1,21 @@
+---
+trln:
+  trln:
+    items:
+    - item_id: i2698163
+      status: Available
+      cn_scheme: LC
+      call_no: D819.G3 T7
+    holdings:
+    - summary: ''
+      call_no: D819.G3 T7
+wbda:
+  wbda:
+    items: []
+    holdings:
+    - call_no: C780.6 N87f2
+      summary: 'N.C. Collection has bound with other material on the Federation. See
+        entry under North Carolina Federation of Music Clubs with title: Official
+        papers, newsletters, etc.'
+    - call_no: '111.222'
+      summary: Fighting with hornets.

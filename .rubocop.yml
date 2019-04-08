@@ -52,6 +52,7 @@ Metrics/MethodLength:
     - 'lib/trln_argon/mappings.rb'
     - 'lib/trln_argon/solr_document/expand_document.rb'
     - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
+    - 'config/initializers/parsing_nesting_parser.rb'
 
 Metrics/ModuleLength:
   Exclude:

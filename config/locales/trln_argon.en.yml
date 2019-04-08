@@ -47,6 +47,7 @@ en:
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
+            show_results_from: 'Show results from:'
 
     trln_argon:
 
@@ -58,8 +59,8 @@ en:
                 short_name: "NCCU"
                 long_name: "NCCU Libraries"
             ncsu:
-                short_name: "NCSU"
-                long_name: "NCSU Libraries"
+                short_name: "NC State"
+                long_name: "NC State Libraries"
             unc:
                 short_name: "UNC"
                 long_name: "UNC Libraries"
@@ -78,7 +79,7 @@ en:
             no_results: 'Go back to %{local_institution_name} Catalog'
             search_verb: 'Search'
             searching_local: '%{local_institution_name}'
-            searching_trln: 'UNC, Duke, NCSU, NCCU Libraries'
+            searching_trln: 'UNC, Duke, NC State, NCCU Libraries'
             showing_results: 'Searching:'
 
         scope_name:
@@ -191,6 +192,9 @@ en:
                 show_more: "show more"
                 show_less: "show less"
                 details: "Details"
+
+        latest_received:
+            link_text: "View"
 
         imprint_type:
             imprint: ""
