@@ -1580,8 +1580,13 @@ h2.local-filter-heading  {
 
 /* Advanced Search */
 
-.blacklight-advanced .search-query-form, .blacklight-advanced_trln .search-query-form {
-  display: none;
+.blacklight-advanced {
+  .search-query-form, .blacklight-advanced_trln .search-query-form {
+    display: none;
+  }
+  form.advanced span.option-wrapper {
+    display: inline-block;
+  }
 }
 
 /* AxS Tweaks */
