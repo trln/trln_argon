@@ -11,8 +11,12 @@
 
       <div class="query-criteria"> 
         <h3 class="query-criteria-heading"><%= "#{t("blacklight_advanced_search.form.show_results_from")}" %></h3>
-        <%= radio_button_tag :option, "catalog" %> <%= "#{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}" %> &emsp;
-        <%= radio_button_tag  :option, "trln" %> <%= "#{t("trln_argon.local_filter.searching_trln")}" %>
+        <span class="option-wrapper">
+          <%= radio_button_tag :option, "catalog" %> <%= label_tag 'option_catalog', "#{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}" %> &emsp;
+        </span>
+        <span class="option-wrapper">
+          <%= radio_button_tag  :option, "trln" %> <%= label_tag 'option_trln', "#{t("trln_argon.local_filter.searching_trln")}" %>
+        </span>
       </div>
 
       <div class="query-criteria">
