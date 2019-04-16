@@ -23,7 +23,7 @@ module TrlnArgon
     def self.ping
       @cache.fetch(:ping) do
         begin
-          solr = ENV['SOLR_URL']
+          solr = Blacklight.connection_config.fetch(:url, nil)
           return nil unless solr
           (RSolr.connect url: solr).get('select', params: { rows: 0 })
         rescue StandardError
