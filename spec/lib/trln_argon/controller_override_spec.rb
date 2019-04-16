@@ -84,6 +84,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the sms show document action' do
       expect(override_config.show.document_actions).to include(:sms)
     end
+
+    it 'sets the share bookmarks show document action' do
+      expect(override_config.show.document_actions).to include(:share_bookmarks)
+    end
   end
 
   describe 'title field' do
