@@ -9,7 +9,8 @@ module TrlnArgon
                                         large: 'LC.JPG').freeze
 
       def syndetics_data
-        @syndetics_data ||= enhanced_data
+        return @syndetics_data if defined?(@syndetics_data)
+        @syndetics_data = enhanced_data
       end
 
       def syndetics_or_marc_summary
@@ -37,7 +38,6 @@ module TrlnArgon
       def cover_image(options = { client: 'trlnet', size: :small })
         options = {}.update(IMG_OPTIONS).update(options)
         params = get_params(options[:client], SIZES[options[:size].to_sym])
-        # build_syndetics_query(params) if params
         yield build_syndetics_query(params) if params
       end
 
@@ -50,8 +50,11 @@ module TrlnArgon
         params = get_params(client, 'XML.XML')
         return nil unless params
         begin
-          doc_xml = Faraday.get(build_syndetics_query(params)).body
-          data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(doc_xml))
+          response = Faraday::Connection.new.get(build_syndetics_query(params)) do |request|
+            request.options.timeout = 5
+            request.options.open_timeout = 2
+          end
+          data = TrlnArgon::SyndeticsData.new(Nokogiri::XML(response.body))
         rescue StandardError => e
           Rails.logger.warn('unable to fetch syndetics data for '\
                             "#{fetch('id', 'unknown document')} "\
