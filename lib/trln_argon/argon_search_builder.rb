@@ -5,6 +5,7 @@ require 'trln_argon/argon_search_builder/local_filter'
 require 'trln_argon/argon_search_builder/min_match'
 require 'trln_argon/argon_search_builder/subjects_boost'
 require 'trln_argon/argon_search_builder/wildcard_char_strip'
+require 'trln_argon/argon_search_builder/share_bookmarks'
 
 module TrlnArgon
   # Shared SearchBuilder behaviors concerning record rollup,
@@ -17,5 +18,6 @@ module TrlnArgon
     include MinMatch
     include SubjectsBoost
     include WildcardCharStrip
+    include ShareBookmarks
   end
 end

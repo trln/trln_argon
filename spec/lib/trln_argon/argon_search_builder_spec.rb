@@ -185,4 +185,76 @@ describe TrlnArgon::ArgonSearchBuilder do
       end
     end
   end
+
+  describe 'share_bookmarks' do
+    before { builder_with_params.add_document_ids_query(solr_parameters) }
+
+    context 'query contains a single bookmark ID' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: 'UNCb9249630'
+        )
+      end
+
+      it 'adds the correct defType to the solr query' do
+        expect(solr_parameters[:defType]).to eq(
+          'lucene'
+        )
+      end
+
+      it 'adds the correct q parameter to the solr query' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:(UNCb9249630)'
+        )
+      end
+    end
+
+    context 'query contains multiple bookmark IDs' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: 'UNCb9249630|UNCb9001022|UNCb7925949'
+        )
+      end
+
+      it 'adds the correct defType to the solr query' do
+        expect(solr_parameters[:defType]).to eq(
+          'lucene'
+        )
+      end
+
+      it 'adds the correct q parameter to the solr query' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:(UNCb9249630 OR UNCb9001022 OR UNCb7925949)'
+        )
+      end
+    end
+
+    context 'query contains junk' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: '&///?**__$$ '
+        )
+      end
+
+      it 'strips out the junk (only alphanumeric should pass)' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:()'
+        )
+      end
+    end
+
+    context 'query is empty' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: ''
+        )
+      end
+
+      it 'returns nil' do
+        expect(solr_parameters[:q]).to eq(
+          nil
+        )
+      end
+    end
+  end
 end

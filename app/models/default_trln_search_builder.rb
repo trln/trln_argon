@@ -4,5 +4,6 @@ class DefaultTrlnSearchBuilder < SearchBuilder
                                      min_match_for_boolean
                                      rollup_duplicate_records
                                      only_home_facets
-                                     subjects_boost]
+                                     subjects_boost
+                                     add_document_ids_query]
 end
