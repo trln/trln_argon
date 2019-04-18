@@ -78,6 +78,45 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'disable_boolean_for_all_caps' do
+    before do
+      builder_with_params.add_query_to_solr(solr_parameters)
+      builder_with_params.disable_boolean_for_all_caps(solr_parameters)
+    end
+
+    context 'query contains a boolean operator and is all caps' do
+      let(:builder_with_params) { search_builder.with(q: 'STURM AND DRANG') }
+
+      it 'downcases the query to turn off boolean treatment' do
+        expect(solr_parameters[:q]).to eq('sturm and drang')
+      end
+    end
+
+    context 'query contains a boolean operator and a lowercase letter' do
+      let(:builder_with_params) { search_builder.with(q: 'sturm AND drang') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('sturm AND drang')
+      end
+    end
+
+    context 'query does not contain boolean operators and is all caps' do
+      let(:builder_with_params) { search_builder.with(q: 'STURM UND DRANG') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('STURM UND DRANG')
+      end
+    end
+
+    context 'query does not contain boolean operators and has a lowercase letter' do
+      let(:builder_with_params) { search_builder.with(q: 'sturm und drang') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('sturm und drang')
+      end
+    end
+  end
+
   describe 'min_match_for_boolean' do
     before { builder_with_params.min_match_for_boolean(solr_parameters) }
 
@@ -92,7 +131,15 @@ describe TrlnArgon::ArgonSearchBuilder do
     context 'query does not contain any boolean operators' do
       let(:builder_with_params) { search_builder.with(q: 'deforestation columbia ecuador)') }
 
-      it 'applies the min match setting for boolean searches' do
+      it 'does not apply the min match setting for boolean searches' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+
+    context 'query contains a boolean operator and is all uppercase' do
+      let(:builder_with_params) { search_builder.with(q: 'STRANGE AND STRANGER') }
+
+      it 'does not apply the min match setting for boolean searches' do
         expect(solr_parameters[:mm]).to be_nil
       end
     end
