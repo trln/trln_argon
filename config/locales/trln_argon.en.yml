@@ -205,7 +205,8 @@ en:
             manufacture: "Manufactured"
             copyright: ""
 
-        item_location: "%{loc_b_display} (Call Number: %{call_number})"
+        item_location_plus_callnumber: "%{loc_b_display} (Call Number: %{call_number})"
+        item_location: "%{loc_b_display}"
 
         email:
             library_note: "This message was sent from the %{inst} catalog. Please do not reply to this message. For assistance, see %{contact_url}."

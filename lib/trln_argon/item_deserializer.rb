@@ -12,13 +12,32 @@ module TrlnArgon
       @read_items ||= deserialize_items
     end
 
-    # For RIS, Email and other record export functions
+    # For Email, SMS, and other record export functions (Location and Call Number)
     def holdings_to_text
       @holdings_to_text ||= holdings.flat_map do |loc_b, loc_n_map|
         loc_n_map.map do |_loc_n, entries|
-          I18n.t('trln_argon.item_location',
+          I18n.t('trln_argon.item_location_plus_callnumber',
                  loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"),
                  call_number: entries.fetch('holdings', []).map { |e| e.fetch('call_no', '').strip }.join(', '))
+        end
+      end
+    end
+
+    # For RIS (Locations only)
+    def locations_to_text
+      @locations_to_text ||= holdings.flat_map do |loc_b, loc_n_map|
+        loc_n_map.map do |_loc_n, entries|
+          I18n.t('trln_argon.item_location',
+                 loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"))
+        end
+      end
+    end
+
+    # For RIS (Call Numbers only)
+    def callnumbers_to_text
+      @callnumbers_to_text ||= holdings.flat_map do |loc_b, loc_n_map|
+        loc_n_map.map do |_loc_n, entries|
+          entries.fetch('holdings', []).map { |e| e.fetch('call_no', '').strip }.join(', ')
         end
       end
     end

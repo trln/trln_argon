@@ -425,7 +425,8 @@ describe TrlnArgon::SolrDocument do
       expect(test_document.export_as_ris).to eq(
         "TY  - BOOK\r\n"\
         "A1  - Maureen E. Downey.\r\n"\
-        "AV  - Perkins Public Documents/Maps (Call Number: SI 1.27:435)\r\n"\
+        "AV  - Perkins Public Documents/Maps\r\n"\
+        "CN  - SI 1.27:435\r\n"\
         "ID  - DUKE002952265\r\n"\
         "KW  - Brisingida -- Atlantic Ocean -- Classification\r\n"\
         "KW  - Echinodermata -- Classification\r\n"\
