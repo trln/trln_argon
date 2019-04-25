@@ -61,7 +61,7 @@ en:
                 long_name: "NCCU Libraries"
             ncsu:
                 short_name: "NC State"
-                long_name: "NC State Libraries"
+                long_name: "NC State University Libraries"
             unc:
                 short_name: "UNC"
                 long_name: "UNC Libraries"
