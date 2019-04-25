@@ -22,7 +22,7 @@ describe 'full records' do
     end
 
     it 'shows location information for NCSU' do
-      expect(page).to have_css('#doc_duke002952265 h3', text: 'NC State Libraries')
+      expect(page).to have_css('#doc_duke002952265 h3', text: 'NC State University Libraries')
     end
   end
 
