@@ -9,5 +9,9 @@ describe TrlnArgon::BookmarksControllerBehavior do
     it 'uses the expected search builder' do
       expect(override_config.search_builder_class).to eq(RollupOnlySearchBuilder)
     end
+
+    it 'sets the correct http method' do
+      expect(override_config.http_method).to eq :get
+    end
   end
 end

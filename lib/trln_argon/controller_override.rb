@@ -36,6 +36,12 @@ module TrlnArgon
                              new_window: true,
                              modal: false,
                              path: :refworks_path)
+      add_show_tools_partial(:share_bookmarks,
+                             icon: 'glyphicon-share',
+                             if: :render_sharebookmarks_action?,
+                             new_window: false,
+                             modal: false,
+                             path: :sharebookmarks_path)
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -545,12 +551,16 @@ module TrlnArgon
       end
 
       # rubocop:disable Style/PredicateName
+      # rubocop:disable Metrics/AbcSize
       def has_search_parameters?
         !params[:q].blank? ||
           !params[:f].blank? ||
           !params[:search_field].blank? ||
-          !params[:range].blank?
+          !params[:range].blank? ||
+          !params[:doc_ids].blank?
       end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Style/PredicateName
 
       def query_has_constraints?(localized_params = params)
         if is_advanced_search? localized_params
@@ -559,7 +569,8 @@ module TrlnArgon
           !(localized_params[:q].blank? &&
             localized_params[:f].blank? &&
             localized_params[:f_inclusive].blank? &&
-            localized_params[:range].blank?)
+            localized_params[:range].blank? &&
+            localized_params[:doc_ids].blank?)
         end
       end
 
@@ -569,6 +580,10 @@ module TrlnArgon
       end
 
       alias_method :render_refworks_action?, :render_ris_action?
+
+      def render_sharebookmarks_action?(_config, _options)
+        true if request.path == bookmarks_path
+      end
     end
   end
 end

@@ -78,6 +78,45 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'disable_boolean_for_all_caps' do
+    before do
+      builder_with_params.add_query_to_solr(solr_parameters)
+      builder_with_params.disable_boolean_for_all_caps(solr_parameters)
+    end
+
+    context 'query contains a boolean operator and is all caps' do
+      let(:builder_with_params) { search_builder.with(q: 'STURM AND DRANG') }
+
+      it 'downcases the query to turn off boolean treatment' do
+        expect(solr_parameters[:q]).to eq('sturm and drang')
+      end
+    end
+
+    context 'query contains a boolean operator and a lowercase letter' do
+      let(:builder_with_params) { search_builder.with(q: 'sturm AND drang') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('sturm AND drang')
+      end
+    end
+
+    context 'query does not contain boolean operators and is all caps' do
+      let(:builder_with_params) { search_builder.with(q: 'STURM UND DRANG') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('STURM UND DRANG')
+      end
+    end
+
+    context 'query does not contain boolean operators and has a lowercase letter' do
+      let(:builder_with_params) { search_builder.with(q: 'sturm und drang') }
+
+      it 'does not modify the query' do
+        expect(solr_parameters[:q]).to eq('sturm und drang')
+      end
+    end
+  end
+
   describe 'min_match_for_boolean' do
     before { builder_with_params.min_match_for_boolean(solr_parameters) }
 
@@ -92,7 +131,15 @@ describe TrlnArgon::ArgonSearchBuilder do
     context 'query does not contain any boolean operators' do
       let(:builder_with_params) { search_builder.with(q: 'deforestation columbia ecuador)') }
 
-      it 'applies the min match setting for boolean searches' do
+      it 'does not apply the min match setting for boolean searches' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+
+    context 'query contains a boolean operator and is all uppercase' do
+      let(:builder_with_params) { search_builder.with(q: 'STRANGE AND STRANGER') }
+
+      it 'does not apply the min match setting for boolean searches' do
         expect(solr_parameters[:mm]).to be_nil
       end
     end
@@ -181,6 +228,78 @@ describe TrlnArgon::ArgonSearchBuilder do
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
            'abs(publication_year_isort)),11,0)^50']
+        )
+      end
+    end
+  end
+
+  describe 'share_bookmarks' do
+    before { builder_with_params.add_document_ids_query(solr_parameters) }
+
+    context 'query contains a single bookmark ID' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: 'UNCb9249630'
+        )
+      end
+
+      it 'adds the correct defType to the solr query' do
+        expect(solr_parameters[:defType]).to eq(
+          'lucene'
+        )
+      end
+
+      it 'adds the correct q parameter to the solr query' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:(UNCb9249630)'
+        )
+      end
+    end
+
+    context 'query contains multiple bookmark IDs' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: 'UNCb9249630|UNCb9001022|UNCb7925949'
+        )
+      end
+
+      it 'adds the correct defType to the solr query' do
+        expect(solr_parameters[:defType]).to eq(
+          'lucene'
+        )
+      end
+
+      it 'adds the correct q parameter to the solr query' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:(UNCb9249630 OR UNCb9001022 OR UNCb7925949)'
+        )
+      end
+    end
+
+    context 'query contains junk' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: '&///?**__$$ '
+        )
+      end
+
+      it 'strips out the junk (only alphanumeric should pass)' do
+        expect(solr_parameters[:q]).to eq(
+          '{!lucene}id:()'
+        )
+      end
+    end
+
+    context 'query is empty' do
+      let(:builder_with_params) do
+        search_builder.with(
+          doc_ids: ''
+        )
+      end
+
+      it 'returns nil' do
+        expect(solr_parameters[:q]).to eq(
+          nil
         )
       end
     end

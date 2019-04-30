@@ -18,7 +18,9 @@ module TrlnArgon
           # Second Author
           # A2: ,
           # Location in Archives (Inst., Lib., Call No.)
-          AV: proc { holdings_to_text },
+          AV: proc { locations_to_text },
+          # Call Number
+          CN: proc { callnumbers_to_text },
           # Place Published (Note: Combined with Publisher in Argon imprint_main)
           # CY: ,
           # Reference ID

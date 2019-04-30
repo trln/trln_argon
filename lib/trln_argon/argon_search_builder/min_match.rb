@@ -5,7 +5,8 @@ module TrlnArgon
         return unless blacklight_params &&
                       blacklight_params[:q].present? &&
                       blacklight_params[:q].respond_to?(:match) &&
-                      blacklight_params[:q].match(/\s(AND|OR|NOT)\s/)
+                      blacklight_params[:q].match(/\s(AND|OR|NOT)\s/) &&
+                      blacklight_params[:q].match(/[a-z]+/)
         solr_parameters[:mm] = '1'
       end
 

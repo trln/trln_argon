@@ -2,6 +2,10 @@ describe DefaultLocalSearchBuilder do
   let(:obj) { described_class.new(CatalogController.new) }
 
   describe 'processor chain' do
+    it 'adds the disable_boolean_for_all_caps method to the processor_chain' do
+      expect(obj.processor_chain).to include(:disable_boolean_for_all_caps)
+    end
+
     it 'adds the wildcard_char_strip method to the processor chain' do
       expect(obj.processor_chain).to include(:wildcard_char_strip)
     end

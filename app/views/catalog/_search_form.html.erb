@@ -7,7 +7,7 @@
       <% params_to_block = blacklight_config.search_fields
                                             .keys
                                             .map(&:to_sym)
-                                            .concat(%i[q search_field qt page utf8 op]) %>
+                                            .concat(%i[q search_field qt page utf8 op doc_ids]) %>
       <%= render_hash_as_hidden_fields(search_state.params_for_search.except(*params_to_block)) %>
       <div class="row">
 

@@ -2,6 +2,8 @@ module TrlnArgon
   module BookmarksControllerBehavior
     extend ActiveSupport::Concern
 
+    include Blacklight::CatalogHelperBehavior
+
     included do
       helper_method :ris_path
       helper_method :ris_url
@@ -10,9 +12,11 @@ module TrlnArgon
       helper_method :sms_path
       helper_method :sms_url
       helper_method :url_for_document
+      helper_method :bookmarks_share_ids
 
       configure_blacklight do |config|
         config.search_builder_class = RollupOnlySearchBuilder
+        config.http_method = :get
       end
 
       private
@@ -48,6 +52,10 @@ module TrlnArgon
 
       def sms_url(options = {})
         sms_bookmarks_url(options)
+      end
+
+      def bookmarks_share_ids
+        current_bookmarks.map { |bookmark| bookmark[:document_id] }.join('|')
       end
     end
   end
