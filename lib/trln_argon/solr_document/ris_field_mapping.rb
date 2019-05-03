@@ -14,7 +14,7 @@ module TrlnArgon
           # Type of reference
           TY: proc { ris_type([*self[TrlnArgon::Fields::RESOURCE_TYPE]]) },
           # First Author
-          A1: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
+          A1: proc { names_to_text },
           # Second Author
           # A2: ,
           # Location in Archives (Inst., Lib., Call No.)

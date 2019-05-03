@@ -173,6 +173,62 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'author_boost' do
+    before { builder_with_params.author_boost(solr_parameters) }
+
+    context 'query contains a basic author search' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'Haruki Murakami',
+          'search_field' => 'author'
+        )
+      end
+
+      it 'adds the bq parameter to the solr query' do
+        expect(solr_parameters[:bq]).to eq(
+          ['language_f:English^5000']
+        )
+      end
+
+      it 'adds the bf parameter to the solr query' do
+        current_year = Date.today.year
+        current_year_plus_two = current_year + 2
+        current_year_minus_ten = current_year - 10
+        expect(solr_parameters[:bf]).to eq(
+          ["linear(map(publication_year_isort,#{current_year_plus_two}," \
+           "10000,#{current_year_minus_ten}," \
+           'abs(publication_year_isort)),11,0)^5']
+        )
+      end
+    end
+
+    context 'query contains an advanced author search' do
+      let(:builder_with_params) do
+        search_builder.with(
+          'author' => 'Haruki Murakami',
+          'search_field' => 'advanced'
+        )
+      end
+
+      it 'adds the bq parameter to the solr query' do
+        expect(solr_parameters[:bq]).to eq(
+          ['language_f:English^5000']
+        )
+      end
+
+      it 'adds the bf parameter to the solr query' do
+        current_year = Date.today.year
+        current_year_plus_two = current_year + 2
+        current_year_minus_ten = current_year - 10
+        expect(solr_parameters[:bf]).to eq(
+          ["linear(map(publication_year_isort,#{current_year_plus_two}," \
+           "10000,#{current_year_minus_ten}," \
+           'abs(publication_year_isort)),11,0)^5']
+        )
+      end
+    end
+  end
+
   describe 'subjects_boost' do
     before { builder_with_params.subjects_boost(solr_parameters) }
 

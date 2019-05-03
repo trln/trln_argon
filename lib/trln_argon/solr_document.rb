@@ -64,6 +64,10 @@ module TrlnArgon
       @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES, name: '', rel: '')
     end
 
+    def names_to_text
+      names.map { |n| n[:name] }.reject(&:empty?)
+    end
+
     def oclc_number
       fetch(TrlnArgon::Fields::OCLC_NUMBER, '')
     end

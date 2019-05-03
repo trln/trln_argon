@@ -12,7 +12,7 @@ module TrlnArgon
       def email_field_mapping
         @email_field_mapping ||= {
           title: TrlnArgon::Fields::TITLE_MAIN,
-          author: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,
+          author: proc { names_to_text },
           link_to_record: proc do
                             TrlnArgon::Engine.configuration.root_url.chomp('/') +
                               Rails.application.routes.url_helpers.solr_document_path(self)
