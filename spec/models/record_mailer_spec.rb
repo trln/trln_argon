@@ -11,7 +11,7 @@ describe RecordMailer do
                        institution_a: 'unc',
                        resource_type_a: ['Book'],
                        title_main: 'The horn',
-                       statement_of_responsibility_a: 'Janetzky, Kurt')
+                       names_a: ['{"name":"Janetzky, Kurt"}'])
     end
     let(:documents) { [document] }
     let(:details) { { to: 'test@test.com', message: 'This is my message' } }
@@ -50,7 +50,7 @@ describe RecordMailer do
                        institution_a: 'unc',
                        resource_type_a: ['Book'],
                        title_main: 'The horn',
-                       statement_of_responsibility_a: 'Janetzky, Kurt')
+                       names_a: ['{"name":"Janetzky, Kurt"}'])
     end
     let(:documents) { [document] }
     let(:details) { { to: '5555555555@txt.att.net' } }
