@@ -1,11 +1,11 @@
-<div id="related-works" class="<%= show_related_works_class %>" role="complementary" aria-labelledby="relatedWorksLabel">
-  <% if display_related_works?(document: document) %>
+<% if display_related_works?(document: document) %>
+  <div id="related-works" class="<%= show_related_works_class %>" role="complementary" aria-labelledby="relatedWorksLabel">
     <h2 id="relatedWorksLabel"><%= t('trln_argon.show.heading.related_works') %></h2>
       <dl class="dl-invert">
       <% show_configured_fields_and_values(blacklight_config.show_related_works_fields, document).each do |value| %>
           <dt><%= value[:label] %></dt>
           <%= value[:value] %>
       <% end %>
-    </dl>
-  <% end %>
-</div>
+    </dl>  
+  </div>
+<% end %>

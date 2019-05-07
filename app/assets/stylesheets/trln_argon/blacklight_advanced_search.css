@@ -1,2 +1,16 @@
 @import 'blacklight_advanced_search/advanced_results';
 @import 'blacklight_advanced_search/blacklight_advanced_search_styles';
+
+
+h2.query-criteria-heading,
+h2.limit-criteria-heading {
+  font-size: 24px;
+}
+
+h2.query-criteria-heading label {
+  font-weight: 500;
+}
+
+#advanced_search_facets .chosen-search-input {
+  color: #767676;
+}

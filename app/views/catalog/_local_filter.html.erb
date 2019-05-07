@@ -1,4 +1,4 @@
-<h2 class="local-filter-heading" id="localFilterLabel"><%= t("trln_argon.local_filter.showing_results") %></h2>
+<h2 class="local-filter-heading" id="<%= local_filter_id %>"><%= t("trln_argon.local_filter.showing_results") %></h2>
 
 <% query_state = query_state_from_search_state(search_state) %>
 <% query_state.delete('page') %>

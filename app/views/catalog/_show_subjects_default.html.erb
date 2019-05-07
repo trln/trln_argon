@@ -1,10 +1,10 @@
-<div id="subjects" class="<%= show_subjects_class %>" role="complementary" aria-labelledby="subjectsLabel">
-  <% if display_subjects?(document: document) %>
+<% if display_subjects?(document: document) %>
+  <div id="subjects" class="<%= show_subjects_class %>" role="complementary" aria-labelledby="subjectsLabel">
     <h2 id="subjectsLabel"><%= t('trln_argon.show.heading.subjects') %></h2>
     <ul>
       <% show_configured_fields_and_values(blacklight_config.show_subjects_fields, document).each do |value| %>
           <%= value[:value] %>
       <% end %>
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>
