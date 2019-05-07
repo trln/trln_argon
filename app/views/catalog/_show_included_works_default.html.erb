@@ -1,10 +1,10 @@
-<div id="included-works" class="<%= show_included_works_class %>" role="complementary" aria-labelledby="includedWorksLabel">
-  <% if display_included_works?(document: document) %>
+<% if display_included_works?(document: document) %>
+  <div id="included-works" class="<%= show_included_works_class %>" role="complementary" aria-labelledby="includedWorksLabel">
     <h2 id="includedWorksLabel"><%= t('trln_argon.show.heading.included_works') %></h2>
     <ul>
       <% show_configured_fields_and_values(blacklight_config.show_included_works_fields, document).each do |value| %>
           <%= value[:value] %>
       <% end %>
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>
