@@ -9,7 +9,7 @@
 -%>
 
 <% if show_doc_actions? %>
-  <div id="document-tools" role="complementary" aria-labelledby="toolsLabel">
+  <div id="document-tools" aria-labelledby="toolsLabel">
     <h2 class="sr-only" id="toolsLabel">Tools</h2>
     <ul class="<%= controller_name %>Tools nav nav-pills">
       <%= render_show_doc_actions @document do |config, inner| %>
