@@ -49,6 +49,7 @@ en:
         form:
             title: "Advanced Search"
             show_results_from: 'Show results from:'
+            query_criteria_heading_html: "<label for='op'>Find items that match</label> %{select_menu} of"
 
     trln_argon:
 
