@@ -45,11 +45,11 @@ module TrlnArgon
 
         head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
 
-        if File.exist?(head_fetch_file)
-          # this method might get called in a loop when, e.g. creating
-          # an engine_cart instance, so we need a very short term cache.
-          do_pull = File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
-        end
+        do_pull = if File.exist?(head_fetch_file)
+                    File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
+                  else
+                    true
+                  end
 
         if do_pull
           logger.info("Pulling changes from #{@url}")
