@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'openurl', '~>1.0'
   s.add_dependency 'font-awesome-rails', '~> 4.7'
   s.add_dependency 'bootstrap-select-rails', '~> 1.12'
-  s.add_dependency 'chosen-rails', '~> 1.8.7'
+  s.add_dependency 'trln-chosen-rails', '~> 1.8.7'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
