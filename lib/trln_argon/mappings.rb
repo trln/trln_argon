@@ -40,7 +40,7 @@ module TrlnArgon
     def refresh
       if File.directory?(File.join(@repo_dir, '.git'))
         @git ||= Git.init(@repo_dir)
-        do_pull = false
+
         logger.info("Repository #{@url} has already been cloned")
 
         head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
