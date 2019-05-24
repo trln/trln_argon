@@ -13,10 +13,7 @@ module TrlnArgon
           # TODO: Do something sensible when format is more settled
           format: proc { 'book' },
           identifiers: [
-            proc do
-              TrlnArgon::Engine.configuration.root_url.chomp('/') +
-                Rails.application.routes.url_helpers.solr_document_path(self)
-            end
+            proc { link_to_record }
           ],
           metadata: {
             au: TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY,

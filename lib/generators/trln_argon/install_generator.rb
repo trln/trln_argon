@@ -26,6 +26,24 @@ module TrlnArgon
       copy_file 'solr_field_overrides.yml', 'config/solr_field_overrides.yml'
     end
 
+    def install_trln_controller_file
+      copy_file 'trln_controller.rb', 'app/controllers/trln_controller.rb'
+    end
+
+    def install_solr_document_behaviors
+      copy_file 'solr_document_behavior.rb', 'app/models/concerns/solr_document_behavior.rb'
+    end
+
+    def install_solr_document
+      # remove Blacklight installed solr_document.rb
+      File.delete('app/models/solr_document.rb')
+      copy_file 'solr_document.rb', 'app/models/solr_document.rb'
+    end
+
+    def install_trln_solr_document
+      copy_file 'trln_solr_document.rb', 'app/models/trln_solr_document.rb'
+    end
+
     def load_helpers_in_host_application
       insert_into_file 'app/controllers/application_controller.rb',
                        after: 'layout \'blacklight\'' do
@@ -54,77 +72,11 @@ module TrlnArgon
       end
     end
 
-    def inject_item_deserializer
-      solrdoc = 'app/models/solr_document.rb'
-      return if IO.read(solrdoc).include?('TrlnArgon')
-      insert_into_file solrdoc, before: 'class SolrDocument' do
-        "\nrequire 'trln_argon'\n\n"
-      end
-      insert_into_file solrdoc, after: 'include Blacklight::Solr::Document' do
-        "\n  include TrlnArgon::ItemDeserializer\n"
-      end
-    end
-
-    def inject_solr_document_behaviors
-      solrdoc = 'app/models/solr_document.rb'
-      return if IO.read(solrdoc).include?('TrlnArgon::SolrDocument')
-      insert_into_file solrdoc, after: 'include Blacklight::Solr::Document' do
-        "\n  include TrlnArgon::SolrDocument\n"
-      end
-    end
-
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
         "\n\n  BetterErrors::Middleware.allow_ip! \"10.0.2.2\" if defined? BetterErrors && Rails.env == :development\n"
       end
-    end
-
-    # rubocop:disable MethodLength
-    def inject_into_solr_document
-      line_to_check = 'SolrDocument.repository.blacklight_config.document_solr_path'
-      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
-      insert_into_file 'app/models/solr_document.rb', after: 'include Blacklight::Solr::Document' do
-        "\n\n  # This is needed so that SolrDocument.find will work correctly"\
-        "\n  # from the Rails console with our Solr configuration."\
-        "\n  # Otherwise, it tries to use the non-existent document request handler."\
-        "\n  SolrDocument.repository.blacklight_config.document_solr_path = :document"\
-        "\n  SolrDocument.repository.blacklight_config.document_solr_request_handler = nil"
-      end
-    end
-
-    def inject_ris_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)'
-      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
-      insert_into_file 'app/models/solr_document.rb',
-                       after: 'SolrDocument.repository.blacklight_config.document_solr_request_handler = nil' do
-        "\n  SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)\n"
-      end
-    end
-
-    def inject_open_url_ctx_kev_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::OpenurlCtxKev)'
-      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
-      insert_into_file 'app/models/solr_document.rb',
-                       after: 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Ris)' do
-        "\n  SolrDocument.use_extension(TrlnArgon::DocumentExtensions::OpenurlCtxKev)\n"
-      end
-    end
-
-    def inject_email_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Email)'
-      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
-      gsub_file 'app/models/solr_document.rb',
-                'SolrDocument.use_extension(Blacklight::Document::Email)',
-                'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Email)'
-    end
-
-    def inject_sms_action
-      line_to_check = 'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Sms)'
-      return if IO.read('app/models/solr_document.rb').include?(line_to_check)
-      gsub_file 'app/models/solr_document.rb',
-                'SolrDocument.use_extension(Blacklight::Document::Sms)',
-                'SolrDocument.use_extension(TrlnArgon::DocumentExtensions::Sms)'
     end
 
     def inject_catalog_controller_overrides

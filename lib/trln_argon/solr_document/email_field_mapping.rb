@@ -8,15 +8,11 @@ module TrlnArgon
       # For more complex data mappings see proc examples.
 
       # rubocop:disable MethodLength
-      # rubocop:disable AbcSize
       def email_field_mapping
         @email_field_mapping ||= {
           title: TrlnArgon::Fields::TITLE_MAIN,
           author: proc { names_to_text },
-          link_to_record: proc do
-                            TrlnArgon::Engine.configuration.root_url.chomp('/') +
-                              Rails.application.routes.url_helpers.solr_document_path(self)
-                          end,
+          link_to_record: proc { link_to_record },
           location: proc { holdings_to_text },
           publisher: proc { imprint_main_to_text },
           edition: TrlnArgon::Fields::EDITION,
