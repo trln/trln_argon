@@ -52,6 +52,13 @@ module TrlnArgon
         ).map { |isbn_info_pairs| isbn_info_pairs.join(' ') }
     end
 
+    # Needed so that document export functions can generate a link
+    # back to the record without the controller context.
+    def link_to_record
+      TrlnArgon::Engine.configuration.root_url.chomp('/') +
+        Rails.application.routes.url_helpers.solr_document_path(self)
+    end
+
     def marc_summary
       format_for_display(self[TrlnArgon::Fields::NOTE_SUMMARY])
     end

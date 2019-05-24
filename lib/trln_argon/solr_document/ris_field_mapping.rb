@@ -48,10 +48,7 @@ module TrlnArgon
           # Secondary Title (journal title, if applicable)
           # T2: ,
           # URL
-          UR: proc do
-                TrlnArgon::Engine.configuration.root_url.chomp('/') +
-                  Rails.application.routes.url_helpers.solr_document_path(self)
-              end
+          UR: proc { link_to_record }
         }
       end
 
