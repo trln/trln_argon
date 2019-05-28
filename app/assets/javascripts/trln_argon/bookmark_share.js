@@ -17,23 +17,43 @@ $(document).on('click', '#share_bookmarksLink', function( e ){
   // open modal
   $('#bookmark-modal').modal('show');
 
-  // initiate tooltip
-  $('#copy-to-clipboard').tooltip();
+  // don't use toopltip for iOS
+  if (!navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+    $('#copy-to-clipboard').tooltip();
+  }
 
   // copy URL
   $('#copy-to-clipboard').click(function() {
 
-    $('#sharing-url-holder').focus();
-    $('#sharing-url-holder').select();
+    // separate approach for iOS
+    if (navigator.userAgent.match(/ipad|ipod|iphone/i)) {
+      $('#sharing-url-holder').attr('readonly', false);
+      $('#sharing-url-holder').attr('contenteditable', true);
+      range = document.createRange();
+      range.selectNodeContents($('#sharing-url-holder')[0]);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(range);
+      $('#sharing-url-holder')[0].setSelectionRange(0, $('#sharing-url-holder').val().length);
+      document.execCommand('copy'); // only works with iOS 10+
+      $('#sharing-url-holder').attr('readonly', true);
+      $('#sharing-url-holder').attr('contenteditable', false);
 
-    try {
-      var successful = document.execCommand('copy');
-      var msg = successful ? 'successful' : 'unsuccessful';
-      $('#copy-to-clipboard').attr('title', 'Copied!').tooltip('fixTitle').tooltip('show');
-      $('#bookmark-modal .tooltip').delay( 1000 ).fadeOut();
-      $('#copy-to-clipboard').attr('title', 'Copy to clipboard').tooltip('fixTitle');
-    } catch (err) {
-      console.log('Oops, unable to copy');
+    } else {
+
+      $('#sharing-url-holder').focus();
+      $('#sharing-url-holder').select();
+      
+      try {
+        var successful = document.execCommand('copy');
+        var msg = successful ? 'successful' : 'unsuccessful';
+        $('#copy-to-clipboard').attr('title', 'Copied!').tooltip('fixTitle').tooltip('show');
+        $('#bookmark-modal .tooltip').delay( 1000 ).fadeOut();
+        $('#copy-to-clipboard').attr('title', 'Copy to clipboard').tooltip('fixTitle');
+      } catch (err) {
+        console.log('Oops, unable to copy');
+      }
+
     }
 
   });
