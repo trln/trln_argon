@@ -168,5 +168,12 @@ module TrlnArgon
                 /^\s*config.autocomplete_path = 'suggest'/,
                 "    # config.autocomplete_path = 'suggest'")
     end
+
+    def inject_trln_argon_user
+      file = 'app/models/user.rb'
+      insert_into_file(file, after: 'include Blacklight::User') do
+        "\n  include TrlnArgon::User\n"
+      end
+    end
   end
 end
