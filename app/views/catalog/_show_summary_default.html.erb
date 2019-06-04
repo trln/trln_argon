@@ -2,7 +2,7 @@
 
   <% if display_summary?(document: @document) %>
     <span id="summary-top"></span>
-    <section id="summary" class="<%= show_enhanced_data_summary_class %>" role="complementary" aria-labelledby="summaryLabel">
+    <section id="summary" class="<%= show_enhanced_data_summary_class %>" aria-labelledby="summaryLabel">
 
       <h2 id="summaryLabel"><%= t('trln_argon.show.heading.summary') %></h2>
 
@@ -22,7 +22,7 @@
 
   <% if display_toc?(document: @document) %>
     <span id="contents-top"></span>
-    <section id="contents" class="<%= show_enhanced_data_toc_class %>" role="complementary" aria-labelledby="contentsLabel">
+    <section id="contents" class="<%= show_enhanced_data_toc_class %>" aria-labelledby="contentsLabel">
       <h2 id="contentsLabel"><%= t('trln_argon.show.heading.contents') %></h2>
 
       <div class="content expandable-content">
@@ -39,7 +39,7 @@
 
   <% if display_sample_chapter?(document: @document) %>
   <span id="sample-chapter-top"></span>
-  <section id="sample-chapter" class="<%= show_enhanced_data_sample_chapter_class %>" role="complementary" aria-labelledby="sampleChapterLabel">
+  <section id="sample-chapter" class="<%= show_enhanced_data_sample_chapter_class %>" aria-labelledby="sampleChapterLabel">
     <h2 id="sampleChapterLabel"><%= t('trln_argon.show.heading.sample_chapter') %></h2>
 
     <div class='content expandable-content'>

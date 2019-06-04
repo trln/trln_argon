@@ -29,5 +29,9 @@ describe DefaultTrlnSearchBuilder do
     it 'adds the subjects boost method to the processor chain' do
       expect(obj.processor_chain).to include(:subjects_boost)
     end
+
+    it 'adds the author boost method to the processor chain' do
+      expect(obj.processor_chain).to include(:author_boost)
+    end
   end
 end

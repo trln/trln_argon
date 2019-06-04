@@ -17,5 +17,7 @@ module TrlnArgon
   autoload :SolrEscape, 'trln_argon/solr_escape'
   autoload :SyndeticsData, 'trln_argon/syndetics_data'
   autoload :TrlnControllerBehavior, 'trln_argon/trln_controller_behavior'
+  autoload :TrlnSolrDocument, 'trln_argon/trln_solr_document'
+  autoload :User, 'trln_argon/user.rb'
   autoload :ViewHelpers, 'trln_argon/view_helpers'
 end

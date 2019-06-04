@@ -231,6 +231,7 @@ body {
 
     .filter-expand {
       position: absolute;
+      width: 0 !important;
     }
 
   }
@@ -467,7 +468,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     #included-works ul {
       list-style-type: square;
       padding-left: 2em;
-      color: #999;
+      color: #767676;
     }
 }
 
@@ -1173,10 +1174,11 @@ h1, h2, h3, h4, h5 {
       margin-top: 2.5em;
     }
 
-    h4 {
+    h3, h4 {
       font-size: 1.2em;
       margin-top: 0;
       margin-bottom: 0;
+      color: #333;
     }
 
   }
@@ -1476,7 +1478,7 @@ div.marc-record {
     .toc-element-pagerange {
       font-size: 90%;
       margin-left: 0.5em;
-      color: #aaa;
+      color: #767676;
     }
     .toc-element-author {
       display: block;
@@ -1583,7 +1585,7 @@ h2.local-filter-heading  {
 
 .blacklight-advanced {
   .search-query-form, .blacklight-advanced_trln .search-query-form {
-    display: none;
+    /* fixed via JS */
   }
   form.advanced span.option-wrapper {
     display: inline-block;
@@ -1673,15 +1675,12 @@ h2.local-filter-heading  {
 
 .syndetics-copyright {
   text-align: right;
-  color: #999;
+  color: #767676;
 }
 
 .skiplink {
-  position: absolute;
-  left: -10000px;
+  padding: 0.5em;
 }
-
-
 
 
 /* Holdings */

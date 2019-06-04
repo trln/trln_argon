@@ -1,10 +1,10 @@
-<div id="authors" class="<%= show_authors_class %>" role="complementary" aria-labelledby="authorsLabel">
-  <% if display_authors?(document: document) %>
+<% if display_authors?(document: document) %>
+  <div id="authors" class="<%= show_authors_class %>" aria-labelledby="authorsLabel">
     <h2 id="authorsLabel"><%= t('trln_argon.show.heading.authors') %></h2>
     <ul>
       <% show_configured_fields_and_values(blacklight_config.show_authors_fields, document).each do |value| %>
           <%= value[:value] %>
       <% end %>
     </ul>
-  <% end %>
-</div>
+  </div>
+<% end %>

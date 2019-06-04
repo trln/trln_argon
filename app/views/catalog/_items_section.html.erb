@@ -69,11 +69,11 @@
                 <div class="col-md-12">
                   <div class="items-toggle">
 
-                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
                       <%= t('trln_argon.show.controls.show') %> <%= t('trln_argon.show.controls.all') %> <%= item_data['items'].length %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     </a>
 
-                    <a href="#<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='this'>
+                    <a href="#<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
                       <%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </a>
 

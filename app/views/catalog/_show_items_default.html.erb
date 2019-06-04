@@ -1,6 +1,6 @@
 <% if display_holdings_well?(document: document) %>
 
-  <div id="holdings" class="<%= show_items_class %>" role="complementary" aria-labelledby="holdingsLabel">
+  <div id="holdings" class="<%= show_items_class %>" aria-labelledby="holdingsLabel">
 
     <h2 class="holdings-header" id="holdingsLabel"><%= t('trln_argon.show.heading.holdings') %></h2>
 
@@ -15,7 +15,7 @@
           <%= render partial: 'items_section',
                      locals: { document: document,
                                num_display_items: TrlnArgon::Engine.configuration.number_of_items_show_view.to_f,
-                               loc_b_header_level: :h4 } %>
+                               loc_b_header_level: :h3 } %>
         <% end %>
 
       </div>
