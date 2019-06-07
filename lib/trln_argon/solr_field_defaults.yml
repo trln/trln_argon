@@ -278,6 +278,10 @@ NOTE_PERFORMER_CREDITS:
   solr_field: note_performer_credits_a
   label:
     en: Performers/Participants
+NOTE_PREFERRED_CITATION:
+  solr_field: note_preferred_citation_a
+  label:
+    en: Preferred Citation
 NOTE_PRODUCTION_CREDITS:
   solr_field: note_production_credits_a
   label:
@@ -322,6 +326,10 @@ NOTE_TOC:
   solr_field: note_toc_a
   label:
     en: Contents
+NOTE_USE_TERMS:
+  solr_field: note_use_terms_a
+  label:
+    en: Terms of Use
 NOTE_WITH:
   solr_field: note_with_a
   label:

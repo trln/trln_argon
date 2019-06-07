@@ -279,6 +279,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTE_DISSERTATION.label
         config.add_show_field TrlnArgon::Fields::NOTE_ACCESS_RESTRICTIONS.to_s,
                               label: TrlnArgon::Fields::NOTE_ACCESS_RESTRICTIONS.label
+        config.add_show_field TrlnArgon::Fields::NOTE_USE_TERMS.to_s,
+                              label: TrlnArgon::Fields::NOTE_USE_TERMS.label
         config.add_show_field TrlnArgon::Fields::NOTE_SCALE.to_s,
                               label: TrlnArgon::Fields::NOTE_SCALE.label
         config.add_show_field TrlnArgon::Fields::NOTE_PRODUCTION_CREDITS.to_s,
@@ -319,6 +321,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTE_GENERAL.label
         config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
                               label: TrlnArgon::Fields::NOTE_LOCAL.label
+        config.add_show_field TrlnArgon::Fields::NOTE_PREFERRED_CITATION.to_s,
+                              label: TrlnArgon::Fields::NOTE_PREFERRED_CITATION.label
         config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION.to_s,
                               label: TrlnArgon::Fields::PHYSICAL_DESCRIPTION.label
         config.add_show_field TrlnArgon::Fields::PHYSICAL_DESCRIPTION_DETAILS.to_s,
