@@ -360,6 +360,14 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the Genre Heading field' do
       expect(override_config.show_fields).to have_key('genre_headings_a')
     end
+
+    it 'sets the Terms of Use field' do
+      expect(override_config.show_fields).to have_key('note_use_terms_a')
+    end
+
+    it 'sets the Preferred Citation field' do
+      expect(override_config.show_fields).to have_key('note_preferred_citation_a')
+    end
   end
 
   describe 'show included works fields' do
