@@ -1,0 +1,8 @@
+<!-- NOTE: To turn off Internet Archive links, override this partial in your -->
+<!--       local application and leave the partial empty. -->
+
+<% unless document.internet_archive_id.empty? %>
+  <div class="internet-archive-link internet-archive-id-<%= document.internet_archive_id.first %>"
+       data-internet-archive-id="<%= document.internet_archive_id.join('|') %>">
+  </div>
+<% end %>

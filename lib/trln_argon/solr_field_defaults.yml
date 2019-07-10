@@ -114,6 +114,10 @@ INSTITUTION_FACET:
   solr_field: :institution_f
   label:
     en: Institution
+INTERNET_ARCHIVE_ID:
+  solr_field: :internet_archive_id_a
+  label:
+    en: Internet Archive ID
 ISBN_NUMBER:
   solr_field: :isbn_number_a
   label:

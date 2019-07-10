@@ -9,6 +9,7 @@ module TrlnArgon
   autoload :Field, 'trln_argon/field'
   autoload :Fields, 'trln_argon/fields'
   autoload :HathitrustControllerBehavior, 'trln_argon/hathitrust_controller_behavior'
+  autoload :InternetArchiveControllerBehavior, 'trln_argon/internet_archive_controller_behavior'
   autoload :ItemDeserializer, 'trln_argon/item_deserializer'
   autoload :LookupManager, 'trln_argon/mappings'
   autoload :Lookups, 'trln_argon/mappings'

@@ -44,8 +44,12 @@ module TrlnArgon
         @hathitrust_response_hash ||= JSON.parse(hathitrust_api_response)
       end
 
+      # rubocop:disable MethodLength
       def hathitrust_api_response
-        response = Net::HTTP.start(hathitrust_uri.host, hathitrust_uri.port,
+        response = Net::HTTP.start(hathitrust_uri.host,
+                                   hathitrust_uri.port,
+                                   open_timeout: 10,
+                                   read_timeout: 10,
                                    use_ssl: hathitrust_uri.scheme == 'https') do |http|
                                      request = Net::HTTP::Get.new hathitrust_uri
                                      http.request request
@@ -56,6 +60,7 @@ module TrlnArgon
         Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
         '{}'
       end
+      # rubocop:enable MethodLength
 
       def hathitrust_uri
         @hathitrust_uri ||= URI(hathitrust_uri_path)

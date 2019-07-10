@@ -25,4 +25,5 @@
   <%= render partial: 'open_access_links', locals: { document: document } %>
 <% else %>
   <%= render partial: 'hathitrust_link', locals: { document: document } %>
+  <%= render partial: 'internet_archive_link', locals: { document: document } %>
 <% end %>

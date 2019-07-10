@@ -41,6 +41,10 @@ module TrlnArgon
       )
     end
 
+    def internet_archive_id
+      fetch(TrlnArgon::Fields::INTERNET_ARCHIVE_ID, [])
+    end
+
     def isbn_number
       fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
     end
