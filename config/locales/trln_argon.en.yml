@@ -127,6 +127,7 @@ en:
         links:
             finding_aid: "Finding Aid"
             hathitrust: "Full text available via HathiTrust"
+            internet_archive: "Full text available via Internet Archive"
             online_access: "Online Access"
             online_access_restricted: "Online Access (%{institution} Only)"
             open_access: "Open Access"

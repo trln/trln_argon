@@ -1,0 +1,7 @@
+<% unless internet_archive_argon_url_hash.fetch(:href, nil).blank? %>
+  <div class="<%= primary_link_class %>">
+    <ul>
+      <li><%= link_to_open_access(internet_archive_argon_url_hash) %></li>
+    </ul>
+  </div>
+<% end %>
