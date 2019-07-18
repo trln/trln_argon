@@ -34,9 +34,11 @@ Blacklight.onLoad(function() {
                     if (! link ) {
                         return;
                     }
-                    $('#google-books-preview-image').each(function () {
-                        if (this.src.length == 0) {
-                            $('#google-books-preview-image').attr({ src: "<%= asset_path('trln_argon/google_books_preview.png') %>" });
+                    $('#google-books').each(function () {
+                        if ($(this).find('img').length == 0) {
+                            $('#google-books').append("<img id='google-books-preview-image' " +
+                                "alt='Google Preview' " +
+                                "src='<%= asset_path('trln_argon/google_books_preview.png') %>'>");
                             $("#google-books-preview-image").after(
                                 '<a href=' + link +
                                 ' target="_blank"> Preview this title via Google Book Search </a>');
