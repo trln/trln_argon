@@ -46,6 +46,14 @@ describe TrlnArgon::Engine do
     it 'sets number of items in show view' do
       expect(config.number_of_items_show_view).to eq('6')
     end
+
+    it 'sets the paging limit' do
+      expect(config.paging_limit).to eq('250')
+    end
+
+    it 'sets the facet paging limit' do
+      expect(config.facet_paging_limit).to eq('50')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -61,6 +69,8 @@ describe TrlnArgon::Engine do
                                  'ho=t&fvf=ContentType,Journal%20Article,f|'\
                                  'ContentType,Magazine%20Article,f&l=en&q='
     config.contact_url = 'https://library.duke.edu/research/ask'
+    config.paging_limit = '100'
+    config.facet_paging_limit = '10'
 
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('custom_institution')
@@ -104,6 +114,14 @@ describe TrlnArgon::Engine do
 
     it 'sets number of items in show view' do
       expect(config.number_of_items_show_view).to eq('6')
+    end
+
+    it 'sets the paging limit' do
+      expect(config.paging_limit).to eq('100')
+    end
+
+    it 'sets the facet paging limit' do
+      expect(config.facet_paging_limit).to eq('10')
     end
   end
 end

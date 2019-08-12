@@ -162,6 +162,10 @@ en:
               online: 'Online'
               findingaid: 'Collection Guide'
 
+        paging_limit:
+            results: 'Only the first %{paging_limit} pages of results may be viewed. Please contact us using the feedback form if you need to view more results.'
+            facets: 'Only the first %{facet_paging_limit} pages of facets may be viewed. Please contact us using the feedback form if you need to view more facets.'
+
         show:
             heading:
                 holdings: "Where to find it"

@@ -59,6 +59,10 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     }
 }
 
+.facet-paging-alert p {
+  text-align: left !important;
+}
+
 .panel-success, .facet_limit-active {
     border-color: $primary-color;
 }

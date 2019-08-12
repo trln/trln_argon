@@ -156,6 +156,16 @@ SORT_ORDER_IN_HOLDING_LIST: 'unc, duke, ncsu, nccu, trln'
 NUMBER_OF_LOCATION_FACETS: '10'
 NUMBER_OF_ITEMS_INDEX_VIEW: '3'
 NUMBER_OF_ITEMS_SHOW_VIEW: '6'
+# Sets the last page of results that may be loaded.
+# Deep paging is resource intensive and without this limit
+# bots and humans can overload Solr. Configurable, but the default
+# value is recommended.
+PAGING_LIMIT: 250
+# Sets the last page of facet results that may be loaded.
+# Deep facet paging is resource intensive and without this limit
+# bots and humans can overload Solr. Configurable, but the default
+# value is recommended.
+FACET_PAGING_LIMIT: 50
 # this entry need not be present, but this shows the default
 # value; a git repository containing the mappings is checked
 # out to the directory

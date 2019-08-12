@@ -3,7 +3,7 @@
   <div class="col-md-12">
 
     <div class="pagination">
-      <%= paginate @response, :outer_window => 0, :theme => 'blacklight' %>
+      <%= paginate @response, :theme => 'blacklight' %>
 
       <div id="viewAllResultsEnd" class="clearfix">
         <%= render :partial => "local_filter", locals: { local_filter_id: 'localFilterLabelFooter', local_button_id: 'toggle-local-btn-bottom', trln_button_id: 'toggle-trln-btn-bottom' } %>
