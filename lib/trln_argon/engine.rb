@@ -40,6 +40,8 @@ module TrlnArgon
                     :number_of_location_facets,
                     :number_of_items_index_view,
                     :number_of_items_show_view,
+                    :paging_limit,
+                    :facet_paging_limit,
                     :unc_latest_received_url
 
       # rubocop:disable MethodLength
@@ -63,6 +65,8 @@ module TrlnArgon
         @number_of_location_facets = '10'
         @number_of_items_index_view = '3'
         @number_of_items_show_view = '6'
+        @paging_limit = '250'
+        @facet_paging_limit = '50'
         @unc_latest_received_url = 'https://webcat.lib.unc.edu/search/.%<local_id>s/.%<local_id>s/,,,/cr%<holdings_id>s'
       end
       # rubocop:enable MethodLength

@@ -1,4 +1,5 @@
 require 'trln_argon/controller_override/local_filter'
+require 'trln_argon/controller_override/paging_limit'
 
 module TrlnArgon
   # Sets the default Blacklight configuration and
@@ -10,7 +11,11 @@ module TrlnArgon
 
     included do
       send(:include, LocalFilter)
+      send(:include, PagingLimit)
       send(:include, BlacklightAdvancedSearch::Controller)
+
+      before_action :limit_results_paging, only: :index
+      before_action :limit_facet_paging, only: :facet
 
       helper_method :query_has_constraints?
 
