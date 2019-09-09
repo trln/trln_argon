@@ -353,7 +353,8 @@ describe TrlnArgon::SolrDocument do
       SolrDocumentTestClass.new(
         id: 'DUKE12345',
         url_a: ['{"href":"http://purl.access.gpo.gov/GPO/LPS606","type":"fulltext"}',
-                '{"href":"http://some/open/access/thinkg","type":"fulltext", "restricted":"false"}']
+                '{"href":"http://some/open/access/thinkg","type":"fulltext", "restricted":"false"}'],
+        institution_a: ['duke']
       )
     end
 
@@ -750,7 +751,8 @@ describe TrlnArgon::SolrDocument do
           items_a: 'a unc item',
           url_a: ['{"href":"https://proxy.lib.unc.edu/login?url='\
                   'http://www.aspresolver.com/aspresolver.asp?ANTH;1659389",'\
-                  '"type":"fulltext","text":"Episode 1"}'] }
+                  '"type":"fulltext","text":"Episode 1"}'],
+          institution_a: ['unc'] }
       end
 
       let(:another_rolled_up_doc) do

@@ -9,10 +9,19 @@ module TrlnArgon
       # All the restricted and local fulltext URLs.
       # Excludes Shared URLs that require param substitution
       # Excludes URLs that are set to restricted: false
+      # def fulltext_urls
+      #   @fulltext_urls ||= select_urls('fulltext').reject do |url|
+      #     url_has_variables?(url[:href]) ||
+      #       url.fetch(:restricted, 'true') == 'false'
+      #   end
+      # end
+
       def fulltext_urls
-        @fulltext_urls ||= select_urls('fulltext').reject do |url|
-          url_has_variables?(url[:href]) ||
-            url.fetch(:restricted, 'true') == 'false'
+        @fulltext_urls ||= select_fulltext_urls.each do |url|
+          if url_has_variables?(url[:href])
+            url[:href] = url_template_subst(url[:href],
+                                            TrlnArgon::Engine.configuration.local_institution_code)
+          end
         end
       end
 
@@ -66,6 +75,13 @@ module TrlnArgon
         urls.select { |url| url[:type] == type }
       end
 
+      def select_fulltext_urls
+        select_urls('fulltext').select do |url|
+          fetch(TrlnArgon::Fields::INSTITUTION, []).count == 1 &&
+            url.fetch(:restricted, 'true') == 'true'
+        end
+      end
+
       def deserialized_urls
         deserialize_solr_field(TrlnArgon::Fields::URLS,
                                { href: '', type: '', text: '', note: '' },
@@ -78,7 +94,9 @@ module TrlnArgon
 
       def templated_fulltext_shared_urls
         deserialized_urls.select do |url|
-          url_has_variables?(url[:href]) && url[:type] == 'fulltext'
+          url_has_variables?(url[:href]) &&
+            url[:type] == 'fulltext' &&
+            fetch(TrlnArgon::Fields::INSTITUTION, []).count > 1
         end
       end
 
