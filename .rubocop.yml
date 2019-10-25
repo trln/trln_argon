@@ -32,6 +32,7 @@ Metrics/BlockLength:
     - 'lib/tasks/trln_argon_tasks.rake'
     - 'spec/lib/trln_argon/fields_spec.rb'
     - 'spec/**/*'
+    - 'config/initializers/trln_argon.rb'
 
 Metrics/ClassLength:
   Exclude:

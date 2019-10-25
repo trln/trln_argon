@@ -1,5 +1,6 @@
 require 'trln_argon/controller_override/local_filter'
 require 'trln_argon/controller_override/paging_limit'
+require 'trln_argon/controller_override/solr_caching'
 
 module TrlnArgon
   # Sets the default Blacklight configuration and
@@ -12,6 +13,7 @@ module TrlnArgon
     included do
       send(:include, LocalFilter)
       send(:include, PagingLimit)
+      send(:include, SolrCaching)
       send(:include, BlacklightAdvancedSearch::Controller)
 
       before_action :limit_results_paging, only: :index
@@ -557,6 +559,12 @@ module TrlnArgon
         # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
         #                       "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
+      end
+
+      # Override default Blacklight index action to add caching
+      # See behavior in lib/controller_override/solr_caching_catalog.rb
+      def index
+        cached_catalog_index
       end
 
       # rubocop:disable Style/PredicateName

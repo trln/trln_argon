@@ -20,6 +20,7 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'paging_limit')
   apply_local_configuration(config, 'facet_paging_limit')
   apply_local_configuration(config, 'unc_latest_received_url')
+  apply_local_configuration(config, 'solr_cache_exp_time')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',
