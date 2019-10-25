@@ -45,12 +45,12 @@ module TrlnArgon
       end
 
       def standard_search_title_boost
-        "#{TrlnArgon::Fields::TITLE_MAIN_INDEXED}:"\
+        "#{TrlnArgon::Fields::TITLE_MAIN_INDEXED_NO_STEM}:"\
         "(#{RSolr.solr_escape(blacklight_params[:q])})^500"
       end
 
       def advanced_search_title_boost
-        "#{TrlnArgon::Fields::TITLE_MAIN_INDEXED}:"\
+        "#{TrlnArgon::Fields::TITLE_MAIN_INDEXED_NO_STEM}:"\
         "(#{RSolr.solr_escape(blacklight_params['subject'])})^500"
       end
 

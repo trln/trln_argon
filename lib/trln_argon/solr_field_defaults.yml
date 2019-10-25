@@ -478,6 +478,10 @@ TITLE_MAIN_INDEXED:
   solr_field: :title_main_indexed_t
   label:
     en: Title Main Indexed
+TITLE_MAIN_INDEXED_NO_STEM:
+  solr_field: :title_main_indexed_tp
+  label:
+    en: Title Main Indexed No Stem
 TITLE_MAIN_VERN:
   solr_field: :title_main_vern
   label:

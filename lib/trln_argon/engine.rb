@@ -42,7 +42,8 @@ module TrlnArgon
                     :number_of_items_show_view,
                     :paging_limit,
                     :facet_paging_limit,
-                    :unc_latest_received_url
+                    :unc_latest_received_url,
+                    :solr_cache_exp_time
 
       # rubocop:disable MethodLength
       def initialize
@@ -68,6 +69,7 @@ module TrlnArgon
         @paging_limit = '250'
         @facet_paging_limit = '50'
         @unc_latest_received_url = 'https://webcat.lib.unc.edu/search/.%<local_id>s/.%<local_id>s/,,,/cr%<holdings_id>s'
+        @solr_cache_exp_time = '12.hours'
       end
       # rubocop:enable MethodLength
 
