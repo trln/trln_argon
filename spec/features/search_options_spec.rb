@@ -1,6 +1,10 @@
 describe 'search options' do
   context 'when displaying search dropdown' do
-    before { visit search_catalog_path }
+    before do
+      VCR.use_cassette('search_options/search_dropdown') do
+        visit search_catalog_path
+      end
+    end
 
     it 'provides a dropdown with fielded search options' do
       expect(page).to have_select('search_field')

@@ -1,0 +1,47 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://query.discovery.trln.org/trlnbib/select?fq=institution_f:unc&rows=0&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:32:04 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '224'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.16.1
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "responseHeader":{
+            "zkConnected":true,
+            "status":0,
+            "QTime":170,
+            "params":{
+              "fq":"institution_f:unc",
+              "rows":"0",
+              "wt":"json"}},
+          "response":{"numFound":7043195,"start":0,"docs":[]
+          }}
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:32:04 GMT
+recorded_with: VCR 5.0.0

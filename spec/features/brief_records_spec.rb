@@ -1,8 +1,10 @@
 describe 'brief records' do
   before do
-    visit search_catalog_path
-    fill_in('q', with: 'how milton works stanley fish')
-    click_button 'search'
+    VCR.use_cassette('brief_records/how_milton_works') do
+      visit search_catalog_path
+      fill_in('q', with: 'how milton works stanley fish')
+      click_button 'search'
+    end
   end
 
   describe 'displays multiple fields from the record' do
@@ -11,7 +13,7 @@ describe 'brief records' do
     end
 
     it 'displays the statement of responsibility field value' do
-      expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
+        expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
     end
 
     it 'displays the imprint main field value' do
