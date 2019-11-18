@@ -26,6 +26,8 @@
   - publication
   imprint_main_a:
   - '{"type":"imprint", "label":"", "value":"Washington : Smithsonian Institution Press, 1986."}'
+  publisher_location_a:
+  - 'Washington'
   misc_id_qual_a:
   - ''
   misc_id_type_a:

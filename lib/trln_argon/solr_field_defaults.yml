@@ -370,6 +370,10 @@ PUBLICATION_YEAR_SORT:
   solr_field: :publication_year_isort
   label:
     en: Publication Year
+PUBLISHER_LOCATION:
+  solr_field: :publisher_location_a
+  label:
+      en: Place of Publication
 RELATED_WORK:
   solr_field: :related_work_a
   label:
