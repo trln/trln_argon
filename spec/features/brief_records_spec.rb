@@ -13,7 +13,7 @@ describe 'brief records' do
     end
 
     it 'displays the statement of responsibility field value' do
-        expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
+      expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
     end
 
     it 'displays the imprint main field value' do
