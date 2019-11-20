@@ -1,0 +1,299 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://query.discovery.trln.org/trlnbib/document?expand=true&expand.field=rollup_id&expand.q=*:*&expand.rows=50&id=DUKE002952265&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:51:49 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '10606'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.16.1
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "responseHeader":{
+            "zkConnected":true,
+            "status":0,
+            "QTime":1,
+            "params":{
+              "expand.field":"rollup_id",
+              "expand":"true",
+              "expand.rows":"50",
+              "expand.q":"*:*",
+              "id":"DUKE002952265",
+              "wt":"json"}},
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "id":"DUKE002952265",
+                "items_a":["{\"loc_b\":\"DOCS\",\"loc_n\":\"PGSM\",\"cn_scheme\":\"3\",\"call_no\":\"SI 1.27:435\",\"copy_no\":\"c.1\",\"type\":\"BOOK\",\"item_id\":\"HBIE-7234-00001\",\"status\":\"Available\"}"],
+                "author_suggest":["Downey, Maureen E.",
+                  "Smithsonian Institution. Press"],
+                "names_a":["{\"name\":\"Downey, Maureen E.\"}",
+                  "{\"name\":\"Smithsonian Institution. Press\"}"],
+                "owner_a":["duke"],
+                "misc_id_a":["LCCN: 86006579",
+                  "GPO Item Number: 910-D (microfiche)"],
+                "barcodes_a":["HBIE-7234-00001"],
+                "holdings_a":["{\"loc_b\":\"DOCS\",\"loc_n\":\"PGSM\",\"call_no\":\"SI 1.27:435\"}"],
+                "language_a":["English"],
+                "local_id":"DUKE002952265",
+                "available_a":["Available"],
+                "lang_code_a":["eng"],
+                "publisher_a":["Smithsonian Institution Press"],
+                "rollup_id":"OCLC13423674",
+                "title_suggest":["Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                  "Smithsonian contributions to zoology"],
+                "title_main":"Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                "title_sort_ssort_single":"revision of the atlantic brisingida echinodermataasteroidea with description of a new genus and family",
+                "access_type_a":["At the Library"],
+                "institution_a":["duke"],
+                "oclc_number":"13423674",
+                "series_work_a":["{\"title\":[\"Smithsonian contributions to zoology\"],\"details\":\"no. 435.\"}"],
+                "creator_main_a":["Downey, Maureen E."],
+                "imprint_main_a":["{\"type\":\"imprint\",\"value\":\"Washington : Smithsonian Institution Press, 1986.\"}"],
+                "note_general_a":["Distributed to depository libraries in microfiche.",
+                  "Includes index.",
+                  "Bibliography: p. 53-56."],
+                "resource_type_a":["Book",
+                  "Government publication"],
+                "subject_genre_a":["Classification",
+                  "Nonfiction"],
+                "genre_headings_a":["Classification"],
+                "subject_suggest":["Classification",
+                  "Brisingida -- Atlantic Ocean -- Classification",
+                  "Echinodermata -- Classification",
+                  "Echinodermata -- Atlantic Ocean -- Classification"],
+                "physical_media_a":["Print"],
+                "subject_topical_a":["Brisingida",
+                  "Echinodermata"],
+                "publication_year_sort":"1986",
+                "series_statement_a":["Smithsonian contributions to zoology ; no. 435"],
+                "subject_headings_a":["Brisingida -- Atlantic Ocean -- Classification",
+                  "Echinodermata -- Classification",
+                  "Echinodermata -- Atlantic Ocean -- Classification"],
+                "location_hierarchy_a":["duke",
+                  "duke:dukeperk",
+                  "duke:dukeperk:dukeperkpdms"],
+                "record_data_source_a":["ILSMARC"],
+                "subject_geographic_a":["Atlantic Ocean"],
+                "physical_description_a":["iv, 57 p. : ill. ; 27 cm."],
+                "statement_of_responsibility_a":["Maureen E. Downey."]}]
+          },
+          "expanded":{
+            "OCLC13423674":{"numFound":2,"start":0,"docs":[
+                {
+                  "id":"NCSU1184441",
+                  "items_a":["{\"call_no\":\"SI 1.27:435\",\"cn_scheme\":\"SUDOC\",\"item_id\":\"0999947160308\",\"loc_n\":\"BOOKBOT\",\"loc_b\":\"HUNT\",\"type\":\"MICROFICHE\",\"item_cat_2\":\"FEDDOC\",\"copy_no\":\"\",\"status\":\"Available upon request\"}"],
+                  "author_suggest":["Downey, Maureen E.",
+                    "Smithsonian Institution. Press"],
+                  "names_a":["{\"name\":\"Downey, Maureen E.\"}",
+                    "{\"name\":\"Smithsonian Institution. Press\"}"],
+                  "owner_a":["ncsu"],
+                  "misc_id_a":["LCCN: 86006579",
+                    "GPO Item Number: 910-D (microfiche)"],
+                  "barcodes_a":["0999947160308"],
+                  "language_a":["English"],
+                  "local_id":"1184441",
+                  "shelfkey":"sudoc:SI 1.27:435",
+                  "available_a":["Available"],
+                  "lang_code_a":["eng"],
+                  "publisher_a":["Smithsonian Institution Press"],
+                  "rollup_id":"OCLC13423674",
+                  "title_suggest":["Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                    "Smithsonian contributions to zoology"],
+                  "title_main":"Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                  "title_sort_ssort_single":"revision of the atlantic brisingida echinodermataasteroidea with description of a new genus and family",
+                  "access_type_a":["At the Library"],
+                  "institution_a":["ncsu"],
+                  "oclc_number":"13423674",
+                  "series_work_a":["{\"title\":[\"Smithsonian contributions to zoology\"],\"details\":\"no. 435.\"}"],
+                  "creator_main_a":["Downey, Maureen E."],
+                  "imprint_main_a":["{\"type\":\"publication\",\"value\":\"Washington : Smithsonian Institution Press, 1986.\"}"],
+                  "note_general_a":["Distributed to depository libraries in microfiche.",
+                    "Includes index.",
+                    "Bibliography: pages 53-56."],
+                  "resource_type_a":["Book",
+                    "Government publication"],
+                  "subject_genre_a":["Classification",
+                    "Nonfiction"],
+                  "genre_headings_a":["Classification"],
+                  "subject_suggest":["Classification",
+                    "Brisingida -- Atlantic Ocean -- Classification",
+                    "Echinodermata -- Classification",
+                    "Echinodermata -- Atlantic Ocean -- Classification"],
+                  "physical_media_a":["Microform > Microfiche"],
+                  "subject_topical_a":["Brisingida",
+                    "Echinodermata"],
+                  "publication_year_sort":"1986",
+                  "reverse_shelfkey":"sudoc:7H~Y}XS~VWU",
+                  "series_statement_a":["Smithsonian contributions to zoology ; no. 435"],
+                  "subject_headings_a":["Brisingida -- Atlantic Ocean -- Classification",
+                    "Echinodermata -- Classification",
+                    "Echinodermata -- Atlantic Ocean -- Classification"],
+                  "location_hierarchy_a":["ncsu",
+                    "ncsu:HUNT"],
+                  "record_data_source_a":["ILSMARC"],
+                  "subject_geographic_a":["Atlantic Ocean"],
+                  "call_number_schemes_a":["SUDOC"],
+                  "physical_description_a":["iv, 57 pages : illustrations ; 27 cm."],
+                  "statement_of_responsibility_a":["Maureen E. Downey."]},
+                {
+                  "id":"UNCb3705772",
+                  "items_a":["{\"item_id\":\"i5151750\",\"loc_b\":\"dcpf\",\"loc_n\":\"dcpf\",\"status\":\"Available\",\"vol\":\"no.435\",\"call_no\":\"SI 1.27:435\",\"cn_scheme\":\"SUDOC\"}",
+                    "{\"item_id\":\"i10324803\",\"loc_b\":\"trln\",\"loc_n\":\"trln\",\"status\":\"Available\",\"vol\":\"no.435\",\"call_no\":\"QL1 .S54 no. 435\",\"cn_scheme\":\"LC\"}"],
+                  "author_suggest":["Downey, Maureen E.",
+                    "Smithsonian Institution. Press"],
+                  "names_a":["{\"name\":\"Downey, Maureen E.\"}",
+                    "{\"name\":\"Smithsonian Institution. Press\"}"],
+                  "owner_a":["unc"],
+                  "misc_id_a":["LCCN: 86006579",
+                    "GPO Item Number: 910-D (microfiche)"],
+                  "barcodes_a":["HBBR-6565-00001",
+                    "10002855126"],
+                  "language_a":["English"],
+                  "local_id":"b3705772",
+                  "shelfkey":"lc:QL.0001.S54--NO0435",
+                  "available_a":["Available"],
+                  "lang_code_a":["eng"],
+                  "publisher_a":["Smithsonian Institution Press"],
+                  "rollup_id":"OCLC13423674",
+                  "title_suggest":["Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                    "Smithsonian contributions to zoology"],
+                  "title_main":"Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), with description of a new genus and family",
+                  "title_sort_ssort_single":"revision of the atlantic brisingida echinodermataasteroidea with description of a new genus and family",
+                  "access_type_a":["At the Library"],
+                  "institution_a":["unc"],
+                  "oclc_number":"13423674",
+                  "series_work_a":["{\"title\":[\"Smithsonian contributions to zoology\"],\"details\":\"no. 435.\"}"],
+                  "creator_main_a":["Downey, Maureen E."],
+                  "imprint_main_a":["{\"type\":\"imprint\",\"value\":\"Washington : Smithsonian Institution Press, 1986.\"}"],
+                  "note_general_a":["Distributed to depository libraries in microfiche.",
+                    "Includes index.",
+                    "Bibliography: pages 53-56."],
+                  "resource_type_a":["Book",
+                    "Government publication"],
+                  "subject_genre_a":["Classification",
+                    "Nonfiction"],
+                  "date_cataloged":"2004-10-01T04:00:00Z",
+                  "genre_headings_a":["Classification"],
+                  "subject_suggest":["Classification",
+                    "Brisingida -- Atlantic Ocean -- Classification",
+                    "Echinodermata -- Classification",
+                    "Echinodermata -- Atlantic Ocean -- Classification"],
+                  "physical_media_a":["Print"],
+                  "vendor_marc_id_a":["87003881"],
+                  "subject_topical_a":["Brisingida",
+                    "Echinodermata"],
+                  "publication_year_sort":"1986",
+                  "reverse_shelfkey":"lc:9E}ZZZY}7UV~~CBZVWU",
+                  "series_statement_a":["Smithsonian contributions to zoology ; no. 435"],
+                  "subject_headings_a":["Brisingida -- Atlantic Ocean -- Classification",
+                    "Echinodermata -- Classification",
+                    "Echinodermata -- Atlantic Ocean -- Classification"],
+                  "location_hierarchy_a":["unc",
+                    "unc:uncdavy",
+                    "unc:uncdavy:uncdavdoc",
+                    "unc:unclibr"],
+                  "record_data_source_a":["ILSMARC"],
+                  "subject_geographic_a":["Atlantic Ocean"],
+                  "call_number_schemes_a":["SUDOC",
+                    "LC"],
+                  "origin_place_search_a":["Washington",
+                    "District of Columbia",
+                    "United States"],
+                  "physical_description_a":["iv, 57 pages : illustrations ; 27 cm."],
+                  "lcc_callnum_classification_a":["Q - Science",
+                    "Q - Science|QL1 - QL991 Zoology",
+                    "Q - Science|QL1 - QL991 Zoology|QL1 - QL355 General (including geographical distribution)"],
+                  "statement_of_responsibility_a":["Maureen E. Downey."]}]
+            }}}
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:51:48 GMT
+- request:
+    method: get
+    uri: https://syndetics.com/index.php?client=trlnet&isbn=/XML.XML&oclc=13423674
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:51:50 GMT
+      Server:
+      - Apache/2.2.3 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Fri, 01 Nov 2019 19:51:50 GMT
+      Last-Modified:
+      - Fri, 25 Oct 2019 19:51:30 GMT
+      Cache-Tag:
+      - oclc:13423674
+      Pragma:
+      - no-cache
+      Content-Length:
+      - '1924'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n<HTML
+        lang=\"EN\">\r\n<head>\r\n<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600'
+        rel='stylesheet' type='text/css'>\r\n<meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=EmulateIE8\">\r\n<meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=utf-8\">\r\n<META http-equiv=\"Content-Script-Type\" content=\"text/javascript\">\r\n<META
+        http-equiv=\"Content-Style-Type\" content=\"text/css\">\r\n<meta name=\"robots\"
+        content=\"noindex\">\r\n\r\n<title>error</title>\r\n<![if !IE]>\r\n  <link
+        href=\"/css/classic/syndetics_classic.css\" rel=\"stylesheet\" type=\"text/css\">\r\n<![endif]>\r\n<!--[if
+        gte IE 8]>\r\n  <link href=\"/css/classic/syndetics_classic.css\" rel=\"stylesheet\"
+        type=\"text/css\">\r\n<![endif]--> \r\n<!--[if lte IE 7]>\r\n  <link href=\"/css/classic/syndetics_classic_l.css\"
+        rel=\"stylesheet\" type=\"text/css\">\r\n<![endif]--> \r\n\r\n\r\n</head>\r\n\r\n<div
+        align=\"center\">\r\n\t<div class=\"main_container error_container\">\r\n
+        \   <div class=\"main_header\">\r\n          <div class=\"error_header\">\r\n
+        \         \t<span class=\"header_title\">Oops! Requested page not found!</span>\r\n
+        \         </div>\r\n          <div class=\"header_instructions\">\r\n          </div>\r\n
+        \   </div>\r\n    <div class=\"resetfloat\"></div>\r\n    <div class=\"element_container\">\r\n
+        \     <a id=\"xml\" name=\"xml\"></a>\r\n      <div class=\"element_body error_body\">\r\n<br><br>\r\n
+        \       <div class=\"error_full_message\">The page you are looking for could
+        not be found.</div>\r\n        <div class=\"back_link\"><a class=\"error_back_link\"
+        href=\"javascript:history.back()\">Please click here to return to the previous
+        page.</a></div>\r\n<br><br>\r\n      </div>\r\n    </div>\r\n    <div class=\"footer\">\r\n
+        \     \t<div class=\"legal\">\r\n        </div>\r\n        <div class=\"logo\">\r\n
+        \       <img src=\"/images/newui/footer_logo.jpg\" alt=\"Proquest Logo\">\r\n
+        \       </div>\r\n    </div>        \r\n  </div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:51:50 GMT
+recorded_with: VCR 5.0.0

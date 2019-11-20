@@ -442,6 +442,7 @@ describe TrlnArgon::SolrDocument do
         "A1  - Smithsonian Institution. Press\r\n"\
         "AV  - Perkins Public Documents/Maps\r\n"\
         "CN  - SI 1.27:435\r\n"\
+        "CY  - Washington\r\n"\
         "ID  - DUKE002952265\r\n"\
         "KW  - Brisingida -- Atlantic Ocean -- Classification\r\n"\
         "KW  - Echinodermata -- Classification\r\n"\

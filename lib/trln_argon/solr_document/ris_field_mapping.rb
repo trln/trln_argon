@@ -21,8 +21,8 @@ module TrlnArgon
           AV: proc { locations_to_text },
           # Call Number
           CN: proc { callnumbers_to_text },
-          # Place Published (Note: Combined with Publisher in Argon imprint_main)
-          # CY: ,
+          # Place Published
+          CY: TrlnArgon::Fields::PUBLISHER_LOCATION,
           # Reference ID
           ID: TrlnArgon::Fields::ID,
           # Keywords (Subjects)

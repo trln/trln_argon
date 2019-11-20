@@ -1,8 +1,10 @@
 describe 'brief records' do
   before do
-    visit search_catalog_path
-    fill_in('q', with: 'how milton works stanley fish')
-    click_button 'search'
+    VCR.use_cassette('brief_records/how_milton_works') do
+      visit search_catalog_path
+      fill_in('q', with: 'how milton works stanley fish')
+      click_button 'search'
+    end
   end
 
   describe 'displays multiple fields from the record' do

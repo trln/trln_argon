@@ -1,0 +1,168 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://query.discovery.trln.org/trlnbib/document?id=UNCb2224383&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:46:31 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '2783'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.16.1
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "responseHeader":{
+            "zkConnected":true,
+            "status":0,
+            "QTime":0,
+            "params":{
+              "id":"UNCb2224383",
+              "wt":"json"}},
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "id":"UNCb2224383",
+                "isbn_number_a":["0632020636",
+                  "0632019239"],
+                "isbn_qualifying_info_a":[":",
+                  ""],
+                "items_a":["{\"item_id\":\"i3203873\",\"loc_b\":\"trln\",\"loc_n\":\"trln\",\"status\":\"Available\",\"call_no\":\"RJ499 .B27 1988\",\"cn_scheme\":\"LC\"}"],
+                "author_suggest":["Barker, Philip"],
+                "names_a":["{\"name\":\"Barker, Philip\"}"],
+                "owner_a":["unc"],
+                "edition_a":["5th ed."],
+                "misc_id_a":["LCCN: 87035081"],
+                "barcodes_a":["00004388898"],
+                "language_a":["English"],
+                "local_id":"b2224383",
+                "shelfkey":"lc:RJ.0499.B27.1988",
+                "available_a":["Available"],
+                "lang_code_a":["eng"],
+                "publisher_a":["Blackwell Scientific Publications"],
+                "rollup_id":"OCLC17260956",
+                "title_suggest":["Basic child psychiatry"],
+                "title_main":"Basic child psychiatry",
+                "title_sort_ssort_single":"basic child psychiatry",
+                "access_type_a":["At the Library"],
+                "institution_a":["unc"],
+                "oclc_number":"17260956",
+                "creator_main_a":["Barker, Philip"],
+                "imprint_main_a":["{\"type\":\"imprint\",\"value\":\"Oxford ; Boston : Blackwell Scientific Publications, 1988.\"}"],
+                "note_general_a":["Includes index.",
+                  "Bibliography: pages [339]-365."],
+                "resource_type_a":["Book"],
+                "subject_genre_a":["Nonfiction"],
+                "date_cataloged":"2004-10-01T04:00:00Z",
+                "physical_media_a":["Print"],
+                "subject_topical_a":["Child psychiatry",
+                  "Child Psychiatry"],
+                "publication_year_sort":"1988",
+                "reverse_shelfkey":"lc:8G}ZVQQ}OXS}YQRR",
+                "subject_headings_a":["Child psychiatry",
+                  "Child Psychiatry"],
+                "subject_suggest":["Child psychiatry",
+                  "Child Psychiatry"],
+                "location_hierarchy_a":["unc",
+                  "unc:unclibr"],
+                "record_data_source_a":["ILSMARC"],
+                "call_number_schemes_a":["LC"],
+                "origin_place_search_a":["Oxford",
+                  "Boston",
+                  "England",
+                  "United Kingdom"],
+                "physical_description_a":["xiv, 399 pages ; 24 cm"],
+                "lcc_callnum_classification_a":["R - Medicine",
+                  "R - Medicine|RJ1 - RJ570 Pediatrics",
+                  "R - Medicine|RJ1 - RJ570 Pediatrics|RJ370 - RJ550 Diseases of children and adolescents",
+                  "R - Medicine|RJ1 - RJ570 Pediatrics|RJ370 - RJ550 Diseases of children and adolescents|RJ499 - RJ507 Mental disorders. Child psychiatry"],
+                "statement_of_responsibility_a":["Philip Barker."]}]
+          }}
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:46:31 GMT
+- request:
+    method: get
+    uri: https://syndetics.com/index.php?client=trlnet&isbn=0632020636/XML.XML&oclc=17260956
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:46:32 GMT
+      Server:
+      - Apache/2.2.3 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Cache-Control:
+      - no-cache
+      Expires:
+      - Fri, 01 Nov 2019 19:46:32 GMT
+      Last-Modified:
+      - Fri, 25 Oct 2019 19:46:12 GMT
+      Cache-Tag:
+      - isbn:0632020636,oclc:17260956
+      Pragma:
+      - no-cache
+      Content-Length:
+      - '1924'
+      Content-Type:
+      - text/html; charset=UTF-8
+    body:
+      encoding: UTF-8
+      string: "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n<HTML
+        lang=\"EN\">\r\n<head>\r\n<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600'
+        rel='stylesheet' type='text/css'>\r\n<meta http-equiv=\"X-UA-Compatible\"
+        content=\"IE=EmulateIE8\">\r\n<meta http-equiv=\"Content-Type\" content=\"text/html;
+        charset=utf-8\">\r\n<META http-equiv=\"Content-Script-Type\" content=\"text/javascript\">\r\n<META
+        http-equiv=\"Content-Style-Type\" content=\"text/css\">\r\n<meta name=\"robots\"
+        content=\"noindex\">\r\n\r\n<title>error</title>\r\n<![if !IE]>\r\n  <link
+        href=\"/css/classic/syndetics_classic.css\" rel=\"stylesheet\" type=\"text/css\">\r\n<![endif]>\r\n<!--[if
+        gte IE 8]>\r\n  <link href=\"/css/classic/syndetics_classic.css\" rel=\"stylesheet\"
+        type=\"text/css\">\r\n<![endif]--> \r\n<!--[if lte IE 7]>\r\n  <link href=\"/css/classic/syndetics_classic_l.css\"
+        rel=\"stylesheet\" type=\"text/css\">\r\n<![endif]--> \r\n\r\n\r\n</head>\r\n\r\n<div
+        align=\"center\">\r\n\t<div class=\"main_container error_container\">\r\n
+        \   <div class=\"main_header\">\r\n          <div class=\"error_header\">\r\n
+        \         \t<span class=\"header_title\">Oops! Requested page not found!</span>\r\n
+        \         </div>\r\n          <div class=\"header_instructions\">\r\n          </div>\r\n
+        \   </div>\r\n    <div class=\"resetfloat\"></div>\r\n    <div class=\"element_container\">\r\n
+        \     <a id=\"xml\" name=\"xml\"></a>\r\n      <div class=\"element_body error_body\">\r\n<br><br>\r\n
+        \       <div class=\"error_full_message\">The page you are looking for could
+        not be found.</div>\r\n        <div class=\"back_link\"><a class=\"error_back_link\"
+        href=\"javascript:history.back()\">Please click here to return to the previous
+        page.</a></div>\r\n<br><br>\r\n      </div>\r\n    </div>\r\n    <div class=\"footer\">\r\n
+        \     \t<div class=\"legal\">\r\n        </div>\r\n        <div class=\"logo\">\r\n
+        \       <img src=\"/images/newui/footer_logo.jpg\" alt=\"Proquest Logo\">\r\n
+        \       </div>\r\n    </div>        \r\n  </div>\r\n</div>\r\n</body>\r\n</html>\r\n"
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:46:32 GMT
+recorded_with: VCR 5.0.0

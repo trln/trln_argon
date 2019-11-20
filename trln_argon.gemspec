@@ -33,15 +33,18 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
+  s.add_dependency 'sprockets', '~> 3.0'
 
   # no version specified for sqlite3 because engine_cart 2.2
   # will otherwise use an incompatible version when generating
   # the internal rails app (rails 5.2.3 required for sqlite3 1.4.0)
   s.add_development_dependency 'rspec-rails', '~> 3.5'
-  s.add_development_dependency 'capybara'
+  s.add_development_dependency 'capybara', '~> 3.29'
   s.add_development_dependency 'rubocop', '~> 0.49.1'
-  s.add_development_dependency 'rubocop-rspec'
+  s.add_development_dependency 'rubocop-rspec', '~> 1.16'
+  s.add_development_dependency 'webmock', '~> 3.7'
+  s.add_development_dependency 'vcr', '~> 5.0'
   s.add_development_dependency 'engine_cart', '~> 2.2'
   s.add_development_dependency 'better_errors', '~> 2.1.1'
-  s.add_development_dependency 'binding_of_caller'
+  s.add_development_dependency 'binding_of_caller', '~> 0.8'
 end

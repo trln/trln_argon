@@ -1,0 +1,192 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://query.discovery.trln.org/trlnbib/document?id=DUKE002960043&wt=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:46:22 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '3289'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.16.1
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "responseHeader":{
+            "zkConnected":true,
+            "status":0,
+            "QTime":0,
+            "params":{
+              "id":"DUKE002960043",
+              "wt":"json"}},
+          "response":{"numFound":1,"start":0,"docs":[
+              {
+                "id":"DUKE002960043",
+                "isbn_number_a":["0195069714",
+                  "0195069722"],
+                "isbn_qualifying_info_a":["",
+                  ""],
+                "items_a":["{\"loc_b\":\"LSC\",\"loc_n\":\"PSK\",\"cn_scheme\":\"LC\",\"call_no\":\"KF4758 .V36 2001\",\"copy_no\":\"c.1\",\"type\":\"BOOK\",\"item_id\":\"D01686205S\",\"status\":\"Available\"}"],
+                "author_suggest":["VanBurkleo, Sandra F., 1944-"],
+                "names_a":["{\"name\":\"VanBurkleo, Sandra F., 1944-\"}"],
+                "owner_a":["duke"],
+                "lcc_top_a":["K"],
+                "misc_id_a":["LCCN: 00029349",
+                  "National Bibliography Number: GBA0-V0425"],
+                "barcodes_a":["D01686205S"],
+                "holdings_a":["{\"loc_b\":\"LSC\",\"loc_n\":\"PSK\",\"call_no\":\"KF4758 .V36 2001\"}"],
+                "language_a":["English"],
+                "local_id":"DUKE002960043",
+                "shelfkey":"lc:KF.4758.V36.2001",
+                "available_a":["Available"],
+                "lang_code_a":["eng"],
+                "publisher_a":["Oxford University Press"],
+                "rollup_id":"OCLC43641407",
+                "title_suggest":["\"Belonging to the world\" : women's rights and American constitutional culture",
+                  "Bicentennial essays on the Bill of Rights."],
+                "title_main":"\"Belonging to the world\" : women's rights and American constitutional culture",
+                "title_sort_ssort_single":"belonging to the world womens rights and american constitutional culture",
+                "access_type_a":["At the Library"],
+                "institution_a":["duke"],
+                "oclc_number":"43641407",
+                "series_work_a":["{\"title\":[\"Bicentennial essays on the Bill of Rights.\"]}"],
+                "creator_main_a":["VanBurkleo, Sandra F., 1944-"],
+                "imprint_main_a":["{\"type\":\"imprint\",\"value\":\"New York : Oxford University Press, 2001.\"}"],
+                "note_general_a":["Includes bibliographical references (p. [316]-390) and index."],
+                "resource_type_a":["Book"],
+                "subject_genre_a":["Nonfiction"],
+                "physical_media_a":["Print"],
+                "subject_topical_a":["Women's rights",
+                  "History"],
+                "publication_year_sort":"2001",
+                "reverse_shelfkey":"lc:FK}VSUR}4WT}XZZY",
+                "series_statement_a":["Bicentennial essays on the Bill of Rights"],
+                "subject_headings_a":["Women's rights -- United States -- History"],
+                "subject_suggest":["Women's rights -- United States -- History"],
+                "lc_call_nos_normed_a":["KF.4758.V36.2001"],
+                "location_hierarchy_a":["duke",
+                  "duke:dukelibr"],
+                "record_data_source_a":["ILSMARC"],
+                "subject_geographic_a":["United States"],
+                "call_number_schemes_a":["LC"],
+                "physical_description_a":["xix, 409 p. ; 24 cm."],
+                "lcc_callnum_classification_a":["K - Law in general. Comparative and uniform law. Jurisprudence",
+                  "K - Law in general. Comparative and uniform law. Jurisprudence|KF - Law of the United States",
+                  "K - Law in general. Comparative and uniform law. Jurisprudence|KF - Law of the United States|KF4000 - KF4999"],
+                "statement_of_responsibility_a":["Sandra F. VanBurkleo."]}]
+          }}
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:46:22 GMT
+- request:
+    method: get
+    uri: https://syndetics.com/index.php?client=trlnet&isbn=0195069714/XML.XML&oclc=43641407
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 25 Oct 2019 19:46:23 GMT
+      Server:
+      - Apache/2.2.3 (CentOS)
+      X-Powered-By:
+      - PHP/5.3.3
+      Cache-Control:
+      - public, pre-check=0, post-check=0, max-age=604800
+      Expires:
+      - Fri, 01 Nov 2019 19:46:23 GMT
+      Last-Modified:
+      - Fri, 25 Oct 2019 19:46:03 GMT
+      Cache-Tag:
+      - isbn:0195069714,oclc:43641407
+      Content-Disposition:
+      - inline; filename=xml.xml
+      Content-Length:
+      - '4655'
+      Content-Type:
+      - text/xml; charset=utf-8
+    body:
+      encoding: UTF-8
+      string: '<?xml version="1.0" encoding="utf-8" ?><ssi><CHREVIEW><USMARC><Leader/><VarFlds><VarCFlds><Fld001/><Fld005/><Fld008/></VarCFlds><VarDFlds><NumbCode><Fld020
+        I1="BLANK" I2="BLANK"><a>9780195069716</a></Fld020></NumbCode><MainEnty><Fld100
+        I1="BLANK" I2="BLANK"><a>Sandra F. VanBurkleo</a></Fld100></MainEnty><Titles><Fld245
+        I1="BLANK" I2="BLANK"><a>Belonging to the World: Women''s Rights and American
+        Constitutional Culture</a></Fld245></Titles><Notes><Fld520 I1="BLANK" I2="BLANK"><a>VanBurkleo
+        (history and law, Wayne State Univ.) presents an engaging history of women
+        and American law that synthesizes the social, political, and legal history
+        of women from the Colonial period through the 1990s. She addresses the changes
+        in women''s legal status as well as continued limits to their equality, while
+        providing an original framework for understanding women''s legal history.
+        Following the American Revolution, women developed speech communities, such
+        as women''s rights conventions, to voice their criticism of oppressive laws
+        and social practices. After the Civil War, women formed suffrage communities,
+        seeking the ballot in order to enact social reform and gain access to the
+        polity. In addition, VanBurkleo posits three main "settlements" in the legal
+        status of women, showing how shifting political ideals caused women, the judiciary,
+        and the government to reconsider women''s rights as citizens. The book introduces
+        readers to the legal history of women, but it should also provoke discussion
+        on feminist strategies and the intransigence of American society and the judiciary
+        in extending equal protection under the law to women. This ambitious book
+        will be a valuable addition to history, law, and women''s studies collections
+        at all levels. C. Faulkner SUNY College at Geneseo</a></Fld520></Notes><SSIFlds><Fld997
+        I1="BLANK" I2="BLANK">Copyright American Library Association, used with permission.</Fld997></SSIFlds></VarDFlds></VarFlds></USMARC></CHREVIEW><SUMMARY><USMARC><Leader/><VarFlds><VarCFlds><Fld001/><Fld005/><Fld008/></VarCFlds><VarDFlds><NumbCode><Fld020
+        I1="BLANK" I2="BLANK"><a>9780195069716</a></Fld020></NumbCode><MainEnty><Fld100
+        I1="BLANK" I2="BLANK"><a>Sandra F. VanBurkleo</a></Fld100></MainEnty><Titles><Fld245
+        I1="BLANK" I2="BLANK"><a>Belonging to the World: Women''s Rights and American
+        Constitutional Culture</a></Fld245></Titles><Notes><Fld520 I1="BLANK" I2="BLANK"><a>Belonging
+        to the World surveys the treatment of women in American law from the nation''s
+        earliest beginnings in British North America to the present. An original work
+        of historical synthesis, the book aims to build bridges between fields long
+        thought to be unbridgeable -- among them, thehistory of women, American constitutional
+        and legal history, political theory, and law. It delinates the shifting relationships
+        between American law practice and women, both within the family and elsewhere,
+        as it looks beyond the campagin for women''s suffrage to broader zones of
+        contest andcontroversy. Women''s stories and voices are used throughout to
+        drive home the extraordinary range and persistence of female rebellion since
+        the 1630s -- when Anne Hutchinson and Ann Hibbens decided to oppose forces
+        of constraint in colonial New England -- to the present era of "post-feminist"retrenchment
+        and backlash. As the narrative documents women''s ongoing battles for such
+        rights have been governed differently from men, often out of the state''s
+        line of vision, and that much of this difference reflected the survival of
+        a unitary monarchical "head" in the constitutional and moraleconomy of households.
+        Excellent for use in constitutional law and women''s studies classes.</a></Fld520></Notes><SSIFlds><Fld997
+        I1="BLANK" I2="BLANK"></Fld997></SSIFlds></VarDFlds></VarFlds></USMARC></SUMMARY><ANOTES><USMARC><Leader/><VarFlds><VarCFlds><Fld001/><Fld005/><Fld008/></VarCFlds><VarDFlds><NumbCode><Fld020
+        I1="BLANK" I2="BLANK"><a>9780195069716</a></Fld020></NumbCode><MainEnty><Fld100
+        I1="BLANK" I2="BLANK"><a>Sandra F. VanBurkleo</a></Fld100></MainEnty><Titles><Fld245
+        I1="BLANK" I2="BLANK"><a>Belonging to the World: Women''s Rights and American
+        Constitutional Culture</a></Fld245></Titles><SSIFlds><Fld997 I1="BLANK" I2="BLANK"></Fld997><Fld980
+        I1="BLANK" I2="BLANK"><a>Sandra F. VanBurkleo, Assistant Professor of History,
+        Wayne State University.</a></Fld980></SSIFlds></VarDFlds></VarFlds></USMARC></ANOTES><LC>http://www.syndetics.com/index.php?isbn=9780195069716/lc.jpg&amp;client=trlnet</LC><MC>http://www.syndetics.com/index.php?isbn=9780195069716/mc.gif&amp;client=trlnet</MC><SC>http://www.syndetics.com/index.php?isbn=9780195069716/sc.gif&amp;client=trlnet</SC></ssi>'
+    http_version: 
+  recorded_at: Fri, 25 Oct 2019 19:46:23 GMT
+recorded_with: VCR 5.0.0

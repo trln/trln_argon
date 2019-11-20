@@ -1,18 +1,22 @@
 describe 'search results' do
   context 'when no results found' do
     it 'displays a message for no results found' do
-      visit search_catalog_path
-      fill_in 'q', with: 'qwertyuiopasdfdghjklzxcvbnm'
-      click_button 'search'
-      expect(page).to have_content 'There are no results at any Triangle Research Libraries'
+      VCR.use_cassette('search_results/no_results_found') do
+        visit search_catalog_path
+        fill_in 'q', with: 'qwertyuiopasdfdghjklzxcvbnm'
+        click_button 'search'
+        expect(page).to have_content 'There are no results at any Triangle Research Libraries'
+      end
     end
   end
 
   context 'when facets applied to search' do
     before do
-      visit search_catalog_path
-      click_button 'search'
-      click_link 'Music recording'
+      VCR.use_cassette('search_results/facets_applied') do
+        visit search_catalog_path
+        click_button 'search'
+        click_link 'Music recording'
+      end
     end
 
     it 'displays the Resource Type facet breadcrumb field label' do
@@ -26,9 +30,11 @@ describe 'search results' do
 
   context 'when location facet applied to search' do
     before do
-      visit search_catalog_path
-      click_button 'search'
-      click_link 'Law Library'
+      VCR.use_cassette('search_results/location_facet_applied') do
+        visit search_catalog_path
+        click_button 'search'
+        click_link 'Law Library'
+      end
     end
 
     it 'displays the full location name in the page title' do
@@ -38,8 +44,10 @@ describe 'search results' do
 
   describe 'paging controls' do
     before do
-      visit search_catalog_path
-      click_button 'search'
+      VCR.use_cassette('search_results/paging_controls') do
+        visit search_catalog_path
+        click_button 'search'
+      end
     end
 
     it 'provides paging options above the results' do
@@ -53,20 +61,24 @@ describe 'search results' do
 
   context 'when checkbox facet is configured' do
     it 'renders a checkbox field in the facet' do
-      visit search_catalog_path
-      expect(page).to have_selector(:css, '#checkbox_access_type_f')
+      VCR.use_cassette('search_results/checkbox_facet') do
+        visit search_catalog_path
+        expect(page).to have_selector(:css, '#checkbox_access_type_f')
+      end
     end
   end
 
   describe 'sorting of location hierachy facet' do
     it 'sorts the values by hits, descending' do
-      visit search_catalog_path
-      click_button 'search'
-      expect(page).to have_selector(
-        :css,
-        '#facet-location_hierarchy_f .facet-hierarchy .h-node .h-node:first-child',
-        text: 'Davis Library'
-      )
+      VCR.use_cassette('search_results/location_hierarchy_facet') do
+        visit search_catalog_path
+        click_button 'search'
+        expect(page).to have_selector(
+          :css,
+          '#facet-location_hierarchy_f .facet-hierarchy .h-node .h-node:first-child',
+          text: 'Davis Library'
+        )
+      end
     end
   end
 
