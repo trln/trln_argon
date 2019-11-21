@@ -54,6 +54,10 @@ describe TrlnArgon::Engine do
     it 'sets the facet paging limit' do
       expect(config.facet_paging_limit).to eq('50')
     end
+
+    it 'sets the solr cache expire time' do
+      expect(config.solr_cache_exp_time).to eq('12.hours')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -71,6 +75,7 @@ describe TrlnArgon::Engine do
     config.contact_url = 'https://library.duke.edu/research/ask'
     config.paging_limit = '100'
     config.facet_paging_limit = '10'
+    config.solr_cache_exp_time = '1.minute'
 
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('custom_institution')
@@ -122,6 +127,10 @@ describe TrlnArgon::Engine do
 
     it 'sets the facet paging limit' do
       expect(config.facet_paging_limit).to eq('10')
+    end
+
+    it 'sets the solr cache expire time' do
+      expect(config.solr_cache_exp_time).to eq('1.minute')
     end
   end
 end
