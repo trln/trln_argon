@@ -21,6 +21,8 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'facet_paging_limit')
   apply_local_configuration(config, 'unc_latest_received_url')
   apply_local_configuration(config, 'solr_cache_exp_time')
+  apply_local_configuration(config, 'allow_open_search')
+  apply_local_configuration(config, 'open_search_q_min_length')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',

@@ -43,9 +43,12 @@ module TrlnArgon
                     :paging_limit,
                     :facet_paging_limit,
                     :unc_latest_received_url,
-                    :solr_cache_exp_time
+                    :solr_cache_exp_time,
+                    :allow_open_search,
+                    :open_search_q_min_length
 
       # rubocop:disable MethodLength
+      # rubocop:disable AbcSize
       def initialize
         @local_institution_code        = 'unc'
         @application_name              = 'TRLN Argon'
@@ -70,8 +73,11 @@ module TrlnArgon
         @facet_paging_limit = '50'
         @unc_latest_received_url = 'https://webcat.lib.unc.edu/search/.%<local_id>s/.%<local_id>s/,,,/cr%<holdings_id>s'
         @solr_cache_exp_time = '12.hours'
+        @allow_open_search = 'true'
+        @open_search_q_min_length = '4'
       end
       # rubocop:enable MethodLength
+      # rubocop:enable AbcSize
 
       private
 
