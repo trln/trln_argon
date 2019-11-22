@@ -1,4 +1,5 @@
 require 'trln_argon/controller_override/local_filter'
+require 'trln_argon/controller_override/open_search'
 require 'trln_argon/controller_override/paging_limit'
 require 'trln_argon/controller_override/solr_caching'
 
@@ -12,6 +13,7 @@ module TrlnArgon
 
     included do
       send(:include, LocalFilter)
+      send(:include, OpenSearch)
       send(:include, PagingLimit)
       send(:include, SolrCaching)
       send(:include, BlacklightAdvancedSearch::Controller)

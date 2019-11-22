@@ -58,6 +58,14 @@ describe TrlnArgon::Engine do
     it 'sets the solr cache expire time' do
       expect(config.solr_cache_exp_time).to eq('12.hours')
     end
+
+    it 'sets whether open search is enabled' do
+      expect(config.allow_open_search).to eq('true')
+    end
+
+    it 'sets the minimum query length to return an open search response' do
+      expect(config.open_search_q_min_length).to eq('4')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -76,6 +84,8 @@ describe TrlnArgon::Engine do
     config.paging_limit = '100'
     config.facet_paging_limit = '10'
     config.solr_cache_exp_time = '1.minute'
+    config.allow_open_search = 'false'
+    config.open_search_q_min_length = '10'
 
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('custom_institution')
@@ -131,6 +141,14 @@ describe TrlnArgon::Engine do
 
     it 'sets the solr cache expire time' do
       expect(config.solr_cache_exp_time).to eq('1.minute')
+    end
+
+    it 'sets whether open search is enabled' do
+      expect(config.allow_open_search).to eq('false')
+    end
+
+    it 'sets the minimum query length to return an open search response' do
+      expect(config.open_search_q_min_length).to eq('10')
     end
   end
 end
