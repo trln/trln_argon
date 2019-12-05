@@ -236,6 +236,13 @@ module TrlnArgon
           lf_components[0..-2].join('_') => [[lf_components[-1]], ':']
         }
 
+        # solr debug fields to be displayed in the index (search results) view
+        # when debug=true is present in the request.
+        config.add_index_field TrlnArgon::Fields::SCORE.to_s,
+                               helper_method: :relevance_score
+        config.add_index_field TrlnArgon::Fields::ID.to_s,
+                               helper_method: :solr_document_request
+
         # solr fields to be displayed in the index (search results) view
         #   The ordering of the field names is the order of the display
         config.add_index_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
@@ -354,6 +361,8 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::UPC.to_s,
                               label: TrlnArgon::Fields::UPC.label
 
+        config.add_show_sub_header_field TrlnArgon::Fields::ID.to_s,
+                                         helper_method: :solr_document_request
         config.add_show_sub_header_field TrlnArgon::Fields::STATEMENT_OF_RESPONSIBILITY.to_s,
                                          accessor: :statement_of_responsibility
         config.add_show_sub_header_field TrlnArgon::Fields::CREATOR_MAIN.to_s,

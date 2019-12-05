@@ -242,7 +242,7 @@ body {
 
 }
 
-#startOverLink, #editSearchLink {
+#startOverLink, #editSearchLink, #solrRequestLink {
   margin-right: 1em;
 }
 
@@ -474,6 +474,18 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       padding-left: 2em;
       color: #767676;
     }
+}
+
+.solr-debug-info {
+  color: #f09905;
+  font-size: 125%;
+  a {
+    color: #f09905;
+    text-decoration: underline;
+  }
+  .solr-debug-info-details {
+    font-weight: bold;
+  }
 }
 
 .index-document-metadata {

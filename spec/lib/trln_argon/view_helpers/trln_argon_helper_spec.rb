@@ -212,6 +212,66 @@ describe TrlnArgonHelper, type: :helper do
   end
 
   ########################
+  # DebugInfoHelper
+  ########################
+
+  describe 'DebugInfoHelper' do
+    let(:solr_params) do
+      YAML.safe_load(file_fixture('debug/response_headers.yml').read, [Symbol])
+    end
+
+    let(:document) do
+      SolrDocument.new(YAML.safe_load(file_fixture('documents/DUKE002952265.yml').read).first)
+    end
+
+    let(:options) do
+      { document: document }
+    end
+
+    before do
+      allow(helper).to receive(:solr_query_params).and_return(solr_params)
+      allow(helper).to receive(:solr_document_only_path).and_return('/document')
+      allow(helper).to receive(:solr_query_path).and_return('https://query.discovery.trln.org/trlnbib/')
+    end
+
+    describe '#solr_document_request' do
+      it 'when debug enabled it generates a link to the solr request' do
+        allow(helper).to receive(:params).and_return(debug: 'true')
+        expect(helper.solr_query_request).to be_truthy
+      end
+
+      it 'when debug disabled it does not generate a link to the solr request' do
+        allow(helper).to receive(:params).and_return({})
+        expect(helper.solr_query_request).to be_falsey
+      end
+    end
+
+    describe '#solr_document_request' do
+      it 'when debug enabled it generates a link to the solr document request' do
+        allow(helper).to receive(:params).and_return(debug: 'true')
+        expect(helper.solr_document_request(options)).to be_truthy
+      end
+
+      it 'when debug disabled it does not generate a link to the solr document request' do
+        allow(helper).to receive(:params).and_return({})
+        expect(helper.solr_document_request(options)).to be_falsey
+      end
+    end
+
+    describe '#relevance_score' do
+      it 'when debug enabled it generates a displayable relevance score' do
+        allow(helper).to receive(:params).and_return(debug: 'true')
+        expect(helper.relevance_score(options)).to be_truthy
+      end
+
+      it 'when debug disabled it does not generate a displayable relevance score' do
+        allow(helper).to receive(:params).and_return({})
+        expect(helper.relevance_score(options)).to be_falsey
+      end
+    end
+  end
+
+  ########################
   # ItemsSectionHelper
   ########################
 

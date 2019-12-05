@@ -387,11 +387,15 @@ RESOURCE_TYPE_FACET:
   label:
     en: Resource Type
 ROLLUP_ID:
-  solr_field: rollup_id
+  solr_field: :rollup_id
   label:
     en: Rollup ID
+SCORE:
+  solr_field: :score
+  label:
+    en: score
 SECONDARY_URLS:
-  solr_field: secondary_urls
+  solr_field: :secondary_urls
   label:
     en: Links
 SERIES_STATEMENT:

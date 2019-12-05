@@ -33,5 +33,9 @@ describe DefaultTrlnSearchBuilder do
     it 'adds the author boost method to the processor chain' do
       expect(obj.processor_chain).to include(:author_boost)
     end
+
+    it 'adds the solr debug method to the processor chain' do
+      expect(obj.processor_chain).to include(:add_solr_debug)
+    end
   end
 end

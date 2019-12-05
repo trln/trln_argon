@@ -360,4 +360,20 @@ describe TrlnArgon::ArgonSearchBuilder do
       end
     end
   end
+
+  describe '#add_solr_debug' do
+    before { builder_with_params.add_solr_debug(solr_parameters) }
+
+    let(:builder_with_params) do
+      search_builder.with(debug: 'true')
+    end
+
+    it 'adds the solr debug parameter' do
+      expect(solr_parameters[:debug]).to eq('true')
+    end
+
+    it 'adds the score to the fl paramater' do
+      expect(solr_parameters[:fl]).to eq('*,score')
+    end
+  end
 end

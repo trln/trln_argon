@@ -1,0 +1,47 @@
+---
+:responseHeader:
+  :zkConnected: true
+  :status: 0
+  :QTime: 503
+  :params:
+    :facet.query[]:
+    - date_cataloged_dt:[NOW-7DAY/DAY TO NOW]
+    - date_cataloged_dt:[NOW-1MONTH/DAY TO NOW]
+    - date_cataloged_dt:[NOW-3MONTH/DAY TO NOW]
+    :f.available_f.facet.limit: '11'
+    :f.date_cataloged_dt.facet.limit: '11'
+    :f.location_hierarchy_f.facet.sort: count
+    :fl: "*,score"
+    :f.subject_chronological_f.facet.limit: '11'
+    :f.subject_genre_f.facet.limit: '11'
+    :fq: institution_f:unc
+    :f.subject_geographic_f.facet.limit: '11'
+    :stats: 'true'
+    :f.physical_media_f.facet.limit: '11'
+    :wt: json
+    :stats.field: publication_year_isort
+    :f.lcc_callnum_classification_f.facet.limit: '4501'
+    :debug: 'true'
+    :sort: score desc, publication_year_isort desc, title_sort_ssort_single asc
+    :rows: '20'
+    :q: milton
+    :f.language_f.facet.limit: '11'
+    :f.location_hierarchy_f.facet.limit: '201'
+    :facet.field[]:
+    - access_type_f
+    - available_f
+    - "{!ex=rollup}location_hierarchy_f"
+    - resource_type_f
+    - physical_media_f
+    - subject_topical_f
+    - lcc_callnum_classification_f
+    - language_f
+    - "{!ex=publication_year_isort_single}publication_year_isort"
+    - author_facet_f
+    - subject_genre_f
+    - subject_geographic_f
+    - subject_chronological_f
+    :f.author_facet_f.facet.limit: '11'
+    :f.resource_type_f.facet.limit: '11'
+    :f.subject_topical_f.facet.limit: '11'
+    :facet: 'true'

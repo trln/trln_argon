@@ -1,6 +1,7 @@
 require: rubocop-rspec
 
 AllCops:
+  TargetRubyVersion: 2.3
   Exclude:
     - '.internal_test_app/**/*'
     - 'Gemfile'
@@ -81,3 +82,7 @@ RSpec/VerifiedDoubles:
 
 RSpec/MessageSpies:
   EnforcedStyle: receive
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
