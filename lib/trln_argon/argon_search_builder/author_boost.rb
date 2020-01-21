@@ -21,11 +21,11 @@ module TrlnArgon
         current_year_minus_ten = current_year - 10
         'linear(map(' \
         "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT},#{current_year_plus_two},10000," \
-        "#{current_year_minus_ten},abs(#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT})),11,0)^5"
+        "#{current_year_minus_ten},abs(#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT})),11,0)^0.5"
       end
 
       def author_english_boost_query
-        "#{TrlnArgon::Fields::LANGUAGE_FACET}:English^5000"
+        "#{TrlnArgon::Fields::LANGUAGE_FACET}:English^500"
       end
 
       def includes_author_search?

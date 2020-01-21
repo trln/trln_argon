@@ -186,7 +186,7 @@ describe TrlnArgon::ArgonSearchBuilder do
 
       it 'adds the bq parameter to the solr query' do
         expect(solr_parameters[:bq]).to eq(
-          ['language_f:English^5000']
+          ['language_f:English^500']
         )
       end
 
@@ -197,7 +197,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^5']
+           'abs(publication_year_isort)),11,0)^0.5']
         )
       end
     end
@@ -212,7 +212,7 @@ describe TrlnArgon::ArgonSearchBuilder do
 
       it 'adds the bq parameter to the solr query' do
         expect(solr_parameters[:bq]).to eq(
-          ['language_f:English^5000']
+          ['language_f:English^500']
         )
       end
 
@@ -223,7 +223,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^5']
+           'abs(publication_year_isort)),11,0)^0.5']
         )
       end
     end
@@ -242,9 +242,9 @@ describe TrlnArgon::ArgonSearchBuilder do
 
       it 'adds the bq parameter to the solr query' do
         expect(solr_parameters[:bq]).to eq(
-          ['language_f:English^10000',
-           'title_main_indexed_tp:(civil war history)^500',
-           'resource_type_f:Book^100']
+          ['language_f:English^1000',
+           'title_main_indexed_tp:(civil war history)^50',
+           'resource_type_f:Book^10']
         )
       end
 
@@ -255,7 +255,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^50']
+           'abs(publication_year_isort)),11,0)^5']
         )
       end
     end
@@ -270,9 +270,9 @@ describe TrlnArgon::ArgonSearchBuilder do
 
       it 'adds the bq parameter to the solr query' do
         expect(solr_parameters[:bq]).to eq(
-          ['language_f:English^10000',
-           'title_main_indexed_tp:(civil war history)^500',
-           'resource_type_f:Book^100']
+          ['language_f:English^1000',
+           'title_main_indexed_tp:(civil war history)^50',
+           'resource_type_f:Book^10']
         )
       end
 
@@ -283,7 +283,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         expect(solr_parameters[:bf]).to eq(
           ["linear(map(publication_year_isort,#{current_year_plus_two}," \
            "10000,#{current_year_minus_ten}," \
-           'abs(publication_year_isort)),11,0)^50']
+           'abs(publication_year_isort)),11,0)^5']
         )
       end
     end
