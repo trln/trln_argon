@@ -7,5 +7,6 @@ class DefaultLocalSearchBuilder < SearchBuilder
                                      only_home_facets
                                      author_boost
                                      subjects_boost
-                                     add_document_ids_query]
+                                     add_document_ids_query
+                                     add_solr_debug]
 end

@@ -206,6 +206,10 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the creator main field' do
       expect(override_config.index_fields).to have_key('creator_main_a')
     end
+
+    it 'sets the debug info' do
+      expect(override_config.index_fields).to have_key('id')
+    end
   end
 
   describe 'show fields' do
@@ -450,6 +454,10 @@ describe TrlnArgon::ControllerOverride do
 
     it 'sets the creator main field' do
       expect(override_config.show_sub_header_fields).to have_key('creator_main_a')
+    end
+
+    it 'sets the debug info' do
+      expect(override_config.show_sub_header_fields).to have_key('id')
     end
   end
 

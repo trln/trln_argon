@@ -1,4 +1,5 @@
 require 'trln_argon/view_helpers/advanced_search_helper'
+require 'trln_argon/view_helpers/debug_info_helper'
 require 'trln_argon/view_helpers/document_export_helper'
 require 'trln_argon/view_helpers/facets_helper'
 require 'trln_argon/view_helpers/items_section_helper'
@@ -16,6 +17,7 @@ module TrlnArgon
     # in app/helpers/trln_argon_helper.rb
     module TrlnArgonHelper
       include AdvancedSearchHelper
+      include DebugInfoHelper
       include DocumentExportHelper
       include FacetsHelper
       include ItemsSectionHelper
@@ -81,10 +83,9 @@ module TrlnArgon
 
       def call_number_display(item)
         return '' if item.nil? || item.empty? || !item.respond_to?(:fetch)
-        r = item.fetch('call_no', '')
-        r << " #{item['vol']}" if item.key?('vol')
-        r << " #{item['copy_no']}" if item.key?('copy_no')
-        r
+        [item.fetch('call_no', nil),
+         item.fetch('vol', nil),
+         item.fetch('copy_no', nil)].compact.join(' ')
       end
 
       def item_notes_display(item)

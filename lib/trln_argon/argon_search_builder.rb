@@ -1,4 +1,5 @@
 require 'trln_argon/argon_search_builder/add_query_to_solr'
+require 'trln_argon/argon_search_builder/add_solr_debug_info'
 require 'trln_argon/argon_search_builder/author_boost'
 require 'trln_argon/argon_search_builder/disable_boolean_for_all_caps'
 require 'trln_argon/argon_search_builder/count_only'
@@ -14,6 +15,7 @@ module TrlnArgon
   # local record filtering, etc.
   module ArgonSearchBuilder
     include AddQueryToSolr
+    include AddSolrDebugInfo
     include AuthorBoost
     include DisableBooleanForAllCaps
     include CountOnly

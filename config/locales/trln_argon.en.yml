@@ -243,3 +243,8 @@ en:
 
         bookmarks:
             constraint_label: "Document IDs"
+
+        debug_info:
+            solr_query_request: "Solr Request"
+            solr_document_score: "Relevance Score: "
+            solr_document_request: "Solr Document"
