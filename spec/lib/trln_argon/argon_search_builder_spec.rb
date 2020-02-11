@@ -368,10 +368,6 @@ describe TrlnArgon::ArgonSearchBuilder do
       search_builder.with(debug: 'true')
     end
 
-    it 'adds the solr debug parameter' do
-      expect(solr_parameters[:debug]).to eq('true')
-    end
-
     it 'adds the score to the fl paramater' do
       expect(solr_parameters[:fl]).to eq('*,score')
     end
