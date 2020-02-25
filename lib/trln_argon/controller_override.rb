@@ -51,6 +51,9 @@ module TrlnArgon
                              new_window: false,
                              modal: false,
                              path: :sharebookmarks_path)
+      add_show_tools_partial(:citation,
+                             icon: 'glyphicon-copy',
+                             if: :render_citation_action?)
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -84,7 +87,6 @@ module TrlnArgon
         # Disable these tools in the UI for now.
         # See add_show_tools_partial methods above for
         # tools configuration
-        config.show.document_actions.delete(:citation)
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
@@ -625,6 +627,14 @@ module TrlnArgon
 
       def render_sharebookmarks_action?(_config, _options)
         true if request.path == bookmarks_path
+      end
+
+      def render_citation_action?(_config, options = {})
+        docs = [options[:document] || (options[:document_list] || [])].flatten
+        TrlnArgon::Engine.configuration.citation_formats.present? &&
+          TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
+          TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
+          docs.select { |doc| doc.oclc_number.present? }.any?
       end
     end
   end

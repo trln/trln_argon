@@ -30,6 +30,7 @@ module TrlnArgon
                     :application_name,
                     :argon_code_mappings_dir,
                     :solr_fields,
+                    :citation_formats,
                     :code_mappings,
                     :refworks_url,
                     :root_url,
@@ -45,7 +46,9 @@ module TrlnArgon
                     :unc_latest_received_url,
                     :solr_cache_exp_time,
                     :allow_open_search,
-                    :open_search_q_min_length
+                    :open_search_q_min_length,
+                    :worldcat_cite_base_url,
+                    :worldcat_cite_api_key
 
       # rubocop:disable MethodLength
       # rubocop:disable AbcSize
@@ -64,6 +67,7 @@ module TrlnArgon
           'url=http://unc.summon.serialssolutions.com/search?'\
           's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
         @contact_url = 'https://library.unc.edu/ask/'
+        @citation_formats = 'apa, mla, chicago, harvard, turabian'
         @feedback_url = ''
         @sort_order_in_holding_list = 'unc, duke, ncsu, nccu, trln'
         @number_of_location_facets = '10'
