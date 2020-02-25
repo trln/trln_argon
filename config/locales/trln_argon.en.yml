@@ -248,3 +248,10 @@ en:
             solr_query_request: "Solr Request"
             solr_document_score: "Relevance Score: "
             solr_document_request: "Solr Document"
+
+        citation:
+            apa: "APA"
+            mla: "MLA"
+            chicago: "Chicago"
+            harvard: "Harvard"
+            turabian: "Turabian"    

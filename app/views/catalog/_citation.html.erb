@@ -1,0 +1,14 @@
+<% @documents.each do |document| %>
+  <% if document.citable? %>
+    <div class="modal-header">
+      <button type="button" class="ajax-modal-close close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 class="modal-title"><%= document_heading(document) %></h3>
+    </div>
+    <div class="modal-body">
+      <% document.citations.each do |format, citation| %>
+        <h4><%= t("trln_argon.citation.#{format}") %></h4>
+        <%= citation %>
+      <% end %>
+    </div>
+  <% end %> 
+<% end %>

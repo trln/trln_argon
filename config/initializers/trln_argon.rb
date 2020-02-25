@@ -10,6 +10,7 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'refworks_url')
   apply_local_configuration(config, 'root_url')
   apply_local_configuration(config, 'article_search_url')
+  apply_local_configuration(config, 'citation_formats')
   apply_local_configuration(config, 'contact_url')
   apply_local_configuration(config, 'feedback_url')
   apply_local_configuration(config, 'sort_order_in_holding_list')
@@ -23,6 +24,8 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'solr_cache_exp_time')
   apply_local_configuration(config, 'allow_open_search')
   apply_local_configuration(config, 'open_search_q_min_length')
+  apply_local_configuration(config, 'worldcat_cite_base_url')
+  apply_local_configuration(config, 'worldcat_cite_api_key')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',
