@@ -52,7 +52,7 @@ module TrlnArgon
                              modal: false,
                              path: :sharebookmarks_path)
       add_show_tools_partial(:citation,
-                             icon: 'glyphicon-copy',
+                             icon: 'fa fa-quote-left',
                              if: :render_citation_action?)
 
       # TRLN Argon CatalogController configurations
