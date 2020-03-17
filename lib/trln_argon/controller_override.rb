@@ -505,6 +505,18 @@ module TrlnArgon
           }
         end
 
+        config.add_search_field('series_statement') do |field|
+          field.include_in_simple_select = false
+          field.label = I18n.t('trln_argon.search_fields.series')
+          field.def_type = 'edismax'
+          field.solr_local_parameters = {
+            qf:  '$series_qf',
+            pf:  '$series_pf',
+            pf3: '$series_pf3',
+            pf2: '$series_pf2'
+          }
+        end
+
         config.add_search_field('isbn_issn') do |field|
           field.label = I18n.t('trln_argon.search_fields.isbn_issn')
           field.def_type = 'edismax'

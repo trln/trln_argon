@@ -114,6 +114,7 @@ en:
             isbn_issn: "ISBN/ISSN/barcode"
             publisher: "Publisher"
             genre_headings: "Genre"
+            series: "Series"
             work_entry: "Work"
 
         sort_options:
