@@ -18,7 +18,7 @@ module TrlnArgon
         loc_n_map.map do |_loc_n, entries|
           I18n.t('trln_argon.item_location_plus_callnumber',
                  loc_b_display: TrlnArgon::LookupManager.instance.map("#{self.record_owner}.loc_b.#{loc_b}"),
-                 call_number: entries.fetch('holdings', []).map { |e| e.fetch('call_no', '').strip }.join(', '))
+                 call_number: entries.fetch('items', []).map { |e| e.fetch('call_no', '').strip }.join(', '))
         end
       end
     end
