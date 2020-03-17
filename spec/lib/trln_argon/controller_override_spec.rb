@@ -517,6 +517,16 @@ describe TrlnArgon::ControllerOverride do
         expect(override_config.search_fields['publisher'].label).to eq('Publisher')
       end
     end
+
+    describe 'series field' do
+      it 'sets the series field' do
+        expect(override_config.search_fields).to have_key('series_statement')
+      end
+
+      it 'has a label' do
+        expect(override_config.search_fields['series_statement'].label).to eq('Series')
+      end
+    end
   end
 
   describe 'sort fields' do
