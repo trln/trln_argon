@@ -543,7 +543,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     describe 'Year: New to Old' do
-      let(:fields) { 'publication_year_isort desc, title_sort_ssort_single asc' }
+      let(:fields) { 'publication_year_isort desc, score desc, title_sort_ssort_single asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)
@@ -555,7 +555,7 @@ describe TrlnArgon::ControllerOverride do
     end
 
     describe 'Year: Old to New' do
-      let(:fields) { 'publication_year_isort asc, title_sort_ssort_single asc' }
+      let(:fields) { 'publication_year_isort asc, score desc, title_sort_ssort_single asc' }
 
       it 'sets the sort fields' do
         expect(override_config.sort_fields).to have_key(fields)

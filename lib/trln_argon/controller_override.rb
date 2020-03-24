@@ -564,10 +564,12 @@ module TrlnArgon
                               label: I18n.t('trln_argon.sort_options.relevance')
 
         config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} desc, "\
+                              'score desc, '\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.year_desc')
 
         config.add_sort_field "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc, "\
+                              'score desc, '\
                               "#{TrlnArgon::Fields::TITLE_SORT} asc",
                               label: I18n.t('trln_argon.sort_options.year_asc')
 
