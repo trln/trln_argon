@@ -878,4 +878,87 @@ describe TrlnArgon::SolrDocument do
       end
     end
   end
+
+  ########################
+  # Citation
+  ########################
+  describe 'citable?' do
+    context 'document does not have an oclc number' do
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345'
+        )
+      end
+
+      it 'returns false' do
+        expect(document.citable?).to be false
+      end
+    end
+
+    context 'document does not have citations' do
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          oclc_number: '123098080985'
+        )
+      end
+
+      it 'returns false' do
+        allow(document).to receive(:citations).and_return({})
+        expect(document.citable?).to be false
+      end
+    end
+
+    context 'document does have citations' do
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          oclc_number: '123098080985'
+        )
+      end
+
+      let(:apa_citation) do
+        { 'APA' => '<p class="citation_style_APA"><i>Cats</i>. (1996). Port Orange, FL: Cats Magazine. </p>' }
+      end
+
+      it 'returns true' do
+        allow(document).to receive(:citations).and_return apa_citation
+        expect(document.citable?).to be true
+      end
+    end
+  end
+
+  describe 'citations' do
+    context 'document has invalid oclc number' do
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          oclc_number: 'abcdef'
+        )
+      end
+
+      it 'returns empty hash' do
+        allow(document).to receive(:citations).and_return({})
+        expect(document.citations).to be_blank
+      end
+    end
+
+    context 'document does have citations' do
+      let(:document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          oclc_number: '123098080985'
+        )
+      end
+
+      let(:apa_citation) do
+        { 'APA' => '<p class="citation_style_APA"><i>Cats</i>. (1996). Port Orange, FL: Cats Magazine. </p>' }
+      end
+
+      it 'returns citations' do
+        allow(document).to receive(:citations).and_return apa_citation
+        expect(document.citations).to be apa_citation
+      end
+    end
+  end
 end
