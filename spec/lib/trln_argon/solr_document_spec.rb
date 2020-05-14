@@ -69,15 +69,15 @@ describe TrlnArgon::SolrDocument do
     let(:names_document) do
       SolrDocumentTestClass.new(
         id: 'DUKE000007907',
-        names_a: ['{"name":"Nabokov, Vladimir Vladimirovich, 1899-1977", "rel":"author"}',
+        names_a: ['{"name":"Nabokov, Vladimir Vladimirovich, 1899-1977", "rel":"author", "type":"creator"}',
                   '{"name":"Appel, Alfred"}']
       )
     end
 
     it 'deserializes the names string' do
       expect(names_document.names).to eq(
-        [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author' },
-         { name: 'Appel, Alfred', rel: '' }]
+        [{ name: 'Nabokov, Vladimir Vladimirovich, 1899-1977', rel: 'author', type: 'creator' },
+         { name: 'Appel, Alfred', rel: '', type: '' }]
       )
     end
   end
@@ -438,11 +438,11 @@ describe TrlnArgon::SolrDocument do
     it 'exports the document as RIS' do
       expect(test_document.export_as_ris).to eq(
         "TY  - BOOK\r\n"\
-        "A1  - Downey, Maureen E.\r\n"\
         "A1  - Smithsonian Institution. Press\r\n"\
         "AV  - Perkins Public Documents/Maps\r\n"\
         "CN  - SI 1.27:435\r\n"\
         "CY  - Washington\r\n"\
+        "ED  - Downey, Maureen E.\r\n"\
         "ID  - DUKE002952265\r\n"\
         "KW  - Brisingida -- Atlantic Ocean -- Classification\r\n"\
         "KW  - Echinodermata -- Classification\r\n"\

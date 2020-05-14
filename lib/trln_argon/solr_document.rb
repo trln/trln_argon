@@ -12,6 +12,7 @@ require 'trln_argon/solr_document/work_entry'
 
 module TrlnArgon
   # Mixin for SolrDocument with TRLN Argon Specific Behavior
+  # rubocop:disable ModuleLength
   module SolrDocument
     include Citation
     include EmailFieldMapping
@@ -74,11 +75,24 @@ module TrlnArgon
     end
 
     def names
-      @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES, name: '', rel: '')
+      @names ||= deserialize_solr_field(TrlnArgon::Fields::NAMES,
+                                        name: '',
+                                        rel: '',
+                                        type: '')
     end
 
     def names_to_text
       names.map { |n| n[:name] }.reject(&:empty?)
+    end
+
+    def creators_to_text
+      names.select { |n| n[:type] == 'creator' || n[:type] == 'no_rel' || n[:type] == '' }
+           .map { |n| n[:name] }.reject(&:empty?)
+    end
+
+    def editors_to_text
+      names.select { |n| n[:type] == 'editor' }
+           .map { |n| n[:name] }.reject(&:empty?)
     end
 
     def oclc_number
@@ -152,4 +166,5 @@ module TrlnArgon
       value.respond_to?(:call) ? value.call : fetch(value, '')
     end
   end
+  # rubocop:enable ModuleLength
 end
