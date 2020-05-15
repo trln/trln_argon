@@ -14,7 +14,7 @@ module TrlnArgon
           # Type of reference
           TY: proc { ris_type([*self[TrlnArgon::Fields::RESOURCE_TYPE]]) },
           # First Author
-          A1: proc { names_to_text },
+          A1: proc { creators_to_text },
           # Second Author
           # A2: ,
           # Location in Archives (Inst., Lib., Call No.)
@@ -23,6 +23,8 @@ module TrlnArgon
           CN: proc { callnumbers_to_text },
           # Place Published
           CY: TrlnArgon::Fields::PUBLISHER_LOCATION,
+          # Editor
+          ED: proc { editors_to_text },
           # Reference ID
           ID: TrlnArgon::Fields::ID,
           # Keywords (Subjects)
