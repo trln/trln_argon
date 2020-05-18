@@ -348,8 +348,7 @@ module TrlnArgon
         config.add_show_field TrlnArgon::Fields::GENRE_HEADINGS.to_s,
                               label: TrlnArgon::Fields::GENRE_HEADINGS.label,
                               accessor: :genre_headings,
-                              helper_method: :link_to_fielded_keyword_search,
-                              search_field: :genre_headings
+                              helper_method: :list_of_linked_genres_segments
         config.add_show_field TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.to_s,
                               label: TrlnArgon::Fields::ISBN_WITH_QUALIFYING_INFO.label,
                               accessor: :isbn_with_qualifying_info

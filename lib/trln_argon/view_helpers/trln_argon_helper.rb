@@ -146,13 +146,6 @@ module TrlnArgon
         hits.present? ? number_with_delimiter(hits, delimiter: ',') : '0'
       end
 
-      def link_to_fielded_keyword_search(options = {})
-        options[:value].map do |v|
-          query = { search_field: options[:config].search_field, q: v }
-          link_to v, search_catalog_path(query)
-        end.join('<br/>').html_safe
-      end
-
       def add_thumbnail(document, size: :small)
         return marc_thumbnail_tag(document) if document.thumbnail_urls.any?
         syndetics_thumbnail_tag(document, size)

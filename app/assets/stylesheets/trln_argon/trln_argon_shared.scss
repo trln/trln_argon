@@ -1539,7 +1539,8 @@ div.marc-record {
 }
 
 #subjects .subject-separator,
-#included-works .subject-separator {
+#included-works .subject-separator,
+#other-details .subject-separator {
   text-decoration: none !important;
   display: inline-block;
   margin-left: 5px;

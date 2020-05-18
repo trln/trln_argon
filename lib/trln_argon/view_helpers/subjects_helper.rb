@@ -4,30 +4,45 @@ module TrlnArgon
       def list_of_linked_subjects_segments(options = {})
         link_to_subject_segments(options).map do |subject|
           content_tag :li, class: options[:field] do
-            content_tag :span,
-                        subject.gsub(
-                          ' -- ',
-                          "<div class='subject-separator'><span aria-hidden='true'>&gt;</span></div>"
-                        ).html_safe,
-                        class: 'progressive-link-wrapper'
+            progress_link_span(subject)
           end
         end.join('').html_safe
       end
 
-      def link_to_subject_segments(options = {})
-        options[:value].map { |subject| build_segment_links(subject).html_safe }
+      def list_of_linked_genres_segments(options = {})
+        link_to_subject_segments(options).map do |genre|
+          progress_link_span(genre)
+        end.join('<br />').html_safe
       end
 
-      def build_segment_links(segments_string, delimiter = ' -- ')
+      def progress_link_span(subj)
+        content_tag :span,
+                    subj.gsub(
+                      ' -- ',
+                      "<div class='subject-separator'><span aria-hidden='true'>&gt;</span></div>"
+                    ).html_safe,
+                    class: 'progressive-link-wrapper'
+      end
+
+      def link_to_subject_segments(options = {})
+        options[:value].map { |subject| build_segment_links(subject, options).html_safe }
+      end
+
+      def build_segment_links(segments_string, options, delimiter = ' -- ')
         segments = segments_string.split(delimiter)
         subject_hierarchy = array_to_hierarchy(segments, delimiter)
         zipped_segments = segments.zip(subject_hierarchy)
-        linked_segments = zipped_segments.map { |segment| segment_search_link(segment, delimiter) }.join
+        linked_segments = zipped_segments.map { |segment| segment_search_link(segment, options, delimiter) }.join
         linked_segments
       end
 
-      def segment_search_link(segment_hierarchy_pair, delimiter = ' -- ')
-        params = { search_field: 'subject', q: "\"#{segment_hierarchy_pair.last}\"" }
+      def segment_search_link(segment_hierarchy_pair, options, delimiter = ' -- ')
+        search_field = if options[:field] == 'subject_headings_a'
+                         'subject'
+                       else
+                         'genre_headings'
+                       end
+        params = { search_field: search_field, q: "\"#{segment_hierarchy_pair.last}\"" }
         link_to(search_action_url(params),
                 class: 'progressive-link') do
           segment_link_content(segment_hierarchy_pair, delimiter).html_safe
