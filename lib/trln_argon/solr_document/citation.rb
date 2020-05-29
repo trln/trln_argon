@@ -23,7 +23,7 @@ module TrlnArgon
       def world_cat_api_response(format)
         url = world_cat_uri(format)
 
-        Net::HTTP.start(url.host, url.port) do |http|
+        Net::HTTP.start(url.host, url.port, use_ssl: url.scheme == 'https') do |http|
           request = Net::HTTP::Get.new url
           response = http.request request
           response.body
