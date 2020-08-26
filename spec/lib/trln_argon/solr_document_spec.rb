@@ -414,7 +414,7 @@ describe TrlnArgon::SolrDocument do
 
     it 'returns the proxied links for each institution that has access' do
       expect(solr_document.expanded_shared_fulltext_urls).to(
-        eq('duke' => [{ href: 'http://proxy.lib.duke.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+        eq('duke' => [{ href: 'https://login.proxy.lib.duke.edu/login?url=http://www.law.duke.edu/journals/lcp/',
                         type: 'fulltext',
                         text: 'Law and contemporary problems, v. 63, no. 1-2',
                         note: '' }],
