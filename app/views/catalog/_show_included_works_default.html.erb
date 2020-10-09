@@ -1,10 +1,10 @@
-<% if display_included_works?(document: document) %>
+<% included_works = TrlnArgon::DocumentMetadataListComponent.new(
+          fields: show_included_works_presenter(document).field_presenters,
+          show: true) %>
+
+<% if included_works.render? %>
   <div id="included-works" class="<%= show_included_works_class %>" aria-labelledby="includedWorksLabel">
     <h2 id="includedWorksLabel"><%= t('trln_argon.show.heading.included_works') %></h2>
-    <ul>
-      <% show_configured_fields_and_values(blacklight_config.show_included_works_fields, document).each do |value| %>
-          <%= value[:value] %>
-      <% end %>
-    </ul>
+      <%= render(included_works) %>
   </div>
 <% end %>

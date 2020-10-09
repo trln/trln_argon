@@ -2,7 +2,7 @@ Blacklight.onLoad(function() {
 
   // Get natural width of thumbnails and hide empty syndetics thumbs
 
-  	$(window).load(function(){
+  	$(window).on('load', function(){
 
       $('#documents div.thumbnail').find('img').each(function () {
   			var $this = $(this), width = $(this).get(0).naturalWidth;

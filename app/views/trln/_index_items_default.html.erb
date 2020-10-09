@@ -1,4 +1,4 @@
-<div class="items well">
+<div class="items card">
 
   <div class="availability institution-availability row">
 
@@ -19,9 +19,9 @@
           <div class="row">
 
             <div class="<%= availability_class %>">
-              <dl class="dl-horizontal">
-                <dt><span class='status-label label label-info'><%= t('trln_argon.show.label.status') %></span></dt>
-                <dd>
+              <dl class="row">
+                <dt class="col-sm-3"><span class='status-label badge badge-info'><%= t('trln_argon.show.label.status') %></span></dt>
+                <dd class="col-sm-9">
                   <span class="<%= binary_availability_span_class(document: local_doc) %>">
                     <%= local_doc.present? ? local_doc.availability : 'Available' %>
                   </span>

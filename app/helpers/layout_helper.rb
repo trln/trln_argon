@@ -10,4 +10,8 @@ module LayoutHelper
   def sidebar_classes
     'col-lg-3 col-md-4 col-sm-5'
   end
+
+  def show_content_classes
+    'col-sm-12 show-document'
+  end
 end

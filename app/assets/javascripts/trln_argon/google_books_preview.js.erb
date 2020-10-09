@@ -1,5 +1,5 @@
 Blacklight.onLoad(function() {
-    $(window).load(function() {
+    $(window).on('load', function() {
         var previewAvailable = function (item) {
             try {
                 return $.inArray(item.accessInfo.viewability, ['PARTIAL', 'ALL_PAGES']) >= 0;

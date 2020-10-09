@@ -1,9 +1,9 @@
 <% lr_text, lr_url = latest_received(document, item_data) %>
 <% unless lr_text.blank? %>
 <div class="<%= latest_received_wrapper_class %>">
-      <dl class="dl-horizontal">
-        <dt><span class='latest-received-label label label-info'><%= t('trln_argon.show.label.latest_received') %></span></dt>
-        <dd>
+      <dl class="row">
+        <dt class="col-sm-3"><span class='latest-received-label badge badge-info'><%= t('trln_argon.show.label.latest_received') %></span></dt>
+        <dd class="col-sm-9">
         	<span class='latest-received'>
         	<% if lr_url.blank? %>
         		<%= lr_text %>

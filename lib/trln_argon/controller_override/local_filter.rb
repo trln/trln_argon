@@ -11,7 +11,7 @@ module TrlnArgon
       # with no documents listed. Primarily used to fetch counts
       # client side for the TRLN/local toggle.
       def count_only
-        builder = search_builder.with(params)
+        builder = search_service.search_builder.with(params)
         builder.rows = '0'
 
         builder.processor_chain.delete(:add_facetting_to_solr)
@@ -20,7 +20,7 @@ module TrlnArgon
         builder.processor_chain.delete(:add_sorting_to_solr)
         builder.processor_chain.append(:remove_params_for_count_only_query)
 
-        response = repository.search(builder)
+        response = search_service.repository.search(builder)
         render json: response
       end
 
@@ -35,8 +35,9 @@ module TrlnArgon
 
       private
 
+      # TODO: BL7 Undefined method repository
       def filtered_results_query_response
-        repository.search(local_filter_search_builder
+        search_service.repository.search(local_filter_search_builder
           .append(*additional_processor_chain_methods)
           .with(search_state.to_h))
       end
@@ -45,7 +46,7 @@ module TrlnArgon
       # Will have any additional processor chain methods applied to the
       # query that fetches the local filter count
       def additional_processor_chain_methods
-        search_builder.processor_chain -
+        search_service.search_builder.processor_chain -
           local_filter_search_builder.processor_chain -
           excluded_processor_chain_methods
       end
