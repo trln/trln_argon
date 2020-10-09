@@ -1,8 +1,8 @@
 <% if url_hash[:note].present? %>
   <div class="<%= url_note_wrapper_class %>">
-    <dl class="dl-horizontal">
-      <dt><span class='url-note-label label label-info'><%= t('trln_argon.show.label.url_note') %></span></dt>
-      <dd><span class='url-note'><%= url_hash[:note] %></dd>
+    <dl class="row">
+      <dt class="col-sm-2"><span class='url-note-label badge badge-info'><%= t('trln_argon.show.label.url_note') %></span></dt>
+      <dd class="col-sm-10"><span class='url-note'><%= url_hash[:note] %></dd>
     </dl>
   </div>
 <% end %>

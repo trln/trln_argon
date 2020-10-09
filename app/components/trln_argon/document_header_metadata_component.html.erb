@@ -1,0 +1,5 @@
+<ul>
+  <% @fields.each do |field| -%>
+    <%= @view_context.render(field_component(field).new(field: field, show: @show, layout: TrlnArgon::MetadataHeaderFieldLayoutComponent)) %>
+  <% end -%>
+</ul>

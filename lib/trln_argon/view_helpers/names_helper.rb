@@ -4,7 +4,7 @@ module TrlnArgon
       def names_display(options = {})
         assemble_names_list_value(options[:value]).map do |work|
           content_tag(:li, work.html_safe, class: options[:field])
-        end.join('').html_safe
+        end .join('').html_safe
       end
 
       def assemble_names_list_value(value)

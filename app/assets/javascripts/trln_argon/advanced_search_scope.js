@@ -1,5 +1,5 @@
 Blacklight.onLoad(function() {
-  $(window).load(function(){
+  $(window).on('load', function(){
 
     //remove default mast search to fix duplicate IDs
     $(".blacklight-advanced #search-navbar .navbar-form").remove();

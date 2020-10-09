@@ -1,12 +1,3 @@
-<% display_values = show_configured_fields_and_values(blacklight_config.show_sub_header_fields, document) %>
 <div id="show-sub-header" class="<%= show_sub_header_class %>">
-  <% if display_values.any? %>
-    <ul>
-    <% display_values.each do |values| %>
-      <li class="sub-header <%= values[:field]  %>">
-        <%= values[:value] %>
-      </li>
-    <% end %>
-    </ul>
-  <% end %>
+  <%= render(TrlnArgon::DocumentHeaderMetadataComponent.new(fields: show_sub_header_presenter(document).field_presenters)) %>
 </div>

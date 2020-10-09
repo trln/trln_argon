@@ -1,16 +1,10 @@
 <% if show_pagination? and @response.total_pages > 1 %>
  <div class="row record-padding">
   <div class="col-md-12">
-
-    <div class="pagination">
-      <%= paginate @response, :theme => 'blacklight' %>
-
+    <%= render Blacklight::Response::PaginationComponent.new(response: @response, html: {}, outer_window: 0) %>
       <div id="viewAllResultsEnd" class="clearfix">
         <%= render :partial => "local_filter", locals: { local_filter_id: 'localFilterLabelFooter', local_button_id: 'toggle-local-btn-bottom', trln_button_id: 'toggle-trln-btn-bottom' } %>
       </div>
-
-    </div>
-
   </div>
  </div>
 <% end %>

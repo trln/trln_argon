@@ -8,15 +8,17 @@ module SolrCaching
   def cached_catalog_index
     cat_index_cache_key = cache_key('cached_catalog_index')
 
-    (@response, @document_list) =
+    (@response, deprecated_document_list) =
       if cat_index_cache_key.present?
         logger.info('index page solr response cache hit')
         Rails.cache.fetch(cat_index_cache_key.to_s, expires_in: solr_cache_exp_time) do
-          search_results(params)
+          search_service.search_results
         end
       else
-        search_results(params)
+        search_service.search_results
       end
+
+    @document_list = ActiveSupport::Deprecation::DeprecatedObjectProxy.new(deprecated_document_list, 'The @document_list instance variable is deprecated; use @response.documents instead.')
 
     respond_to do |format|
       format.html { store_preferred_view }
@@ -24,8 +26,6 @@ module SolrCaching
       format.atom { render layout: false }
       format.json do
         @presenter = Blacklight::JsonPresenter.new(@response,
-                                                   @document_list,
-                                                   facets_from_request,
                                                    blacklight_config)
       end
       additional_response_formats(format)

@@ -1,21 +1,5 @@
-<div class="page-header row" role="main">
-  <h2 class='section-heading'><%= t('blacklight.home.welcome') %></h2>
-  <p><%= t('blacklight.home.blurb') %></p>
+<div class="jumbotron text-center">
+  <h2 class="jumbotron-heading"><%= t('blacklight.home.welcome') %></h2>
+
+  <p class="lead"><%= t('blacklight.home.blurb') %></p>
 </div>
-
-
-<script>
-  $(function() {
-    $('#about a').on('click', function(e) {
-      e.preventDefault();
-
-      if ($('#about-content').html() == "") {
-        $('#about-content').load($(this).attr("href"), function() {
-          $('#about-content').show();
-        });
-      } else {
-        $('#about-content').toggle();
-      }
-    });
-  });
-</script>

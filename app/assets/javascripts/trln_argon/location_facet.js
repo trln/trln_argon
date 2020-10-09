@@ -1,6 +1,6 @@
 Blacklight.onLoad(function() {
 
-    $(window).load(function(){
+    $(window).on('load', function(){
 
       if ($("body").hasClass("blacklight-catalog-index")) {
 
