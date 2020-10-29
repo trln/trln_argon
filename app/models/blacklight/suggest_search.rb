@@ -7,7 +7,7 @@ module Blacklight
     ##
     # @param [Hash] params
     def initialize(params, category, repository)
-      @request_params = { q: params[:q] }
+      @request_params = { q: params[:q], 'suggest.cfq' => params[:institution] }
       @category = category
       @repository = repository
     end
