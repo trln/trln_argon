@@ -1,0 +1,6 @@
+<% if @response.total <= spell_check_max && !@response.spelling.collation.nil? && @response.spelling.collation.any? %>
+    <div id="spell">
+     <h4 class="suggest"><em><%= t('blacklight.did_you_mean', :options => safe_join(@response.spelling.collation.map { |collation| link_to_query(collation) }, " #{t('blacklight.or')} ")).html_safe %></em></h4>
+  </div>
+<% end %>
+
