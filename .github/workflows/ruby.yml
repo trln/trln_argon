@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby: ['2.4.6', '2.5.5', '2.6.3']
+    name: Ruby ${{ matrix.ruby }}
+    
+    steps:
+    - uses: actions/checkout@v2
+      
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby }}
+        
+    - name: Install dependencies
+      run: bundle install
+
+    - name: Generate a Rails testing application
+      run: rake engine_cart:generate
+
+    - name: Run rubocop
+      run: rake rubocop  
+      
+    - name: Run tests
+      run: rspec
