@@ -63,6 +63,10 @@ module TrlnArgon
         # Use Solr search requestHandler for search requests
         config.solr_path = :select
 
+        # Turn the spellcheck off
+        # Remove this line if you need to turn the spellcheck on
+        config.spell_max = -1
+
         # Use Solr document requestHandler for document requests
         config.document_solr_path = :document
         config.document_solr_request_handler = nil
