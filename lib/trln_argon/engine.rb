@@ -48,8 +48,11 @@ module TrlnArgon
                     :allow_open_search,
                     :open_search_q_min_length,
                     :worldcat_cite_base_url,
-                    :worldcat_cite_api_key
-
+                    :worldcat_cite_api_key,
+                    :worldcat_search_api_key,
+                    :worldcat_search_api_url,
+                    :worldcat_search_base_url
+                    
       # rubocop:disable MethodLength
       # rubocop:disable AbcSize
       def initialize

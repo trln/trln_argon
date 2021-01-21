@@ -26,6 +26,9 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'open_search_q_min_length')
   apply_local_configuration(config, 'worldcat_cite_base_url')
   apply_local_configuration(config, 'worldcat_cite_api_key')
+  apply_local_configuration(config, 'worldcat_search_api_key')
+  apply_local_configuration(config, 'worldcat_search_api_url')
+  apply_local_configuration(config, 'worldcat_search_base_url')
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',

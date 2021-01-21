@@ -145,6 +145,9 @@ en:
                 title: 'No results available at %{local_institution_name}'
                 modify_search: 'Or try these options:'
                 search_fields: 'You searched by %{search_fields}.'
+                worldcat_search: 'Search for %{query} at libraries worldwide'
+                worldcat_html: '%{href}'
+                worldcat_link_text: 'See %{count} results for %{query} at libraries worldwide'
                 search_everything: 'Try searching everything'
                 article_search: 'Search for articles related to "%{query}"'
                 expand_search_html:

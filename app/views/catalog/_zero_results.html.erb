@@ -16,6 +16,23 @@
 
     <ul class="lead">
 
+      <!-- WORLDCAT SEARCH -->
+      <% if params[:q] %>
+        <% wcqs = TrlnArgon::WorldcatQueryService::WorldcatQuery.new(@current_search_session) %>
+        <%# <li class='no-results-worldcat-search'> %>
+          <%#= t('trln_argon.search.zero_results.worldcat_search', query: link_to(t(truncate(params[:q], length: 60, escape: false)), wcqs.query_url)).html_safe %>
+        <%# </li> %>
+        <li class='no-results-worldcat-search'>
+          <%= t('trln_argon.search.zero_results.worldcat_link_text', count: link_to(t(wcqs.count), wcqs.query_url), query: t(truncate(params[:q], length: 60, escape: false))).html_safe %>
+        </li>
+        
+          <%#= link_to t('trln_argon.search.zero_results.worldcat_search',
+                      query: truncate(params[:q], length: 60, escape: false)),
+                      # {TrlnArgon::Engine.configuration.worldcat_search_base_url}+{CGI::escape(params[:q])}
+                      "https://ncsu.on.worldcat.org/#{CGI::escape(params[:q])}" %>
+        
+      <% end %>
+
       <!-- ARTICLE SEARCH -->
       <% if params[:q] %>
         <li>
