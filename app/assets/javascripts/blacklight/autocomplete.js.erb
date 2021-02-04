@@ -26,6 +26,12 @@ Blacklight.onLoad(function() {
     // Detect which search field is selected.
     var current_search_field = $("select").find("option:selected").val();
 
+    //Detect local institution code
+    var local_institution_code = "unc||ncsu||duke||nccu";
+    if ($("body").hasClass("blacklight-catalog")) {
+      local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+    }
+
     // Set the autocomplete URL slug/ID based on the selected search field.
     switch (current_search_field) {
       case 'title':
@@ -53,7 +59,7 @@ Blacklight.onLoad(function() {
           return response.title;
         },
         replace: function(url, uri_encoded_query) {
-          var new_url = suggest_url + '?q=' + uri_encoded_query;
+          var new_url = suggest_url + '?q=' + uri_encoded_query + '&institution=' + local_institution_code;
           return new_url;
         }
       }
@@ -70,7 +76,7 @@ Blacklight.onLoad(function() {
           return response.author;
         },
         replace: function(url, uri_encoded_query) {
-          var new_url = suggest_url + '?q=' + uri_encoded_query;
+          var new_url = suggest_url + '?q=' + uri_encoded_query + '&institution=' + local_institution_code;
           return new_url;
         }
       }
@@ -87,7 +93,7 @@ Blacklight.onLoad(function() {
           return response.subject;
         },
         replace: function(url, uri_encoded_query) {
-          var new_url = suggest_url + '?q=' + uri_encoded_query;
+          var new_url = suggest_url + '?q=' + uri_encoded_query + '&institution=' + local_institution_code;
           return new_url;
         }
       }
