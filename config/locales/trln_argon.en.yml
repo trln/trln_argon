@@ -45,6 +45,8 @@ en:
         range_limit:
             submit_limit: 'Apply'
 
+        did_you_mean: 'Did you mean: %{options}?'
+
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
