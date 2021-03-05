@@ -838,18 +838,39 @@ describe TrlnArgon::SolrDocument do
         '123456789012X'
       end
 
+      let(:primary_isbn) do
+        '123456789012X'
+      end
+
+      let(:primary_oclc) do
+        '123098080985'
+      end
+
+      let(:primary_upc) do
+        '034571173412'
+      end
+
       let(:document) do
         SolrDocumentTestClass.new(
           id: 'TRLN12345',
-          isbn_number_a: ['123456789012X']
+          isbn_number_a: ['123456789012X'],
+          primary_isbn_a: ['123456789012X']
         )
       end
 
       let(:oclc_document) do
         SolrDocumentTestClass.new(
           id: 'TRLN12345',
-          isbn_number_a: ['123456789012X'],
-          oclc_number: '123098080985'
+          primary_isbn_a: ['123456789012X'],
+          primary_oclc_a: ['123098080985']
+        )
+      end
+
+      let(:upc_document) do
+        SolrDocumentTestClass.new(
+          id: 'TRLN12345',
+          primary_isbn_a: ['123456789012X'],
+          primary_upc_a: ['034571173412']
         )
       end
 
@@ -858,13 +879,13 @@ describe TrlnArgon::SolrDocument do
       end
 
       it 'generates a link to a small cover image with defaults' do
-        expected = URI(format(url_template, isbn, 'SC.GIF'))
+        expected = URI(format(url_template, primary_isbn, 'SC.GIF'))
         actual = document.cover_image { |x| URI(x) }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
 
       it 'generates a link to a small cover image with custom options' do
-        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), isbn, 'SC.GIF'))
+        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), primary_isbn, 'SC.GIF'))
         actual = document.cover_image(size: 'small', client: 'ncstateu') do |x|
           URI(x)
         end
@@ -872,8 +893,14 @@ describe TrlnArgon::SolrDocument do
       end
 
       it 'generates a link to a medium cover image with an OCLC number' do
-        expected = URI(format(url_template + '&oclc=' + oclc, isbn, 'MC.GIF'))
+        expected = URI(format(url_template + '&oclc=' + primary_oclc, primary_isbn, 'MC.GIF'))
         actual = oclc_document.cover_image(size: :medium) { |x| URI(x) }
+        expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
+      end
+
+      it 'generates a link to a medium cover image with a UPC number' do
+        expected = URI(format(url_template + '&upc=' + primary_upc, primary_isbn, 'MC.GIF'))
+        actual = upc_document.cover_image(size: :medium) { |x| URI(x) }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
     end
