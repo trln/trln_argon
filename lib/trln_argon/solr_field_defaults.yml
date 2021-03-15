@@ -374,6 +374,18 @@ PUBLISHER_LOCATION:
   solr_field: :publisher_location_a
   label:
       en: Place of Publication
+PRIMARY_ISBN:
+  solr_field: :primary_isbn_a
+  label:
+    en: Primary ISBN
+PRIMARY_OCLC:
+  solr_field: :primary_oclc_a
+  label:
+    en: Primary OCLC
+PRIMARY_UPC:
+  solr_field: :primary_upc_a
+  label:
+    en: Primary UPC           
 RELATED_WORK:
   solr_field: :related_work_a
   label:

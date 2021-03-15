@@ -52,6 +52,10 @@ module TrlnArgon
       fetch(TrlnArgon::Fields::ISBN_NUMBER, [])
     end
 
+    def primary_isbn
+      fetch(TrlnArgon::Fields::PRIMARY_ISBN, [])
+    end
+
     def isbn_with_qualifying_info
       @isbn_with_qualifying_info ||=
         [*self[TrlnArgon::Fields::ISBN_NUMBER]].zip(
@@ -99,6 +103,10 @@ module TrlnArgon
       fetch(TrlnArgon::Fields::OCLC_NUMBER, '')
     end
 
+    def primary_oclc
+      fetch(TrlnArgon::Fields::PRIMARY_OCLC, [])
+    end
+
     # Organizational association for the record.
     # Expected to be one of: duke, unc, ncsu, nccu, trln
     # Used to group records for display purposes, especially
@@ -141,6 +149,12 @@ module TrlnArgon
     def upc
       fetch(TrlnArgon::Fields::UPC, []).map do |upc|
         upc.to_s.gsub(/\D/, '')
+      end.reject(&:empty?)
+    end
+
+    def primary_upc
+      fetch(TrlnArgon::Fields::PRIMARY_UPC, []).map do |primary_upc|
+        primary_upc.to_s.gsub(/\D/, '')
       end.reject(&:empty?)
     end
 

@@ -72,9 +72,9 @@ module TrlnArgon
 
       def get_params(client = 'trlnet', format_spec = 'XML.XML')
         params = {
-          isbn: [fetch(TrlnArgon::Fields::ISBN_NUMBER, []).first].compact,
-          oclc: fetch(TrlnArgon::Fields::OCLC_NUMBER, []).dup,
-          upc: [upc.first].compact
+          isbn: [primary_isbn.first].compact,
+          oclc: [primary_oclc.first].compact,
+          upc: [primary_upc.first].compact
           # placeholder for EAN when added
         }
         %i[isbn oclc upc ean].each do |k|
