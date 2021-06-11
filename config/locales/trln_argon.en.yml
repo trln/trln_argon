@@ -159,6 +159,7 @@ en:
                     other: 'View these results <i class="fa fa-angle-double-right" aria-hidden="true"></i>'
                 contact_us_html: '%{href} for help'
                 contact_us_href: 'Contact library staff'
+                remove_filters: 'Try removing your search filters to see more results.'
 
             results:
               location: 'At the Library'
