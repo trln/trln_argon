@@ -1,7 +1,9 @@
 <h1><%= t('trln_argon.search.zero_results.title', local_institution_name: institution_long_name) %></h1>
 
 <% if search_state.params.key?('f') && !search_state.params.fetch('f').empty? && @response.empty? %>
-  <h3><%= link_to t('trln_argon.search.zero_results.remove_filters'), url_for(search_state.params_for_search(f: nil)) %></h3>
+  <h3><%= t('trln_argon.search.zero_results.remove_filters_html',
+                      href: link_to(t('trln_argon.search.zero_results.remove_filters_href'),
+                      search_state.params_for_search(f: nil))).html_safe %></h3>
 <% end %>
 
 <div class="jumbotron jumbotron-border">
