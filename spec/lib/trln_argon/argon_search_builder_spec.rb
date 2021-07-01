@@ -145,6 +145,52 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'min_match_for_titles' do
+    before do
+      builder_with_params.min_match_for_titles(solr_parameters)
+    end
+
+    context 'all fields search contains an initial article' do
+      let(:builder_with_params) do
+        search_builder.with(q: 'the two three four five six')
+      end
+
+      it 'does not set the min match setting' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+
+    context 'title search contains an initial article and has 3 or fewer terms' do
+      let(:builder_with_params) do
+        search_builder.with(q: 'the two three', 'search_field' => 'title')
+      end
+
+      it 'does not set the min match setting' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+
+    context 'title search contains an initial article and more than 3 terms' do
+      let(:builder_with_params) do
+        search_builder.with(q: 'the two three four five six', 'search_field' => 'title')
+      end
+
+      it 'sets the min match setting' do
+        expect(solr_parameters[:mm]).to eq('5<95%')
+      end
+    end
+
+    context 'title search does not contain an initial article' do
+      let(:builder_with_params) do
+        search_builder.with(q: 'one two three four five', 'search_field' => 'title')
+      end
+
+      it 'does not set the min match setting' do
+        expect(solr_parameters[:mm]).to be_nil
+      end
+    end
+  end
+
   describe 'min_match_for_cjk' do
     before { builder_with_params.min_match_for_cjk(solr_parameters) }
 

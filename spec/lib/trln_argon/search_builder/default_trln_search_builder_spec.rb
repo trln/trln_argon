@@ -14,6 +14,10 @@ describe DefaultTrlnSearchBuilder do
       expect(obj.processor_chain).to include(:min_match_for_cjk)
     end
 
+    it 'adds the min_match_for_titles method to the processor chain' do
+      expect(obj.processor_chain).to include(:min_match_for_titles)
+    end
+
     it 'adds the min_match_for_boolean method to the processor chain' do
       expect(obj.processor_chain).to include(:min_match_for_boolean)
     end
