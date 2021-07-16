@@ -67,6 +67,13 @@ module TrlnArgon
         t('trln_argon.consortium.long_name')
       end
 
+      def no_results_inst_display
+        TrlnArgon::Engine.configuration.sort_order_in_holding_list.split(', ')
+                         .reject { |inst| inst == 'trln' }
+                         .map { |inst_code| t("trln_argon.institution.#{inst_code}.short_name") }
+                         .to_sentence(words_connector: ', ', last_word_connector: ', or ')
+      end
+
       def item_due_date(item)
         return '' if item.fetch('due_date', '').blank?
 

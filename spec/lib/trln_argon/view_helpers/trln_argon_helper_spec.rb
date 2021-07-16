@@ -90,6 +90,12 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe '#no_results_inst_display' do
+    it 'uses sort_order_in_holding_list' do
+      expect(helper.no_results_inst_display).to eq('UNC, Duke, NC State, or NCCU')
+    end
+  end
+
   describe '#location_filter_display' do
     context 'when all codes are mappable' do
       let(:hierarchy_value) { 'duke:dukedivy:dukedivyrees' }
