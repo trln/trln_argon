@@ -1,4 +1,4 @@
-<h1><%= t('trln_argon.search.zero_results.title', local_institution_name: institution_long_name) %></h1>
+<%= render partial: 'no_results_message' %>
 
 <% if search_state.params.key?('f') && !search_state.params.fetch('f').empty? && @response.empty? %>
   <h3><%= t('trln_argon.search.zero_results.remove_filters_html',
