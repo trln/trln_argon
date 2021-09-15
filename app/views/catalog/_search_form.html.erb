@@ -3,7 +3,7 @@
 
   <div class="col-md-10 col-md-offset-1">
 
-    <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
+    <%= form_tag search_action_url, method: :get, autocomplete: 'off', class: 'search-query-form clearfix navbar-form', role: 'search' do %>
       <% params_to_block = blacklight_config.search_fields
                                             .keys
                                             .map(&:to_sym)
