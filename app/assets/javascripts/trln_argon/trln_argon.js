@@ -16,3 +16,4 @@
 //= require trln_argon/force_bootstrap-select_render.js
 //= require trln_argon/advanced_search_scope.js
 //= require trln_argon/bookmark_share.js
+//= require trln_argon/typeahead.bundle.js
