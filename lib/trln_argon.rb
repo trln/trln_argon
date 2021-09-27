@@ -21,4 +21,5 @@ module TrlnArgon
   autoload :TrlnSolrDocument, 'trln_argon/trln_solr_document'
   autoload :User, 'trln_argon/user.rb'
   autoload :ViewHelpers, 'trln_argon/view_helpers'
+  autoload :HTTPFetch, 'trln_argon/http_fetch.rb'
 end
