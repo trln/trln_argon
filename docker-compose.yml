@@ -1,0 +1,10 @@
+---
+services:
+  argon:
+    build: .
+    ports:
+      - '3000:3000'
+    network: host
+    volumes:
+      - ./:/opt/trln_argon:Z
+
