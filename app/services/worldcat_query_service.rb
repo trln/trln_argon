@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
-#  rubocop:disable Metrics/ClassLength
-# Service for querying worldcat
+# rubocop has waaay too many false positives, and this is a
+# tricky class to refactor
+
+# rubocop:disable all
+# Service for querying worldcat based on Blacklight search
 class WorldcatQueryService
   extend TrlnArgon::HTTPFetch
   attr_reader :id, :query_params
@@ -132,6 +135,7 @@ class WorldcatQueryService
     query&.scan(/("[^"]+"|[^\s"][\w\s]+[^\s"])/)&.flatten
   end
 
+
   def build_string(type = 'query')
     params = strip_params(@query_params)
     return '' if params.nil? || params.empty?
@@ -157,4 +161,4 @@ class WorldcatQueryService
     # TODO: does not handle + or - modifiers nor manual AND OR NOT in query fields in search
   end
 end
-#  rubocop:enable Metrics/ClassLength
+#  rubocop:enable all
