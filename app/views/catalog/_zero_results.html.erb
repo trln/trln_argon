@@ -22,6 +22,14 @@
 
     <ul class="lead">
 
+      <% if params[:q] and worldcat_search_available? %>
+        <% wcqs = worldcat_query %>
+        <li class='no-results-worldcat-search'><%= t('trln_argon.search.zero_results.worldcat_html',
+            href: link_to(raw(t('trln_argon.search.zero_results.worldcat_href',
+            count: wcqs.count)),
+            wcqs.query_url)) %></li>
+      <% end %>
+
       <!-- ARTICLE SEARCH -->
       <% if params[:q] %>
         <li>
@@ -40,6 +48,7 @@
                       url_for(search_state.params_for_search(search_field: blacklight_config.default_search_field.key)) %>
         </li>
       <% end %>
+
 
       <!-- CONTACT US -->
       <li>

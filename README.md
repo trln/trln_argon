@@ -170,6 +170,19 @@ FACET_PAGING_LIMIT: 50
 # value; a git repository containing the mappings is checked
 # out to the directory
 ARGON_CODE_MAPPINGS_DIR: #{File.join(Rails.root, 'config', 'mappings')
+
+# The following are collectively required to perform queries
+# against the Worldcat API and link to the results, which is typically
+# done when there are no results.
+
+# Wording and styling of the results can be adjusted via editing the
+# key `trln_argon.search.zero_results.{worldcat_href, worldcat_html}`
+# in the locale file and/or editing  the
+# `app/views/catalog/_zero_results.html.erb` template
+
+WORLDCAT_URL: # URL for localized instance of Worldcat
+WORLDCAT_API_URL: # https://www.worldcat.org/webservices/catalog/search/sru
+WORLDCAT_API_KEY: # (institution-specific key for accessing above API)
 ```
 
 ### Changing Styles

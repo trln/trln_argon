@@ -161,6 +161,9 @@ en:
                 contact_us_href: 'Contact library staff'
                 remove_filters_href: 'Try removing your search filters'
                 remove_filters_html: '%{href} to see more results.'
+                worldcat_href: '<span>View %{count} results at libraries worldwide</span>'
+                worldcat_html: '%{href}'
+          
 
             results:
               location: 'At the Library'
