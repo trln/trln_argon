@@ -52,8 +52,8 @@ module TrlnArgon
                              modal: false,
                              path: :sharebookmarks_path)
       add_show_tools_partial(:citation,
-                             icon: 'fa fa-quote-left',
-                             if: :render_citation_action?)
+                              icon: 'fa fa-quote-left')
+      #                        if: :render_citation_action?)
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -585,6 +585,44 @@ module TrlnArgon
         # config.add_sort_field "#{TrlnArgon::Fields::TITLE_SORT} desc, "\
         #                       "#{TrlnArgon::Fields::PUBLICATION_YEAR_SORT} asc",
         #                       label: I18n.t('trln_argon.sort_options.title_desc')
+
+        config.citeproc = {
+          fields: {
+            address: 'publication_year',
+            author: 'creator_main_a',
+            booktitle: 'title_main',
+            # chapter: 'chapter_tsim',
+            # doi: 'doi_tsim',
+            # edition: 'edition_tsim',
+            # editor: 'editor_tsim',
+            # how_published: 'how_published_tsim',
+            institution: 'owner_a',
+            # journal: 'journal_tsim',
+            key: 'id',
+            # month: 'month_tsim',
+            note: 'note_general_a',
+            number: 'isbn_number_a',
+            # organization: 'organization_tsim',
+            pages: 'physical_description_a',
+            publisher: 'publisher_a',
+            # school: 'school_tsim',
+            # series: 'series_tsim',
+            title: 'title_main',
+            type: 'resource_type_a',
+            # url: 'url_tsim',
+            # volume: 'number_tsim',
+            year: 'publication_year_sort'
+          },
+          styles: %w(apa chicago-fullnote-bibliography modern-language-association ieee council-of-science-editors),
+          format: {
+            field: 'format',
+            default_format: :book,
+            mappings: {
+              book: ['Book', 'Musical Score', 'Ebook'],
+              misc: ['Map/Globe', 'Non-musical Recording', 'Musical Recording', 'Image', 'Software/Data', 'Video/Film']
+            }
+          }
+        }
       end
 
       # Override default Blacklight index action to add caching
@@ -628,13 +666,13 @@ module TrlnArgon
         true if request.path == bookmarks_path
       end
 
-      def render_citation_action?(_config, options = {})
-        docs = [options[:document] || (options[:document_list] || [])].flatten
-        TrlnArgon::Engine.configuration.citation_formats.present? &&
-          TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
-          TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
-          docs.select { |doc| doc.oclc_number.present? }.any?
-      end
+      # def render_citation_action?(_config, options = {})
+      #   docs = [options[:document] || (options[:document_list] || [])].flatten
+      #   TrlnArgon::Engine.configuration.citation_formats.present? &&
+      #     TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
+      #     TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
+      #     docs.select { |doc| doc.oclc_number.present? }.any?
+      # end
     end
   end
 end

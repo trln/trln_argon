@@ -1,4 +1,4 @@
-require 'trln_argon/solr_document/citation'
+# require 'trln_argon/solr_document/citation'
 require 'trln_argon/solr_document/email_field_mapping'
 require 'trln_argon/solr_document/expand_document'
 require 'trln_argon/solr_document/field_deserializer'
@@ -14,7 +14,7 @@ module TrlnArgon
   # Mixin for SolrDocument with TRLN Argon Specific Behavior
   # rubocop:disable ModuleLength
   module SolrDocument
-    include Citation
+    # include Citation
     include EmailFieldMapping
     include ExpandDocument
     include FieldDeserializer

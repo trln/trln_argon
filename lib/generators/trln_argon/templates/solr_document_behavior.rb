@@ -15,6 +15,7 @@ module SolrDocumentBehavior
     use_extension(TrlnArgon::DocumentExtensions::Email)
     use_extension(TrlnArgon::DocumentExtensions::Sms)
     use_extension(Blacklight::Document::DublinCore)
+    use_extension(Blacklight::Document::Bibtex)
 
     send(:include, TrlnArgon::SolrDocument)
     send(:include, TrlnArgon::ItemDeserializer)
