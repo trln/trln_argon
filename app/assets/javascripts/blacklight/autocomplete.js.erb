@@ -2,10 +2,9 @@
 
 Blacklight.onLoad(function() {
   'use strict';
-
-  $('#search-navbar [data-autocomplete-enabled="true"]').each(function() {
+  
+  $('[data-autocomplete-enabled="true"]').each(function() {
     var $el = $(this);
-
     // Intercept native typeahead Tab key functionality re: https://trlnmain.atlassian.net/browse/TD-832
     $el.on("keydown", function(e) {
       var code = e.keyCode || e.which;
@@ -18,35 +17,57 @@ Blacklight.onLoad(function() {
           }
       }
     });
-
+        
     // Fetch the configured autocomplete path.
     var suggest_root = $el.data().autocompletePath;
-    var suggest_slug = '';
 
-    // Detect which search field is selected.
-    var current_search_field = $("select").find("option:selected").val();
+    // ======= Advanced search =================
+    if ($("#advanced_search").length){
+      // Detect which search field is selected.
+      var current_search_field = $el.attr('name');
 
-    //Detect local institution code
-    var local_institution_code = "unc||ncsu||duke||nccu";
-    if ($("body").hasClass("blacklight-catalog")) {
-      local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+      // Assemble the complete autosuggest URL.
+      var suggest_url = suggest_root + "/" + current_search_field;
+
+      //Detect local institution code
+      var local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+
+      $('input[type=radio][name=option]').change(function(){
+        if ($('input[type=radio][name=option]:checked').attr('id') == "option_trln") {
+          local_institution_code = "unc||ncsu||duke||nccu";
+        } else {
+          local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>";
+        }
+      });
+    } else if ($("#search-navbar").length){ 
+      
+      // ======= Main search ======================
+      var suggest_slug = '';
+
+      // Detect which search field is selected.
+      var current_search_field = $("select").find("option:selected").val();
+
+      //Detect local institution code
+      var local_institution_code = "unc||ncsu||duke||nccu";
+      if ($("body").hasClass("blacklight-catalog")) {
+        local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+      }
+
+      // Set the autocomplete URL slug/ID based on the selected search field.
+      switch (current_search_field) {
+        case 'title':
+          suggest_slug = '/title';
+          break;
+        case 'author':
+          suggest_slug = '/author';
+          break;
+        case 'subject':
+          suggest_slug = '/subject';
+          break;
+      }
+      // Assemble the complete autosuggest URL.
+      var suggest_url = suggest_root + suggest_slug;
     }
-
-    // Set the autocomplete URL slug/ID based on the selected search field.
-    switch (current_search_field) {
-      case 'title':
-        suggest_slug = '/title';
-        break;
-      case 'author':
-        suggest_slug = '/author';
-        break;
-      case 'subject':
-        suggest_slug = '/subject';
-        break;
-    }
-
-    // Assemble the complete autosuggest URL.
-    var suggest_url = suggest_root + suggest_slug;
 
     // Configure the request for title suggestions
     var titles = new Bloodhound({
