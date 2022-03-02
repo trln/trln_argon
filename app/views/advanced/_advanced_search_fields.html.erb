@@ -3,7 +3,7 @@
       <%= label_tag key, "#{field_def.label }", :class => "col-sm-3 control-label" %>
       <div class="col-sm-9">
       	<% if key =~ /^(all_fields|title|author|subject)$/ %>
-          <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', data: { autocomplete_enabled: autocomplete_enabled?, autocomplete_path: blacklight.suggest_index_path } %>
+          <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control', :autocomplete => :off, data: { autocomplete_enabled: autocomplete_enabled?, autocomplete_path: blacklight.suggest_index_path } %>
         <% else %>
           <%= text_field_tag key, label_tag_default_for(key), :class => 'form-control' %>
         <% end %>  
