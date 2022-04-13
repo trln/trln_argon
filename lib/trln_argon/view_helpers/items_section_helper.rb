@@ -26,7 +26,7 @@ module TrlnArgon
       end
 
       def location_narrow_group_class
-        'location-narrow-group col-md-12'
+        'location-narrow-group'
       end
 
       def holdings_summary_wrapper_class
@@ -66,11 +66,11 @@ module TrlnArgon
       end
 
       def call_number_wrapper_class(_options = {})
-        'col-md-5 col-sm-12 call-number-wrapper'
+        'col-md-7 col-sm-12 call-number-wrapper'
       end
 
       def status_wrapper_class(_options = {})
-        'col-md-7 col-sm-12'
+        'col-md-5 col-sm-12'
       end
 
       def item_note_wrapper_class(_options = {})

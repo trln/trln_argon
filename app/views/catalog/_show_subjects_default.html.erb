@@ -1,10 +1,10 @@
-<% if display_subjects?(document: document) %>
+<% subjects_comopnents = TrlnArgon::DocumentMetadataListComponent.new(
+     fields: show_subjects_presenter(document).field_presenters,
+     show: true ) %>
+
+<% if subjects_comopnents.render? %>
   <div id="subjects" class="<%= show_subjects_class %>" aria-labelledby="subjectsLabel">
     <h2 id="subjectsLabel"><%= t('trln_argon.show.heading.subjects') %></h2>
-    <ul>
-      <% show_configured_fields_and_values(blacklight_config.show_subjects_fields, document).each do |value| %>
-          <%= value[:value] %>
-      <% end %>
-    </ul>
+    <%= render(subjects_comopnents) %>
   </div>
 <% end %>

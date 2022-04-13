@@ -12,6 +12,7 @@ module TrlnArgon
     extend ActiveSupport::Concern
 
     included do
+      send(:include, Blacklight::DefaultComponentConfiguration)
       send(:include, LocalFilter)
       send(:include, OpenSearch)
       send(:include, PagingLimit)
@@ -23,37 +24,8 @@ module TrlnArgon
 
       helper_method :query_has_constraints?
 
-      add_show_tools_partial(:email,
-                             icon: 'glyphicon-envelope',
-                             callback: :email_action,
-                             path: :email_path,
-                             validator: :validate_email_params)
-      add_show_tools_partial(:sms,
-                             icon: 'glyphicon-phone',
-                             if: :render_sms_action?,
-                             callback: :sms_action,
-                             path: :sms_path,
-                             validator: :validate_sms_params)
-      add_show_tools_partial(:ris,
-                             icon: 'glyphicon-download-alt',
-                             if: :render_ris_action?,
-                             modal: false,
-                             path: :ris_path)
-      add_show_tools_partial(:refworks,
-                             icon: 'glyphicon-export',
-                             if: :render_refworks_action?,
-                             new_window: true,
-                             modal: false,
-                             path: :refworks_path)
-      add_show_tools_partial(:share_bookmarks,
-                             icon: 'glyphicon-share',
-                             if: :render_sharebookmarks_action?,
-                             new_window: false,
-                             modal: false,
-                             path: :sharebookmarks_path)
-      add_show_tools_partial(:citation,
-                             icon: 'fa fa-quote-left',
-                             if: :render_citation_action?)
+
+
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -65,6 +37,7 @@ module TrlnArgon
 
         # Use Solr document requestHandler for document requests
         config.document_solr_path = :document
+        config.document_unique_id_param = :id
         config.document_solr_request_handler = nil
 
         # Configuration for autocomplete suggester
@@ -90,6 +63,44 @@ module TrlnArgon
 
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
+
+        config.show.document_actions.delete(:bookmark)
+
+        config.add_show_tools_partial(:email,
+                                      icon: 'glyphicon-envelope',
+                                      callback: :email_action,
+                                      path: :email_path,
+                                      validator: :validate_email_params)
+        config.add_show_tools_partial(:sms,
+                                      icon: 'glyphicon-phone',
+                                      if: :render_sms_action?,
+                                      callback: :sms_action,
+                                      path: :sms_path,
+                                      validator: :validate_sms_params)
+        config.add_show_tools_partial(:ris,
+                                      icon: 'glyphicon-download-alt',
+                                      if: :render_ris_action?,
+                                      modal: false,
+                                      path: :ris_path)
+        config.add_show_tools_partial(:refworks,
+                                      icon: 'glyphicon-export',
+                                      if: :render_refworks_action?,
+                                      new_window: true,
+                                      modal: false,
+                                      path: :refworks_path)
+        config.add_show_tools_partial(:share_bookmarks,
+                                      icon: 'glyphicon-share',
+                                      if: :render_sharebookmarks_action?,
+                                      new_window: false,
+                                      modal: false,
+                                      path: :sharebookmarks_path)
+        config.add_show_tools_partial(:citation,
+                                      icon: 'fa fa-quote-left',
+                                      if: :render_citation_action?)
+        config.add_show_tools_partial(:bookmark,
+                                      partial: 'bookmark_control',
+                                      if: :render_bookmarks_control?)
+
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new

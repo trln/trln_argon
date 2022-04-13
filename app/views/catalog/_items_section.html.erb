@@ -34,7 +34,7 @@
 
             <% # ---ITEMS WRAPPER --- %>
 
-              <div class="item-group-display <%= display_holdings_summaries?(item_data) ? 'has-summary' : '' %>" id="<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview">
+              <div class="item-group-display col-md-12 <%= display_holdings_summaries?(item_data) ? 'has-summary' : '' %>" id="<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview">
 
                 <% item_data['items'].first(num_display_items).each do |item| %>
 
@@ -50,7 +50,7 @@
 
               <% if item_data['items'].size > num_display_items %>
 
-                <div class='item-group-display collapse' id="item-container-<%=document.id %>-<%= loc_n %>-<%= document_index %>">
+                <div class='item-group-display col-md-12 collapse' id="item-container-<%=document.id %>-<%= loc_n %>-<%= document_index %>">
 
                   <% item_data['items'].each_with_index do |item, i| %>
 

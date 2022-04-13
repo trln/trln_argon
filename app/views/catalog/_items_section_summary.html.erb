@@ -1,10 +1,10 @@
 <% # --- SUMMARY --- %>
 
-<div class="row">
+<!-- <div class=""> -->
 
   <div class="<%= location_narrow_group_class %>">
 
-    <div class="holdings-wrapper expandable-content">
+    <div class="row expandable-content">
 
       <% item_data['holdings'].each do |h|  %>
 
@@ -15,9 +15,9 @@
         <% if h.fetch('call_no', '').present? %>
 
           <div class="<%= call_number_wrapper_class %>">
-            <dl class="dl-horizontal">
-              <dt><span class='call-number-label label label-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
-              <dd><span class='call-number'><%= h['call_no'] %></span></dd>
+            <dl class="row">
+              <dt class="col-sm-3"><span class='call-number-label badge badge-info'><%= t('trln_argon.show.label.call_number') %></span></dt>
+              <dd class="col-sm-9"><span class='call-number'><%= h['call_no'] %></span></dd>
             </dl>
           </div>
 
@@ -28,9 +28,9 @@
         <% if h.fetch('summary', '').present? %>
 
           <div class="<%= holdings_summary_wrapper_class %>">
-            <dl class="dl-horizontal" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
-              <dt><span class='summary-label label label-info'><%= t('trln_argon.show.label.summary') %></span></dt>
-              <dd>
+            <dl class="row" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
+              <dt class="col-sm-2"><span class='summary-label badge badge-info'><%= t('trln_argon.show.label.summary') %></span></dt>
+              <dd class="col-sm-10">
 
                 <div class="summary-text-wrapper">
                     <span class="summary-text"><%= h['summary'].gsub(' ', '&nbsp;').html_safe %></span>
@@ -54,9 +54,9 @@
 
           <div class="<%= holdings_note_class %>">
 
-            <dl class="dl-horizontal">
-              <dt><span class='holding-note-label label label-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
-              <dd><%= [*h['notes']].join("; "); %></dd>
+            <dl class="row">
+              <dt class="col-sm-1"><span class='holding-note-label badge badge-info'><%= t('trln_argon.show.label.holding_note') %></span></dt>
+              <dd class="col-sm-11"><%= [*h['notes']].join("; "); %></dd>
             </dl>
 
           </div>
@@ -74,4 +74,4 @@
 
   </div>
 
-</div>
+<!-- </div> -->
