@@ -47,4 +47,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'engine_cart', '~> 2.2'
   s.add_development_dependency 'better_errors', '~> 2.1.1'
   s.add_development_dependency 'binding_of_caller', '~> 0.8'
+  s.add_development_dependency 'rake', '~> 13'
 end

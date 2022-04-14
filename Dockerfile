@@ -1,14 +1,40 @@
-FROM ruby:2.6
+FROM ruby:2.7 AS app_bootstrap
+
+RUN apt-get update && apt-get install -y nodejs vim
+
+FROM app_bootstrap AS builder
+
+RUN mkdir -p /build/lib/trln_argon/
+COPY ./Gemfile ./trln_argon.gemspec ./bundler_config.rb /build
+COPY ./lib/trln_argon/version.rb /build/lib/trln_argon
+
+WORKDIR /build
+
+RUN $(./bundler_config.rb path /gems) && bundle install -j $(nproc)
+
+FROM app_bootstrap
+
+COPY --from=builder /gems /gems
+COPY ./bundler_config.rb .
+
+RUN $(./bundler_config.rb path /gems)
+
+WORKDIR /app
 
 EXPOSE 3000
 
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash - && apt-get install -y nodejs
+ENV ENGINE_CART_RAILS_OPTIONS="--skip-webpack-install --skip-javascript"
 
-WORKDIR /opt/trln_argon
+ENV BOOTSTRAP_VERSION="~> 5.1"
 
-RUN bundle install && bundle exec rake engine_cart:prepare
+# allows setting options for caching HTTP operations
+# used in unit testing with 'vcr', a ruby framework for recording
+# http interactions.  see https://bibwild.wordpress.com/2017/02/07/ruby-vcr-easy-trick-for-easy-re-record/
+ENV VCR='once'
 
-CMD cd /opt/trln_argon && ./docker-start.sh
-#bundle exec rake engine_cart:server['-b 0.0.0.0']
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
+# need to bind to 0.0.0.0 for the port bind to work
+CMD ["start"]
