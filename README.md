@@ -1,12 +1,22 @@
 # TRLN Argon Rails Engine
 
+## THIS REPRESENTS WORK IN PROGRESS
+
+We aim to keep this information up to date but the application is changing.
+
+Ask in the Slack channel if anything is not working as documented here.
+
+
 The TRLN Argon Rails Engine provides additional templates, styles, search
 builder behaviors, catalog controller overrides, and other features to
 bootstrap a Blacklight catalog for the TRLN shared catalog index.
 
 # Developing
 
-We use [Engine Cart](https://github.com/cbeer/engine_cart) to run a development instance.  To run with `engine_cart`, clone this repository and change into the directory, then run:
+Since a Rails engine is not a complete application, We use [Engine
+Cart](https://github.com/cbeer/engine_cart) to run a development instance.  To
+run with `engine_cart`, clone this repository and change into the directory,
+then run:
 
        $ bundle install
 	   $ bundle exec rake engine_cart:prepare
@@ -15,6 +25,46 @@ We use [Engine Cart](https://github.com/cbeer/engine_cart) to run a development 
        $ bundle exec rake engine_cart:server['-p 3001']
 
 The TRLN Argon Blacklight catalog should now be available at [http://localhost:3000](http://localhost:3000) (or a different port if you used the second form).
+
+## Development With Docker
+
+We are actively working on allowing development using containers, to allow quickly switching between Ruby versions without having to use Ruby version management software (e.g. RVM).  The key components here are the `Dockerfile`, `docker-compose.yml`, and `entrypoint.sh`.
+
+### "Just" Docker
+
+    $ docker build . -t trln_argon:latest
+    $ docker run -v $(pwd):/app -p 3000:3000 trln_argon:latest
+
+`-v` mounts the current directory into the container at `/app`; this allows you
+to edit the files on the host and see the changes reflected in the container.
+
+Note that this bind mount means that the `.internal_test_app` directory used by engine cart is also on the host system, and will persist between stop, starts, and rebuilds of the container. It's best to delete this directory after rebuilds and before fresh starts. Failure to do so can lead to inexplicable errors.
+
+If `.internal_test_app` does not exist when the container is started, it will be created as the application is generated.
+
+Special note for podman users: use `-v $(pwd):/app:Z` to make sure your bind
+mount works with SELinux enabled.
+
+### Using docker compose
+
+The `docker-compose.yml` file automates a lot of the above for you.
+
+    $ podman-compose build # builds the image
+    $ podman-compose up # starts a container based on the image; output to terminal; ctrl-c to stop
+    $ podman-compose down # removes the container
+
+### `entrypoint.sh`
+
+This does some startup magic, like removing PID files which are often not cleaned up when stopping containers.  It also bundles up various commands to automate common operations.  See the source of this file for more details.
+
+### `bundler_config.rb` 
+
+By default we're using Ruby 2.7 in the container but you may occasionally want
+to switch this up to Ruby 2.6; since these versions of Ruby come with different
+versions of bundler that use different syntax to set the path for installed
+gems, this script must be copied into the container and its output executed in
+order to portably set this path. It should not be needed outside this narrow
+context.
 
 ## Creating a Rails Application using the TRLN Argon Engine.
 

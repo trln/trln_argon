@@ -1,3 +1,5 @@
+require 'delegate'
+
 module TrlnArgon
   class Field < SimpleDelegator
     attr_reader :solr_name, :labels
