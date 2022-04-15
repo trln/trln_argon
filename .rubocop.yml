@@ -22,7 +22,7 @@ Documentation:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 25
   Exclude:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
     - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
