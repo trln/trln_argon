@@ -40,8 +40,8 @@ Gem::Specification.new do |s|
   # the internal rails app (rails 5.2.3 required for sqlite3 1.4.0)
   s.add_development_dependency 'rspec-rails', '~> 3.5'
   s.add_development_dependency 'capybara', '~> 3.29'
-  s.add_development_dependency 'rubocop', '~> 0.49.1'
-  s.add_development_dependency 'rubocop-rspec', '~> 1.16'
+  s.add_development_dependency 'rubocop', '~> 1.0'
+  s.add_development_dependency 'rubocop-rspec', '~> 2.5'
   s.add_development_dependency 'webmock', '~> 3.7'
   s.add_development_dependency 'vcr', '~> 5.0'
   s.add_development_dependency 'engine_cart', '~> 2.2'
