@@ -605,7 +605,6 @@ module TrlnArgon
       end
 
       # rubocop:disable Style/PredicateName
-      # rubocop:disable Metrics/AbcSize
       def has_search_parameters?
         !params[:q].blank? ||
           !params[:f].blank? ||
@@ -613,7 +612,6 @@ module TrlnArgon
           !params[:range].blank? ||
           !params[:doc_ids].blank?
       end
-      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Style/PredicateName
 
       def query_has_constraints?(localized_params = params)

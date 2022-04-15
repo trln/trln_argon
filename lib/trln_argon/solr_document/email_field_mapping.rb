@@ -7,7 +7,6 @@ module TrlnArgon
       # (Use the Solr Field constants, e.g. TrlnArgon::Fields::FIELD_CONSTANT)
       # For more complex data mappings see proc examples.
 
-      # rubocop:disable MethodLength
       def email_field_mapping
         @email_field_mapping ||= {
           title: TrlnArgon::Fields::TITLE_MAIN,

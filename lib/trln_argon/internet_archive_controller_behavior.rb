@@ -58,7 +58,6 @@ module TrlnArgon
             '&fl[]=identifier&rows=250&output=json')
       end
 
-      # rubocop:disable MethodLength
       def ia_api_response
         response = Net::HTTP.start(ia_api_request_uri.host, ia_api_request_uri.port,
                                    open_timeout: 10,
@@ -73,7 +72,6 @@ module TrlnArgon
         Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
         '{}'
       end
-      # rubocop:enable MethodLength
 
       def validated_ia_ids
         @validated_ia_ids ||=

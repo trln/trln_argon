@@ -50,8 +50,7 @@ module TrlnArgon
                     :worldcat_cite_base_url,
                     :worldcat_cite_api_key
 
-      # rubocop:disable MethodLength
-      # rubocop:disable AbcSize
+      # rubocop:disable Metrics/MethodLength
       def initialize
         @local_institution_code        = 'unc'
         @application_name              = 'TRLN Argon'
@@ -80,8 +79,7 @@ module TrlnArgon
         @allow_open_search = 'true'
         @open_search_q_min_length = '4'
       end
-      # rubocop:enable MethodLength
-      # rubocop:enable AbcSize
+      # rubocop:enable Metrics/MethodLength
 
       private
 

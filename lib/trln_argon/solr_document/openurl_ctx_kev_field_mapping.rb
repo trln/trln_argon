@@ -7,7 +7,6 @@ module TrlnArgon
       # (Use the Solr Field constants, e.g. TrlnArgon::Fields::FIELD_CONSTANT)
       # For more complex data mappings see proc examples.
 
-      # rubocop:disable MethodLength
       def openurl_ctx_kev_field_mapping
         @openurl_ctx_kev_field_mapping ||= {
           # TODO: Do something sensible when format is more settled

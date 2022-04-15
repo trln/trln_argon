@@ -5,7 +5,6 @@ module TrlnWorldcatHelper
     WorldcatQueryService.available?
   end
 
-  # rubocop:disable Metrics/AbcSize
   def worldcat_query
     old_wq = WorldcatQueryService.new(session[:worldcat]) unless session[:worldcat].nil?
     new_wq = WorldcatQueryService.new(@current_search_session)
@@ -17,5 +16,4 @@ module TrlnWorldcatHelper
     session[:worldcat][:query_url] = new_wq.query_url
     new_wq
   end
-  # rubocop:enable Metrics/AbcSize
 end

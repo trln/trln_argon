@@ -63,7 +63,6 @@ module TrlnArgon
     # in the target application as a set of requires, based
     # on the contents of the /app/javascript/blacklight directory
     # in the Blacklight gem, excluding autocomplete.
-    # rubocop:disable Metrics/AbcSize
     def override_compiled_blacklight_javascript
       blpath = Bundler.rubygems.find_name('blacklight').first.full_gem_path
       # this is where the source javascript in later versions of BL7 is 
@@ -88,8 +87,6 @@ module TrlnArgon
       filenames.uniq.each_with_object(inserts) do |i, c|
           c << "//= require 'blacklight/#{i}'"
       end
-      # rubocop:enable Metrics/AbcSize
-
       create_file 'app/assets/javascripts/blacklight/blacklight.js', inserts.join("\n")
     end
 

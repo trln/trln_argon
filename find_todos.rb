@@ -56,5 +56,8 @@ unless commands.empty?
   warn 'Please fix the reported issues before committing'
   warn "You can autofix many issues with the following:\n\n"
   commands.each { |c| warn c }
+  warn "\n\nWhen you're done fixing up these files, you should regenerate"\
+       "\nthe .rubocop_todo.yml file with:\n\n"\
+       "bundle exec rubocop --regenerate-todo"
   exit 1
 end

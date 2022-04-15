@@ -45,7 +45,6 @@ module TrlnArgon
 
       # fetches enhanced data (SyndeticsData object) and yields it to a block,
       # if it's available.
-      # rubocop:disable MethodLength
       def enhanced_data(client = 'trlnet')
         params = get_params(client, 'XML.XML')
         return nil unless params

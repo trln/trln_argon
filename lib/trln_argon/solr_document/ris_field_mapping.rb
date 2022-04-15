@@ -7,8 +7,6 @@ module TrlnArgon
       # (Use the Solr Field constants, e.g. TrlnArgon::Fields::FIELD_CONSTANT)
       # For more complex data mappings see proc examples.
 
-      # rubocop:disable MethodLength
-      # rubocop:disable AbcSize
       def ris_field_mapping
         @ris_field_mapping ||= {
           # Type of reference
@@ -55,6 +53,7 @@ module TrlnArgon
       end
 
       # rubocop:disable CyclomaticComplexity
+      # rubocop:disable Metrics/MethodLength
       def ris_type(resource_type)
         case resource_type.first
         when 'Archival and manuscript material'
@@ -103,6 +102,7 @@ module TrlnArgon
           'GEN'
         end
       end
+      # rubocop:enable Metrics/MethodLength
     end
   end
 end
