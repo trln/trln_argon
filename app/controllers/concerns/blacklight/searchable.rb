@@ -23,7 +23,7 @@ module Blacklight::Searchable
   end
 
   # @return [Blacklight::SuggestSearch]
-  def suggestions_service
+  def suggestions_service(category = nil)
     Blacklight::SuggestSearch.new(params, params[:category], search_service.repository).suggestions
   end
 end

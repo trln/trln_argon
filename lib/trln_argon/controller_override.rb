@@ -18,6 +18,7 @@ module TrlnArgon
       send(:include, PagingLimit)
       send(:include, SolrCaching)
       send(:include, BlacklightAdvancedSearch::Controller)
+      send(:include, Blacklight::Searchable)
 
       before_action :limit_results_paging, only: :index
       before_action :limit_facet_paging, only: :facet
@@ -643,6 +644,27 @@ module TrlnArgon
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
           docs.select { |doc| doc.oclc_number.present? }.any?
+      end
+
+      def suggest
+        respond_to do |format|
+          format.json do
+            render json: category_suggestions(params[:category])
+          end
+        end
+      end
+
+      def category_suggestions(category = nil)
+        case category
+        when 'title'
+          suggestions_service(category).title_suggestions
+        when 'author'
+          suggestions_service(category).author_suggestions
+        when 'subject'
+          suggestions_service(category).subject_suggestions
+        else
+          suggestions_service(category).suggestions
+        end
       end
     end
   end

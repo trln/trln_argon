@@ -19,4 +19,4 @@
 //= require trln_argon/bookmark_share.js
 //= require trln_argon/typeahead.bundle.js
 //= require trln_argon/advanced_search_tt_menu.js
-//= require trln_argon/autocomplete.js
+//= require trln_argon/autocomplete.js.erb
