@@ -18,7 +18,10 @@ module SolrCaching
         search_service.search_results
       end
 
-    @document_list = ActiveSupport::Deprecation::DeprecatedObjectProxy.new(deprecated_document_list, 'The @document_list instance variable is deprecated; use @response.documents instead.')
+    @document_list = ActiveSupport::Deprecation::DeprecatedObjectProxy.new(
+      deprecated_document_list,
+      'The @document_list instance variable is deprecated; '\
+      ' use @response.documents instead.')
 
     respond_to do |format|
       format.html { store_preferred_view }
@@ -35,7 +38,6 @@ module SolrCaching
   # rubocop:enable Metrics/MethodLength
   # rubocop:enable Metrics/AbcSize
 
-  # rubocop:disable Metrics/MethodLength
   def cached_advanced_index
     return if request.method == :post
 
@@ -51,7 +53,6 @@ module SolrCaching
         get_advanced_search_facets
       end
   end
-  # rubocop:enable Metrics/MethodLength
 
   private
 

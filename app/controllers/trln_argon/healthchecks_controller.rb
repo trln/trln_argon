@@ -4,7 +4,6 @@ module TrlnArgon
   class HealthchecksController < ::ApplicationController
     @cache = ActiveSupport::Cache::MemoryStore.new(expires_in: 3.minutes)
 
-    # rubocop:disable MethodLength
     def index
       result = self.class.ping
       if result.nil?
@@ -18,7 +17,6 @@ module TrlnArgon
         render json: { status: 'OK', count: count }
       end
     end
-    # rubocop:enable MethodLength
 
     def self.ping
       @cache.fetch(:ping) do

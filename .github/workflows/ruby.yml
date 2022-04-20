@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: ['2.4.6', '2.5.5', '2.6.3']
+        ruby: ['2.6.9', '2.7.5']
     name: Ruby ${{ matrix.ruby }}
     
     steps:
@@ -24,11 +24,11 @@ jobs:
     - name: Install dependencies
       run: bundle install
 
+    - name: Run rubocop
+      run: rake rubocop  
+
     - name: Generate a Rails testing application
       run: rake engine_cart:generate
 
-    - name: Run rubocop
-      run: rake rubocop  
-      
     - name: Run tests
       run: rspec

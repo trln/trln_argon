@@ -1,7 +1,11 @@
+inherit_from: .rubocop_todo.yml
+
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.6
+  # TODO: review this later
+  NewCops: disable
   Exclude:
     - '.internal_test_app/**/*'
     - 'Gemfile'
@@ -18,7 +22,7 @@ Documentation:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 20
+  Max: 25
   Exclude:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
     - 'lib/trln_argon/view_helpers/hierarchy_helper.rb'
@@ -86,3 +90,29 @@ RSpec/MessageSpies:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
+# The following were disabled due to an excessive amount of errors
+# after an upgrade, not because they're useless.  We can enable them
+# one by one over time to avoid excessively large commits
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/EmptyLineAfterExampleGroup:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Migration/DepartmentName:
+  Enabled: false
+
+Lint/MissingCopEnableDirective:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
