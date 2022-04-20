@@ -24,7 +24,6 @@ module Blacklight::Searchable
 
   # @return [Blacklight::SuggestSearch]
   def suggestions_service
-    warn "hey here is the suggestions_service: #{params[:category]}"
     Blacklight::SuggestSearch.new(params, params[:category], search_service.repository).suggestions
   end
 end
