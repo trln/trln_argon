@@ -19,8 +19,8 @@ namespace :trln_argon do
   end
 
   namespace :solr do
-    require 'trln_argon/field.rb'
-    require 'trln_argon/fields.rb'
+    require 'trln_argon/field'
+    require 'trln_argon/fields'
 
     desc 'list missing field definitions'
     task 'missing_fields' do

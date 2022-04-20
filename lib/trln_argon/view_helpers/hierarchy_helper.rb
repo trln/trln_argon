@@ -101,7 +101,8 @@ module TrlnArgon
       end
 
       def q_facet_params(facet_solr_field, item)
-        search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
+        # search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
+        search_state.filter(facet_solr_field).add(item.qvalue).to_h
       end
 
       def map_argon_facet_codes(item)
