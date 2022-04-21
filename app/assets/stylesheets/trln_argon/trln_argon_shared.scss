@@ -1784,3 +1784,8 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
   margin-right: 5px;
 }
 
+.advanced-search {
+    display: flex;
+    align-items: center;
+    padding-left: 1em;
+}
