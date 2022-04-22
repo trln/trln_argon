@@ -1,6 +1,9 @@
 en:
 
+    # BL7 advanced search uses new path
     blacklight:
+        advanced_search:
+          more_options: Advanced Search
 
         home:
 

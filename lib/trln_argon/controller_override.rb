@@ -104,6 +104,8 @@ module TrlnArgon
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+        # BL7
+        config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:form_facet_partial] ||= 'advanced_search_facets_as_select'
         config.advanced_search[:form_solr_parameters] ||= {
