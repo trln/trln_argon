@@ -2,9 +2,9 @@
      fields: show_subjects_presenter(document).field_presenters,
      show: true ) %>
 
-<% if subjects_comopnents.render? %>
+<%# if subjects_comopnents.render? %>
   <div id="subjects" class="<%= show_subjects_class %>" aria-labelledby="subjectsLabel">
     <h2 id="subjectsLabel"><%= t('trln_argon.show.heading.subjects') %></h2>
     <%= render(subjects_comopnents) %>
   </div>
-<% end %>
+<%# end %>
