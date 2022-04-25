@@ -4,9 +4,7 @@
      show: true) %>
 
 <%# default partial to display solr document fields in catalog show view -%>
-<%# if other_details_component.render? %>
-  <div id="other-details" class="<%= show_other_details_class %>" aria-labelledby="otherDetailsLabel">
+<div id="other-details" class="<%= show_other_details_class %>" aria-labelledby="otherDetailsLabel">
     <h2 id="otherDetailsLabel"><%= t('trln_argon.show.heading.metadata') %></h2>
-      <%= render(other_details_component) %>
-  </div>
-<%# end %>
+    <%= render(other_details_component) %>
+</div>
