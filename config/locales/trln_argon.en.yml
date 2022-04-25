@@ -50,6 +50,10 @@ en:
 
         did_you_mean: 'Did you mean: %{options}?'
 
+        search:
+            pagination_info:
+                no_items_found: ''
+
     blacklight_advanced_search:
         form:
             title: "Advanced Search"
