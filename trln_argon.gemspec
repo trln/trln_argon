@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'blacklight_advanced_search', '~> 7'
   s.add_dependency 'blacklight-hierarchy', '~> 4'
   s.add_dependency 'blacklight_range_limit', '~> 7'
-  s.add_dependency 'git', '~> 1.3.0'
+  s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'
   s.add_dependency 'library_stdnums', '~> 1.6'
   s.add_dependency 'openurl', '~>1.0'
@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   # the internal rails app (rails 5.2.3 required for sqlite3 1.4.0)
   s.add_development_dependency 'rspec-rails', '~> 5'
   s.add_development_dependency 'capybara', '~> 3.29'
+  s.add_development_dependency 'pry', '~> 0.14'
   s.add_development_dependency 'rubocop', '~> 1.0'
   s.add_development_dependency 'rubocop-rspec', '~> 2.5'
   s.add_development_dependency 'webmock', '~> 3.7'
