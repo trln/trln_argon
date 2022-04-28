@@ -49,4 +49,11 @@ Blacklight.onLoad(function() {
 
     });
 
+    // general facet 'onclick' handler; needs some work AJC TODO 
+    $('li.twiddle').on('click', function(t) {
+      if ( t.target == this ) {
+        $(this).toggleClass("twiddle-open");
+        $(this).children("ul").slideToggle();
+      }
+    });
 });
