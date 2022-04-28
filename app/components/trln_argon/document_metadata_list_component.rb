@@ -1,4 +1,4 @@
 module TrlnArgon
-  class DocumentMetadataListComponent < Blacklight::DocumentMetadataComponent
+  class DocumentMetadataListComponent < TrlnArgon::DocumentMetadataComponent
   end
 end
