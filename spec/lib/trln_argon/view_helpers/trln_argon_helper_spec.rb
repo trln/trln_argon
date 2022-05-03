@@ -1291,7 +1291,6 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'
-        
       )
     end
 
