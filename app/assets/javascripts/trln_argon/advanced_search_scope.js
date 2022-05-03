@@ -2,8 +2,8 @@ Blacklight.onLoad(function() {
   $(window).on('load', function(){
 
     //remove default mast search to fix duplicate IDs
-    $(".blacklight-advanced #search-navbar .navbar-form").remove();
-    $(".blacklight-advanced_trln #search-navbar .navbar-form").remove();
+    $(".blacklight-catalog-advanced_search #search-navbar").remove();
+    $(".blacklight-trln-advanced_search #search-navbar").remove();
     
     // change adv search scope
   	window.location.href.indexOf('advanced_trln') != -1 ? $('#option_trln').attr('checked',true) : $('#option_catalog').attr('checked',true);
