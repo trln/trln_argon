@@ -65,12 +65,14 @@ module TrlnArgon
         end
       end
 
+      # nb displayed by default next to status
+      # column numbers for col-md-# should add up to 12
       def call_number_wrapper_class(_options = {})
-        'col-md-7 col-sm-12 call-number-wrapper'
+        'col-md-5 col-sm-12 call-number-wrapper'
       end
 
       def status_wrapper_class(_options = {})
-        'col-md-5 col-sm-12'
+        'col-md-7 col-sm-12'
       end
 
       def item_note_wrapper_class(_options = {})

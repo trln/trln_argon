@@ -9,6 +9,11 @@ module TrlnArgon
         end.join('').html_safe
       end
 
+      # TODO - a bit of a departure from
+      # 1.3.29's rendering which assumed `dd` tag
+      # this leads to generally more dense
+      # output suitable for two columns
+      # revisit with POs
       def work_entry_display(options = {})
         assemble_work_entry_list_value(options[:value]).map do |work|
           content_tag :span, work.html_safe, class: 'progressive-link-wrapper'

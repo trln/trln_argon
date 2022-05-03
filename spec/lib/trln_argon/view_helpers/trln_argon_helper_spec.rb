@@ -332,7 +332,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#location_narrow_group_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.location_narrow_group_class).to(
-        eq('location-narrow-group col-md-12')
+        eq('location-narrow-group')
       )
     end
   end
@@ -1273,7 +1273,6 @@ describe TrlnArgonHelper, type: :helper do
     # rubocop:disable ExampleLength
     it 'creates a display value with links from the supplied work entry data' do
       expect(context.helpers.work_entry_display(options)).to eq(
-        '<dd>'\
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
@@ -1291,8 +1290,8 @@ describe TrlnArgonHelper, type: :helper do
         'href="/catalog?search=something">'\
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
-        '</span>'\
-        '</dd>'
+        '</span>'
+        
       )
     end
 
