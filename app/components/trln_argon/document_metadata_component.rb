@@ -8,6 +8,6 @@ module TrlnArgon
 
     def render?
       @fields.present?
-    end 	
+    end
   end
 end

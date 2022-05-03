@@ -9,7 +9,7 @@ module TrlnArgon
         end.join('').html_safe
       end
 
-      # TODO - a bit of a departure from
+      # TODO: a bit of a departure from
       # 1.3.29's rendering which assumed `dd` tag
       # this leads to generally more dense
       # output suitable for two columns
