@@ -6,7 +6,7 @@ Blacklight.onLoad(function() {
     $(".blacklight-trln-advanced_search #search-navbar").remove();
     
     // change adv search scope
-  	window.location.href.indexOf('advanced_trln') != -1 ? $('#option_trln').attr('checked',true) : $('#option_catalog').attr('checked',true);
+  	$(".blacklight-trln-advanced_search").length > 0 ? $('#option_trln').attr('checked',true) : $('#option_catalog').attr('checked',true);
   	
   	$("input[type='radio'][name='option']").change(function() {
         var action = $(this).val();
