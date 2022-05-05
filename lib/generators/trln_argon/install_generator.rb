@@ -116,7 +116,9 @@ module TrlnArgon
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  BetterErrors::Middleware.allow_ip! \"10.0.2.2\" if defined? BetterErrors && Rails.env == :development\n"
+        "\n\n  require 'socket'  
+               local_ip = IPSocket.getaddress(Socket.gethostname)
+  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
       end
     end
 
