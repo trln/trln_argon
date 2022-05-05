@@ -12,7 +12,7 @@
                 <%= facet_field_label(display_facet.name) %>
             <% end %>            
 
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <%= content_tag(:select, :multiple => true,                     
                     :name   => "f_inclusive[#{display_facet.name}][]",
                     :id     => display_facet.name.parameterize,
