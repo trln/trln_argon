@@ -40,31 +40,27 @@ $unc-blue: #467aaa !default;
 $shared-links-color: #490e6f !default;
 
 
+//== Media query breakpoints (from bootstrap v5.1)
 
+// Old BS-3 based media queries used the following values:
+// xs: 480px
+// sm: 768px
+// md: 992px
+// lg: 1200px
 
-//== Media query breakpoints (from bootstrap v3)
+// BS5 uses new breakpoints like so:
+// $grid-breakpoints: (
+//   xs: 0,
+//   sm: 576px,
+//   md: 768px,
+//   lg: 992px,
+//   xl: 1200px,
+//   xxl: 1400px
+// );
 
-// Extra small screen / phone
-$screen-xs:                  480px !default;
-$screen-xs-min:              $screen-xs !default;
-$screen-phone:               $screen-xs-min !default;
-
-// Small screen / tablet
-$screen-sm:                  768px !default;
-$screen-sm-min:              $screen-sm !default;
-$screen-tablet:              $screen-sm-min !default;
-
-// Medium screen / desktop
-$screen-md:                  992px !default;
-$screen-md-min:              $screen-md !default;
-$screen-desktop:             $screen-md-min !default;
-
-// Large screen / wide desktop
-$screen-lg:                  1200px !default;
-$screen-lg-min:              $screen-lg !default;
-$screen-lg-desktop:          $screen-lg-min !default;
-
-// So media queries don't overlap when required, provide a maximum
-$screen-xs-max:              ($screen-sm-min - 1) !default;
-$screen-sm-max:              ($screen-md-min - 1) !default;
-$screen-md-max:              ($screen-lg-min - 1) !default;
+// and implements MQs as follows:
+// @include media-breakpoint-up(sm) { ... }
+// @include media-breakpoint-up(md) { ... }
+// @include media-breakpoint-up(lg) { ... }
+// @include media-breakpoint-up(xl) { ... }
+// @include media-breakpoint-up(xxl) { ... }
