@@ -3,4 +3,4 @@
             class: 'btn btn-outline-secondary',
             target: (document_action_config.has_key?(:new_window) && document_action_config[:new_window] == true) ? '_blank' : '',
             id: document_action_config.fetch(:id, "#{document_action_config.key}Link"),
-            data: {}.merge(({ajax_modal: "trigger"} if document_action_config.modal != false) || {}) %>
+            data: {}.merge(({blacklight_modal: "trigger"} if document_action_config.modal != false) || {}) %>

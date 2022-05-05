@@ -1,11 +1,11 @@
-FROM ruby:2.7 AS app_bootstrap
+FROM ruby:2.7.4 AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim
 
 FROM app_bootstrap AS builder
 
 RUN mkdir -p /build/lib/trln_argon/
-COPY ./Gemfile ./trln_argon.gemspec ./bundler_config.rb /build
+COPY ./Gemfile ./trln_argon.gemspec ./bundler_config.rb /build/
 COPY ./lib/trln_argon/version.rb /build/lib/trln_argon
 
 WORKDIR /build

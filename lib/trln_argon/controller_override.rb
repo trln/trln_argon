@@ -33,6 +33,7 @@ module TrlnArgon
         config.default_per_page = 20
 
         # Use Solr search requestHandler for search requests
+        config.http_method = :get
         config.solr_path = :select
 
         # Use Solr document requestHandler for document requests
@@ -66,17 +67,17 @@ module TrlnArgon
 
         config.show.document_actions.delete(:bookmark)
 
-        config.add_show_tools_partial(:email,
-                                      icon: 'glyphicon-envelope',
-                                      callback: :email_action,
-                                      path: :email_path,
-                                      validator: :validate_email_params)
-        config.add_show_tools_partial(:sms,
-                                      icon: 'glyphicon-phone',
-                                      if: :render_sms_action?,
-                                      callback: :sms_action,
-                                      path: :sms_path,
-                                      validator: :validate_sms_params)
+        # config.add_show_tools_partial(:email,
+        #                              icon: 'glyphicon-envelope',
+        #                              callback: :email_action,
+        #                              path: :email_path,
+        #                              validator: :validate_email_params)
+        # config.add_show_tools_partial(:sms,
+        #                              icon: 'glyphicon-phone',
+        #                              if: :render_sms_action?,
+        #                              callback: :sms_action,
+        #                              path: :sms_path,
+        #                              validator: :validate_sms_params)
         config.add_show_tools_partial(:ris,
                                       icon: 'glyphicon-download-alt',
                                       if: :render_ris_action?,
@@ -143,7 +144,6 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                     limit: 200,
                                     sort: 'count',
-                                    helper_method: :location_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false,
                                     ex: :rollup
@@ -154,7 +154,6 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                     label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                     limit: 4500,
-                                    helper_method: :call_number_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
@@ -187,7 +186,6 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                limit: 200,
                                sort: 'count',
-                               helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false,
                                ex: :rollup
@@ -206,7 +204,6 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
-                               helper_method: :call_number_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy'
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
@@ -604,6 +601,10 @@ module TrlnArgon
       # See behavior in lib/controller_override/solr_caching_catalog.rb
       def index
         cached_catalog_index
+      end
+
+      def action_documents
+        [search_service.repository.find(params[:id])]
       end
 
       # rubocop:disable Style/PredicateName
