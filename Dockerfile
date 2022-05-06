@@ -1,14 +1,16 @@
-FROM ruby:2.7.4 AS app_bootstrap
+FROM ruby:2.7.5 AS app_bootstrap
 
-RUN apt-get update && apt-get install -y nodejs vim
+RUN apt-get update && apt-get install -y nodejs vim tree
 
 FROM app_bootstrap AS builder
 
-RUN mkdir -p /build/lib/trln_argon/
-COPY ./Gemfile ./trln_argon.gemspec ./bundler_config.rb /build/
-COPY ./lib/trln_argon/version.rb /build/lib/trln_argon
+COPY ./Gemfile ./trln_argon.gemspec ./VERSION ./bundler_config.rb /build/
+
+COPY lib/trln_argon/version.rb /build/lib/trln_argon/version.rb
 
 WORKDIR /build
+
+RUN tree
 
 RUN $(./bundler_config.rb path /gems) && bundle install -j $(nproc)
 
@@ -25,7 +27,7 @@ EXPOSE 3000
 
 ENV ENGINE_CART_RAILS_OPTIONS="--skip-webpack-install --skip-javascript"
 
-ENV BOOTSTRAP_VERSION="~> 5.1"
+ENV BOOTSTRAP_VERSION="~> 4.1"
 
 # allows setting options for caching HTTP operations
 # used in unit testing with 'vcr', a ruby framework for recording
