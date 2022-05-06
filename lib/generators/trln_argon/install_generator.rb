@@ -143,19 +143,19 @@ module TrlnArgon
       end
 
       # For single line fields
-      fields_to_remove = [/\s+config.index.title_field +=.+?$\n*/,
-                          /\s+config.index.display_type_field +=.+?$\n*/,
-                          /\s+config.add_facet_field.+?$\n*/,
-                          /\s+config.add_index_field.+?$\n*/,
-                          /\s+config.add_show_field.+?$\n*/,
-                          /\s+config.add_search_field.+?$\n*/,
-                          /\s+config.add_sort_field.+?$\n*/,
-                          /\s+config.add_show_tools_partial.+?$\n*/]
+      fields_to_remove = [/(\s+)(config.index.title_field +=.+?)$\n*/,
+                          /(\s+)(config.index.display_type_field +=.+?)$\n*/,
+                          /(\s+)(config.add_facet_field.+?)$\n*/,
+                          /(\s+)(config.add_index_field.+?)$\n*/,
+                          /(\s+)(config.add_show_field.+?$)\n*/,
+                          /(\s+)(config.add_search_field.+?)$\n*/,
+                          /(\s+)(config.add_sort_field.+?)$\n*/,
+                          /(\s+)(config.add_show_tools_partial.+?)$\n*/]
 
 
 
       fields_to_remove.each do |remove_marker|
-        gsub_file('app/controllers/catalog_controller.rb', remove_marker, "# #{remove_marker}\n")
+        gsub_file('app/controllers/catalog_controller.rb', remove_marker, '\1# \2' + "\n")
       end
     end
 
