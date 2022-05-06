@@ -16,9 +16,10 @@ module TrlnArgon
       generate 'blacklight_range_limit:install'
     end
 
+    # this should match whatever's in trln_argon.gemspec
     def install_gems
       return if IO.read('Gemfile').include?('better_errors')
-      gem 'better_errors', '2.1.1'
+      gem 'better_errors', '~> 2.9.1'
     end
 
     def install_configuration_files
@@ -116,9 +117,7 @@ module TrlnArgon
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  require 'socket'  
-               local_ip = IPSocket.getaddress(Socket.gethostname)
-  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
+        "\n\n  require 'socket'\n\n    local_ip = IPSocket.getaddress(Socket.gethostname)\n\n  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
       end
     end
 
@@ -144,16 +143,19 @@ module TrlnArgon
       end
 
       # For single line fields
-      fields_to_remove = [/ +config.index.title_field +=.+?$\n*/,
-                          / +config.index.display_type_field +=.+?$\n*/,
-                          / +config.add_facet_field +'.+?$\n*/,
-                          / +config.add_index_field +'.+?$\n*/,
-                          / +config.add_show_field +'.+?$\n*/,
-                          / +config.add_search_field +'.+?$\n*/,
-                          / +config.add_sort_field +'.+?$\n*/]
+      fields_to_remove = [/\s+config.index.title_field +=.+?$\n*/,
+                          /\s+config.index.display_type_field +=.+?$\n*/,
+                          /\s+config.add_facet_field.+?$\n*/,
+                          /\s+config.add_index_field.+?$\n*/,
+                          /\s+config.add_show_field.+?$\n*/,
+                          /\s+config.add_search_field.+?$\n*/,
+                          /\s+config.add_sort_field.+?$\n*/,
+                          /\s+config.add_show_tools_partial.+?$\n*/]
+
+
 
       fields_to_remove.each do |remove_marker|
-        gsub_file('app/controllers/catalog_controller.rb', /#{remove_marker}/, '')
+        gsub_file('app/controllers/catalog_controller.rb', remove_marker, "# #{remove_marker}\n")
       end
     end
 
