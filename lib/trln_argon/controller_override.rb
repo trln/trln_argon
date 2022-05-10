@@ -12,7 +12,6 @@ module TrlnArgon
     extend ActiveSupport::Concern
 
     included do
-      send(:include, Blacklight::DefaultComponentConfiguration)
       send(:include, LocalFilter)
       send(:include, OpenSearch)
       send(:include, PagingLimit)
@@ -67,17 +66,20 @@ module TrlnArgon
 
         config.show.document_actions.delete(:bookmark)
 
-        # config.add_show_tools_partial(:email,
-        #                              icon: 'glyphicon-envelope',
-        #                              callback: :email_action,
-        #                              path: :email_path,
-        #                              validator: :validate_email_params)
-        # config.add_show_tools_partial(:sms,
-        #                              icon: 'glyphicon-phone',
-        #                              if: :render_sms_action?,
-        #                              callback: :sms_action,
-        #                              path: :sms_path,
-        #                              validator: :validate_sms_params)
+        config.add_show_tools_partial(:email,
+                                      icon: 'glyphicon-envelope',
+                                      callback: :email_action,
+                                      path: :email_path,
+                                      validator: :validate_email_params)
+        config.add_show_tools_partial(:sms,
+                                      icon: 'glyphicon-phone',
+                                      if: :render_sms_action?,
+                                      callback: :sms_action,
+                                      path: :sms_path,
+                                      validator: :validate_sms_params)
+        config.add_show_tools_partial(:citation,
+                                      icon: 'fa fa-quote-left',
+                                      if: :render_citation_action?)
         config.add_show_tools_partial(:ris,
                                       icon: 'glyphicon-download-alt',
                                       if: :render_ris_action?,
@@ -95,9 +97,6 @@ module TrlnArgon
                                       new_window: false,
                                       modal: false,
                                       path: :sharebookmarks_path)
-        config.add_show_tools_partial(:citation,
-                                      icon: 'fa fa-quote-left',
-                                      if: :render_citation_action?)
         config.add_show_tools_partial(:bookmark,
                                       partial: 'bookmark_control',
                                       if: :render_bookmarks_control?)
@@ -146,7 +145,8 @@ module TrlnArgon
                                     sort: 'count',
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false,
-                                    ex: :rollup
+                                    ex: :rollup,
+                                    helper_method: :location_filter_display
         config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
@@ -154,7 +154,8 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                     label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                     limit: 4500,
-                                    partial: 'blacklight/hierarchy/facet_hierarchy'
+                                    partial: 'blacklight/hierarchy/facet_hierarchy',
+                                    helper_method: :call_number_filter_display
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                     limit: true
@@ -188,7 +189,8 @@ module TrlnArgon
                                sort: 'count',
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false,
-                               ex: :rollup
+                               ex: :rollup,
+                               helper_method: :location_filter_display
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
@@ -204,7 +206,8 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
-                               partial: 'blacklight/hierarchy/facet_hierarchy'
+                               partial: 'blacklight/hierarchy/facet_hierarchy',
+                               helper_method: :call_number_filter_display
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
@@ -641,6 +644,7 @@ module TrlnArgon
       end
 
       def render_citation_action?(_config, options = {})
+        warn "\n\n\nrender_citation_action? called\n\n\n\n"
         docs = [options[:document] || (options[:document_list] || [])].flatten
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
