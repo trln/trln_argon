@@ -604,7 +604,6 @@ module TrlnArgon
       end
 
       def action_documents
-        # make sure to send a solr_reponse and documents
         # Code borrowed from [blacklight]/app/services/blacklight/search_service.rb
         solr_response = search_service.repository.find params[:id]
         # Not sure if we need to set @documents in this context (d.croney)
