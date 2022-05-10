@@ -71,7 +71,7 @@ a:hover, a:focus {
     border-color: $primary-color;
 }
 
-#facet-location_hierarchy_f a.remove {
+#facet-location_hierarchy_f, #facet-lcc_callnum_classification_f a.remove {
   color: $primary-color;
   :hover {
     color: $not-available-color;
@@ -623,7 +623,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 /* FACETS          */
 /* =============== */
 
-#facet-location_hierarchy_f {
+#facet-location_hierarchy_f, #facet-lcc_callnum_classification_f {
 
   ul {
     width: 100%;
