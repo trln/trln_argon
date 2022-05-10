@@ -152,8 +152,6 @@ module TrlnArgon
                           /(\s+)(config.add_sort_field.+?)$\n*/,
                           /(\s+)(config.add_show_tools_partial.+?)$\n*/]
 
-
-
       fields_to_remove.each do |remove_marker|
         gsub_file('app/controllers/catalog_controller.rb', remove_marker, '\1# \2' + "\n")
       end
