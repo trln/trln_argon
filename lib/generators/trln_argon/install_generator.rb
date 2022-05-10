@@ -114,12 +114,14 @@ module TrlnArgon
       end
     end
 
+    # rubocop:disable Layout/LineLength
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
         "\n\n  require 'socket'\n\n    local_ip = IPSocket.getaddress(Socket.gethostname)\n\n  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
       end
     end
+    # rubocop:enable Layout/LineLength
 
     def inject_catalog_controller_overrides
       return if IO.read('config/application.rb').include?('local_env.yml')
@@ -133,6 +135,7 @@ module TrlnArgon
       end
     end
 
+    # rubocop:disable Style/StringConcatenation
     def remove_default_blacklight_configs
       # For multi line fields
       fields_to_remove = [/ +config.add_facet_field 'example_query_facet_field'[\s\S]+?}\n[ ]+}/,
@@ -145,7 +148,7 @@ module TrlnArgon
       # For single line fields
       fields_to_remove = [/(\s+)(config.index.title_field +=.+?)$\n*/,
                           /(\s+)(config.index.display_type_field +=.+?)$\n*/,
-                          /(\s+)(config.add_facet_field.+?)$\n*/,
+                          /(\s+)(config.add_facet_field\b.+?)$\n*/,
                           /(\s+)(config.add_index_field.+?)$\n*/,
                           /(\s+)(config.add_show_field.+?$)\n*/,
                           /(\s+)(config.add_search_field.+?)$\n*/,
@@ -156,6 +159,7 @@ module TrlnArgon
         gsub_file('app/controllers/catalog_controller.rb', remove_marker, '\1# \2' + "\n")
       end
     end
+    # rubocop:enable Style/StringConcatenation
 
     def inject_search_builder_behavior
       return if IO.read('app/models/search_builder.rb').include?('TrlnArgon::ArgonSearchBuilder')
