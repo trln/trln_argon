@@ -116,6 +116,7 @@ module TrlnArgon
       end
 
       def call_number_filter_display(value = '')
+        value = value.first if value.is_a?(Array)
         value.gsub('|', I18n.t('trln_argon.search_constraints.call_number_separator'))
       end
 

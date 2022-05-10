@@ -5,6 +5,7 @@
 //= require trln_argon/physical_media_facet.js
 //= require bootstrap
 //= require bootstrap-select
+//= require chosen-jquery
 //= require blacklight/hierarchy/hierarchy.js
 //= require trln_argon/location_facet.js
 //= require trln_argon/advanced_search_select.js
