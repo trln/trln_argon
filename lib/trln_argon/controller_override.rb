@@ -606,8 +606,14 @@ module TrlnArgon
         cached_catalog_index
       end
 
+      # Override behavior
+      # returns solr_response and documents
       def action_documents
-        [search_service.repository.find(params[:id])]
+        # Code borrowed from [blacklight]/app/services/blacklight/search_service.rb
+        solr_response = search_service.repository.find params[:id]
+        # Not sure if we need to set @documents in this context (d.croney)
+        @documents = solr_response.documents
+        [solr_response, solr_response.documents]
       end
 
       # rubocop:disable Style/PredicateName
