@@ -644,7 +644,6 @@ module TrlnArgon
       end
 
       def render_citation_action?(_config, options = {})
-        warn "\n\n\nrender_citation_action? called\n\n\n\n"
         docs = [options[:document] || (options[:document_list] || [])].flatten
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
