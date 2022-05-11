@@ -624,8 +624,119 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 /* FACETS          */
 /* =============== */
 
+#checkbox_wrapper_access_type_f { // avalable online
+  display: flex;
+  flex-wrap: wrap;
+
+  span.facet-label {
+    margin-bottom: 0;
+    line-height: 1.2;
+    flex: 1 0 60%;
+    margin-right: 2.5%;
+    display: block;
+    white-space: nowrap;
+
+    label {
+      margin-bottom: 0;
+      white-space: normal;
+    }
+
+    @include media-breakpoint-up(sm) {
+      flex: 1 1 100%;
+      margin-right: 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: 0 0 62.5%;
+      margin-right: 2.5%;
+    }
+  }
+
+  span.facet-count {
+    line-height: 1.2;
+    flex: 0 0 35%;
+    text-align: right;
+    display: block;
+
+    @include media-breakpoint-up(sm) {
+      flex: 1 1 100%;
+      margin-left: 1.1em;
+      text-align: left;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: 0 0 35%;
+      text-align: right;
+      margin-left: 0;
+    }
+  }
+}
+
+div.facet-content { // non-hierarcical facets
+
+  ul.facet-values {
+    width: 100%;
+    display: block;
+    margin-left: 0;
+    padding-left: 0;
+    margin-bottom: 0;
+
+    li { // use flexbox for positioning of the hierarchy nodes
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: .5em;
+      margin-bottom: .5em;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      span.facet-label {
+        padding-right: 0;
+        text-indent: 0;
+        padding-left: 0;
+        padding-bottom: 0;
+        max-width: 100%;
+        flex: 1 1 67.5%;
+        margin-right: 2.5%;
+        margin-bottom: 0;
+        line-height: 1.2;
+
+        @include media-breakpoint-up(sm) {
+          flex: 1 1 100%;
+          margin-right: 0;
+        }
+
+        @include media-breakpoint-up(xl) {
+          flex: 1 1 calc(62.5% - 1em);
+          margin-right: 2.5%;
+          margin-left: 1em; // reverse indentation
+          text-indent: -1em; // reverse indentation
+        }
+      }
+
+      span.facet-count {
+        display: block;
+        flex: 0 0 30%;
+        text-align: right;
+        line-height: 1.2;
+
+        @include media-breakpoint-up(sm) {
+          flex: 1 1 100%;
+          text-align: left;
+        }
+
+        @include media-breakpoint-up(xl) {
+          flex: 0 0 32.5%;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
 #facet-location_hierarchy_f, 
-#facet-lcc_callnum_classification_f {
+#facet-lcc_callnum_classification_f { // hierarcical facets
 
   ul {
     width: 100%;
@@ -722,10 +833,10 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       margin-right: 2.5%;
     }
 
-    @include media-breakpoint-up(xxl) {
-      flex: 1 1 60%;
-      margin-right: 2.5%;
-    }
+    // @include media-breakpoint-up(xxl) {
+    //   flex: 1 1 60%;
+    //   margin-right: 2.5%;
+    // }
 
   }
 
@@ -747,20 +858,13 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
       margin-left: 0;
     }
 
-    @include media-breakpoint-up(xxl) {
-      flex: 0 0 30%;
-      text-align: right;
-      margin-left: 0;
-    }
+    // @include media-breakpoint-up(xxl) {
+    //   flex: 0 0 30%;
+    //   text-align: right;
+    //   margin-left: 0;
+    // }
 
   }
-
-  span.selected {
-    // need to get this element to not wrap the facet-count span!!
-  }
-
-
-
 
   // make open twiddles pretty
   li.h-node.twiddle-open {
