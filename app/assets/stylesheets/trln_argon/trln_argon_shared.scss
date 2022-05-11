@@ -1,3 +1,7 @@
+/* =============== */
+/* COLORS          */
+/* =============== */
+
 a {
     color: $primary-link-color;
 }
@@ -32,24 +36,17 @@ a:hover, a:focus {
     border-color: $secondary-color;
 }
 
-.panel-default {
-    border-color: darken( $facet-grey, 10% );
-}
 
-.panel-default > .panel-heading {
-    background-color: $facet-grey;
-    border-color: darken( $facet-grey, 10% );
-}
-
-.panel-default > .panel-heading + .panel-collapse > .panel-body {
-    border-top-color: darken( $facet-grey, 10% );
-}
-
-
-panel-success > .panel-heading, .facet_limit-active > .panel-heading {
-    color: #fff;
-    background-color: $secondary-color;
-    border-color: $secondary-color;
+#facets div.facet-limit-active {
+  border-color: $secondary-color !important;
+  
+  h3.card-header {
+    background-color: $secondary-color !important;
+    border-color: $secondary-color !important;
+    .btn {
+      color: #fff;
+    }
+  }
 }
 
 .facet_limit-active .panel-heading.collapse-toggle .panel-title:after {
@@ -65,6 +62,7 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     }
 }
 
+
 .facet-paging-alert p {
   text-align: left !important;
 }
@@ -73,6 +71,33 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     border-color: $primary-color;
 }
 
+#facet-location_hierarchy_f a.remove, 
+#facet-lcc_callnum_classification_f a.remove {
+  color: $primary-color;
+  :hover {
+    color: $not-available-color;
+  }
+}
+
+#facets ul.facet-values,
+#facets ul.facet-hierarchy {
+  .facet-label span.selected,
+  .selected.facet-count {
+    color: #212529 !important;
+  }
+  .facet-label a.remove,
+  .selected a.remove {
+     color: $primary-color;
+    :hover {
+      color: $not-available-color;
+    } 
+  }
+}
+
+
+/* =============== */
+/* NAVBAR          */
+/* =============== */
 
 .navbar-form {
     margin-left: 0;
@@ -92,10 +117,6 @@ panel-success > .panel-heading, .facet_limit-active > .panel-heading {
     .navbar-nav > li > a:hover, .navbar-nav > li > a:focus {
         color: $tertiary-color;
     }
-}
-
-body {
-  border-top: none;
 }
 
 .navbar-static-top {
@@ -148,6 +169,15 @@ body {
 }
 
 
+/* =============== */
+/* LAYOUT          */
+/* =============== */
+
+body {
+  border-top: none;
+}
+
+
 #document {
 
     display: flex;
@@ -176,9 +206,6 @@ body {
 
 }
 
-
-
-
 .table-responsive {
   border: none !important;
 }
@@ -204,6 +231,10 @@ body {
 }
 
 
+
+/* =============== */
+/* SEARCH          */
+/* =============== */
 
 .mast-search {
   width: 100%;
@@ -264,7 +295,7 @@ body {
 
 
 
-@media screen and (max-width: $screen-xs) {
+@include media-breakpoint-up(sm) {
 
   .search-extra-controls {
     text-align: center;
@@ -280,30 +311,25 @@ body {
 }
 
 
-
-@media screen and (min-width: $screen-sm) {
+@include media-breakpoint-up(md) {
   .mast-search .bootstrap-select {
     max-width: unset;
   }
 }
 
-@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
-
+@include media-breakpoint-up(lg) {
   .twitter-typeahead,
   .search_q {
     min-width: 35em;
   }
-
 }
 
 
-@media screen and (min-width: $screen-md) {
-
+@include media-breakpoint-up(xl) {
   .twitter-typeahead,
   .search_q {
     min-width: 25em;
   }
-
 }
 
 .input-group-element h3 {
@@ -329,6 +355,11 @@ body {
     max-width: calc(100% - 25px);
 }
 
+
+
+/* =============== */
+/* RESULTS         */
+/* =============== */
 
 .institution-availability .primary-url {
   margin-top: 1em;
@@ -503,7 +534,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   margin-bottom: 1.5em;
 }
 
-@media screen and (min-width: $screen-sm) {
+@include media-breakpoint-up(md) {
   .show-document #authors ul,
   .show-document #subjects ul,
   .show-document #included-works ul {
@@ -520,7 +551,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   }
   .show-document #authors ul li,
   .show-document #subjects ul li,
-  .show-document #included-works ul li,{
+  .show-document #included-works ul li {
     margin-bottom: 6px;
     display: inline-block;
     margin-left: 1em;
@@ -561,7 +592,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 }
 
 
-/* masthead styles */
+/* =============== */
+/* MASTHEAD        */
+/* =============== */
 
 .blacklight-catalog-index #sortAndPerPage .search-widgets .btn-secondary {
   padding: 5px 10px;
@@ -575,242 +608,194 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     text-align: right;
 }
 
-/* sidebar styles */
+
+
+/* =============== */
+/* SIDEBAR         */
+/* =============== */
 
 .panel-group .panel + .panel {
     margin-top: 15px;
 }
 
 
-  /* Facets */
 
-  #facets ul.facet-hierarchy {
+/* =============== */
+/* FACETS          */
+/* =============== */
+
+#facet-location_hierarchy_f, 
+#facet-lcc_callnum_classification_f {
+
+  ul {
+    width: 100%;
+  }
+
+  ul.facet-hierarchy {
     margin-left: 0;
-    padding-left: 10px;
-  }
-
-  #facets ul.facet-hierarchy ul {
-    padding-left: 15px;
-    padding-top: 6px;
-    /*display: table;
-    width: 100%;*/
-  }
-
-  #facets ul.facet-hierarchy ul ul {
     padding-left: 0;
-    /*display: table;
-    width: 100%;*/
-  }
+    margin-bottom: 0;
 
-  #facets ul.facet-hierarchy li.h-node {
-    padding-bottom: 6px;
+    ul {
+      padding-left: 1em;
+      padding-top: 0.375em;
 
-    a, .facet-count {
-        padding-bottom: 6px;
-    }
+      ul {
+        padding-left: 0;
+      }
 
-    .facet-count {
-        float: right;
-    }
-
-  }
-
-  #facets ul.facet-hierarchy li.h-leaf {
-    list-style-image: none;
-    list-style: none;
-    margin-left: 0;
-    overflow: hidden;
-    /*display: table-row;*/
-
-    a:not(.remove) {
-        /*display: table-cell;*/
-        padding-bottom: 6px;
-        display: block;
-        float: left;
-        max-width: 240px;
-    }
-
-    .facet-count {
-        text-align: right;
-        float: right;
-        /*display: table-cell;*/
-    }
-
-  }
-
-  @media screen and (min-width: $screen-lg) {
-
-    #facets ul.facet-hierarchy .twiddle > .facet_select {
-      display: inline-block;
-      width: 150px;
-      margin-right: 7px;
-      float: left;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      height: 18px !important;
-      padding-bottom: 0;
-      white-space: nowrap;
-    }
-
-    #facets ul.facet-hierarchy .twiddle-open > .facet_select {
-      display: auto;
-      width: 150px;
-      margin-right: 7px;
-      float: none;
-    }
-
-    #facets ul.facet-hierarchy ul .twiddle > .facet_select {
-      width: 135px;
-    }
-
-  }
-
-  @media screen and (min-width: $screen-xs) and (max-width: $screen-sm) { // have to manually set widths on children at different breakpoints
-    #facets ul.facet-hierarchy li.h-leaf a { max-width: 300px; }
-  }
-
-  @media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
-    #facets ul.facet-hierarchy li.h-leaf {
-      a { width: 150px; }
     }
   }
 
-  @media screen and (min-width: $screen-md) and (max-width: $screen-lg) {
-    #facets ul.facet-hierarchy li.h-leaf {
-      a { width: 145px; }
-    }
+  li.h-leaf {
+    padding-left: 0;
   }
 
-  @media screen and (min-width: $screen-lg) {
-    #facets ul.facet-hierarchy li.h-leaf {
-      width: 205px;
-      a { width: 135px; }
-    }
+  li.h-leaf,
+  li.h-node { // use flexbox for positioning of the hierarchy nodes
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: .5em;
+    margin-bottom: .5em;
   }
 
+  li.h-leaf:first-child,
+  li.h-node:first-child {
+    margin-top: 0;
+  }
 
-  #facets ul.facet-hierarchy li.h-leaf:only-child {
+  li.h-leaf:last-child,
+  li.h-node:last-child {
+    margin-bottom: 0;
+  }
 
+  li.h-leaf::before {
+    content: ' '; // needs content to have equal spacing
+  }
+
+  li.h-node::before {
+    content: '▶';
+  }
+
+  li.h-node.twiddle-open::before {
+    content: '▼';
+  }
+
+  li.h-leaf::before,
+  li.h-node::before,
+  li.h-node.twiddle-open::before {
+    flex: 0 0 5%;
     display: block;
+    color: #929292;
+    font-size: .75em;
 
-    a {
-        display: inline-block;
-        padding-bottom: 6px;
+    @include media-breakpoint-up(sm) {
+      flex: 0 0 10%;
     }
 
-    .facet-count {
-        text-align: right;
-        float: right;
-        display: block;
+    @include media-breakpoint-up(xl) {
+      flex: 0 0 7.5%;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      flex: 0 0 5%;
+    }
+  }
+
+  a.facet_select,
+  span.selected {
+    display: block;
+    max-width: 100%;
+    flex: 1 1 60%;
+    margin-right: 2.5%;
+    margin-bottom: 0;
+    line-height: 1.2;
+
+
+    @include media-breakpoint-up(sm) {
+      flex: 1 1 90%;
+      margin-right: 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: 1 1 50%;
+      margin-right: 2.5%;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      flex: 1 1 60%;
+      margin-right: 2.5%;
     }
 
   }
 
-  #facets .h-node .twiddle {
-    margin-left: 0;
+  span.facet-count {
+    float: none;
+    display: block;
+    flex: 0 0 30%;
+    text-align: right;
+
+    @include media-breakpoint-up(sm) {
+      flex: 1 1 100%;
+      text-align: left;
+      margin-left: 10%;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: 0 0 35%;
+      text-align: right;
+      margin-left: 0;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      flex: 0 0 30%;
+      text-align: right;
+      margin-left: 0;
+    }
+
+  }
+
+  span.selected {
+    // need to get this element to not wrap the facet-count span!!
   }
 
 
-  #facets ul.facet-hierarchy li.h-node.twiddle-open {
+
+
+  // make open twiddles pretty
+  li.h-node.twiddle-open {
     border-top: 1px solid #eee;
-    padding-top: 6px;
+    padding-top: 0.5em;
     border-bottom: 1px solid #eee;
-    margin-bottom: 6px;
-  }
+    margin-bottom: 0;
+    padding-bottom: 0.5em;
 
-  #facets ul.facet-hierarchy li.h-node.twiddle-open > a {
-    font-weight: bold;
-  }
-
-  #facets ul.facet-hierarchy li.h-node.twiddle-open > a ~ a {
-    font-weight: normal;
-  }
-
-  // replaces default arrows with larger ones
-  #facets ul.facet-hierarchy li.h-node {
-    list-style-image:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RDM3NDFFRkRFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RDM3NDFFRkVFNTA1MTFFOEEwRThGQzZGM0VCMDM0MTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzc0MUVGQkU1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzc0MUVGQ0U1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pvuoa0QAAACdSURBVHjarJC9CgMhEITPn0KU4zjsLE4slHv/l7j+3kBL0UqQ68ymSELCQlJkimWRj5lZyRhj+iY6/aAXdBxHrRU15s/tPM+c877vxph5nnHouq4YY+89pWSt3bZNCPEJEUIgq5TSWoMJLyEEBLp3pFRKCTbruiJxAHHOvfeQBbWUUgiktQZ/59yyLIyxt/PGQ9Aaug9M5G8/fhNgAPOLUrlCzIhLAAAAAElFTkSuQmCC');
-  }
-
-  #facets ul.facet-hierarchy li.h-node.twiddle-open {
-    list-style-image:
-    url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAIAAADZF8uwAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjQ0NEYyRkFFQTc2MTFFODlGMEU5NTZDQThGOUYwQTMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjQ0NEYyRjlFQTc2MTFFODlGMEU5NTZDQThGOUYwQTMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpEMzc0MUVGOUU1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpEMzc0MUVGQUU1MDUxMUU4QTBFOEZDNkYzRUIwMzQxNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpHKUKMAAACWSURBVHjazI69CsMgFIX9GcwigWCIZFAcFCd335+8iKsEH8EeahtoaaFjv+EO93z3cGnvnRBSSjmO4zzP/mSappRSzhkpI3e2bQshcM6HQSnVWmMz0ockhHDOee/hMcbWdY0xLsvyIoF5nq21mDhQSu37jr53CR0I0CelhI15RXQ8flFrba0ZY/D4V+kjjPzAP0o3AQYAjlgtJfHnMfIAAAAASUVORK5CYII=');
-  }
-
-  #facets ul.facet-hierarchy li.h-node:hover {
-    //cursor: pointer;
-  }
-
-
-  /* more / less */
-  #facets ul.facet-hierarchy ul li.location-more-toggle-wrapper {
-    margin-left: 0 !important;
-    list-style-image: none !important;
-    list-style: none !important;
-  }
-
-  .more_locations_link,
-  .less_locations_link {
-    cursor: pointer;
-  }
-
-  .facet-checkbox-wrapper {
-
-    .facet-label {
-      color: $primary-link-color;
-      input, label {
-        cursor: pointer;
-        font-weight: normal;
-      }
-      input {
-        font-size: 1.2em;
-      }
-      label:hover {
-        text-decoration: underline;
-      }
-    }
-    .facet-count {
-      float: right;
+    > a {
+      font-weight: bold
     }
 
   }
 
-  .facet-content .panel-body {
-    border-top: 0 !important;
+  .location-more-toggle-wrapper {
+    margin-bottom: .5em;
   }
 
-  .checkbox-facet {
-    .facet-content .panel-body {
-      border-top: 0 !important;
-    }
-  }
+}
 
-  .facet-checkbox-wrapper {
+ul.facet-hierarchy li.h-node.twiddle-open:first-child {
+  border-top: none !important;
+  padding-top: 0 !important;
+}
 
-    .facet-label label,
-    .facet-count {
-      margin-bottom: 0;
-    }
-
-    .facet-label input {
-      margin-right: .15em;
-    }
-
-  }
-
-  .checkbox-facet-checked {
-    background: $primary-link-color;
-    border: $secondary-color;
-
-    .facet-label label,
-    .facet-count {
-      color: #fff;
-    }
-
-  }
-
-  /* END Facets */
+ul.facet-hierarchy li.h-node.twiddle-open:last-child {
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+}
 
 
+/* =============== */
+/* RESULTS         */
+/* =============== */
 
 .text-success, .facet-values li .selected {
   color: $secondary-color;
@@ -894,7 +879,7 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
 }
 
-@media screen and (min-width: $screen-sm) {
+@include media-breakpoint-up(md) {
 
   #viewAllResults {
 
@@ -1016,7 +1001,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 
 
 
-/* Elements */
+/* =============== */
+/* ELEMENTS        */
+/* =============== */
 
 hr.dashed {
   border-top: 2px dotted rgba(0,0,0,.1);
@@ -1033,7 +1020,10 @@ ul.lead li {
 }
 
 
-/* Typography */
+
+/* =============== */
+/* TYPOGRAPHY      */
+/* =============== */
 
 h1, h2, h3, h4, h5 {
   line-height: 1.2;
@@ -1060,7 +1050,7 @@ h1, h2, h3, h4, h5 {
     border-bottom: 2px solid #eee;
   }
 
-  @media screen and (min-width: $screen-sm) {
+  @include media-breakpoint-up(md) {
     #holdings h2 {
       margin-top: 0;
     }
@@ -1098,7 +1088,9 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* results styles */
+/* =============== */
+/* RESULTS         */
+/* =============== */
 
 #appliedParams {
   padding: 1.5rem 0 1.5rem 0;
@@ -1145,7 +1137,11 @@ h1, h2, h3, h4, h5 {
 
 }
 
-/* ITEMS */
+
+
+/* =============== */
+/* ITEMS           */
+/* =============== */
 
 #documents .items,
 #document #holdings .items {
@@ -1343,13 +1339,22 @@ h1, h2, h3, h4, h5 {
   /*.item { overflow: visible;}*/
 }
 
-@media screen and (min-width: $screen-sm) and (max-width: $screen-md) {
+@include media-breakpoint-up(md) {
+  #document #holdings .items {
+    .loc-narrow-banner a.expander,
+    .item-details-link a {
+      min-width: 70%;
+    }
+  }
+}
+
+@include media-breakpoint-up(lg) {
   #documents .items .item {
     overflow: hidden;
   }
 }
 
-@media screen and (min-width: $screen-md) {
+@include media-breakpoint-up(xl) {
   #document #holdings .items {
     .primary-url { margin-bottom: 0;}
     /*.item { padding-bottom: 0; }*/
@@ -1363,18 +1368,8 @@ h1, h2, h3, h4, h5 {
 }
 
 
-@media screen and (min-width: $screen-sm) {
-  #document #holdings .items {
-    .loc-narrow-banner a.expander,
-    .item-details-link a {
-      min-width: 70%;
-    }
-  }
 
-}
-
-
-@media screen and (min-width: $screen-xs) {
+@include media-breakpoint-up(sm) {
 
   #documents .items {
     margin-right: 1em;
@@ -1430,9 +1425,9 @@ h1, h2, h3, h4, h5 {
 }
 
 
-/* show styles */
-
-
+/* ================ */
+/* SHOW             */
+/* ================ */
 
 .show-document #appliedParams {
   text-align: right;
@@ -1498,7 +1493,12 @@ div.marc-record {
   text-align: right;
 }
 
-/* Table of Contents from Syndetics */
+
+
+
+/* =============== */
+/* SYNDETICS TOC   */
+/* =============== */
 
 #contents {
   ul.toc {
@@ -1556,7 +1556,9 @@ div.marc-record {
 }
 
 
-/* progressive links */
+/* ================+ */
+/* PROGRESSIVE LINKS */
+/* ===============++ */
 
 .progressive-link-hover {
   text-decoration: underline;
@@ -1608,7 +1610,10 @@ div.marc-record {
 }
 
 
-/* Results Display */
+
+/* ================ */
+/* RESULTS DISPLAY  */
+/* ================ */
 
 .item-note-wrapper {
   clear: both;
@@ -1650,7 +1655,11 @@ h2.local-filter-heading  {
   font-size: 18px;
 }
 
-/* Advanced Search */
+
+
+/* ================ */
+/* ADVANCED SEARCH  */
+/* ================ */
 
 .blacklight-advanced {
   .search-query-form, .blacklight-advanced_trln .search-query-form {
@@ -1661,14 +1670,21 @@ h2.local-filter-heading  {
   }
 }
 
-/* AxS Tweaks */
+
+
+/* =============== */
+/* A11Y TWEAKS     */
+/* =============== */
 
 .pagination > .disabled > span, .pagination > .disabled > span:hover, .pagination > .disabled > span:focus, .pagination > .disabled > a, .pagination > .disabled > a:hover, .pagination > .disabled > a:focus {
   color: #686868;
 }
 
 
-/* Feedback Link */
+
+/* =============== */
+/* FEEDBACK LINK   */
+/* =============== */
 
 .feedback-link-wrapper {
   position: fixed;
@@ -1703,7 +1719,7 @@ h2.local-filter-heading  {
   }
 }
 
-@media screen and (min-width: $screen-sm) {
+@include media-breakpoint-up(md) {
 
   .feedback-link-wrapper {
     bottom: 25%;
@@ -1724,7 +1740,10 @@ h2.local-filter-heading  {
 
 }
 
-/* Typeahead/Autosuggest */
+
+/* ======================= */
+/* TYPEAHEAD / AUTOSUGGEST */
+/* ======================= */
 
 .twitter-typeahead {
   .tt-menu {
@@ -1752,7 +1771,9 @@ h2.local-filter-heading  {
 }
 
 
-/* Holdings */
+/* ================ */
+/* HOLDINGS         */
+/* ================ */
 
 .holdings-wrapper {
   overflow: hidden;
@@ -1778,7 +1799,11 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
   max-height: 110px;
 }
 
-/* Bookmarks */
+
+
+/* ================ */
+/* BOOKMARKS        */
+/* ================ */
 
 .bookmarksTools li {
   margin-right: 5px;
