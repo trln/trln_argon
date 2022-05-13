@@ -2,6 +2,25 @@ module TrlnArgon
   # Utility classes for use outside of a running application
   class Utilities < Thor::Group
     include Thor::Actions
+
+    def install_blacklight_asset_path
+      content_file = File.join(__dir__, '..', 'generators', 'trln_argon', 'templates', 'assets_initializer_fragment.rb')
+      unless File.exist?(content_file)
+        path = File.expand_path(content_file)
+        raise(IOError, "unable to locate template at #{path} for Blacklight 7+ asset configuration")
+      end
+
+      destination = File.join('config/initializers/assets.rb')
+      File.open(destination, 'w') {} unless File.exist?(destination)
+
+      # heuristic for seeing if we've already inserted this
+      return if IO.read(destination).include?('Bundler.rubygems.find_name')
+
+      insert_into_file(destination, before: '# Add additional assets to the asset load path.') do
+        File.read(content_file)
+      end
+    end
+
     # rubocop:disable Metrics/MethodLength
     def repackage_blacklight_javascript
       bl_gem = Bundler.rubygems.find_name('blacklight').first

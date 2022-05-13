@@ -69,15 +69,11 @@ module TrlnArgon
     end
 
     def insert_into_assets_initializer
-      get 'assets_initializer_fragment.rb' do |txt|
-        insert_into_file 'config/initializers/assets.rb', before: '# Add additional assets to the asset load path.' do
-          txt
-        end
-      end
+      TrlnArgon::Utilities.new.install_blacklight_asset_path
     end
 
     def inject_javascript_include
-      return if IO.read('app/assets/javascripts/application.js').include?('trl_argon')
+      return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
       insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n//= require trln_argon/trln_argon\n"
       end
