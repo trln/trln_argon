@@ -22,4 +22,5 @@ module TrlnArgon
   autoload :User, 'trln_argon/user.rb'
   autoload :ViewHelpers, 'trln_argon/view_helpers'
   autoload :HTTPFetch, 'trln_argon/http_fetch.rb'
+  autoload :Utilities, 'trln_argon/utilities.rb'
 end

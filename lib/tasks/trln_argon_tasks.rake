@@ -18,6 +18,16 @@ namespace :trln_argon do
     puts 'Reloaded mappings from github'
   end
 
+  desc('Repacackages Blacklight JS without their autocomplete')
+  task(regenerate_blacklight_js: :environment) do
+    require 'trln_argon'
+    puts 'Regenerating /app/javascript/blacklight/blacklight.js with local modifications'
+    utils = TrlnArgon::Utilities.new
+    utils.repackage_blacklight_javascript
+    puts 'Ensuring config/initializers/assets.rb has correct path for BL JS assets'
+    utils.install_blacklight_asset_path
+  end
+
   namespace :solr do
     require 'trln_argon/field'
     require 'trln_argon/fields'
