@@ -67,12 +67,12 @@ module TrlnArgon
         config.show.document_actions.delete(:bookmark)
 
         config.add_show_tools_partial(:email,
-                                      icon: 'glyphicon-envelope',
+                                      icon: 'fa fa-envelope',
                                       callback: :email_action,
                                       path: :email_path,
                                       validator: :validate_email_params)
         config.add_show_tools_partial(:sms,
-                                      icon: 'glyphicon-phone',
+                                      icon: 'fa fa-sms',
                                       if: :render_sms_action?,
                                       callback: :sms_action,
                                       path: :sms_path,
@@ -81,7 +81,7 @@ module TrlnArgon
                                       icon: 'fa fa-quote-left',
                                       if: :render_citation_action?)
         config.add_show_tools_partial(:ris,
-                                      icon: 'glyphicon-download-alt',
+                                      icon: 'fa fa-download',
                                       if: :render_ris_action?,
                                       modal: false,
                                       path: :ris_path)
