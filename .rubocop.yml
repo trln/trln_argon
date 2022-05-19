@@ -47,7 +47,7 @@ Metrics/CyclomaticComplexity:
   Exclude:
     - 'lib/trln_argon/view_helpers/catalog_helper_behavior.rb'
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
   Exclude:
     - 'lib/trln_argon/controller_override.rb'
