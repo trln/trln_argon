@@ -2,9 +2,9 @@ module TrlnArgon
   class MetadataHeaderFieldLayoutComponent < Blacklight::MetadataFieldLayoutComponent
     renders_one :value
     def render?
-      return false if value&.to_s.blank?
-
-      value.present? && !value.blank?
+      # value is actually a ViewComponent::SlotV2 and is probably
+      # not nil? 
+      !(value&.to_s.blank?)
     end
   end
 end
