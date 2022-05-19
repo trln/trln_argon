@@ -48,6 +48,11 @@ module TrlnArgon
         config.autocomplete_path_author = 'suggest_author'
         config.autocomplete_path_subject = 'suggest_subject'
 
+        config.add_results_collection_tool(:sort_widget)
+        config.add_results_collection_tool(:per_page_widget)
+
+
+
         config.show.heading_partials = %i[show_header show_thumbnail show_sub_header]
         config.show.partials = %i[show_items
                                   show_authors
