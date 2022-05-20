@@ -1069,6 +1069,14 @@ h1, h2, h3, h4, h5 {
   line-height: 1.2;
 }
 
+/* BS3 class that was removed in BS4 but we still */
+/* use it. */
+.page-header {
+  padding-bottom: 12px;
+  margin: 40px 0 24px;
+  border-bottom: 1px solid #eeeeee;
+}
+
 #documents .document h3.document-title-heading {
   font-size: 1.4em;
   font-weight: 400;
@@ -1781,6 +1789,7 @@ h2.local-filter-heading  {
 /* ======================= */
 
 .twitter-typeahead {
+  z-index: auto;
   .tt-menu {
     max-height: 300px;
     overflow-y: auto;
