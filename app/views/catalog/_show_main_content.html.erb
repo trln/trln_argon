@@ -1,15 +1,3 @@
-<div class="row show-document-controls">
-  <div class="col-6">
-    <%= render 'previous_next_doc' %>
-  </div>
-  <% if current_search_session %>
-    <div id="appliedParams" class="col-6 clearfix constraints-container">
-      <%= render 'start_over' %>
-      <%= link_back_to_catalog class: 'btn btn-link' %>
-    </div>
-  <% end %>
-</div>
-
 <div class="row">
   <div class="<%= show_tools_class %>">
     <%= render :partial => 'show_tools' %>
