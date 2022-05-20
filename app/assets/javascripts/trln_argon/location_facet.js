@@ -12,8 +12,8 @@ Blacklight.onLoad(function() {
         var facetLocationWrapper = $('#facet-location_hierarchy_f');
 
         // hide first two facets
-        facetLocationWrapper.find('.facet_select:contains("' + argonHSL + '")').parent().addClass("hidden");
-        facetLocationWrapper.find('.facet_select:contains("' + argonLAW + '")').parent().addClass("hidden");
+        facetLocationWrapper.find('.facet_select:contains("' + argonHSL + '")').parent().addClass("d-none");
+        facetLocationWrapper.find('.facet_select:contains("' + argonLAW + '")').parent().addClass("d-none");
 
         // open local institution and expand
         facetLocationWrapper.find('.facet_select:contains("' + argonInstitution + '")').parent().addClass("twiddle-open");
