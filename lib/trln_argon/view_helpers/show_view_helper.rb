@@ -25,7 +25,7 @@ module TrlnArgon
       end
 
       def show_main_content_partials_class
-        'col-md-10'
+        'col-md-12'
       end
 
       def show_tools_class
