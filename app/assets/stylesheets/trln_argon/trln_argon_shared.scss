@@ -1134,6 +1134,16 @@ h1, h2, h3, h4, h5 {
 
 #appliedParams {
   padding: 1.5rem 0 1.5rem 0;
+  align-items: center;
+
+  .btn-group.constraint {
+    span.constraint-value,
+    a.btn {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+  }
 
   .applied-filter {
     margin: 3px 0 3px 0;
@@ -1472,17 +1482,6 @@ h1, h2, h3, h4, h5 {
 .show-document #appliedParams {
   text-align: right;
   padding: 0 0 0 0;
-  align-items: center;
-
-  .btn-group.constraint {
-    span.constraint-value,
-    a.btn {
-      padding: 0.25rem 0.5rem;
-      font-size: 0.875rem;
-      line-height: 1.5;
-    }
-  }
-
 }
 
 .pagination-search-widgets {
