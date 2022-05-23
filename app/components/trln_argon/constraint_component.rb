@@ -5,6 +5,7 @@ module TrlnArgon
     with_collection_parameter :facet_item_presenter
 
     def initialize(facet_item_presenter:, classes: 'filter', layout: TrlnArgon::ConstraintLayoutComponent)
+      super
       @facet_item_presenter = facet_item_presenter
       @classes = classes
       @layout = layout

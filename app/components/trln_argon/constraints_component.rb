@@ -1,7 +1,5 @@
 module TrlnArgon
   class ConstraintsComponent < Blacklight::ConstraintsComponent
-
-
     # rubocop:disable Metrics/ParameterLists
     def initialize(search_state:,
                    tag: :div,
@@ -12,6 +10,7 @@ module TrlnArgon
                    facet_constraint_component: TrlnArgon::ConstraintComponent,
                    facet_constraint_component_options: {},
                    start_over_component: TrlnArgon::StartOverButtonComponent)
+      super
       @search_state = search_state
       @query_constraint_component = query_constraint_component
       @query_constraint_component_options = query_constraint_component_options
