@@ -1208,7 +1208,7 @@ h1, h2, h3, h4, h5 {
   padding: 1em 1.5em 1em 1.5em;
 
   .items-spacer {
-    height: .5em;
+    height: 1.5em;
   }
 
   .hathi-trust-link {
@@ -1307,7 +1307,7 @@ h1, h2, h3, h4, h5 {
     margin-bottom: .25em;
 
     ~ .location-header {
-      margin-top: 0.5em;
+      margin-top: 2.5em;
     }
 
     h3, h4 {
@@ -1470,7 +1470,7 @@ h1, h2, h3, h4, h5 {
   #document #holdings .items {
     .primary-url { margin-bottom: 0;}
     /*.item { padding-bottom: 0; }*/
-    .location-header ~ .location-header { margin-top: 1.25em; }
+    .location-header ~ .location-header { margin-top: 2.5em; }
   }
 
   // .institution-availability .primary-url {
