@@ -297,9 +297,11 @@ body {
 /* RESULTS         */
 /* =============== */
 
-.institution-availability .primary-url {
-  margin-top: 1em;
-}
+// .institution-availability {
+//   .primary-url {
+//     margin-top: 1em;
+//   }
+// }
 
 .primary-url {
   display: inline-block;
@@ -1206,18 +1208,23 @@ h1, h2, h3, h4, h5 {
   padding: 1em 1.5em 1em 1.5em;
 
   .items-spacer {
-    height: 2em;
+    height: .5em;
+  }
+
+  .hathi-trust-link {
+    width: 100%;
   }
 
   .item {
     padding-top: .5em;
     margin: .25em 0 .25em 0;
-    /*padding-bottom: 1em;*/
     overflow: hidden;
     border-bottom: 1px solid #e3e3e3;
+    padding-bottom: .5em;
 
     &:last-of-type {
       border-bottom: none;
+      padding-bottom: 0;
     }
 
   }
@@ -1226,9 +1233,46 @@ h1, h2, h3, h4, h5 {
     border-top: none;
   }
 
+  .institution-availability {
+    
+    .item {
+      display: flex;
+      flex-wrap: wrap;
 
-  .institution-availability .item:nth-child(n+1):before {
-    margin: 0 0 0 0;
+      .primary-url {
+        display: flex;
+        flex: 1 1 58.333;
+
+        ul {
+          width: 100%;
+        }
+      }
+
+      .row {
+        flex: 1 1 41.667%;
+        .available {
+          flex: 1 1 100%;
+          max-width: 100%;
+        }
+      }
+
+      @include media-breakpoint-between(sm, md) {
+        .row {
+          flex: 1 1 100%;
+        }
+      }
+
+    }
+
+    .item:last-of-type {
+      div dl {
+        margin-bottom: 0;
+      }
+    }
+    
+    .item:nth-child(n+1):before {
+      margin: 0 0 0 0;
+    }
   }
 
   .location-narrow-group {
@@ -1263,7 +1307,7 @@ h1, h2, h3, h4, h5 {
     margin-bottom: .25em;
 
     ~ .location-header {
-      margin-top: 2.5em;
+      margin-top: 0.5em;
     }
 
     h3, h4 {
@@ -1426,12 +1470,12 @@ h1, h2, h3, h4, h5 {
   #document #holdings .items {
     .primary-url { margin-bottom: 0;}
     /*.item { padding-bottom: 0; }*/
-    .location-header ~ .location-header { margin-top: 2.5em; }
+    .location-header ~ .location-header { margin-top: 1.25em; }
   }
 
-  .institution-availability .primary-url {
-    margin-top: 0;
-  }
+  // .institution-availability .primary-url {
+  //   margin-top: 0;
+  // }
 
 }
 
