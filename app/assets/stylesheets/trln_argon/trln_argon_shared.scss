@@ -721,11 +721,11 @@ div.facet-content { // non-hierarcical facets
   }
 
   li.h-node::before {
-    content: '▶';
+    content: '▶︎';
   }
 
   li.h-node.twiddle-open::before {
-    content: '▼';
+    content: '▼︎';
   }
 
   li.h-leaf::before,
