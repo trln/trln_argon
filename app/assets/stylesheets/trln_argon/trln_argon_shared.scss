@@ -1477,7 +1477,13 @@ h1, h2, h3, h4, h5 {
   //   margin-top: 0;
   // }
 
+  body.blacklight-trln-index #document #holdings .items .location-header ~ .location-header {
+    margin-top: 1.25em;
+  }
+
+
 }
+
 
 .blacklight.thumbnail {
   margin-bottom: 0;
