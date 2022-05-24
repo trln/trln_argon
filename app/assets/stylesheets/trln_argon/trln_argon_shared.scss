@@ -413,27 +413,27 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 .contracted-ul {
   position: relative;
   overflow: hidden;
-  margin-bottom: 20px;
-  max-height: 80px;
+  margin-bottom: 1.25em;
+  max-height: 4.25em;
 }
 
-.contracted-ul {
-  max-height: 90px;
-}
+// .contracted-ul {
+//   max-height: 90px;
+// }
 
 .contracted:after {
   content: "";
   text-align: right;
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: 1em;
   width: 70%;
   height: 1.5em;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+  background: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1) 50%);
 }
 
-.summary-text-wrapper.contracted:after {
-  background: linear-gradient(to right, rgba(243, 243, 243, 0), rgba(237, 237, 237, 1) 50%);
+.location-narrow-group .row.contracted:after {
+  background: linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1) 50%);
 }
 
 .show-document,
