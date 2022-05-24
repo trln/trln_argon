@@ -227,7 +227,6 @@ body {
 
 #search_field {
     position: relative;
-    /*top: -.6em;*/
 }
 
 
@@ -274,9 +273,10 @@ body {
         z-index: 1000;
       }
 
-      .input-group-btn .search-btn {
+      .search-btn {
         border-top-left-radius: 0 !important;
         border-bottom-left-radius: 0 !important;
+        border-width: 0px;
       }
 
     }
