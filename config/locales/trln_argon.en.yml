@@ -194,7 +194,7 @@ en:
                 metadata: "Other details"
                 expanded_links: "Online"
 
-            label:
+            badge:
                 summary: "Summary"
                 call_number: "Call Number"
                 status: "Status"

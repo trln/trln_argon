@@ -1203,33 +1203,28 @@ h1, h2, h3, h4, h5 {
   margin-bottom: 2em;
   overflow: hidden;
   border-radius: 0 0 4px 4px;
-  padding: 10px;
-
-
+  padding: 1em 1.5em 1em 1.5em;
 
   .items-spacer {
     height: 2em;
   }
 
   .item {
+    padding-top: .5em;
     margin: .25em 0 .25em 0;
     /*padding-bottom: 1em;*/
     overflow: hidden;
-  }
+    border-bottom: 1px solid #e3e3e3;
 
-  .item:nth-child(n+1):before,
-  .loc-narrow-banner:before {
-    display: block;
-    content: '';
-    border-top: 1px solid #e3e3e3;
-    padding-top: 10px;
-    margin: 0 15px 0 15px;
+    &:last-of-type {
+      border-bottom: none;
+    }
+
   }
 
   .has-summary .item:nth-child(1):before {
     border-top: none;
   }
-
 
 
   .institution-availability .item:nth-child(n+1):before {
@@ -1238,18 +1233,20 @@ h1, h2, h3, h4, h5 {
 
   .location-narrow-group {
     background: rgba(0,0,0,.03);
-    margin-left: 4px;
-    margin-right: 4px;
     width: 100%;
-    padding: 0;
-    margin-bottom: 0;
-    margin-top: 5px;
-    padding-top: 7px;
-    padding-bottom: 5px;
-    padding-left: 30px;
-    padding-right: 15px;
     border: 1px solid rgba(0,0,0,.05);
+    margin: 1em .75em 0 .75em;
+    padding: .5em 0 .5em 0;
+
+    .call-number-wrapper,
+    .summary-wrapper {
+      dl {
+        margin-bottom: 0;
+      }
+    }
   }
+
+
 
 
 
@@ -1311,23 +1308,17 @@ h1, h2, h3, h4, h5 {
     }
   }
 
-
-
-  .call-number-wrapper {
-    float: left;
-  }
-
   .url-note-wrapper {
     margin-top:10px;
   }
 
-  .call-number-label,
-  .status-label,
-  .summary-label,
-  .latest-received-label,
-  .item-note-label,
-  .holding-note-label,
-  .url-note-label {
+  .call-number-badge,
+  .status-badge,
+  .summary-badge,
+  .latest-received-badge,
+  .item-note-badge,
+  .holding-note-badge,
+  .url-note-badge {
     background: #e5e5e5;
     color: #444;
     border: 1px solid #ddd;
@@ -1336,12 +1327,8 @@ h1, h2, h3, h4, h5 {
     margin-right: .25em;
   }
 
-  .location-narrow-group .label {
+  .location-narrow-group .badge {
     background: rgba(255,255,255,.9);
-  }
-
-  .status-wrapper {
-    float: left;
   }
 
   .summary-text,
@@ -1390,8 +1377,35 @@ h1, h2, h3, h4, h5 {
 
 #documents .items {
   overflow: visible;
-  /*.item { overflow: visible;}*/
+  margin-right: 1em;
 }
+
+#document .items,
+#documents .items {
+
+  dl {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  dt {
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 0 0 7em;
+    margin-right: .25em;
+  }
+
+  dd {
+    width: calc(100% - 7.75em);
+    margin-bottom: 0;
+    margin-right: .5em;
+    flex: 1 1 calc(100% - 7.75em);
+  }
+
+}
+
 
 @include media-breakpoint-up(md) {
   #document #holdings .items {
@@ -1420,39 +1434,6 @@ h1, h2, h3, h4, h5 {
   }
 
 }
-
-
-
-@include media-breakpoint-up(sm) {
-
-  #documents .items {
-    margin-right: 1em;
-  }
-
-  #document .items,
-  #documents .items {
-
-    dt {
-      float: left;
-      clear: left;
-      text-align: right;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 7em;
-    }
-
-    /* dd { margin-left: 7.1em; } */
-
-  }
-
-  /* #documents .items .institution-availability {
-    dt { width: 4em; }
-    dd { margin-left: 4.5em; }
-  } */
-
-}
-
 
 .blacklight.thumbnail {
   margin-bottom: 0;

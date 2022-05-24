@@ -284,7 +284,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#items_spacer_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.items_spacer_class).to(
-        eq('items-spacer col-md-12')
+        eq('items-spacer col-lg-12')
       )
     end
   end
@@ -292,7 +292,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#items_wrapper_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.items_wrapper_class).to(
-        eq('items-wrapper items-section-index col-md-12')
+        eq('items-wrapper items-section-index col-lg-12')
       )
     end
   end
@@ -300,7 +300,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#item_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.item_class).to(
-        eq('item col-md-12')
+        eq('item col-lg-12')
       )
     end
   end
@@ -308,7 +308,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#availability_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.availability_class).to(
-        eq('available col-md-5')
+        eq('available col-lg-5')
       )
     end
   end
@@ -316,7 +316,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#location_header_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.location_header_class).to(
-        eq('location-header col-md-12')
+        eq('location-header col-lg-12')
       )
     end
   end
@@ -324,7 +324,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#institution_location_header_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.institution_location_header_class).to(
-        eq('institution location-header col-md-12')
+        eq('institution location-header col-lg-12')
       )
     end
   end
@@ -340,7 +340,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#holdings_summary_wrapper_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.holdings_summary_wrapper_class).to(
-        eq('col-sm-12 summary-wrapper')
+        eq('col-lg-12 col-sm-12 summary-wrapper')
       )
     end
   end
@@ -348,7 +348,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#holdings_note_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.holdings_note_class).to(
-        eq('holding-note col-md-12')
+        eq('holding-note col-lg-12')
       )
     end
   end
@@ -438,7 +438,7 @@ describe TrlnArgonHelper, type: :helper do
     context 'show action' do
       it 'returns the HTML class attribute values' do
         expect(helper.call_number_wrapper_class(action: 'show')).to(
-          eq('col-md-5 col-sm-12 call-number-wrapper')
+          eq('col-lg-5 col-sm-12 call-number-wrapper')
         )
       end
     end
@@ -446,7 +446,7 @@ describe TrlnArgonHelper, type: :helper do
     context 'other action' do
       it 'returns the HTML class attribute values' do
         expect(helper.call_number_wrapper_class).to(
-          eq('col-md-5 col-sm-12 call-number-wrapper')
+          eq('col-lg-5 col-sm-12 call-number-wrapper')
         )
       end
     end
@@ -456,14 +456,14 @@ describe TrlnArgonHelper, type: :helper do
     context 'show action' do
       it 'returns the HTML class attribute values' do
         expect(helper.status_wrapper_class(action: 'show')).to(
-          eq('col-md-7 col-sm-12')
+          eq('col-lg-7 col-sm-12')
         )
       end
     end
     context 'other action' do
       it 'returns the HTML class attribute values' do
         expect(helper.status_wrapper_class).to(
-          eq('col-md-7 col-sm-12')
+          eq('col-lg-7 col-sm-12')
         )
       end
     end
@@ -473,21 +473,21 @@ describe TrlnArgonHelper, type: :helper do
     context 'show action and long items' do
       it 'returns the HTML class attribute values' do
         expect(helper.item_note_wrapper_class(action: 'show', item_length: 130)).to(
-          eq('col-md-12')
+          eq('col-lg-12')
         )
       end
     end
     context 'show action short item' do
       it 'returns the HTML class attribute values' do
         expect(helper.item_note_wrapper_class(action: 'show', item_length: 110)).to(
-          eq('col-md-12')
+          eq('col-lg-12')
         )
       end
     end
     context 'all other cases' do
       it 'returns the HTML class attribute values' do
         expect(helper.item_note_wrapper_class).to(
-          eq('col-md-12')
+          eq('col-lg-12')
         )
       end
     end
@@ -1099,7 +1099,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#show_main_content_partials_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.show_main_content_partials_class).to(
-        eq('col-md-10')
+        eq('col-md-12')
       )
     end
   end
