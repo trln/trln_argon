@@ -5,7 +5,6 @@ TrlnArgon::Engine.routes.draw do
 
   mount BlacklightAdvancedSearch::Engine => '/'
 
-  get 'advanced_trln' => 'advanced_trln#index', as: 'advanced_trln'
   get ':controller/suggest/:category', to: 'catalog#suggest'
   get 'catalog_count_only', to: 'catalog#count_only', as: 'catalog_count_only'
   get 'trln_count_only', to: 'trln#count_only', as: 'trln_count_only'

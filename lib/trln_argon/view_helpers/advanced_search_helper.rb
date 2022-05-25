@@ -6,11 +6,11 @@ module TrlnArgon
       end
 
       def advanced_search_form_class
-        'col-md-8'
+        'col-lg-8'
       end
 
       def advanced_search_help_class
-        'col-md-4'
+        'col-lg-4'
       end
     end
   end

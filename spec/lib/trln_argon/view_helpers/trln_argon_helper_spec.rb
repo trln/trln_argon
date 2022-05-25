@@ -206,13 +206,13 @@ describe TrlnArgonHelper, type: :helper do
 
     it 'returns the advanced search form HTML class attribute values' do
       expect(helper.advanced_search_form_class).to(
-        eq('col-md-8')
+        eq('col-lg-8')
       )
     end
 
     it 'returns the advanced search help HTML class attribute values' do
       expect(helper.advanced_search_help_class).to(
-        eq('col-md-4')
+        eq('col-lg-4')
       )
     end
   end
