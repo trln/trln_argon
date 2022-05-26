@@ -58,7 +58,7 @@ module TrlnArgon
       end
 
       def advanced_search_url(options = {})
-        trln_argon.url_for(options.merge(controller: 'advanced_trln', action: 'index'))
+        trln_argon.url_for(options.merge(controller: 'trln', action: 'advanced_search'))
       end
 
       def local_search_button_class
