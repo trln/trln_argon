@@ -734,20 +734,40 @@ div.facet-content { // non-hierarcical facets
   }
 
   li.h-node::before {
-    content: '▶︎';
+    font-family: "FontAwesome";
+    content: '\f0da';
+    transform: scaleX(1.5);
   }
 
   li.h-node.twiddle-open::before {
-    content: '▼︎';
+    font-family: "FontAwesome";
+    content: '\f0d7';
+    transform: scaleY(1.5);
   }
 
   li.h-leaf::before,
   li.h-node::before,
   li.h-node.twiddle-open::before {
-    flex: 0 0 5%;
+    flex: 0 0 3.5%;
     display: block;
     color: #929292;
-    font-size: .75em;
+    width: 1em;
+    height: 1em;
+    font-size: 1em;
+    margin-top: -0.2em;
+
+    @include media-breakpoint-up(sm) {
+      flex: 0 0 7.5%;
+    }
+
+    @include media-breakpoint-up(xl) {
+      flex: 0 0 5.5%;
+    }
+  }
+
+  li.h-node.twiddle-open::before {
+    flex: 0 0 5%;
+    margin-top: -0.4em;
 
     @include media-breakpoint-up(sm) {
       flex: 0 0 10%;
@@ -755,10 +775,6 @@ div.facet-content { // non-hierarcical facets
 
     @include media-breakpoint-up(xl) {
       flex: 0 0 7.5%;
-    }
-
-    @include media-breakpoint-up(xxl) {
-      flex: 0 0 5%;
     }
   }
 
