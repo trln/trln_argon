@@ -1,5 +1,18 @@
 # TRLN Argon Rails Engine
 
+## WIP for removal of blacklight advanced search plugin
+
+This branch reflects work to remove the `blacklight_advanced_search` plugin
+which does not fit well into Blacklight 7, which has its own way of providing
+similar functionality.  It does not, as of 2022-05-26, work, since the
+queries it builds are interpreted as requiring HTTP POST to the Solr service,
+which is disabled for security reasons.  However, it illustrates many of 
+the steps required to remove the plugin code and rely on the functionality built
+in ot Blacklight 7.
+
+It is based on the active `argon-2` branch during development of Argon 2
+
+
 ## THIS REPRESENTS WORK IN PROGRESS
 
 We aim to keep this information up to date but the application is changing.

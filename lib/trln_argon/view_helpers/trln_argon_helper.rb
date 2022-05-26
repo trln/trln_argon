@@ -33,7 +33,8 @@ module TrlnArgon
       end
 
       def advanced_search_url(options = {})
-        blacklight_advanced_search_engine.url_for(options.merge(controller: 'advanced', action: 'index'))
+        url_for(controller: 'catalog', action: 'advanced_search')
+        #blacklight_advanced_search_engine.url_for(options.merge(controller: 'advanced', action: 'index'))
       end
 
       def institution_code_to_short_name(options = {})

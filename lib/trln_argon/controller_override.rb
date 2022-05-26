@@ -16,7 +16,7 @@ module TrlnArgon
       send(:include, OpenSearch)
       send(:include, PagingLimit)
       send(:include, SolrCaching)
-      send(:include, BlacklightAdvancedSearch::Controller)
+      #send(:include, BlacklightAdvancedSearch::Controller)
 
       before_action :limit_results_paging, only: :index
       before_action :limit_facet_paging, only: :facet
@@ -488,6 +488,14 @@ module TrlnArgon
             pf3: '$title_pf3',
             pf2: '$title_pf2'
           }
+          field.clause_params = {
+              edismax: {
+                qf: '$title_qf',
+                pf:  '$title_pf',
+                pf3: '$title_pf3',
+                pf2: '$title_pf2'
+              }
+                }
         end
 
         config.add_search_field('author') do |field|
@@ -630,6 +638,10 @@ module TrlnArgon
           !params[:doc_ids].blank?
       end
       # rubocop:enable Style/PredicateName
+      #
+      def is_advanced_search?(localized_params)
+        localized_params.fetch(:search_field, '') == 'advanced'
+      end
 
       def query_has_constraints?(localized_params = params)
         if is_advanced_search? localized_params

@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', '~> 6'
   s.add_dependency 'blacklight', '~> 7.24.0'
-  s.add_dependency 'blacklight_advanced_search', '~> 7'
+  #s.add_dependency 'blacklight_advanced_search', '~> 7'
   s.add_dependency 'blacklight-hierarchy', '~> 4'
   s.add_dependency 'blacklight_range_limit', '~> 7'
   s.add_dependency 'git', '>= 1.11.0', "< 2"
