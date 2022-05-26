@@ -574,9 +574,20 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     display: block;
     white-space: nowrap;
 
+    input:hover, input:focus {
+      cursor: pointer;
+    }
+
     label {
       margin-bottom: 0;
       white-space: normal;
+      color: $primary-link-color;
+    }
+
+    label:hover, label:focus {
+      color: $primary-link-color;
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     @include media-breakpoint-up(sm) {
