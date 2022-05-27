@@ -14,7 +14,7 @@ module TrlnArgon
       end
 
       def trln_search_button_class
-        'btn-default'
+        'btn-outline-secondary'
       end
 
       def local_search_button_label_class

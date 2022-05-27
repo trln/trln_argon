@@ -19,7 +19,7 @@ describe TrlnArgon::ViewHelpers::SearchScopeToggleHelper, type: :helper do
 
   describe '#trln_search_button_class' do
     it 'returns the expected class' do
-      expect(helper.trln_search_button_class).to eq('btn-default')
+      expect(helper.trln_search_button_class).to eq('btn-outline-secondary')
     end
   end
 

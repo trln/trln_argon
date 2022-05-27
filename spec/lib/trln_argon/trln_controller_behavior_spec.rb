@@ -31,7 +31,7 @@ describe TrlnArgon::TrlnControllerBehavior do
   describe '#local_search_button_class' do
     it 'sets the search button class' do
       expect(mock_controller.helpers.local_search_button_class).to eq(
-        'btn-default'
+        'btn-outline-secondary'
       )
     end
   end
