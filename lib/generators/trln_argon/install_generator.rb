@@ -16,9 +16,10 @@ module TrlnArgon
       generate 'blacklight_range_limit:install'
     end
 
+    # this should match whatever's in trln_argon.gemspec
     def install_gems
       return if IO.read('Gemfile').include?('better_errors')
-      gem 'better_errors', '2.1.1'
+      gem 'better_errors', '~> 2.9.1'
     end
 
     def install_configuration_files
@@ -57,8 +58,22 @@ module TrlnArgon
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
+    # BL7 started precompiling blacklight/blacklight.js
+    # We need this file without the autocomplete parts so
+    # we can use our own.  This autogenerates the above file
+    # in the target application as a set of requires, based
+    # on the contents of the /app/javascript/blacklight directory
+    # in the Blacklight gem, excluding autocomplete.
+    def override_compiled_blacklight_javascript
+      TrlnArgon::Utilities.new.repackage_blacklight_javascript
+    end
+
+    def insert_into_assets_initializer
+      TrlnArgon::Utilities.new.install_blacklight_asset_path
+    end
+
     def inject_javascript_include
-      return if IO.read('app/assets/javascripts/application.js').include?('trl_argon')
+      return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
       insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n//= require trln_argon/trln_argon\n"
       end
@@ -72,12 +87,14 @@ module TrlnArgon
       end
     end
 
+    # rubocop:disable Layout/LineLength
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  BetterErrors::Middleware.allow_ip! \"10.0.2.2\" if defined? BetterErrors && Rails.env == :development\n"
+        "\n\n  require 'socket'\n\n    local_ip = IPSocket.getaddress(Socket.gethostname)\n\n  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
       end
     end
+    # rubocop:enable Layout/LineLength
 
     def inject_catalog_controller_overrides
       return if IO.read('config/application.rb').include?('local_env.yml')
@@ -91,7 +108,8 @@ module TrlnArgon
       end
     end
 
-    def remove_default_blacklight_configs # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Style/StringConcatenation
+    def remove_default_blacklight_configs
       # For multi line fields
       fields_to_remove = [/ +config.add_facet_field 'example_query_facet_field'[\s\S]+?}\n[ ]+}/,
                           / +config.add_search_field\([\s\S]+?end/]
@@ -101,18 +119,20 @@ module TrlnArgon
       end
 
       # For single line fields
-      fields_to_remove = [/ +config.index.title_field +=.+?$\n*/,
-                          / +config.index.display_type_field +=.+?$\n*/,
-                          / +config.add_facet_field +'.+?$\n*/,
-                          / +config.add_index_field +'.+?$\n*/,
-                          / +config.add_show_field +'.+?$\n*/,
-                          / +config.add_search_field +'.+?$\n*/,
-                          / +config.add_sort_field +'.+?$\n*/]
+      fields_to_remove = [/(\s+)(config.index.title_field +=.+?)$\n*/,
+                          /(\s+)(config.index.display_type_field +=.+?)$\n*/,
+                          /(\s+)(config.add_facet_field\b.+?)$\n*/,
+                          /(\s+)(config.add_index_field.+?)$\n*/,
+                          /(\s+)(config.add_show_field.+?$)\n*/,
+                          /(\s+)(config.add_search_field.+?)$\n*/,
+                          /(\s+)(config.add_sort_field.+?)$\n*/,
+                          /(\s+)(config.add_show_tools_partial.+?)$\n*/]
 
       fields_to_remove.each do |remove_marker|
-        gsub_file('app/controllers/catalog_controller.rb', /#{remove_marker}/, '')
+        gsub_file('app/controllers/catalog_controller.rb', remove_marker, '\1# \2' + "\n")
       end
     end
+    # rubocop:enable Style/StringConcatenation
 
     def inject_search_builder_behavior
       return if IO.read('app/models/search_builder.rb').include?('TrlnArgon::ArgonSearchBuilder')

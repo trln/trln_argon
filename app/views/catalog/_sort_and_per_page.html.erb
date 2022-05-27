@@ -1,6 +1,8 @@
-<div id="sortAndPerPage" class="clearfix" role="navigation" aria-label="sort and result pages">
-  <% unless @response.empty? %>
-    <%= render :partial => "paginate_compact", :object => @response if show_pagination? %>
-  <% end %>
-  <%= render_results_collection_tools wrapping_class: "search-widgets pull-right" %>
+<div id="sortAndPerPage" class="row" role="navigation" aria-label="<%= t('blacklight.search.per_page.aria_label')%>">
+  <div class="col-sm-12 col-lg-6">
+    <%= render partial: "paginate_compact", object: @response if show_pagination? %>
+  </div>
+  <div class="col-sm-12 col-lg-6">
+    <%= render_results_collection_tools wrapping_class: "search-widgets" %>
+  </div>
 </div>

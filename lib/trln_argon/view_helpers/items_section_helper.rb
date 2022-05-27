@@ -2,39 +2,39 @@ module TrlnArgon
   module ViewHelpers
     module ItemsSectionHelper
       def items_spacer_class
-        'items-spacer col-md-12'
+        'items-spacer col-lg-12'
       end
 
       def items_wrapper_class
-        'items-wrapper items-section-index col-md-12'
+        'items-wrapper items-section-index col-lg-12'
       end
 
       def item_class
-        'item col-md-12'
+        'item col-lg-12'
       end
 
       def availability_class
-        'available col-md-5'
+        'available col-lg-5'
       end
 
       def location_header_class
-        'location-header col-md-12'
+        'location-header col-lg-12'
       end
 
       def institution_location_header_class
-        'institution location-header col-md-12'
+        'institution location-header col-lg-12'
       end
 
       def location_narrow_group_class
-        'location-narrow-group col-md-12'
+        'location-narrow-group'
       end
 
       def holdings_summary_wrapper_class
-        'col-sm-12 summary-wrapper'
+        'col-lg-12 col-sm-12 summary-wrapper'
       end
 
       def holdings_note_class
-        'holding-note col-md-12'
+        'holding-note col-lg-12'
       end
 
       def url_note_wrapper_class
@@ -65,20 +65,22 @@ module TrlnArgon
         end
       end
 
+      # nb displayed by default next to status
+      # column numbers for col-md-# should add up to 12
       def call_number_wrapper_class(_options = {})
-        'col-md-5 col-sm-12 call-number-wrapper'
+        'col-lg-5 col-sm-12 call-number-wrapper'
       end
 
       def status_wrapper_class(_options = {})
-        'col-md-7 col-sm-12'
+        'col-lg-7 col-sm-12'
       end
 
       def item_note_wrapper_class(_options = {})
-        'col-md-12'
+        'col-lg-12'
       end
 
       def latest_received_wrapper_class(_opts = {})
-        'col-md5 col-sm-12 latest-received-wrapper'
+        'col-lg-5 col-sm-12 latest-received-wrapper'
       end
 
       def display_holdings_summaries?(options = {})

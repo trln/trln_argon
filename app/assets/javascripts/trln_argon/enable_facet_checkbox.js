@@ -1,82 +1,45 @@
 Blacklight.onLoad(function() {
-
-  $(window).load(function(){
-
-    var facetPanel = $('#facet-panel-collapse');
-
-    var numCheckboxes = facetPanel.find('.facet-checkbox-wrapper').length;
-
-    if (numCheckboxes) {
-
-      facetPanel.find('.facet-checkbox-wrapper').each( function( index, element ) {
-
-          facet_field = $( this ).data("facet-field");
-          checkbox_field = $( this ).data("checkbox-field");
-
-          if (facet_field != undefined) {
-
-            $(".blacklight-" + facet_field + " .panel-heading").hide();
-
-            var facetChecked = false;
-            var theParam = "f%5B" + facet_field + "%5D%5B%5D=" + checkbox_field;
-
-            // check if url param exists, add checked status
-            if (window.location.href.indexOf(theParam) > -1) {
-              $("#checkbox_" + facet_field).attr("checked", "checked");
-              $(".blacklight-" + facet_field).addClass("checkbox-facet");
-              $(".blacklight-" + facet_field).addClass("facet_limit-active checkbox-facet-checked");
-              facetChecked = true;
-            } else {
-              $("#checkbox_" + facet_field).removeAttr("checked", "checked");
-              $(".blacklight-" + facet_field).addClass("checkbox-facet");
-              $(".blacklight-" + facet_field).removeClass("facet_limit-active checkbox-facet-checked");
-            }
-
-            $("#checkbox_" + facet_field).click( function() {
-
-              var theOGURL = window.location.href.toString();
-              // Remove page parameter if present to return to the
-              // first page of results when selecting the facet.
-              theOGURL = theOGURL.replace(/&?page=\d+/gi, '');
-
-              if (facetChecked == true) { // already checked
-
-                if (window.location.href.indexOf("?" + theParam + "&") > -1) {
-                  theParam = "?" + theParam;
-                  var theNewURL = theOGURL.replace(theParam, "?");
-
-                } else if (window.location.href.indexOf("?" + theParam) > -1) {
-                  theParam = "?" + theParam;
-                  var theNewURL = theOGURL.replace(theParam, "");
-
-                } else {
-                  theParam = "&" + theParam;
-                  var theNewURL = theOGURL.replace(theParam, "");
-                }
-
-                window.location.href = theNewURL;
-
-              } else {
-
-                if (window.location.href.indexOf("?") > -1) {
-                  var theNewURL = theOGURL + "&" + theParam;
-
-                } else {
-                  var theNewURL = theOGURL + "?" + theParam;
-                }
-
-                window.location.href = theNewURL;
-
-              } // END already checked
-
-            }); // click function
-
-          } // END facet_field defined
-
-      }); // END .facet-checkbox-wrapper loop
-
-    } // END numCheckboxes
-
-  }); // END window.load
-
+  /**
+   * Ensures that checkbox-only facets (currently, access_type which is either
+   * online or not)
+   * (a) do not display a header and
+   * (b) automatically select/deselect based on whether the value of the checkbox 
+   * changes.
+   */
+  $(window).on('load', function() {
+    $('#facet-panel-collapse .facet-checkbox-wrapper').each(
+      function(index, element) {
+        var wrapper = $(this);
+        
+        // hide the header
+        wrapper.closest('div.card').find('.facet-field-heading').hide();
+      
+        var fieldName = wrapper.data('facetField');
+        if ( !fieldName ) {
+          return;
+        }
+        var fieldValue = wrapper.data('checkboxField');
+        var field = wrapper.find(":checkbox");
+        var parameter = "f[" + fieldName + "][]";
+        var currentURL = new URL(window.location);
+        var currentParams = currentURL.searchParams;
+        if ( currentParams.has(parameter) ) {
+          field.attr("checked", "checked");
+        } else {
+          field.removeAttr("checked");
+        }
+        field.on('change', () => {
+          if ( field.is(':checked')) {
+            currentParams.set(parameter, fieldValue);
+            currentURL.searchParams = currentParams;
+            window.location.searchParams = currentParams;
+          } else {
+            currentParams.delete(parameter);
+            currentURL.searchParams = currentParams;
+          }
+          console.log("sending to ", currentURL);
+          window.location.assign(currentURL.toString());
+        });
+      });
+  });
 }); // END Blacklight.onLoad

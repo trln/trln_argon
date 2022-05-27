@@ -2,7 +2,7 @@ module TrlnArgon
   module ViewHelpers
     module LinkHelper
       def primary_link_class
-        'col-md-7 primary-url'
+        'col-lg-7 primary-url'
       end
 
       # Other and related links

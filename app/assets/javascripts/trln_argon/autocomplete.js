@@ -2,7 +2,7 @@
 
 Blacklight.onLoad(function() {
   'use strict';
-  
+
   $('[data-autocomplete-enabled="true"]').each(function() {
     var $el = $(this);
     // Intercept native typeahead Tab key functionality re: https://trlnmain.atlassian.net/browse/TD-832
@@ -17,6 +17,8 @@ Blacklight.onLoad(function() {
           }
       }
     });
+
+    var sharedData = $("#shared-application-data").data();
         
     // Fetch the configured autocomplete path.
     var suggest_root = $el.data().autocompletePath;
@@ -30,14 +32,12 @@ Blacklight.onLoad(function() {
       var suggest_url = suggest_root + "/" + current_search_field;
 
       //Detect local institution code
-      var local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+      var local_institution_code = sharedData.localInstitution;
 
       $('input[type=radio][name=option]').change(function(){
         if ($('input[type=radio][name=option]:checked').attr('id') == "option_trln") {
           local_institution_code = "unc||ncsu||duke||nccu";
-        } else {
-          local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>";
-        }
+        } 
       });
     } else if ($("#search-navbar").length){ 
       
@@ -50,7 +50,7 @@ Blacklight.onLoad(function() {
       //Detect local institution code
       var local_institution_code = "unc||ncsu||duke||nccu";
       if ($("body").hasClass("blacklight-catalog")) {
-        local_institution_code = "<%= "#{TrlnArgon::Engine.configuration.local_institution_code}" %>"
+        local_institution_code = sharedData.localInstitution;
       }
 
       // Set the autocomplete URL slug/ID based on the selected search field.
@@ -165,7 +165,7 @@ Blacklight.onLoad(function() {
     }];
 
     // Listen for change to selected search field
-    $("select").on("changed.bs.select", function() {
+    $("#search-navbar select").on("change", function() {
       current_search_field = this.value;
 
       // remove any existing .on() listeners attached to

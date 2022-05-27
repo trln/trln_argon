@@ -23,37 +23,8 @@ module TrlnArgon
 
       helper_method :query_has_constraints?
 
-      add_show_tools_partial(:email,
-                             icon: 'glyphicon-envelope',
-                             callback: :email_action,
-                             path: :email_path,
-                             validator: :validate_email_params)
-      add_show_tools_partial(:sms,
-                             icon: 'glyphicon-phone',
-                             if: :render_sms_action?,
-                             callback: :sms_action,
-                             path: :sms_path,
-                             validator: :validate_sms_params)
-      add_show_tools_partial(:ris,
-                             icon: 'glyphicon-download-alt',
-                             if: :render_ris_action?,
-                             modal: false,
-                             path: :ris_path)
-      add_show_tools_partial(:refworks,
-                             icon: 'glyphicon-export',
-                             if: :render_refworks_action?,
-                             new_window: true,
-                             modal: false,
-                             path: :refworks_path)
-      add_show_tools_partial(:share_bookmarks,
-                             icon: 'glyphicon-share',
-                             if: :render_sharebookmarks_action?,
-                             new_window: false,
-                             modal: false,
-                             path: :sharebookmarks_path)
-      add_show_tools_partial(:citation,
-                             icon: 'fa fa-quote-left',
-                             if: :render_citation_action?)
+
+
 
       # TRLN Argon CatalogController configurations
       configure_blacklight do |config|
@@ -61,10 +32,12 @@ module TrlnArgon
         config.default_per_page = 20
 
         # Use Solr search requestHandler for search requests
+        config.http_method = :get
         config.solr_path = :select
 
         # Use Solr document requestHandler for document requests
         config.document_solr_path = :document
+        config.document_unique_id_param = :id
         config.document_solr_request_handler = nil
 
         # Configuration for autocomplete suggester
@@ -74,6 +47,11 @@ module TrlnArgon
         config.autocomplete_path_title = 'suggest_title'
         config.autocomplete_path_author = 'suggest_author'
         config.autocomplete_path_subject = 'suggest_subject'
+
+        config.add_results_collection_tool(:sort_widget)
+        config.add_results_collection_tool(:per_page_widget)
+
+
 
         config.show.heading_partials = %i[show_header show_thumbnail show_sub_header]
         config.show.partials = %i[show_items
@@ -91,10 +69,50 @@ module TrlnArgon
         # Set partials to render
         config.index.partials = %i[index_header thumbnail index index_items]
 
+        config.show.document_actions.delete(:bookmark)
+
+        config.add_show_tools_partial(:email,
+                                      icon: 'fa fa-envelope',
+                                      callback: :email_action,
+                                      path: :email_path,
+                                      validator: :validate_email_params)
+        config.add_show_tools_partial(:sms,
+                                      icon: 'fa fa-sms',
+                                      if: :render_sms_action?,
+                                      callback: :sms_action,
+                                      path: :sms_path,
+                                      validator: :validate_sms_params)
+        config.add_show_tools_partial(:citation,
+                                      icon: 'fa fa-quote-left',
+                                      if: :render_citation_action?)
+        config.add_show_tools_partial(:ris,
+                                      icon: 'fa fa-download',
+                                      if: :render_ris_action?,
+                                      modal: false,
+                                      path: :ris_path)
+        config.add_show_tools_partial(:refworks,
+                                      icon: 'glyphicon-export',
+                                      if: :render_refworks_action?,
+                                      new_window: true,
+                                      modal: false,
+                                      path: :refworks_path)
+        config.add_show_tools_partial(:share_bookmarks,
+                                      icon: 'glyphicon-share',
+                                      if: :render_sharebookmarks_action?,
+                                      new_window: false,
+                                      modal: false,
+                                      path: :sharebookmarks_path)
+        config.add_show_tools_partial(:bookmark,
+                                      partial: 'bookmark_control',
+                                      if: :render_bookmarks_control?)
+
+
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
+        # BL7
+        config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
-        config.advanced_search[:form_facet_partial] ||= 'advanced_search_facets_as_select'
+        config.advanced_search[:form_facet_partial] ||= 'advanced/advanced_search_facets_as_select'
         config.advanced_search[:form_solr_parameters] ||= {
           # NOTE: You will not get any facets back
           #       on the advanced search page
@@ -130,10 +148,10 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                     limit: 200,
                                     sort: 'count',
-                                    helper_method: :location_filter_display,
                                     partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false,
-                                    ex: :rollup
+                                    ex: :rollup,
+                                    helper_method: :location_filter_display
         config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
@@ -141,8 +159,8 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                     label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                     limit: 4500,
-                                    helper_method: :call_number_filter_display,
-                                    partial: 'blacklight/hierarchy/facet_hierarchy'
+                                    partial: 'blacklight/hierarchy/facet_hierarchy',
+                                    helper_method: :call_number_filter_display
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                     limit: true
@@ -174,10 +192,10 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                limit: 200,
                                sort: 'count',
-                               helper_method: :location_filter_display,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false,
-                               ex: :rollup
+                               ex: :rollup,
+                               helper_method: :location_filter_display
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
@@ -193,8 +211,8 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
-                               helper_method: :call_number_filter_display,
-                               partial: 'blacklight/hierarchy/facet_hierarchy'
+                               partial: 'blacklight/hierarchy/facet_hierarchy',
+                               helper_method: :call_number_filter_display
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true
@@ -593,8 +611,17 @@ module TrlnArgon
         cached_catalog_index
       end
 
+      # Override behavior
+      # returns solr_response and documents
+      def action_documents
+        # Code borrowed from [blacklight]/app/services/blacklight/search_service.rb
+        solr_response = search_service.repository.find params[:id]
+        # Not sure if we need to set @documents in this context (d.croney)
+        @documents = solr_response.documents
+        [solr_response, solr_response.documents]
+      end
+
       # rubocop:disable Style/PredicateName
-      # rubocop:disable Metrics/AbcSize
       def has_search_parameters?
         !params[:q].blank? ||
           !params[:f].blank? ||
@@ -602,7 +629,6 @@ module TrlnArgon
           !params[:range].blank? ||
           !params[:doc_ids].blank?
       end
-      # rubocop:enable Metrics/AbcSize
       # rubocop:enable Style/PredicateName
 
       def query_has_constraints?(localized_params = params)

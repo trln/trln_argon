@@ -33,7 +33,7 @@ module TrlnArgon
       end
 
       def advanced_search_url(options = {})
-        blacklight_advanced_search_engine.url_for(options.merge(controller: 'advanced', action: 'index'))
+        url_for(options.merge(controller: 'catalog', action: 'advanced_search'))
       end
 
       def institution_code_to_short_name(options = {})
@@ -116,6 +116,7 @@ module TrlnArgon
       end
 
       def call_number_filter_display(value = '')
+        value = value.first if value.is_a?(Array)
         value.gsub('|', I18n.t('trln_argon.search_constraints.call_number_separator'))
       end
 

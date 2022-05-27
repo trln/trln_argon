@@ -25,7 +25,7 @@ module TrlnArgon
       end
 
       def show_main_content_partials_class
-        'col-md-10'
+        'col-md-12'
       end
 
       def show_tools_class
@@ -88,32 +88,7 @@ module TrlnArgon
         display_enhanced_data?(options, :syndetics_or_marc_sample_chapter)
       end
 
-      def display_other_details?(options = {})
-        display_configured_fields?(options, :show_fields)
-      end
-
-      def display_authors?(options = {})
-        display_configured_fields?(options, :show_authors_fields)
-      end
-
-      def display_subjects?(options = {})
-        display_configured_fields?(options, :show_subjects_fields)
-      end
-
-      def display_related_works?(options = {})
-        display_configured_fields?(options, :show_related_works_fields)
-      end
-
-      def display_included_works?(options = {})
-        display_configured_fields?(options, :show_included_works_fields)
-      end
-
       private
-
-      def display_configured_fields?(options, field_config)
-        doc = options.fetch(:document, false)
-        doc && show_configured_fields_and_values(blacklight_config.send(field_config), doc).any?
-      end
 
       def display_enhanced_data?(options, accessor)
         doc = options.fetch(:document, false)

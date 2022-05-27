@@ -62,6 +62,8 @@ module TrlnArgon
              else
                render_qfacet_value(field_name, item)
              end
+        # NOTE CHANGE: adding facet_count to end of li content
+        li += render_facet_count(item.hits).html_safe
 
         unless subset.empty?
           # NOTE CHANGE: Apply the configured sort option to the current node.
@@ -75,6 +77,19 @@ module TrlnArgon
         %(<li class="#{li_class}">#{li.html_safe}#{ul.html_safe}</li>).html_safe
       end
 
+      def render_selected_qfacet_value(facet_solr_field, item)
+        # NOTE CHANGE: rendering remove link inside of content tag, using font-awesome instead of glyphicon
+        remove_href = search_action_path(search_state.remove_facet_params(facet_solr_field, item.qvalue))
+        content_tag(:span, class: 'selected') do
+          concat render_qfacet_value(facet_solr_field, item, suppress_link: true)
+          concat ' '
+          concat link_to(content_tag(:i, '', class: 'fa fa-times') +
+                  content_tag(:span, '[remove]', class: 'sr-only'),
+                         remove_href,
+                         class: 'remove')
+        end
+      end
+
       def hierarchy_node_sort(node, sort, field_name)
         if sort == 'count'
           node.sort_by { |_k, v| v[:_].hits }.reverse.to_h
@@ -86,10 +101,12 @@ module TrlnArgon
       end
 
       def render_qfacet_value(facet_solr_field, item, options = {})
-        (link_to_unless(options[:suppress_link],
-                        q_value(facet_solr_field, item),
-                        q_facet_params(facet_solr_field, item),
-                        class: 'facet_select') + ' ' + render_facet_count(item.hits)).html_safe
+        link_to_unless(options[:suppress_link],
+                       q_value(facet_solr_field, item),
+                       q_facet_params(facet_solr_field, item),
+                       # NOTE CHANGE: removed 'render_facet_count(item.hits)'
+                       # class: 'facet_select') + ' ' + render_facet_count(item.hits)).html_safe
+                       class: 'facet_select').html_safe
       end
 
       def q_value(facet_solr_field, item)
@@ -101,7 +118,8 @@ module TrlnArgon
       end
 
       def q_facet_params(facet_solr_field, item)
-        search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
+        # search_state.add_facet_params(facet_solr_field, item.qvalue).to_h
+        search_state.filter(facet_solr_field).add(item.qvalue).to_h
       end
 
       def map_argon_facet_codes(item)

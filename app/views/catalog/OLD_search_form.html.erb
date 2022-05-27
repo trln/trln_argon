@@ -1,0 +1,62 @@
+
+<div class="row">
+
+  <div class="col-md-10 col-md-offset-1">
+
+    <%= form_tag search_action_url, method: :get, autocomplete: 'off', class: 'search-query-form clearfix navbar-form', role: 'search' do %>
+      <% params_to_block = blacklight_config.search_fields
+                                            .keys
+                                            .map(&:to_sym)
+                                            .concat(%i[q search_field qt page utf8 op doc_ids]) %>
+      <%= render_hash_as_hidden_fields(search_state.params_for_search.except(*params_to_block)) %>
+      <div class="row">
+
+        <div class="form-group mast-search">
+
+          <div class="input-group">
+
+            <% if search_fields.length > 1 %>
+                <label for="search_field" class="sr-only"><%= t('blacklight.search.form.search_field.label') %></label>
+                <%= select_tag(:search_field, options_for_select(search_fields, h(params[:search_field])), id: "search_field", class: "search_field selectpicker", data: {width: "fit", style: "btn-default search-select"} ) %>
+            <% elsif search_fields.length == 1 %>
+              <%= hidden_field_tag :search_field, search_fields.first.last %>
+            <% end %>
+
+            <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+            <!-- TODO: blacklight.suggest_index_path is not defined. -->
+            <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search_q q form-control", id: "q", autofocus: should_autofocus_on_search_box?, data: { autocomplete_enabled: autocomplete_enabled?, autocomplete_path: 'blacklight.suggest_index_path' }  %> 
+
+            <div class="input-group-btn">
+              <button type="submit" class="btn btn-primary search-btn" id="search" aria-label="<%= t('blacklight.search.form.submit') %>">
+                <span class="submit-search-text"><%= t('blacklight.search.form.submit') %></span>
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class='search-extra-controls'>
+          <div class='input-group'>
+            <div class='input-group-element'>
+              <%# check_box :search_within, 'no', disabled: true %>
+              <!-- <label for='search_within'>Search within results</label> -->
+            </div>
+            <div class='input-group'>
+              <%= link_to t('blacklight_advanced_search.form.title'), advanced_search_url, class: 'advanced_search'%>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>

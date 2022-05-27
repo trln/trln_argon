@@ -20,7 +20,7 @@ class AdvancedController < CatalogController
     # * IGNORING current query (add in facets_for_advanced_search_form filter)
     # * IGNORING current advanced search facets
     #   (remove add_advanced_search_to_solr filter)
-    response, = search_results(params) do |search_builder|
+    response, = search_service.search_results do |search_builder|
       search_builder.except(:add_advanced_search_to_solr)
                     .append(:facets_for_advanced_search_form)
     end

@@ -42,7 +42,7 @@ describe 'full records' do
     end
 
     it 'displays the edition statement' do
-      expect(page).to have_css('li.sub-header.edition_a', text: /5th/)
+      expect(page).to have_css('li.edition_a', text: /5th/)
     end
   end
 end

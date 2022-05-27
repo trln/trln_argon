@@ -10,15 +10,24 @@ module TrlnArgon
         TrlnArgon::Engine.configuration.application_name
       end
 
-      # Fixes a bug in blacklight. In the case where an accessor method is
-      # used to retrieve the field value this method needs to check for the presence
-      # of a value returned from that accessor method, not merely the presence of an accessor method
-      # or a field value. This prevents a field label from being output if there's no value
-      # returned by the accessor method.
-      def document_has_value?(document, field_config)
-        document.has?(field_config.field) ||
-          (document.has_highlight_field? field_config.field if field_config.highlight) ||
-          (field_config.accessor && document.send(field_config.accessor).present?)
+      def show_subjects_presenter(document)
+        TrlnArgon::ShowSubjectsPresenter.new(document, self)
+      end
+
+      def show_authors_presenter(document)
+        TrlnArgon::ShowAuthorsPresenter.new(document, self)
+      end
+
+      def show_related_works_presenter(document)
+        TrlnArgon::ShowRelatedWorksPresenter.new(document, self)
+      end
+
+      def show_included_works_presenter(document)
+        TrlnArgon::ShowIncludedWorksPresenter.new(document, self)
+      end
+
+      def show_sub_header_presenter(document)
+        TrlnArgon::ShowSubHeaderPresenter.new(document, self)
       end
     end
   end

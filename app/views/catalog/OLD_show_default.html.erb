@@ -2,7 +2,7 @@
 <% if display_other_details?(document: document) %>
   <div id="other-details" class="<%= show_other_details_class %>" aria-labelledby="otherDetailsLabel">
     <h2 id="otherDetailsLabel"><%= t('trln_argon.show.heading.metadata') %></h2>
-    <dl class="dl-invert">
+    <dl>
       <% document_show_fields(document).each do |field_name, field| -%>
         <% if should_render_show_field? document, field %>
           <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>

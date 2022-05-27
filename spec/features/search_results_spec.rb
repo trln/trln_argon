@@ -20,11 +20,11 @@ describe 'search results' do
     end
 
     it 'displays the Resource Type facet breadcrumb field label' do
-      expect(page).to have_css('.filterName', text: 'Resource Type')
+      expect(page).to have_css('.filter-name', text: 'Resource Type')
     end
 
     it 'displays the Music Recording facet breadcrumb field value' do
-      expect(page).to have_css('.filterValue', text: 'Music recording')
+      expect(page).to have_css('.filter-value', text: 'Music recording')
     end
   end
 
@@ -51,7 +51,7 @@ describe 'search results' do
     end
 
     it 'provides paging options above the results' do
-      expect(page).to have_css('#sortAndPerPage .page_links')
+      expect(page).to have_css('#sortAndPerPage .page-links')
     end
 
     it 'provides paging options below the search results' do

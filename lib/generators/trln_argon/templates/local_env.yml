@@ -3,8 +3,8 @@ LOCAL_INSTITUTION_CODE: unc
 APPLICATION_NAME: TRLN Argon
 REFWORKS_URL: 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
 ROOT_URL: 'https://discovery.trln.org'
-ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
-CONTACT_URL: 'https://library.unc.edu/ask/'
+ARTICLE_SEARCH_URL: 'https://duke.summon.serialssolutions.com/search?s.fvf[]=ContentType%2CJournal+Article%2Cf&s.fvf[]=ContentType%2CMagazine+Article%2Cf&s.q=food#!/search?ho=t&fvf=ContentType,Journal Article,f|ContentType,Magazine Article,f&l=en&q='
+CONTACT_URL: 'https://library.duke.edu/ask'
 FEEDBACK_URL: ''
 #Define the order of institutions in holding list. Your institution should go first.
 SORT_ORDER_IN_HOLDING_LIST: 'unc, duke, ncsu, nccu, trln'
@@ -13,3 +13,4 @@ NUMBER_OF_ITEMS_INDEX_VIEW: '3'
 NUMBER_OF_ITEMS_SHOW_VIEW: '6'
 PAGING_LIMIT: '250'
 FACET_PAGING_LIMIT: '50'
+

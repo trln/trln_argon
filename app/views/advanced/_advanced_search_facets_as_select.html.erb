@@ -1,30 +1,44 @@
-<%# alternate version of facets on form that renders using multi-select.
+<!-- NOTE: Override of BL Advanced Search partial so that we can -->
+<!--       render location codes as human readable strings.   -->
+<!-- TODO: Evaluate whether the Blacklight 7+ native advanced -->
+<!--       search might be sufficient enough to retire these  -->
+<!--       custom overrides. -->
+
+<%# Alternate version of facets on form that renders using multi-select.
     Has to copy and paste more code from blacklight than default, making
     it somewhat more fragile. 
-
     Logic taken from facets_helper_behavior.rb, #render_facet_partials and
     #render_facet_limit. 
 %>
 
 <% facets_from_request(facet_field_names).each do |display_facet| %>
     <% if should_render_facet?(display_facet) %>
-        <div class="form-group advanced-search-facet">
-            <%= label_tag display_facet.name.parameterize, class: "col-sm-3 control-label", id: "#{display_facet.name.parameterize}_label"  do %>
+        <div class="form-group row advanced-search-facet">
+            <%= label_tag display_facet.name.parameterize,
+                  class: 'col-12 col-sm-6 col-md-3 col-form-label font-weight-bold',
+                  id: "#{display_facet.name.parameterize}_label" do %>
                 <%= facet_field_label(display_facet.name) %>
-            <% end %>            
+            <% end %>
 
-            <div class="col-sm-9">
-                <%= content_tag(:select, :multiple => true,                     
-                    :name   => "f_inclusive[#{display_facet.name}][]",
-                    :id     => display_facet.name.parameterize,
-                    :class  => "form-control advanced-search-facet-select") do %>
+            <div class="col-12 col-sm-6 col-md-9">
+                <%= content_tag(:select,
+                      multiple: true,
+                      name: "f_inclusive[#{display_facet.name}][]",
+                      id: display_facet.name.parameterize,
+                      class: 'form-control custom-select advanced-search-facet-select') do %>
                     <% display_facet.items.each do |facet_item| %>
-                        <%= content_tag :option, :value => facet_item.value, :selected => facet_value_checked?(display_facet.name, facet_item.value) do %>
-                            <%= facet_item.label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
+                      <%= content_tag :option,
+                          value: facet_item.value,
+                          selected: facet_value_checked?(display_facet.name, facet_item.value) do %>
+                        <% if display_facet.name == TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s %>
+                          <%= location_filter_display(facet_item.label) %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
+                        <% else %>
+                          <%= facet_item.label %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
                         <% end %>
+                      <% end %>
                     <% end %>
                 <% end %>
             </div>
-        </div>        
+        </div>
     <% end %>
 <% end %>

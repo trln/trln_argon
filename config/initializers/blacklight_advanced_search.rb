@@ -6,8 +6,6 @@ module BlacklightAdvancedSearch
     # rubocop:disable ClassAndModuleChildren
     module ParsingNesting::Tree
       class Node
-        # rubocop:disable MethodLength
-        # rubocop:disable AbcSize
         def build_nested_query(embeddables, solr_params = {}, options = {})
           options = { always_nested: true,
                       force_deftype: 'dismax' }.merge(options)

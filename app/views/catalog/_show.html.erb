@@ -1,0 +1,10 @@
+<% other_details_component = TrlnArgon::DocumentMetadataComponent.new(
+     # fields: show_presenter(document).field_presenters,
+     fields: document_presenter(document).field_presenters,
+     show: true) %>
+
+<%# default partial to display solr document fields in catalog show view -%>
+<div id="other-details" class="<%= show_other_details_class %>" aria-labelledby="otherDetailsLabel">
+    <h2 id="otherDetailsLabel"><%= t('trln_argon.show.heading.metadata') %></h2>
+    <%= render(other_details_component) %>
+</div>
