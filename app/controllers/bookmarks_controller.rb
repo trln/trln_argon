@@ -1,6 +1,7 @@
 class BookmarksController < CatalogController
   include Blacklight::Bookmarks
   include TrlnArgon::BookmarksControllerBehavior
+  include BookmarksHelper
 
   # blacklight 7 will try, in default configuration to POST any request
   # which is blocked by our Solr configuration, so we need to ensure
@@ -10,7 +11,7 @@ class BookmarksController < CatalogController
     @bookmarks = token_or_current_or_guest_user.bookmarks
     bookmark_ids = @bookmarks.collect { |b| b.document_id.to_s }
     query_params = {
-      q: "id:(#{bookmark_ids.join(' OR ')})",
+      q: bookmarks_query(bookmark_ids),
       defType: 'lucene',
       rows: bookmark_ids.count
     }
