@@ -39,7 +39,7 @@ a:hover, a:focus {
 
 #facets div.facet-limit-active {
   border-color: $secondary-color !important;
-  
+
   h3.card-header {
     background-color: $secondary-color !important;
     border-color: $secondary-color !important;
@@ -71,7 +71,7 @@ a:hover, a:focus {
     border-color: $primary-color;
 }
 
-#facet-location_hierarchy_f a.remove, 
+#facet-location_hierarchy_f a.remove,
 #facet-lcc_callnum_classification_f a.remove {
   color: $primary-color;
   :hover {
@@ -90,7 +90,7 @@ a:hover, a:focus {
      color: $primary-color;
     :hover {
       color: $not-available-color;
-    } 
+    }
   }
 }
 
@@ -684,7 +684,7 @@ div.facet-content { // non-hierarcical facets
   }
 }
 
-#facet-location_hierarchy_f, 
+#facet-location_hierarchy_f,
 #facet-lcc_callnum_classification_f { // hierarcical facets
 
   ul {
@@ -894,6 +894,16 @@ ul.facet-hierarchy li.h-node.twiddle-open:last-child {
     &.toggle-trln {
       text-align: left;
       margin-left: -2px;
+    }
+
+    .btn-outline-secondary {
+      &:hover,
+      &:not(:disabled):not(.disabled):active,
+      &:focus {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
     }
 
   }
@@ -1269,7 +1279,7 @@ h1, h2, h3, h4, h5 {
   }
 
   .institution-availability {
-    
+
     .item {
       display: flex;
       flex-wrap: wrap;
@@ -1304,7 +1314,7 @@ h1, h2, h3, h4, h5 {
         margin-bottom: 0;
       }
     }
-    
+
     .item:nth-child(n+1):before {
       margin: 0 0 0 0;
     }

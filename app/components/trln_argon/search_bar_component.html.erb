@@ -10,7 +10,7 @@
           <%= select_tag(:search_field,
                        options_for_select(@search_fields, h(@search_field)),
                        #title: scoped_t('search_field.title'),
-                       data: {style: "btn-default search-select"},
+                       data: {style: "btn-outline-secondary search-select"},
                        id: "#{@prefix}search_field",
                        class: "search_field selectpicker") %>
       <% elsif @search_fields.length == 1 %>
