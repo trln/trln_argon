@@ -7,12 +7,13 @@ class BookmarksController < CatalogController
   # which is blocked by our Solr configuration, so we need to ensure
   # our requests are done via GET
   # rubocop:disable Layout/LineLength
+  # rubocop:disable Metrics/MethodLength
   def index
     @bookmarks = token_or_current_or_guest_user.bookmarks
     bookmark_ids = @bookmarks.collect { |b| b.document_id.to_s }
-    
+
     if bookmark_ids.empty?
-      @response = Blacklight::Solr::Response.new({},{})
+      @response = Blacklight::Solr::Response.new({}, {})
       @document_list = []
     else
       query_params = {
@@ -35,4 +36,5 @@ class BookmarksController < CatalogController
     end
   end
   # rubocop:enable Layout/LineLength
+  # rubocop:enable Metrics/MethodLength
 end
