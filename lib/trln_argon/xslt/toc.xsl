@@ -5,8 +5,8 @@
         encoding='utf-8' />
         <xsl:param name="copyright">
          <div class="syndetics-copyright">
-          Content provided by Syndetic Solutions, Inc. 
-          <a href='https://syndetics.com/termsofuse.htm' rel='nofollow noopener noreferrer'>Terms of Use</a>
+          Content provided by Syndetic Solutions, Inc.
+          <a href='https://syndetics.com/termsofuse.html' rel='nofollow noopener noreferrer'>Terms of Use</a>
         </div>
         </xsl:param>
 

@@ -32,7 +32,7 @@ module TrlnArgon
     COPYRIGHT = %(
       <div class='syndetics-copyright'>
       Content provided by Syndetic Solutions, Inc.
-      <a href='http://syndetics.com/termsofuse.htm'
+      <a href='http://syndetics.com/termsofuse.html'
        rel='nofollow noopener noreferrer'>Terms of Use</a>
        </div>).freeze
 
