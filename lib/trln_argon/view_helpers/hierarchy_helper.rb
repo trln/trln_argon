@@ -29,7 +29,7 @@ module TrlnArgon
       #        (and with :partial => 'blacklight/hierarchy/facet_hierarchy')
       # @return [String] html for the facet tree
       def render_hierarchy(bl_facet_field, delim = '_')
-        Deprecation.silence(Blacklight::HierarchyHelper) do 
+        Deprecation.silence(Blacklight::HierarchyHelper) do
           field_name = bl_facet_field.field
 
           # NOTE CHANGE: Fetch the sort setting from the facet field config.
