@@ -29,24 +29,26 @@ module TrlnArgon
       #        (and with :partial => 'blacklight/hierarchy/facet_hierarchy')
       # @return [String] html for the facet tree
       def render_hierarchy(bl_facet_field, delim = '_')
-        field_name = bl_facet_field.field
+        Deprecation.silence(Blacklight::HierarchyHelper) do 
+          field_name = bl_facet_field.field
 
-        # NOTE CHANGE: Fetch the sort setting from the facet field config.
-        sort = bl_facet_field.sort || 'index'
+          # NOTE CHANGE: Fetch the sort setting from the facet field config.
+          sort = bl_facet_field.sort || 'index'
 
-        prefix = field_name.gsub("#{delim}#{field_name.split(/#{delim}/).last}", '')
-        facet_tree_for_prefix = facet_tree(prefix)
-        tree = facet_tree_for_prefix ? facet_tree_for_prefix[field_name] : nil
+          prefix = field_name.gsub("#{delim}#{field_name.split(/#{delim}/).last}", '')
+          facet_tree_for_prefix = facet_tree(prefix)
+          tree = facet_tree_for_prefix ? facet_tree_for_prefix[field_name] : nil
 
-        return '' unless tree
+          return '' unless tree
 
-        # NOTE CHANGE: Apply the configured sort option to the first node values.
-        tree = hierarchy_node_sort(tree, sort, field_name)
+          # NOTE CHANGE: Apply the configured sort option to the first node values.
+          tree = hierarchy_node_sort(tree, sort, field_name)
 
-        # NOTE CHANGE: Do not sort keys to preserve current sort.
-        tree.keys.collect do |key|
-          render_facet_hierarchy_item(field_name, tree[key], key, sort)
-        end.join("\n").html_safe
+          # NOTE CHANGE: Do not sort keys to preserve current sort.
+          tree.keys.collect do |key|
+            render_facet_hierarchy_item(field_name, tree[key], key, sort)
+          end.join("\n").html_safe
+        end
       end
 
       def render_facet_hierarchy_item(field_name, data, key, sort)
