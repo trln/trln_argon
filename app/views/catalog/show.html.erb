@@ -5,4 +5,6 @@
   </div>
 <% end %>
 
+<%= render(Blacklight::SearchContextComponent.new(search_context: @search_context, search_session: search_session)) if search_session['document_id'] == @document.id %>
+
 <%= render_document_main_content_partial %>
