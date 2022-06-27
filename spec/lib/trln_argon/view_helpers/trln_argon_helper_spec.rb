@@ -139,7 +139,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#add_icon_to_action_label' do
     let(:tool_with_label) do
       Blacklight::Configuration::ToolConfig.new(
-        icon: 'glyphicon-download-alt',
+        icon: 'fa fa-download',
         if: :render_ris_action?,
         modal: false,
         path: :ris_path
@@ -158,7 +158,7 @@ describe TrlnArgonHelper, type: :helper do
     context 'the configuration provides an icon' do
       it 'adds an icon to the document action label' do
         expect(helper.add_icon_to_action_label(tool_with_label)).to eq(
-          '<i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i> <li>Action Label</li>'
+          '<i class="fa fa-download" aria-hidden="true"></i> <li>Action Label</li>'
         )
       end
     end

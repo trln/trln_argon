@@ -77,7 +77,7 @@ module TrlnArgon
                                       path: :email_path,
                                       validator: :validate_email_params)
         config.add_show_tools_partial(:sms,
-                                      icon: 'fa fa-sms',
+                                      icon: 'fa fa-commenting',
                                       if: :render_sms_action?,
                                       callback: :sms_action,
                                       path: :sms_path,
@@ -91,13 +91,13 @@ module TrlnArgon
                                       modal: false,
                                       path: :ris_path)
         config.add_show_tools_partial(:refworks,
-                                      icon: 'glyphicon-export',
+                                      icon: 'fa fa-list',
                                       if: :render_refworks_action?,
                                       new_window: true,
                                       modal: false,
                                       path: :refworks_path)
         config.add_show_tools_partial(:share_bookmarks,
-                                      icon: 'glyphicon-share',
+                                      icon: 'fa fa-share',
                                       if: :render_sharebookmarks_action?,
                                       new_window: false,
                                       modal: false,
