@@ -643,8 +643,8 @@ module TrlnArgon
         end
       end
 
-      def render_ris_action?(_config, options = {})
-        doc = options[:document] || (options[:document_list] || []).first
+      def render_ris_action?
+        doc = @document || (@document_list || []).first
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
       end
 
@@ -654,8 +654,8 @@ module TrlnArgon
         true if request.path == bookmarks_path
       end
 
-      def render_citation_action?(_config, options = {})
-        docs = [options[:document] || (options[:document_list] || [])].flatten
+      def render_citation_action?
+        docs = [@document || (@document_list || [])].flatten
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
