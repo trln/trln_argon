@@ -1,3 +1,5 @@
+<!-- We override this file to remove the wrapping tag and wrapping classes for the buttons on the bookmarks page in the tools nav. Once this issue https://github.com/projectblacklight/blacklight/issues/2754 is addressed in BL, this file can be removed. -->
+
 <% if render_show_doc_actions_method_from_blacklight? %>
   <%= render(Blacklight::Document::ActionsComponent.new(document: nil, classes: "#{controller_name}Tools", link_classes: '', actions: document_actions(document_list, options: { document: nil }), options: { document_list: @response.documents }, url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h))) %>
 <% else %>
