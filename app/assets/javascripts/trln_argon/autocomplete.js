@@ -5,21 +5,9 @@ Blacklight.onLoad(function() {
 
   $('[data-autocomplete-enabled="true"]').each(function() {
     var $el = $(this);
-    // Intercept native typeahead Tab key functionality re: https://trlnmain.atlassian.net/browse/TD-832
-    $el.on("keydown", function(e) {
-      var code = e.keyCode || e.which;
-      if ( code == 9 ) { // tab key
-          e.preventDefault();
-          $(this).closest('form').find('button[type="submit"]').focus();
-
-          if (e.shiftKey) { // tab + shift
-            $('#search_field').focus();
-          }
-      }
-    });
 
     var sharedData = $("#shared-application-data").data();
-        
+
     // Fetch the configured autocomplete path.
     var suggest_root = $el.data().autocompletePath;
 
@@ -37,10 +25,10 @@ Blacklight.onLoad(function() {
       $('input[type=radio][name=option]').change(function(){
         if ($('input[type=radio][name=option]:checked').attr('id') == "option_trln") {
           local_institution_code = "unc||ncsu||duke||nccu";
-        } 
+        }
       });
-    } else if ($("#search-navbar").length){ 
-      
+    } else if ($("#search-navbar").length){
+
       // ======= Main search ======================
       var suggest_slug = '';
 
