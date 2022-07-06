@@ -168,11 +168,6 @@ nav.navbar.topbar {
   border-color: #ccc;
 }
 
-/*.turbolinks-progress-bar {
-  height: 5px;
-  background-color: $secondary-color;
-}*/
-
 .thumbnail {
     border: none;
     float: right;
@@ -219,10 +214,6 @@ body {
 
 .table-responsive {
   border: none !important;
-}
-
-.input-group {
-    /*display: table-row;*/
 }
 
 .input-group-element {
@@ -307,12 +298,6 @@ body {
 /* =============== */
 /* RESULTS         */
 /* =============== */
-
-// .institution-availability {
-//   .primary-url {
-//     margin-top: 1em;
-//   }
-// }
 
 .primary-url {
   display: inline-block;
@@ -409,12 +394,6 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   display: inline;
 }
 
-#enhanced-data .content p {
-  // font-size: 14px;
-  // margin-bottom: 20px;
-  // line-height: 20px;
-}
-
 .expandable-content-controls .show-control {
   display: none;
   float: right;
@@ -427,10 +406,6 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   margin-bottom: 1.5em;
   max-height: 4.5em;
 }
-
-// .contracted-ul {
-//   max-height: 90px;
-// }
 
 .contracted:after {
   content: "";
@@ -820,12 +795,6 @@ div.facet-content { // non-hierarcical facets
       flex: 1 1 50%;
       margin-right: 2.5%;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 1 1 60%;
-    //   margin-right: 2.5%;
-    // }
-
   }
 
   span.facet-count {
@@ -845,13 +814,6 @@ div.facet-content { // non-hierarcical facets
       text-align: right;
       margin-left: 0;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 0 0 30%;
-    //   text-align: right;
-    //   margin-left: 0;
-    // }
-
   }
 
   // make open twiddles pretty
@@ -1187,8 +1149,6 @@ h1, h2, h3, h4, h5 {
 #documents {
   div.items h3,
   div.availability h3 {
-    /*font-size: 14px;
-    font-weight: bolder;*/
     font-size: 1.2em;
     color: #707070;
     font-weight: 500;
@@ -1368,9 +1328,6 @@ h1, h2, h3, h4, h5 {
   .location.loc-broad,
   .location.loc-narrow  {
     display: inline;
-    /*font-size: 1.2em;
-    color: #707070;
-    font-weight: 500;*/
   }
 
   .location-header {
@@ -1463,10 +1420,6 @@ h1, h2, h3, h4, h5 {
     font-style: italic;
   }
 
-  .link-type-fulltext {
-    /*color: $secondary-link-color;*/
-  }
-
   .item-available {
     color: $available-color;
   }
@@ -1543,11 +1496,6 @@ h1, h2, h3, h4, h5 {
     /*.item { padding-bottom: 0; }*/
     .location-header ~ .location-header { margin-top: 2.5em; }
   }
-
-  // .institution-availability .primary-url {
-  //   margin-top: 0;
-  // }
-
 }
 
 body.blacklight-trln-index #documents .items {
