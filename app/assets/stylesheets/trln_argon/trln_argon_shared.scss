@@ -99,6 +99,22 @@ a:hover, a:focus {
 /* NAVBAR          */
 /* =============== */
 
+/* fix logo and toggler */
+nav.navbar.topbar {
+  .navbar-logo {
+    background: transparent image_url($institution-logo) no-repeat left;
+    background-size: contain;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+
+  .navbar-brand:nth-of-type(2) {
+    margin: 0;
+  }
+}
+
 .navbar-form {
     margin-left: 0;
     margin-right: 0;
@@ -121,11 +137,6 @@ a:hover, a:focus {
 
 .navbar-static-top {
     border-width: 10px 0 0;
-}
-
-.navbar .navbar-logo {
-  background: transparent image_url($institution-logo) no-repeat top left;
-  background-size: contain;
 }
 
 
@@ -156,11 +167,6 @@ a:hover, a:focus {
 #user-util-collapse {
   border-color: #ccc;
 }
-
-/*.turbolinks-progress-bar {
-  height: 5px;
-  background-color: $secondary-color;
-}*/
 
 .thumbnail {
     border: none;
@@ -208,10 +214,6 @@ body {
 
 .table-responsive {
   border: none !important;
-}
-
-.input-group {
-    /*display: table-row;*/
 }
 
 .input-group-element {
@@ -296,12 +298,6 @@ body {
 /* =============== */
 /* RESULTS         */
 /* =============== */
-
-// .institution-availability {
-//   .primary-url {
-//     margin-top: 1em;
-//   }
-// }
 
 .primary-url {
   display: inline-block;
@@ -398,12 +394,6 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   display: inline;
 }
 
-#enhanced-data .content p {
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 20px;
-}
-
 .expandable-content-controls .show-control {
   display: none;
   float: right;
@@ -413,13 +403,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 .contracted-ul {
   position: relative;
   overflow: hidden;
-  margin-bottom: 1.25em;
-  max-height: 4.25em;
+  margin-bottom: 1.5em;
+  max-height: 4.5em;
 }
-
-// .contracted-ul {
-//   max-height: 90px;
-// }
 
 .contracted:after {
   content: "";
@@ -432,9 +418,21 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   background: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1) 50%);
 }
 
+body.blacklight-catalog-show,
+body.blacklight-trln-show {
+  .contracted:after {
+    width: 50%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    right: 0;
+  }
+}
+
 .location-narrow-group .row.contracted:after {
   background: linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1) 50%);
+  right: 1em;
 }
+
+
 
 .show-document,
 .index-document-metadata {
@@ -797,12 +795,6 @@ div.facet-content { // non-hierarcical facets
       flex: 1 1 50%;
       margin-right: 2.5%;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 1 1 60%;
-    //   margin-right: 2.5%;
-    // }
-
   }
 
   span.facet-count {
@@ -822,13 +814,6 @@ div.facet-content { // non-hierarcical facets
       text-align: right;
       margin-left: 0;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 0 0 30%;
-    //   text-align: right;
-    //   margin-left: 0;
-    // }
-
   }
 
   // make open twiddles pretty
@@ -1164,8 +1149,6 @@ h1, h2, h3, h4, h5 {
 #documents {
   div.items h3,
   div.availability h3 {
-    /*font-size: 14px;
-    font-weight: bolder;*/
     font-size: 1.2em;
     color: #707070;
     font-weight: 500;
@@ -1333,6 +1316,9 @@ h1, h2, h3, h4, h5 {
         margin-bottom: 0;
       }
     }
+    .summary-text-wrapper {
+      padding-right: 1em;
+    }
   }
 
 
@@ -1342,9 +1328,6 @@ h1, h2, h3, h4, h5 {
   .location.loc-broad,
   .location.loc-narrow  {
     display: inline;
-    /*font-size: 1.2em;
-    color: #707070;
-    font-weight: 500;*/
   }
 
   .location-header {
@@ -1437,10 +1420,6 @@ h1, h2, h3, h4, h5 {
     font-style: italic;
   }
 
-  .link-type-fulltext {
-    /*color: $secondary-link-color;*/
-  }
-
   .item-available {
     color: $available-color;
   }
@@ -1517,11 +1496,6 @@ h1, h2, h3, h4, h5 {
     /*.item { padding-bottom: 0; }*/
     .location-header ~ .location-header { margin-top: 2.5em; }
   }
-
-  // .institution-availability .primary-url {
-  //   margin-top: 0;
-  // }
-
 }
 
 body.blacklight-trln-index #documents .items {
