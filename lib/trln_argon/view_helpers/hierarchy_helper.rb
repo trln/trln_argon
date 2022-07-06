@@ -73,10 +73,12 @@ module TrlnArgon
           subul = subset.keys.collect do |subkey|
             render_facet_hierarchy_item(field_name, subset[subkey], subkey, sort)
           end.join('')
-          ul = "<ul>#{subul}</ul>".html_safe
+          # NOTE CHANGE: role="group" for accessibility
+          ul = %(<ul role="group">#{subul}</ul>).html_safe
         end
 
-        %(<li class="#{li_class}">#{li.html_safe}#{ul.html_safe}</li>).html_safe
+        # NOTE CHANGE: role="treeitem" for accessibility
+        %(<li role="treeitem" class="#{li_class}">#{li.html_safe}#{ul.html_safe}</li>).html_safe
       end
 
       def render_selected_qfacet_value(facet_solr_field, item)
