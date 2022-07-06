@@ -12,7 +12,6 @@
 //= require trln_argon/results_count_for_toggle.js
 //= require trln_argon/google_books_preview.js
 //= require trln_argon/fulltext_links.js
-//= require trln_argon/skiplink.js
 //= require trln_argon/force_bootstrap-select_render.js
 //= require trln_argon/advanced_search_scope.js
 //= require trln_argon/bookmark_share.js
