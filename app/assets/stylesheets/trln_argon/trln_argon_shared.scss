@@ -10,18 +10,6 @@ a:hover, a:focus {
     color: $primary-link-color;
 }
 
-#sort-dropdown, #per_page-dropdown {
-    .dropdown-toggle {
-        color: $primary-color;
-    }
-    .dropdown-toggle:hover {
-      color: #fff;
-    }
-    .dropdown-toggle:active, .dropdown-toggle:focus {
-      color: #fff;
-    }
-}
-
 .pagination > li > a, .pagination > li > span {
     color: $primary-link-color;
 }
