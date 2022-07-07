@@ -239,23 +239,12 @@ body {
       padding-top: 2em;
       margin-bottom: .5em;
 
-      .dropdown.bootstrap-select {
-        width: unset;
-        max-width: unset;
-        display: block;
+      .search-field {
+        background-color: #eee;
         flex: 0 0 8em;
-
         @include media-breakpoint-up(md) {
           flex: 0 0 10em;
         }
-      }
-
-      .search-select {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        background: #eee;
-        color: #555;
-        border-right: none;
       }
 
       #q {
@@ -1900,5 +1889,4 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
 .advanced-search {
     display: flex;
     align-items: center;
-    padding-left: 1em;
 }

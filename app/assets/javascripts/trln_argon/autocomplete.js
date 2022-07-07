@@ -207,7 +207,6 @@ Blacklight.onLoad(function() {
     $el.on('typeahead:select', function(ev, data) {
       function switch_selected_field(field) {
         $('select[name=search_field]').val(field);
-        $('.selectpicker').selectpicker('refresh');
       }
 
       if (current_search_field == 'all_fields') {

@@ -4,7 +4,6 @@
 //= require trln_argon/progressive_links.js
 //= require trln_argon/physical_media_facet.js
 //= require bootstrap
-//= require bootstrap-select
 //= require chosen-jquery
 //= require blacklight/hierarchy/hierarchy.js
 //= require trln_argon/location_facet.js
@@ -12,7 +11,6 @@
 //= require trln_argon/results_count_for_toggle.js
 //= require trln_argon/google_books_preview.js
 //= require trln_argon/fulltext_links.js
-//= require trln_argon/force_bootstrap-select_render.js
 //= require trln_argon/advanced_search_scope.js
 //= require trln_argon/bookmark_share.js
 //= require trln_argon/typeahead.bundle.js
