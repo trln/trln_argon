@@ -531,6 +531,23 @@ body.blacklight-trln-show {
     margin-top: 15px;
 }
 
+/* Workaround for BL core's hard-coded facet toggle breakpoint.       */
+/* This is a stopgap solution for Blacklight issue #2733 per TD-1172  */
+/* and should be replaced w/a BL-friendly approach once resolved.     */
+/* https://github.com/projectblacklight/blacklight/issues/2733        */
+
+.facets-toggleable-md {
+  @include media-breakpoint-up(md) {
+    .facets-collapse {
+      display: block !important;
+      width: 100%;
+    }
+
+    .navbar-toggler {
+      display: none;
+    }
+  }
+}
 
 
 /* =============== */
