@@ -37,4 +37,21 @@ class BookmarksController < CatalogController
   end
   # rubocop:enable Layout/LineLength
   # rubocop:enable Metrics/MethodLength
+
+  # Override BL core to query Solr via GET rather than POST
+  # for bookmarks tools, e.g., Cite, Email, SMS. See:
+  # https://github.com/projectblacklight/blacklight/blob/main/app/controllers/concerns/blacklight/bookmarks.rb#L27-L31
+  # https://github.com/projectblacklight/blacklight/blob/main/app/controllers/concerns/blacklight/catalog.rb#L126-L131
+  # See also: lib/trln_argon/controller_override.rb
+  def action_documents
+    @bookmarks = token_or_current_or_guest_user.bookmarks
+    bookmark_ids = @bookmarks.collect { |b| b.document_id.to_s }
+    query_params = {
+      q: bookmarks_query(bookmark_ids),
+      defType: 'lucene',
+      rows: bookmark_ids.count
+    }
+    solr_response = search_service.repository.search(query_params)
+    [solr_response, solr_response.documents]
+  end
 end
