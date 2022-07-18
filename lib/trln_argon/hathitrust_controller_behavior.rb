@@ -70,7 +70,7 @@ module TrlnArgon
          'volumes',
          'brief',
          'json',
-         URI.encode(munge_oclc_number_params)].join('/')
+         URI.encode_www_form_component(munge_oclc_number_params)].join('/')
       end
 
       def munge_oclc_number_params

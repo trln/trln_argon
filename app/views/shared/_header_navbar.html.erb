@@ -1,7 +1,6 @@
 <% inst = TrlnArgon::Engine.configuration.local_institution_code %>
 <% inst_long = t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name") %>
 
-<a href="#content" class="skiplink sr-only sr-only-focusable">Skip to Main Content</a>
 <nav class="navbar navbar-expand-md navbar-light bg-light topbar" role="navigation" aria-label="Masthead">
   <div class="<%= container_classes %>">
     <%= link_to application_name, root_path, class: 'mb-0 navbar-brand navbar-logo' %>
@@ -18,6 +17,13 @@
 
 <div id='search-navbar' class="navbar-search navbar navbar-light bg-light" role="navigation">
   <div class="<%= container_classes %>">
-    <%= render_search_bar  %>
+    <%= render TrlnArgon::SearchBarComponent.new(
+        url: search_action_url,
+        advanced_search_url: search_action_url(action: 'advanced_search'),
+        params: search_state.params_for_search.except(:qt),
+        search_fields: Deprecation.silence(Blacklight::ConfigurationHelperBehavior) { search_fields },
+        autocomplete_path: search_action_path(action: :suggest)
+      )
+%>
   </div>
 </div>

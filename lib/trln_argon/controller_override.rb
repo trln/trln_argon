@@ -77,7 +77,7 @@ module TrlnArgon
                                       path: :email_path,
                                       validator: :validate_email_params)
         config.add_show_tools_partial(:sms,
-                                      icon: 'fa fa-sms',
+                                      icon: 'fa fa-commenting',
                                       if: :render_sms_action?,
                                       callback: :sms_action,
                                       path: :sms_path,
@@ -91,13 +91,13 @@ module TrlnArgon
                                       modal: false,
                                       path: :ris_path)
         config.add_show_tools_partial(:refworks,
-                                      icon: 'glyphicon-export',
+                                      icon: 'fa fa-list',
                                       if: :render_refworks_action?,
                                       new_window: true,
                                       modal: false,
                                       path: :refworks_path)
         config.add_show_tools_partial(:share_bookmarks,
-                                      icon: 'glyphicon-share',
+                                      icon: 'fa fa-share',
                                       if: :render_sharebookmarks_action?,
                                       new_window: false,
                                       modal: false,
@@ -643,8 +643,8 @@ module TrlnArgon
         end
       end
 
-      def render_ris_action?(_config, options = {})
-        doc = options[:document] || (options[:document_list] || []).first
+      def render_ris_action?
+        doc = @document || (@document_list || []).first
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
       end
 
@@ -654,8 +654,8 @@ module TrlnArgon
         true if request.path == bookmarks_path
       end
 
-      def render_citation_action?(_config, options = {})
-        docs = [options[:document] || (options[:document_list] || [])].flatten
+      def render_citation_action?
+        docs = [@document || (@document_list || [])].flatten
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&

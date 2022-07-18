@@ -10,18 +10,6 @@ a:hover, a:focus {
     color: $primary-link-color;
 }
 
-#sort-dropdown, #per_page-dropdown {
-    .dropdown-toggle {
-        color: $primary-color;
-    }
-    .dropdown-toggle:hover {
-      color: #fff;
-    }
-    .dropdown-toggle:active, .dropdown-toggle:focus {
-      color: #fff;
-    }
-}
-
 .pagination > li > a, .pagination > li > span {
     color: $primary-link-color;
 }
@@ -39,7 +27,7 @@ a:hover, a:focus {
 
 #facets div.facet-limit-active {
   border-color: $secondary-color !important;
-  
+
   h3.card-header {
     background-color: $secondary-color !important;
     border-color: $secondary-color !important;
@@ -71,7 +59,7 @@ a:hover, a:focus {
     border-color: $primary-color;
 }
 
-#facet-location_hierarchy_f a.remove, 
+#facet-location_hierarchy_f a.remove,
 #facet-lcc_callnum_classification_f a.remove {
   color: $primary-color;
   :hover {
@@ -90,7 +78,7 @@ a:hover, a:focus {
      color: $primary-color;
     :hover {
       color: $not-available-color;
-    } 
+    }
   }
 }
 
@@ -98,6 +86,22 @@ a:hover, a:focus {
 /* =============== */
 /* NAVBAR          */
 /* =============== */
+
+/* fix logo and toggler */
+nav.navbar.topbar {
+  .navbar-logo {
+    background: transparent image_url($institution-logo) no-repeat left;
+    background-size: contain;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+
+  .navbar-brand:nth-of-type(2) {
+    margin: 0;
+  }
+}
 
 .navbar-form {
     margin-left: 0;
@@ -121,11 +125,6 @@ a:hover, a:focus {
 
 .navbar-static-top {
     border-width: 10px 0 0;
-}
-
-.navbar .navbar-logo {
-  background: transparent image_url($institution-logo) no-repeat top left;
-  background-size: contain;
 }
 
 
@@ -156,11 +155,6 @@ a:hover, a:focus {
 #user-util-collapse {
   border-color: #ccc;
 }
-
-/*.turbolinks-progress-bar {
-  height: 5px;
-  background-color: $secondary-color;
-}*/
 
 .thumbnail {
     border: none;
@@ -210,10 +204,6 @@ body {
   border: none !important;
 }
 
-.input-group {
-    /*display: table-row;*/
-}
-
 .input-group-element {
   display: table-cell;
   padding: 0 1em;
@@ -249,23 +239,12 @@ body {
       padding-top: 2em;
       margin-bottom: .5em;
 
-      .dropdown.bootstrap-select {
-        width: unset;
-        max-width: unset;
-        display: block;
+      .search-field {
+        background-color: #eee;
         flex: 0 0 8em;
-
         @include media-breakpoint-up(md) {
           flex: 0 0 10em;
         }
-      }
-
-      .search-select {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
-        background: #eee;
-        color: #555;
-        border-right: none;
       }
 
       #q {
@@ -296,12 +275,6 @@ body {
 /* =============== */
 /* RESULTS         */
 /* =============== */
-
-// .institution-availability {
-//   .primary-url {
-//     margin-top: 1em;
-//   }
-// }
 
 .primary-url {
   display: inline-block;
@@ -398,12 +371,6 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   display: inline;
 }
 
-#enhanced-data .content p {
-  font-size: 14px;
-  margin-bottom: 20px;
-  line-height: 20px;
-}
-
 .expandable-content-controls .show-control {
   display: none;
   float: right;
@@ -413,13 +380,9 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
 .contracted-ul {
   position: relative;
   overflow: hidden;
-  margin-bottom: 1.25em;
-  max-height: 4.25em;
+  margin-bottom: 1.5em;
+  max-height: 4.5em;
 }
-
-// .contracted-ul {
-//   max-height: 90px;
-// }
 
 .contracted:after {
   content: "";
@@ -432,9 +395,21 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
   background: linear-gradient(to right, rgba(245, 245, 245, 0), rgba(245, 245, 245, 1) 50%);
 }
 
+body.blacklight-catalog-show,
+body.blacklight-trln-show {
+  .contracted:after {
+    width: 50%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    right: 0;
+  }
+}
+
 .location-narrow-group .row.contracted:after {
   background: linear-gradient(to right, rgba(237, 237, 237, 0), rgba(237, 237, 237, 1) 50%);
+  right: 1em;
 }
+
+
 
 .show-document,
 .index-document-metadata {
@@ -556,6 +531,23 @@ dd[aria-expanded=true] .expandable-content-controls .show-control.less {
     margin-top: 15px;
 }
 
+/* Workaround for BL core's hard-coded facet toggle breakpoint.       */
+/* This is a stopgap solution for Blacklight issue #2733 per TD-1172  */
+/* and should be replaced w/a BL-friendly approach once resolved.     */
+/* https://github.com/projectblacklight/blacklight/issues/2733        */
+
+.facets-toggleable-md {
+  @include media-breakpoint-up(md) {
+    .facets-collapse {
+      display: block !important;
+      width: 100%;
+    }
+
+    .navbar-toggler {
+      display: none;
+    }
+  }
+}
 
 
 /* =============== */
@@ -684,7 +676,7 @@ div.facet-content { // non-hierarcical facets
   }
 }
 
-#facet-location_hierarchy_f, 
+#facet-location_hierarchy_f,
 #facet-lcc_callnum_classification_f { // hierarcical facets
 
   ul {
@@ -797,12 +789,6 @@ div.facet-content { // non-hierarcical facets
       flex: 1 1 50%;
       margin-right: 2.5%;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 1 1 60%;
-    //   margin-right: 2.5%;
-    // }
-
   }
 
   span.facet-count {
@@ -822,13 +808,6 @@ div.facet-content { // non-hierarcical facets
       text-align: right;
       margin-left: 0;
     }
-
-    // @include media-breakpoint-up(xxl) {
-    //   flex: 0 0 30%;
-    //   text-align: right;
-    //   margin-left: 0;
-    // }
-
   }
 
   // make open twiddles pretty
@@ -894,6 +873,16 @@ ul.facet-hierarchy li.h-node.twiddle-open:last-child {
     &.toggle-trln {
       text-align: left;
       margin-left: -2px;
+    }
+
+    .btn-outline-secondary {
+      &:hover,
+      &:not(:disabled):not(.disabled):active,
+      &:focus {
+        color: #333;
+        background-color: #e6e6e6;
+        border-color: #adadad;
+      }
     }
 
   }
@@ -1154,8 +1143,6 @@ h1, h2, h3, h4, h5 {
 #documents {
   div.items h3,
   div.availability h3 {
-    /*font-size: 14px;
-    font-weight: bolder;*/
     font-size: 1.2em;
     color: #707070;
     font-weight: 500;
@@ -1269,7 +1256,7 @@ h1, h2, h3, h4, h5 {
   }
 
   .institution-availability {
-    
+
     .item {
       display: flex;
       flex-wrap: wrap;
@@ -1304,7 +1291,7 @@ h1, h2, h3, h4, h5 {
         margin-bottom: 0;
       }
     }
-    
+
     .item:nth-child(n+1):before {
       margin: 0 0 0 0;
     }
@@ -1323,6 +1310,9 @@ h1, h2, h3, h4, h5 {
         margin-bottom: 0;
       }
     }
+    .summary-text-wrapper {
+      padding-right: 1em;
+    }
   }
 
 
@@ -1332,9 +1322,6 @@ h1, h2, h3, h4, h5 {
   .location.loc-broad,
   .location.loc-narrow  {
     display: inline;
-    /*font-size: 1.2em;
-    color: #707070;
-    font-weight: 500;*/
   }
 
   .location-header {
@@ -1427,10 +1414,6 @@ h1, h2, h3, h4, h5 {
     font-style: italic;
   }
 
-  .link-type-fulltext {
-    /*color: $secondary-link-color;*/
-  }
-
   .item-available {
     color: $available-color;
   }
@@ -1507,11 +1490,6 @@ h1, h2, h3, h4, h5 {
     /*.item { padding-bottom: 0; }*/
     .location-header ~ .location-header { margin-top: 2.5em; }
   }
-
-  // .institution-availability .primary-url {
-  //   margin-top: 0;
-  // }
-
 }
 
 body.blacklight-trln-index #documents .items {
@@ -1887,11 +1865,6 @@ h2.local-filter-heading  {
   color: #767676;
 }
 
-.skiplink {
-  padding: 0.5em;
-}
-
-
 /* ================ */
 /* HOLDINGS         */
 /* ================ */
@@ -1933,5 +1906,4 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
 .advanced-search {
     display: flex;
     align-items: center;
-    padding-left: 1em;
 }

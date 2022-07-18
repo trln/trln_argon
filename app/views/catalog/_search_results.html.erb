@@ -1,24 +1,30 @@
-<h2 class="sr-only top-content-title"><%= t('blacklight.search.search_results_header') %></h2>
-
-<% @page_title = t('blacklight.search.page_title.title', :constraints => render_search_to_page_title(params), :application_name => application_name) %>
+<% @page_title = t('blacklight.search.page_title.title', constraints: render_search_to_page_title(params), application_name: application_name) %>
 
 <% content_for(:head) do -%>
-  <%= render_opensearch_response_metadata %>
+  <%= render 'catalog/opensearch_response_metadata', response: @response %>
   <%= rss_feed_link_tag %>
   <%= atom_feed_link_tag %>
   <%= json_api_link_tag %>
 <% end %>
 
+<% content_for(:skip_links) do -%>
+    <%= link_to t('blacklight.skip_links.first_result'), '#documents', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
+<% end %>
+
+<% content_for(:container_header) do -%>
+  <h1 class="sr-only visually-hidden top-content-title"><%= t('blacklight.search.header') %></h1>
+<% end %>
+
 <%= render 'search_header' %>
 
-<h2 class="sr-only" id="searchResultsLabel"><%= t('blacklight.search.search_results') %></h2>
+<h2 class="sr-only visually-hidden" id="searchResultsLabel"><%= t('blacklight.search.search_results') %></h2>
 
 <%- if @response.empty? %>
   <%= render "zero_results" %>
 <%- elsif render_grouped_response? %>
-  <%= render_grouped_document_index %>
+  <%= Deprecation.silence(Blacklight::RenderPartialsHelperBehavior) { render_grouped_document_index } %>
 <%- else %>
-  <%= render_document_index %>
+  <%= render_document_index @response.documents %>
 <%- end %>
 
 <%= render 'results_pagination' %>

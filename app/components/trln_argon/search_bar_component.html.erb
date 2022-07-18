@@ -10,9 +10,8 @@
           <%= select_tag(:search_field,
                        options_for_select(@search_fields, h(@search_field)),
                        #title: scoped_t('search_field.title'),
-                       data: {style: "btn-default search-select"},
                        id: "#{@prefix}search_field",
-                       class: "search_field selectpicker") %>
+                       class: "custom-select form-select search-field") %>
       <% elsif @search_fields.length == 1 %>
         <%= hidden_field_tag :search_field, @search_fields.first.last %>
       <% end %>
@@ -30,7 +29,7 @@
       </span>
     </div>
 
-    <% if presenter.advanced_search_enabled? %>
+    <% if advanced_search_enabled? %>
       <div class="advanced-search">
         <%= link_to t('blacklight.advanced_search.more_options'), @advanced_search_url, class: 'advanced_search'%>
       </div>

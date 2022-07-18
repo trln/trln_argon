@@ -131,7 +131,7 @@ module TrlnArgon
 
       def add_icon_to_action_label(document_action_config)
         if document_action_config.key?(:icon)
-          content_tag(:i, '', class: "glyphicon #{document_action_config[:icon]}", 'aria-hidden' => 'true') + ' ' +
+          content_tag(:i, '', class: (document_action_config[:icon]).to_s, 'aria-hidden' => 'true') + ' ' +
             document_action_label(document_action_config.key, document_action_config).html_safe
         else
           document_action_label(document_action_config.key, document_action_config).html_safe

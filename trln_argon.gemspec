@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   s.add_dependency 'rails', '~> 6'
-  s.add_dependency 'blacklight', '~> 7.24.0'
+  s.add_dependency 'blacklight', '~> 7.0'
   s.add_dependency 'blacklight_advanced_search', '~> 7'
   s.add_dependency 'blacklight-hierarchy', '~> 4'
   s.add_dependency 'blacklight_range_limit', '~> 7'
@@ -28,7 +28,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'library_stdnums', '~> 1.6'
   s.add_dependency 'openurl', '~>1.0'
   s.add_dependency 'font-awesome-rails', '~> 4.7'
-  s.add_dependency 'bootstrap-select-rails', '~> 1.12'
   s.add_dependency 'chosen-rails', '~> 1.10'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
