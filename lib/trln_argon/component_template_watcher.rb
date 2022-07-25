@@ -6,7 +6,7 @@ module TrlnArgon
 
     def initialize(base_watch_dir = File.expand_path('../..', __dir__))
       @gem_base = base_watch_dir
-      @watch_paths = ENV.fetch('BLACKLIGHT_COMPONENT_DIRS', 'app/components/blacklight').split(':').map(&:strip) 
+      @watch_paths = ENV.fetch('BLACKLIGHT_COMPONENT_DIRS', 'app/components/blacklight').split(':').map(&:strip)
     end
 
     # returns an array of listeners on the watch paths
