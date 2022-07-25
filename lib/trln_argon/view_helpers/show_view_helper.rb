@@ -16,6 +16,14 @@ module TrlnArgon
       #   end
       # end
 
+      def startover_button_class
+        'catalog_startOverLink btn btn-primary'
+      end
+
+      def back_to_search_button_class
+        'btn btn-outline-secondary'
+      end
+
       def show_class
         'col-md-12 show-document'
       end
