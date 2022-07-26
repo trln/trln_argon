@@ -28,6 +28,14 @@ namespace :trln_argon do
     utils.install_blacklight_asset_path
   end
 
+  desc('Copy overridden Blacklight::Component templates into application directory')
+  task(:copy_viewcomponent_templates) do
+    require 'trln_argon'
+    utils = TrlnArgon::Utilities.new
+    results = utils.find_view_component_template_overrides
+    puts results
+  end
+
   namespace :solr do
     require 'trln_argon/field'
     require 'trln_argon/fields'

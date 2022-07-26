@@ -1,3 +1,5 @@
+require 'find'
+
 module TrlnArgon
   # Utility classes for use outside of a running application
   class Utilities < Thor::Group
@@ -49,5 +51,16 @@ module TrlnArgon
       create_file 'app/assets/javascripts/blacklight/blacklight.js', inserts.join("\n")
     end
     # rubocop:enable Metrics/MethodLength
+
+    def find_view_component_template_overrides(srcdir = Dir.getwd)
+      %w[app/components/blacklight].each_with_object([]) do |dir, acc|
+        pth = File.join(srcdir, dir)
+        warn(" ====== > #{pth}")
+        next unless File.directory?(pth)
+        Find.find(pth) do |f|
+          acc << { full: f, partial: f[srcdir.length + 1..] } if f.end_with?('.html.erb')
+        end
+      end
+    end
   end
 end

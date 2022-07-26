@@ -1,7 +1,7 @@
 <% if current_search_session %>
   <div class="float-right search-widgets">
-  	<%= render(TrlnArgon::StartOverButtonComponent.new(classes: 'catalog_startOverLink btn btn-primary')) %>
-    <%= link_back_to_catalog class: 'btn btn-outline-secondary' %>
+  	<%= render(TrlnArgon::StartOverButtonComponent.new(classes: startover_button_class)) %>
+    <%= link_back_to_catalog(class: back_to_search_button_class)%>
   </div>
 <% end %>
 

@@ -9,5 +9,6 @@ class DefaultLocalSearchBuilder < SearchBuilder
                                      author_boost
                                      subjects_boost
                                      add_document_ids_query
+                                     facetize_advanced_search_fields
                                      add_solr_debug]
 end

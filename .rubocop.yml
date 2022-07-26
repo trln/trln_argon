@@ -18,7 +18,7 @@ AllCops:
     - 'lib/trln_argon/argon_search_builder/add_query_to_solr.rb'
     - 'lib/generators/trln_argon/remove_solr_marc_generator.rb'
 
-Documentation:
+Style/Documentation:
   Enabled: false
 
 Metrics/AbcSize:

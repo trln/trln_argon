@@ -1,0 +1,23 @@
+<!-- NOTE: Override of BL Advanced Search partial so that we can -->
+<!--       render location codes as human readable strings. See: -->
+<!-- https://github.com/projectblacklight/blacklight_advanced_search/blob/v7.0.0/app/views/blacklight_advanced_search/_facet_limit.html.erb -->
+
+<div class="advanced_facet_limit">
+  <div class="inclusive_or card card-body bg-light mb-3">
+    <h5>Any of:</h5>
+    <ul class="list-unstyled facet-values">
+    <% advanced_query.filters[facet_field.key].each do |value| %>
+      <li>
+        <span class="facet-label">
+        <span class='selected'><%= custom_facet_value(facet_field, value) %>
+          <%= link_to(remove_advanced_facet_param(facet_field.key, value, params), :class => "remove", :rel => "nofollow") do %>
+              <span class="remove-icon" aria-hidden="true">✖</span><span class="sr-only visually-hidden">[remove]</span>
+          <% end %>
+        </span>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+  <%= render_facet_limit display_facet, :layout => nil, :partial => advanced_search_facet_partial_name(display_facet) %>
+</div>
+

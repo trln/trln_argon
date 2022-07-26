@@ -195,5 +195,24 @@ module TrlnArgon
         "\n  include TrlnArgon::User\n"
       end
     end
+
+    # Blacklight 7.25.1 and higher allow overriding viewcomponent
+    # templates, but only for applications, not engines; this
+    # copies any overridden template components into the application
+    def copy_blacklight_component_templates
+      util = TrlnArgon::Utilities.new
+      search_path = File.expand_path('../../..', __dir__)
+      util.find_view_component_template_overrides(search_path).each do |f|
+        dest = File.join(destination_root, f[:partial])
+        if File.exist?(dest)
+          puts "Not overwriting #{dest} as it already exists"
+        else
+          puts "Ensure #{File.dirname(dest)}"
+          FileUtils.mkdir_p(File.dirname(dest))
+          puts "Copying #{f[:full]} to #{dest}"
+          FileUtils.copy_file(f[:full], dest)
+        end
+      end
+    end
   end
 end
