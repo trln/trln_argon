@@ -9,11 +9,7 @@
     <% advanced_query.filters[facet_field.key].each do |value| %>
       <li>
         <span class="facet-label">
-          <% if facet_field.key == TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s %>
-            <span class="selected"><%= location_filter_display(h(value)) %></span>
-          <% else %>
-            <span class="selected"><%= h(value) %></span>
-          <% end %>
+        <span class='selected'><%= custom_facet_value(facet_field, value) %>
           <%= link_to(remove_advanced_facet_param(facet_field.key, value, params), :class => "remove", :rel => "nofollow") do %>
               <span class="remove-icon" aria-hidden="true">✖</span><span class="sr-only visually-hidden">[remove]</span>
           <% end %>
