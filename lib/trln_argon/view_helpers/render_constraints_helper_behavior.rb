@@ -1,7 +1,6 @@
 module TrlnArgon
   module ViewHelpers
     module RenderConstraintsHelperBehavior
-      
       include BlacklightAdvancedSearch::RenderConstraintsOverride
 
       # handles a special case only in TRLN
