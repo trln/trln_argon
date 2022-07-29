@@ -2,7 +2,7 @@
 
 <!-- <div class=""> -->
 
-  <div class="<%= location_narrow_group_class %>">
+  <div class="<%= location_narrow_group_class %>" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
 
     <div class="row expandable-content">
 
@@ -33,7 +33,7 @@
               <dd>
 
                 <div class="summary-text-wrapper">
-                    <span class="summary-text"><%= h['summary'].gsub(' ', '&nbsp;').html_safe %></span>
+                    <span class="summary-text"><%= h['summary'].html_safe %></span>
                 </div>
 
               </dd>
