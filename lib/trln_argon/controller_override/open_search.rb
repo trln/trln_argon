@@ -30,7 +30,7 @@ module TrlnArgon
           if q.length < TrlnArgon::Engine.configuration.open_search_q_min_length.to_i
             []
           else
-            get_opensearch_response
+            search_service.opensearch_response
           end
         end
       end
