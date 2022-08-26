@@ -20,7 +20,7 @@ module TrlnArgon
     def initialize(options = {})
       @repo_base = options.fetch(:repo_base, 'config/mappings')
       @repo_dir = File.join(@repo_base, REPO_NAME)
-      @branch = options[:branch] || 'master'
+      @branch = options[:branch] || 'main'
       begin
         @url = options[:git_url] || ::Rails.configuration.code_mappings[:git_url]
       rescue NoMethodError
