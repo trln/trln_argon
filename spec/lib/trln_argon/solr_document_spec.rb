@@ -393,7 +393,7 @@ describe TrlnArgon::SolrDocument do
 
     it 'returns the proxied link for the the local institution' do
       expect(solr_document.shared_fulltext_urls).to(
-        eq([{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+        eq([{ href: 'https://login.libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
               type: 'fulltext',
               text: 'Law and contemporary problems, v. 63, no. 1-2',
               note: '' }])
@@ -418,7 +418,7 @@ describe TrlnArgon::SolrDocument do
                         type: 'fulltext',
                         text: 'Law and contemporary problems, v. 63, no. 1-2',
                         note: '' }],
-           'unc' => [{ href: 'http://libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
+           'unc' => [{ href: 'https://login.libproxy.lib.unc.edu/login?url=http://www.law.duke.edu/journals/lcp/',
                        type: 'fulltext',
                        text: 'Law and contemporary problems, v. 63, no. 1-2',
                        note: '' }])

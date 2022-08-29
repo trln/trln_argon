@@ -1,6 +1,5 @@
 module TrlnArgon
   class MetadataHeaderFieldLayoutComponent < Blacklight::MetadataFieldLayoutComponent
-    renders_one :value
 
     # rubocop:disable Style/RedundantParentheses
     def render?
