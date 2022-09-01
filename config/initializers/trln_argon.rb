@@ -29,7 +29,7 @@ TrlnArgon::Engine.configure do |config|
 
   config.code_mappings = {
     git_url: 'https://github.com/trln/argon_code_mappings',
-    git_branch: 'master'
+    git_branch: 'main'
   }
 
   git_fetcher = TrlnArgon::MappingsGitFetcher.new(
