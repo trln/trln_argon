@@ -17,12 +17,25 @@ module TrlnArgon
 
     REPO_NAME = 'argon_mappings'.freeze
 
+    DEFAULT_BRANCHES = %w[main master]
+
     def initialize(options = {})
       @repo_base = options.fetch(:repo_base, 'config/mappings')
       @repo_dir = File.join(@repo_base, REPO_NAME)
-      @branch = options[:branch] || 'master'
       begin
         @url = options[:git_url] || ::Rails.configuration.code_mappings[:git_url]
+        remote_branches = Git.ls_remote(@url)['branches'].keys
+        if options[:branch]
+          logger.info("Using '#{options[:branch]}' branch for mappings")
+          @branch = options[:branch]
+        else
+          @branch = DEFAULT_BRANCHES.find { |b| remote_branches.include?(b) }
+        end
+
+        unless remote_branches.include?(@branch)
+          logger.error("The repository at #{@url} does not contain a branch named '#{@branch}: we only found #{remote_branches}")
+        end
+
       rescue NoMethodError
         @url = GIT_URL
         logger.error('Unable to find configuration key `mappings_git_url`')
@@ -35,27 +48,34 @@ module TrlnArgon
     def clone
       logger.info("Initial clone of code mappings from #{@url} to #{@repo_base}")
       @git = Git.clone(@url, REPO_NAME, path: @repo_base)
+      @git.checkout(@branch)
     end
-
+    
+    # refreshes the contents of the repository from origin;
+    # has checks to short circuit this if we're pulling too often
+    # and not changing branches.
     def refresh
       if File.directory?(File.join(@repo_dir, '.git'))
-        @git ||= Git.init(@repo_dir)
-
-        logger.info("Repository #{@url} has already been cloned")
+        logger.debug("Repository #{@repo_dir} appears to be a .git repo")
+        @git ||= Git.open(@repo_dir)
 
         head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
 
+        # if we're not changing branches and we're within 2 minutes
+        # of our last changes, don't bother pulling new ones.
+        # Otherwise: pull down changes
         do_pull = if File.exist?(head_fetch_file)
-                    File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
+                    File.stat(head_fetch_file).mtime < (Time.now - 2.minutes) && @git.current_branch == @branch
                   else
                     true
                   end
 
         if do_pull
-          logger.info("Pulling changes from #{@url}")
+          logger.info("Pulling changes from #{@url}/#{@branch} to #{@repo_dir}")
           @git.pull('origin', @branch)
+          @git.checkout(@branch)
         else
-          logger.warn("Not pulling changes from #{@url} because it was updated in the last 2 minutes")
+          logger.debug("Not pulling changes from #{@url} because it was updated in the last 2 minutes")
         end
       else
         clone
@@ -105,12 +125,10 @@ module TrlnArgon
     end
 
     def reload!
-      logger.info("Reloading code mappings from #{@directory}")
       @mappings = load
     end
 
     def load
-      logger.info('load() called on mappings')
       mappings = {}
       Dir.foreach(@directory) do |dir_entry|
         path = File.expand_path(File.join(@directory, dir_entry))
@@ -174,12 +192,11 @@ module TrlnArgon
     def initialize
       if Rails.env == 'development'
         @dev_reload_file = File.join(Rails.root, 'tmp', 'reload-code-mappings')
-        logger.info(%q(development mode -- argon code mappings loaded at
-startup and when #{@dev_reload_file} is seen.))
+        logger.info("development mode -- argon code mappings loaded at
+startup and when #{@dev_reload_file} exists.")
       end
 
       reload
-      lookups
     end
 
     # Refreshes mappings from git and reloads
@@ -195,20 +212,17 @@ startup and when #{@dev_reload_file} is seen.))
     end
 
     def check_cache
-      if Rails.env == 'development'
-        if File.exist?(@dev_reload_file)
-          logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
-          @lookups = nil
-          File.unlink(@dev_reload_file)
-          logger.info(%q(Removed #{@dev_reload_file}, use
-'bundle exec rake trln_argon:reload_code_mappings if you want to
-reload mappings again))
-        end
-        return true
+      # in dev mode, allow for expiring the cache via external
+      # command
+      if Rails.env == 'development' && File.exist?(dev_reload_file)
+        logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
+        @lookups = nil
+        File.unlink(@dev_reload_file)
+        logger.info("Removed #{@dev_reload_file}, use\n\nbundle exec rake trln_argon:reload_code_mappings\n\nif you want to reload mappings again")
       end
 
       Rails.cache.fetch(CACHE_KEY, expires_in: 24.hours) do |_|
-        logger.info('Standard cache period for code mappings expired')
+        logger.info('Location code mappings not found in cache, reloading')
         @lookups = nil # .reload! if @lookups
         Time.now.to_s
       end

@@ -1,12 +1,5 @@
 # TRLN Argon Rails Engine
 
-## THIS REPRESENTS WORK IN PROGRESS
-
-We aim to keep this information up to date but the application is changing.
-
-Ask in the Slack channel if anything is not working as documented here.
-
-
 The TRLN Argon Rails Engine provides additional templates, styles, search
 builder behaviors, catalog controller overrides, and other features to
 bootstrap a Blacklight catalog for the TRLN shared catalog index.
@@ -150,11 +143,11 @@ another git repository inside what might be the git repository containing your
 application, you can set `ARGON_CODE_MAPPINGS_DIR` (in `local_env.yml`, see
 below) to an appropriate value.
 
-When running in production, the lookups generated from these files are loaded at application startup and
-reloaded every 24 hours (which allows your application to pick up changes
-coming in from other institutions without you having to intervene), but if you
-have made a locally important change and you want to reload the mappings
-immediately, you can execute the rake task `trln_argon:reload_code_mappings`.
+When running in production, the lookups generated from these files are loaded
+at application startup and reloaded every 24 hours (which allows your
+application to pick up changes coming in from other institutions without you
+having to intervene), but if you're seeing odd results or you want to reload
+the mappings immediately, you can execute the rake task `trln_argon:reload_code_mappings`.
 
 This will sync your local copy with the upstream repository, and un-cache the
 lookups generated from the files in the repository, meaning your changes will
@@ -165,6 +158,10 @@ be visible immediately in the running application.
 (this will fail unless you also have SECRET_KEY_BASE defined in your
 environment; it doesn't need to be the actual value in use by the web
 application for this purpose, however.)
+
+If you want, for any reason (typically, not in production) to use a different
+branch of the mappings repository, set the `ARGON_MAPPINGS_BRANCH` environment
+variable before starting your argon instance.
 
 When running in 'development' environment, the code mappings are loaded *once*
 at startup, because Rails doesn't cache in this mode and otherwise would be

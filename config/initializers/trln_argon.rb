@@ -27,15 +27,20 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'worldcat_cite_base_url')
   apply_local_configuration(config, 'worldcat_cite_api_key')
 
-  config.code_mappings = {
+  mappings_options = {
     git_url: 'https://github.com/trln/argon_code_mappings',
-    git_branch: 'master'
+    repo_base: config.argon_code_mappings_dir
   }
 
-  git_fetcher = TrlnArgon::MappingsGitFetcher.new(
-    git_url: config.code_mappings[:git_url],
-    repo_base: config.argon_code_mappings_dir
-  )
+  # set this env var if you want to test changes without
+  # having to use the default branch
+
+  if ENV.key?('ARGON_MAPPINGS_BRANCH')
+    mappings_options[:branch] = ENV['ARGON_MAPPINGS_BRANCH']
+  end
+
+  git_fetcher = TrlnArgon::MappingsGitFetcher.new(mappings_options)
+
   TrlnArgon::LookupManager.fetcher = git_fetcher
   # do a lookup so the mappings are initialized.
   TrlnArgon::LookupManager.instance.map('ncsu.library.DHHILL')
