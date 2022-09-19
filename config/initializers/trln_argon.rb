@@ -35,9 +35,7 @@ TrlnArgon::Engine.configure do |config|
   # set this env var if you want to test changes without
   # having to use the default branch
 
-  if ENV.key?('ARGON_MAPPINGS_BRANCH')
-    mappings_options[:branch] = ENV['ARGON_MAPPINGS_BRANCH']
-  end
+  mappings_options[:branch] = ENV['ARGON_MAPPINGS_BRANCH'] if ENV.key?('ARGON_MAPPINGS_BRANCH')
 
   git_fetcher = TrlnArgon::MappingsGitFetcher.new(mappings_options)
 
