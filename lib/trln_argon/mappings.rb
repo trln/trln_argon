@@ -17,7 +17,7 @@ module TrlnArgon
 
     REPO_NAME = 'argon_mappings'.freeze
 
-    DEFAULT_BRANCHES = %w[main master]
+    DEFAULT_BRANCHES = %w[main master].freeze
 
     def initialize(options = {})
       @repo_base = options.fetch(:repo_base, 'config/mappings')
@@ -33,9 +33,10 @@ module TrlnArgon
         end
 
         unless remote_branches.include?(@branch)
-          logger.error("The repository at #{@url} does not contain a branch named '#{@branch}: we only found #{remote_branches}")
+          logger.error("The repository at #{@url} "\
+            "does not contain a branch named '#{@branch}:\n\n"\
+            "we only found #{remote_branches}")
         end
-
       rescue NoMethodError
         @url = GIT_URL
         logger.error('Unable to find configuration key `mappings_git_url`')
@@ -50,10 +51,11 @@ module TrlnArgon
       @git = Git.clone(@url, REPO_NAME, path: @repo_base)
       @git.checkout(@branch)
     end
-    
+
     # refreshes the contents of the repository from origin;
     # has checks to short circuit this if we're pulling too often
     # and not changing branches.
+    # rubocop:disable Metrics/PerceivedComplexity
     def refresh
       if File.directory?(File.join(@repo_dir, '.git'))
         logger.debug("Repository #{@repo_dir} appears to be a .git repo")
@@ -81,6 +83,7 @@ module TrlnArgon
         clone
       end
     end
+    # rubocop:enable Metrics/PerceivedComplexity
   end
 
   class Lookups
@@ -211,9 +214,9 @@ startup and when #{@dev_reload_file} exists.")
       lookups.lookup(path)
     end
 
+    # rubocop:disable Layout/LineLength
     def check_cache
-      # in dev mode, allow for expiring the cache via external
-      # command
+      # in dev mode, allow for expiring the cache via external command
       if Rails.env == 'development' && File.exist?(dev_reload_file)
         logger.info("Found #{@dev_reload_file}, reloading argon code mappings")
         @lookups = nil
@@ -227,6 +230,7 @@ startup and when #{@dev_reload_file} exists.")
         Time.now.to_s
       end
     end
+    # rubocop:enable Layout/LineLength
 
     def lookups
       check_cache
