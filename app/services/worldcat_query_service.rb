@@ -75,35 +75,11 @@ class WorldcatQueryService
     ENV['WORLDCAT_URL']
   end
 
-  def count
-    @count ||= fetch_count
-  end
-
   def search_worldcat_path
     query = build_string('link')
     return worldcat_base_url if query.nil? || query.empty?
 
     worldcat_base_url + 'search?queryString=' + query
-  end
-
-  # Retrieves number of results from a worldcat query
-  # @param params hash
-  def fetch_count
-    query = build_string('query')
-    return '' if query.nil? || query.empty?
-
-    uri = URI.parse(ENV['WORLDCAT_API_URL'])
-    prepared_query = { query: query }.merge(DEFAULTS[:params])
-    uri.query = URI.encode_www_form(prepared_query)
-    doc = Nokogiri::XML.parse(self.class.do_get(uri).body)
-    count = doc.search('numberOfRecords').text
-    return '' if count == '0' || count.nil? || count.empty?
-
-    count
-  rescue StandardError => e
-    Rails.logger.warn("unable to fetch data at #{uri}")
-    Rails.logger.warn(e.backtrace.join("\n"))
-    ''
   end
 
   def map_field(type = 'query', field = 'q', exact = true)
