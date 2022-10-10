@@ -77,7 +77,11 @@ class WorldcatQueryService
     query = build_string('link')
     return worldcat_base_url if query.nil? || query.empty?
 
-    worldcat_base_url + 'search?queryString=' + query
+    u = URI(worldcat_base_url)
+    u.path = '/search'
+    u.query = 'queryString=' + query
+    u.to_s
+    #worldcat_base_url + 'search?queryString=' + query
   end
 
   def map_field(type = 'query', field = 'q', exact = true)
