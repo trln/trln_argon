@@ -1,7 +1,7 @@
 module TrlnWorldcatHelper
   include ApplicationHelper
 
-  def worldcat_search_available?
+  def worldcat_url_available?
     WorldcatQueryService.available?
   end
 
@@ -12,7 +12,6 @@ module TrlnWorldcatHelper
 
     session[:worldcat] = nil
     session[:worldcat] = new_wq.to_h
-    session[:worldcat][:count] = new_wq.count
     session[:worldcat][:query_url] = new_wq.query_url
     new_wq
   end
