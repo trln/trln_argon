@@ -46,9 +46,7 @@ class WorldcatQueryService
   }.freeze
 
   def self.available?
-    %w[WORLDCAT_URL WORLDCAT_API_URL WORLDCAT_API_KEY].all? do |k|
-      ENV.include?(k)
-    end
+    ENV['WORLDCAT_URL'].present?
   end
 
   def initialize(search_session)

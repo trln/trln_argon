@@ -1,7 +1,7 @@
 module TrlnWorldcatHelper
   include ApplicationHelper
 
-  def worldcat_search_available?
+  def worldcat_url_available?
     WorldcatQueryService.available?
   end
 
