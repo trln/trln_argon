@@ -643,6 +643,11 @@ module TrlnArgon
         end
       end
 
+      def is_advanced_search?(req_params = params)
+        (req_params[:search_field] == blacklight_config.advanced_search[:url_key]) ||
+         req_params[:f_inclusive]
+      end
+
       def render_ris_action?
         doc = @document || (@document_list || []).first
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
@@ -664,4 +669,3 @@ module TrlnArgon
     end
   end
 end
-                                                                                                                                                                                      
