@@ -1,7 +1,7 @@
 module TrlnArgon
   module ViewHelpers
     module RenderConstraintsHelperBehavior
-      include BlacklightAdvancedSearch::RenderConstraintsOverride
+      # include BlacklightAdvancedSearch::RenderConstraintsOverride
 
       # handles a special case only in TRLN
       def render_constraints_query(my_params = params)

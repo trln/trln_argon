@@ -29,7 +29,7 @@
                     <% display_facet.items.each do |facet_item| %>
                       <%= content_tag :option,
                           value: facet_item.value,
-                          selected: facet_value_checked?(display_facet.name, facet_item.value) do %>
+                          selected: facet_value_for_facet_item(display_facet) do %>
                         <% if display_facet.name == TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s %>
                           <%= location_filter_display(facet_item.label) %>&nbsp;&nbsp;(<%= number_with_delimiter facet_item.hits %>)
                         <% else %>
