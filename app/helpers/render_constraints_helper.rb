@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module RenderConstraintsHelper
-  #include TrlnArgon::ViewHelpers::RenderConstraintsHelperBehavior
+  # include TrlnArgon::ViewHelpers::RenderConstraintsHelperBehavior
 
   def custom_facet_value(facet_field, value)
     case facet_field.key

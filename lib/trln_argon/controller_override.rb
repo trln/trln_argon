@@ -112,7 +112,6 @@ module TrlnArgon
         # BL7
         config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
-        config.advanced_search[:form_facet_partial] ||= 'advanced/advanced_search_facets_as_select'
         config.advanced_search[:form_solr_parameters] ||= {
           # NOTE: You will not get any facets back
           #       on the advanced search page
@@ -635,7 +634,7 @@ module TrlnArgon
       # rubocop:disable Style/PredicateName
       def has_search_parameters?
         %i[q f op seach_field range doc_ids].any? { |p| params[p].present? }
-      # rubocop:enable Style/PredicateName
+        # rubocop:enable Style/PredicateName
       end
 
       def query_has_constraints?(localized_params = params)
@@ -650,9 +649,10 @@ module TrlnArgon
         end
       end
 
+      # rubocop:disable Style/PredicateName
       def is_advanced_search?(req_params = params)
         (req_params[:search_field] == blacklight_config.advanced_search[:url_key]) ||
-         req_params[:f_inclusive]
+          req_params[:f_inclusive]
       end
 
       def render_ris_action?
@@ -671,9 +671,8 @@ module TrlnArgon
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
-          docs.select { |doc| doc.oclc_number.present? }.any?  
+          docs.select { |doc| doc.oclc_number.present? }.any?
       end
     end
   end
 end
-
