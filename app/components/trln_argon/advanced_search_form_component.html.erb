@@ -1,72 +1,67 @@
-<% if constraints? %>
-  <div class="constraints well search_history">
-    <h4><%= t 'blacklight.advanced_search.form.search_context' %></h4>
-    <% constraints.each do |constraint| %>
-      <%= constraint %>
-    <% end %>
-  </div>
-<% end %>
-
 <%= form_tag @url, method: @method, class: @classes.join(' '), role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+  <!-- follows the default implementation, but this leads to duplication
+       of parameters after 'edit search' is used,  as chosen is doing 
+       its own thing -->
+  <noscript>
   <%= render_hash_as_hidden_fields(@params) %>
+  </noscript>
+    <div class="input-criteria">
 
-  <div class="input-criteria">
-    <div class="query-criteria mb-4">
-      <h2 class="query-criteria-heading h3 mb-4">
-        <%= t('blacklight.advanced_search.form.query_criteria_heading_html', select_menu: default_operator_menu) %>
-      </h2>
-
-      <div id="advanced_search">
-        <% search_field_controls.each do |control| %>
-          <%= control %>
-        <% end %>
+      <div class="query-criteria" role="radiogroup" aria-labelledby="show-results-from-header"> 
+        <h2 class="query-criteria-heading" id="show-results-from-header"><%= "#{t("blacklight_advanced_search.form.show_results_from")}" %></h2>
+        <span class="option-wrapper">
+          <%= radio_button_tag :option, "catalog" %> <%= label_tag 'option_catalog', "#{t("trln_argon.local_filter.searching_local", local_institution_name: t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name"))}" %> &emsp;
+        </span>
+        <span class="option-wrapper">
+          <%= radio_button_tag  :option, "trln" %> <%= label_tag 'option_trln', "#{t("trln_argon.local_filter.searching_trln")}" %>
+        </span>
       </div>
-    </div>
 
-    <% if search_filter_controls? %>
-      <div class="limit-criteria mb-4">
-        <h2 class="limit-criteria-heading h3"><%= t('blacklight.advanced_search.form.limit_criteria_heading_html')%></h2>
+      <div class="query-criteria">
+        <h2 class="query-criteria-heading">
+          <%= t('blacklight_advanced_search.form.query_criteria_heading_html', :select_menu =>  default_operator_menu ) %> 
+        </h2>
 
-        <div id="advanced_search_facets" class="limit_input row">
-          <div class="advanced-facet-limits panel-group col-md-9">
-            <% search_filter_controls.each do |control| %>
-              <%= control %>
-            <% end %>
-          </div>
+        <div id="advanced_search">
+          <%= render 'advanced/advanced_search_fields' %>
         </div>
       </div>
-    <% end %>
-  </div>
-  
-  <% pub_date = blacklight_config.facet_fields[TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s] %>
-  <% if pub_date.present? %>
-      <div class="form-group row advanced-search-facet">
-        <%= label_tag pub_date.field.parameterize,
-        class: "col-12 col-sm-6 col-md-3 col-form-label font-weight-bold" do %>
-          <%= pub_date.label %>
-        <% end %>
-        <div class="col-12 col-sm-6 col-md-9 range_limit">
-          <label for="range_publication_year_isort_begin" class="sr-only">Publication date range (starting year)</label>
-          <%= render_range_input(pub_date.field, :begin) %> – 
-          <label for="range_publication_year_isort_end" class="sr-only">Publication date range (ending year)</label>
-          <%= render_range_input(pub_date.field, :end) %>
-          </div>
+
+      <div class="limit-criteria">
+        <h2 class="limit-criteria-heading"><%= t('blacklight_advanced_search.form.limit_criteria_heading_html')%></h2>
+
+        <div id="advanced_search_facets" class="limit_input">
+           <% if blacklight_config.try(:advanced_search).try {|h| h[:form_facet_partial] } %>
+            <%= render blacklight_config.advanced_search[:form_facet_partial] %>
+          <% else %>
+            <%= render 'advanced_search_facets' %>
+          <% end %>
+
+          <!-- Fetch and display publication year range input if configured. -->
+          <% pub_date = blacklight_config.facet_fields[TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s] %>
+          <% if pub_date.present? %>
+            <div class="form-group row advanced-search-facet">
+              <%= label_tag pub_date.field.parameterize,
+                    class: "col-12 col-sm-6 col-md-3 col-form-label font-weight-bold" do %>
+                  <%= pub_date.label %>
+              <% end %>
+              <div class="col-12 col-sm-6 col-md-9 range_limit">
+                <label for="range_publication_year_isort_begin" class="sr-only">Publication date range (starting year)</label>
+                <%= render_range_input(pub_date.field, :begin) %> – 
+                <label for="range_publication_year_isort_end" class="sr-only">Publication date range (ending year)</label>
+                <%= render_range_input(pub_date.field, :end) %>
+              </div>
+            </div>
+          <% end %>
+
         </div>
-  <% end %>
-
-  <% if sort_fields_select %>
-    <div class="form-group row mb-4">
-      <%= content_tag :h2, t('blacklight.advanced_search.form.sort_label'), class: 'col-md-3 col-form-label text-md-right' %>
-      <div class="col">
-        <%= sort_fields_select %>
       </div>
-    </div>
-  <% end %>
-
-  <div class="form-group row">
-    <div class="submit-buttons col-md-9 offset-md-3">
-      <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
-      <%= button_tag t('blacklight.advanced_search.form.start_over_html'), type: 'reset', class: 'btn btn-link advanced-search-start-over' %>
-    </div>
   </div>
+
+  <hr>
+
+  <div class="sort-submit-buttons clearfix">
+    <%= render 'advanced/advanced_search_submit_btns' %>
+  </div>
+
 <% end %>
