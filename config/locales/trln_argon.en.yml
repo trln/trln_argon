@@ -1,5 +1,6 @@
 en:
-
+  # ported from v7 of advanced_search_plugin as v8 removed these?
+    # AJC -- this should probably be (re)moved?
     # BL7 advanced search uses new path
     blacklight:
         advanced_search:
@@ -56,9 +57,14 @@ en:
 
     blacklight_advanced_search:
         form:
-            title: "Advanced Search"
+            title: "More Search Options"
+            limit_criteria_heading_html: "<strong>AND</strong> have these attributes"
             show_results_from: 'Show results from:'
             query_criteria_heading_html: "<label for='op'>Find items that match</label> %{select_menu} of"
+            search_context: Within search
+            sort_label: "Sort results by"
+            start_over: "Start over"
+            search_btn: 'Search'
 
     trln_argon:
 
