@@ -636,6 +636,7 @@ module TrlnArgon
       def has_search_parameters?
         %i[q f op seach_field range doc_ids].any? { |p| params[p].present? }
       # rubocop:enable Style/PredicateName
+      end
 
       def query_has_constraints?(localized_params = params)
         if is_advanced_search? localized_params
@@ -670,8 +671,9 @@ module TrlnArgon
         TrlnArgon::Engine.configuration.citation_formats.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
-          docs.select { |doc| doc.oclc_number.present? }.any?
+          docs.select { |doc| doc.oclc_number.present? }.any?  
       end
     end
   end
 end
+
