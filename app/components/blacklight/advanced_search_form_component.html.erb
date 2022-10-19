@@ -28,7 +28,7 @@
         <h2 class="limit-criteria-heading h3"><%= t('blacklight.advanced_search.form.limit_criteria_heading_html')%></h2>
 
         <div id="advanced_search_facets" class="limit_input row">
-          <div class="advanced-facet-limits panel-group col-md-9">
+          <div class="advanced-facet-limits panel-group col-md-12">
             <% search_filter_controls.each do |control| %>
               <%= control %>
             <% end %>
@@ -37,20 +37,19 @@
       </div>
     <% end %>
   </div>
-  
+
+  <hr>
+
   <% if sort_fields_select %>
     <div class="form-group row mb-4">
-      <%= content_tag :h2, t('blacklight.advanced_search.form.sort_label'), class: 'col-md-3 col-form-label text-md-right' %>
-      <div class="col">
+      <div class="col-md-6 col-sm-6 col-xs-6 sorting" style="display: inline-flex">
+        <%= content_tag :label, t('blacklight.advanced_search.form.sort_label'), for: 'sort', class: 'col-form-label' %>
         <%= sort_fields_select %>
+      </div>
+      <div class="submit-buttons col-md-5 col-sm-6 col-xs-6 offset-md-1">
+        <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
+        <%= button_tag t('blacklight.advanced_search.form.start_over_html'), type: 'reset', class: 'btn btn-outline-secondary advanced-search-start-over' %>
       </div>
     </div>
   <% end %>
-
-  <div class="form-group row">
-    <div class="submit-buttons col-md-9 offset-md-3">
-      <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
-      <%= button_tag t('blacklight.advanced_search.form.start_over_html'), type: 'reset', class: 'btn btn-link advanced-search-start-over' %>
-    </div>
-  </div>
 <% end %>

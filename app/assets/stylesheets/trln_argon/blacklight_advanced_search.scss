@@ -10,6 +10,58 @@ h2.query-criteria-heading label {
   font-weight: 500;
 }
 
-#advanced_search_facets .chosen-search-input {
-  color: #767676;
+#advanced_search_facets {
+  .col-form-label {
+    text-align: right;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .col-form-label {
+      text-align: left;
+    }
+  }
+
+  .chosen-search-input {
+    color: #767676;
+  }
+}
+
+#advanced_search {
+  label {
+    font-weight: 700;
+  }
+
+  .form-control {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #555555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
+}
+
+.advanced {
+  .submit-buttons {
+    text-align: right;
+  }
+
+  @include media-breakpoint-down(xs) {
+    .submit-buttons {
+      margin-top: 15px;
+      text-align: left;
+    }
+  }
+}
+
+.sorting {
+  display: inline-flex;
+
+  label {
+    margin-right: 8px;
+    font-weight: 700;
+  }
 }

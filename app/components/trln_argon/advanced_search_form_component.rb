@@ -21,5 +21,25 @@ module TrlnArgon
                             oninvalid: "setCustomValidity('Publication Year should be a number')",
                             oninput: "setCustomValidity('')")
     end
+
+    private
+
+    # Override of https://github.com/projectblacklight/blacklight/blob/ce114b6c3709e09efcd2fa91429b84dd6f2ca08b/app/components/blacklight/advanced_search_form_component.rb#L39
+    # Adjusts classes for labels and inputs
+    def initialize_search_field_controls
+      search_fields.values.each.with_index do |field, i|
+        search_field_control do
+          fields_for('clause[]', i, include_id: false) do |f|
+            content_tag(:div, class: 'form-group advanced-search-field row mb-3') do
+              f.label(:query, field.display_label('search'), class: 'col-12 col-md-3 col-form-label text-md-right') +
+                content_tag(:div, class: 'col-12 col-md-9') do
+                  f.hidden_field(:field, value: field.key) +
+                    f.text_field(:query, value: query_for_search_clause(field.key), class: 'form-control')
+                end
+            end
+          end
+        end
+      end
+    end
   end
 end
