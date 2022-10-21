@@ -229,7 +229,8 @@ module TrlnArgon
                                range: {
                                  assumed_boundaries: [1100, Time.now.year + 1],
                                  segments: false
-                               }
+                               },
+                               advanced_search_component: TrlnArgon::AdvancedSearchRangeLimitComponent
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true
