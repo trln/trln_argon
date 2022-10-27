@@ -1,7 +1,7 @@
 module TrlnArgon
   class AdvancedSearchRangeLimitComponent < Blacklight::Component
     include ViewHelpers
-    
+
     def initialize(facet_field:, **args)
       super
       @facet_field = facet_field
@@ -26,4 +26,4 @@ module TrlnArgon
                             oninput: "setCustomValidity('')")
     end
   end
-end  
+end
