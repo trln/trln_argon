@@ -15,7 +15,11 @@ module TrlnArgon
               f.label(:query, field.display_label('search'), class: 'col-12 col-md-3 col-form-label') +
                 content_tag(:div, class: 'col-12 col-md-9') do
                   f.hidden_field(:field, value: field.key) +
-                    f.text_field(:query, value: query_for_search_clause(field.key), class: 'form-control')
+                    f.text_field(:query, value: query_for_search_clause(field.key), class: 'form-control tt-input',
+                                 autocomplete: :off,
+                                 data: { adv_search_field: field.key,
+                                         autocomplete_enabled: true,
+                                         autocomplete_path: '/trln/suggest' })
                 end
             end
           end

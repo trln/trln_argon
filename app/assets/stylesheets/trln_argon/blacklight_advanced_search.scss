@@ -43,6 +43,10 @@ h2.query-criteria-heading label {
     text-align: right;
   }
 
+  .twitter-typeahead {
+    width: 100%;
+  }
+
   @include media-breakpoint-down(xs) {
     .submit-buttons {
       margin-top: 15px;
