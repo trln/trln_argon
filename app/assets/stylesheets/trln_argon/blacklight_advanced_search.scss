@@ -12,13 +12,7 @@ h2.query-criteria-heading label {
 
 #advanced_search_facets {
   .col-form-label {
-    text-align: right;
-  }
-
-  @include media-breakpoint-down(sm) {
-    .col-form-label {
-      text-align: left;
-    }
+    text-align: left;
   }
 
   .chosen-search-input {
