@@ -102,7 +102,7 @@ module TrlnArgon
         "\n\n  config.before_configuration do"\
         "\n      env_file = File.join(Rails .root, 'config', 'local_env.yml')"\
         "\n      if File.exists?(env_file)"\
-        "\n        YAML.load_file(env_file).each { |key, value| ENV[key.to_s] = value }"\
+        "\n        YAML.load_file(env_file).reject { |k, _| ENV.key?(k.to_s) }.each { |key, value| ENV[key.to_s] = value  }"\
         "\n      end"\
         "\n    end\n"
       end

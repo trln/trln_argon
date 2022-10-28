@@ -59,6 +59,10 @@ gems, this script must be copied into the container and its output executed in
 order to portably set this path. It should not be needed outside this narrow
 context.
 
+## Temporary Configuration Overrides
+
+By default, the engine will read `config/local_env.yml` (created by the installer) for environment variables. Sometimes, during development, you may want to temporarily override some of these values. In this case, set the relevant variable (e.g. `export SOLR_URL=http://some.other.solr:8983/solr/trlnbib`) and then start the application.  When you're back to wanting to use the default `SOLR_URL`, `uset SOLR_URL`.
+
 ## Creating a Rails Application using the TRLN Argon Engine.
 
 This is what you want to do if you are intending to customize an application using the engine for a local catalog instance, it's not needed for development.
