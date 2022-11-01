@@ -18,8 +18,8 @@ module TrlnArgon
                     f.text_field(:query, value: query_for_search_clause(field.key), class: 'form-control tt-input',
                                  autocomplete: :off,
                                  data: { adv_search_field: field.key,
-                                         autocomplete_enabled: true,
-                                         autocomplete_path: '/trln/suggest' })
+                                         autocomplete_enabled: blacklight_config[:autocomplete_enabled],
+                                         autocomplete_path: blacklight_config[:autocomplete_path] })
                 end
             end
           end
