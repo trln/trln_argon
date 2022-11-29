@@ -32,6 +32,10 @@ case $1 in
         bundle exec rake engine_cart:generate
         exec bundle exec rake spec
         ;;
+    rubocop)
+        check_bundle
+        bundle exec rubocop
+        ;;
     update)
         # generates a new Gemfile.lock
         exec bundle update

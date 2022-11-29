@@ -48,7 +48,16 @@ The `docker-compose.yml` file automates a lot of the above for you.
 
 ### `entrypoint.sh`
 
-This does some startup magic, like removing PID files which are often not cleaned up when stopping containers.  It also bundles up various commands to automate common operations.  See the source of this file for more details.
+This does some startup magic, like removing PID files which are often not
+cleaned up when stopping containers.  It also bundles up various commands to
+automate common operations (e.g. `test` and `rubocop`).  See the source of this
+file for more details.
+
+The entrypoint command is also useful if you are running a shell "inside" the
+container (by starting it with either `shell` or `/bin/bash` as the command),
+as it tends to make sure that all gems are already installed.
+
+    # entrypoint.sh rubocop
 
 ### `bundler_config.rb` 
 
