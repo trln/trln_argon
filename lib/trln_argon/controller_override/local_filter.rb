@@ -39,7 +39,7 @@ module TrlnArgon
       def filtered_results_query_response
         search_service.repository.search(local_filter_search_builder
           .append(*additional_processor_chain_methods)
-          .with(search_state.to_h))
+          .with(search_state))
       end
 
       # This is needed so that controllers that inherit from CatalogController
