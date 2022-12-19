@@ -46,6 +46,7 @@ describe 'search results' do
     before do
       VCR.use_cassette('search_results/paging_controls') do
         visit search_catalog_path
+        fill_in 'q', with: 'book'
         click_button 'search'
       end
     end

@@ -11,7 +11,7 @@ module TrlnArgon
       # with no documents listed. Primarily used to fetch counts
       # client side for the TRLN/local toggle.
       def count_only
-        builder = search_service.search_builder.with(params)
+        builder = search_service.search_builder.with(search_state)
         builder.rows = '0'
 
         builder.processor_chain.delete(:add_facetting_to_solr)
@@ -39,7 +39,7 @@ module TrlnArgon
       def filtered_results_query_response
         search_service.repository.search(local_filter_search_builder
           .append(*additional_processor_chain_methods)
-          .with(search_state.to_h))
+          .with(search_state))
       end
 
       # This is needed so that controllers that inherit from CatalogController

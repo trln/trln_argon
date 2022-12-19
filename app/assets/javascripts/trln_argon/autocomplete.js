@@ -14,7 +14,7 @@ Blacklight.onLoad(function() {
     // ======= Advanced search =================
     if ($("#advanced_search").length){
       // Detect which search field is selected.
-      var current_search_field = $el.attr('name');
+      var current_search_field = $el.data('adv-search-field');
 
       // Assemble the complete autosuggest URL.
       var suggest_url = suggest_root + "/" + current_search_field;

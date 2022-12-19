@@ -112,7 +112,6 @@ module TrlnArgon
         # BL7
         config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
-        config.advanced_search[:form_facet_partial] ||= 'advanced/advanced_search_facets_as_select'
         config.advanced_search[:form_solr_parameters] ||= {
           # NOTE: You will not get any facets back
           #       on the advanced search page
@@ -182,12 +181,14 @@ module TrlnArgon
                                collapse: false,
                                show: true,
                                partial: 'catalog/facet_checkbox',
-                               locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') }
+                               locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') },
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,
                                collapse: false,
-                               show: true
+                               show: true,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                limit: 200,
@@ -195,40 +196,49 @@ module TrlnArgon
                                partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false,
                                ex: :rollup,
-                               helper_method: :location_filter_display
+                               helper_method: :location_filter_display,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
-                               collapse: false
+                               collapse: false,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
                                label: TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.label,
                                limit: true,
-                               collapse: false
+                               collapse: false,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
-                               collapse: false
+                               collapse: false,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
                                partial: 'blacklight/hierarchy/facet_hierarchy',
-                               helper_method: :call_number_filter_display
+                               helper_method: :call_number_filter_display,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
-                               limit: true
+                               limit: true,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
                                single: true,
                                range: {
                                  assumed_boundaries: [1100, Time.now.year + 1],
                                  segments: false
-                               }
+                               },
+                               advanced_search_component: TrlnArgon::AdvancedSearchRangeLimitComponent
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true
+
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GENRE_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GENRE_FACET.label,
                                limit: true
+
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.label,
                                limit: true
@@ -243,7 +253,8 @@ module TrlnArgon
                                         'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
-                               limit: true
+                               limit: true,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
 
         # hierarchical facet configuration
         config.facet_display ||= {}
@@ -623,13 +634,9 @@ module TrlnArgon
 
       # rubocop:disable Style/PredicateName
       def has_search_parameters?
-        !params[:q].blank? ||
-          !params[:f].blank? ||
-          !params[:search_field].blank? ||
-          !params[:range].blank? ||
-          !params[:doc_ids].blank?
+        %i[q f op seach_field range doc_ids].any? { |p| params[p].present? }
+        # rubocop:enable Style/PredicateName
       end
-      # rubocop:enable Style/PredicateName
 
       def query_has_constraints?(localized_params = params)
         if is_advanced_search? localized_params
@@ -641,6 +648,12 @@ module TrlnArgon
             localized_params[:range].blank? &&
             localized_params[:doc_ids].blank?)
         end
+      end
+
+      # rubocop:disable Style/PredicateName
+      def is_advanced_search?(req_params = params)
+        (req_params[:search_field] == blacklight_config.advanced_search[:url_key]) ||
+          req_params[:f_inclusive]
       end
 
       def render_ris_action?

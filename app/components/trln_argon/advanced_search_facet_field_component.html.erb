@@ -1,0 +1,12 @@
+<div class="form-group row advanced-search-facet">
+  <label class="col-12 col-md-3 col-form-label font-weight-bold" id="<%= facet_field.key %>" for="<%= facet_field.key %>">
+    <%= facet_field.label %>
+  </label>
+  <div class="col-12 col-md-9">
+    <select multiple="multiple" name="<%= field_param %>" id="<%= facet_field.key %>" class="form-control custom-select advanced-search-facet-select">
+    <% facet_field.display_facet.items.each do |item| %>
+     <option value="<%= item.value %>"><%= display_value(item) %></option>
+     <% end %>
+    </select>
+  </div>
+</div>
