@@ -253,8 +253,9 @@ module TrlnArgon
                                         'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
-                               limit: true,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               limit: true
+        #                      Hide Advanced search New Titles facet until it's fixed
+        #                      advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
 
         # hierarchical facet configuration
         config.facet_display ||= {}
