@@ -120,12 +120,13 @@ module TrlnArgon
           'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                             TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                             TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
-                            TrlnArgon::Fields::LANGUAGE_FACET.to_s],
+                            TrlnArgon::Fields::LANGUAGE_FACET.to_s,
+                            TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s],
           'f.resource_type_f.facet.limit' => -1, # return all resource type values
           'f.language_f.facet.limit' => -1, # return all language facet values
+          'f.date_cataloged_dt.facet.limit' => -1, # return all date facet values
           'facet.limit' => -1, # return all facet values
-          'facet.sort' => 'index', # sort by byte order of values
-          'facet.query' => ''
+          'facet.sort' => 'index' # sort by byte order of values
         }
 
         config.index.title_field = TrlnArgon::Fields::TITLE_MAIN.to_s
@@ -253,9 +254,8 @@ module TrlnArgon
                                         'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
-                               limit: true
-        #                      Hide Advanced search New Titles facet until it's fixed
-        #                      advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               limit: true,
+                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
 
         # hierarchical facet configuration
         config.facet_display ||= {}

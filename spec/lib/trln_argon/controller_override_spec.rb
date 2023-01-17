@@ -32,12 +32,13 @@ describe TrlnArgon::ControllerOverride do
         'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                           TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
                           TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
-                          TrlnArgon::Fields::LANGUAGE_FACET.to_s],
+                          TrlnArgon::Fields::LANGUAGE_FACET.to_s,
+                          TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s],
+        'f.date_cataloged_dt.facet.limit' => -1,
         'f.resource_type_f.facet.limit' => -1,
         'f.language_f.facet.limit' => -1,
         'facet.limit' => -1,
-        'facet.sort' => 'index',
-        'facet.query' => ''
+        'facet.sort' => 'index'
       )
     end
   end
