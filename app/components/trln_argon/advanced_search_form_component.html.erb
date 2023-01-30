@@ -51,8 +51,9 @@
         <%= sort_fields_select %>
       </div>
       <div class="submit-buttons col-md-5 col-sm-6 col-xs-6 offset-md-1">
+        <%= link_to t('blacklight.advanced_search.form.start_over_html'), advanced_search_catalog_path,
+                    class: 'btn btn-outline-secondary advanced-search-start-over' %>
         <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
-        <%= button_tag t('blacklight.advanced_search.form.start_over_html'), type: 'reset', class: 'btn btn-outline-secondary advanced-search-start-over' %>
       </div>
     </div>
   <% end %>
