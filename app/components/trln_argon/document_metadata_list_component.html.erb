@@ -1,5 +1,5 @@
-<ul>
+<dl>
   <% @fields.each do |field| -%>
     <%= @view_context.render(field_component(field).new(field: field, show: @show, layout: TrlnArgon::MetadataListFieldLayoutComponent)) %>
   <% end -%>
-</ul>
+</dl>

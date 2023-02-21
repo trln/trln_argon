@@ -1,3 +1,4 @@
-<li class="index-metadata <%= @key  %>">
-  <%= value %>
-</li>
+<dt class="blacklight-<%= @key %> <%= @label_class %>"><%= label %></dt>
+<% values.each do |v| %>
+  <%= v %>
+<% end %>

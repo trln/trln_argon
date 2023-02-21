@@ -13,15 +13,19 @@ describe 'brief records' do
     end
 
     it 'displays the statement of responsibility field value' do
-      expect(brief_records).to have_css('li.statement_of_responsibility_a', text: /.+/)
+      expect(brief_records).to have_css('dd.blacklight-statement_of_responsibility_a', text: /.+/)
+    end
+
+    it 'does not display a blank edition field value' do
+      expect(brief_records).not_to have_css('.document[data-document-id=UNCb3917352] dd.blacklight-edition_a')
     end
 
     it 'displays the imprint main field value' do
-      expect(brief_records).to have_css('li.imprint_main_a', text: /.+/)
+      expect(brief_records).to have_css('dd.blacklight-imprint_main_a', text: /.+/)
     end
 
     it 'displays the resource_type field value' do
-      expect(brief_records).to have_css('li.resource_type_a', text: /.+/)
+      expect(brief_records).to have_css('dd.blacklight-resource_type_a', text: /.+/)
     end
   end
 

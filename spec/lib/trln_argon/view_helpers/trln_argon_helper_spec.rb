@@ -1070,8 +1070,8 @@ describe TrlnArgonHelper, type: :helper do
 
     it 'creates a display value with links from the supplied names data' do
       expect(context.helpers.names_display(options)).to eq(
-        '<li><a href="/catalog?search=something">Nabokov, Vladimir Vladimirovich, 1899-1977</a>, author</li>'\
-        '<li><a href="/catalog?search=something">Appel, Alfred</a></li>'
+        '<ul><li><a href="/catalog?search=something">Nabokov, Vladimir Vladimirovich, 1899-1977</a>, author</li>'\
+        '<li><a href="/catalog?search=something">Appel, Alfred</a></li></ul>'
       )
     end
   end
@@ -1296,7 +1296,7 @@ describe TrlnArgonHelper, type: :helper do
 
     it 'creates a display value with links from the supplied work entry data that are formatted as an unordered list' do
       expect(context.helpers.included_works_display(options)).to eq(
-        '<li>'\
+        '<ul><li>'\
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
@@ -1315,7 +1315,7 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="sr-only">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'\
-        '</li>'
+        '</li></ul>'
       )
     end
   end

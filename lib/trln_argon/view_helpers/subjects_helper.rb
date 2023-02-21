@@ -2,11 +2,13 @@ module TrlnArgon
   module ViewHelpers
     module SubjectsHelper
       def list_of_linked_subjects_segments(options = {})
-        link_to_subject_segments(options).map do |subject|
-          content_tag :li, class: options[:field] do
-            progress_link_span(subject)
-          end
-        end.join('').html_safe
+        content_tag :ul do
+          link_to_subject_segments(options).map do |subject|
+            content_tag :li, class: options[:field] do
+              progress_link_span(subject)
+            end
+          end.join('').html_safe
+        end
       end
 
       def list_of_linked_genres_segments(options = {})

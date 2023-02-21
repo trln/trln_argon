@@ -1,12 +1,20 @@
 module TrlnArgon
   class MetadataHeaderFieldLayoutComponent < Blacklight::MetadataFieldLayoutComponent
-    # rubocop:disable Style/RedundantParentheses
-    def render?
-      # value is actually a ViewComponent::SlotV2 and is probably
-      # not nil?
-      # Rubocop lies, I find this clearer
-      !(value&.to_s.blank?)
+    def initialize(field:, label_class: 'sr-only', value_class: '')
+      super
+      @field = field
+      @key = @field.key.parameterize
+      @label_class = label_class
+      @value_class = value_class
     end
-    # rubocop:enable Style/RedundantParentheses
+
+    # values is an Array of ViewComponent::SlotV2
+    # objects, each containing html markup, some with only
+    # \n for content. So this requires gymnastics.
+    def render?
+      values.map(&:to_s)
+            .map { |v| strip_tags(v).squish }
+            .compact_blank.present?
+    end
   end
 end
