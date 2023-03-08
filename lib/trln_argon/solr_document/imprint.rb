@@ -8,10 +8,10 @@ module TrlnArgon
       end
 
       def imprint_multiple_for_display
-        imprint_multiple.map { |imprint| imprint_entry(imprint) }
-          .concat(imprint_main.map { |imprint| imprint_entry(imprint) })
+        imprint_multiple.map { |imprint| imprint_entry(imprint, escape: true) }
+                        .concat(imprint_main.map { |imprint| imprint_entry(imprint, escape: true) })
                         .uniq
-          .join('<br />').html_safe
+                        .join('<br />').html_safe
       end
 
       def imprint_main_to_text
@@ -34,9 +34,9 @@ module TrlnArgon
 
       private
 
-      def imprint_entry(imprint)
+      def imprint_entry(imprint, escape_label: false)
         [imprint_type(imprint),
-         imprint_label(imprint),
+         imprint_label(imprint, escape: escape_label),
          imprint_value(imprint)].compact.join(': ')
       end
 
@@ -45,12 +45,11 @@ module TrlnArgon
         I18n.t("trln_argon.imprint_type.#{imprint[:type]}")
       end
 
-      def imprint_label(imprint)
+      def imprint_label(imprint, escape: false)
         return if imprint[:label].blank?
-        puts "[imprint_label] #{imprint[:label]} / #{raw(imprint[:label])}"
-        # raw(imprint[:label])
-        imprint[:label].gsub! '<', "&lt;"
-        imprint[:label].gsub '>', "&gt;"
+        return imprint[:label] unless escape
+        imprint[:label].gsub! '<', ' &lt;'
+        imprint[:label].gsub '>', '&gt;'
       end
 
       def imprint_value(imprint)
