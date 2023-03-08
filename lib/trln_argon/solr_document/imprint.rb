@@ -8,10 +8,10 @@ module TrlnArgon
       end
 
       def imprint_multiple_for_display
-        imprint_multiple.map { |imprint| imprint_entry(imprint) }
-                        .concat(imprint_main.map { |imprint| imprint_entry(imprint) })
+        imprint_multiple.map { |imprint| imprint_entry(imprint).h }
+          .concat(imprint_main.map { |imprint| imprint_entry(imprint).h })
                         .uniq
-                        .join('<br />')
+          .join('<br />').html_safe
       end
 
       def imprint_main_to_text
