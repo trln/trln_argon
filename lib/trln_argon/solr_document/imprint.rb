@@ -11,7 +11,7 @@ module TrlnArgon
         imprint_multiple.map { |imprint| imprint_entry(imprint) }
                         .concat(imprint_main.map { |imprint| imprint_entry(imprint) })
                         .uniq
-                        .join('<br />').html_safe
+                        .join('<br />')
       end
 
       def imprint_main_to_text
