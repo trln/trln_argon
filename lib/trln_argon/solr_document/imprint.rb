@@ -12,8 +12,6 @@ module TrlnArgon
           .concat(imprint_main.map { |imprint| imprint_entry(imprint) })
                         .uniq
           .join('<br />').html_safe
-
-        puts "[imprint_multiple_for_display] #{imprint_multiple.inspect}"
       end
 
       def imprint_main_to_text
@@ -49,8 +47,6 @@ module TrlnArgon
 
       def imprint_label(imprint)
         return if imprint[:label].blank?
-        # return raw(...) because of the possibility of
-        # having < and > in the label string.
         raw(imprint[:label])
       end
 
