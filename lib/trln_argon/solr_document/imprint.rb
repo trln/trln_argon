@@ -8,8 +8,8 @@ module TrlnArgon
       end
 
       def imprint_multiple_for_display
-        imprint_multiple.map { |imprint| raw(imprint_entry(imprint)) }
-          .concat(imprint_main.map { |imprint| raw(imprint_entry(imprint)) })
+        imprint_multiple.map { |imprint| imprint_entry(imprint) }
+          .concat(imprint_main.map { |imprint| imprint_entry(imprint) })
                         .uniq
           .join('<br />').html_safe
 
@@ -49,7 +49,9 @@ module TrlnArgon
 
       def imprint_label(imprint)
         return if imprint[:label].blank?
-        imprint[:label]
+        # return raw(...) because of the possibility of
+        # having < and > in the label string.
+        raw(imprint[:label])
       end
 
       def imprint_value(imprint)
