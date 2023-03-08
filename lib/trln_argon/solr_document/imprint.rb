@@ -48,7 +48,9 @@ module TrlnArgon
       def imprint_label(imprint)
         return if imprint[:label].blank?
         puts "[imprint_label] #{imprint[:label]} / #{raw(imprint[:label])}"
-        raw(imprint[:label])
+        # raw(imprint[:label])
+        imprint[:label].gsub! '<', "&lt;"
+        imprint[:label].gsub '>', "&gt;"
       end
 
       def imprint_value(imprint)
