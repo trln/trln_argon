@@ -12,6 +12,8 @@ module TrlnArgon
           .concat(imprint_main.map { |imprint| raw(imprint_entry(imprint)) })
                         .uniq
           .join('<br />').html_safe
+
+        puts "[imprint_multiple_for_display] #{imprint_multiple.inspect}"
       end
 
       def imprint_main_to_text
