@@ -58,7 +58,7 @@ module TrlnArgon
         I18n.t("trln_argon.imprint_type.#{imprint[:type]}")
       end
 
-      # when needed, replace < and > with their intended 
+      # when needed, replace < and > with their intended
       # escaped &lt; and &gt; string values.
       def imprint_label(imprint, escape_label: false)
         return if imprint[:label].blank?
