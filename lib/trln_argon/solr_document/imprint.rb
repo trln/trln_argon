@@ -21,8 +21,8 @@ module TrlnArgon
       end
 
       def imprint_multiple_for_display
-        imprint_multiple.map { |imprint| imprint_entry(imprint, escape_label: false) }
-                        .concat(imprint_main.map { |imprint| imprint_entry(imprint, escape_label: false) })
+        imprint_multiple.map { |imprint| imprint_entry(imprint, escape_label: true) }
+                        .concat(imprint_main.map { |imprint| imprint_entry(imprint, escape_label: true) })
                         .uniq
                         .join('<br />').html_safe
       end
