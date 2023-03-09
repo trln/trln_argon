@@ -1,5 +1,18 @@
 module TrlnArgon
   module SolrDocument
+    # In addition to marking the imprint (resulting) value as
+    # "html_safe", work is done to ensure < and > are preserved...
+    #
+    # ...because some catalogers are adding &lt; and &gt;
+    # in subfield $3.
+    #
+    # DEVELOPERS' NOTE
+    # We are aware that we're possibly violating the spirit
+    # of the "Single Responsibily Principle" with this
+    # approach, but it was either here, or taking a
+    # deep-dive at parsing through FieldPresenters and/or
+    # ShowPresenters to determine if we are displaying
+    # the "imprint" field.
     module Imprint
       def imprint_main_for_header_display
         imprint_main.reverse.map do |imprint|
@@ -45,6 +58,8 @@ module TrlnArgon
         I18n.t("trln_argon.imprint_type.#{imprint[:type]}")
       end
 
+      # when needed, replace < and > with their intended 
+      # escaped &lt; and &gt; string values.
       def imprint_label(imprint, escape_label: false)
         return if imprint[:label].blank?
         return imprint[:label] unless escape_label
