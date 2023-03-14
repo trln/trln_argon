@@ -1,4 +1,5 @@
-FROM ruby:2.7.5 AS app_bootstrap
+ARG RUBY_VERSION=2.7.6
+FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim tree
 

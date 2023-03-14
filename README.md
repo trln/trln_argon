@@ -31,6 +31,9 @@ We are actively working on allowing development using containers, to allow quick
 `-v` mounts the current directory into the container at `/app`; this allows you
 to edit the files on the host and see the changes reflected in the container.
 
+To use a different version of Ruby from the default, you can pass the build
+argument `RUBY_VERSION` to an appropriate version of Ruby, e.g. `docker build . --build-arg RUBY_VERSION=3.2-alpine -t trln_argon:latest`.
+
 Note that this bind mount means that the `.internal_test_app` directory used by engine cart is also on the host system, and will persist between stop, starts, and rebuilds of the container. It's best to delete this directory after rebuilds and before fresh starts. Failure to do so can lead to inexplicable errors.
 
 If `.internal_test_app` does not exist when the container is started, it will be created as the application is generated.
