@@ -41,5 +41,9 @@ describe DefaultLocalSearchBuilder do
     it 'adds the solr debug method to the processor chain' do
       expect(obj.processor_chain).to include(:add_solr_debug)
     end
+
+    it 'adds the solr clause count method to the processor chain' do
+      expect(obj.processor_chain).to include(:clause_count)
+    end
   end
 end
