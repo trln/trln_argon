@@ -78,6 +78,220 @@ describe TrlnArgon::ArgonSearchBuilder do
     end
   end
 
+  describe 'clause_count' do
+    before do
+      builder_with_params.add_query_to_solr(solr_parameters)
+      builder_with_params.clause_count(solr_parameters)
+    end
+
+    context 'All fields search: query contains more than 10 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight nine ten eleven twelve',
+          'search_field' => 'all_fields'
+        )
+      end
+
+      it 'truncates query at 10 terms' do
+        expect(solr_parameters[:q]).to eq('One two three four five six seven eight nine ten')
+      end
+    end
+
+    context 'All fields search: query contains less than 10 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight nine',
+          'search_field' => 'all_fields'
+        )
+      end
+
+      it 'does not truncate query at 10 terms' do
+        expect(solr_parameters[:q]).to eq('One two three four five six seven eight nine')
+      end
+    end
+
+    context 'All fields search: query contains more than 10 terms and two colons' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five : six seven eight nine ten : one',
+          'search_field' => 'all_fields'
+        )
+      end
+
+      it 'truncates query at 10 terms' do
+        expect(solr_parameters[:q]).to eq('One two three four five \\: six seven eight nine ten')
+      end
+    end
+
+    context 'All fields search: query contains an apostrophe and -' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'Fanaroff and Martin’s Neonatal-perinatal medicine: Diseases of the fetus and infant',
+          'search_field' => 'all_fields'
+        )
+      end
+
+      it 'truncates query at 10 terms' do
+        expect(solr_parameters[:q]).to eq('Fanaroff and Martin’s Neonatal-perinatal medicine: Diseases of the')
+      end
+    end
+
+    context 'Title search: query contains more than 19 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight nine ten One two three four five six seven eight nine ten',
+          'search_field' => 'title'
+        )
+      end
+
+      it 'truncates query at 19 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$title_qf pf=$title_pf pf3=$title_pf3 pf2=$title_pf2}'\
+          'One two three four five six seven eight nine ten '\
+          'One two three four five six seven eight nine')
+      end
+    end
+
+    context 'Title search: query contains less than 19 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18',
+          'search_field' => 'title'
+        )
+      end
+
+      it 'does not truncate query at 19 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$title_qf pf=$title_pf pf3=$title_pf3 pf2=$title_pf2}'\
+          '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18')
+      end
+    end
+
+    context 'Title search: query contains an apostrophe and -' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'Fanaroff and Martin’s Neonatal-perinatal medicine: Diseases of the fetus '\
+          'and infant Fanaroff and Martin’s Neonatal-perinatal medicine: Diseases of the fetus and infant',
+          'search_field' => 'title'
+        )
+      end
+
+      it 'truncates query at 19 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$title_qf pf=$title_pf pf3=$title_pf3 pf2=$title_pf2}'\
+          'Fanaroff and Martin’s Neonatal-perinatal medicine: Diseases of the fetus '\
+          'and infant Fanaroff and Martin’s Neonatal-perinatal')
+      end
+    end
+
+    context 'Author search: query contains more than 27 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight nine ten '\
+          'One two three four five six seven eight nine ten '\
+          'One two three four five six seven eight nine ten',
+          'search_field' => 'author'
+        )
+      end
+
+      it 'truncates query at 27 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$author_qf pf=$author_pf pf3=$author_pf3 pf2=$author_pf2}'\
+          'One two three four five six seven eight nine ten '\
+          'One two three four five six seven eight nine ten '\
+          'One two three four five six seven')
+      end
+    end
+
+    context 'Author search: query contains less than 27 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight nine ten',
+          'search_field' => 'author'
+        )
+      end
+
+      it 'does not truncate query at 10 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$author_qf pf=$author_pf pf3=$author_pf3 pf2=$author_pf2}'\
+          'One two three four five six seven eight nine ten')
+      end
+    end
+
+    context 'Subject search: query contains more than 132 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+          '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 '\
+          '41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 '\
+          '61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 '\
+          '81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 '\
+          '101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 '\
+          '121 122 123 124 125 126 127 128 129 130 131 132 133',
+          'search_field' => 'subject'
+        )
+      end
+
+      it 'truncates query at 132 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$subject_qf pf=$subject_pf pf3=$subject_pf3 pf2=$subject_pf2}'\
+          '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+          '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 '\
+          '41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 '\
+          '61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 '\
+          '81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 '\
+          '101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 '\
+          '121 122 123 124 125 126 127 128 129 130 131 132')
+      end
+    end
+
+    context 'Subject search: query contains less than 132 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight',
+          'search_field' => 'subject'
+        )
+      end
+
+      it 'does not truncate query at 132 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$subject_qf pf=$subject_pf pf3=$subject_pf3 pf2=$subject_pf2}'\
+          'One two three four five six seven eight')
+      end
+    end
+
+    context 'ISBN search: query contains more than 117 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+          '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 '\
+          '41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 '\
+          '61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 '\
+          '81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 '\
+          '101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118',
+          'search_field' => 'isbn_issn'
+        )
+      end
+
+      it 'truncates query at 117 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$isbn_issn_qf pf=\'\' pf3=\'\' pf2=\'\'}'\
+          '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+          '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 '\
+          '41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 '\
+          '61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 '\
+          '81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 '\
+          '101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117')
+      end
+    end
+
+    context 'ISBN search: query contains less than 117 terms' do
+      let(:builder_with_params) do
+        search_builder.with(
+          q: 'One two three four five six seven eight',
+          'search_field' => 'isbn_issn'
+        )
+      end
+
+      it 'does not truncate query at 117 terms' do
+        expect(solr_parameters[:q]).to eq('{!edismax qf=$isbn_issn_qf pf=\'\' pf3=\'\' pf2=\'\'}'\
+          'One two three four five six seven eight')
+      end
+    end
+  end
+
   describe 'disable_boolean_for_all_caps' do
     before do
       builder_with_params.add_query_to_solr(solr_parameters)
