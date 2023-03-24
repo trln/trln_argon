@@ -223,7 +223,7 @@ describe TrlnArgonHelper, type: :helper do
 
   describe 'DebugInfoHelper' do
     let(:solr_params) do
-      YAML.safe_load(file_fixture('debug/response_headers.yml').read, [Symbol])
+      YAML.safe_load(file_fixture('debug/response_headers.yml').read, permitted_classes: [Symbol])
     end
 
     let(:document) do
