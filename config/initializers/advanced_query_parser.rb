@@ -6,14 +6,42 @@ require 'parsing_nesting/tree'
 # Here is the file v8.0.0.alpha2: https://github.com/projectblacklight/blacklight_advanced_search/blob/v8.0.0.alpha2/lib/blacklight_advanced_search/advanced_query_parser.rb
 module BlacklightAdvancedSearch
   class QueryParser
+    # See trln_argon/argon_search_builder/clause_count
+    # Max terms allowed in each field before the query gets truncated.
+    MAX_TERMS_PER_FIELD =
+      {
+        'all_fields': 9,
+        'title': 28,
+        'author': 36,
+        'subject': 141,
+        'isbn_issn': 123,
+        'default': 100
+      }.with_indifferent_access
+
+    def keyword_queries_adjusted_for_truncation(keyword_queries)
+      # If we're likely to go over our Solr query clause limit...
+      while estimated_solr_clauses_total(keyword_queries) > 4096
+        adjusted_keyword_queries = keyword_queries.dup
+
+        # Take away a term from the first field that has 2+ and try again.
+        # This should truncate the most expensive fields first (all_fields, title)
+        # and iterate until we're under the threshold.
+
+        field_to_truncate = adjusted_keyword_queries.find { |clause| query_length(clause[:query]) > 1 }
+        field_to_truncate[:query] = remove_one_term(field_to_truncate[:query])
+        keyword_queries_adjusted_for_truncation(adjusted_keyword_queries)
+      end
+
+      keyword_queries
+    end
+
     def process_query(config)
-      queries = keyword_queries.map do |clause|
+      queries = keyword_queries_adjusted_for_truncation(keyword_queries).map do |clause|
         field = clause[:field]
         query = clause[:query]
         begin
           query = remove_quotes(query) if unbalanced_quotes?(query)
           query = remove_parentheses(query) if unbalanced_parentheses?(query)
-          query = truncate_query(query, 7) if query_length(query) > 7
           ParsingNesting::Tree.parse(query, config.advanced_search[:query_parser])
                               .to_query(local_param_hash(field, config))
         rescue Parslet::ParseFailed => e
@@ -48,6 +76,33 @@ module BlacklightAdvancedSearch
 
     def truncate_query(query, length)
       query.truncate_words(length, separator: /\W+/, omission: '')
+    end
+
+    # Cumulative total of the Solr query clauses the current query would likely require.
+    def estimated_solr_clauses_total(keyword_queries)
+      total_clauses = 0
+      keyword_queries.map do |clause|
+        total_clauses += estimated_solr_clauses_for_field(clause)
+      end
+      total_clauses
+    end
+
+    def estimated_solr_clauses_for_field(clause)
+      query_length(clause[:query]) * estimated_solr_clauses_per_term(clause[:field])
+    end
+
+    def estimated_solr_clauses_per_term(field)
+      field_clause_multipliers.fetch(field, field_clause_multipliers[:default])
+    end
+
+    # Roughly how many Solr clauses will each term present in a given field consume?
+    # The total query has to be under 4096 or Solr will break & the query will fail
+    def field_clause_multipliers
+      MAX_TERMS_PER_FIELD.transform_values { |term_count| 4096 / term_count }
+    end
+
+    def remove_one_term(query)
+      truncate_query(query, query_length(query) - 1)
     end
   end
 end
