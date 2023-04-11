@@ -6,15 +6,15 @@ require 'parsing_nesting/tree'
 # Here is the file v8.0.0.alpha2: https://github.com/projectblacklight/blacklight_advanced_search/blob/v8.0.0.alpha2/lib/blacklight_advanced_search/advanced_query_parser.rb
 module BlacklightAdvancedSearch
   class QueryParser
-    # See trln_argon/argon_search_builder/clause_count
+    # See lib/trln_argon/argon_search_builder/clause_count.rb
     # Max terms allowed in each field before the query gets truncated.
     MAX_TERMS_PER_FIELD =
       {
         'all_fields': 9,
-        'title': 28,
-        'author': 36,
-        'subject': 141,
-        'isbn_issn': 123,
+        'title': 19,
+        'author': 27,
+        'subject': 132,
+        'isbn_issn': 117,
         'default': 100
       }.with_indifferent_access
 
