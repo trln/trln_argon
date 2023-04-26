@@ -1,7 +1,11 @@
 module TrlnArgon
   module ArgonSearchBuilder
     module ClauseCount
+      # rubocop:disable Metrics/CyclomaticComplexity
       def clause_count(solr_parameters)
+        # Option to bypass query truncation, esp. while still on Solr 7.
+        # Truncation will be necessary for Solr 9+.
+        return unless TrlnArgon::Engine.configuration.enable_query_truncation.present?
         return unless query_is_present?(solr_parameters)
 
         case blacklight_params['search_field']
@@ -24,6 +28,7 @@ module TrlnArgon
 
         truncate_query(solr_parameters, length)
       end
+      # rubocop:enable Metrics/CyclomaticComplexity
 
       private
 

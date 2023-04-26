@@ -66,6 +66,10 @@ describe TrlnArgon::Engine do
     it 'sets the minimum query length to return an open search response' do
       expect(config.open_search_q_min_length).to eq('4')
     end
+
+    it 'does not enable query truncation (config is an empty string)' do
+      expect(config.enable_query_truncation).to eq('')
+    end
   end
 
   describe 'it should accept custom configuration values' do
@@ -86,6 +90,7 @@ describe TrlnArgon::Engine do
     config.solr_cache_exp_time = '1.minute'
     config.allow_open_search = 'false'
     config.open_search_q_min_length = '10'
+    config.enable_query_truncation = 'true'
 
     it 'sets the local_institution_code' do
       expect(config.local_institution_code).to eq('custom_institution')
@@ -149,6 +154,10 @@ describe TrlnArgon::Engine do
 
     it 'sets the minimum query length to return an open search response' do
       expect(config.open_search_q_min_length).to eq('10')
+    end
+
+    it 'sets query truncation to true' do
+      expect(config.enable_query_truncation).to eq('true')
     end
   end
 end

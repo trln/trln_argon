@@ -4,6 +4,12 @@ require 'parsing_nesting/tree'
 # For now, when this happens, skip the parse, log the error, and continue.
 # The likely result is No Results Found, which seems better than an error.
 # Here is the file v8.0.0.alpha2: https://github.com/projectblacklight/blacklight_advanced_search/blob/v8.0.0.alpha2/lib/blacklight_advanced_search/advanced_query_parser.rb
+
+# This also implements adaptive query truncation for advanced searches to keep us under our
+# maxClauseCount constraint for Solr 9+. This could potentially be done in a SearchBuilder,
+# though a more opportune time to refactor it as such may be when we drop the
+# blacklight_advanced_search plugin altogether in favor of native BL advanced search (TBD).
+
 module BlacklightAdvancedSearch
   class QueryParser
     # See lib/trln_argon/argon_search_builder/clause_count.rb
@@ -19,6 +25,9 @@ module BlacklightAdvancedSearch
       }.with_indifferent_access
 
     def keyword_queries_adjusted_for_truncation(keyword_queries)
+      # Option to bypass query truncation, esp. while still on Solr 7; needed for 9
+      return keyword_queries unless TrlnArgon::Engine.configuration.enable_query_truncation.present?
+
       # If we're likely to go over our Solr query clause limit...
       while estimated_solr_clauses_total(keyword_queries) > 4096
         adjusted_keyword_queries = keyword_queries.dup
@@ -95,7 +104,7 @@ module BlacklightAdvancedSearch
       field_clause_multipliers.fetch(field, field_clause_multipliers[:default])
     end
 
-    # Roughly how many Solr clauses will each term present in a given field consume?
+    # Roughly how many Solr clauses will each term in a given field consume?
     # The total query has to be under 4096 or Solr will break & the query will fail
     def field_clause_multipliers
       MAX_TERMS_PER_FIELD.transform_values { |term_count| 4096 / term_count }
