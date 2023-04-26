@@ -29,12 +29,13 @@
       <%= content_for(:skip_links) %>
     </nav>
     <%= render partial: 'shared/header_navbar' %>
+  
+
 
   <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
     <%= content_for(:container_header) %>
-
+  
     <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
-
     <div class="row">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>

@@ -47,7 +47,8 @@ module TrlnArgon
                     :allow_open_search,
                     :open_search_q_min_length,
                     :worldcat_cite_base_url,
-                    :worldcat_cite_api_key
+                    :worldcat_cite_api_key,
+                    :allow_tracebacks
 
       # rubocop:disable Metrics/MethodLength
       def initialize
@@ -77,6 +78,7 @@ module TrlnArgon
         @solr_cache_exp_time = '12.hours'
         @allow_open_search = 'true'
         @open_search_q_min_length = '4'
+        @allow_tracebacks = 'false'
       end
       # rubocop:enable Metrics/MethodLength
 

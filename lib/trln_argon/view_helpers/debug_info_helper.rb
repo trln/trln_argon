@@ -24,6 +24,10 @@ module TrlnArgon
         end
       end
 
+      def allow_tracebacks_present?
+        display_debug_info? && TrlnArgon::Engine.configuration.allow_tracebacks.present?
+      end
+
       private
 
       def document_debug_links(options)
