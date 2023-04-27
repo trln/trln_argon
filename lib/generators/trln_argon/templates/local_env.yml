@@ -13,4 +13,5 @@ NUMBER_OF_ITEMS_INDEX_VIEW: '3'
 NUMBER_OF_ITEMS_SHOW_VIEW: '6'
 PAGING_LIMIT: '250'
 FACET_PAGING_LIMIT: '50'
-
+# Uncomment for Solr 9, where truncation is needed to get under maxClauseCount constraint
+# ENABLE_QUERY_TRUNCATION: 'true'

@@ -59,7 +59,7 @@ as it tends to make sure that all gems are already installed.
 
     # entrypoint.sh rubocop
 
-### `bundler_config.rb` 
+### `bundler_config.rb`
 
 By default we're using Ruby 2.7 in the container but you may occasionally want
 to switch this up to Ruby 2.6; since these versions of Ruby come with different
@@ -239,6 +239,10 @@ ARGON_CODE_MAPPINGS_DIR: #{File.join(Rails.root, 'config', 'mappings')
 WORLDCAT_URL: # URL for localized instance of Worldcat
 WORLDCAT_API_URL: # https://www.worldcat.org/webservices/catalog/search/sru
 WORLDCAT_API_KEY: # (institution-specific key for accessing above API)
+
+# Truncate query terms to stay under maxClauseCount constraint in Solr 9+
+# ENABLE_QUERY_TRUNCATION: 'true'
+
 ```
 
 ### Changing Styles

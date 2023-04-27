@@ -9,5 +9,6 @@ class DefaultTrlnSearchBuilder < SearchBuilder
                                      author_boost
                                      subjects_boost
                                      add_document_ids_query
-                                     add_solr_debug]
+                                     add_solr_debug
+                                     clause_count]
 end
