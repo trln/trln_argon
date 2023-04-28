@@ -78,7 +78,7 @@ module TrlnArgon
         @solr_cache_exp_time = '12.hours'
         @allow_open_search = 'true'
         @open_search_q_min_length = '4'
-        @allow_tracebacks = 'false'
+        @allow_tracebacks = ''
       end
       # rubocop:enable Metrics/MethodLength
 
