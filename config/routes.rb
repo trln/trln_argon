@@ -14,4 +14,6 @@ TrlnArgon::Engine.routes.draw do
   # redirects for blacklight_advanced_search plugin former URLs
   get '/advanced', to: redirect('catalog/advanced')
   get '/advanced_trln', to: redirect('trln/advanced')
+
+  get 'logs' => 'catalog#logs', as: 'logs'
 end

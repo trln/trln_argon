@@ -27,6 +27,7 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'worldcat_cite_base_url')
   apply_local_configuration(config, 'worldcat_cite_api_key')
   apply_local_configuration(config, 'enable_query_truncation')
+  apply_local_configuration(config, 'allow_tracebacks')
 
   mappings_options = {
     git_url: 'https://github.com/trln/argon_code_mappings',
