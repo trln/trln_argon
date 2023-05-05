@@ -243,6 +243,9 @@ WORLDCAT_API_KEY: # (institution-specific key for accessing above API)
 # Truncate query terms to stay under maxClauseCount constraint in Solr 9+
 # ENABLE_QUERY_TRUNCATION: 'true'
 
+# Uncomment to add route \logs?lines=50 (lines parameter is optional, default value is 50)
+# ALLOW_TRACEBACKS: 'true'
+
 ```
 
 ### Changing Styles

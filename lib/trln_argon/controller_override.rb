@@ -675,6 +675,17 @@ module TrlnArgon
           TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
           docs.select { |doc| doc.oclc_number.present? }.any?
       end
+
+      def log_params
+        params.permit(:lines)
+      end
+
+      def logs
+        return unless TrlnArgon::Engine.configuration.allow_tracebacks.present?
+        lines = log_params.fetch(:lines, 50)
+        return unless lines.to_s.match(/\d+/)
+        @logs = `tail -n #{lines} log/#{Rails.env}.log`
+      end
     end
   end
 end

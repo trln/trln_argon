@@ -48,7 +48,8 @@ module TrlnArgon
                     :open_search_q_min_length,
                     :worldcat_cite_base_url,
                     :worldcat_cite_api_key,
-                    :enable_query_truncation
+                    :enable_query_truncation,
+                    :allow_tracebacks
 
       # rubocop:disable Metrics/MethodLength
       def initialize
@@ -79,6 +80,7 @@ module TrlnArgon
         @allow_open_search = 'true'
         @open_search_q_min_length = '4'
         @enable_query_truncation = ''
+        @allow_tracebacks = ''
       end
       # rubocop:enable Metrics/MethodLength
 
