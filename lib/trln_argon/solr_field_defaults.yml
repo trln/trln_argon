@@ -258,6 +258,10 @@ NOTE_GENERAL:
   solr_field: note_general_a
   label:
     en: Notes
+NOTE_ACCESSIBILITY:
+  solr_field: note_accessibility_a
+  label:
+    en: Accessibility Notes    
 NOTE_ISSUANCE:
   solr_field: note_issuance_a
   label:
