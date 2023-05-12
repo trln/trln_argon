@@ -367,6 +367,8 @@ module TrlnArgon
                               label: TrlnArgon::Fields::NOTE_REPRODUCTION.label
         config.add_show_field TrlnArgon::Fields::NOTE_GENERAL.to_s,
                               label: TrlnArgon::Fields::NOTE_GENERAL.label
+        config.add_show_field TrlnArgon::Fields::NOTE_ACCESSIBILITY.to_s,
+                              label: TrlnArgon::Fields::NOTE_ACCESSIBILITY.label
         config.add_show_field TrlnArgon::Fields::NOTE_LOCAL.to_s,
                               label: TrlnArgon::Fields::NOTE_LOCAL.label
         config.add_show_field TrlnArgon::Fields::NOTE_PREFERRED_CITATION.to_s,

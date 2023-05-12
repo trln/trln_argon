@@ -322,6 +322,10 @@ describe TrlnArgon::ControllerOverride do
       expect(override_config.show_fields).to have_key('note_general_a')
     end
 
+    it 'sets the Accessibility Notes field' do
+      expect(override_config.show_fields).to have_key('note_accessibility_a')
+    end
+
     it 'sets the Local Note field' do
       expect(override_config.show_fields).to have_key('note_local_a')
     end
