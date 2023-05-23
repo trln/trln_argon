@@ -18,6 +18,10 @@ module TrlnArgon
       "#{facet_value_label(facet_item)}&nbsp;&nbsp;(#{number_with_delimiter facet_item.hits})".html_safe
     end
 
+    def selected?(item)
+      ' selected="selected"' if params[:f_inclusive]&.fetch(facet_field.key, [])&.include?(item.value)
+    end
+
     def render?
       !!display_facet&.items
     end
