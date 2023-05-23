@@ -1,6 +1,7 @@
-FROM ruby:2.7.5 AS app_bootstrap
+ARG RUBY_VERSION=2.7.6
+FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
-RUN apt-get update && apt-get install -y nodejs vim tree
+RUN apt-get update && apt-get install -y nodejs vim less
 
 FROM app_bootstrap AS builder
 
@@ -10,11 +11,9 @@ COPY lib/trln_argon/version.rb /build/lib/trln_argon/version.rb
 
 WORKDIR /build
 
-RUN tree
-
 RUN $(./bundler_config.rb path /gems) && bundle install -j $(nproc)
 
-FROM app_bootstrap
+FROM app_bootstrap AS runnable
 
 COPY --from=builder /gems /gems
 COPY ./bundler_config.rb .

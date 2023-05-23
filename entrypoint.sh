@@ -1,7 +1,7 @@
 #!/bin/sh
 
 check_bundle() {
-    bundle check || bundle install -j "$(nproc)"
+    bundle config set path /gems && bundle check || bundle install -j "$(nproc)"
 }
 
 cd /app || exit
