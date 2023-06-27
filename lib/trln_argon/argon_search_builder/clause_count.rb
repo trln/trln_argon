@@ -24,6 +24,11 @@ module TrlnArgon
         when 'isbn_issn'
           # 117 + "edismax", "qf", "isbn_issn_qf", "pf", "pf3", "pf2"
           length = 123
+        else
+          # 20 fallback for any other search field, e.g., call_number
+          # Note that call_number may have its own search builder, see:
+          # https://github.com/trln/argon_call_number_search
+          length = 19
         end
 
         truncate_query(solr_parameters, length)
