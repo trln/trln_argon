@@ -25,13 +25,13 @@ module TrlnArgon
           # 117 + "edismax", "qf", "isbn_issn_qf", "pf", "pf3", "pf2"
           length = 123
         else
-          # 20 fallback for any other search field, e.g., call_number
-          # Note that call_number may have its own search builder, see:
-          # https://github.com/trln/argon_call_number_search
+          # 20 fallback for any other search field, e.g., work_entry
           length = 19
         end
 
-        truncate_query(solr_parameters, length)
+        # call number truncation occurs in the argon_call_number_search gem
+        # https://github.com/trln/argon_call_number_search
+        truncate_query(solr_parameters, length) unless blacklight_params['search_field'] == 'call_number'
       end
       # rubocop:enable Metrics/CyclomaticComplexity
 
