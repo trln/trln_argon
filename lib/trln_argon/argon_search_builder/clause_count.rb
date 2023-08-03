@@ -25,7 +25,8 @@ module TrlnArgon
           # 117 + "edismax", "qf", "isbn_issn_qf", "pf", "pf3", "pf2"
           length = 123
         else
-          # 20 fallback for any other search field, e.g., work_entry
+          # 20 fallback for any other search field such as publisher, series_statement,
+          # work_entry and genre_headings
           length = 19
         end
 

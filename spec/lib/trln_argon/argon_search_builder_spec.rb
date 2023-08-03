@@ -314,7 +314,7 @@ describe TrlnArgon::ArgonSearchBuilder do
         end
       end
 
-      context 'Any other field search: query contains more than 20 terms' do
+      context 'Work entry search field: query contains more than 20 terms' do
         let(:builder_with_params) do
           search_builder.with(
             q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
@@ -326,6 +326,55 @@ describe TrlnArgon::ArgonSearchBuilder do
         it 'truncates query at 20 terms' do
           expect(solr_parameters[:q]).to eq(\
             '{!edismax qf=$work_entry_qf pf=$work_entry_pf pf3=\'\' pf2=\'\'}1 2 3 4 5 6 7 8 9 10 11 12'
+          )
+        end
+      end
+
+      context 'Publisher search field: query contains more than 20 terms' do
+        let(:builder_with_params) do
+          search_builder.with(
+            q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+            '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40',
+            'search_field' => 'publisher'
+          )
+        end
+
+        it 'truncates query at 20 terms' do
+          expect(solr_parameters[:q]).to eq(\
+            '{!edismax }1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18'
+          )
+        end
+      end
+
+      context 'Series statement search field: query contains more than 20 terms' do
+        let(:builder_with_params) do
+          search_builder.with(
+            q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+            '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40',
+            'search_field' => 'series_statement'
+          )
+        end
+
+        it 'truncates query at 20 terms' do
+          expect(solr_parameters[:q]).to eq(\
+            '{!edismax qf=$series_qf pf=$series_pf pf3=$series_pf3 pf2=$series_pf2}1 2 3 4 5 6 7 8 9 10'
+          )
+        end
+      end
+
+      context 'Genre headings search field: query contains more than 20 terms' do
+        let(:builder_with_params) do
+          search_builder.with(
+            q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+            '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40',
+            'search_field' => 'genre_headings'
+          )
+        end
+
+        it 'truncates query at 20 terms' do
+          expect(solr_parameters[:q]).to eq(\
+            '{!edismax qf=\'genre_headings_t genre_headings_ara_v genre_headings_cjk_v '\
+            'genre_headings_rus_v\' pf=\'\' pf3=\'\' pf2=\'\'}1 2 3 4 5 6 7 8 9 10'
           )
         end
       end
