@@ -319,13 +319,30 @@ describe TrlnArgon::ArgonSearchBuilder do
           search_builder.with(
             q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
             '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40',
-            'search_field' => 'call_number'
+            'search_field' => 'work_entry'
           )
         end
 
         it 'truncates query at 20 terms' do
           expect(solr_parameters[:q]).to eq(\
-            '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20'
+            '{!edismax qf=$work_entry_qf pf=$work_entry_pf pf3=\'\' pf2=\'\'}1 2 3 4 5 6 7 8 9 10 11 12'
+          )
+        end
+      end
+
+      context 'Call number search: query contains more than 20 terms' do
+        let(:builder_with_params) do
+          search_builder.with(
+            q: '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+            '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40',
+            'search_field' => 'call_number'
+          )
+        end
+
+        it 'do not truncate query at 20 terms' do
+          expect(solr_parameters[:q]).to eq(\
+            '1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 '\
+            '21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40'
           )
         end
       end
