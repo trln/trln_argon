@@ -131,6 +131,7 @@ en:
             genre_headings: "Genre"
             series: "Series"
             work_entry: "Work"
+            call_number: "Call number"
 
         sort_options:
             relevance: "Relevance"
