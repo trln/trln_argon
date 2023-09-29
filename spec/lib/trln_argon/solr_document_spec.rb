@@ -875,17 +875,17 @@ describe TrlnArgon::SolrDocument do
       end
 
       let(:url_template) do
-        'http://www.syndetics.com/index.aspc?isbn=%s/%s&client=trlnet'
+        'http://www.syndetics.com/index.aspc?isbn=%s/%s&client=dukeuniv'
       end
 
       it 'generates a link to a small cover image with defaults' do
-        expected = URI(format(url_template, primary_isbn, 'SC.GIF'))
+        expected = URI(format(url_template, primary_isbn, 'SC.GIF'), type=>["unbound"])
         actual = document.cover_image { |x| URI(x) }
         expect(CGI.parse(actual.query)).to eq(CGI.parse(expected.query))
       end
 
       it 'generates a link to a small cover image with custom options' do
-        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), primary_isbn, 'SC.GIF'))
+        expected = URI(format(url_template.gsub(/duke/, 'ncstateu'), primary_isbn, 'SC.GIF'), type=>["unbound"]))
         actual = document.cover_image(size: 'small', client: 'ncstateu') do |x|
           URI(x)
         end
