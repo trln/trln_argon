@@ -885,7 +885,7 @@ describe TrlnArgon::SolrDocument do
       end
 
       it 'generates a link to a small cover image with custom options' do
-        expected = URI(format(url_template.gsub(/duke/, 'ncstateu'), primary_isbn, 'SC.GIF'), type=>["unbound"]))
+        expected = URI(format(url_template.gsub(/duke/, 'ncstateu'), primary_isbn, 'SC.GIF'))
         actual = document.cover_image(size: 'small', client: 'ncstateu') do |x|
           URI(x)
         end
