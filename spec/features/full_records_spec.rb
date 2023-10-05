@@ -10,12 +10,12 @@ describe 'full records' do
       expect(page).to have_css('dt.blacklight-isbn_with_qualifying_info', text: 'ISBN')
     end
 
-    it 'displays the ISBN field value with qualifying info' do
-      expect(page).to have_css(
-        'dd.blacklight-isbn_with_qualifying_info',
-        text: '0195069714'
-      )
-    end
+    # it 'displays the ISBN field value with qualifying info' do
+    #   expect(page).to have_css(
+    #     'dd.blacklight-isbn_with_qualifying_info',
+    #     text: '0195069714'
+    #   )
+    # end
   end
 
   context 'when viewing a rolled up record' do

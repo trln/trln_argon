@@ -99,7 +99,7 @@ http_interactions:
   recorded_at: Fri, 25 Oct 2019 19:46:22 GMT
 - request:
     method: get
-    uri: https://syndetics.com/index.php?client=trlnet&isbn=0195069714/XML.XML&oclc=43641407
+    uri: https://syndetics.com/index.php?client=dukeuniv&isbn=0195069714/XML.XML&oclc=43641407
     body:
       encoding: US-ASCII
       string: ''
@@ -186,7 +186,7 @@ http_interactions:
         I1="BLANK" I2="BLANK"><a>Belonging to the World: Women''s Rights and American
         Constitutional Culture</a></Fld245></Titles><SSIFlds><Fld997 I1="BLANK" I2="BLANK"></Fld997><Fld980
         I1="BLANK" I2="BLANK"><a>Sandra F. VanBurkleo, Assistant Professor of History,
-        Wayne State University.</a></Fld980></SSIFlds></VarDFlds></VarFlds></USMARC></ANOTES><LC>http://www.syndetics.com/index.php?isbn=9780195069716/lc.jpg&amp;client=trlnet</LC><MC>http://www.syndetics.com/index.php?isbn=9780195069716/mc.gif&amp;client=trlnet</MC><SC>http://www.syndetics.com/index.php?isbn=9780195069716/sc.gif&amp;client=trlnet</SC></ssi>'
+        Wayne State University.</a></Fld980></SSIFlds></VarDFlds></VarFlds></USMARC></ANOTES><LC>https://secure.syndetics.com/index.aspx?isbn=9780195069716/lc.jpg&amp;client=dukeuniv&type=unbound</LC><MC>https://secure.syndetics.com/index.aspx?isbn=9780195069716/mc.gif&amp;client=dukeuniv&type=unbound</MC><SC>https://secure.syndetics.com/index.aspx?isbn=9780195069716/sc.gif&amp;client=dukeuniv&type=unbound</SC></ssi>'
     http_version: 
   recorded_at: Fri, 25 Oct 2019 19:46:23 GMT
 recorded_with: VCR 5.0.0

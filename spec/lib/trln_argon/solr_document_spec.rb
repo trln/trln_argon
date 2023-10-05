@@ -850,6 +850,10 @@ describe TrlnArgon::SolrDocument do
         '034571173412'
       end
 
+      let(:type) do
+        'unbound'
+      end
+
       let(:document) do
         SolrDocumentTestClass.new(
           id: 'TRLN12345',
@@ -875,7 +879,7 @@ describe TrlnArgon::SolrDocument do
       end
 
       let(:url_template) do
-        'http://www.syndetics.com/index.aspc?isbn=%s/%s&client=trlnet'
+        'https://secure.syndetics.com/index.aspx?isbn=%s/%s&client=dukeuniv&type=unbound'
       end
 
       it 'generates a link to a small cover image with defaults' do
@@ -885,7 +889,7 @@ describe TrlnArgon::SolrDocument do
       end
 
       it 'generates a link to a small cover image with custom options' do
-        expected = URI(format(url_template.gsub(/trlnet/, 'ncstateu'), primary_isbn, 'SC.GIF'))
+        expected = URI(format(url_template.gsub(/dukeuniv/, 'ncstateu'), primary_isbn, 'SC.GIF'))
         actual = document.cover_image(size: 'small', client: 'ncstateu') do |x|
           URI(x)
         end

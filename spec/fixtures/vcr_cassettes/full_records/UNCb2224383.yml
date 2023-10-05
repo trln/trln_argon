@@ -101,7 +101,7 @@ http_interactions:
   recorded_at: Fri, 25 Oct 2019 19:46:31 GMT
 - request:
     method: get
-    uri: https://syndetics.com/index.php?client=trlnet&isbn=0632020636/XML.XML&oclc=17260956
+    uri: https://syndetics.com/index.php?client=dukeuniv&isbn=0632020636/XML.XML&oclc=17260956
     body:
       encoding: US-ASCII
       string: ''

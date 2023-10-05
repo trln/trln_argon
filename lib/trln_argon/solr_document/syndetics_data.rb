@@ -1,7 +1,7 @@
 module TrlnArgon
   module SolrDocument
     module SyndeticsData
-      IMG_OPTIONS = { client: 'trlnet', size: :small }.freeze
+      IMG_OPTIONS = { client: 'dukeuniv', size: :small }.freeze
 
       # available image sizes and their codes
       SIZES = Hash.new('SC.GIF').update(small: 'SC.GIF',
@@ -35,7 +35,7 @@ module TrlnArgon
       # @option options :client [String] client parameter for syndetics request
       # @option options :size [String, Symbol] image size (:small, :medium, :large)
       # @yield [String] a prospective URL for the specified cover image
-      def cover_image(options = { client: 'trlnet', size: :small })
+      def cover_image(options = { client: 'dukeuniv', size: :small })
         options = {}.update(IMG_OPTIONS).update(options)
         params = get_params(options[:client], SIZES[options[:size].to_sym])
         yield build_syndetics_query(params) if params
@@ -45,7 +45,7 @@ module TrlnArgon
 
       # fetches enhanced data (SyndeticsData object) and yields it to a block,
       # if it's available.
-      def enhanced_data(client = 'trlnet')
+      def enhanced_data(client = 'dukeuniv')
         params = get_params(client, 'XML.XML')
         return nil unless params
         begin
@@ -64,12 +64,12 @@ module TrlnArgon
       end
 
       def build_syndetics_query(params)
-        URI::HTTPS.build(host: 'syndetics.com',
-                         path: '/index.php',
+        URI::HTTPS.build(host: 'secure.syndetics.com',
+                         path: '/index.aspx',
                          query: params.to_query.gsub(/%5B%5D/, ''))
       end
 
-      def get_params(client = 'trlnet', format_spec = 'XML.XML')
+      def get_params(client = 'dukeuniv', format_spec = 'XML.XML')
         params = {
           isbn: [primary_isbn.first].compact,
           oclc: [primary_oclc.first].compact,
@@ -84,6 +84,7 @@ module TrlnArgon
             break
           end
         end
+        params[:type] = 'unbound' unless params.empty?
         params.empty? ? false : params.update(client: client)
       end
     end
