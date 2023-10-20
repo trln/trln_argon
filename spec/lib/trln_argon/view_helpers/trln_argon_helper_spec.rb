@@ -883,6 +883,29 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
+  describe '#clean_and_format_links' do
+    context 'when 583$u includes "Action note" and a link' do
+      let(:local_note) { 'Action note: HathiTrust https://www.hathitrust.org/shared_print_program.' }
+      let(:expected_output) { 'Action note: HathiTrust <a href="https://www.hathitrust.org/shared_print_program">https://www.hathitrust.org/shared_print_program</a>.'.html_safe }
+
+      it 'make URLs clickable' do
+        options = { value: [local_note] }
+        result = helper.clean_and_format_links(options)
+        expect(result).to eq(expected_output)
+      end
+    end
+
+    context 'when 583$u text does not include "Action note"' do
+      let(:local_note) { 'Source of acquisition: HathiTrust https://www.hathitrust.org/shared_print_program.' }
+
+      it 'do not modify the 583$u text' do
+        options = { value: [local_note] }
+        result = helper.clean_and_format_links(options)
+        expect(result).to eq(local_note)
+      end
+    end
+  end
+
   describe '#link_to_fulltext_url' do
     context 'url data includes text' do
       let(:url_hash) do

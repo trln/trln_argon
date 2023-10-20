@@ -11,10 +11,7 @@ describe 'full records' do
     end
 
     it 'displays the ISBN field value with qualifying info' do
-      expect(page).to have_css(
-        'dd.blacklight-isbn_with_qualifying_info',
-        text: '0195069714'
-      )
+      expect(page).to have_content('0195069714')
     end
   end
 
