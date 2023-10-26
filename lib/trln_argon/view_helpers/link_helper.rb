@@ -17,6 +17,14 @@ module TrlnArgon
         end.join('<br />').html_safe
       end
 
+      # Make 583$u clickable
+      def clean_and_format_links(options = {})
+        value = options[:value].first.dup
+        return value unless value.include?('Action note')
+        auto_linked_value = auto_link(value, sanitize: false)
+        auto_linked_value.html_safe
+      end
+
       # Full Text Links -- for Local View
       def link_to_fulltext_url(url_hash)
         inst = TrlnArgon::Engine.configuration.local_institution_code
