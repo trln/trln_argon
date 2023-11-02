@@ -11,7 +11,7 @@ describe TrlnArgon::Engine do
     end
 
     it 'sets the refworks_url' do
-      expect(config.refworks_url).to eq('http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?'\
+      expect(config.refworks_url).to eq('https://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?'\
                                         'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url=')
     end
 

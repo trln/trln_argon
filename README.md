@@ -202,7 +202,7 @@ LOCAL_INSTITUTION_CODE: unc
 APPLICATION_NAME: TRLN Argon
 # Where the argon_code_mappings git repo is checked out.
 ARGON_CODE_MAPPINGS_DIR: #{Rails.root.join('config', 'mappings')
-REFWORKS_URL: "http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url="
+REFWORKS_URL: "https://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url="
 ROOT_URL: 'https://discovery.trln.org'
 ARTICLE_SEARCH_URL: 'http://libproxy.lib.unc.edu/login?url=http://unc.summon.serialssolutions.com/search?s.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
 CONTACT_URL: 'https://library.unc.edu/ask/'

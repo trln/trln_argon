@@ -1,7 +1,7 @@
 SOLR_URL: https://query.discovery.trln.org/trlnbib
 LOCAL_INSTITUTION_CODE: unc
 APPLICATION_NAME: TRLN Argon
-REFWORKS_URL: 'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
+REFWORKS_URL: 'https://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
 ROOT_URL: 'https://discovery.trln.org'
 ARTICLE_SEARCH_URL: 'https://duke.summon.serialssolutions.com/search?s.fvf[]=ContentType%2CJournal+Article%2Cf&s.fvf[]=ContentType%2CMagazine+Article%2Cf&s.q=food#!/search?ho=t&fvf=ContentType,Journal Article,f|ContentType,Magazine Article,f&l=en&q='
 CONTACT_URL: 'https://library.duke.edu/ask'
