@@ -59,7 +59,7 @@ module TrlnArgon
         @solr_fields =
           field_constants(default_fields.merge(override_fields).deep_symbolize_keys)
         @refworks_url =
-          'http://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?' \
+          'https://www.refworks.com.libproxy.lib.unc.edu/express/ExpressImport.asp?' \
           'vendor=SearchUNC&filter=RIS%20Format&encoding=65001&url='
         @root_url = 'https://discovery.trln.org'
         @article_search_url =
