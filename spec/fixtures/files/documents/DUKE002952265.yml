@@ -28,6 +28,8 @@
   - '{"type":"imprint", "label":"", "value":"Washington : Smithsonian Institution Press, 1986."}'
   publisher_location_a:
   - 'Washington'
+  publisher_a:
+  - ["Smithsonian Institution Press"]
   misc_id_qual_a:
   - ''
   misc_id_type_a:
@@ -76,3 +78,6 @@
   - Echinodermata
   statement_of_responsibility_a:
   - Maureen E. Downey.
+  isbn_number_a:
+  - ["0632020636", "0632019239"]
+  

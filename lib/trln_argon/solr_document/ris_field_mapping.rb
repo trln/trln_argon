@@ -14,7 +14,7 @@ module TrlnArgon
           # First Author
           A1: proc { creators_to_text },
           # Second Author
-          # A2: ,
+          # A2: proc { creators_to_text },
           # Location in Archives (Inst., Lib., Call No.)
           AV: proc { locations_to_text },
           # Call Number
@@ -38,11 +38,12 @@ module TrlnArgon
           # Notes
           N1: TrlnArgon::Fields::NOTE_GENERAL,
           # Publisher (Note: Combined with Place Published in Argon imprint_main)
-          PB:  proc { imprint_main_to_text },
+          PB: proc { publisher_name_text },
+
           # Publication year (YYYY/MM/DD)
           PY: TrlnArgon::Fields::PUBLICATION_YEAR,
           # ISBN/ISSN
-          # SN: ,
+          SN: proc { isbn_number } || proc { issn },
           # Primary Title
           TI: TrlnArgon::Fields::TITLE_MAIN,
           # Secondary Title (journal title, if applicable)
@@ -103,6 +104,10 @@ module TrlnArgon
         end
       end
       # rubocop:enable Metrics/MethodLength
+    end
+
+    def publisher_name_text
+      fetch('publisher_a', []).first || ''
     end
   end
 end
