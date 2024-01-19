@@ -448,8 +448,9 @@ describe TrlnArgon::SolrDocument do
         "KW  - Echinodermata -- Classification\r\n"\
         "KW  - Echinodermata -- Atlantic Ocean -- Classification\r\n"\
         "LA  - English\r\n"\
-        "PB  - Washington : Smithsonian Institution Press, 1986.\r\n"\
+        "PB  - Smithsonian Institution Press\r\n"\
         "PY  - 1986\r\n"\
+        "SN  - [\"0632020636\", \"0632019239\"]\r\n"\
         'TI  - Revision of the Atlantic Brisingida (Echinodermata:Asteroidea), '\
         "with description of a new genus and family /\r\n"\
         "UR  - https://discovery.trln.org/catalog/DUKE002952265\r\n"\

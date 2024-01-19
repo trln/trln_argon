@@ -9,6 +9,7 @@ require 'trln_argon/solr_document/sms_field_mapping'
 require 'trln_argon/solr_document/syndetics_data'
 require 'trln_argon/solr_document/urls'
 require 'trln_argon/solr_document/work_entry'
+require 'trln_argon/solr_document/highwire_field_mapping'
 
 module TrlnArgon
   # Mixin for SolrDocument with TRLN Argon Specific Behavior
@@ -25,6 +26,7 @@ module TrlnArgon
     include SyndeticsData
     include Urls
     include WorkEntry
+    include HighwireFieldMapping
 
     def availability
       if self[TrlnArgon::Fields::AVAILABLE].present?
@@ -90,7 +92,7 @@ module TrlnArgon
     end
 
     def creators_to_text
-      names.select { |n| n[:type] == 'creator' || n[:type] == 'no_rel' || n[:type] == '' }
+      names.select { |n| n[:type] == 'creator' || n[:type] == 'director' || n[:type] == 'no_rel' || n[:type] == '' }
            .map { |n| n[:name] }.reject(&:empty?)
     end
 
