@@ -9,7 +9,7 @@ module TrlnArgon
     # Adjusts classes for labels and inputs
     def initialize_search_field_controls
       search_fields.values.each.with_index do |field, i|
-        search_field_control do
+        with_search_field_control do
           fields_for('clause[]', i, include_id: false) do |f|
             content_tag(:div, class: 'form-group advanced-search-field row mb-3') do
               f.label(:query, field.display_label('search'), class: 'col-12 col-md-3 col-form-label') +
