@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
-  s.add_dependency 'sprockets', '~> 3.0'
+  s.add_dependency 'sprockets', '~> 4.0'
 
   # no version specified for sqlite3 because engine_cart 2.2
   # will otherwise use an incompatible version when generating
