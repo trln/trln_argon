@@ -28,11 +28,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails_autolink', '~> 1.1'
   s.add_dependency 'library_stdnums', '~> 1.6'
   s.add_dependency 'font-awesome-rails', '~> 4.7'
-  s.add_dependency 'chosen-rails', '~> 1.10'
   s.add_dependency 'coffee-rails', '~> 4.2'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 4.0'
+  s.add_dependency 'trln-chosen-rails', '~> 1.20'
 
   # no version specified for sqlite3 because engine_cart 2.2
   # will otherwise use an incompatible version when generating
