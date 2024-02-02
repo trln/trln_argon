@@ -11,7 +11,6 @@ module SolrDocumentBehavior
     repository.blacklight_config.document_solr_path = :document
     repository.blacklight_config.document_solr_request_handler = nil
     use_extension(TrlnArgon::DocumentExtensions::Ris)
-    use_extension(TrlnArgon::DocumentExtensions::OpenurlCtxKev)
     use_extension(TrlnArgon::DocumentExtensions::Email)
     use_extension(TrlnArgon::DocumentExtensions::Sms)
     use_extension(Blacklight::Document::DublinCore)
