@@ -26,12 +26,6 @@ describe SolrDocument do
       )
     end
 
-    it 'registers OpenurlCtxKev as a document extension' do
-      expect(described_class.registered_extensions).to include(
-        module_obj: TrlnArgon::DocumentExtensions::OpenurlCtxKev, condition_proc: nil
-      )
-    end
-
     it 'registers Email as a document extension' do
       expect(described_class.registered_extensions).to include(
         module_obj: TrlnArgon::DocumentExtensions::Email, condition_proc: nil

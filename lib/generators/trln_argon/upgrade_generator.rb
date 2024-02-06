@@ -29,7 +29,6 @@ module TrlnArgon
       solr_document = 'app/models/solr_document.rb'
 
       lines_to_remove = [/ +SolrDocument.use_extension(TrlnArgon::Document::Ris).*$/,
-                         / +SolrDocument.use_extension(TrlnArgon::Document::OpenurlCtxKev).*$/,
                          / +SolrDocument.use_extension(TrlnArgon::Document::Email).*$/]
       lines_to_remove.each do |remove_marker|
         gsub_file(solr_document, /#{remove_marker}/, '')

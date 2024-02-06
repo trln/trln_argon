@@ -26,7 +26,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'
   s.add_dependency 'library_stdnums', '~> 1.6'
-  s.add_dependency 'openurl', '~>1.0'
   s.add_dependency 'font-awesome-rails', '~> 4.7'
   s.add_dependency 'chosen-rails', '~> 1.10'
   s.add_dependency 'coffee-rails', '~> 4.2'
