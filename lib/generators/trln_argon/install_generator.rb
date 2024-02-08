@@ -53,6 +53,10 @@ module TrlnArgon
       end
     end
 
+    def update_assets_manifest
+      prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
+    end
+
     def install_stylesheet
       copy_file 'trln_argon.scss', 'app/assets/stylesheets/trln_argon.scss'
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
