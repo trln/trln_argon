@@ -21,8 +21,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'rails', '~> 7'
   s.add_dependency 'blacklight', '~> 7.0'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
-  # s.add_dependency 'blacklight-hierarchy', '~> 4'
-  s.add_dependency 'blacklight-hierarchy', '~> 6.1', '>= 6.1.2'
+  # TODO: when trln-blacklight-hierarchy fork is published on rubygems, reference it here
+  # s.add_dependency 'trln-blacklight-hierarchy'
   s.add_dependency 'blacklight_range_limit', '~> 7'
   s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'

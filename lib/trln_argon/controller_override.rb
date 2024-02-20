@@ -146,12 +146,13 @@ module TrlnArgon
                                     show: true
         config.add_home_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                     label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
-                                    limit: 200,
+                                    limit: -1,
                                     sort: 'count',
-                                    partial: 'blacklight/hierarchy/facet_hierarchy',
                                     collapse: false,
                                     ex: :rollup,
-                                    helper_method: :location_filter_display
+                                    # This helper is still needed for the label in constraints
+                                    helper_method: :location_filter_display,
+                                    component: Blacklight::Hierarchy::FacetFieldListComponent
         config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
@@ -159,8 +160,10 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                     label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                     limit: 4500,
-                                    partial: 'blacklight/hierarchy/facet_hierarchy',
-                                    helper_method: :call_number_filter_display
+                                    sort: 'alpha',
+                                    # This helper is still needed for the label in constraints
+                                    helper_method: :call_number_filter_display,
+                                    component: Blacklight::Hierarchy::FacetFieldListComponent
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                     limit: true
@@ -192,12 +195,13 @@ module TrlnArgon
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
-                               limit: 200,
+                               limit: -1,
                                sort: 'count',
-                               partial: 'blacklight/hierarchy/facet_hierarchy',
                                collapse: false,
                                ex: :rollup,
+                               # This helper is still needed for the label in constraints
                                helper_method: :location_filter_display,
+                               component: Blacklight::Hierarchy::FacetFieldListComponent,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
@@ -217,8 +221,10 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
-                               partial: 'blacklight/hierarchy/facet_hierarchy',
+                               sort: 'alpha',
+                               # This helper is still needed for the label in constraints
                                helper_method: :call_number_filter_display,
+                               component: Blacklight::Hierarchy::FacetFieldListComponent,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
@@ -257,15 +263,22 @@ module TrlnArgon
                                limit: true,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
 
-        # hierarchical facet configuration
+        # Hierarchical facet configuration
+        # See: https://github.com/trln/blacklight-hierarchy/blob/main/README.md
         config.facet_display ||= {}
         cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
         lf_components = TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s.split('_')
         config.facet_display[:hierarchy] = {
-          # blacklight-hierarchy requires this mapping;
-          # prefix + final component (separated by _)
-          cnf_components[0..-2].join('_') => [[cnf_components[-1]], '|'],
-          lf_components[0..-2].join('_') => [[lf_components[-1]], ':']
+          # blacklight-hierarchy gem requires this mapping;
+          # prefix + final component (separated by _) e.g.,
+          #   'location_hierarchy' => [['f'], ':']
+          # TRLN CUSTOMIZATION adds an optional third element to specify
+          # a custom FacetItemPresenter.
+          cnf_components[0..-2].join('_') => [[cnf_components[-1]],
+                                              '|'],
+          lf_components[0..-2].join('_') => [[lf_components[-1]],
+                                             ':',
+                                             TrlnArgon::LocationFacetItemPresenter]
         }
 
         # solr debug fields to be displayed in the index (search results) view

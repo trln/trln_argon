@@ -12,12 +12,12 @@ Blacklight.onLoad(function() {
         var facetLocationWrapper = $('#facet-location_hierarchy_f');
 
         // hide first two facets
-        facetLocationWrapper.find('.facet_select:contains("' + argonHSL + '")').parent().addClass("d-none");
-        facetLocationWrapper.find('.facet_select:contains("' + argonLAW + '")').parent().addClass("d-none");
+        facetLocationWrapper.find('.facet-select:contains("' + argonHSL + '")').closest('li').addClass("d-none");
+        facetLocationWrapper.find('.facet-select:contains("' + argonLAW + '")').closest('li').addClass("d-none");
 
         // open local institution and expand
-        facetLocationWrapper.find('.facet_select:contains("' + argonInstitution + '")').parent().addClass("twiddle-open");
-        facetLocationWrapper.find('.facet_select:contains("' + argonInstitution + '")').parent().children("ul").css("display", "block");
+        facetLocationWrapper.find('.facet-select:contains("' + argonInstitution + '")').closest('li').addClass("twiddle-open");
+        facetLocationWrapper.find('.facet-select:contains("' + argonInstitution + '")').closest('li').children("ul.collapse").collapse('show');
 
         // if there are more than 10 results
         if ( facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul > li').length > parseInt(locationFacetLimit) ) {
@@ -49,11 +49,4 @@ Blacklight.onLoad(function() {
 
     });
 
-    // general facet 'onclick' handler; needs some work AJC TODO
-    $('li.twiddle').on('click', function(t) {
-      if ( t.target == this ) {
-        $(this).toggleClass("twiddle-open");
-        $(this).children("ul").slideToggle();
-      }
-    });
 });
