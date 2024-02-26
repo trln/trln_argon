@@ -11,6 +11,18 @@ module TrlnArgon
       raise 'Install Blacklight before installing TRLN Argon.'
     end
 
+    # Load our TRLN fork of the blacklight-hierarchy gem
+    # TODO: remove in favor of trln_argon.gemspec once our fork is
+    # published on rubygems
+    def install_trln_fork_hierarchy
+      say_status('warning', 'Installing TRLN fork of blacklight-hierarchy', :yellow)
+
+      gem 'blacklight-hierarchy', git: 'https://github.com/trln/blacklight-hierarchy', tag: 'v6.3.1'
+      Bundler.with_clean_env do
+        run 'bundle install'
+      end
+    end
+
     def run_dependency_generators
       generate 'blacklight_hierarchy:install'
       generate 'blacklight_range_limit:install'
