@@ -1,6 +1,5 @@
 require 'blacklight'
 require 'blacklight_advanced_search'
-# require 'trln-blacklight-hierarchy'
 require 'blacklight_range_limit'
 require 'rails_autolink'
 require 'library_stdnums'

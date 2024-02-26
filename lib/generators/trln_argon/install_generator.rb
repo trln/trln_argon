@@ -11,13 +11,13 @@ module TrlnArgon
       raise 'Install Blacklight before installing TRLN Argon.'
     end
 
-    # TODO: temporarily load a branch of our fork of blacklight-hierarchy
-    # Can remove once our fork is published on rubygems
+    # Load our TRLN fork of the blacklight-hierarchy gem
+    # TODO: remove in favor of trln_argon.gemspec once our fork is
+    # published on rubygems
     def install_trln_fork_hierarchy
-      say_status('warning', 'Installing trln fork of blacklight-hierarchy', :yellow)
+      say_status('warning', 'Installing TRLN fork of blacklight-hierarchy', :yellow)
 
-      gem 'blacklight-hierarchy', git: 'https://github.com/trln/blacklight-hierarchy', 
-branch: 'configurable-labels-and-sort'
+      gem 'blacklight-hierarchy', git: 'https://github.com/trln/blacklight-hierarchy', tag: 'v6.3.1'
       Bundler.with_clean_env do
         run 'bundle install'
       end
