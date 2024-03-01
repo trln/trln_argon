@@ -32,7 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 4.0'
-  s.add_dependency 'trln-chosen-rails', '~> 1.20'
+  s.add_dependency 'trln-chosen-rails', '1.30.0.pre.beta' #'~> 1.20'
 
   s.add_development_dependency 'rspec-rails', '~> 5'
   s.add_development_dependency 'capybara', '~> 3.29'
