@@ -17,8 +17,8 @@ Blacklight.onLoad(function() {
         topLocationFacetItems.find('.facet-select:contains("' + argonLAW + '")').closest('li').addClass("d-none");
 
         // open top-level local institution and expand
-        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').closest('li').addClass("twiddle-open");
-        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').closest('li').children("ul.collapse").addClass("show");
+        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').first().closest('li').addClass("twiddle-open");
+        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').first().closest('li').children("ul.collapse").addClass("show");
 
         // if there are more than 10 results
         if ( facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul > li').length > parseInt(locationFacetLimit) ) {
