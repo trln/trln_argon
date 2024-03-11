@@ -559,6 +559,14 @@ $hierarchy-facet-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.
 .facet-hierarchy {
   ul {
     padding-left: 0.5rem;
+    li {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
+      &.h-leaf {
+        // Keep this padding-left the same width as .toggle-handle
+        padding-left: 1.2rem;
+      }
+    }
   }
 
   .twiddle-open > .facet-label > a {
@@ -566,16 +574,15 @@ $hierarchy-facet-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.
   }
 
   .twiddle > .toggle-handle {
-    min-width: 1.1rem;
+    width: 1.2rem;
   }
 
   .twiddle > .toggle-handle .toggle-icon {
-
     min-height: 0.8rem;
     min-width: 0.8rem;
     max-width: 0.8rem;
     margin-right: 0.2rem;
-    margin-top: 0.3rem;
+    margin-top: 0.2rem;
     background-size: contain;
     background-repeat: no-repeat;
 
@@ -587,6 +594,11 @@ $hierarchy-facet-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.
       transform: rotate(90deg);
     }
   }
+
+  .facet-label, .facet-count {
+    line-height: 1.2rem;
+  }
+
   .more_locations_link, .less_locations_link {
     cursor: pointer;
   }
