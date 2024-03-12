@@ -10,14 +10,15 @@ Blacklight.onLoad(function() {
         var argonInstitution = $('#location-data').data('argon-institution');
         var locationFacetLimit = $('#location-data').data('location-facet-limit');
         var facetLocationWrapper = $('#facet-location_hierarchy_f');
+        var topLocationFacetItems = facetLocationWrapper.find('ul.facet-hierarchy > li');
 
-        // hide first two facets
-        facetLocationWrapper.find('.facet_select:contains("' + argonHSL + '")').parent().addClass("d-none");
-        facetLocationWrapper.find('.facet_select:contains("' + argonLAW + '")').parent().addClass("d-none");
+        // hide top-level HSL & Law facets
+        topLocationFacetItems.find('.facet-select:contains("' + argonHSL + '")').closest('li').addClass("d-none");
+        topLocationFacetItems.find('.facet-select:contains("' + argonLAW + '")').closest('li').addClass("d-none");
 
-        // open local institution and expand
-        facetLocationWrapper.find('.facet_select:contains("' + argonInstitution + '")').parent().addClass("twiddle-open");
-        facetLocationWrapper.find('.facet_select:contains("' + argonInstitution + '")').parent().children("ul").css("display", "block");
+        // open top-level local institution and expand
+        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').first().closest('li').addClass("twiddle-open");
+        topLocationFacetItems.find('.facet-select:contains("' + argonInstitution + '")').first().closest('li').children("ul.collapse").addClass("show");
 
         // if there are more than 10 results
         if ( facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul > li').length > parseInt(locationFacetLimit) ) {
@@ -49,11 +50,4 @@ Blacklight.onLoad(function() {
 
     });
 
-    // general facet 'onclick' handler; needs some work AJC TODO
-    $('li.twiddle').on('click', function(t) {
-      if ( t.target == this ) {
-        $(this).toggleClass("twiddle-open");
-        $(this).children("ul").slideToggle();
-      }
-    });
 });

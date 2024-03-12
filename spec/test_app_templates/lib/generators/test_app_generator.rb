@@ -9,7 +9,11 @@ class TestAppGenerator < Rails::Generators::Base
 
   def add_gems
     gem 'blacklight', '~> 7.0'
-    gsub_file 'Gemfile', /^gem ["']sqlite3["']$/, 'gem "sqlite3", "~> 1.4.2"'
+
+    if RUBY_VERSION < '3.0'
+      # Hack for https://github.com/cbeer/engine_cart/issues/125
+      gsub_file 'Gemfile', /^gem ["']sqlite3["'].*$/, 'gem "sqlite3", "< 1.7"'
+    end
 
     Bundler.with_clean_env do
       run 'bundle install'
