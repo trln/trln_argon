@@ -3,7 +3,7 @@ FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim less
 
-RUN mkdir -p /gems/ruby/3.0.0
+RUN mkdir -p /gems/ruby/3.0.0/cache
 RUN chmod -R +rw /gems
 WORKDIR /app
 COPY . .
