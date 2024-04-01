@@ -18,20 +18,30 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
+  s.add_dependency 'autoprefixer-rails'
+  s.add_dependency 'bcrypt'
   s.add_dependency 'rails', '~> 6'
   s.add_dependency 'blacklight', '~> 7.0'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
   s.add_dependency 'blacklight-hierarchy', '~> 4'
   s.add_dependency 'blacklight_range_limit', '~> 7'
+  s.add_dependency 'bootstrap'
+  s.add_dependency 'devise'
+  s.add_dependency 'devise-guests'
   s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'
+  s.add_dependency 'jquery-rails'
   s.add_dependency 'library_stdnums', '~> 1.6'
   s.add_dependency 'font-awesome-rails', '~> 4.7'
   s.add_dependency 'chosen-rails', '~> 1.10'
   s.add_dependency 'coffee-rails', '~> 4.2'
+  s.add_dependency 'orm_adapter'
+  s.add_dependency 'responders'
+  s.add_dependency 'warden'
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 3.0'
+  s.add_dependency 'twitter-typeahead-rails'
 
   # no version specified for sqlite3 because engine_cart 2.2
   # will otherwise use an incompatible version when generating

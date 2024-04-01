@@ -1,26 +1,16 @@
-ARG RUBY_VERSION=2.7.6
+ARG RUBY_VERSION=3.0.6
 FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim less
 
-FROM app_bootstrap AS builder
-
-COPY ./Gemfile ./trln_argon.gemspec ./VERSION ./bundler_config.rb /build/
-
-COPY lib/trln_argon/version.rb /build/lib/trln_argon/version.rb
-
-WORKDIR /build
-
-RUN $(./bundler_config.rb path /gems) && bundle install -j $(nproc)
-
-FROM app_bootstrap AS runnable
-
-COPY --from=builder /gems /gems
-COPY ./bundler_config.rb .
-
-RUN $(./bundler_config.rb path /gems)
-
+RUN mkdir -p /gems/ruby/3.0.0
+RUN chmod -R +rw /gems
 WORKDIR /app
+COPY . .
+
+RUN gem install bundler -v 2.4.22
+RUN bundle install
+
 
 EXPOSE 3000
 
