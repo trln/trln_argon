@@ -144,13 +144,14 @@ module TrlnArgon
         options[:value].join(', ')
       end
 
+      # @todo facets_from_request is removed in BL 8 https://github.com/projectblacklight/blacklight/commit/5b2def753dc3724bae5d3d4e70a69ed6453e185b
       def display_facet_hit_count(the_facet, the_value)
-        hits = facets_from_request.select { |f| f.name == the_facet }
-                                  .map(&:items)
-                                  .first
-                                  .select { |i| i.value == the_value }
-                                  .map(&:hits)
-                                  .first
+        hits = facets_from_request(facet_field_names, @response).select { |f| f.name == the_facet }
+                                                                .map(&:items)
+                                                                .first
+                                                                .select { |i| i.value == the_value }
+                                                                .map(&:hits)
+                                                                .first
         hits.present? ? number_with_delimiter(hits, delimiter: ',') : '0'
       end
 
