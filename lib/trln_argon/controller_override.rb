@@ -264,7 +264,7 @@ module TrlnArgon
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
 
         # Hierarchical facet configuration
-        # See: https://github.com/trln/blacklight-hierarchy/blob/main/README.md
+        # See: https://github.com/sul-dlss/blacklight-hierarchy/blob/main/README.md
         config.facet_display ||= {}
         cnf_components = TrlnArgon::Fields::CALL_NUMBER_FACET.to_s.split('_')
         lf_components = TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s.split('_')
@@ -272,8 +272,7 @@ module TrlnArgon
           # blacklight-hierarchy gem requires this mapping;
           # prefix + final component (separated by _) e.g.,
           #   'location_hierarchy' => [['f'], ':']
-          # TRLN CUSTOMIZATION adds an optional third element to specify
-          # a custom FacetItemPresenter.
+          # An optional third element can specify a custom FacetItemPresenter.
           cnf_components[0..-2].join('_') => [[cnf_components[-1]],
                                               '|'],
           lf_components[0..-2].join('_') => [[lf_components[-1]],

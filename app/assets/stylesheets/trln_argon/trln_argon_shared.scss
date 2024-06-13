@@ -554,45 +554,33 @@ body.blacklight-trln-show {
 /* FACETS          */
 /* =============== */
 
-$hierarchy-facet-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc. --><path fill='#{$gray-600}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/></svg>");
+// Blacklight Hierarchy Icons
+// https://github.com/sul-dlss/blacklight-hierarchy/blob/main/README.md#changing-the-icons
+
+$b-h-closed-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d='M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z'/></svg>");
+
+$b-h-opened-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d='M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/></svg>");
 
 .facet-hierarchy {
-  ul {
-    padding-left: 0.5rem;
-    li {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
-      &.h-leaf {
-        // Keep this padding-left the same width as .toggle-handle
-        padding-left: 1.2rem;
-      }
+  .twiddle > .toggle-handle {
+    .toggle-icon {
+      background-color: $gray-600;
+      min-width: 1rem;
+      min-height: 1rem;
+      background-image: none;
+      mask-repeat: no-repeat;
+      mask-position: center;
+    }
+    .closed {
+      mask-image: $b-h-closed-icon;
+    }
+    .opened {
+      mask-image: $b-h-opened-icon;
     }
   }
 
   .twiddle-open > .facet-label > a {
     font-weight: bold;
-  }
-
-  .twiddle > .toggle-handle {
-    width: 1.2rem;
-  }
-
-  .twiddle > .toggle-handle .toggle-icon {
-    min-height: 0.8rem;
-    min-width: 0.8rem;
-    max-width: 0.8rem;
-    margin-right: 0.2rem;
-    margin-top: 0.2rem;
-    background-size: contain;
-    background-repeat: no-repeat;
-
-    &.closed {
-      background-image: escape-svg($hierarchy-facet-expand-icon);
-    }
-    &.opened {
-      background-image: escape-svg($hierarchy-facet-expand-icon);
-      transform: rotate(90deg);
-    }
   }
 
   .facet-label, .facet-count {
@@ -603,7 +591,6 @@ $hierarchy-facet-expand-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.
     cursor: pointer;
   }
 }
-
 
 #checkbox_wrapper_access_type_f { // avalable online
   display: flex;
