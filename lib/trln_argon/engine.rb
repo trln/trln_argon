@@ -45,12 +45,11 @@ module TrlnArgon
                     :solr_cache_exp_time,
                     :allow_open_search,
                     :open_search_q_min_length,
-                    :worldcat_cite_base_url,
-                    :worldcat_cite_api_key,
                     :enable_query_truncation,
                     :allow_tracebacks
 
       # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Layout/LineLength
       def initialize
         @local_institution_code        = 'unc'
         @application_name              = 'TRLN Argon'
@@ -66,7 +65,9 @@ module TrlnArgon
           'url=http://unc.summon.serialssolutions.com/search?'\
           's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
         @contact_url = 'https://library.unc.edu/ask/'
-        @citation_formats = 'apa, mla, chicago, harvard, turabian'
+        # citation formats are coming from the citation-style-language/styles repository on GitHub
+        # (https://github.com/citation-style-language/styles/tree/b2be5aeeee7f00fd2032ac1daad995bbe95398cf)
+        @citation_formats = 'apa, modern-language-association, chicago-fullnote-bibliography, harvard-cite-them-right, turabian-fullnote-bibliography'
         @feedback_url = ''
         @sort_order_in_holding_list = 'unc, duke, ncsu, nccu, trln'
         @number_of_location_facets = '10'
@@ -82,6 +83,7 @@ module TrlnArgon
         @allow_tracebacks = ''
       end
       # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Layout/LineLength
 
       private
 

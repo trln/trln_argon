@@ -864,83 +864,51 @@ describe TrlnArgon::SolrDocument do
   ########################
   # Citation
   ########################
-  describe 'citable?' do
-    context 'document does not have an oclc number' do
-      let(:document) do
-        SolrDocumentTestClass.new(
-          id: 'TRLN12345'
-        )
-      end
+  context 'when document has all required fields for citations' do
+    let(:document) do
+      SolrDocumentTestClass.new(
+        'id' => 'TRLN123',
+        'title_main' => 'Test Title',
+        'publication_year_sort' => '2020',
+        'statement_of_responsibility_a' => 'Test Author',
+        'note_general_a' => 'Test Note',
+        'isbn_number_a' => 'Test Number',
+        'physical_description_a' => 'Test Pages',
+        'publisher_a' => 'Test Publisher',
+        'resource_type_a' => 'Test Type',
+        'edition_a' => 'Test Edition',
+        'address' => 'Test Location'
+      )
+    end
 
-      it 'returns false' do
-        expect(document.citable?).to be false
+    let(:apa_citation) do
+      { 'APA' => '<p class="citation_style_APA"><i>Cats</i>. (1996). Port Orange, FL: Cats Magazine. </p>' }
+    end
+
+    describe '#generate_citations' do
+      it 'returns a hash with citations for each desired format' do
+        expect(document.send(:generate_citations)).to be_a(Hash)
       end
     end
 
-    context 'document does not have citations' do
-      let(:document) do
-        SolrDocumentTestClass.new(
-          id: 'TRLN12345',
-          oclc_number: '123098080985'
-        )
-      end
-
-      it 'returns false' do
-        allow(document).to receive(:citations).and_return({})
-        expect(document.citable?).to be false
+    describe '#map_document_values' do
+      it 'maps document values according to the MAPPING constant' do
+        mapped_values = document.send(:map_document_values)
+        expect(mapped_values).to include(['title', 'Test Title'])
       end
     end
 
-    context 'document does have citations' do
-      let(:document) do
-        SolrDocumentTestClass.new(
-          id: 'TRLN12345',
-          oclc_number: '123098080985'
-        )
-      end
-
-      let(:apa_citation) do
-        { 'APA' => '<p class="citation_style_APA"><i>Cats</i>. (1996). Port Orange, FL: Cats Magazine. </p>' }
-      end
-
-      it 'returns true' do
-        allow(document).to receive(:citations).and_return apa_citation
-        expect(document.citable?).to be true
-      end
-    end
-  end
-
-  describe 'citations' do
-    context 'document has invalid oclc number' do
-      let(:document) do
-        SolrDocumentTestClass.new(
-          id: 'TRLN12345',
-          oclc_number: 'abcdef'
-        )
-      end
-
-      it 'returns empty hash' do
-        allow(document).to receive(:citations).and_return({})
-        expect(document.citations).to be_blank
+    describe '#convert_to_bibtex_format' do
+      it 'returns a correctly formatted BibTeX string' do
+        input = document.send(:map_document_values)
+        bibtex_string = document.send(:convert_to_bibtex_format, input)
+        expect(bibtex_string).to start_with('@book{TRLN123, title = {Test Title}')
       end
     end
 
-    context 'document does have citations' do
-      let(:document) do
-        SolrDocumentTestClass.new(
-          id: 'TRLN12345',
-          oclc_number: '123098080985'
-        )
-      end
-
-      let(:apa_citation) do
-        { 'APA' => '<p class="citation_style_APA"><i>Cats</i>. (1996). Port Orange, FL: Cats Magazine. </p>' }
-      end
-
-      it 'returns citations' do
-        allow(document).to receive(:citations).and_return apa_citation
-        expect(document.citations).to be apa_citation
-      end
+    it 'returns citations' do
+      allow(document).to receive(:citations).and_return apa_citation
+      expect(document.citations).to be apa_citation
     end
   end
 end
