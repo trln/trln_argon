@@ -46,6 +46,9 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'better_errors', '~> 2.9.1'
   s.add_development_dependency 'binding_of_caller', '~> 1.0'
   s.add_development_dependency 'rake', '~> 13'
+  s.add_dependency 'citeproc-ruby', '~> 1.1'
+  s.add_dependency 'csl-styles', '~> 1.0'
+  s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
 
   # Conditionally constrain nokogiri & sqlite3 to versions that still work with Ruby 2.7
   # TODO: remove when we are all using Ruby 3+.

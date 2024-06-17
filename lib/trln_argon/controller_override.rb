@@ -84,7 +84,7 @@ module TrlnArgon
                                       validator: :validate_sms_params)
         config.add_show_tools_partial(:citation,
                                       icon: 'fa fa-quote-left',
-                                      if: :render_citation_action?)
+                                      if: true)
         config.add_show_tools_partial(:ris,
                                       icon: 'fa fa-download',
                                       if: :render_ris_action?,
