@@ -102,24 +102,7 @@ module TrlnArgon
           processor = CiteProc::Processor.new(style: style, format: 'html')
           processor.import(bibliography.to_citeproc)
           citation = processor.render(:bibliography, id: bibliography.first.id).first
-          citation_hash[format_display_name(format)] = citation
-        end
-      end
-
-      def format_display_name(format)
-        case format
-        when 'apa'
-          'apa'
-        when 'modern-language-association'
-          'mla'
-        when 'chicago-fullnote-bibliography'
-          'chicago'
-        when 'harvard-cite-them-right'
-          'harvard'
-        when 'turabian-fullnote-bibliography'
-          'turabian'
-        else
-          format
+          citation_hash[format] = citation
         end
       end
 
