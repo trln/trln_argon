@@ -75,12 +75,16 @@ module TrlnArgon
         editors = []
         docvalue.each do |doc|
           parsed_doc = JSON.parse(doc)
-          if parsed_doc['rel'] == 'editor'
+          if parsed_doc['type'] == 'no_rel'
+            authors << "{#{parsed_doc['name']}}"
+          elsif parsed_doc['rel'] == 'editor'
             editors << parsed_doc['name']
-          elsif parsed_doc['rel'] != 'illustrator'
+          else
             authors << parsed_doc['name']
           end
         end
+        puts "authors=", authors
+        puts "editors=", editors
         [authors.join(' and '), editors.join(' and ')]
       end
 
@@ -102,7 +106,7 @@ module TrlnArgon
           processor = CiteProc::Processor.new(style: style, format: 'html')
           processor.import(bibliography.to_citeproc)
           citation = processor.render(:bibliography, id: bibliography.first.id).first
-          citation_hash[format] = citation
+          citation_hash[format] = citation.tr('{}', '')
         end
       end
 
