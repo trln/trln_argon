@@ -56,8 +56,8 @@ module TrlnArgon
       end
 
       def process_url(docvalue, value, output)
-        processed_value = parse_url(docvalue)
-        process_docvalue(output, value, processed_value)
+        urls = parse_urls(docvalue)
+        process_docvalue(output, value, urls) unless urls.empty?
       end
 
       def process_names(docvalue, output)
@@ -66,8 +66,15 @@ module TrlnArgon
         process_docvalue(output, 'editor', editors) unless editors.empty?
       end
 
-      def parse_url(docvalue)
-        JSON.parse(docvalue.first)['href']
+      def parse_urls(docvalue)
+        urls = []
+        docvalue.each do |value|
+          parsed = JSON.parse(value)
+          if parsed['type'] == 'fulltext' && parsed.key?('href')
+            urls << parsed['href']
+          end
+        end
+        urls
       end
 
       def parse_authors_and_editors(docvalue)
@@ -75,12 +82,12 @@ module TrlnArgon
         editors = []
         docvalue.each do |doc|
           parsed_doc = JSON.parse(doc)
-          if parsed_doc['type'] == 'no_rel'
+          if !parsed_doc.key?('rel') && !parsed_doc.key?('id')
             authors << "{#{parsed_doc['name']}}"
           elsif parsed_doc['rel'] == 'editor'
-            editors << parsed_doc['name']
-          else
-            authors << parsed_doc['name']
+            editors << parsed_doc['name'].sub(/\s*,\s*\d{4}-/, '')
+          elsif parsed_doc['rel'] != 'illustrator'
+            authors << parsed_doc['name'].sub(/\s*,\s*\d{4}-/, '')
           end
         end
         puts "authors=", authors

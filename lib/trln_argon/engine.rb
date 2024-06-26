@@ -66,7 +66,7 @@ module TrlnArgon
           's.secure=f&s.ho=t&s.role=authenticated&s.ps=20&s.q='
         @contact_url = 'https://library.unc.edu/ask/'
         # citation formats are coming from the citation-style-language/styles repository on GitHub
-        # (https://github.com/citation-style-language/styles/tree/b2be5aeeee7f00fd2032ac1daad995bbe95398cf)
+        # (https://github.com/citation-style-language/styles)
         @citation_formats = 'apa, modern-language-association, chicago-fullnote-bibliography, harvard-cite-them-right, turabian-fullnote-bibliography'
         @feedback_url = ''
         @sort_order_in_holding_list = 'unc, duke, ncsu, nccu, trln'

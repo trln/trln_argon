@@ -4,7 +4,6 @@
 <div class="modal-body">
   <% @document.citations.each do |format, citation| %>
     <h4><%= t("trln_argon.citation.#{format}") %></h4>
-    <%= citation.html_safe %>
+    <p><%= auto_link(citation.html_safe) %></p>
   <% end %>
 </div>
-
