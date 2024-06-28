@@ -24,8 +24,6 @@ TrlnArgon::Engine.configure do |config|
   apply_local_configuration(config, 'solr_cache_exp_time')
   apply_local_configuration(config, 'allow_open_search')
   apply_local_configuration(config, 'open_search_q_min_length')
-  apply_local_configuration(config, 'worldcat_cite_base_url')
-  apply_local_configuration(config, 'worldcat_cite_api_key')
   apply_local_configuration(config, 'enable_query_truncation')
   apply_local_configuration(config, 'allow_tracebacks')
 
