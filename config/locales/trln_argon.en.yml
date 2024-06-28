@@ -273,7 +273,8 @@ en:
 
         citation:
             apa: "APA"
-            mla: "MLA"
-            chicago: "Chicago (Author-Date)"
-            harvard: "Harvard"
-            turabian: "Turabian"    
+            modern-language-association: "MLA"
+            chicago-fullnote-bibliography: "Chicago (Author-Date)"
+            harvard-cite-them-right: "Harvard"
+            turabian-fullnote-bibliography: "Turabian"
+

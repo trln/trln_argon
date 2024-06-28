@@ -1,11 +1,9 @@
-<% if @document.citable? %>
-  <div class="modal-header">
-    <h3 class="modal-title"><%= title %></h3>
-  </div>
-  <div class="modal-body">
-    <% @document.citations.each do |format, citation| %>
-      <h4><%= t("trln_argon.citation.#{format}") %></h4>
-      <%= citation %>
-    <% end %>
-  </div>
-<% end %> 
+<div class="modal-header">
+  <h3 class="modal-title"><%= title %></h3>
+</div>
+<div class="modal-body">
+  <% @document.citations.each do |format, citation| %>
+    <h4><%= t("trln_argon.citation.#{format}") %></h4>
+    <p><%= auto_link(citation.html_safe) %></p>
+  <% end %>
+</div>

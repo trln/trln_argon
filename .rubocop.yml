@@ -66,6 +66,7 @@ Metrics/ModuleLength:
     - 'lib/trln_argon/view_helpers/trln_argon_helper.rb'
     - 'spec/lib/trln_argon/fields_spec.rb'
     - 'lib/trln_argon/view_helpers/items_section_helper.rb'
+    - 'lib/trln_argon/solr_document/citation.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:

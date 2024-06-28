@@ -83,8 +83,7 @@ module TrlnArgon
                                       path: :sms_path,
                                       validator: :validate_sms_params)
         config.add_show_tools_partial(:citation,
-                                      icon: 'fa fa-quote-left',
-                                      if: :render_citation_action?)
+                                      icon: 'fa fa-quote-left')
         config.add_show_tools_partial(:ris,
                                       icon: 'fa fa-download',
                                       if: :render_ris_action?,
@@ -682,14 +681,6 @@ module TrlnArgon
 
       def render_sharebookmarks_action?(_config, _options)
         true if request.path == bookmarks_path
-      end
-
-      def render_citation_action?
-        docs = [@document || (@document_list || [])].flatten
-        TrlnArgon::Engine.configuration.citation_formats.present? &&
-          TrlnArgon::Engine.configuration.worldcat_cite_base_url.present? &&
-          TrlnArgon::Engine.configuration.worldcat_cite_api_key.present? &&
-          docs.select { |doc| doc.oclc_number.present? }.any?
       end
 
       def log_params
