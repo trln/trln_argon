@@ -82,16 +82,14 @@ module TrlnArgon
         editors = []
         docvalue.each do |doc|
           parsed_doc = JSON.parse(doc)
-          if !parsed_doc.key?('rel') && !parsed_doc.key?('id')
-            authors << "{#{parsed_doc['name']}}"
+          if !parsed_doc.key?('rel') && !parsed_doc.key?('id') # names of organizations
+            authors << "{#{parsed_doc['name']}}" # need to be in double curly braces
           elsif parsed_doc['rel'] == 'editor'
             editors << parsed_doc['name'].sub(/\s*,\s*\d{4}-/, '')
           elsif parsed_doc['rel'] != 'illustrator'
             authors << parsed_doc['name'].sub(/\s*,\s*\d{4}-/, '')
           end
         end
-        puts "authors=", authors
-        puts "editors=", editors
         [authors.join(' and '), editors.join(' and ')]
       end
 

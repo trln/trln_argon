@@ -864,7 +864,7 @@ describe TrlnArgon::SolrDocument do
   ########################
   # Citation
   ########################
-  context 'when document has all required fields for citations' do
+  context 'when document has all fields for citations' do
     let(:document) do
       SolrDocumentTestClass.new(
         'id' => 'TRLN123',
@@ -909,6 +909,26 @@ describe TrlnArgon::SolrDocument do
     it 'returns citations' do
       allow(document).to receive(:citations).and_return apa_citation
       expect(document.citations).to be apa_citation
+    end
+  end
+
+  context 'when document is missing some fields for citations' do
+    describe '#generate_citation' do
+      let(:document) do
+        SolrDocument.new(
+          title: 'An Example Title',
+          author: 'Doe, John',
+          publication_year: '2020',
+          publisher: 'Example Publisher',
+          location: 'City, State'
+        )
+      end
+
+      it 'generates an APA citation' do
+        expected_citation = 'Doe, J. (2020). An example title. City, State: Example Publisher.'
+        allow(document).to receive(:citations).and_return(expected_citation)
+        expect(document.citations).to eq(expected_citation)
+      end
     end
   end
 end
