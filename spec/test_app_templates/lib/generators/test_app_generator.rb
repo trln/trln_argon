@@ -8,7 +8,7 @@ class TestAppGenerator < Rails::Generators::Base
   # after setting up the application
 
   def add_gems
-    gem 'blacklight', '~> 7.0'
+    gem 'blacklight', '~> 8.0'
 
     if RUBY_VERSION < '3.0'
       # Hack for https://github.com/cbeer/engine_cart/issues/125

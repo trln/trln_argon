@@ -76,9 +76,11 @@ module TrlnArgon
     end
 
     def inject_javascript_include
-      return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
-      insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-        "\n//= require trln_argon/trln_argon\n"
+      if File.exist?('app/assets/javascripts/application.js')
+        return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
+        insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+          "\n//= require trln_argon/trln_argon\n"
+        end
       end
     end
 
@@ -152,7 +154,9 @@ module TrlnArgon
 
     def remove_turbolinks # via http://codkal.com/rails-how-to-remove-turbolinks/
       gsub_file('Gemfile', "gem 'turbolinks',", '')
-      gsub_file('app/assets/javascripts/application.js', '//= require turbolinks', '')
+      if File.exist?('app/assets/javascripts/application.js')
+        gsub_file('app/assets/javascripts/application.js', '//= require turbolinks', '')
+      end
       gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all',
         'data-turbolinks-track': 'reload' %>", '')
       gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application',
