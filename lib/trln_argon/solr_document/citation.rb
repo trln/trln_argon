@@ -94,15 +94,31 @@ module TrlnArgon
       end
 
       def convert_to_bibtex_format(input)
-        identifier = input.detect { |key, _| key == 'id' }[1]
-        entry_type = input.detect { |key, _| key == 'type' }[1].split(',').first.strip.downcase
-        entry_type = map_entry_type(entry_type)
+        identifier = input.detect { |key, _| key == 'id' }&.last
+        entry_type = determine_entry_type(input)
         # The bibtex string should look like this
         # "@book{id, author = {Author, A.}, title = {Title}, journal = {Journal}, year = {2020}}"
-        formatted_pairs = input.reject { |key, _| ['id', 'type'].include?(key) }.map do |key, value|
+        formatted_pairs = generate_formatted_pairs(input)
+        "@#{entry_type}{#{identifier}, #{formatted_pairs.join(', ')}}"
+      rescue StandardError => e
+        puts "An error occurred: #{e.message}"
+        'No citations for this item.'
+      end
+
+      def determine_entry_type(input)
+        entry_type_value = input.detect { |key, _| key == 'type' }&.last
+        entry_type = if entry_type_value.to_s.strip.empty?
+                       'book'
+                     else
+                       entry_type_value.split(',').first.strip.downcase
+                     end
+        map_entry_type(entry_type)
+      end
+
+      def generate_formatted_pairs(input)
+        input.reject { |key, _| ['id', 'type'].include?(key) }.map do |key, value|
           "#{key} = {#{value}}"
         end
-        "@#{entry_type}{#{identifier}, #{formatted_pairs.join(', ')}}"
       end
 
       def process_citations(bibliography, citation_hash)
