@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
   
-  s.add_development_dependency 'rspec-rails', '~> 5'
+  s.add_development_dependency 'rspec-rails', '~> 6'
   s.add_development_dependency 'capybara', '~> 3.29'
   s.add_development_dependency 'pry', '~> 0.14'
   s.add_development_dependency 'rubocop', '~> 1.0'
