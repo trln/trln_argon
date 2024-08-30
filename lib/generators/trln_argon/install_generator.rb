@@ -90,14 +90,18 @@ module TrlnArgon
       end
     end
 
-    # rubocop:disable Layout/LineLength
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  require 'socket'\n\n    local_ip = IPSocket.getaddress(Socket.gethostname)\n\n  BetterErrors::Middleware.allow_ip! local_ip if defined? BetterErrors && Rails.env == :development\n"
+        "\n\n  require 'socket'\n" \
+        "  begin\n" \
+        "    local_ip = IPSocket.getaddress(Socket.gethostname)\n" \
+        "  rescue\n" \
+        "    local_ip = \"127.0.0.1\"\n" \
+        "  end\n" \
+        "  BetterErrors::Middleware.allow_ip! local_ip if defined?(BetterErrors) && Rails.env.development?\n"
       end
     end
-    # rubocop:enable Layout/LineLength
 
     def inject_catalog_controller_overrides
       return if IO.read('config/application.rb').include?('local_env.yml')
