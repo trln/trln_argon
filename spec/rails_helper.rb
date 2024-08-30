@@ -34,7 +34,12 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  # config.fixture_paths = "#{::Rails.root}/spec/fixtures"
+  # Update fixture paths configuration to be compatible with Rails 7.1 and later.
+  # Rails now expects `fixture_paths` to be an array rather than a singular string.
+  # This change is documented in the Rails 7.1 release notes:
+  # https://guides.rubyonrails.org/7_1_release_notes.html
+  # https://apidock.com/rails/v7.1.3.2/ActiveSupport/TestCase/fixture_paths%3D/class
+  config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
