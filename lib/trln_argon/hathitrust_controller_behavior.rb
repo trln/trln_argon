@@ -21,7 +21,7 @@ module TrlnArgon
         render_to_string('hathitrust/show',
                          locals: { hathitrust_argon_url_hash:
                                      hathitrust_argon_url_hash(full_text_url) },
-                         layout: false)
+                         layout: false).gsub(/<!--.*?-->/m, '')
       end
 
       def hathitrust_argon_url_hash(full_text_url)

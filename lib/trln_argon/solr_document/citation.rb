@@ -101,7 +101,7 @@ module TrlnArgon
         formatted_pairs = generate_formatted_pairs(input)
         "@#{entry_type}{#{identifier}, #{formatted_pairs.join(', ')}}"
       rescue StandardError => e
-        if e.message == '500: Internal Server Error'
+        if e.message.include?('500')
           puts 'There are no citations available due to a server error.'
         else
           puts "An error occurred: #{e.message}"

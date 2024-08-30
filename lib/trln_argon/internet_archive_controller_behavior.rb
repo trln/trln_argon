@@ -26,10 +26,13 @@ module TrlnArgon
       end
 
       def render_ia_partial_to_string(full_text_url)
-        render_to_string('internet_archive/show',
-                         locals: { internet_archive_argon_url_hash:
-                                     ia_argon_url_hash(full_text_url) },
-                         layout: false)
+        render_to_string(
+          'internet_archive/show',
+          locals: {
+            internet_archive_argon_url_hash: ia_argon_url_hash(full_text_url)
+          },
+          layout: false
+        ).gsub(/<!--.*?-->/m, '')
       end
 
       def ia_argon_url_hash(full_text_url)
