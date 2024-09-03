@@ -101,11 +101,7 @@ module TrlnArgon
         formatted_pairs = generate_formatted_pairs(input)
         "@#{entry_type}{#{identifier}, #{formatted_pairs.join(', ')}}"
       rescue StandardError => e
-        if e.message.include?('500')
-          puts 'There are no citations available due to a server error.'
-        else
-          puts "An error occurred: #{e.message}"
-        end
+        puts "An error occurred: #{e.message}"
         'No citations for this item.'
       end
 
@@ -114,7 +110,7 @@ module TrlnArgon
         entry_type = if entry_type_value.to_s.strip.empty?
                        'book'
                      else
-                       entry_type_value.split(',').first.strip.downcase
+                       entry_type_value
                      end
         map_entry_type(entry_type)
       end

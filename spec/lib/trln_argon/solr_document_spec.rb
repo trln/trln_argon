@@ -931,4 +931,63 @@ describe TrlnArgon::SolrDocument do
       end
     end
   end
+
+  context 'when an error occurs during citation generation' do
+    describe '#generate_citation' do
+      let(:document) do
+        SolrDocument.new(
+          # Missing required fields
+          title: 'An Incomplete Title'
+        )
+      end
+
+      before do
+        allow(document).to receive(:generate_formatted_pairs).and_raise(StandardError)
+      end
+
+      it 'prints a server error message' do
+        expect { document.send(:convert_to_bibtex_format, document) }
+          .to output(a_string_starting_with('An error occurred:')).to_stdout
+      end
+
+      it 'returns a fallback message' do
+        expect(document.send(:convert_to_bibtex_format, document)).to eq('No citations for this item.')
+      end
+    end
+  end
+
+  describe '#determine_entry_type' do
+    let(:document) { SolrDocument.new }
+
+    context 'when type is present' do
+      it 'returns the correct entry type' do
+        input = { 'type' => 'Journal, Magazine, or Periodical' }
+        expect(document.send(:determine_entry_type, input)).to eq('article-journal')
+      end
+    end
+
+    context 'when type is present but empty' do
+      it 'defaults to book' do
+        input = { 'type' => '' }
+        expect(document.send(:determine_entry_type, input)).to eq('book')
+      end
+    end
+
+    context 'when type is not present' do
+      it 'defaults to book' do
+        input = {}
+        expect(document.send(:determine_entry_type, input)).to eq('book')
+      end
+    end
+  end
+
+  describe '#generate_formatted_pairs' do
+    let(:document) { SolrDocument.new }
+
+    it 'formats input pairs, excluding id and type' do
+      input = { 'id' => '123', 'type' => 'article', 'author' => 'Doe, John', 'title' => 'An Interesting Article' }
+      expected_output = ['author = {Doe, John}', 'title = {An Interesting Article}']
+      expect(document.send(:generate_formatted_pairs, input)).to eq(expected_output)
+    end
+  end
 end
