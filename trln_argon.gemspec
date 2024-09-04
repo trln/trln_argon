@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  s.add_dependency 'rails', '~> 7'
+  s.add_dependency 'rails', '~> 7.1'
   s.add_dependency 'blacklight', '~> 7.0'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
   s.add_dependency 'blacklight-hierarchy', '~> 6.3'
@@ -36,7 +36,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
   
-  s.add_development_dependency 'rspec-rails', '~> 5'
+  s.add_development_dependency 'rspec-rails', '~> 6'
   s.add_development_dependency 'capybara', '~> 3.29'
   s.add_development_dependency 'pry', '~> 0.14'
   s.add_development_dependency 'rubocop', '~> 1.0'
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
 
   # Conditionally constrain nokogiri & sqlite3 to versions that still work with Ruby 2.7
   # TODO: remove when we are all using Ruby 3+.
-  if Gem::Requirement.new('< 3.0').satisfied_by?(Gem::Version.new(RUBY_VERSION))
+  if Gem::Requirement.new('< 3.1').satisfied_by?(Gem::Version.new(RUBY_VERSION))
     s.add_dependency 'nokogiri', '< 1.16'
     s.add_dependency 'sqlite3', '< 1.7'
   end
