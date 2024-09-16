@@ -17,7 +17,8 @@
                        locals: { document: document,
                                    loc_b: loc_b,
                                    loc_n: loc_n,
-                                   loc_b_header_level: loc_b_header_level } %>
+                                   loc_b_header_level: loc_b_header_level,
+                                   location_holdings: item_data['holdings']&.first } %>
             </div>
 
             <% # --- HOLDINGS SUMMARIES WRAPPER --- %>
