@@ -675,16 +675,10 @@ div.facet-content { // non-hierarcical facets
         text-indent: 0;
         padding-left: 0;
         padding-bottom: 0;
-        max-width: 100%;
         flex: 1 1 67.5%;
         margin-right: 2.5%;
         margin-bottom: 0;
         line-height: 1.2;
-
-        @include media-breakpoint-up(sm) {
-          flex: 1 1 100%;
-          margin-right: 0;
-        }
 
         @include media-breakpoint-up(xl) {
           flex: 1 1 calc(62.5% - 1em);
@@ -699,11 +693,6 @@ div.facet-content { // non-hierarcical facets
         flex: 0 0 30%;
         text-align: right;
         line-height: 1.2;
-
-        @include media-breakpoint-up(sm) {
-          flex: 1 1 100%;
-          text-align: left;
-        }
 
         @include media-breakpoint-up(xl) {
           flex: 0 0 32.5%;
@@ -976,6 +965,12 @@ h1, h2, h3, h4, h5 {
     color: #707070;
   }
 
+}
+
+.documents-list {
+  .document {
+    display: inherit;
+  }
 }
 
 #document {
@@ -1312,7 +1307,6 @@ h1, h2, h3, h4, h5 {
 
 #documents .items {
   overflow: visible;
-  margin-right: 1em;
 }
 
 #document .items,
