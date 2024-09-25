@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=2.7.6
+ARG RUBY_VERSION=3.0.0
 FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim less
@@ -26,7 +26,7 @@ EXPOSE 3000
 
 ENV ENGINE_CART_RAILS_OPTIONS="--skip-webpack-install --skip-javascript"
 
-ENV BOOTSTRAP_VERSION="~> 4.1"
+ENV BOOTSTRAP_VERSION="~> 5.3"
 
 # allows setting options for caching HTTP operations
 # used in unit testing with 'vcr', a ruby framework for recording
