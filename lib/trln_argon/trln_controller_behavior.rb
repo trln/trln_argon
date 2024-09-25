@@ -15,6 +15,7 @@ module TrlnArgon
       helper_method :ris_url
       helper_method :show_solr_document_path
       helper_method :show_solr_document_url
+      helper_method :show_trln_solr_document_url
       helper_method :email_path
       helper_method :email_url
       helper_method :sms_path
@@ -52,6 +53,7 @@ module TrlnArgon
         return unless doc.respond_to?(:id)
         trln_solr_document_url(options.merge(id: doc.id))
       end
+      alias_method :show_trln_solr_document_url, :show_solr_document_url
 
       def filter_scope_name
         t('trln_argon.consortium.short_name')
