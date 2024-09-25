@@ -1,0 +1,17 @@
+// This makes it so we only have to import one trln_argon JS
+// file into our local application.js file.
+import "trln_argon/syndetics"
+import "trln_argon/expand_contract"
+import "trln_argon/enable_facet_checkbox"
+import "trln_argon/progressive_links"
+import "trln_argon/physical_media_facet"
+import "trln_argon/location_facet"
+import "trln_argon/advanced_search_select"
+import "trln_argon/results_count_for_toggle"
+import "trln_argon/google_books_preview"
+import "trln_argon/fulltext_links"
+import "trln_argon/advanced_search_scope"
+import "trln_argon/bookmark_share"
+import "trln_argon/typeahead.bundle"
+import "trln_argon/advanced_search_tt_menu"
+import "trln_argon/autocomplete"

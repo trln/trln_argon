@@ -1,5 +1,6 @@
-Blacklight.onLoad(function () {
+import Blacklight from 'blacklight';
 
+Blacklight.onLoad(function () {
   // Get natural width of thumbnails and hide empty syndetics thumbs
 
   var selectors = ['#document div.thumbnail', '#documents div.thumbnail'];

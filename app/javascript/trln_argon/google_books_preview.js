@@ -1,3 +1,5 @@
+import Blacklight from 'blacklight';
+
 Blacklight.onLoad(function() {
     $(window).on('load', function() {
         var previewAvailable = function (item) {

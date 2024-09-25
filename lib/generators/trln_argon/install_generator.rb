@@ -61,6 +61,7 @@ module TrlnArgon
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
+    # TODO: revisit this; probably not necessary for BL8
     # BL7 started precompiling blacklight/blacklight.js
     # We need this file without the autocomplete parts so
     # we can use our own.  This autogenerates the above file
@@ -75,12 +76,39 @@ module TrlnArgon
       TrlnArgon::Utilities.new.install_blacklight_asset_path
     end
 
-    def inject_javascript_include
-      if File.exist?('app/assets/javascripts/application.js')
-        return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
-        insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-          "\n//= require trln_argon/trln_argon\n"
-        end
+    # Inject jQuery into the importmap, to ease transition to BL8
+    # TODO: Might we retire jQuery entirely in favor of vanilla ES6 & Stimulus?
+    # TODO: We probably need to revise some existing jQuery to work with
+    # modern versions, e.g., $('#element').click() may no longer work...
+    # and/or adjust the max version of jQuery we're using.
+    def inject_jquery
+      jquery_version = "3.7.1"
+      puts "Injecting jQuery #{jquery_version}"
+      append_to_file 'config/importmap.rb' do
+        <<~CONTENT
+          pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery@#{jquery_version}/dist/jquery.js"
+        CONTENT
+      end
+
+      append_to_file 'app/javascript/application.js' do
+        <<~CONTENT
+          import "jquery"
+        CONTENT
+      end
+    end
+
+    def inject_javascript_imports
+      puts "Injecting trln_argon javascript"
+      append_to_file 'config/importmap.rb' do
+        <<~CONTENT
+          pin_all_from "trln_argon", under: "trln_argon"
+        CONTENT
+      end
+
+      append_to_file 'app/javascript/application.js' do
+        <<~CONTENT
+          import "trln_argon"
+        CONTENT
       end
     end
 
@@ -152,6 +180,7 @@ module TrlnArgon
       end
     end
 
+    # TODO: revisit this; Turbolinks was replaced by Turbo in Rails 7
     def remove_turbolinks # via http://codkal.com/rails-how-to-remove-turbolinks/
       gsub_file('Gemfile', "gem 'turbolinks',", '')
       if File.exist?('app/assets/javascripts/application.js')

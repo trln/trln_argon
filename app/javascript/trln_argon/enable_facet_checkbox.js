@@ -1,19 +1,21 @@
+import Blacklight from 'blacklight';
+
 Blacklight.onLoad(function() {
   /**
    * Ensures that checkbox-only facets (currently, access_type which is either
    * online or not)
    * (a) do not display a header and
-   * (b) automatically select/deselect based on whether the value of the checkbox 
+   * (b) automatically select/deselect based on whether the value of the checkbox
    * changes.
    */
   $(window).on('load', function() {
     $('#facet-panel-collapse .facet-checkbox-wrapper').each(
       function(index, element) {
         var wrapper = $(this);
-        
+
         // hide the header
         wrapper.closest('div.card').find('.facet-field-heading').hide();
-      
+
         var fieldName = wrapper.data('facetField');
         if ( !fieldName ) {
           return;

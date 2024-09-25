@@ -1,3 +1,5 @@
+import Blacklight from 'blacklight';
+
 // test if an element is in the viewport
 $.fn.isInViewport = function() {
   var elementTop = $(this).offset().top;
@@ -8,7 +10,6 @@ $.fn.isInViewport = function() {
 };
 
 Blacklight.onLoad(function() {
-
   $("#documents .hider, #holdings .hider").click(function(evt) {
     evt.preventDefault();
     var theAnchorID = $(this).attr('href');

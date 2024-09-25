@@ -11,4 +11,5 @@ Gemfile.lock
 config/mappings/
 
 .internal_test_app
+.DS_Store
 .idea/

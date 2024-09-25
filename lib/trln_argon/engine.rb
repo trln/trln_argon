@@ -23,6 +23,16 @@ module TrlnArgon
       yield configuration
     end
 
+    # See https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/blacklight/engine.rb#L34-L46
+    # https://github.com/rails/importmap-rails?tab=readme-ov-file#composing-import-maps
+    initializer "trln_argon.assets.precompile" do |app|
+      app.config.assets.paths << Engine.root.join("app/javascript")
+    end
+
+    initializer "trln_argon.importmap", before: "importmap" do |app|
+      app.config.importmap.paths << Engine.root.join("config/importmap.rb") if app.config.respond_to?(:importmap)
+    end
+
     class Configuration
       attr_accessor :local_institution_code,
                     :application_name,

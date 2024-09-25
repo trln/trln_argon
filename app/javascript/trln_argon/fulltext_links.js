@@ -1,3 +1,5 @@
+import Blacklight from 'blacklight';
+
 Blacklight.onLoad(function() {
   // Fetch Internet Archive IDs from the DOM
   // for Internet Archive linking

@@ -1,3 +1,5 @@
+import Blacklight from 'blacklight';
+
 Blacklight.onLoad(function() {
 
   function fetch_and_display_toggle_count(toggle_label) {

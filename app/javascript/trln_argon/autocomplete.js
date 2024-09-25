@@ -1,4 +1,4 @@
-/*global Bloodhound */
+import Blacklight from 'blacklight';
 
 Blacklight.onLoad(function() {
   'use strict';
