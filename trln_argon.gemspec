@@ -48,12 +48,4 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'better_errors', '~> 2.9.1'
   s.add_development_dependency 'binding_of_caller', '~> 1.0'
   s.add_development_dependency 'rake', '~> 13'
-  
-
-  # Conditionally constrain nokogiri & sqlite3 to versions that still work with Ruby 2.7
-  # TODO: remove when we are all using Ruby 3+.
-  if Gem::Requirement.new('< 3.1').satisfied_by?(Gem::Version.new(RUBY_VERSION))
-    s.add_dependency 'nokogiri', '< 1.16'
-    s.add_dependency 'sqlite3', '< 1.7'
-  end
 end
