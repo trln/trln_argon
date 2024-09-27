@@ -1,12 +1,12 @@
 <% if query_has_constraints? %>
   <div id="appliedParams" class="clearfix constraints-container" role="navigation" aria-label="Search Constraints">
-    <div class="float-left">
+    <div class="float-start">
       <%= solr_query_request %>
     </div>
-    <div class="float-left">
+    <div class="float-start">
       <%= render(TrlnArgon::StartOverButtonComponent.new(classes: 'catalog_startOverLink btn btn-primary btn-sm')) %>
     </div>
-    <div class="float-left">
+    <div class="float-start">
       <%= link_to 'Edit Search', advanced_search_url(params.permit!.except(:controller, :action).to_h), :class => "catalog_editSearchLink btn btn-outline-secondary btn-sm", :id=>"editSearchLink" %>
     </div>
     <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
