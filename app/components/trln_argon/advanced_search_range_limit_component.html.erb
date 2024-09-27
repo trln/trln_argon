@@ -5,9 +5,9 @@
     <%= @facet_field.label %>
   <% end %>
   <div class="col-12 col-sm-6 col-md-9 range_limit">
-    <label for="range_publication_year_isort_begin" class="sr-only">Publication date range (starting year)</label>
+    <label for="range_publication_year_isort_begin" class="visually-hidden">Publication date range (starting year)</label>
     <%= render_range_input(@facet_field.key, :begin) %> – 
-    <label for="range_publication_year_isort_end" class="sr-only">Publication date range (ending year)</label>
+    <label for="range_publication_year_isort_end" class="visually-hidden">Publication date range (ending year)</label>
     <%= render_range_input(@facet_field.key, :end) %>
   </div>
 </div>

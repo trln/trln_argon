@@ -7,7 +7,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#user-util-collapse" aria-controls="user-util-collapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <%= link_to content_tag(:span, inst_long, class: "sr-only"), root_path, class: "navbar-brand" %>
+    <%= link_to content_tag(:span, inst_long, class: "visually-hidden"), root_path, class: "navbar-brand" %>
 
     <div class="collapse navbar-collapse justify-content-md-end" id="user-util-collapse">
       <%= render 'shared/user_util_links' %>

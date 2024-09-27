@@ -9,7 +9,7 @@
 -%>
 
 <div id="document-tools" aria-labelledby="toolsLabel">
-  <h2 class="sr-only" id="toolsLabel">Tools</h2>
+  <h2 class="visually-hidden" id="toolsLabel">Tools</h2>
   <%= render Blacklight::Document::ActionsComponent.new(
         document: @document,
         tag: 'ul',
