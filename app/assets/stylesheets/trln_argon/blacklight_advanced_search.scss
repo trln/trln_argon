@@ -44,7 +44,7 @@ h2.query-criteria-heading label {
     width: 100%;
   }
 
-  @include media-breakpoint-down(xs) {
+  @include media-breakpoint-down(sm) {
     .submit-buttons {
       margin-top: 15px;
       text-align: left;
