@@ -2,14 +2,14 @@
 
   <div class="<%= call_number_wrapper_class(action: action_name) %>">
     <dl>
-    <dt><span class='call-number-badge badge badge-info'><%= t('trln_argon.show.badge.call_number') %></span></dt>
+    <dt><span class='call-number-badge badge bg-info'><%= t('trln_argon.show.badge.call_number') %></span></dt>
     <dd><span class='call-number'><%= call_number_display(item) %></span> <%= render partial: 'location_link', locals: { document: document, loc_b: loc_b, loc_n: loc_n, item: item } %></dd>
     </dl>
   </div>
 
   <div class="<%= status_wrapper_class(action: action_name) %> status-wrapper" <%= assign_item_id_as_id(item) %>>
     <dl>
-      <dt><span class='status-badge badge badge-info'><%= t('trln_argon.show.badge.status') %></span></dt>
+      <dt><span class='status-badge badge bg-info'><%= t('trln_argon.show.badge.status') %></span></dt>
       <dd>
        <% available_class = item_availability_display(item) %>
        <% due_date = item_due_date(item) %>
@@ -27,7 +27,7 @@
 
   <div class="<%= item_note_wrapper_class({ action: action_name, item_length: item_notes_display(item).length }) %> item-note-wrapper">
     <dl>
-      <dt><span class='item-note-badge badge badge-info'><%= t('trln_argon.show.badge.item_note') %></span></dt>
+      <dt><span class='item-note-badge badge bg-info'><%= t('trln_argon.show.badge.item_note') %></span></dt>
       <dd><%= item_notes_display(item) %></dd>
     </dl>
   </div>
