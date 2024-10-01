@@ -8,16 +8,4 @@
 
 -%>
 
-<div id="document-tools" aria-labelledby="toolsLabel">
-  <h2 class="sr-only" id="toolsLabel">Tools</h2>
-  <%= render Blacklight::Document::ActionsComponent.new(
-        document: @document,
-        tag: 'ul',
-        classes: "#{controller_name}Tools nav nav-pills",
-        wrapping_tag: 'li',
-        wrapping_classes: "#{config.name}",
-        actions: document_actions(@document),
-        link_classes: "btn btn-outline-secondary",
-        url_opts: Blacklight::Parameters.sanitize(params.to_unsafe_h)
-      ) %>
-</div>
+<%= render TrlnArgon::Document::ShowToolsComponent.new(document: @document) %>
