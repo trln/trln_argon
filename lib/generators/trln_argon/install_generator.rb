@@ -12,13 +12,19 @@ module TrlnArgon
     end
 
     def run_dependency_generators
+      say_status('info', '=================================', :magenta)
+      say_status('info', 'Installing Blacklight Range Limit', :magenta)
+      say_status('info', '=================================', :magenta)
       generate 'blacklight_range_limit:install'
     end
 
     # this should match whatever's in trln_argon.gemspec
     def install_gems
-      return if IO.read('Gemfile').include?('better_errors')
-      gem 'better_errors', '~> 2.9.1'
+      say_status('info', '======================', :magenta)
+      say_status('info', 'Adding gems to Gemfile', :magenta)
+      say_status('info', '======================', :magenta)
+      gem 'better_errors', '~> 2.9.1' unless IO.read('Gemfile').include?('better_errors')
+      gem 'jquery-rails', '~> 4.6' unless IO.read('Gemfile').include?('jquery-rails')
     end
 
     def install_configuration_files
@@ -53,7 +59,11 @@ module TrlnArgon
     end
 
     def update_assets_manifest
+      say_status('info', '============================', :magenta)
+      say_status('info', 'Updating the assets manifest', :magenta)
+      say_status('info', '============================', :magenta)
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
+      prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
     end
 
     def install_stylesheet
@@ -61,26 +71,47 @@ module TrlnArgon
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
+    # TODO: Investigate whether these steps and associated code are still
+    # necessary (probably not?). BL8 refactored typeahead/autocomplete.
+    # See: https://github.com/projectblacklight/blacklight/pull/2576
     # BL7 started precompiling blacklight/blacklight.js
     # We need this file without the autocomplete parts so
     # we can use our own.  This autogenerates the above file
     # in the target application as a set of requires, based
     # on the contents of the /app/javascript/blacklight directory
     # in the Blacklight gem, excluding autocomplete.
-    def override_compiled_blacklight_javascript
-      TrlnArgon::Utilities.new.repackage_blacklight_javascript
-    end
+    #def override_compiled_blacklight_javascript
+    #  TrlnArgon::Utilities.new.repackage_blacklight_javascript
+    #end
 
-    def insert_into_assets_initializer
-      TrlnArgon::Utilities.new.install_blacklight_asset_path
-    end
+    #def insert_into_assets_initializer
+    #  TrlnArgon::Utilities.new.install_blacklight_asset_path
+    #end
 
     def inject_javascript_include
+      say_status('info', '==============================', :magenta)
+      say_status('info', 'Injecting TRLN Argon JS assets', :magenta)
+      say_status('info', '==============================', :magenta)
       if File.exist?('app/assets/javascripts/application.js')
         return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
         insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
           "\n//= require trln_argon/trln_argon\n"
         end
+      end
+    end
+
+    # BL8's Sprockets asset generator only injects jQuery for Bootstrap 4
+    # so we need to explicitly add it when using Bootstrap 5
+    # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb
+    def inject_jquery
+      say_status('info', '================', :magenta)
+      say_status('info', 'Injecting jQuery', :magenta)
+      say_status('info', '================', :magenta)
+      return unless File.exist?('app/assets/javascripts/application.js')
+      insert_into_file 'app/assets/javascripts/application.js', after: '//= require rails-ujs' do
+        <<~CONTENT
+          \n//= require jquery3
+        CONTENT
       end
     end
 

@@ -35,7 +35,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'citeproc-ruby', '~> 1.1'
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
-  
+  s.add_dependency 'jquery-rails', '~> 4.6'
+
   s.add_development_dependency 'rspec-rails', '~> 6'
   s.add_development_dependency 'capybara', '~> 3.29'
   s.add_development_dependency 'pry', '~> 0.14'
