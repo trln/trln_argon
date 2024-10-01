@@ -21,12 +21,27 @@ class TestAppGenerator < Rails::Generators::Base
   end
 
   def run_blacklight_generator
-    say_status('warning', 'GENERATING BL', :yellow)
+    say_status('info', '================================', :magenta)
+    say_status('info', 'Generating Blacklight w/o assets', :magenta)
+    say_status('info', '================================', :magenta)
 
-    generate 'blacklight:install', '--devise', '--skip-solr'
+    # Skip the default BL assets generator via --skip-assets:
+    generate 'blacklight:install', '--devise', '--skip-solr', '--skip-assets'
+
+    # We need to explicitly specify BL8's Sprockets assets generator, else
+    # BL will assume we want to use Propshaft or Importmap. See:
+    # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets_generator.rb
+    # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb
+    say_status('info', '========================================', :magenta)
+    say_status('info', 'Generating Blacklight assets w/Sprockets', :magenta)
+    say_status('info', '========================================', :magenta)
+    generate 'blacklight:assets:sprockets'
   end
 
   def install_engine
+    say_status('info', '============================', :magenta)
+    say_status('info', 'Generating TRLN Argon engine', :magenta)
+    say_status('info', '============================', :magenta)
     generate 'trln_argon:install'
   end
 end
