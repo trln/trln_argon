@@ -20,7 +20,7 @@
 
             <div class="<%= availability_class %>">
               <dl>
-                <dt><span class='status-badge badge bg-info'><%= t('trln_argon.show.badge.status') %></span></dt>
+                <dt><span class='status-badge badge'><%= t('trln_argon.show.badge.status') %></span></dt>
                 <dd>
                   <span class="<%= binary_availability_span_class(document: local_doc) %>">
                     <%= local_doc.present? ? local_doc.availability : 'Available' %>
