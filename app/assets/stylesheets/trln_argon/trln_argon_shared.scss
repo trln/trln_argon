@@ -1715,11 +1715,29 @@ h2.local-filter-heading  {
   flex-grow: 1;
 
   .tt-menu {
+    background-color: white;
+    border: 1px solid #aaa;
     max-height: 300px;
     overflow-y: auto;
+    width: 100%;
+    padding: 0.2em;
+    font-size: 85%;
+    color: #333;
+  }
+
+  .tt-suggestion:hover,
+  .tt-suggestion:focus,
+  .tt-suggestion.tt-cursor {
+    background:#eee;
+    cursor:pointer
   }
 
   .tt-suggestion {
+    padding:0.5em;
+    margin:0;
+    text-align:left;
+    clear:both;
+
     .tt-category {
       float: right;
       font-weight: 600;

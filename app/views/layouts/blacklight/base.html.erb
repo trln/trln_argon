@@ -30,12 +30,6 @@
     <%# instead just use the traditional Sprockets-compiled application.js    -%>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
-    <%# TODO: This module is added by default in BL8. Investigate whether we  -%>
-    <%# need it, given TRLN's specific typeahead/autocomplete setup. -%>
-    <script type="module">
-      import githubAutoCompleteElement from 'https://cdn.skypack.dev/@github/auto-complete-element';
-    </script>
-
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
