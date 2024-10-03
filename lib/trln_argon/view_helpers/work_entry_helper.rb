@@ -86,7 +86,7 @@ module TrlnArgon
         sr_only_segment = title_segments[0..-1].join(' ')
         last_segment = title_segments[-1]
         if sr_only_segment != last_segment
-          sr_span = content_tag(:span, sr_only_segment, class: 'sr-only')
+          sr_span = content_tag(:span, sr_only_segment, class: 'visually-hidden')
         end
         "#{sr_span} #{CGI.escapeHTML(last_segment)}"
       end

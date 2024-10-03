@@ -27,7 +27,7 @@ Blacklight.onLoad(function() {
           facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul > li').slice( parseInt(locationFacetLimit) ).hide();
 
           // add 'more' and 'less' button at end
-          facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul').append( "<li role='treeitem' class='location-more-toggle-wrapper'><a class='more_locations_link'>more <span class='sr-only'>Locations</span> »</a><a class='less_locations_link' style='display: none;'>less <span class='sr-only'>Locations</span> »</a></li>" );
+          facetLocationWrapper.find('ul.facet-hierarchy > .twiddle-open > ul').append( "<li role='treeitem' class='location-more-toggle-wrapper'><a class='more_locations_link'>more <span class='visually-hidden'>Locations</span> »</a><a class='less_locations_link' style='display: none;'>less <span class='visually-hidden'>Locations</span> »</a></li>" );
 
           // click 'more' to show all
           facetLocationWrapper.find('.more_locations_link').click(function() {

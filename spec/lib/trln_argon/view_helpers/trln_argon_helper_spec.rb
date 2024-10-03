@@ -1243,10 +1243,10 @@ describe TrlnArgonHelper, type: :helper do
       expect(context.helpers.link_to_subject_segments(options)).to(
         eq(['<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">Technology</a>'\
             '<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">'\
-            '<span class="sr-only">Technology</span> -- History</a>'\
+            '<span class="visually-hidden">Technology</span> -- History</a>'\
             '<a class="progressive-link" '\
             'href="/catalog?search_field=subject&amp;q=something">'\
-            '<span class="sr-only">Technology -- History</span> -- Science</a>',
+            '<span class="visually-hidden">Technology -- History</span> -- Science</a>',
             '<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">'\
             'Galilei, Galileo, 1564-1642</a>'])
       )
@@ -1299,19 +1299,19 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
-        '<span class="sr-only">Author One</span> One'\
+        '<span class="visually-hidden">Author One</span> One'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two</span> Two'\
+        '<span class="visually-hidden">Author One Two</span> Two'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three</span> Three'\
+        '<span class="visually-hidden">Author One Two Three</span> Three'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '<span class="visually-hidden">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'
       )
@@ -1323,19 +1323,19 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
-        '<span class="sr-only">Author One</span> One'\
+        '<span class="visually-hidden">Author One</span> One'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two</span> Two'\
+        '<span class="visually-hidden">Author One Two</span> Two'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three</span> Three'\
+        '<span class="visually-hidden">Author One Two Three</span> Three'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '<span class="visually-hidden">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'\
         '</li></ul>'

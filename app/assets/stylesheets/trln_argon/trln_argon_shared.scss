@@ -1712,6 +1712,8 @@ h2.local-filter-heading  {
 
 .twitter-typeahead {
   z-index: auto;
+  flex-grow: 1;
+
   .tt-menu {
     max-height: 300px;
     overflow-y: auto;

@@ -15,7 +15,7 @@ module TrlnArgon
         default = params['range'][solr_field][type]
       end
 
-      html = label_tag("range[#{solr_field}][#{type}]", input_label, class: 'sr-only') if input_label.present?
+      html = label_tag("range[#{solr_field}][#{type}]", input_label, class: 'visually-hidden') if input_label.present?
       html ||= ''.html_safe
       html + text_field_tag("range[#{solr_field}][#{type}]",
                             default,
