@@ -71,23 +71,6 @@ module TrlnArgon
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
-    # TODO: Investigate whether these steps and associated code are still
-    # necessary (probably not?). BL8 refactored typeahead/autocomplete.
-    # See: https://github.com/projectblacklight/blacklight/pull/2576
-    # BL7 started precompiling blacklight/blacklight.js
-    # We need this file without the autocomplete parts so
-    # we can use our own.  This autogenerates the above file
-    # in the target application as a set of requires, based
-    # on the contents of the /app/javascript/blacklight directory
-    # in the Blacklight gem, excluding autocomplete.
-    #def override_compiled_blacklight_javascript
-    #  TrlnArgon::Utilities.new.repackage_blacklight_javascript
-    #end
-
-    #def insert_into_assets_initializer
-    #  TrlnArgon::Utilities.new.install_blacklight_asset_path
-    #end
-
     def inject_javascript_include
       say_status('info', '==============================', :magenta)
       say_status('info', 'Injecting TRLN Argon JS assets', :magenta)

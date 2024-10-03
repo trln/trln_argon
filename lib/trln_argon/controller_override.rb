@@ -637,6 +637,16 @@ module TrlnArgon
         cached_catalog_index
       end
 
+      # Override default Blacklight to restore the BL 7 suggest method of returning JSON instead of populating a template
+      # Returns the dropdown list for autocomplete
+      def suggest
+        respond_to do |format|
+          format.json do
+            render json: suggestions_service.suggestions
+          end
+        end
+      end
+
       # Override behavior
       # returns solr_response and documents
       def action_documents
