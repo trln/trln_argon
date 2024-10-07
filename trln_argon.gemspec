@@ -49,4 +49,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'better_errors', '~> 2.9.1'
   s.add_development_dependency 'binding_of_caller', '~> 1.0'
   s.add_development_dependency 'rake', '~> 13'
+
+  # Conditionally constrain sqlite3 to version that still works with Ruby 3.0
+  # TODO: remove when we are all using Ruby 3.1+.
+  if Gem::Requirement.new('< 3.1').satisfied_by?(Gem::Version.new(RUBY_VERSION))
+    s.add_dependency 'sqlite3', '< 1.7'
+  end
 end

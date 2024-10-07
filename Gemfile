@@ -28,10 +28,15 @@ if File.exist?(file)
 else
   Bundler.ui.warn "[EngineCart] Unable to find test application dependencies in #{file}, using placeholder dependencies"
 
+  # TRLN CUSTOMIZATION:
+  # We'll use the Rails --skip-javascript flag so when generated we
+  # won't get the default JS files in app/javascript. We are sticking
+  # with Sprockets for now; our JS is in app/assets/javascripts.
+  ENV['ENGINE_CART_RAILS_OPTIONS'] = '--skip-javascript'
   if ENV['RAILS_VERSION']
     if ENV['RAILS_VERSION'] == 'edge'
       gem 'rails', github: 'rails/rails'
-      ENV['ENGINE_CART_RAILS_OPTIONS'] = '--edge --skip-turbolinks'
+      ENV['ENGINE_CART_RAILS_OPTIONS'] = '--edge --skip-turbolinks --skip-javascript'
     else
       gem 'rails', ENV['RAILS_VERSION']
     end

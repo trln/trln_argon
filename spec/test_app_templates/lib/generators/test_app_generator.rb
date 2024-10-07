@@ -10,12 +10,13 @@ class TestAppGenerator < Rails::Generators::Base
   def add_gems
     gem 'blacklight', '~> 8.0'
 
-    if RUBY_VERSION < '3.0'
+    if RUBY_VERSION < '3.1'
+      say_status('info', 'Adding Hack for Ruby < 3.1', :magenta)
       # Hack for https://github.com/cbeer/engine_cart/issues/125
       gsub_file 'Gemfile', /^gem ["']sqlite3["'].*$/, 'gem "sqlite3", "< 1.7"'
     end
 
-    Bundler.with_clean_env do
+    Bundler.with_unbundled_env do
       run 'bundle install'
     end
   end
@@ -36,6 +37,10 @@ class TestAppGenerator < Rails::Generators::Base
     say_status('info', 'Generating Blacklight assets w/Sprockets', :magenta)
     say_status('info', '========================================', :magenta)
     generate 'blacklight:assets:sprockets'
+
+    Bundler.with_unbundled_env do
+      run 'bundle install'
+    end
   end
 
   def install_engine
