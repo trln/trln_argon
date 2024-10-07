@@ -1,4 +1,4 @@
-ARG RUBY_VERSION=3.0.0
+ARG RUBY_VERSION=3.1.6
 FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
 RUN apt-get update && apt-get install -y nodejs vim less

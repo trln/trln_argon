@@ -6,7 +6,7 @@ check_bundle() {
 
 cd /app || exit
 
-export BOOTSTRAP_VERSION=${BOOTSTRAP_VERSION:-'~>5.3'}
+export BOOTSTRAP_VERSION="${BOOTSTRAP_VERSION:-~>5.3}"
 
 PIDFILE=.internal_test_app/tmp/pids/server.pid
 
