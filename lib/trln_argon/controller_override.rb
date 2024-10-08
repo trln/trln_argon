@@ -31,6 +31,9 @@ module TrlnArgon
         config.search_builder_class = DefaultLocalSearchBuilder
         config.default_per_page = 20
 
+        # Sets the sidebar component for the index view in the TrlnArgon configuration.
+        config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
+
         # Use Solr search requestHandler for search requests
         config.http_method = :get
         config.solr_path = :select

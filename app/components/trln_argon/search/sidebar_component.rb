@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module Blacklight
+module TrlnArgon
   module Search
-    class SidebarComponent < Blacklight::Component
+    class SidebarComponent < Blacklight::Search::SidebarComponent
       def initialize(blacklight_config:, response:, view_config:)
         @blacklight_config = blacklight_config
         @response = response
