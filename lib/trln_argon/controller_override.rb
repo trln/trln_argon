@@ -663,7 +663,7 @@ module TrlnArgon
         solr_response = search_service.repository.find params[:id]
         # Not sure if we need to set @documents in this context (d.croney)
         @documents = solr_response.documents
-        [solr_response, solr_response.documents]
+        solr_response.documents
       end
 
       # rubocop:disable Naming/PredicateName
