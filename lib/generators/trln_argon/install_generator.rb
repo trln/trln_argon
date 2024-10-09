@@ -76,11 +76,11 @@ module TrlnArgon
       say_status('info', '==============================', :magenta)
       say_status('info', 'Injecting TRLN Argon JS assets', :magenta)
       say_status('info', '==============================', :magenta)
-      if File.exist?('app/assets/javascripts/application.js')
-        return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
-        insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
-          "\n//= require trln_argon/trln_argon\n"
-        end
+      return unless File.exist?('app/assets/javascripts/application.js')
+      return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
+
+      insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
+        "\n//= require trln_argon/trln_argon\n"
       end
     end
 

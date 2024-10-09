@@ -4,6 +4,7 @@ module TrlnArgon
   module Search
     class SidebarComponent < Blacklight::Search::SidebarComponent
       def initialize(blacklight_config:, response:, view_config:)
+        super(blacklight_config: blacklight_config, response: response, view_config: view_config)
         @blacklight_config = blacklight_config
         @response = response
         @group_component_class = view_config.facet_group_component || Blacklight::Response::FacetGroupComponent
