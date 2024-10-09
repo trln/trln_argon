@@ -78,32 +78,38 @@ module TrlnArgon
                                       icon: 'fa fa-envelope',
                                       callback: :email_action,
                                       path: :email_path,
-                                      validator: :validate_email_params)
+                                      validator: :validate_email_params,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:sms,
                                       icon: 'fa fa-commenting',
                                       if: :render_sms_action?,
                                       callback: :sms_action,
                                       path: :sms_path,
-                                      validator: :validate_sms_params)
+                                      validator: :validate_sms_params,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:citation,
-                                      icon: 'fa fa-quote-left')
+                                      icon: 'fa fa-quote-left',
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:ris,
                                       icon: 'fa fa-download',
                                       if: :render_ris_action?,
                                       modal: false,
-                                      path: :ris_path)
+                                      path: :ris_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:refworks,
                                       icon: 'fa fa-list',
                                       if: :render_refworks_action?,
                                       new_window: true,
                                       modal: false,
-                                      path: :refworks_path)
+                                      path: :refworks_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:share_bookmarks,
                                       icon: 'fa fa-share',
                                       if: :render_sharebookmarks_action?,
                                       new_window: false,
                                       modal: false,
-                                      path: :sharebookmarks_path)
+                                      path: :sharebookmarks_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:bookmark,
                                       partial: 'bookmark_control',
                                       if: :render_bookmarks_control?)

@@ -136,39 +136,6 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
-  describe '#add_icon_to_action_label' do
-    let(:tool_with_label) do
-      Blacklight::Configuration::ToolConfig.new(
-        icon: 'fa fa-download',
-        if: :render_ris_action?,
-        modal: false,
-        path: :ris_path
-      )
-    end
-    let(:tool_without_label) do
-      Blacklight::Configuration::ToolConfig.new(
-        if: :render_ris_action?,
-        modal: false,
-        path: :ris_path
-      )
-    end
-
-    before { allow(helper).to receive(:document_action_label).and_return('<li>Action Label</li>') }
-
-    context 'the configuration provides an icon' do
-      it 'adds an icon to the document action label' do
-        expect(helper.add_icon_to_action_label(tool_with_label)).to eq(
-          '<i class="fa fa-download" aria-hidden="true"></i> <li>Action Label</li>'
-        )
-      end
-    end
-    context 'the configuration does not provide an icon' do
-      it 'does not add an icon to the document action label' do
-        expect(helper.add_icon_to_action_label(tool_without_label)).to eq('<li>Action Label</li>')
-      end
-    end
-  end
-
   describe 'join_with_comma_semicolon_fallback' do
     context 'when values do not already contain commas' do
       let(:options) { { value: %w[Book Video] } }
