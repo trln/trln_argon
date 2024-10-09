@@ -1,0 +1,15 @@
+<% # TRLN override of BL8 sidebar component %>
+<%= render 'catalog/local_filter',
+           local_button_id: 'toggle-local-btn-top',
+           trln_button_id: 'toggle-trln-btn-top' %>
+
+<search>
+  <% facet_group_names.each do |groupname| %>
+    <% fields = facet_fields_in_group(groupname) %>
+    <%= render group_component_class.new(id: groupname, fields: fields, response: response) do |component| %>
+      <% component.with_body do %>
+        <%= render Blacklight::FacetComponent.with_collection(fields, response: response) %>
+      <% end %>
+    <% end %>
+  <% end %>
+</search>

@@ -1,42 +1,45 @@
-<h2 class="local-filter-heading" id="<%= local_filter_id %>"><%= t("trln_argon.local_filter.showing_results") %></h2>
+<% inst = TrlnArgon::Engine.configuration.local_institution_code %>
+<% instname = TrlnArgon::LookupManager.instance.map("#{inst}.facet.#{inst}") %>
 
-<% query_state = query_state_from_search_state(search_state) %>
-<% query_state.delete('page') %>
-<% query_state.fetch('f', {}).delete(TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s) %>
-
-<div class="toggle toggle-local">
-
-  <%= button_tag( type: "button",
-                  id: local_button_id,
-                  class: "btn btn-md #{local_search_button_class}",
-                  title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name)}",
-                  onclick: "window.location='#{search_catalog_path(query_state)}'"
-                ) do %>
-    <span class="visually-hidden">icon</span><span class="icon-wrapper"></span>
-  <% end %>
-
-  <%= label_tag( local_button_id,
-                 t("trln_argon.local_filter.searching_local", local_institution_name: institution_long_name),
-                 class: "#{local_search_button_label_class}",
-                 data: { count_only_path: trln_argon.catalog_count_only_path(query_state) }) %>
-
+<div id="location-data"
+     data-argon-institution="<%= instname %>"
+     data-argon-hsl="<%= TrlnArgon::LookupManager.instance.map('hsl.facet.hsl') %>"
+     data-argon-law="<%= TrlnArgon::LookupManager.instance.map('law.facet.law') %>"
+     data-location-facet-limit="<%= TrlnArgon::Engine.configuration.number_of_location_facets %>">
 </div>
 
+<div id="trln-toggle" class="sidenav facets top-panel-heading">
+  <div id="viewAllResults" class="clearfix" role="navigation" aria-label="Searching (context)">
+    <h2 class="local-filter-heading" id="localFilterLabelFacets">
+      <%= t("trln_argon.local_filter.showing_results") %>
+    </h2>
 
-<div class="toggle toggle-trln">
+    <% query_state = query_state_from_search_state(search_state) %>
+    <% query_state.delete('page') %>
+    <% query_state.fetch('f', {}).delete(TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s) %>
 
-  <%= button_tag( type: "button",
-                  id: trln_button_id,
-                  class: "btn btn-md #{trln_search_button_class}",
-                  title: "#{t("trln_argon.local_filter.search_verb")} #{t("trln_argon.local_filter.searching_trln")}",
-                  onclick: "window.location='#{search_trln_path(query_state)}'"
-                ) do %>
-    <span class="visually-hidden">icon</span><span class="icon-wrapper"></span>
-  <% end %>
+    <div class="toggle toggle-local">
+      <%= button_tag(type: "button", id: local_button_id, class: "btn btn-md #{local_search_button_class}",
+                    title: "#{t('trln_argon.local_filter.search_verb')} #{t('trln_argon.local_filter.searching_local', local_institution_name: institution_long_name)}",
+                    onclick: "window.location='#{search_catalog_path(query_state)}'") do %>
+        <span class="sr-only">icon</span><span class="icon-wrapper"></span>
+      <% end %>
 
-  <%= label_tag( trln_button_id,
-                 "#{t("trln_argon.local_filter.searching_trln")}",
-                 class: "#{trln_search_button_label_class}",
-                 data: { count_only_path: trln_argon.trln_count_only_path(query_state) }) %>
+      <%= label_tag(local_button_id, t('trln_argon.local_filter.searching_local', local_institution_name: institution_long_name),
+                    class: "#{local_search_button_label_class}",
+                    data: { count_only_path: trln_argon.catalog_count_only_path(query_state) }) %>
+    </div>
 
+    <div class="toggle toggle-trln">
+      <%= button_tag(type: "button", id: trln_button_id, class: "btn btn-md #{trln_search_button_class}",
+                    title: "#{t('trln_argon.local_filter.search_verb')} #{t('trln_argon.local_filter.searching_trln')}",
+                    onclick: "window.location='#{search_trln_path(query_state)}'") do %>
+        <span class="sr-only">icon</span><span class="icon-wrapper"></span>
+      <% end %>
+
+      <%= label_tag(trln_button_id, t('trln_argon.local_filter.searching_trln'),
+                    class: "#{trln_search_button_label_class}",
+                    data: { count_only_path: trln_argon.trln_count_only_path(query_state) }) %>
+    </div>
+  </div>
 </div>
