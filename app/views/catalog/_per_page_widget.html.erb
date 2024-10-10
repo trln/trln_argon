@@ -1,0 +1,4 @@
+<%# TRLN override to make per_page_widget work with Ruby 3.0.x.
+It adds default arguments for each component parameter.
+This override can be removed when everyone is on Ruby 3.1+ %>
+<%= render Blacklight::Search::PerPageComponent.new(search_state: @search_state, blacklight_config: blacklight_config, response: @response) %>
