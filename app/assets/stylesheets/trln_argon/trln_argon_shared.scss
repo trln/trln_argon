@@ -1266,7 +1266,7 @@ h1, h2, h3, h4, h5 {
   }
 
   .summary-text,
-  .latest_ree
+  .latest_ree,
   .summary-holdings {
     word-wrap:break-word;
   }
@@ -1275,7 +1275,6 @@ h1, h2, h3, h4, h5 {
     background-color: $primary-color;
     border-color: darken($primary-color, 10%);
   }
-
 
 
   .item-note {
@@ -1793,4 +1792,14 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
 .advanced-search {
     display: flex;
     align-items: center;
+}
+
+/* ================ */
+/* CITATIONS        */
+/* ================ */
+
+.citation-note {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: normal;
 }
