@@ -171,6 +171,9 @@ body {
   border-top: none;
 }
 
+.form-group {
+  margin-bottom: 1rem;
+}
 
 #document {
 
@@ -303,15 +306,16 @@ body {
     /*border: 1px solid darken($primary-color, 10%)*/
     line-height: 1.2;
     text-align: left;
-    }
+    text-decoration: none;
+  }
 
-    .link-type-fulltext:hover,
-    .link-type-fulltext:focus,
-    .link-type-findingaid:hover,
-    .link-type-findingaid:focus {
-      background: darken($primary-color, 10%);
-      text-decoration: none;
-    }
+  .link-type-fulltext:hover,
+  .link-type-fulltext:focus,
+  .link-type-findingaid:hover,
+  .link-type-findingaid:focus {
+    background: darken($primary-color, 10%);
+    text-decoration: none;
+  }
 
 
   .fa {
@@ -330,6 +334,12 @@ body {
     display: inline-block;
   }
 
+}
+
+a.expander,
+a.expander:hover,
+a.expander:focus {
+  color: white;
 }
 
 .expander[aria-expanded=false].hider {
@@ -1182,10 +1192,6 @@ h1, h2, h3, h4, h5 {
       padding-right: 1em;
     }
   }
-
-
-
-
 
   .location.loc-broad,
   .location.loc-narrow  {
