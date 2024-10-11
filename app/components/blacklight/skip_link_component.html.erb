@@ -1,0 +1,9 @@
+<%# TRLN override. Remove Bootstrap 4 sr-only classes. This override can be removed with the next release of Blacklight, as
+as they've been removed on the main branch. %>
+<nav id="skip-link" role="navigation" class="visually-hidden-focusable" aria-label="<%= t('blacklight.skip_links.label') %>">
+  <div class="container-xl">
+    <%= link_to_search %>
+    <%= link_to_main %>
+    <%= content %>
+  </div>
+</nav>
