@@ -48,5 +48,9 @@ class TestAppGenerator < Rails::Generators::Base
     say_status('info', 'Generating TRLN Argon engine', :magenta)
     say_status('info', '============================', :magenta)
     generate 'trln_argon:install'
+
+    Bundler.with_unbundled_env do
+      run 'bundle install'
+    end
   end
 end
