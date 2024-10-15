@@ -46,8 +46,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'vcr', '~> 5.0'
   s.add_development_dependency 'engine_cart', '~> 2.2'
   s.add_development_dependency 'listen'
-  s.add_development_dependency 'better_errors', '~> 2.9.1'
-  s.add_development_dependency 'binding_of_caller', '~> 1.0'
   s.add_development_dependency 'rake', '~> 13'
 
   # Conditionally constrain sqlite3 to version that still works with Ruby 3.0

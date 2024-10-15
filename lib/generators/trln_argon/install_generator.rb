@@ -23,7 +23,14 @@ module TrlnArgon
       say_status('info', '======================', :magenta)
       say_status('info', 'Adding gems to Gemfile', :magenta)
       say_status('info', '======================', :magenta)
-      gem 'better_errors', '~> 2.9.1' unless IO.read('Gemfile').include?('better_errors')
+
+      insert_into_file 'Gemfile', after: 'group :development do' do
+        <<~CONTENT
+          \n  gem 'better_errors'
+          \n  gem 'binding_of_caller'
+        CONTENT
+      end
+
       gem 'jquery-rails', '~> 4.6' unless IO.read('Gemfile').include?('jquery-rails')
     end
 
@@ -110,13 +117,16 @@ module TrlnArgon
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  require 'socket'\n" \
-        "  begin\n" \
-        "    local_ip = IPSocket.getaddress(Socket.gethostname)\n" \
-        "  rescue\n" \
-        "    local_ip = \"127.0.0.1\"\n" \
-        "  end\n" \
-        "  BetterErrors::Middleware.allow_ip! local_ip if defined?(BetterErrors) && Rails.env.development?\n"
+        <<~CONTENT
+          \n  # Enable BetterErrors to work in Docker
+
+            if defined?(BetterErrors) && Rails.env.development?
+              # Allow private subnets as defined by RFC1918
+              BetterErrors::Middleware.allow_ip! '10.0.0.0/8'
+              BetterErrors::Middleware.allow_ip! '172.16.0.0/12'
+              BetterErrors::Middleware.allow_ip! '192.168.0.0/16'
+            end
+        CONTENT
       end
     end
 
