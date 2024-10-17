@@ -1,5 +1,3 @@
-<%= render(Blacklight::SearchContextComponent.new(search_context: @search_context, search_session: search_session)) if search_session['document_id'] == @document.id %>
-
 <div class="row">
   <div class="<%= show_tools_class %>">
     <%= render :partial => 'show_tools' %>

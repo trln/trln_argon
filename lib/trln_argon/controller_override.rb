@@ -33,6 +33,7 @@ module TrlnArgon
 
         # Sets the sidebar component for the index view in the TrlnArgon configuration.
         config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
+        config.index.document_component = TrlnArgon::DocumentComponent
 
         # Use Solr search requestHandler for search requests
         config.http_method = :get
