@@ -18,6 +18,7 @@ gemspec
 # engine_cart stanza: 2.5.0
 # the below comes from engine_cart, a gem used to test this Rails engine gem in the context of a Rails app.
 file = File.expand_path('Gemfile', ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path('.internal_test_app', File.dirname(__FILE__)))
+
 if File.exist?(file)
   begin
     eval_gemfile file
@@ -32,7 +33,11 @@ else
   # We'll use the Rails --skip-javascript flag so when generated we
   # won't get the default JS files in app/javascript. We are sticking
   # with Sprockets for now; our JS is in app/assets/javascripts.
-  ENV['ENGINE_CART_RAILS_OPTIONS'] = '--skip-javascript'
+  # We also run --skip-bundle to avoid running `bundle install` upon the
+  # initial creation of the Rails app. We'll run it later in our generator
+  # steps after customizing the Gemfile.
+  ENV['ENGINE_CART_RAILS_OPTIONS'] = '--skip-javascript --skip-bundle'
+
   if ENV['RAILS_VERSION']
     if ENV['RAILS_VERSION'] == 'edge'
       gem 'rails', github: 'rails/rails'
@@ -40,8 +45,6 @@ else
     else
       gem 'rails', ENV['RAILS_VERSION']
     end
-
-    gem 'sass-rails', '>= 6'
   end
 end
 # END ENGINE_CART BLOCK

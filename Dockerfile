@@ -29,7 +29,7 @@ WORKDIR /app
 
 EXPOSE 3000
 
-ENV ENGINE_CART_RAILS_OPTIONS="--skip-webpack-install --skip-javascript"
+ENV ENGINE_CART_RAILS_OPTIONS="--skip-webpack-install --skip-javascript --skip-bundle"
 
 ENV BOOTSTRAP_VERSION="~> 5.3"
 
