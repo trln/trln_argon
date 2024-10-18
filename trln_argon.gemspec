@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 4.0'
-  s.add_dependency 'trln-chosen-rails', '~> 1.20'
+  s.add_dependency 'trln-chosen-rails', '1.30.0.pre.beta'
   s.add_dependency 'citeproc-ruby', '~> 1.1'
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
@@ -48,9 +48,27 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'listen'
   s.add_development_dependency 'rake', '~> 13'
 
-  # Conditionally constrain sqlite3 to version that still works with Ruby 3.0
-  # TODO: remove when we are all using Ruby 3.1+.
+  # Ruby 3.x compatibility: some gems and their dependencies need to be
+  # pinned to specific versions to work with different Ruby 3.x versions
+
+  # Ruby 3.0
+  # =================
   if Gem::Requirement.new('< 3.1').satisfied_by?(Gem::Version.new(RUBY_VERSION))
     s.add_dependency 'sqlite3', '< 1.7'
+
+    s.add_dependency 'dartsass-sprockets', '< 3.1.0'
+    s.add_dependency 'sass-embedded', '<= 1.69.5'
+    s.add_dependency 'dartsass-ruby', '>= 3.0.2'
+
+  # Ruby 3.1
+  # =================
+  elsif Gem::Requirement.new('< 3.2').satisfied_by?(Gem::Version.new(RUBY_VERSION))
+    s.add_dependency 'dartsass-sprockets'
+    s.add_dependency 'sass-embedded', '<= 1.70'
+
+  # Ruby 3.2+
+  # =================
+  else
+    s.add_dependency 'dartsass-sprockets'
   end
 end

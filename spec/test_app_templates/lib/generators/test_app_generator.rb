@@ -10,12 +10,6 @@ class TestAppGenerator < Rails::Generators::Base
   def add_gems
     gem 'blacklight', '~> 8.0'
 
-    if RUBY_VERSION < '3.1'
-      say_status('info', 'Adding Hack for Ruby < 3.1', :magenta)
-      # Hack for https://github.com/cbeer/engine_cart/issues/125
-      gsub_file 'Gemfile', /^gem ["']sqlite3["'].*$/, 'gem "sqlite3", "< 1.7"'
-    end
-
     Bundler.with_unbundled_env do
       run 'bundle install'
     end
@@ -30,17 +24,38 @@ class TestAppGenerator < Rails::Generators::Base
     generate 'blacklight:install', '--devise', '--skip-solr', '--skip-assets'
 
     # We need to explicitly specify BL8's Sprockets assets generator, else
-    # BL will assume we want to use Propshaft or Importmap. See:
+    # BL will assume we want to use Propshaft and/or Importmap. See:
     # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets_generator.rb
     # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb
     say_status('info', '========================================', :magenta)
     say_status('info', 'Generating Blacklight assets w/Sprockets', :magenta)
     say_status('info', '========================================', :magenta)
     generate 'blacklight:assets:sprockets'
+  end
 
+  # The sassc-rails gem is added by the BL assets generator but we don't want it.
+  # We'll use dartsass-sprockets instead.
+  # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb#L33
+  def remove_sassc_rails
+    say_status('info', '====================', :magenta)
+    say_status('info', 'Removing SassC-Rails', :magenta)
+    say_status('info', '====================', :magenta)
+    gsub_file('Gemfile', /^.*gem\s+["']sassc-rails["'].*$/, '')
+  end
+
+  def install_dartsass
+    say_status('info', '===================', :magenta)
+    say_status('info', 'Installing DartSass', :magenta)
+    say_status('info', '===================', :magenta)
+    gem 'dartsass-sprockets' unless IO.read('Gemfile').include?('dartsass-sprockets')
     Bundler.with_unbundled_env do
       run 'bundle install'
     end
+
+    # Remove the default Rails-generated application.css in favor of application.scss
+    # (needed because we're using DartSass with Sprockets)
+    remove_file 'app/assets/stylesheets/application.css'
+    create_file 'app/assets/stylesheets/application.scss'
   end
 
   def install_engine

@@ -177,6 +177,17 @@ module TrlnArgon
       end
     end
 
+    def setup_application_scss
+      say_status('info', '===========================', :magenta)
+      say_status('info', 'Setting up application.scss', :magenta)
+      say_status('info', '===========================', :magenta)
+      insert_into_file 'app/assets/stylesheets/application.scss' do
+        <<~CONTENT
+          @import 'trln_argon';
+        CONTENT
+      end
+    end
+
     def remove_turbolinks # via http://codkal.com/rails-how-to-remove-turbolinks/
       gsub_file('Gemfile', "gem 'turbolinks',", '')
       if File.exist?('app/assets/javascripts/application.js')
