@@ -71,7 +71,7 @@ module TrlnArgon
         # tools configuration
 
         # Set partials to render
-        config.index.partials = %i[index_header thumbnail index index_items]
+        config.index.partials = %i[index_header index index_items]
 
         config.show.document_actions.delete(:bookmark)
 

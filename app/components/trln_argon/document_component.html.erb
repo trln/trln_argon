@@ -15,7 +15,10 @@
       <%= title %>
       <%= embed %>
       <%= content %>
-      <%= metadata %>
+      <%= render partial: 'show_thumbnail_default', locals: { document: @document } %>
+      <div class="index-document-metadata">
+        <%= metadata %>
+      </div>
       <% metadata_sections.each do |section| %>
         <%= section %>
       <% end %>
