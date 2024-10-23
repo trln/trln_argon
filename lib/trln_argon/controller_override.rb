@@ -146,8 +146,7 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                     collapse: false,
                                     show: true,
-                                    partial: 'catalog/facet_checkbox',
-                                    locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') }
+                                    component: TrlnArgon::FacetFieldCheckboxesComponent
         config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                     label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                     limit: true,
@@ -193,8 +192,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                collapse: false,
                                show: true,
-                               partial: 'catalog/facet_checkbox',
-                               locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') },
+                               component: TrlnArgon::FacetFieldCheckboxesComponent,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
