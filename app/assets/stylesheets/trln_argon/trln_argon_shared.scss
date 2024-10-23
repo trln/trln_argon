@@ -629,108 +629,14 @@ $b-h-opened-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg
   }
 }
 
-// Available Online checkbox
-.blacklight-facet-checkboxes {
-  ul {
-    width: 100%;
-  }
-}
-
-.blacklight-facet-checkboxes li {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  width: 100%;
-  padding: 0.5em 0;
-
-  .facet-checkbox {
-    margin-right: 1px;
-    flex-shrink: 0;
-
-    input:hover,
-    input:focus {
-      cursor: pointer;
-    }
-  }
-
-  label {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    .facet-label {
-      text-align: left;
-      margin-right: 2rem;
-      flex-grow: 1;
-      color: $primary-link-color;
-    }
-
-    .facet-label:hover,
-    .facet-label:focus {
-      color: $primary-link-color;
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    .facet-count {
-      text-align: right;
-      flex-shrink: 0;
-    }
-  }
-}
-
-div.facet-content {
-  // non-hierarcical facets
-
-  ul.facet-values {
-    width: 100%;
-    display: block;
-    margin-left: 0;
-    padding-left: 0;
-    margin-bottom: 0;
-
-    li {
-      // use flexbox for positioning of the hierarchy nodes
+// Checkbox facet styles
+// As of BL 8.4.0, BL does not yet make these flexbox-friendly like
+// "normal" facets, so we have to impose some style here.
+ul.blacklight-facet-checkboxes {
+  > li > span:not(.facet-checkbox) {
+    flex-grow: 1;
+    label {
       display: flex;
-      flex-wrap: wrap;
-      margin-top: .5em;
-      margin-bottom: .5em;
-
-      &:first-child {
-        margin-top: 0;
-      }
-
-      span.facet-label {
-        padding-right: 0;
-        text-indent: 0;
-        padding-left: 0;
-        padding-bottom: 0;
-        flex: 1 1 67.5%;
-        margin-right: 2.5%;
-        margin-bottom: 0;
-        line-height: 1.2;
-
-        @include media-breakpoint-up(xl) {
-          flex: 1 1 calc(62.5% - 1em);
-          margin-right: 2.5%;
-          margin-left: 1em; // reverse indentation
-          text-indent: -1em; // reverse indentation
-        }
-      }
-
-      span.facet-count {
-        display: block;
-        flex: 0 0 30%;
-        text-align: right;
-        line-height: 1.2;
-
-        @include media-breakpoint-up(xl) {
-          flex: 0 0 32.5%;
-          text-align: right;
-        }
-      }
     }
   }
 }
