@@ -2,6 +2,7 @@
 # See configurations in lib/trln_argon/controller_override.rb
 module Blacklight
   class Configuration
+    extend ActiveSupport::Autoload
     eager_autoload do
       autoload :HomeFacetField
       autoload :ShowSubHeaderField
