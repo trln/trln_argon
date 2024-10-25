@@ -1,21 +1,45 @@
-<%= content_tag(loc_b_header_level) do %>
-  <% # --- display broad location --- %>
-  <% if loc_b.present? %>
-    <% broad_location_display = map_argon_code(document.record_owner, 'loc_b', loc_b) %>
-    <span class='location loc-broad loc_b__<%= loc_b %>'>
-      <%= broad_location_display %>
-    </span>
-  <% end %>
 
-  <% # --- display narrow location --- %>
-  <% if loc_n.present? %>
-    <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
-    <% if narrow_loc.nil? %>
-      <% narrow_loc = loc_n %>
+<div class="col flex-grow-1">
+  <%= content_tag(loc_b_header_level) do %>
+    <% # --- display broad location --- %>
+    <% if loc_b.present? %>
+      <% broad_location_display = map_argon_code(document.record_owner, 'loc_b', loc_b) %>
+      <span class='location loc-broad loc_b__<%= loc_b %>'>
+        <%= broad_location_display %>
+      </span>
     <% end %>
-    <% # is loc_n different and not empty? %>
-    <% if narrow_loc != broad_location_display && narrow_loc != '' %>
-      <span class='location loc-narrow loc_n__<%= loc_n %>'> &mdash; <%= narrow_loc %></span>
+
+    <% # --- display narrow location --- %>
+    <% if loc_n.present? %>
+      <% narrow_loc = map_argon_code(document.record_owner, 'loc_n', loc_n) %>
+      <% if narrow_loc.nil? %>
+        <% narrow_loc = loc_n %>
+      <% end %>
+      <% # is loc_n different and not empty? %>
+      <% if narrow_loc != broad_location_display && narrow_loc != '' %>
+        <span class='location loc-narrow loc_n__<%= loc_n %>'> &mdash; <%= narrow_loc %></span>
+      <% end %>
     <% end %>
   <% end %>
+</div>
+
+<%# If present, holdings availability status for a *location* will display aligned with and   %>
+<%# styled like item availability. If not, the location will use the entire width of the row. %>
+<% if display_holdings_availability?(location_holdings) %>
+  <% available_class = item_availability_display(location_holdings) %>
+  <div class="<%= status_wrapper_class(action: action_name) %> status-wrapper">
+    <dl>
+      <dt>
+        <span class='status-badge badge badge-info'><%= t('trln_argon.show.badge.status') %></span>
+      </dt>
+      <dd>
+        <span class="<%= available_class %>">
+          <%= render 'items_section_location_status', { document: document,
+                                                        loc_b: loc_b,
+                                                        loc_n: loc_n,
+                                                        location_holdings: location_holdings } %>
+        </span>
+      </dd>
+    </dl>
+  </div>
 <% end %>

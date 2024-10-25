@@ -283,7 +283,7 @@ describe TrlnArgonHelper, type: :helper do
   describe '#location_header_class' do
     it 'returns the HTML class attribute values' do
       expect(helper.location_header_class).to(
-        eq('location-header col-lg-12')
+        eq('location-header col d-lg-flex flex-grow-1 no-gutters')
       )
     end
   end
@@ -340,6 +340,16 @@ describe TrlnArgonHelper, type: :helper do
     end
 
     context 'item is NOT available' do
+      let(:item) { { 'status' => 'Unavailable' } }
+
+      it 'returns the HTML class attribute values' do
+        expect(helper.item_availability_display(item)).to(
+          eq('item-not-available')
+        )
+      end
+    end
+
+    context 'item is checked out' do
       let(:item) { { 'status' => 'Checked Out' } }
 
       it 'returns the HTML class attribute values' do
@@ -349,7 +359,7 @@ describe TrlnArgonHelper, type: :helper do
       end
     end
 
-    context 'item is NOT available' do
+    context 'item is library use only' do
       let(:item) { { 'status' => 'Library Use Only' } }
 
       it 'returns the HTML class attribute values' do
@@ -495,6 +505,36 @@ describe TrlnArgonHelper, type: :helper do
 
       it 'returns true' do
         expect(helper.display_holdings_well?(document: document)).to be true
+      end
+    end
+  end
+
+  describe '#display_item_availability?' do
+    context 'item has a status' do
+      let(:item) do
+        {
+          'call_no' => 'E909 .O24 A3 2018',
+          'type' => 'BOOK',
+          'status' => 'Available'
+        }
+      end
+
+      it 'returns true' do
+        expect(helper.display_item_availability?(item)).to be true
+      end
+    end
+
+    context 'item has a blank status' do
+      let(:item) do
+        {
+          'call_no' => 'E909 .O24 A3 2018',
+          'type' => 'BOOK',
+          'status' => ''
+        }
+      end
+
+      it 'returns false' do
+        expect(helper.display_item_availability?(item)).to be false
       end
     end
   end
@@ -702,6 +742,31 @@ describe TrlnArgonHelper, type: :helper do
 
       it 'returns false' do
         expect(helper.suppress_item?(item_data: item_data, loc_b: loc_b)).to be false
+      end
+    end
+  end
+
+  describe '#display_holdings_availability?' do
+    context 'location holdings have a status' do
+      let(:location_holdings) do
+        {
+          'call_no' => 'E909.O24 A3 2018',
+          'status' => 'Unavailable'
+        }
+      end
+
+      it 'returns true' do
+        expect(helper.display_holdings_availability?(location_holdings)).to be true
+      end
+    end
+
+    context 'location holdings do not have a status' do
+      let(:location_holdings) do
+        { 'call_no' => 'E909.O24 A3' }
+      end
+
+      it 'returns false' do
+        expect(helper.display_holdings_availability?(location_holdings)).to be false
       end
     end
   end
