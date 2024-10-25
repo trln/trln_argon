@@ -18,7 +18,7 @@ module TrlnArgon
       end
 
       def location_header_class
-        'location-header col-lg-12'
+        'location-header col d-lg-flex flex-grow-1 no-gutters'
       end
 
       def institution_location_header_class
@@ -45,7 +45,7 @@ module TrlnArgon
         case item['status']
         when /^available/i
           'item-available'
-        when /^checked out/i, /\blost\b/i, /^missing/i
+        when /^checked out/i, /^unavailable/i, /\blost\b/i, /^missing/i
           'item-not-available'
         when /(?:in-)?library use only/i
           'item-library-only'
@@ -81,6 +81,10 @@ module TrlnArgon
 
       def latest_received_wrapper_class(_opts = {})
         'col-lg-5 col-sm-12 latest-received-wrapper'
+      end
+
+      def display_holdings_availability?(location_holdings)
+        location_holdings['status'].present?
       end
 
       def display_holdings_summaries?(options = {})
@@ -127,6 +131,10 @@ module TrlnArgon
           online_only_items?(loc_b: loc_b, loc_n: loc_n, item_data: item_data) ||
           no_items_no_holdings?(loc_b: loc_b, loc_n: loc_n, item_data: item_data) ||
           no_items_holdings_no_summary?(loc_b: loc_b, loc_n: loc_n, item_data: item_data)
+      end
+
+      def display_item_availability?(item)
+        item['status'].present?
       end
 
       def online_only_items?(options = {})
