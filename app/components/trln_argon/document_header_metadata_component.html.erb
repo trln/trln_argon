@@ -7,5 +7,3 @@
         ) %>
   <% end %>
 </dl>
-
-<%= @tag.nil? ? content : tag.public_send(@tag, content, class: @classes, **@component_args) %>
