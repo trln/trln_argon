@@ -69,8 +69,11 @@ module TrlnArgon
       say_status('info', '============================', :magenta)
       say_status('info', 'Updating the assets manifest', :magenta)
       say_status('info', '============================', :magenta)
+      
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
       prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
+      
+      return unless Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.1') && Rails.env.production?
       append_to_file 'app/assets/config/manifest.js', "//= link application.js\n"
     end
 
