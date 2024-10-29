@@ -94,7 +94,7 @@ module TrlnArgon
       end
 
       def convert_to_bibtex_format(input)
-        identifier = input.detect { |key, _| key == 'id' }&.last
+        identifier = input.to_h.detect { |key, _| key == 'id' }&.last
         entry_type = determine_entry_type(input)
         # The bibtex string should look like this
         # "@book{id, author = {Author, A.}, title = {Title}, journal = {Journal}, year = {2020}}"
@@ -106,7 +106,7 @@ module TrlnArgon
       end
 
       def determine_entry_type(input)
-        entry_type_value = input.detect { |key, _| key == 'type' }&.last
+        entry_type_value = input.to_h.detect { |key, _| key == 'type' }&.last
         entry_type = if entry_type_value.to_s.strip.empty?
                        'book'
                      else
