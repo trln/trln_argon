@@ -623,6 +623,14 @@ $b-h-opened-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg
     line-height: 1.2rem;
   }
 
+  .facet-select {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
   .more_locations_link,
   .less_locations_link {
     cursor: pointer;
@@ -633,8 +641,9 @@ $b-h-opened-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg
 // As of BL 8.4.0, BL does not yet make these flexbox-friendly like
 // "normal" facets, so we have to impose some style here.
 ul.blacklight-facet-checkboxes {
-  > li > span:not(.facet-checkbox) {
+  >li>span:not(.facet-checkbox) {
     flex-grow: 1;
+
     label {
       display: flex;
     }
