@@ -73,7 +73,9 @@ module TrlnArgon
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
       prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
       
-      return unless File.exist?('app/assets/javascripts/application.js')
+      # Check if the line already exists in the file
+      manifest_file = 'app/assets/config/manifest.js'
+      return if File.readlines(manifest_file).grep(%r{//= link application\.js}).any?
       append_to_file 'app/assets/config/manifest.js', "//= link application.js\n"
     end
 
