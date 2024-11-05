@@ -73,7 +73,7 @@ module TrlnArgon
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
       prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
       
-      return unless Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.1') && Rails.env.test?
+      return unless Gem::Version.new(RUBY_VERSION) < Gem::Version.new('3.1')
       append_to_file 'app/assets/config/manifest.js', "//= link application.js\n"
     end
 
