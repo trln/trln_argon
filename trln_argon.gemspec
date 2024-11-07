@@ -58,6 +58,7 @@ Gem::Specification.new do |s|
 
     s.add_dependency 'dartsass-sprockets', '< 3.1.0'
     s.add_dependency 'sass-embedded', '<= 1.69.5'
+    s.add_dependency 'uri', '< 1.0'
     s.add_dependency 'dartsass-ruby', '>= 3.0.2'
 
   # Ruby 3.1
@@ -65,6 +66,7 @@ Gem::Specification.new do |s|
   elsif Gem::Requirement.new('< 3.2').satisfied_by?(Gem::Version.new(RUBY_VERSION))
     s.add_dependency 'dartsass-sprockets'
     s.add_dependency 'sass-embedded', '<= 1.70'
+    s.add_dependency 'uri', '< 1.0'
 
   # Ruby 3.2+
   # =================
