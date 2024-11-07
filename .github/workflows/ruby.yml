@@ -21,8 +21,15 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         
+    - name: Set ENGINE_CART_RAILS_OPTIONS environment variable
+      run: echo "ENGINE_CART_RAILS_OPTIONS=--skip-javascript --skip-bundle" >> $GITHUB_ENV
+
     - name: Install dependencies
-      run: bundle install
+      run: |
+        if [[ "${{ matrix.ruby }}" == "3.0" || "${{ matrix.ruby }}" == "3.1" ]]; then
+          gem install uri -v '0.13.1'
+        fi
+        bundle install
 
     - name: Run rubocop
       run: rake rubocop  
