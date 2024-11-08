@@ -721,9 +721,7 @@ describe TrlnArgon::ArgonSearchBuilder do
       end
 
       it 'returns nil' do
-        expect(solr_parameters[:q]).to eq(
-          nil
-        )
+        expect(solr_parameters[:q]).to be_nil
       end
     end
   end

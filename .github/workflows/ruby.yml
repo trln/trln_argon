@@ -7,25 +7,27 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    env:
+      ENGINE_CART_RAILS_OPTIONS: '--skip-javascript --skip-bundle'
     strategy:
       fail-fast: false
       matrix:
         ruby: ['3.0', '3.1', '3.2', '3.3']
     name: Ruby ${{ matrix.ruby }}
-    
+
     steps:
-    - uses: actions/checkout@v2
-      
+    - uses: actions/checkout@v4
+
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby }}
-        
+
     - name: Install dependencies
       run: bundle install
 
     - name: Run rubocop
-      run: rake rubocop  
+      run: rake rubocop
 
     - name: Generate a Rails testing application
       run: rake engine_cart:generate

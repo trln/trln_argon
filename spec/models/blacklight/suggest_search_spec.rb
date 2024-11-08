@@ -11,12 +11,15 @@ describe Blacklight::SuggestSearch do
 
   describe '#suggestions' do
     it 'returns a Blacklight::Suggest::Response' do
-      allow(suggest_search).to receive(:suggest_results).and_return([])
-      allow(suggest_search).to receive(:suggest_handler_path).and_return(suggest_path)
-      allow(suggest_search).to receive(:suggest_component).and_return(solr_component)
+      allow(suggest_search).to receive_messages(
+        suggest_results: [],
+        suggest_handler_path: suggest_path,
+        suggest_component: solr_component
+      )
       expect(suggest_search.suggestions).to be_an Blacklight::Suggest::Response
     end
   end
+
   describe '#suggest_results' do
     it 'calls send_and_recieve from a repository connection' do
       allow(suggest_search).to receive(:suggest_handler_path).and_return(suggest_path)

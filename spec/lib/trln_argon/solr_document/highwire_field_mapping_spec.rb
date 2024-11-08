@@ -1,4 +1,3 @@
-# rubocop:disable RSpec/FilePath
 describe TrlnArgon::SolrDocument::HighwireFieldMapping do
   include described_class
   # rubocop:disable RSpec/LeakyConstantDeclaration
@@ -68,4 +67,3 @@ describe TrlnArgon::SolrDocument::HighwireFieldMapping do
     end
   end
 end
-# rubocop:enable RSpec/FilePath

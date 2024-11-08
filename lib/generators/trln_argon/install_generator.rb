@@ -69,8 +69,11 @@ module TrlnArgon
       say_status('info', '============================', :magenta)
       say_status('info', 'Updating the assets manifest', :magenta)
       say_status('info', '============================', :magenta)
+
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
       prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
+
+      return if IO.read('app/assets/javascripts/application.js').include?('application.js')
       append_to_file 'app/assets/config/manifest.js', "//= link application.js\n"
     end
 

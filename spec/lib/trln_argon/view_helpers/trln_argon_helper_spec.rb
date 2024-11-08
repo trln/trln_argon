@@ -202,9 +202,11 @@ describe TrlnArgonHelper, type: :helper do
     end
 
     before do
-      allow(helper).to receive(:solr_query_params).and_return(solr_params)
-      allow(helper).to receive(:solr_document_only_path).and_return('/document')
-      allow(helper).to receive(:solr_query_path).and_return('https://query.discovery.trln.org/trlnbib/')
+      allow(helper).to receive_messages(
+        solr_query_params: solr_params,
+        solr_document_only_path: '/document',
+        solr_query_path: 'https://query.discovery.trln.org/trlnbib/'
+      )
     end
 
     describe '#solr_document_request' do
