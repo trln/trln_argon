@@ -1624,6 +1624,23 @@ h2.local-filter-heading {
   }
 }
 
+/* Custom styles for range input boxes */
+.range_limit .form-control.range_begin {
+  width: 100px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.range_limit .form-control.range_end {
+  width: 100px;
+  display: inline-block;
+  margin-left: 8px;
+}
+
+.range_limit {
+  display: flex;
+  align-items: center;
+}
 
 
 /* =============== */
