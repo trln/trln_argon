@@ -1,0 +1,63 @@
+/* We need to backport this BL commit to BL8 else DartSass-Sprockets will fail */
+/* to compile in production mode. */
+/* https://github.com/projectblacklight/blacklight/commit/d7416f4179fd314cc1c827da36ad57a1aa543e52 */
+
+/* Bootstrap's breakpoint-max(xs) when xs = 0 evaluates to null, and DartSass complains   */
+/* See: https://github.com/twbs/bootstrap/blob/main/scss/mixins/_breakpoints.scss#L34-L46 */
+
+.search-widgets {
+  display: flex;
+
+  > * {
+    @extend .mx-1;
+  }
+}
+
+.sort-pagination,
+.pagination-search-widgets {
+  border-bottom: $pagination-border-width solid $pagination-border-color;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+
+.pagination-search-widgets {
+  padding-top: 1px;
+  padding-bottom: $spacer;
+}
+
+.sort-pagination .dropdown-toggle {
+  cursor: pointer;
+}
+
+.no-js {
+  .btn-group:focus-within {
+    .dropdown-menu {
+      @extend .show;
+    }
+  }
+}
+
+.view-type {
+  display: inline-block;
+
+  .caption {
+    @extend .sr-only !optional;
+    @extend .visually-hidden !optional;
+  }
+}
+
+.search-input-group {
+  width: 80%;
+}
+
+/* This block is what breaks DartSass-Sprockets compilation:
+@media (max-width: breakpoint-max(xs)) {
+  .search-input-group {
+    width: auto;
+  }
+}
+*/
+
+.modal_form {
+  margin-bottom: 0;
+}
