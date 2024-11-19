@@ -33,6 +33,15 @@ class TestAppGenerator < Rails::Generators::Base
     generate 'blacklight:assets:sprockets'
   end
 
+  def remove_blacklight_scss
+    # We don't want the BL-generated blacklight.scss file since we are already using
+    # trln_argon_dependencies.scss to @import bootstrap & blacklight styles.
+    say_status('info', '=============================', :magenta)
+    say_status('info', 'Removing Blacklight SCSS file', :magenta)
+    say_status('info', '=============================', :magenta)
+    remove_file 'app/assets/stylesheets/blacklight.scss'
+  end
+
   # The sassc-rails gem is added by the BL assets generator but we don't want it.
   # We'll use dartsass-sprockets instead.
   # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb#L33
