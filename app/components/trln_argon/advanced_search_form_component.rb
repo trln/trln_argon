@@ -1,6 +1,5 @@
 module TrlnArgon
   class AdvancedSearchFormComponent < Blacklight::AdvancedSearchFormComponent
-    include RangeLimitHelper
     include ViewHelpers
 
     private
