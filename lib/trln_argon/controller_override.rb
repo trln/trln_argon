@@ -237,14 +237,18 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+
+        # See Range Facet Configuration options:
+        # https://github.com/projectblacklight/blacklight_range_limit?tab=readme-ov-file#range-facet-configuration
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
-                               single: true,
-                               range: {
-                                 assumed_boundaries: [1100, Time.now.year + 1],
-                                 segments: false
+                               range: true,
+                               range_config: {
+                                 chart_js: false,
+                                 textual_facets: false
                                },
                                advanced_search_component: TrlnArgon::AdvancedSearchRangeLimitComponent
+
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true

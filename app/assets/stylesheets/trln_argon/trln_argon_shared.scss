@@ -1607,41 +1607,31 @@ h2.local-filter-heading {
 }
 
 
-
 /* ================ */
 /* ADVANCED SEARCH  */
 /* ================ */
 
-.blacklight-advanced {
+.blacklight-catalog-advanced_search,
+.blacklight-trln-advanced_search {
 
-  .search-query-form,
-  .blacklight-advanced_trln .search-query-form {
-    /* fixed via JS */
-  }
-
-  form.advanced span.option-wrapper {
+  /* Custom styles for range input boxes */
+  .range_limit .form-control.range_begin {
+    width: 100px;
     display: inline-block;
+    margin-right: 8px;
+  }
+
+  .range_limit .form-control.range_end {
+    width: 100px;
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .range_limit {
+    display: flex;
+    align-items: center;
   }
 }
-
-/* Custom styles for range input boxes */
-.range_limit .form-control.range_begin {
-  width: 100px;
-  display: inline-block;
-  margin-right: 8px;
-}
-
-.range_limit .form-control.range_end {
-  width: 100px;
-  display: inline-block;
-  margin-left: 8px;
-}
-
-.range_limit {
-  display: flex;
-  align-items: center;
-}
-
 
 /* =============== */
 /* A11Y TWEAKS     */
