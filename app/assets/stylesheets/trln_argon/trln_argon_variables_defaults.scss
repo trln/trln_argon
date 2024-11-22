@@ -18,8 +18,8 @@ $primary-color: #4b7ca9 !default; // this is 'UNC Blue'
 $secondary-color: #2e4972 !default; // this should be a darker hue than primary
 $tertiary-color: #5099b4 !default; // this should be a lighter hue than primary
 
-$primary-link-color: darken( $primary-color, 5% ) !default;
-$secondary-link-color: darken( $primary-color, 15% ) !default;
+$primary-link-color: shade-color($primary-color, 5%) !default;
+$secondary-link-color: shade-color($primary-color, 15%) !default;
 
 $facet-grey: #f5f5f5 !default; // use in facets and results lists
 

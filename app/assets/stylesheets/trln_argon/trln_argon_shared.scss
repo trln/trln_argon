@@ -315,12 +315,10 @@ body {
 
   .link-type-fulltext,
   .link-type-findingaid {
-    /*border-radius: 4px;*/
     color: #fff;
     display: inline-block;
-    background: darken($primary-color, 20%);
+    background: shade-color($primary-color, 20%);
     padding: .5em .75em .5em 2em;
-    /*border: 1px solid darken($primary-color, 10%)*/
     line-height: 1.2;
     text-align: left;
     text-decoration: none;
@@ -330,7 +328,7 @@ body {
   .link-type-fulltext:focus,
   .link-type-findingaid:hover,
   .link-type-findingaid:focus {
-    background: darken($primary-color, 10%);
+    background: shade-color($primary-color, 10%);
     text-decoration: none;
   }
 
@@ -1240,7 +1238,7 @@ h5 {
 
   .btn-info {
     background-color: $primary-color;
-    border-color: darken($primary-color, 10%);
+    border-color: shade-color($primary-color, 10%);
   }
 
 
@@ -1515,11 +1513,11 @@ div.marc-record {
 
 .progressive-link-hover {
   text-decoration: underline;
-  background-color: lighten($primary-link-color, 50%);
+  background-color: tint-color($primary-link-color, 50%);
 }
 
 .progressive-link-hover:hover {
-  color: darken($primary-link-color, 40%);
+  color: shade-color($primary-link-color, 40%);
 }
 
 #included-works .progressive-link-wrapper,
@@ -1593,7 +1591,7 @@ div.marc-record {
 
   &:hover {
     text-decoration: none;
-    background: lighten($primary-link-color, 10%);
+    background: tint-color($primary-link-color, 10%);
   }
 
 }
