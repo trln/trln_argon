@@ -2,33 +2,7 @@
 
 @import 'bootstrap';
 
-// Commented out the default blacklight @import so we have more
-// granular control over overriding individual @imports with
-// local files. We will be able to revert once the breakpoint-max(xs)
-// bugfix is backported to BL8 (see blacklight/_controls.scss).
-// See: https://github.com/projectblacklight/blacklight/blob/release-8.x/app/assets/stylesheets/blacklight/_blacklight_base.scss
-
-// @import 'blacklight/blacklight';
-// --------------------------------
-@import "blacklight/mixins";
-@import 'blacklight/blacklight_defaults';
-@import "blacklight/bootstrap_overrides";
-@import "blacklight/layout";
-@import "blacklight/header";
-@import "blacklight/constraints";
-@import "blacklight/controls"; // <-- temporary local override
-@import "blacklight/search_form";
-@import "blacklight/search_results";
-@import "blacklight/pagination";
-@import "blacklight/group";
-@import "blacklight/bookmark";
-@import "blacklight/balanced_list";
-@import "blacklight/facets";
-@import "blacklight/search_history";
-@import "blacklight/modal";
-@import "blacklight/icons";
-@import "blacklight/autocomplete";
-// --------------------------------
+@import 'blacklight/blacklight';
 
 @import 'blacklight_advanced_search';
 

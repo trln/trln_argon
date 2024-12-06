@@ -16,9 +16,7 @@ module TrlnArgon
       say_status('info', 'Installing Blacklight Range Limit', :magenta)
       say_status('info', '=================================', :magenta)
       # TODO: v9.0.0.beta1 of the plugin assumes you are using either yarn or importmap;
-      # it does not support Sprockets for JS. It also provides no easy way to skip
-      # running its assets generator (yet). For now, we will use a local version of
-      # lib/generators/blacklight_range_limit/assets_generator.rb that does nothing.
+      # it does not support Sprockets for JS. So we'll --skip-assets here.
 
       # If we want TRLN Argon to use the plugin this way by default (with no JS), we can.
       # If we want the chart.js histogram supported by TRLN Argon we will need to
@@ -29,7 +27,7 @@ module TrlnArgon
       # See:
       # https://github.com/projectblacklight/blacklight_range_limit/blob/main/lib/generators/blacklight_range_limit/install_generator.rb
       # https://github.com/projectblacklight/blacklight_range_limit/blob/main/lib/generators/blacklight_range_limit/assets_generator.rb
-      generate 'blacklight_range_limit:install'
+      generate 'blacklight_range_limit:install --skip-assets'
     end
 
     # this should match whatever's in trln_argon.gemspec
