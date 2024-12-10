@@ -644,9 +644,13 @@ module TrlnArgon
       end
 
       # Override default Blacklight index action to add caching
-      # See behavior in lib/controller_override/solr_caching_catalog.rb
+      # See behavior in lib/trln_argon/controller_override/solr_caching.rb
       def index
         cached_catalog_index
+      end
+
+      def advanced_search
+        cached_advanced_index
       end
 
       # Override default Blacklight to restore the BL 7 suggest method of returning JSON instead of populating a template
