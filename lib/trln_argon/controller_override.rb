@@ -695,7 +695,7 @@ module TrlnArgon
       # rubocop:enable Naming/PredicateName
 
       def render_ris_action?
-        doc = @document || (@document_list || []).first
+        doc = @document || (@response.documents || []).first
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
       end
 
