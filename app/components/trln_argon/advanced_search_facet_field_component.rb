@@ -7,7 +7,6 @@ module TrlnArgon
       super
       @facet_field = facet_field
       @display_facet = facet_field&.display_facet
-      logger.info("arguments to #{facet_field.key}: #{args}")
     end
 
     def field_param
