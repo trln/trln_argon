@@ -44,10 +44,10 @@ module SolrCaching
         cache_state = 'cacheable'
         Rails.cache.fetch(adv_index_cache_key, expires_in: solr_cache_exp_time) do
           cache_state = 'cache miss'
-          blacklight_advanced_search_form_search_service.search_results
+          advanced_search_form_data
         end
       else # not cacheable
-        blacklight_advanced_search_form_search_service.search_results
+        advanced_search_form_data
       end
 
     log_cache_state(cache_state, adv_index_cache_key)
@@ -70,6 +70,16 @@ module SolrCaching
   def solr_cache_exp_time
     num_string, time_unit = TrlnArgon::Engine.configuration.solr_cache_exp_time.split('.')
     num_string.to_i.send(time_unit)
+  end
+
+  # We need to ensure that the query that populates the advanced search
+  # form (which has no search params) facets isn't limited to just the homepage
+  # facets (TD-1263).
+  def advanced_search_form_data
+    @advanced_search_form_data ||=
+      blacklight_advanced_search_form_search_service.search_results do |builder|
+        builder.except(:only_home_facets)
+      end
   end
 
   def log_cache_state(cache_state, cache_key)

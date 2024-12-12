@@ -118,7 +118,6 @@ module TrlnArgon
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
-        # BL7
         config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:form_solr_parameters] ||= {
@@ -126,14 +125,18 @@ module TrlnArgon
           #       on the advanced search page
           #       unless defType is set to lucene.
           'defType' => 'lucene',
-          'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
-                            TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+          'facet.field' => [TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                            TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                             TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
+                            TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                             TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                             TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s],
-          'f.resource_type_f.facet.limit' => -1, # return all resource type values
-          'f.language_f.facet.limit' => -1, # return all language facet values
-          'f.date_cataloged_dt.facet.limit' => -1, # return all date facet values
+          'f.resource_type_f.facet.limit' => -1,
+          'f.physical_media_f.facet.limit' => -1,
+          'f.language_f.facet.limit' => -1,
+          'f.date_cataloged_dt.facet.limit' => -1,
           'facet.limit' => -1, # return all facet values
           'facet.sort' => 'index' # sort by byte order of values
         }
@@ -224,7 +227,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               include_in_advanced_search: false
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
