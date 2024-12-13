@@ -1,13 +1,22 @@
-<%= form_tag @url, method: @method, class: @classes.join(' '), role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
-  <!-- follows the default implementation, but this leads to duplication
-       of parameters after 'edit search' is used,  as chosen is doing 
-       its own thing -->
-  <noscript>
-  <%= render Blacklight::HiddenSearchStateComponent.new(params: @params) %>
-  </noscript>
-    <div class="input-criteria">
+<%# Replicates upstream BL template, with TRLN modifications; see: -%>
+<%# https://github.com/projectblacklight/blacklight/blob/release-8.x/app/components/blacklight/advanced_search_form_component.html.erb -%>
 
-      <div class="query-criteria" role="radiogroup" aria-labelledby="show-results-from-header"> 
+<% if constraints? %>
+  <%# TRLN CUSTOMIZATION: fix up heading order for a11y %>
+  <div class="constraints search_history">
+    <h2 class="h4"><%= t 'blacklight.advanced_search.form.search_context' %></h2>
+    <% constraints.each do |constraint| %>
+      <%= constraint %>
+    <% end %>
+  </div>
+<% end %>
+
+<%= form_tag @url, method: @method, class: @classes.join(' '), role: 'search', 'aria-label' => t('blacklight.search.form.submit') do %>
+  <%= render Blacklight::HiddenSearchStateComponent.new(params: hidden_search_state_params) %>
+
+  <div class="input-criteria">
+    <%# TRLN CUSTOMIZATION: toggle TRLN vs. local scope -%>
+    <div class="query-criteria mb-4" role="radiogroup" aria-labelledby="show-results-from-header">
         <h2 class="query-criteria-heading" id="show-results-from-header"><%= "#{t("blacklight_advanced_search.form.show_results_from")}" %></h2>
         <span class="option-wrapper">
           <%= radio_button_tag :option, "catalog" %> <%= label_tag 'option_catalog', "#{t("trln_argon.local_filter.searching_local", local_institution_name: t("trln_argon.institution.#{TrlnArgon::Engine.configuration.local_institution_code}.long_name"))}" %> &emsp;
@@ -15,47 +24,50 @@
         <span class="option-wrapper">
           <%= radio_button_tag  :option, "trln" %> <%= label_tag 'option_trln', "#{t("trln_argon.local_filter.searching_trln")}" %>
         </span>
+    </div>
+
+    <div class="query-criteria mb-4">
+      <h2 class="query-criteria-heading mb-4">
+        <%= t('blacklight.advanced_search.form.query_criteria_heading_html', select_menu: default_operator_menu) %>
+      </h2>
+
+      <div id="advanced_search">
+        <% search_field_controls.each do |control| %>
+          <%= control %>
+        <% end %>
       </div>
+    </div>
 
-      <div class="query-criteria">
-        <h2 class="query-criteria-heading">
-          <%= t('blacklight_advanced_search.form.query_criteria_heading_html', :select_menu =>  default_operator_menu ) %> 
-        </h2>
+    <% if search_filter_controls? %>
+      <div class="limit-criteria mb-4">
+        <h2 class="limit-criteria-heading h3"><%= t('blacklight.advanced_search.form.limit_criteria_heading_html')%></h2>
 
-        <div id="advanced_search">
-          <% search_field_controls.each do |control| %>
-            <%= control %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="limit-criteria">
-        <h2 class="limit-criteria-heading"><%= t('blacklight_advanced_search.form.limit_criteria_heading_html')%></h2>
-
-        <div id="advanced_search_facets" class="limit_input">
-          <div class="limit-criteria mb-4">
+        <div id="advanced_search_facets" class="limit_input row">
+          <%# TRLN: removed column offset %>
+          <div class="advanced-facet-limits">
             <% search_filter_controls.each do |control| %>
               <%= control %>
             <% end %>
           </div>
         </div>
       </div>
+    <% end %>
   </div>
 
-  <hr>
+  <hr/>
 
+  <%# TRLN: fixed up the layout here %>
   <% if sort_fields_select %>
     <div class="row mb-4">
-      <div class="col-md-6 col-sm-6 col-xs-6 sorting" style="display: inline-flex">
-        <%= content_tag :label, t('blacklight.advanced_search.form.sort_label'), for: 'sort', class: 'col-form-label' %>
+      <div class="col-sm-6 d-inline-flex sorting">
+        <%= content_tag :label, t('blacklight.advanced_search.form.sort_label'), for: 'sort', id: 'advanced-search-sort-label', class: 'col-form-label' %>
         <%= sort_fields_select %>
       </div>
-      <div class="submit-buttons col-md-5 col-sm-6 col-xs-6 offset-md-1">
+      <div class="submit-buttons col-sm-6">
         <%= link_to t('blacklight.advanced_search.form.start_over_html'), advanced_search_catalog_path,
                     class: 'btn btn-outline-secondary advanced-search-start-over' %>
         <%= submit_tag t('blacklight.advanced_search.form.search_btn_html'), class: 'btn btn-primary advanced-search-submit', id: "advanced-search-submit" %>
       </div>
     </div>
   <% end %>
-
 <% end %>
