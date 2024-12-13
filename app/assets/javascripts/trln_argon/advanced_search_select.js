@@ -1,15 +1,7 @@
 Blacklight.onLoad(function() {
     $('.advanced-search-facet-select').chosen({
         allow_single_deselect: true,
-        no_results_text: 'No results matched'
+        no_results_text: 'No results matched',
+        width: '100%'
     });
-
-   resizeChosen();
-   jQuery(window).on('resize', resizeChosen);
 });
-
-function resizeChosen() {
-   $(".chosen-container").each(function() {
-       $(this).attr('style', 'width: 100%');
-   });
-}

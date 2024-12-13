@@ -4,7 +4,7 @@
 //= require trln_argon/progressive_links.js
 //= require trln_argon/physical_media_facet.js
 //= require bootstrap
-//= require chosen-jquery
+//= require chosen.jquery.js
 //= require blacklight/hierarchy/hierarchy.js
 //= require trln_argon/location_facet.js
 //= require trln_argon/advanced_search_select.js
