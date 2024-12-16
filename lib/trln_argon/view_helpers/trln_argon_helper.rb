@@ -156,13 +156,13 @@ module TrlnArgon
       def marc_thumbnail_tag(document)
         image_tag(
           document.thumbnail_urls.first.fetch(:href, ''),
-          class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image'
+          class: 'coverImage', onerror: "this.style.display = 'none';", alt: ''
         )
       end
 
       def syndetics_thumbnail_tag(document, size)
         document.cover_image(size: size) do |url|
-          image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image')
+          image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: '')
         end
       end
     end
