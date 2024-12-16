@@ -31,7 +31,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 4.0'
-  s.add_dependency 'trln-chosen-rails', '1.30.0'
   s.add_dependency 'citeproc-ruby', '~> 1.1'
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'

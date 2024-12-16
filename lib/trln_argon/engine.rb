@@ -5,7 +5,6 @@ require 'blacklight_range_limit'
 require 'rails_autolink'
 require 'library_stdnums'
 require 'font-awesome-rails'
-require 'chosen-rails'
 require 'rsolr'
 require 'addressable'
 
