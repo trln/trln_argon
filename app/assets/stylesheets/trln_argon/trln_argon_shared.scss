@@ -657,226 +657,125 @@ ul.blacklight-facet-checkboxes {
   color: $secondary-color;
 }
 
-
+/* TRLN vs. Local Scope Toggle */
+/* --------------------------- */
 #viewAllResults {
-
-  text-align: center;
-  margin-bottom: 1em;
-
-  .toggle {
-
-    display: inline-block;
-    width: 45%;
-    overflow: hidden;
-
-    a {
-      display: block;
+  .toggle-wrapper {
+    @include media-breakpoint-down(md) {
+      display: flex;
+      justify-content: center;
     }
+  }
 
-    label {
-      display: none;
-      cursor: pointer;
+  .toggle-logo {
+    border-radius: var(--bs-border-radius);
+    border: var(--bs-border-width) solid var(--bs-border-color-translucent);
+    .icon-wrapper {
+      width: 26px;
+      height: 40px;
+      background: transparent no-repeat left;
     }
+  }
 
-    &.toggle-local {
-      text-align: right;
-      margin-right: -2px;
-    }
-
-    &.toggle-trln {
-      text-align: left;
-      margin-left: -2px;
-    }
-
-    .btn-outline-secondary {
-
-      &:hover,
-      &:not(:disabled):not(.disabled):active,
-      &:focus {
-        color: #333;
-        background-color: #e6e6e6;
-        border-color: #adadad;
+  .toggle button {
+    &.active, &:active {
+      .toggle-logo {
+        @include button-variant($primary, $primary);
+        background: var(--bs-btn-bg);
       }
     }
 
+    &:hover:not(.active):not(:active), {
+      .toggle-logo {
+        background-color: var(--bs-secondary-bg-subtle);
+      }
+    }
   }
 
-  .icon-wrapper {
-    width: 26px;
-    height: 40px;
-    display: block;
+  .toggle-local {
+    .toggle-logo {
+      @include media-breakpoint-up(md) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      @include media-breakpoint-down(md) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+    }
+    .icon-wrapper {
+      background-image: image_url($institution-icon);
+    }
   }
 
-  #toggle-trln-btn-top,
-  #toggle-local-btn-top,
-  #toggle-trln-btn-bottom,
-  #toggle-local-btn-bottom {
-    padding-left: 24px;
-    padding-right: 24px;
+  .toggle-trln {
+    .toggle-logo {
+      @include media-breakpoint-up(md) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+      @include media-breakpoint-down(md) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    .icon-wrapper {
+      background-image: image_url($trln-icon-inverted);
+    }
   }
 
-  #toggle-trln-btn-top,
-  #toggle-trln-btn-bottom {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+  .toggle-label {
+    line-height: 1.1;
+    font-weight: normal;
+    text-decoration: none;
+    color: $primary-link-color;
+    @include media-breakpoint-down(md) {
+      display: none !important;
+    }
   }
 
-  #toggle-local-btn-top,
-  #toggle-local-btn-bottom {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  #toggle-trln-btn-top .icon-wrapper,
-  #toggle-trln-btn-bottom .icon-wrapper {
-    background: transparent image_url($trln-icon-inverted) no-repeat left;
-  }
-
-  #toggle-local-btn-top .icon-wrapper,
-  #toggle-local-btn-bottom .icon-wrapper {
-    background: transparent image_url($institution-icon) no-repeat left;
+  button.active .toggle-label {
+    font-weight: bold;
+    color: #767676;
   }
 
   body.blacklight-catalog & {
-
-    #toggle-trln-btn-top .icon-wrapper,
-    #toggle-trln-btn-bottom .icon-wrapper {
-      background: transparent image_url($trln-icon) no-repeat left;
+    .toggle-local .icon-wrapper {
+      background-image: image_url($institution-icon-inverted);
     }
 
-    #toggle-local-btn-top .icon-wrapper,
-    #toggle-local-btn-bottom .icon-wrapper {
-      background: transparent image_url($institution-icon-inverted) no-repeat left;
+    .toggle-trln .icon-wrapper {
+      background-image: image_url($trln-icon);
     }
-
   }
-
-}
-
-@include media-breakpoint-up(md) {
-
-  #viewAllResults {
-
-    text-align: left;
-
-    .toggle {
-
-      display: block;
-      width: 100%;
-      overflow: hidden;
-
-      &.toggle-local,
-      &.toggle-trln {
-        margin: 0;
-      }
-
-      &.toggle-local {
-        text-align: left;
-      }
-
-      .btn {
-        margin-right: 7px;
-      }
-
-      #toggle-trln-btn-top,
-      #toggle-local-btn-top,
-      #toggle-trln-btn-bottom,
-      #toggle-local-btn-bottom {
-        padding-left: 12px;
-        padding-right: 12px;
-        display: inline-block;
-      }
-
-      #toggle-trln-btn-top,
-      #toggle-trln-btn-bottom {
-        border-radius: 4px;
-      }
-
-      #toggle-local-btn-top,
-      #toggle-local-btn-bottom {
-        border-radius: 4px;
-      }
-
-      label {
-        max-width: calc(100% - 65px);
-        line-height: 1.1;
-        display: inline-block;
-        vertical-align: middle;
-        font-weight: normal;
-        color: #767676;
-
-        &.active {
-          font-weight: bold;
-          color: $primary-link-color;
-        }
-
-      }
-
-      a:hover label {
-        color: $primary-link-color;
-      }
-
-    }
-
-  }
-
 }
 
 #viewAllResultsEnd {
-
-  margin-top: 1em;
-
   .toggle-wrapper {
-    display: table;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .toggle-logo {
+    display: none !important;
   }
 
-  .btn {
-    display: none;
+  .toggle-divider {
+    border-right: 2px solid var(--bs-border-color);
+    min-height: 30px;
   }
 
-  .toggle {
-    width: 45%;
-    display: table-cell;
-    vertical-align: middle;
-
-    &.toggle-local {
-      text-align: right;
-      border-right: 2px solid #ccc;
-      padding-right: 2px;
-    }
-
-    &.toggle-trln {
-      text-align: left;
-    }
-
-    label {
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    a:hover label {
-      color: $primary-link-color;
-      text-decoration: underline;
-    }
-
-  }
-
-  label {
-
-    line-height: 1.2;
+  .toggle-label {
+    line-height: 1.1;
     font-weight: normal;
-    color: #767676;
-
-    &.active {
-      font-weight: bold;
-      color: $primary-link-color;
-    }
-
+    color: $primary-link-color;
   }
 
+  button.active .toggle-label {
+    font-weight: bold;
+    color: #767676;
+  }
 }
-
-
 
 /* =============== */
 /* ELEMENTS        */
