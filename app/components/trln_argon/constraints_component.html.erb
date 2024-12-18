@@ -1,25 +1,43 @@
-<% if @render_headers %>
-  <h2 class="visually-hidden"><%= t('blacklight.search.search_constraints_header') %></h2>
-<% end %>
-<% if @render_headers %>
-  <span class="constraints-label visually-hidden"><%= t('blacklight.search.filters.title') %></span>
-<% end %>
-<% if query_constraints_area.present? %>
-  <% query_constraints_area.each do |constraint| %>
-    <%= constraint %>
+<%# TRLN custom constraints component e.g., adding elements like -%>
+<%# - debug Solr query button   -%>
+<%# - Edit Search button        -%>
+<%# - visible constraints label -%>
+<%# https://github.com/projectblacklight/blacklight/blob/release-8.x/app/components/blacklight/constraints_component.html.erb -%>
+<%= content_tag @tag || :div, id: @id, class: @classes do %>
+  <% if @render_headers %>
+    <h2 class="sr-only visually-hidden"><%= t('blacklight.search.search_constraints_header') %></h2>
   <% end %>
-<% else %>
-  <%= query_constraints %>
-<% end %>
 
-<% if facet_constraints_area.present? %>
-  <% facet_constraints_area.each do |constraint| %>
-    <%= constraint %>
+  <%= helpers.solr_query_request %>
+
+  <%= render(TrlnArgon::StartOverButtonComponent.new(classes: 'catalog_startOverLink btn btn-primary btn-sm')) %>
+
+  <%= link_to 'Edit Search', helpers.advanced_search_url(params.permit!.except(:controller, :action).to_h),
+              class: 'catalog_editSearchLink btn btn-outline-secondary btn-sm',
+              id: 'editSearchLink' %>
+
+  <span class="constraints-label"><%= t('blacklight.search.filters.title') %></span>
+
+  <% if @render_headers %>
+    <span class="constraints-label sr-only visually-hidden"><%= t('blacklight.search.filters.title') %></span>
   <% end %>
-<% else %>
-  <%= facet_constraints %>
-<% end %>
+  <% if query_constraints_area.present? %>
+    <% query_constraints_area.each do |constraint| %>
+      <%= constraint %>
+    <% end %>
+  <% else %>
+    <%= query_constraints %>
+  <% end %>
 
-<% additional_constraints.each do |constraints| %>
-  <%= constraints %>
+  <% if facet_constraints_area.present? %>
+    <% facet_constraints_area.each do |constraint| %>
+      <%= constraint %>
+    <% end %>
+  <% else %>
+    <%= facet_constraints %>
+  <% end %>
+
+  <% additional_constraints.each do |constraints| %>
+    <%= constraints %>
+  <% end %>
 <% end %>

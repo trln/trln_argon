@@ -1004,6 +1004,10 @@ h5 {
     }
   }
 
+  .btn-outline-secondary:not(:hover):not(:focus) {
+    background: white;
+  }
+
   .applied-filter {
     margin: 3px 0 3px 0;
   }
