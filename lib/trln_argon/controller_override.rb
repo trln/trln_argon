@@ -31,8 +31,10 @@ module TrlnArgon
         config.search_builder_class = DefaultLocalSearchBuilder
         config.default_per_page = 20
 
-        # Permit doc_ids param for sharing bookmarks
-        config.search_state_fields << :doc_ids
+        # Permit TRLN specific parameters to be used.
+        # Note that :id is used by BL core; removed when fixed there; see:
+        # https://github.com/projectblacklight/blacklight/issues/3154
+        config.search_state_fields << %i[id debug doc_ids]
 
         # Sets the sidebar component for the index view in the TrlnArgon configuration.
         config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
