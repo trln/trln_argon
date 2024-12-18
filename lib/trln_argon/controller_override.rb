@@ -31,6 +31,9 @@ module TrlnArgon
         config.search_builder_class = DefaultLocalSearchBuilder
         config.default_per_page = 20
 
+        # Permit doc_ids param for sharing bookmarks
+        config.search_state_fields << :doc_ids
+
         # Sets the sidebar component for the index view in the TrlnArgon configuration.
         config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
         config.index.document_component = TrlnArgon::DocumentComponent
