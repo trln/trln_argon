@@ -13,25 +13,13 @@ describe TrlnArgon::ViewHelpers::SearchScopeToggleHelper, type: :helper do
 
   describe '#local_search_button_class' do
     it 'returns the expected class' do
-      expect(helper.local_search_button_class).to eq('btn-primary active')
+      expect(helper.local_search_button_class).to eq('active')
     end
   end
 
   describe '#trln_search_button_class' do
     it 'returns the expected class' do
-      expect(helper.trln_search_button_class).to eq('btn-outline-secondary')
-    end
-  end
-
-  describe '#local_search_button_label_class' do
-    it 'returns the expected class' do
-      expect(helper.local_search_button_label_class).to eq('active')
-    end
-  end
-
-  describe '#trln_search_button_label_class' do
-    it 'returns the expected class' do
-      expect(helper.trln_search_button_label_class).to eq('')
+      expect(helper.trln_search_button_class).to eq('')
     end
   end
 end
