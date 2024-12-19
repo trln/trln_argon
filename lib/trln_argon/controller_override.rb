@@ -36,6 +36,9 @@ module TrlnArgon
         # https://github.com/projectblacklight/blacklight/issues/3154
         config.search_state_fields << %i[id debug doc_ids]
 
+        # TRLN custom skip link display.
+        config.skip_link_component = TrlnArgon::SkipLinkComponent
+
         # Sets the sidebar component for the index view in the TrlnArgon configuration.
         config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
         config.index.document_component = TrlnArgon::DocumentComponent
