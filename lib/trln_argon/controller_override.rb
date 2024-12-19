@@ -684,7 +684,7 @@ module TrlnArgon
 
       # rubocop:disable Naming/PredicateName
       def has_search_parameters?
-        %i[q f op seach_field range doc_ids].any? { |p| params[p].present? }
+        %i[q f f_inclusive op search_field range doc_ids].any? { |p| params[p].present? }
         # rubocop:enable Naming/PredicateName
       end
 
