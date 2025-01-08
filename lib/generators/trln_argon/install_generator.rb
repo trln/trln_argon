@@ -129,6 +129,14 @@ module TrlnArgon
       end
     end
 
+    def inject_sass_config
+      # See https://github.com/tablecheck/dartsass-sprockets?tab=readme-ov-file#silencing-deprecation-warnings
+      insert_into_file 'config/application.rb', after: /config\.eager_load_paths.*$/ do
+        "\n\n    # Quiet Sass deprecation warnings from dependencies"\
+        "\n    config.sass.quiet_deps = true"
+      end
+    end
+
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
