@@ -15,7 +15,7 @@ module TrlnArgon
       say_status('info', '=================================', :magenta)
       say_status('info', 'Installing Blacklight Range Limit', :magenta)
       say_status('info', '=================================', :magenta)
-      # TODO: v9.0.0.beta1 of the plugin assumes you are using either yarn or importmap;
+      # TODO: v9.x of the plugin assumes you are using either yarn or importmap;
       # it does not support Sprockets for JS. So we'll --skip-assets here.
 
       # If we want TRLN Argon to use the plugin this way by default (with no JS), we can.

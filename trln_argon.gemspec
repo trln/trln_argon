@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'blacklight', '~> 8.7'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
   s.add_dependency 'blacklight-hierarchy', '~> 6.3'
-  s.add_dependency 'blacklight_range_limit', '9.0.0.beta2'
+  s.add_dependency 'blacklight_range_limit', '~> 9.0'
   s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'
   s.add_dependency 'library_stdnums', '~> 1.6'
