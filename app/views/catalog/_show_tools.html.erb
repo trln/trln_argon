@@ -8,15 +8,5 @@
 
 -%>
 
-<% if show_doc_actions? %>
-  <div id="document-tools" aria-labelledby="toolsLabel">
-    <h2 class="sr-only" id="toolsLabel">Tools</h2>
-    <ul class="<%= controller_name %>Tools nav nav-pills">
-      <%= render_show_doc_actions @document do |config, inner| %>
-        <li class="<%= config.name %>" >
-          <%= inner %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<% Blacklight.deprecation.warn('The partial _show_tools.html.erb will be removed in Blacklight 9.0. Configure blacklight_config.show.show_tools_component instead (default Blacklight::Document::ShowToolsComponent).') unless local_assigns[:silence_deprecation] %>
+<%= render TrlnArgon::Document::ShowToolsComponent.new(document: @document) %>

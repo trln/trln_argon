@@ -3,7 +3,9 @@
   <div class="col-md-12">
     <%= render Blacklight::Response::PaginationComponent.new(response: @response, html: {}, outer_window: 0) %>
       <div id="viewAllResultsEnd" class="clearfix">
-        <%= render :partial => "local_filter", locals: { local_filter_id: 'localFilterLabelFooter', local_button_id: 'toggle-local-btn-bottom', trln_button_id: 'toggle-trln-btn-bottom' } %>
+        <%= render :partial => "local_filter", locals: { filter_label_id: 'localFilterLabelFooter',
+                                                         local_button_id: 'toggle-local-btn-bottom',
+                                                         trln_button_id: 'toggle-trln-btn-bottom' } %>
       </div>
   </div>
  </div>

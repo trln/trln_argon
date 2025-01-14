@@ -1,3 +1,5 @@
+<%# Customized copy of core BL base layout; see: -%>
+<%# https://github.com/projectblacklight/blacklight/blob/release-8.x/app/views/layouts/blacklight/base.html.erb -%>
 <!DOCTYPE html>
 <%= content_tag :html, class: 'no-js', **html_tag_attributes do %>
   <head>
@@ -5,8 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Internet Explorer use the highest version available -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <%# TRLN CUSTOMIZATION here:  -%>
     <%= render TrlnArgon::HighwireMetadataComponent.new(@document) %>
     <!-- data used by various JS routines -->
     <meta name="shared-application-data"
@@ -15,31 +16,39 @@
         data-google-books-logo-url="<%= asset_path('trln_argon/google_books_preview.png') %>">
 
     <title><%= render_page_title %></title>
+    <script>
+      document.querySelector('html').classList.remove('no-js');
+    </script>
+
     <%= opensearch_description_tag application_name, opensearch_catalog_url(format: 'xml') %>
     <%= favicon_link_tag %>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= javascript_include_tag "application" %>
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload"  %>
+
+    <%# TRLN CUSTOMIZATION here: -%>
+    <%# We remove BL8's code here that defaults to Importmap or Propshaft and -%>
+    <%# instead just use the traditional Sprockets-compiled application.js    -%>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
   </head>
   <body class="<%= render_body_class %>">
-    <nav id="skip-link" role="navigation" aria-label="<%= t('blacklight.skip_links.label') %>">
-      <%= link_to t('blacklight.skip_links.search_field'), '#search_field', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
-      <%= link_to t('blacklight.skip_links.main_content'), '#main-container', class: 'element-invisible element-focusable rounded-bottom py-2 px-3', data: { turbolinks: 'false' } %>
+    <%= render blacklight_config.skip_link_component.new do %>
       <%= content_for(:skip_links) %>
-    </nav>
+    <% end %>
+
     <%= render partial: 'shared/header_navbar' %>
 
-  <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
-    <%= content_for(:container_header) %>
+    <main id="main-container" class="<%= container_classes %>" role="main" aria-label="<%= t('blacklight.main.aria.main_container') %>">
+      <%= content_for(:container_header) %>
 
-    <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
+      <%= render partial: 'shared/flash_msg', layout: 'shared/flash_messages' %>
 
-    <div class="row">
-      <%= content_for?(:content) ? yield(:content) : yield %>
-    </div>
-  </main>
+      <div class="row">
+        <%= content_for?(:content) ? yield(:content) : yield %>
+      </div>
+    </main>
 
     <%= render partial: 'shared/footer' %>
     <%= render partial: 'shared/modal' %>

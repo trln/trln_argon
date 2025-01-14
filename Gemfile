@@ -18,6 +18,7 @@ gemspec
 # engine_cart stanza: 2.5.0
 # the below comes from engine_cart, a gem used to test this Rails engine gem in the context of a Rails app.
 file = File.expand_path('Gemfile', ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path('.internal_test_app', File.dirname(__FILE__)))
+
 if File.exist?(file)
   begin
     eval_gemfile file
@@ -28,22 +29,21 @@ if File.exist?(file)
 else
   Bundler.ui.warn "[EngineCart] Unable to find test application dependencies in #{file}, using placeholder dependencies"
 
+  # TRLN CUSTOMIZATION:
+  # We'll use the Rails --skip-javascript flag so when generated we
+  # won't get the default JS files in app/javascript. We are sticking
+  # with Sprockets for now; our JS is in app/assets/javascripts.
+  # We also run --skip-bundle to avoid running `bundle install` upon the
+  # initial creation of the Rails app. We'll run it later in our generator
+  # steps after customizing the Gemfile.
+  ENV['ENGINE_CART_RAILS_OPTIONS'] = '--skip-javascript --skip-bundle'
+
   if ENV['RAILS_VERSION']
     if ENV['RAILS_VERSION'] == 'edge'
       gem 'rails', github: 'rails/rails'
-      ENV['ENGINE_CART_RAILS_OPTIONS'] = '--edge --skip-turbolinks'
+      ENV['ENGINE_CART_RAILS_OPTIONS'] = '--edge --skip-turbolinks --skip-javascript'
     else
       gem 'rails', ENV['RAILS_VERSION']
-    end
-
-    case ENV['RAILS_VERSION']
-    when /^6.0/
-      gem 'sass-rails', '>= 6'
-      gem 'webpacker', '~> 4.0'
-    when /^5.[12]/
-      gem 'sass-rails', '~> 5.0'
-      gem 'sprockets', '~> 3.7'
-      gem 'thor', '~> 0.20'
     end
   end
 end

@@ -12,13 +12,38 @@ module TrlnArgon
     end
 
     def run_dependency_generators
-      generate 'blacklight_range_limit:install'
+      say_status('info', '=================================', :magenta)
+      say_status('info', 'Installing Blacklight Range Limit', :magenta)
+      say_status('info', '=================================', :magenta)
+      # TODO: v9.x of the plugin assumes you are using either yarn or importmap;
+      # it does not support Sprockets for JS. So we'll --skip-assets here.
+
+      # If we want TRLN Argon to use the plugin this way by default (with no JS), we can.
+      # If we want the chart.js histogram supported by TRLN Argon we will need to
+      # start supporting yarn or importmap, at least for this plugin's dependencies.
+      # Or we can leave it up to each institution, i.e., if you want to use the histogram
+      # you'll also need to be supporting importmap or yarn/vite/jsbundling/etc locally.
+
+      # See:
+      # https://github.com/projectblacklight/blacklight_range_limit/blob/main/lib/generators/blacklight_range_limit/install_generator.rb
+      # https://github.com/projectblacklight/blacklight_range_limit/blob/main/lib/generators/blacklight_range_limit/assets_generator.rb
+      generate 'blacklight_range_limit:install --skip-assets'
     end
 
     # this should match whatever's in trln_argon.gemspec
     def install_gems
-      return if IO.read('Gemfile').include?('better_errors')
-      gem 'better_errors', '~> 2.9.1'
+      say_status('info', '======================', :magenta)
+      say_status('info', 'Adding gems to Gemfile', :magenta)
+      say_status('info', '======================', :magenta)
+
+      insert_into_file 'Gemfile', after: 'group :development do' do
+        <<~CONTENT
+          \n  gem 'better_errors'
+          \n  gem 'binding_of_caller'
+        CONTENT
+      end
+
+      gem 'jquery-rails', '~> 4.6' unless IO.read('Gemfile').include?('jquery-rails')
     end
 
     def install_configuration_files
@@ -53,7 +78,15 @@ module TrlnArgon
     end
 
     def update_assets_manifest
+      say_status('info', '============================', :magenta)
+      say_status('info', 'Updating the assets manifest', :magenta)
+      say_status('info', '============================', :magenta)
+
       prepend_to_file 'app/assets/config/manifest.js', "//= link trln_argon_manifest.js\n"
+      prepend_to_file 'app/assets/config/manifest.js', "//= link blacklight/manifest.js\n"
+
+      return if IO.read('app/assets/javascripts/application.js').include?('application.js')
+      append_to_file 'app/assets/config/manifest.js', "//= link application.js\n"
     end
 
     def install_stylesheet
@@ -61,24 +94,30 @@ module TrlnArgon
       copy_file 'trln_argon_variables.scss', 'app/assets/stylesheets/trln_argon_variables.scss'
     end
 
-    # BL7 started precompiling blacklight/blacklight.js
-    # We need this file without the autocomplete parts so
-    # we can use our own.  This autogenerates the above file
-    # in the target application as a set of requires, based
-    # on the contents of the /app/javascript/blacklight directory
-    # in the Blacklight gem, excluding autocomplete.
-    def override_compiled_blacklight_javascript
-      TrlnArgon::Utilities.new.repackage_blacklight_javascript
-    end
-
-    def insert_into_assets_initializer
-      TrlnArgon::Utilities.new.install_blacklight_asset_path
-    end
-
     def inject_javascript_include
+      say_status('info', '==============================', :magenta)
+      say_status('info', 'Injecting TRLN Argon JS assets', :magenta)
+      say_status('info', '==============================', :magenta)
+      return unless File.exist?('app/assets/javascripts/application.js')
       return if IO.read('app/assets/javascripts/application.js').include?('trln_argon')
+
       insert_into_file 'app/assets/javascripts/application.js', after: '//= require blacklight/blacklight' do
         "\n//= require trln_argon/trln_argon\n"
+      end
+    end
+
+    # BL8's Sprockets asset generator only injects jQuery for Bootstrap 4
+    # so we need to explicitly add it when using Bootstrap 5
+    # https://github.com/projectblacklight/blacklight/blob/release-8.x/lib/generators/blacklight/assets/sprockets_generator.rb
+    def inject_jquery
+      say_status('info', '================', :magenta)
+      say_status('info', 'Injecting jQuery', :magenta)
+      say_status('info', '================', :magenta)
+      return unless File.exist?('app/assets/javascripts/application.js')
+      insert_into_file 'app/assets/javascripts/application.js', after: '//= require rails-ujs' do
+        <<~CONTENT
+          \n//= require jquery3
+        CONTENT
       end
     end
 
@@ -90,16 +129,27 @@ module TrlnArgon
       end
     end
 
+    def inject_sass_config
+      # See https://github.com/tablecheck/dartsass-sprockets?tab=readme-ov-file#silencing-deprecation-warnings
+      insert_into_file 'config/application.rb', after: /config\.eager_load_paths.*$/ do
+        "\n\n    # Quiet Sass deprecation warnings from dependencies"\
+        "\n    config.sass.quiet_deps = true"
+      end
+    end
+
     def inject_into_dev_env
       return if IO.read('config/environments/development.rb').include?('BetterErrors')
       insert_into_file 'config/environments/development.rb', after: 'Rails.application.configure do' do
-        "\n\n  require 'socket'\n" \
-        "  begin\n" \
-        "    local_ip = IPSocket.getaddress(Socket.gethostname)\n" \
-        "  rescue\n" \
-        "    local_ip = \"127.0.0.1\"\n" \
-        "  end\n" \
-        "  BetterErrors::Middleware.allow_ip! local_ip if defined?(BetterErrors) && Rails.env.development?\n"
+        <<~CONTENT
+          \n  # Enable BetterErrors to work in Docker
+
+            if defined?(BetterErrors) && Rails.env.development?
+              # Allow private subnets as defined by RFC1918
+              BetterErrors::Middleware.allow_ip! '10.0.0.0/8'
+              BetterErrors::Middleware.allow_ip! '172.16.0.0/12'
+              BetterErrors::Middleware.allow_ip! '192.168.0.0/16'
+            end
+        CONTENT
       end
     end
 
@@ -150,9 +200,22 @@ module TrlnArgon
       end
     end
 
+    def setup_application_scss
+      say_status('info', '===========================', :magenta)
+      say_status('info', 'Setting up application.scss', :magenta)
+      say_status('info', '===========================', :magenta)
+      insert_into_file 'app/assets/stylesheets/application.scss' do
+        <<~CONTENT
+          @import 'trln_argon';
+        CONTENT
+      end
+    end
+
     def remove_turbolinks # via http://codkal.com/rails-how-to-remove-turbolinks/
       gsub_file('Gemfile', "gem 'turbolinks',", '')
-      gsub_file('app/assets/javascripts/application.js', '//= require turbolinks', '')
+      if File.exist?('app/assets/javascripts/application.js')
+        gsub_file('app/assets/javascripts/application.js', '//= require turbolinks', '')
+      end
       gsub_file('app/views/layouts/application.html.erb', "<%= stylesheet_link_tag 'application', media: 'all',
         'data-turbolinks-track': 'reload' %>", '')
       gsub_file('app/views/layouts/application.html.erb', "<%= javascript_include_tag 'application',

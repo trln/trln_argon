@@ -18,11 +18,11 @@ Gem::Specification.new do |s|
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
-  s.add_dependency 'rails', '~> 7.1'
-  s.add_dependency 'blacklight', '~> 7.0'
+  s.add_dependency 'rails', '>= 7.1', '< 7.2'
+  s.add_dependency 'blacklight', '~> 8.7'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
   s.add_dependency 'blacklight-hierarchy', '~> 6.3'
-  s.add_dependency 'blacklight_range_limit', '~> 7'
+  s.add_dependency 'blacklight_range_limit', '~> 9.0'
   s.add_dependency 'git', '>= 1.11.0', "< 2"
   s.add_dependency 'rails_autolink', '~> 1.1'
   s.add_dependency 'library_stdnums', '~> 1.6'
@@ -31,11 +31,11 @@ Gem::Specification.new do |s|
   s.add_dependency 'rsolr', '>= 1.0', '< 3'
   s.add_dependency 'addressable', '~> 2.5'
   s.add_dependency 'sprockets', '~> 4.0'
-  s.add_dependency 'trln-chosen-rails', '~> 1.20'
   s.add_dependency 'citeproc-ruby', '~> 1.1'
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
-  
+  s.add_dependency 'jquery-rails', '~> 4.6'
+
   s.add_development_dependency 'rspec-rails', '~> 6'
   s.add_development_dependency 'capybara', '~> 3.29'
   s.add_development_dependency 'pry', '~> 0.14'
@@ -45,15 +45,31 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'vcr', '~> 5.0'
   s.add_development_dependency 'engine_cart', '~> 2.2'
   s.add_development_dependency 'listen'
-  s.add_development_dependency 'better_errors', '~> 2.9.1'
-  s.add_development_dependency 'binding_of_caller', '~> 1.0'
   s.add_development_dependency 'rake', '~> 13'
-  
 
-  # Conditionally constrain nokogiri & sqlite3 to versions that still work with Ruby 2.7
-  # TODO: remove when we are all using Ruby 3+.
+  # Ruby 3.x compatibility: some gems and their dependencies need to be
+  # pinned to specific versions to work with different Ruby 3.x versions
+
+  # Ruby 3.0
+  # =================
   if Gem::Requirement.new('< 3.1').satisfied_by?(Gem::Version.new(RUBY_VERSION))
-    s.add_dependency 'nokogiri', '< 1.16'
     s.add_dependency 'sqlite3', '< 1.7'
+
+    s.add_dependency 'dartsass-sprockets', '< 3.1.0'
+    s.add_dependency 'sass-embedded', '<= 1.69.5'
+    s.add_dependency 'uri', '< 1.0'
+    s.add_dependency 'dartsass-ruby', '>= 3.0.2'
+
+  # Ruby 3.1
+  # =================
+  elsif Gem::Requirement.new('< 3.2').satisfied_by?(Gem::Version.new(RUBY_VERSION))
+    s.add_dependency 'dartsass-sprockets'
+    s.add_dependency 'sass-embedded', '<= 1.70'
+    s.add_dependency 'uri', '< 1.0'
+
+  # Ruby 3.2+
+  # =================
+  else
+    s.add_dependency 'dartsass-sprockets'
   end
 end

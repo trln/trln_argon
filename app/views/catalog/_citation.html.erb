@@ -1,7 +1,4 @@
-<div class="modal-header">
-  <p><i>These citations are automatically generated and may not always be correct. Double-check your citations to make sure they match an official citation manual or guide.</i></p>
-  <button type="button" class="ajax-modal-close close" data-dismiss="modal" aria-hidden="true">×</button>
-</div>
-
-<%= render TrlnArgon::Document::CitationComponent.with_collection(@documents) if @documents.present? %>
-
+<%= render Blacklight::System::ModalComponent.new do |component| %>
+  <% component.with_title { t('blacklight.tools.citation_note_html') } %>
+  <%= render TrlnArgon::Document::CitationComponent.with_collection(@documents) if @documents.present? %>
+<% end %>

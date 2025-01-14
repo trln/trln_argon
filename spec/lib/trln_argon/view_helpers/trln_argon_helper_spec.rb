@@ -136,39 +136,6 @@ describe TrlnArgonHelper, type: :helper do
     end
   end
 
-  describe '#add_icon_to_action_label' do
-    let(:tool_with_label) do
-      Blacklight::Configuration::ToolConfig.new(
-        icon: 'fa fa-download',
-        if: :render_ris_action?,
-        modal: false,
-        path: :ris_path
-      )
-    end
-    let(:tool_without_label) do
-      Blacklight::Configuration::ToolConfig.new(
-        if: :render_ris_action?,
-        modal: false,
-        path: :ris_path
-      )
-    end
-
-    before { allow(helper).to receive(:document_action_label).and_return('<li>Action Label</li>') }
-
-    context 'the configuration provides an icon' do
-      it 'adds an icon to the document action label' do
-        expect(helper.add_icon_to_action_label(tool_with_label)).to eq(
-          '<i class="fa fa-download" aria-hidden="true"></i> <li>Action Label</li>'
-        )
-      end
-    end
-    context 'the configuration does not provide an icon' do
-      it 'does not add an icon to the document action label' do
-        expect(helper.add_icon_to_action_label(tool_without_label)).to eq('<li>Action Label</li>')
-      end
-    end
-  end
-
   describe 'join_with_comma_semicolon_fallback' do
     context 'when values do not already contain commas' do
       let(:options) { { value: %w[Book Video] } }
@@ -235,9 +202,11 @@ describe TrlnArgonHelper, type: :helper do
     end
 
     before do
-      allow(helper).to receive(:solr_query_params).and_return(solr_params)
-      allow(helper).to receive(:solr_document_only_path).and_return('/document')
-      allow(helper).to receive(:solr_query_path).and_return('https://query.discovery.trln.org/trlnbib/')
+      allow(helper).to receive_messages(
+        solr_query_params: solr_params,
+        solr_document_only_path: '/document',
+        solr_query_path: 'https://query.discovery.trln.org/trlnbib/'
+      )
     end
 
     describe '#solr_document_request' do
@@ -1308,10 +1277,10 @@ describe TrlnArgonHelper, type: :helper do
       expect(context.helpers.link_to_subject_segments(options)).to(
         eq(['<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">Technology</a>'\
             '<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">'\
-            '<span class="sr-only">Technology</span> -- History</a>'\
+            '<span class="visually-hidden">Technology</span> -- History</a>'\
             '<a class="progressive-link" '\
             'href="/catalog?search_field=subject&amp;q=something">'\
-            '<span class="sr-only">Technology -- History</span> -- Science</a>',
+            '<span class="visually-hidden">Technology -- History</span> -- Science</a>',
             '<a class="progressive-link" href="/catalog?search_field=subject&amp;q=something">'\
             'Galilei, Galileo, 1564-1642</a>'])
       )
@@ -1364,19 +1333,19 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
-        '<span class="sr-only">Author One</span> One'\
+        '<span class="visually-hidden">Author One</span> One'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two</span> Two'\
+        '<span class="visually-hidden">Author One Two</span> Two'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three</span> Three'\
+        '<span class="visually-hidden">Author One Two Three</span> Three'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '<span class="visually-hidden">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'
       )
@@ -1388,19 +1357,19 @@ describe TrlnArgonHelper, type: :helper do
         '<span class="progressive-link-wrapper">'\
         '<a class="progressive-link" href="/catalog?search=something">Author</a>'\
         '<a class="progressive-link" href="/catalog?search=something">'\
-        '<span class="sr-only">Author One</span> One'\
+        '<span class="visually-hidden">Author One</span> One'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two</span> Two'\
+        '<span class="visually-hidden">Author One Two</span> Two'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three</span> Three'\
+        '<span class="visually-hidden">Author One Two Three</span> Three'\
         '</a>'\
         '<a class="progressive-link" '\
         'href="/catalog?search=something">'\
-        '<span class="sr-only">Author One Two Three Four</span> Four'\
+        '<span class="visually-hidden">Author One Two Three Four</span> Four'\
         '</a>'\
         '</span>'\
         '</li></ul>'

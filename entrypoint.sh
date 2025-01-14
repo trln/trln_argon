@@ -6,7 +6,7 @@ check_bundle() {
 
 cd /app || exit
 
-export BOOTSTRAP_VERSION=${BOOTSTRAP_VERSION:-'~>5.1'}
+export BOOTSTRAP_VERSION="${BOOTSTRAP_VERSION:-~>5.3}"
 
 PIDFILE=.internal_test_app/tmp/pids/server.pid
 
@@ -14,8 +14,8 @@ if [ -e "${PIDFILE}" ]; then
     rm "$PIDFILE"
 fi
 
-case $1 in 
-    clean) 
+case $1 in
+    clean)
         rm -rf .internal_test_app
         echo "Test application removed. You can start this container again to get a freshly generated application"
         ;;
@@ -42,7 +42,7 @@ case $1 in
         ;;
     shell)
         exec /bin/bash;;
-    *) 
+    *)
         exec "$@"
         ;;
 esac

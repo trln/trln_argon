@@ -1,0 +1,30 @@
+<% # TRLN override of BL8 sidebar component %>
+<% inst = TrlnArgon::Engine.configuration.local_institution_code %>
+<% instname = TrlnArgon::LookupManager.instance.map("#{inst}.facet.#{inst}") %>
+
+<div id="location-data"
+     data-argon-institution="<%= instname %>"
+     data-argon-hsl="<%= TrlnArgon::LookupManager.instance.map('hsl.facet.hsl') %>"
+     data-argon-law="<%= TrlnArgon::LookupManager.instance.map('law.facet.law') %>"
+     data-location-facet-limit="<%= TrlnArgon::Engine.configuration.number_of_location_facets %>">
+</div>
+
+<div id="trln-toggle" class="sidenav facets top-panel-heading">
+  <div id="viewAllResults" class="mb-2" role="navigation" aria-label="Searching (context)">
+    <%= render 'catalog/local_filter',
+              filter_label_id: 'localFilterLabelFacets',
+              local_button_id: 'toggle-local-btn-top',
+              trln_button_id: 'toggle-trln-btn-top' %>
+  </div>
+</div>
+
+<search>
+  <% facet_group_names.each do |groupname| %>
+    <% fields = facet_fields_in_group(groupname) %>
+    <%= render group_component_class.new(id: groupname, fields: fields, response: response) do |component| %>
+      <% component.with_body do %>
+        <%= render Blacklight::FacetComponent.with_collection(fields, response: response) %>
+      <% end %>
+    <% end %>
+  <% end %>
+</search>

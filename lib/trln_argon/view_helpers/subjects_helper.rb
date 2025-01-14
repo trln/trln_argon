@@ -56,7 +56,7 @@ module TrlnArgon
         if sr_only_segment.present?
           sr_span = content_tag(:span,
                                 sr_only_segment.chomp(delimiter).to_s,
-                                class: 'sr-only')
+                                class: 'visually-hidden')
           apply_delim = delimiter
         end
         "#{sr_span}#{apply_delim}#{segment_hierarchy_pair.first}"

@@ -29,6 +29,7 @@ en:
         tools:
             title: 'Tools'
             citation: 'Cite'
+            citation_note_html: '<p class="citation-note">These citations are automatically generated and may not always be correct. Double-check your citations to make sure they match an official citation manual or guide.</p>'
             email: 'Email'
             sms: 'Text'
             clear: 'Clear'

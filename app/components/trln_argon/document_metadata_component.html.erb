@@ -1,5 +1,9 @@
 <dl class="document-metadata">
   <% @fields.each do |field| -%>
-    <%= @view_context.render(field_component(field).new(field: field, show: @show, layout: TrlnArgon::MetadataFieldLayoutComponent)) %>
+    <%= render field.component.new(
+      field: field, 
+      show: @show, 
+      layout: TrlnArgon::MetadataFieldLayoutComponent
+    ) %>
   <% end -%>
 </dl>

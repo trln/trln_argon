@@ -31,6 +31,19 @@ module TrlnArgon
         config.search_builder_class = DefaultLocalSearchBuilder
         config.default_per_page = 20
 
+        # Permit TRLN specific parameters to be used.
+        # Note that :id is used by BL core; removed when fixed there; see:
+        # https://github.com/projectblacklight/blacklight/issues/3154
+        config.search_state_fields << %i[id debug doc_ids]
+
+        # TRLN custom skip link display.
+        config.skip_link_component = TrlnArgon::SkipLinkComponent
+
+        # Sets the sidebar component for the index view in the TrlnArgon configuration.
+        config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
+        config.index.document_component = TrlnArgon::DocumentComponent
+        config.index.constraints_component = TrlnArgon::ConstraintsComponent
+
         # Use Solr search requestHandler for search requests
         config.http_method = :get
         config.solr_path = :select
@@ -67,7 +80,7 @@ module TrlnArgon
         # tools configuration
 
         # Set partials to render
-        config.index.partials = %i[index_header thumbnail index index_items]
+        config.index.partials = %i[index_header index index_items]
 
         config.show.document_actions.delete(:bookmark)
 
@@ -75,32 +88,38 @@ module TrlnArgon
                                       icon: 'fa fa-envelope',
                                       callback: :email_action,
                                       path: :email_path,
-                                      validator: :validate_email_params)
+                                      validator: :validate_email_params,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:sms,
                                       icon: 'fa fa-commenting',
                                       if: :render_sms_action?,
                                       callback: :sms_action,
                                       path: :sms_path,
-                                      validator: :validate_sms_params)
+                                      validator: :validate_sms_params,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:citation,
-                                      icon: 'fa fa-quote-left')
+                                      icon: 'fa fa-quote-left',
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:ris,
                                       icon: 'fa fa-download',
                                       if: :render_ris_action?,
                                       modal: false,
-                                      path: :ris_path)
+                                      path: :ris_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:refworks,
                                       icon: 'fa fa-list',
                                       if: :render_refworks_action?,
                                       new_window: true,
                                       modal: false,
-                                      path: :refworks_path)
+                                      path: :refworks_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:share_bookmarks,
                                       icon: 'fa fa-share',
                                       if: :render_sharebookmarks_action?,
                                       new_window: false,
                                       modal: false,
-                                      path: :sharebookmarks_path)
+                                      path: :sharebookmarks_path,
+                                      component: TrlnArgon::Document::ActionComponent)
         config.add_show_tools_partial(:bookmark,
                                       partial: 'bookmark_control',
                                       if: :render_bookmarks_control?)
@@ -108,7 +127,6 @@ module TrlnArgon
 
         # default advanced config values
         config.advanced_search ||= Blacklight::OpenStructWithHashAccess.new
-        # BL7
         config.advanced_search.enabled = true
         config.advanced_search[:url_key] ||= 'advanced'
         config.advanced_search[:form_solr_parameters] ||= {
@@ -116,14 +134,18 @@ module TrlnArgon
           #       on the advanced search page
           #       unless defType is set to lucene.
           'defType' => 'lucene',
-          'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
-                            TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+          'facet.field' => [TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                            TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                             TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                            TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
+                            TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                             TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                             TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s],
-          'f.resource_type_f.facet.limit' => -1, # return all resource type values
-          'f.language_f.facet.limit' => -1, # return all language facet values
-          'f.date_cataloged_dt.facet.limit' => -1, # return all date facet values
+          'f.resource_type_f.facet.limit' => -1,
+          'f.physical_media_f.facet.limit' => -1,
+          'f.language_f.facet.limit' => -1,
+          'f.date_cataloged_dt.facet.limit' => -1,
           'facet.limit' => -1, # return all facet values
           'facet.sort' => 'index' # sort by byte order of values
         }
@@ -136,8 +158,7 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                     collapse: false,
                                     show: true,
-                                    partial: 'catalog/facet_checkbox',
-                                    locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') }
+                                    component: TrlnArgon::FacetFieldCheckboxesComponent
         config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                     label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                     limit: true,
@@ -183,8 +204,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                collapse: false,
                                show: true,
-                               partial: 'catalog/facet_checkbox',
-                               locals: { checkbox_field: 'Online', checkbox_field_label: I18n.t('trln_argon.checkbox_facets.online') },
+                               component: TrlnArgon::FacetFieldCheckboxesComponent,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
@@ -216,7 +236,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               include_in_advanced_search: false
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
@@ -229,14 +249,18 @@ module TrlnArgon
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true,
                                advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+
+        # See Range Facet Configuration options:
+        # https://github.com/projectblacklight/blacklight_range_limit?tab=readme-ov-file#range-facet-configuration
         config.add_facet_field TrlnArgon::Fields::PUBLICATION_YEAR_SORT.to_s,
                                label: TrlnArgon::Fields::PUBLICATION_YEAR_SORT.label,
-                               single: true,
-                               range: {
-                                 assumed_boundaries: [1100, Time.now.year + 1],
-                                 segments: false
+                               range: true,
+                               range_config: {
+                                 chart_js: false,
+                                 textual_facets: false
                                },
                                advanced_search_component: TrlnArgon::AdvancedSearchRangeLimitComponent
+
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
                                limit: true
@@ -632,9 +656,23 @@ module TrlnArgon
       end
 
       # Override default Blacklight index action to add caching
-      # See behavior in lib/controller_override/solr_caching_catalog.rb
+      # See behavior in lib/trln_argon/controller_override/solr_caching.rb
       def index
         cached_catalog_index
+      end
+
+      def advanced_search
+        cached_advanced_index
+      end
+
+      # Override default Blacklight to restore the BL 7 suggest method of returning JSON instead of populating a template
+      # Returns the dropdown list for autocomplete
+      def suggest
+        respond_to do |format|
+          format.json do
+            render json: suggestions_service.suggestions
+          end
+        end
       end
 
       # Override behavior
@@ -644,12 +682,12 @@ module TrlnArgon
         solr_response = search_service.repository.find params[:id]
         # Not sure if we need to set @documents in this context (d.croney)
         @documents = solr_response.documents
-        [solr_response, solr_response.documents]
+        solr_response.documents
       end
 
       # rubocop:disable Naming/PredicateName
       def has_search_parameters?
-        %i[q f op seach_field range doc_ids].any? { |p| params[p].present? }
+        %i[q f f_inclusive op search_field range doc_ids].any? { |p| params[p].present? }
         # rubocop:enable Naming/PredicateName
       end
 
@@ -673,7 +711,7 @@ module TrlnArgon
       # rubocop:enable Naming/PredicateName
 
       def render_ris_action?
-        doc = @document || (@document_list || []).first
+        doc = @document || (@response.documents || []).first
         doc && doc.respond_to?(:export_formats) && doc.export_formats.keys.include?(:ris)
       end
 

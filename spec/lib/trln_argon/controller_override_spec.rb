@@ -29,14 +29,18 @@ describe TrlnArgon::ControllerOverride do
     it 'sets the form_solr_parameters' do
       expect(override_config.advanced_search[:form_solr_parameters]).to eq(
         'defType' => 'lucene',
-        'facet.field' => [TrlnArgon::Fields::AVAILABLE_FACET.to_s,
-                          TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+        'facet.field' => [TrlnArgon::Fields::ACCESS_TYPE_FACET.to_s,
+                          TrlnArgon::Fields::AVAILABLE_FACET.to_s,
+                          TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                           TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
+                          TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
+                          TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                           TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                           TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s],
-        'f.date_cataloged_dt.facet.limit' => -1,
         'f.resource_type_f.facet.limit' => -1,
+        'f.physical_media_f.facet.limit' => -1,
         'f.language_f.facet.limit' => -1,
+        'f.date_cataloged_dt.facet.limit' => -1,
         'facet.limit' => -1,
         'facet.sort' => 'index'
       )

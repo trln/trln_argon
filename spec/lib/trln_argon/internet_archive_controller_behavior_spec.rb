@@ -16,8 +16,10 @@ describe TrlnArgon::InternetArchiveControllerBehavior do
 
   describe '#ia_ids_grouped_by_class' do
     it 'assembles the response' do
-      allow(mock_controller).to receive(:ia_api_response).and_return(response.to_json)
-      allow(mock_controller).to receive(:sanitize_internet_archive_id_params).and_return(ids)
+      allow(mock_controller).to receive_messages(
+        ia_api_response: response.to_json,
+        sanitize_internet_archive_id_params: ids
+      )
       expect(mock_controller.send(:ia_ids_grouped_by_class)).to eq(expectation)
     end
   end

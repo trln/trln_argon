@@ -1,0 +1,34 @@
+<%= content_tag @component,
+  id: @id,
+  data: {
+    'document-id': @document.id.to_s.parameterize,
+    'document-counter': @counter,
+  },
+  itemscope: true,
+  itemtype: @document.itemtype,
+  class: classes.flatten.join(' ') do %>
+  <%= header %>
+  <% if body.present? %>
+    <%= body %>
+  <% else %>
+    <div class="document-main-section">
+      <%= title %>
+      <%= embed %>
+      <%= content %>
+      <%= render partial: 'show_thumbnail_default', locals: { document: @document } %>
+      <div class="index-document-metadata">
+        <%= metadata %>
+      </div>
+      <% metadata_sections.each do |section| %>
+        <%= section %>
+      <% end %>
+
+      <% partials.each do |partial| %>
+        <%= partial %>
+      <% end %>
+    </div>
+
+    <%= thumbnail %>
+  <% end %>
+  <%= footer %>
+<% end %>

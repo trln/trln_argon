@@ -16,7 +16,7 @@
 
           <div class="<%= call_number_wrapper_class %>">
             <dl>
-              <dt><span class='call-number-badge badge badge-info'><%= t('trln_argon.show.badge.call_number') %></span></dt>
+              <dt><span class='call-number-badge badge'><%= t('trln_argon.show.badge.call_number') %></span></dt>
               <dd><span class='call-number'><%= h['call_no'] %></span></dd>
             </dl>
           </div>
@@ -28,8 +28,8 @@
         <% if h.fetch('summary', '').present? %>
 
           <div class="<%= holdings_summary_wrapper_class %>">
-            <dl class="row no-gutters" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
-              <dt><span class='summary-badge badge badge-info'><%= t('trln_argon.show.badge.summary') %></span></dt>
+            <dl class="row g-0" id="item-summary-<%= loc_b %>-<%= loc_n %>-<%= document.id %>">
+              <dt><span class='summary-badge badge'><%= t('trln_argon.show.badge.summary') %></span></dt>
               <dd>
 
                 <div class="summary-text-wrapper">
@@ -55,7 +55,7 @@
           <div class="<%= holdings_note_class %>">
 
             <dl>
-              <dt><span class='holding-note-badge badge badge-info'><%= t('trln_argon.show.badge.holding_note') %></span></dt>
+              <dt><span class='holding-note-badge badge'><%= t('trln_argon.show.badge.holding_note') %></span></dt>
               <dd><%= [*h['notes']].join("; "); %></dd>
             </dl>
 

@@ -6,8 +6,6 @@ module TrlnArgon
       helper_method :advanced_search_url
       helper_method :local_search_button_class
       helper_method :trln_search_button_class
-      helper_method :local_search_button_label_class
-      helper_method :trln_search_button_label_class
       helper_method :no_results_escape_href_url
       helper_method :filter_scope_name
       helper_method :url_for_document
@@ -15,6 +13,7 @@ module TrlnArgon
       helper_method :ris_url
       helper_method :show_solr_document_path
       helper_method :show_solr_document_url
+      helper_method :show_trln_solr_document_url
       helper_method :email_path
       helper_method :email_url
       helper_method :sms_path
@@ -52,6 +51,7 @@ module TrlnArgon
         return unless doc.respond_to?(:id)
         trln_solr_document_url(options.merge(id: doc.id))
       end
+      alias_method :show_trln_solr_document_url, :show_solr_document_url
 
       def filter_scope_name
         t('trln_argon.consortium.short_name')
@@ -62,18 +62,10 @@ module TrlnArgon
       end
 
       def local_search_button_class
-        'btn-outline-secondary'
-      end
-
-      def trln_search_button_class
-        'btn-primary active'
-      end
-
-      def local_search_button_label_class
         ''
       end
 
-      def trln_search_button_label_class
+      def trln_search_button_class
         'active'
       end
 

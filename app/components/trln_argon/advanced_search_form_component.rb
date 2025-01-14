@@ -1,6 +1,5 @@
 module TrlnArgon
   class AdvancedSearchFormComponent < Blacklight::AdvancedSearchFormComponent
-    include RangeLimitHelper
     include ViewHelpers
 
     private
@@ -11,7 +10,7 @@ module TrlnArgon
       search_fields.values.each.with_index do |field, i|
         with_search_field_control do
           fields_for('clause[]', i, include_id: false) do |f|
-            content_tag(:div, class: 'form-group advanced-search-field row mb-3') do
+            content_tag(:div, class: 'advanced-search-field row mb-4') do
               f.label(:query, field.display_label('search'), class: 'col-12 col-md-3 col-form-label') +
                 content_tag(:div, class: 'col-12 col-md-9') do
                   f.hidden_field(:field, value: field.key) +

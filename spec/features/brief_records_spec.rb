@@ -30,7 +30,7 @@ describe 'brief records' do
   end
 
   it 'has a title that links to the full record' do
-    brief_record_title = page.find('.document-position-0 .document-title-heading')
+    brief_record_title = page.find('.document-position-1 .document-title-heading')
     expect(brief_record_title).to have_link(nil, href: %r{/catalog/.+})
   end
 end

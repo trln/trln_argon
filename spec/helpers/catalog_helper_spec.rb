@@ -10,11 +10,11 @@ describe CatalogHelper do
     end
 
     it 'is bookmarked if the document is in the bookmarks' do
-      expect(helper.bookmarked?(bookmarked_document)).to eq true
+      expect(helper.bookmarked?(bookmarked_document)).to be true
     end
 
     it 'is not bookmarked if the document is not in the bookmarks' do
-      expect(helper.bookmarked?(SolrDocument.new(id: 'b'))).to eq false
+      expect(helper.bookmarked?(SolrDocument.new(id: 'b'))).to be false
     end
   end
 end

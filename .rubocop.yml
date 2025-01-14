@@ -3,7 +3,7 @@ inherit_from: .rubocop_todo.yml
 require: rubocop-rspec
 
 AllCops:
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.0
   # TODO: review this later
   NewCops: disable
   Exclude:
@@ -116,3 +116,6 @@ Lint/MissingCopEnableDirective:
 
 Lint/ConstantDefinitionInBlock:
   Enabled: false
+
+RSpec/IndexedLet:
+  Enabled: false  

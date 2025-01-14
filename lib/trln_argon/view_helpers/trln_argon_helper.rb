@@ -129,15 +129,6 @@ module TrlnArgon
         end.compact
       end
 
-      def add_icon_to_action_label(document_action_config)
-        if document_action_config.key?(:icon)
-          content_tag(:i, '', class: (document_action_config[:icon]).to_s, 'aria-hidden' => 'true') + ' ' +
-            document_action_label(document_action_config.key, document_action_config).html_safe
-        else
-          document_action_label(document_action_config.key, document_action_config).html_safe
-        end
-      end
-
       def join_with_comma_semicolon_fallback(options = {})
         return options[:value].join('; ') if options[:value].any? { |v| v.include?(',') }
 
@@ -165,13 +156,13 @@ module TrlnArgon
       def marc_thumbnail_tag(document)
         image_tag(
           document.thumbnail_urls.first.fetch(:href, ''),
-          class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image'
+          class: 'coverImage', onerror: "this.style.display = 'none';", alt: ''
         )
       end
 
       def syndetics_thumbnail_tag(document, size)
         document.cover_image(size: size) do |url|
-          image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: 'cover image')
+          image_tag(url.to_s, class: 'coverImage', onerror: "this.style.display = 'none';", alt: '')
         end
       end
     end

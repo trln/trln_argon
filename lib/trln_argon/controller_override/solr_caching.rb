@@ -1,27 +1,24 @@
-# implements caching for certain expensive queries
+# Implements caching for certain expensive queries
 # where liveness of results is not a top concern.
 module SolrCaching
   extend ActiveSupport::Concern
 
   # rubocop:disable Metrics/MethodLength
-  # rubocop:disable Metrics/AbcSize
   def cached_catalog_index
     cat_index_cache_key = cache_key('cached_catalog_index')
 
-    (@response, deprecated_document_list) =
-      if cat_index_cache_key.present?
-        logger.info('index page solr response cache hit')
-        Rails.cache.fetch(cat_index_cache_key.to_s, expires_in: solr_cache_exp_time) do
+    @response =
+      if cat_index_cache_key.present? # cacheable
+        cache_state = 'cacheable'
+        Rails.cache.fetch(cat_index_cache_key, expires_in: solr_cache_exp_time) do
+          cache_state = 'cache miss'
           search_service.search_results
         end
-      else
+      else # not cacheable
         search_service.search_results
       end
 
-    @document_list = ActiveSupport::Deprecation::DeprecatedObjectProxy.new(
-      deprecated_document_list,
-      'The @document_list instance variable is deprecated; '\
-      ' use @response.documents instead.', ActiveSupport::Deprecation.new)
+    log_cache_state(cache_state, cat_index_cache_key)
 
     respond_to do |format|
       format.html { store_preferred_view }
@@ -35,23 +32,25 @@ module SolrCaching
       document_export_formats(format)
     end
   end
-  # rubocop:enable Metrics/MethodLength
-  # rubocop:enable Metrics/AbcSize
 
+  # rubocop:enable Metrics/MethodLength
   def cached_advanced_index
     return if request.method == :post
 
     adv_index_cache_key = cache_key('cached_advanced_index')
 
     @response =
-      if adv_index_cache_key.present?
-        logger.info('advanced search page solr response cache hit')
-        Rails.cache.fetch(adv_index_cache_key.to_s, expires_in: solr_cache_exp_time) do
-          get_advanced_search_facets
+      if adv_index_cache_key.present? # cacheable
+        cache_state = 'cacheable'
+        Rails.cache.fetch(adv_index_cache_key, expires_in: solr_cache_exp_time) do
+          cache_state = 'cache miss'
+          advanced_search_form_data
         end
-      else
-        get_advanced_search_facets
+      else # not cacheable
+        advanced_search_form_data
       end
+
+    log_cache_state(cache_state, adv_index_cache_key)
   end
 
   private
@@ -71,5 +70,26 @@ module SolrCaching
   def solr_cache_exp_time
     num_string, time_unit = TrlnArgon::Engine.configuration.solr_cache_exp_time.split('.')
     num_string.to_i.send(time_unit)
+  end
+
+  # We need to ensure that the query that populates the advanced search
+  # form (which has no search params) facets isn't limited to just the homepage
+  # facets (TD-1263).
+  def advanced_search_form_data
+    @advanced_search_form_data ||=
+      blacklight_advanced_search_form_search_service.search_results do |builder|
+        builder.except(:only_home_facets)
+      end
+  end
+
+  def log_cache_state(cache_state, cache_key)
+    return unless cache_state && cache_key
+
+    case cache_state
+    when 'cacheable'
+      logger.info "Cache hit: Got Solr response from cache for key: #{cache_key}"
+    when 'cache miss'
+      logger.info "Cache miss: Generated Solr response for cache key: #{cache_key}"
+    end
   end
 end

@@ -1,45 +1,44 @@
-Blacklight.onLoad(function() {
+Blacklight.onLoad(function () {
   /**
    * Ensures that checkbox-only facets (currently, access_type which is either
    * online or not)
    * (a) do not display a header and
-   * (b) automatically select/deselect based on whether the value of the checkbox 
+   * (b) automatically select/deselect based on whether the value of the checkbox
    * changes.
    */
-  $(window).on('load', function() {
-    $('#facet-panel-collapse .facet-checkbox-wrapper').each(
-      function(index, element) {
-        var wrapper = $(this);
-        
-        // hide the header
-        wrapper.closest('div.card').find('.facet-field-heading').hide();
-      
-        var fieldName = wrapper.data('facetField');
-        if ( !fieldName ) {
-          return;
-        }
-        var fieldValue = wrapper.data('checkboxField');
-        var field = wrapper.find(":checkbox");
-        var parameter = "f[" + fieldName + "][]";
-        var currentURL = new URL(window.location);
-        var currentParams = currentURL.searchParams;
-        if ( currentParams.has(parameter) ) {
-          field.attr("checked", "checked");
+  $(window).on('load', function () {
+    // Target the updated facet-checkbox list structure
+    $('#facet-panel-collapse .blacklight-facet-checkboxes li').each(function (index, element) {
+      var listItem = $(this);
+
+      // hide the header
+      listItem.closest('div.card').find('.facet-field-heading').hide();
+
+      var fieldName = "access_type_f";
+      var fieldValue = listItem.find('input').val();
+      var field = listItem.find(":checkbox");
+      var parameter = "f_inclusive[" + fieldName + "][]";
+
+      var currentURL = new URL(window.location);
+      var currentParams = currentURL.searchParams;
+
+      // Check the checkbox if it exists in the URL
+      if (currentParams.has(parameter) && currentParams.getAll(parameter).includes(fieldValue)) {
+        field.prop("checked", true);
+      } else {
+        field.prop("checked", false);
+      }
+
+      // Add change listener to reload the page when checkbox is checked/unchecked
+      field.on('change', function () {
+        if (field.is(':checked')) {
+          currentParams.append(parameter, fieldValue);
         } else {
-          field.removeAttr("checked");
+          currentParams.delete(parameter);
         }
-        field.on('change', () => {
-          if ( field.is(':checked')) {
-            currentParams.set(parameter, fieldValue);
-            currentURL.searchParams = currentParams;
-            window.location.searchParams = currentParams;
-          } else {
-            currentParams.delete(parameter);
-            currentURL.searchParams = currentParams;
-          }
-          console.log("sending to ", currentURL);
-          window.location.assign(currentURL.toString());
-        });
+        currentURL.search = currentParams.toString();
+        window.location.assign(currentURL.toString());
       });
+    });
   });
 }); // END Blacklight.onLoad

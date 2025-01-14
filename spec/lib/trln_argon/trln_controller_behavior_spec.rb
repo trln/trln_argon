@@ -30,29 +30,15 @@ describe TrlnArgon::TrlnControllerBehavior do
 
   describe '#local_search_button_class' do
     it 'sets the search button class' do
-      expect(mock_controller.helpers.local_search_button_class).to eq(
-        'btn-outline-secondary'
-      )
+      expect(mock_controller.helpers.local_search_button_class).to eq('')
     end
   end
 
   describe '#trln_search_button_class' do
     it 'sets the TRLN search button class' do
       expect(mock_controller.helpers.trln_search_button_class).to eq(
-        'btn-primary active'
+        'active'
       )
-    end
-  end
-
-  describe '#local_search_button_label_class' do
-    it 'sets the search button label class' do
-      expect(mock_controller.helpers.local_search_button_label_class).to eq('')
-    end
-  end
-
-  describe '#trln_search_button_label_class' do
-    it 'sets the TRLN search button label class' do
-      expect(mock_controller.helpers.trln_search_button_label_class).to eq('active')
     end
   end
 end

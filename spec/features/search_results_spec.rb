@@ -64,7 +64,7 @@ describe 'search results' do
     it 'renders a checkbox field in the facet' do
       VCR.use_cassette('search_results/checkbox_facet') do
         visit search_catalog_path
-        expect(page).to have_selector(:css, '#checkbox_access_type_f')
+        expect(page).to have_selector(:css, '#f_inclusive_access_type_f_1')
       end
     end
   end

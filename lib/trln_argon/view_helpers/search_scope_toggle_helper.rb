@@ -10,18 +10,10 @@ module TrlnArgon
       end
 
       def local_search_button_class
-        'btn-primary active'
-      end
-
-      def trln_search_button_class
-        'btn-outline-secondary'
-      end
-
-      def local_search_button_label_class
         'active'
       end
 
-      def trln_search_button_label_class
+      def trln_search_button_class
         ''
       end
 

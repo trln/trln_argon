@@ -11,6 +11,6 @@ Blacklight.onLoad(function() {
     }
   }
 
-  fetch_and_display_toggle_count($('.blacklight-catalog-index #trln-toggle .toggle-trln label'));
-  fetch_and_display_toggle_count($('.blacklight-trln-index #trln-toggle .toggle-local label'));
+  fetch_and_display_toggle_count($('.blacklight-catalog-index #trln-toggle .toggle-trln .toggle-label'));
+  fetch_and_display_toggle_count($('.blacklight-trln-index #trln-toggle .toggle-local .toggle-label'));
 });

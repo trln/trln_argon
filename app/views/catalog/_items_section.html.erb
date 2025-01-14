@@ -39,7 +39,7 @@
 
                 <% item_data['items'].first(num_display_items).each do |item| %>
 
-                  <div class="row no-gutters item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
+                  <div class="row g-0 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
 
                     <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n } %>
 
@@ -57,7 +57,7 @@
 
                     <% next if i < num_display_items %>
 
-                    <div class="row no-gutters item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
+                    <div class="row g-0 item <%= loc_n %> <%= loc_b %>" data-item-barcode="<%= get_item_id(item) %>">
 
                       <%= render partial: "items_section_item", locals: { document: document, item: item, loc_b: loc_b, loc_n: loc_n } %>
 
@@ -70,11 +70,11 @@
                 <div class="col-lg-12">
                   <div class="items-toggle">
 
-                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
+                    <a href="javascript:void(0);" class="expander btn btn-sm btn-info shower" data-bs-toggle='collapse' data-bs-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
                       <%= t('trln_argon.show.controls.show') %> <%= t('trln_argon.show.controls.all') %> <%= item_data['items'].length %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-plus-circle" aria-hidden="true"></i>
                     </a>
 
-                    <a href="#<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-toggle='collapse' data-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
+                    <a href="#<%= document.id %>-<%= loc_n %>-<%= document_index %>-preview" class="expander btn btn-sm btn-info hider" data-bs-toggle='collapse' data-bs-target='<%= "#item-container-#{document.id}-#{loc_n}-#{document_index}" %>' aria-expanded='false' aria-controls='<%= "item-container-#{document.id}-#{loc_n}-#{document_index}" %>'>
                       <%= t('trln_argon.show.controls.hide') %> <%= t('trln_argon.show.controls.items') %> <i class="fa fa-minus-circle" aria-hidden="true"></i>
                     </a>
 

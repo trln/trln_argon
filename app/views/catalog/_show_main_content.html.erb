@@ -1,20 +1,18 @@
-<%= render(Blacklight::SearchContextComponent.new(search_context: @search_context, search_session: search_session)) if search_session['document_id'] == @document.id %>
-
 <div class="row">
   <div class="<%= show_tools_class %>">
     <%= render :partial => 'show_tools' %>
   </div>
 </div>
 
-<% @page_title = t('blacklight.search.show.title', :document_title => document_presenter(@document).html_title, :application_name => application_name).html_safe %>
+<% @page_title = t('blacklight.search.show.title', document_title: document_presenter(@document).html_title, application_name: application_name).html_safe %>
 <% content_for(:head) { render_link_rel_alternates } %>
 
 <div id="document" class="document <%= render_document_class %>" itemscope  itemtype="<%= @document.itemtype %>" data-document-id="<%= @document.id %>">
   <div id="doc_<%= @document.id.to_s.parameterize %>">
-
     <div class="row">
-
       <div id="title-and-thumbnail" class="<%= show_main_content_heading_partials_class %>" aria-label="Title and thumbnail">
+        <!-- Title Display -->
+        <h1 class="document-title"><%= document_presenter(@document).html_title %></h1>
         <%= render_document_partials @document, blacklight_config.view_config(:show).heading_partials %>
       </div>
       <div class="<%= show_main_content_partials_class %>">
@@ -25,14 +23,8 @@
                      the blacklight partials config. -->
 
         </div>
-
-<!--         <div class="marc-record">
-          <p><a href="#">View MARC record for this title</a></p>
-        </div> -->
-
       </div>
-
     </div>
-
   </div>
 </div>
+
