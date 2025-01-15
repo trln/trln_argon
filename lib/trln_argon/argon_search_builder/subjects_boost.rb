@@ -56,8 +56,7 @@ module TrlnArgon
 
       def includes_subject_search?
         blacklight_params.key?('search_field') &&
-          ((blacklight_params['search_field'] == 'subject' ||
-          blacklight_params['search_field'] == 'genre_headings') ||
+          (['subject', 'genre_headings'].include?(blacklight_params['search_field']) ||
           (blacklight_params['search_field'] == 'advanced' &&
           blacklight_params.fetch('subject', nil).present?))
       end
