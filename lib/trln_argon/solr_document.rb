@@ -90,7 +90,8 @@ module TrlnArgon
     end
 
     def creators_to_text
-      names.select { |n| n[:type] == 'creator' || n[:type] == 'director' || n[:type] == 'no_rel' || n[:type] == '' }
+      valid_types = ['creator', 'director', 'no_rel', '']
+      names.select { |n| valid_types.include?(n[:type]) }
            .map { |n| n[:name] }.reject(&:empty?)
     end
 
