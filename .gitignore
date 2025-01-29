@@ -12,3 +12,4 @@ config/mappings/
 
 .internal_test_app
 .idea/
+node_modules/
