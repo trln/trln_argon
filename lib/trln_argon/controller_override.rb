@@ -205,13 +205,13 @@ module TrlnArgon
                                collapse: false,
                                show: true,
                                component: TrlnArgon::FacetFieldCheckboxesComponent,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                limit: true,
                                collapse: false,
                                show: true,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.to_s,
                                label: TrlnArgon::Fields::LOCATION_HIERARCHY_FACET.label,
                                limit: -1,
@@ -221,17 +221,17 @@ module TrlnArgon
                                # This helper is still needed for the label in constraints
                                helper_method: :location_filter_display,
                                component: Blacklight::Hierarchy::FacetFieldListComponent,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
                                collapse: false,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
                                label: TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.label,
                                limit: true,
                                collapse: false,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
@@ -244,11 +244,11 @@ module TrlnArgon
                                # This helper is still needed for the label in constraints
                                helper_method: :call_number_filter_display,
                                component: Blacklight::Hierarchy::FacetFieldListComponent,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
 
         # See Range Facet Configuration options:
         # https://github.com/projectblacklight/blacklight_range_limit?tab=readme-ov-file#range-facet-configuration
@@ -284,7 +284,7 @@ module TrlnArgon
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
                                limit: true,
-                               advanced_search_component: TrlnArgon::AdvancedSearchFacetFieldComponent
+                               advanced_search_component: TrlnArgon::MultiSelectFacetComponent
 
         # Hierarchical facet configuration
         # See: https://github.com/sul-dlss/blacklight-hierarchy/blob/main/README.md
