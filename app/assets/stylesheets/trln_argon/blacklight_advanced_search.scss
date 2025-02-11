@@ -8,12 +8,9 @@ h2.query-criteria-heading label {
 }
 
 #advanced_search_facets {
+  --bl-facet-margin-bottom: 1rem;
   .col-form-label {
     text-align: left;
-  }
-
-  .chosen-search-input {
-    color: #767676;
   }
 }
 

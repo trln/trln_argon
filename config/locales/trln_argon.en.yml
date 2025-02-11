@@ -66,6 +66,7 @@ en:
             sort_label: "Sort results by"
             start_over: "Start over"
             search_btn: 'Search'
+            placeholder: 'Select facets...'
 
     trln_argon:
 
