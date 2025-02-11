@@ -1,16 +1,16 @@
-<%= render(@layout.new(facet_field: @facet_field)) do |component| %>  
-    <% component.with_label do %>  
-      <%= @facet_field.label %>  
-    <% end %>  
-    <% component.with_body do %>  
-      <div class="facet-multi-select">  
-        <select <%= tag.attributes(select_attributes.merge(placeholder: t('blacklight_advanced_search.form.placeholder'))) %>>  
-          <% presenters.each do |presenter| %>  
-            <option <%= tag.attributes(option_attributes(presenter: presenter)) %>>  
-              <%= "#{presenter.label} (#{number_with_delimiter(presenter.hits)})" %>  
-            </option>  
-          <% end %>  
-        </select>  
-      </div>  
-    <% end %>  
+<%= render(@layout.new(facet_field: @facet_field)) do |component| %>
+    <% component.with_label do %>
+      <%= @facet_field.label %>
+    <% end %>
+    <% component.with_body do %>
+      <div class="facet-multi-select p-2">
+        <select <%= tag.attributes(select_attributes.merge(placeholder: t('blacklight_advanced_search.form.placeholder'))) %>>
+          <% presenters.each do |presenter| %>
+            <option <%= tag.attributes(option_attributes(presenter: presenter)) %>>
+              <%= "#{presenter.label} (#{number_with_delimiter(presenter.hits)})" %>
+            </option>
+          <% end %>
+        </select>
+      </div>
+    <% end %>
   <% end %>
