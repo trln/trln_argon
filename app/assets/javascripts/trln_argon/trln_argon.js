@@ -15,5 +15,4 @@
 //= require trln_argon/advanced_search_tt_menu.js
 //= require trln_argon/autocomplete.js
 //= require tom-select/tom-select.complete.js
-//= require trln_argon/controllers/multi_select_controller.js
-//= require stimulus/stimulus.umd.js
+//= require trln_argon/multi_select.js

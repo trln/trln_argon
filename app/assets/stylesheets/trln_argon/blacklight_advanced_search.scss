@@ -8,6 +8,7 @@ h2.query-criteria-heading label {
 }
 
 #advanced_search_facets {
+  --bl-facet-margin-bottom: 1rem;
   .col-form-label {
     text-align: left;
   }
@@ -53,15 +54,4 @@ h2.query-criteria-heading label {
     margin-right: 8px;
     font-weight: 700;
   }
-}
-
-.card {
-  margin-top: 1rem !important; /* Override with higher value */
-  margin-bottom: 1rem !important; /* Override with higher value */
-}
-
-.ts-wrapper.multi .ts-control [data-value] {
-  background-color: #eeeeee !important;;
-  background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%) !important;
-  text-shadow: none !important; /* Remove text-shadow */
 }

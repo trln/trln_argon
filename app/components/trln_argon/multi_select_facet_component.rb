@@ -28,14 +28,10 @@ module TrlnArgon
     # @return [Hash] HTML attributes for the select element
     def select_attributes
       {
-        class: "#{@facet_field.key}-select",
+        class: "#{@facet_field.key}-select multi-select",
         name: "f_inclusive[#{@facet_field.key}][]",
         placeholder: I18n.t('facets.advanced_search.placeholder'),
-        multiple: true,
-        data: {
-          controller: 'multi-select',
-          multi_select_plugins_value: select_plugins.to_json
-        }
+        multiple: true
       }
     end
 
@@ -45,15 +41,6 @@ module TrlnArgon
         value: presenter.value,
         selected: presenter.selected? ? 'selected' : nil
       }
-    end
-
-    # TomSelect functionality can be expanded with plugins. `checkbox_options`
-    # allow us to use the existing advanced search facet logic by using checkboxes.
-    # More plugins can be found here: https://tom-select.js.org/plugins/
-    #
-    # @return [Array<String>] array of TomSelect plugins
-    def select_plugins
-      %w[checkbox_options caret_position input_autogrow clear_button]
     end
   end
 end
