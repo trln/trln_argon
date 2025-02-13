@@ -3,12 +3,15 @@
 module SolrCaching
   extend ActiveSupport::Concern
 
-  # rubocop:disable Metrics/MethodLength
+  # We replicate much of core BL's index action here, but add logic
+  # around caching the response if it's cacheable. See:
+  # https://github.com/projectblacklight/blacklight/blob/release-8.x/app/controllers/concerns/blacklight/catalog.rb#L24-L51
+  # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
   def cached_catalog_index
     cat_index_cache_key = cache_key('cached_catalog_index')
 
     @response =
-      if cat_index_cache_key.present? # cacheable
+      if cat_index_cache_key.present? && Rails.configuration.action_controller.perform_caching
         cache_state = 'cacheable'
         Rails.cache.fetch(cat_index_cache_key, expires_in: solr_cache_exp_time) do
           cache_state = 'cache miss'
@@ -32,15 +35,15 @@ module SolrCaching
       document_export_formats(format)
     end
   end
+  # rubocop:enable Metrics/MethodLength, Metrics/AbcSize
 
-  # rubocop:enable Metrics/MethodLength
   def cached_advanced_index
     return if request.method == :post
 
     adv_index_cache_key = cache_key('cached_advanced_index')
 
     @response =
-      if adv_index_cache_key.present? # cacheable
+      if adv_index_cache_key.present? && Rails.configuration.action_controller.perform_caching
         cache_state = 'cacheable'
         Rails.cache.fetch(adv_index_cache_key, expires_in: solr_cache_exp_time) do
           cache_state = 'cache miss'
@@ -74,7 +77,9 @@ module SolrCaching
 
   # We need to ensure that the query that populates the advanced search
   # form (which has no search params) facets isn't limited to just the homepage
-  # facets (TD-1263).
+  # facets (TD-1263). So we essentially replicate core BL's advanced_search action,
+  # just with the home facet filters removed. See:
+  # https://github.com/projectblacklight/blacklight/blob/release-8.x/app/controllers/concerns/blacklight/catalog.rb#L53-L55
   def advanced_search_form_data
     @advanced_search_form_data ||=
       blacklight_advanced_search_form_search_service.search_results do |builder|
