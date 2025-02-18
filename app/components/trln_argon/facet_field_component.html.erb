@@ -1,0 +1,17 @@
+<div class="accordion-item facet-limit blacklight-<%= @facet_field.key %> <%= 'facet-limit-active' if @facet_field.active? %>">
+  <div class="accordion-header" id="<%= header_html_id %>">
+  </div>
+  <div id="<%= html_id %>" role="region" aria-labelledby="<%= header_html_id %>" class="panel-collapse facet-content collapse <%= "show" unless @facet_field.collapsed? %>">
+    <div class="accordion-body">
+      <%= body %>
+
+      <% if @facet_field.modal_path %>
+        <div class="more_facets">
+          <%= link_to t("more_#{@facet_field.key}_html", scope: 'blacklight.search.facets', default: :more_html, field_name: @facet_field.label),
+            @facet_field.modal_path,
+            data: { blacklight_modal: 'trigger', turbo: false } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

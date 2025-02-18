@@ -241,6 +241,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                limit: 4500,
                                sort: 'alpha',
+                               collapse: false,
                                # This helper is still needed for the label in constraints
                                helper_method: :call_number_filter_display,
                                component: Blacklight::Hierarchy::FacetFieldListComponent,
@@ -248,6 +249,7 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true,
+                               collapse: false,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
 
         # See Range Facet Configuration options:
@@ -283,6 +285,7 @@ module TrlnArgon
                                         'last_three_months' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_three_months'),
                                                                  fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-3MONTH/DAY TO NOW]" } },
                                label: TrlnArgon::Fields::DATE_CATALOGED_FACET.label,
+                               collapse: false,
                                limit: true,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
 

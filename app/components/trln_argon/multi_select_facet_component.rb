@@ -4,7 +4,7 @@ module TrlnArgon
     def initialize(facet_field:, layout: nil)
       super()
       @facet_field = facet_field
-      @layout = layout == false ? FacetFieldNoLayoutComponent : Blacklight::FacetFieldComponent
+      @layout = layout == false ? FacetFieldNoLayoutComponent : TrlnArgon::FacetFieldComponent
     end
 
     # @return [Boolean] whether to render the component

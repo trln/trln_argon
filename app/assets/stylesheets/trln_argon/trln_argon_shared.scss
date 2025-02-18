@@ -1520,6 +1520,7 @@ h2.local-filter-heading {
     width: 100px;
     display: inline-block;
     margin-right: 8px;
+    margin-left: 10px;
   }
 
   .range_limit .form-control.range_end {
@@ -1705,4 +1706,12 @@ div[aria-expanded=true] .expandable-content-controls .show-control.less {
   font-size: 1rem;
   font-style: italic;
   font-weight: normal;
+}
+
+/* ================ */
+/* COLOR CONTRAST   */
+/* ================ */
+
+a.remove {
+  color: #343a40 !important; /* Ensures it takes precedence */
 }
