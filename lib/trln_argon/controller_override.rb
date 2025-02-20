@@ -176,7 +176,8 @@ module TrlnArgon
         config.add_home_facet_field TrlnArgon::Fields::RESOURCE_TYPE_FACET.to_s,
                                     label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                     limit: true,
-                                    collapse: false
+                                    collapse: false,
+                                    suggest: true
         config.add_home_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                     label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
                                     limit: 4500,
@@ -186,7 +187,8 @@ module TrlnArgon
                                     component: Blacklight::Hierarchy::FacetFieldListComponent
         config.add_home_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                     label: TrlnArgon::Fields::LANGUAGE_FACET.label,
-                                    limit: true
+                                    limit: true,
+                                    suggest: true
         config.add_home_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
                                     query: {
                                       'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
@@ -226,16 +228,19 @@ module TrlnArgon
                                label: TrlnArgon::Fields::RESOURCE_TYPE_FACET.label,
                                limit: true,
                                collapse: false,
+                               suggest: true,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.to_s,
                                label: TrlnArgon::Fields::PHYSICAL_MEDIA_FACET.label,
                                limit: true,
                                collapse: false,
+                               suggest: true,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_TOPICAL_FACET.label,
                                limit: true,
                                collapse: false,
+                               suggest: true,
                                include_in_advanced_search: false
         config.add_facet_field TrlnArgon::Fields::CALL_NUMBER_FACET.to_s,
                                label: TrlnArgon::Fields::CALL_NUMBER_FACET.label,
@@ -248,6 +253,7 @@ module TrlnArgon
         config.add_facet_field TrlnArgon::Fields::LANGUAGE_FACET.to_s,
                                label: TrlnArgon::Fields::LANGUAGE_FACET.label,
                                limit: true,
+                               suggest: true,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
 
         # See Range Facet Configuration options:
@@ -263,18 +269,21 @@ module TrlnArgon
 
         config.add_facet_field TrlnArgon::Fields::AUTHOR_FACET.to_s,
                                label: TrlnArgon::Fields::AUTHOR_FACET.label,
-                               limit: true
+                               limit: true,
+                               suggest: true
 
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GENRE_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GENRE_FACET.label,
-                               limit: true
-
+                               limit: true,
+                               suggest: true
         config.add_facet_field TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_GEOGRAPHIC_FACET.label,
-                               limit: true
+                               limit: true,
+                               suggest: true
         config.add_facet_field TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.to_s,
                                label: TrlnArgon::Fields::SUBJECT_CHRONOLOGICAL_FACET.label,
-                               limit: true
+                               limit: true,
+                               suggest: true
         config.add_facet_field TrlnArgon::Fields::DATE_CATALOGED_FACET.to_s,
                                query: { 'last_week' => { label: I18n.t('trln_argon.new_title_ranges.now_minus_week'),
                                                          fq: "#{TrlnArgon::Fields::DATE_CATALOGED_FACET}:[NOW-7DAY/DAY TO NOW]" },

@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   s.add_dependency 'rails', '>= 7.1', '< 7.2'
-  s.add_dependency 'blacklight', '~> 8.7'
+  s.add_dependency 'blacklight', '~> 8'
   s.add_dependency 'blacklight_advanced_search', '~> 8.0.0.alpha2'
   s.add_dependency 'blacklight-hierarchy', '~> 6.3'
   s.add_dependency 'blacklight_range_limit', '~> 9.0'
