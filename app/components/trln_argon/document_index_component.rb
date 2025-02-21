@@ -1,5 +1,7 @@
 module TrlnArgon
-  class DocumentComponent < Blacklight::DocumentComponent
+  # DocumentComponent for use on Index (results) pages;
+  # replaces metadata slot with basic "subheader" content
+  class DocumentIndexComponent < Blacklight::DocumentComponent
     def before_render
       set_slot(
         :metadata,

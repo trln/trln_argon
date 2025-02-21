@@ -41,8 +41,16 @@ module TrlnArgon
 
         # Sets the sidebar component for the index view in the TrlnArgon configuration.
         config.index.sidebar_component = TrlnArgon::Search::SidebarComponent
-        config.index.document_component = TrlnArgon::DocumentComponent
+
+        # refinement that replaces "metadata" slot with simplified
+        # document subheader content
+        config.index.document_component = TrlnArgon::DocumentIndexComponent
         config.index.constraints_component = TrlnArgon::ConstraintsComponent
+
+        # refinement that adds a sub header slot that matches the simplified
+        # subheader in DocumentIndexComponent but which also keeps
+        # the metadata content for full display
+        config.show.document_component = TrlnArgon::DocumentShowComponent
 
         # Use Solr search requestHandler for search requests
         config.http_method = :get
