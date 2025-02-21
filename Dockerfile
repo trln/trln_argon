@@ -1,7 +1,7 @@
 ARG RUBY_VERSION=3.1.6
 FROM ruby:${RUBY_VERSION} AS app_bootstrap
 
-RUN apt-get update && apt-get install -y nodejs vim less
+RUN apt-get update && apt-get -y upgrade && apt-get install -y nodejs vim less
 
 FROM app_bootstrap AS builder
 
@@ -11,7 +11,7 @@ COPY lib/trln_argon/version.rb /build/lib/trln_argon/version.rb
 
 WORKDIR /build
 
-RUN $(./bundler_config.rb path /gems) && bundle install -j $(nproc)
+RUN $(./bundler_config.rb path /gems) && bundle config set with development test && bundle install -j $(nproc)
 
 FROM app_bootstrap AS runnable
 

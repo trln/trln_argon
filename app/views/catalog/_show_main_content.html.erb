@@ -1,30 +1,21 @@
+<%= render blacklight_config.view_config(:show).document_header_component.new(document: @document, search_context: @search_context, search_session: search_session) %>
+<% @page_title = t('blacklight.search.show.title', document_title: document_presenter(@document).html_title, application_name: application_name).html_safe %>
+<% content_for(:head) { render_link_rel_alternates } %>
+
 <div class="row">
   <div class="<%= show_tools_class %>">
     <%= render :partial => 'show_tools' %>
   </div>
 </div>
 
-<% @page_title = t('blacklight.search.show.title', document_title: document_presenter(@document).html_title, application_name: application_name).html_safe %>
-<% content_for(:head) { render_link_rel_alternates } %>
-
-<div id="document" class="document <%= render_document_class %>" itemscope  itemtype="<%= @document.itemtype %>" data-document-id="<%= @document.id %>">
-  <div id="doc_<%= @document.id.to_s.parameterize %>">
-    <div class="row">
-      <div id="title-and-thumbnail" class="<%= show_main_content_heading_partials_class %>" aria-label="Title and thumbnail">
-        <!-- Title Display -->
-        <h1 class="document-title"><%= document_presenter(@document).html_title %></h1>
-        <%= render_document_partials @document, blacklight_config.view_config(:show).heading_partials %>
-      </div>
-      <div class="<%= show_main_content_partials_class %>">
-        <%= render_document_partials @document, blacklight_config.view_config(:show).partials %>
-        <div id="librarian-tools">
-          <!-- TODO: Placeholder based on wireframes. Not functional yet.
-                     Should probably create a partial for this and wire it through
-                     the blacklight partials config. -->
-
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<% document_component = blacklight_config.view_config(:show).document_component -%>
+<%= render (document_component).new(document_component.collection_parameter => document_presenter(@document), component: :div, show: true, partials: blacklight_config.view_config(:show).partials) do |component| %>
+  <% component.with_title(as: 'h1', classes: '', link_to_document: false, actions: false) %>
+  <% component.with_footer do %>
+    <% if @document.respond_to?(:export_as_openurl_ctx_kev) %>
+      <!-- COinS, for Zotero among others. -->
+      <span class="Z3988" title="<%= @document.export_as_openurl_ctx_kev(document_presenter(@document).display_type) %>"></span>
+    <% end %>
+  <% end %>
+<% end %>
 
