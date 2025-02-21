@@ -2,7 +2,7 @@
 
 module TrlnArgon
   class StartOverButtonComponent < Blacklight::StartOverButtonComponent
-    def initialize(classes:, id: nil)
+    def initialize(classes: '', id: nil)
       super
       @classes = classes
       @id = id
