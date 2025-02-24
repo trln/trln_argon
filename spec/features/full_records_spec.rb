@@ -23,11 +23,11 @@ describe 'full records' do
     end
 
     it 'shows location information for Duke' do
-      expect(page).to have_css('#doc_duke002952265 h3', text: 'Duke Libraries')
+      expect(page).to have_css('#holdings h3.institution-name.duke', text: 'Duke Libraries')
     end
 
     it 'shows location information for NCSU' do
-      expect(page).to have_css('#doc_duke002952265 h3', text: 'NC State University Libraries')
+      expect(page).to have_css('#holdings h3.institution-name.ncsu', text: 'NC State University Libraries')
     end
   end
 
