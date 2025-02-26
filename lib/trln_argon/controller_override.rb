@@ -708,6 +708,7 @@ module TrlnArgon
         # rubocop:enable Naming/PredicateName
       end
 
+      # rubocop:disable Style/RedundantCondition
       def query_has_constraints?(localized_params = params)
         if is_advanced_search? localized_params
           true
@@ -719,6 +720,7 @@ module TrlnArgon
             localized_params[:doc_ids].blank?)
         end
       end
+      # rubocop:enable Style/RedundantCondition
 
       # rubocop:disable Naming/PredicateName
       def is_advanced_search?(req_params = params)
