@@ -13,9 +13,9 @@
   <% else %>
     <div class="document-main-section">
       <%= title %>
+      <%= render partial: 'show_thumbnail_default', locals: { document: @document } %>
       <%= render with_sub_header %>
       <%= content %>
-      <%= render partial: 'show_thumbnail_default', locals: { document: @document } %>
       <% metadata_sections.each do |section| %>
         <%= section %>
       <% end %>
