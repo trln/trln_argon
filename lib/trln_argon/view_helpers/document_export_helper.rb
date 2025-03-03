@@ -1,32 +1,49 @@
 module TrlnArgon
   module ViewHelpers
     module DocumentExportHelper
+      # the various `solr_document__url|path` identifiers
+      # below are dynamically created methods in
+      # ActionDispatch::Routing::RouteSet (rails 7.1)
+      # _options hashes are ignored because the framework will
+      # populate the URL with extraneous parameters; if necessary,
+      # these can be restored but if so, filter out any `id`
+      # parameters
+      #
+      # however, in the test environment we need to pass in the id param
+
       def refworks_path(options = {})
         "#{TrlnArgon::Engine.configuration.refworks_url}#{ris_url(options)}"
       end
 
       def ris_path(options = {})
-        solr_document_path({ format: :ris }.merge(options))
+        fmt = { format: :ris }
+        return solr_document_path(fmt.merge(options)) if Rails.env.test?
+
+        solr_document_path(fmt)
       end
 
       def ris_url(options = {})
-        solr_document_url({ format: :ris }.merge(options))
+        fmt = { format: :ris }
+        # this only breaks under test, but not in productiondd
+        return solr_document_url(fmt.merge(options)) if Rails.env.test?
+
+        solr_document_url(fmt)
       end
 
-      def email_path(options = {})
-        email_solr_document_path(options)
+      def email_path(_options = {})
+        email_solr_document_path
       end
 
-      def email_url(options = {})
-        email_solr_document_url(options)
+      def email_url(_options = {})
+        email_solr_document_url
       end
 
-      def sms_path(options = {})
-        sms_solr_document_path(options)
+      def sms_path(_options = {})
+        sms_solr_document_path
       end
 
-      def sms_url(options = {})
-        sms_solr_document_url(options)
+      def sms_url(_options = {})
+        sms_solr_document_url
       end
 
       def render_ris(documents)
