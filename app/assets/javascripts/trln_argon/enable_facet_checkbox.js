@@ -7,37 +7,41 @@ Blacklight.onLoad(function () {
    * changes.
    */
   $(window).on('load', function () {
-    // Target the updated facet-checkbox list structure
-    $('#facet-panel-collapse .blacklight-facet-checkboxes li').each(function (index, element) {
-      var listItem = $(this);
+
+    $('#facets ul.blacklight-facet-checkboxes').each(function () {
+
+      var wrapper = $(this);
 
       // hide the header
-      listItem.closest('div.card').find('.facet-field-heading').hide();
+      wrapper.closest('div.card').find('.facet-field-heading').hide();
+      var fieldName = wrapper.closest('.facet-content').attr('id').replace('facet-', '');
 
-      var fieldName = "access_type_f";
-      var fieldValue = listItem.find('input').val();
-      var field = listItem.find(":checkbox");
-      var parameter = "f_inclusive[" + fieldName + "][]";
+      wrapper.find('li').each(function () {
+        var listItem = $(this);
+        var fieldValue = listItem.find('input').val();
+        var field = listItem.find(":checkbox");
+        var parameter = "f_inclusive[" + fieldName + "][]";
 
-      var currentURL = new URL(window.location);
-      var currentParams = currentURL.searchParams;
+        var currentURL = new URL(window.location);
+        var currentParams = currentURL.searchParams;
 
-      // Check the checkbox if it exists in the URL
-      if (currentParams.has(parameter) && currentParams.getAll(parameter).includes(fieldValue)) {
-        field.prop("checked", true);
-      } else {
-        field.prop("checked", false);
-      }
-
-      // Add change listener to reload the page when checkbox is checked/unchecked
-      field.on('change', function () {
-        if (field.is(':checked')) {
-          currentParams.append(parameter, fieldValue);
+        // Check the checkbox if it exists in the URL
+        if (currentParams.has(parameter) && currentParams.getAll(parameter).includes(fieldValue)) {
+          field.prop("checked", true);
         } else {
-          currentParams.delete(parameter);
+          field.prop("checked", false);
         }
-        currentURL.search = currentParams.toString();
-        window.location.assign(currentURL.toString());
+
+        // Add change listener to reload the page when checkbox is checked/unchecked
+        field.on('change', function () {
+          if (field.is(':checked')) {
+            currentParams.append(parameter, fieldValue);
+          } else {
+            currentParams.delete(parameter);
+          }
+          currentURL.search = currentParams.toString();
+          window.location.assign(currentURL.toString());
+        });
       });
     });
   });

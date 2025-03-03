@@ -1,0 +1,29 @@
+<%# TRLN: slight modifications over core BL component. See: -%>
+<%# https://github.com/projectblacklight/blacklight/blob/blacklight_8/app/components/blacklight/facet_field_checkboxes_component.html.erb -%>
+<%= render(@layout.new(facet_field: @facet_field)) do |component| %>
+  <% component.with_label do %>
+    <%= @facet_field.label %>
+  <% end %>
+
+  <% component.with_body do %>
+    <ul class="facet-values list-unstyled blacklight-facet-checkboxes">
+      <% presenters.each_with_index do |presenter, idx| -%>
+        <%# TRLN CUSTOMIZATION to only show the online value -%>
+        <% next unless presenter.label == "Online" %>
+        <li>
+          <span class="facet-checkbox">
+            <%= check_box_tag "f_inclusive[#{@facet_field.key}][]", presenter.value, presenter.selected?, id: "f_inclusive_#{@facet_field.key}_#{idx}"%>
+          </span>
+
+          <span>
+            <%= label_tag "f_inclusive_#{@facet_field.key}_#{idx}" do %>
+              <%# TRLN CUSTOMIZATION for configurable label using i18n -%>
+              <span class="facet-label"><%= I18n.t('trln_argon.checkbox_facets.online') %></span>
+              <span class="facet-count"><%= t('blacklight.search.facets.count', number: number_with_delimiter(presenter.hits)) %></span>
+            <% end %>
+          </span>
+        </li>
+      <% end -%>
+    </ul>
+  <% end %>
+<% end %>
