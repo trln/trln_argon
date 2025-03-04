@@ -166,7 +166,7 @@ module TrlnArgon
                                     label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                     collapse: false,
                                     show: true,
-                                    component: TrlnArgon::FacetFieldCheckboxesComponent
+                                    component: TrlnArgon::AccessTypeCheckboxesComponent
         config.add_home_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                     label: TrlnArgon::Fields::AVAILABLE_FACET.label,
                                     limit: true,
@@ -214,7 +214,7 @@ module TrlnArgon
                                label: TrlnArgon::Fields::ACCESS_TYPE_FACET.label,
                                collapse: false,
                                show: true,
-                               component: TrlnArgon::FacetFieldCheckboxesComponent,
+                               component: TrlnArgon::AccessTypeCheckboxesComponent,
                                advanced_search_component: TrlnArgon::MultiSelectFacetComponent
         config.add_facet_field TrlnArgon::Fields::AVAILABLE_FACET.to_s,
                                label: TrlnArgon::Fields::AVAILABLE_FACET.label,

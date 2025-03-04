@@ -60,11 +60,35 @@ describe 'search results' do
     end
   end
 
-  context 'when checkbox facet is configured' do
-    it 'renders a checkbox field in the facet' do
-      VCR.use_cassette('search_results/checkbox_facet') do
-        visit search_catalog_path
-        expect(page).to have_selector(:css, '#f_inclusive_access_type_f_1')
+  describe 'access type (online) checkbox' do
+    context 'when at least one result is online' do
+      before do
+        VCR.use_cassette('search_results/online_facet_appears') do
+          visit search_catalog_path
+        end
+      end
+
+      it 'renders the facet' do
+        expect(page).to have_selector(:css, '#facet-access_type_f')
+      end
+
+      it 'only shows the Available Online value, no others' do
+        expect(page).to have_selector(:css, '#facet-access_type_f ul.facet-values li', count: 1)
+      end
+
+      it 'renders Available Online as a checkbox' do
+        expect(page).to have_selector(:css, '#facet-access_type_f ul.facet-values li input[type="checkbox"]')
+      end
+    end
+
+    context 'when no results are online' do
+      it 'does not render the facet at all' do
+        VCR.use_cassette('search_results/online_facet_suppressed') do
+          visit search_catalog_path
+          click_link 'Map'
+          click_link 'Microfilm'
+          expect(page).not_to have_selector(:css, '#facet-access_type_f')
+        end
       end
     end
   end
