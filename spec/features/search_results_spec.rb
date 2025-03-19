@@ -69,15 +69,15 @@ describe 'search results' do
       end
 
       it 'renders the facet' do
-        expect(page).to have_selector(:css, '#facet-access_type_f')
+        expect(page).to have_css('#facet-access_type_f')
       end
 
       it 'only shows the Available Online value, no others' do
-        expect(page).to have_selector(:css, '#facet-access_type_f ul.facet-values li', count: 1)
+        expect(page).to have_css('#facet-access_type_f ul.facet-values li', count: 1)
       end
 
       it 'renders Available Online as a checkbox' do
-        expect(page).to have_selector(:css, '#facet-access_type_f ul.facet-values li input[type="checkbox"]')
+        expect(page).to have_css('#facet-access_type_f ul.facet-values li input[type="checkbox"]')
       end
     end
 
@@ -87,7 +87,7 @@ describe 'search results' do
           visit search_catalog_path
           click_link 'Map'
           click_link 'Microfilm'
-          expect(page).not_to have_selector(:css, '#facet-access_type_f')
+          expect(page).not_to have_css('#facet-access_type_f')
         end
       end
     end
@@ -98,8 +98,7 @@ describe 'search results' do
       VCR.use_cassette('search_results/location_hierarchy_facet') do
         visit search_catalog_path
         click_button 'search'
-        expect(page).to have_selector(
-          :css,
+        expect(page).to have_css(
           '#facet-location_hierarchy_f .facet-hierarchy .h-node .h-node:first-child',
           text: 'Davis Library'
         )
