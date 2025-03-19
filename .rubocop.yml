@@ -1,6 +1,10 @@
 inherit_from: .rubocop_todo.yml
 
-require: rubocop-rspec
+require:
+- rubocop-capybara
+- rubocop-factory_bot
+- rubocop-rspec
+- rubocop-rspec_rails
 
 AllCops:
   TargetRubyVersion: 3.0
@@ -118,4 +122,4 @@ Lint/ConstantDefinitionInBlock:
   Enabled: false
 
 RSpec/IndexedLet:
-  Enabled: false  
+  Enabled: false
