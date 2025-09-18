@@ -37,6 +37,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'csl-styles', '~> 1.0'
   s.add_dependency 'bibtex-ruby', '>= 4.4.6', '< 7'
   s.add_dependency 'jquery-rails', '~> 4.6'
+  # ViewComponent 4 requires ruby 3.3+
+  s.add_dependency 'view_component', '< 4'
 
   s.add_development_dependency 'rspec-rails', '~> 6'
   s.add_development_dependency 'capybara', '~> 3.29'
