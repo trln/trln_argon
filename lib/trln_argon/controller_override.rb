@@ -712,11 +712,11 @@ module TrlnArgon
         solr_response.documents
       end
 
-      # rubocop:disable Naming/PredicateName
+      # rubocop:disable Naming/PredicatePrefix
       def has_search_parameters?
         %i[q f f_inclusive op search_field range doc_ids].any? { |p| params[p].present? }
-        # rubocop:enable Naming/PredicateName
       end
+      # rubocop:enable Naming/PredicatePrefix
 
       # rubocop:disable Style/RedundantCondition
       def query_has_constraints?(localized_params = params)
@@ -732,12 +732,12 @@ module TrlnArgon
       end
       # rubocop:enable Style/RedundantCondition
 
-      # rubocop:disable Naming/PredicateName
+      # rubocop:disable Naming/PredicatePrefix
       def is_advanced_search?(req_params = params)
         (req_params[:search_field] == blacklight_config.advanced_search[:url_key]) ||
           req_params[:f_inclusive]
       end
-      # rubocop:enable Naming/PredicateName
+      # rubocop:enable Naming/PredicatePrefix
 
       def render_ris_action?
         doc = @document || (@response.documents || []).first

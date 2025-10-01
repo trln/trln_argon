@@ -23,7 +23,7 @@ module BlacklightAdvancedSearch
                             collected_embeddables
                           )
                         )
-          return ('_query_:"' + bs_escape(inner_query) + '"') if options[:always_nested]
+          return '_query_:"' + bs_escape(inner_query) + '"' if options[:always_nested]
           return inner_query
         end
       end

@@ -29,11 +29,13 @@ module TrlnArgon
       end
 
       # NOTE: Combines HAS_SUPPLEMENT_WORK and SUPPLEMENT_TO_WORK
-      def has_supplement_work # rubocop:disable Style/PredicateName
+      # rubocop:disable Naming/PredicatePrefix
+      def has_supplement_work
         @has_supplement_work ||= deserialize_work_entry(TrlnArgon::Fields::HAS_SUPPLEMENT_WORK).concat(
           deserialize_work_entry(TrlnArgon::Fields::SUPPLEMENT_TO_WORK)
         )
       end
+      # rubocop:enable Naming/PredicatePrefix
 
       def host_item_work
         @host_item_work ||= deserialize_work_entry(TrlnArgon::Fields::HOST_ITEM_WORK)
