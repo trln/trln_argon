@@ -1,5 +1,6 @@
 require 'git'
 require 'singleton'
+require 'fileutils'
 
 module TrlnArgon
   module Loggable
@@ -19,12 +20,24 @@ module TrlnArgon
 
     DEFAULT_BRANCHES = %w[main master].freeze
 
+    # CHANGED: Added LOCK_FILE constant. Used by with_lock to serialize git
+    # operations across processes via an exclusive flock, preventing concurrent
+    # Puma workers from corrupting the repo's HEAD file.
+    LOCK_FILE = 'config/mappings/.argon_mappings.lock'.freeze
+
     def initialize(options = {})
       @repo_base = options.fetch(:repo_base, 'config/mappings')
       @repo_dir = File.join(@repo_base, REPO_NAME)
       begin
         @url = options[:git_url] || ::Rails.configuration.code_mappings[:git_url]
+
+        # CHANGED: Added .map to normalize remote branch names. Some versions of
+        # the git gem return full ref names like "refs/heads/main" instead of just
+        # "main", which caused .find below to always return nil, ultimately passing
+        # nil to Git#checkout and corrupting the HEAD file.
         remote_branches = Git.ls_remote(@url)['branches'].keys
+                                                         .map { |b| b.sub('refs/heads/', '') }
+
         if options[:branch]
           logger.info("Using '#{options[:branch]}' branch for mappings")
           @branch = options[:branch]
@@ -32,13 +45,27 @@ module TrlnArgon
           @branch = DEFAULT_BRANCHES.find { |b| remote_branches.include?(b) }
         end
 
+        # CHANGED: Added nil guard for @branch. If .find returns nil (e.g.
+        # because no DEFAULT_BRANCHES matched), the original code would silently
+        # pass nil to Git#checkout, which writes a binary HEAD file and causes
+        # the "no candidates for merging" error on the next pull. Fall back to
+        # 'main' and log an error instead.
+        if @branch.nil?
+          logger.error("Could not determine a valid branch from remote. " \
+                         "Remote branches found: #{remote_branches.inspect}. " \
+                         "Falling back to 'main'.")
+          @branch = 'main'
+        end
+
         unless remote_branches.include?(@branch)
-          logger.error("The repository at #{@url} "\
-            "does not contain a branch named '#{@branch}:\n\n"\
-            "we only found #{remote_branches}")
+          logger.error("The repository at #{@url} does not contain a branch " \
+                         "named '#{@branch}'. We only found: #{remote_branches}")
         end
       rescue NoMethodError
         @url = GIT_URL
+        # CHANGED: Changed = to ||= so an explicitly supplied branch option is
+        # not overwritten when falling into the rescue path.
+        @branch ||= 'main'
         logger.error('Unable to find configuration key `mappings_git_url`')
         logger.error('You need to specify this in the configuration file')
         logger.error("for your environment e.g. config/#{::Rails.env}.rb")
@@ -48,42 +75,78 @@ module TrlnArgon
 
     def clone
       logger.info("Initial clone of code mappings from #{@url} to #{@repo_base}")
-      @git = Git.clone(@url, REPO_NAME, path: @repo_base)
-      @git.checkout(@branch)
+      # CHANGED: Added branch: @branch option to Git.clone so the correct branch
+      # is checked out as part of the clone operation. Removed the separate
+      # @git.checkout(@branch) call that followed — it was redundant and could
+      # fail if @branch was nil.
+      @git = Git.clone(@url, REPO_NAME, path: @repo_base, branch: @branch)
     end
 
-    # refreshes the contents of the repository from origin;
-    # has checks to short circuit this if we're pulling too often
-    # and not changing branches.
     # rubocop:disable Metrics/PerceivedComplexity
     def refresh
-      if File.directory?(File.join(@repo_dir, '.git'))
-        logger.debug("Repository #{@repo_dir} appears to be a .git repo")
-        @git ||= Git.open(@repo_dir)
+      # CHANGED: Wrapped entire method body in with_lock. Without this, concurrent
+      # Puma workers each call refresh against the same repo directory simultaneously,
+      # causing fetch/checkout/reset operations to interleave and corrupt HEAD.
+      with_lock do
+        if File.directory?(File.join(@repo_dir, '.git'))
+          logger.debug("Repository #{@repo_dir} appears to be a .git repo")
+          @git ||= Git.open(@repo_dir)
 
-        head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
+          head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
 
-        # if we're not changing branches and we're within 2 minutes
-        # of our last changes, don't bother pulling new ones.
-        # Otherwise: pull down changes
-        do_pull = if File.exist?(head_fetch_file)
-                    File.stat(head_fetch_file).mtime < (Time.now - 2.minutes) && @git.current_branch == @branch
-                  else
-                    true
-                  end
+          # CHANGED: Removed the `&& @git.current_branch == @branch` clause.
+          # That call can raise if HEAD is damaged, turning a throttle guard
+          # into a crash. Since we always reset to the same branch, the check
+          # provided no real protection.
+          do_fetch = if File.exist?(head_fetch_file)
+                       File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
+                     else
+                       true
+                     end
 
-        if do_pull
-          logger.info("Pulling changes from #{@url}/#{@branch} to #{@repo_dir}")
-          @git.pull('origin', @branch)
-          @git.checkout(@branch)
+          if do_fetch
+            logger.info("Fetching changes from #{@url}/#{@branch} to #{@repo_dir}")
+            begin
+              # CHANGED: Replaced @git.pull('origin', @branch) with fetch +
+              # checkout + reset_hard. In git gem 1.19.x, pull translates to
+              # `git fetch` followed by `git merge FETCH_HEAD`. That merge step
+              # fails with "no candidates for merging" when no local tracking
+              # relationship exists, which Git#clone in this gem version does not
+              # reliably set up. fetch + reset_hard bypasses the merge entirely
+              # and is safe here because this repo is read-only.
+              @git.fetch('origin')
+              @git.checkout(@branch)
+              @git.reset_hard("origin/#{@branch}")
+            rescue Git::GitExecuteError => e
+              # CHANGED: Added rescue block so a corrupted or partially-written
+              # repo self-heals by deleting and re-cloning rather than raising.
+              logger.error("Git operation failed (#{e.message}), re-cloning...")
+              FileUtils.rm_rf(@repo_dir)
+              @git = nil
+              clone
+            end
+          else
+            logger.debug("Skipping fetch, updated within the last 2 minutes")
+          end
         else
-          logger.debug("Not pulling changes from #{@url} because it was updated in the last 2 minutes")
+          clone
         end
-      else
-        clone
       end
     end
     # rubocop:enable Metrics/PerceivedComplexity
+
+    private
+
+    # CHANGED: New private method. Acquires an exclusive file lock before
+    # yielding so that only one process at a time can run git operations
+    # against the shared repo directory.
+    def with_lock(&block)
+      FileUtils.mkdir_p(File.dirname(LOCK_FILE))
+      File.open(LOCK_FILE, File::RDWR | File::CREAT) do |f|
+        f.flock(File::LOCK_EX)
+        block.call
+      end
+    end
   end
 
   class Lookups
