@@ -20,11 +20,6 @@ module TrlnArgon
 
     DEFAULT_BRANCHES = %w[main master].freeze
 
-    # CHANGED: Added LOCK_FILE constant. Used by with_lock to serialize git
-    # operations across processes via an exclusive flock, preventing concurrent
-    # Puma workers from corrupting the repo's HEAD file.
-    LOCK_FILE = 'config/mappings/.argon_mappings.lock'.freeze
-
     def initialize(options = {})
       @repo_base = options.fetch(:repo_base, 'config/mappings')
       @repo_dir = File.join(@repo_base, REPO_NAME)
@@ -84,69 +79,51 @@ module TrlnArgon
 
     # rubocop:disable Metrics/PerceivedComplexity
     def refresh
-      # CHANGED: Wrapped entire method body in with_lock. Without this, concurrent
-      # Puma workers each call refresh against the same repo directory simultaneously,
-      # causing fetch/checkout/reset operations to interleave and corrupt HEAD.
-      with_lock do
-        if File.directory?(File.join(@repo_dir, '.git'))
-          logger.debug("Repository #{@repo_dir} appears to be a .git repo")
-          @git ||= Git.open(@repo_dir)
+      if File.directory?(File.join(@repo_dir, '.git'))
+        logger.debug("Repository #{@repo_dir} appears to be a .git repo")
+        @git ||= Git.open(@repo_dir)
 
-          head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
+        head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
 
-          # CHANGED: Removed the `&& @git.current_branch == @branch` clause.
-          # That call can raise if HEAD is damaged, turning a throttle guard
-          # into a crash. Since we always reset to the same branch, the check
-          # provided no real protection.
-          do_fetch = if File.exist?(head_fetch_file)
-                       File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
-                     else
-                       true
-                     end
+        # CHANGED: Removed the `&& @git.current_branch == @branch` clause.
+        # That call can raise if HEAD is damaged, turning a throttle guard
+        # into a crash. Since we always reset to the same branch, the check
+        # provided no real protection.
+        do_fetch = if File.exist?(head_fetch_file)
+                     File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
+                   else
+                     true
+                   end
 
-          if do_fetch
-            logger.info("Fetching changes from #{@url}/#{@branch} to #{@repo_dir}")
-            begin
-              # CHANGED: Replaced @git.pull('origin', @branch) with fetch +
-              # checkout + reset_hard. In git gem 1.19.x, pull translates to
-              # `git fetch` followed by `git merge FETCH_HEAD`. That merge step
-              # fails with "no candidates for merging" when no local tracking
-              # relationship exists, which Git#clone in this gem version does not
-              # reliably set up. fetch + reset_hard bypasses the merge entirely
-              # and is safe here because this repo is read-only.
-              @git.fetch('origin')
-              @git.checkout(@branch)
-              @git.reset_hard("origin/#{@branch}")
-            rescue Git::GitExecuteError => e
-              # CHANGED: Added rescue block so a corrupted or partially-written
-              # repo self-heals by deleting and re-cloning rather than raising.
-              logger.error("Git operation failed (#{e.message}), re-cloning...")
-              FileUtils.rm_rf(@repo_dir)
-              @git = nil
-              clone
-            end
-          else
-            logger.debug("Skipping fetch, updated within the last 2 minutes")
+        if do_fetch
+          logger.info("Fetching changes from #{@url}/#{@branch} to #{@repo_dir}")
+          begin
+            # CHANGED: Replaced @git.pull('origin', @branch) with fetch +
+            # checkout + reset_hard. In git gem 1.19.x, pull translates to
+            # `git fetch` followed by `git merge FETCH_HEAD`. That merge step
+            # fails with "no candidates for merging" when no local tracking
+            # relationship exists, which Git#clone in this gem version does not
+            # reliably set up. fetch + reset_hard bypasses the merge entirely
+            # and is safe here because this repo is read-only.
+            @git.fetch('origin')
+            @git.checkout(@branch)
+            @git.reset_hard("origin/#{@branch}")
+          rescue Git::GitExecuteError => e
+            # CHANGED: Added rescue block so a corrupted or partially-written
+            # repo self-heals by deleting and re-cloning rather than raising.
+            logger.error("Git operation failed (#{e.message}), re-cloning...")
+            FileUtils.rm_rf(@repo_dir)
+            @git = nil
+            clone
           end
         else
-          clone
+          logger.debug("Skipping fetch, updated within the last 2 minutes")
         end
+      else
+        clone
       end
     end
     # rubocop:enable Metrics/PerceivedComplexity
-
-    private
-
-    # CHANGED: New private method. Acquires an exclusive file lock before
-    # yielding so that only one process at a time can run git operations
-    # against the shared repo directory.
-    def with_lock(&block)
-      FileUtils.mkdir_p(File.dirname(LOCK_FILE))
-      File.open(LOCK_FILE, File::RDWR | File::CREAT) do |f|
-        f.flock(File::LOCK_EX)
-        block.call
-      end
-    end
   end
 
   class Lookups
