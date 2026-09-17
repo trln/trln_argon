@@ -70,54 +70,66 @@ module TrlnArgon
 
     def clone
       logger.info("Initial clone of code mappings from #{@url} to #{@repo_base}")
-      # CHANGED: Added branch: @branch option to Git.clone so the correct branch
-      # is checked out as part of the clone operation. Removed the separate
-      # @git.checkout(@branch) call that followed — it was redundant and could
-      # fail if @branch was nil.
-      @git = Git.clone(@url, REPO_NAME, path: @repo_base, branch: @branch)
+
+      # CHANGED: Remove any existing incomplete or corrupted directory before
+      # cloning. Git#clone will not clone into a non-empty existing directory.
+      FileUtils.rm_rf(@repo_dir)
+
+      # CHANGED: Pass the branch to clone so the desired branch is checked out
+      # during the initial clone.
+      @git = Git.clone(
+        @url,
+        REPO_NAME,
+        path: @repo_base,
+        branch: @branch
+      )
     end
 
     # rubocop:disable Metrics/PerceivedComplexity
     def refresh
-      if File.directory?(File.join(@repo_dir, '.git'))
+      git_directory = File.join(@repo_dir, '.git')
+
+      if File.directory?(git_directory)
         logger.debug("Repository #{@repo_dir} appears to be a .git repo")
-        @git ||= Git.open(@repo_dir)
 
-        head_fetch_file = File.join(@repo_dir, '.git', 'FETCH_HEAD')
+        begin
+          # CHANGED: Git.open can raise ArgumentError when the directory contains
+          # a damaged or incomplete .git directory. This must be inside the rescue
+          # block; otherwise the existing rescue around fetch does not catch it.
+          @git ||= Git.open(@repo_dir)
 
-        # CHANGED: Removed the `&& @git.current_branch == @branch` clause.
-        # That call can raise if HEAD is damaged, turning a throttle guard
-        # into a crash. Since we always reset to the same branch, the check
-        # provided no real protection.
-        do_fetch = if File.exist?(head_fetch_file)
-                     File.stat(head_fetch_file).mtime < (Time.now - 24.hours)
-                   else
-                     true
-                   end
+          head_fetch_file = File.join(git_directory, 'FETCH_HEAD')
 
-        if do_fetch
-          logger.info("Fetching changes from #{@url}/#{@branch} to #{@repo_dir}")
-          begin
-            # CHANGED: Replaced @git.pull('origin', @branch) with fetch +
-            # checkout + reset_hard. In git gem 1.19.x, pull translates to
-            # `git fetch` followed by `git merge FETCH_HEAD`. That merge step
-            # fails with "no candidates for merging" when no local tracking
-            # relationship exists, which Git#clone in this gem version does not
-            # reliably set up. fetch + reset_hard bypasses the merge entirely
-            # and is safe here because this repo is read-only.
+          do_fetch = if File.exist?(head_fetch_file)
+                       File.stat(head_fetch_file).mtime < (Time.now - 24.hours)
+                     else
+                       true
+                     end
+
+          if do_fetch
+            logger.info("Fetching changes from #{@url}/#{@branch} to #{@repo_dir}")
+
+            # CHANGED: Use fetch and reset instead of pull. This avoids the merge
+            # step that produced "There are no candidates for merging."
             @git.fetch('origin')
             @git.checkout(@branch)
             @git.reset_hard("origin/#{@branch}")
-          rescue Git::GitExecuteError => e
-            # CHANGED: Added rescue block so a corrupted or partially-written
-            # repo self-heals by re-cloning rather than raising. The rm_rf
-            # is handled inside clone so we don't need it here.
-            logger.error("Git operation failed (#{e.message}), re-cloning...")
-            @git = nil
-            clone
+          else
+            logger.debug(
+              "Skipping fetch because #{@repo_dir} was updated within the last 24 hours"
+            )
           end
-        else
-          logger.debug("Skipping fetch, updated within the last 2 minutes")
+        rescue ArgumentError, Git::GitExecuteError => e
+          # CHANGED: Catch ArgumentError from Git.open as well as git command
+          # failures. An existing .git directory is not necessarily a valid
+          # working tree.
+          logger.error(
+            "Git repository is invalid or refresh failed: #{e.message}. " \
+              'Removing it and cloning again.'
+          )
+
+          @git = nil
+          clone
         end
       else
         clone
