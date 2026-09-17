@@ -90,7 +90,7 @@ module TrlnArgon
         # into a crash. Since we always reset to the same branch, the check
         # provided no real protection.
         do_fetch = if File.exist?(head_fetch_file)
-                     File.stat(head_fetch_file).mtime < (Time.now - 2.minutes)
+                     File.stat(head_fetch_file).mtime < (Time.now - 24.hours)
                    else
                      true
                    end
