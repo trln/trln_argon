@@ -110,9 +110,9 @@ module TrlnArgon
             @git.reset_hard("origin/#{@branch}")
           rescue Git::GitExecuteError => e
             # CHANGED: Added rescue block so a corrupted or partially-written
-            # repo self-heals by deleting and re-cloning rather than raising.
+            # repo self-heals by re-cloning rather than raising. The rm_rf
+            # is handled inside clone so we don't need it here.
             logger.error("Git operation failed (#{e.message}), re-cloning...")
-            FileUtils.rm_rf(@repo_dir)
             @git = nil
             clone
           end
